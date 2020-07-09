@@ -75,6 +75,7 @@ final class SwissApi(
         description = data.description,
         hasChat = data.hasChat | true,
         roundInterval = data.realRoundInterval,
+        password = data.password,
         conditions = data.conditions.all
       )
     )

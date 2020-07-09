@@ -92,6 +92,7 @@ object Swiss {
       rated: Boolean,
       description: Option[String] = None,
       hasChat: Boolean = true,
+      password: Option[String] = None,
       conditions: SwissCondition.All,
       roundInterval: FiniteDuration
   ) {

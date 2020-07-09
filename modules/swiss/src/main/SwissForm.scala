@@ -29,6 +29,7 @@ final class SwissForm(isProd: Boolean) {
         "description" -> optional(cleanNonEmptyText),
         "hasChat" -> optional(boolean),
         "roundInterval" -> optional(numberIn(roundIntervals)),
+        "password"      -> optional(cleanNonEmptyText),
         "conditions" -> SwissCondition.DataForm.all
       )(SwissData.apply)(SwissData.unapply)
     )
@@ -46,6 +47,7 @@ final class SwissForm(isProd: Boolean) {
       description = none,
       hasChat = true.some,
       roundInterval = Swiss.RoundInterval.auto.some,
+      password = None,
       conditions = SwissCondition.DataForm.AllSetup.default
     )
 
@@ -60,6 +62,7 @@ final class SwissForm(isProd: Boolean) {
       description = s.settings.description,
       hasChat = s.settings.hasChat.some,
       roundInterval = s.settings.roundInterval.toSeconds.toInt.some,
+      password = s.settings.password,
       conditions = SwissCondition.DataForm.AllSetup(s.settings.conditions)
     )
 
@@ -128,6 +131,7 @@ object SwissForm {
       description: Option[String],
       hasChat: Option[Boolean],
       roundInterval: Option[Int],
+      password: Option[String],
       conditions: SwissCondition.DataForm.AllSetup
   ) {
     def realVariant = variant flatMap Variant.apply getOrElse Variant.default

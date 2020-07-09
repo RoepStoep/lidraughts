@@ -105,6 +105,7 @@ object bits {
     trans.startingIn,
     trans.tournament,
     trans.tournamentComplete,
+    trans.password,
     trans.swiss.bye,
     trans.swiss.byes,
     trans.swiss.absent,

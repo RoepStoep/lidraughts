@@ -51,6 +51,7 @@ export interface SwissData {
   podium?: PodiumPlayer[];
   isRecentlyFinished?: boolean;
   stats?: Stats;
+  password?: boolean;
 }
 
 export interface VariantData {

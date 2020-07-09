@@ -68,6 +68,7 @@ final class SwissJson(
       .add("draughtsResult" -> pref.draughtsResult.option(true))
       .add("podium" -> podium)
       .add("isRecentlyFinished" -> swiss.isRecentlyFinished)
+      .add("password" -> swiss.settings.password.isDefined)
       .add("stats" -> stats)
       .add("greatPlayer" -> GreatPlayer.wikiUrl(swiss.name).map { url =>
         Json.obj("name" -> swiss.name, "url" -> url)
