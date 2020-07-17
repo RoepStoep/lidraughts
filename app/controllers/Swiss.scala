@@ -106,7 +106,8 @@ object Swiss extends LidraughtsController {
         lidraughts.team.TeamRepo.isCreator(teamId, me.id) flatMap {
           case false => notFoundJson("You're not a leader of that team")
           case _ =>
-            env.forms.create.bindFromRequest
+            env.forms.create
+              .bindFromRequest()
               .fold(
                 jsonFormErrorDefaultLang,
                 data =>
@@ -119,10 +120,11 @@ object Swiss extends LidraughtsController {
         }
     }
 
-  def join(id: String) = SecureBody(_.Beta) { implicit ctx => me =>
+  def join(id: String) = SecureBody(BodyParsers.parse.json)(lidraughts.security.Permission.Beta) { implicit ctx => me =>
     NoLameOrBot {
+      val password = ctx.body.body.\("password").asOpt[String]
       Env.team.cached.teamIds(me.id) flatMap { teamIds =>
-        env.api.join(SwissId(id), me, teamIds.contains) flatMap { result =>
+        env.api.join(SwissId(id), me, teamIds.contains, password) flatMap { result =>
           negotiate(
             html = Redirect(routes.Swiss.show(id)).fuccess,
             api = _ =>
@@ -168,7 +170,8 @@ object Swiss extends LidraughtsController {
     AuthBody { implicit ctx => me =>
       WithEditableSwiss(id, me) { swiss =>
         implicit val req = ctx.body
-        env.forms.nextRound.bindFromRequest
+        env.forms.nextRound
+          .bindFromRequest()
           .fold(
             err => Redirect(routes.Swiss.show(id)).fuccess,
             date => env.api.scheduleNextRound(swiss, date) inject Redirect(routes.Swiss.show(id))

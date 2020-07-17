@@ -29,7 +29,7 @@ final class SwissForm(isProd: Boolean) {
         "description" -> optional(cleanNonEmptyText),
         "hasChat" -> optional(boolean),
         "roundInterval" -> optional(numberIn(roundIntervals)),
-        "password"      -> optional(cleanNonEmptyText),
+        "password" -> optional(cleanNonEmptyText),
         "conditions" -> SwissCondition.DataForm.all
       )(SwissData.apply)(SwissData.unapply)
     )

@@ -34,6 +34,7 @@ object form {
                 fields.roundInterval,
                 fields.startsAt
               ),
+              fields.password,
               condition(form, fields, swiss = none),
               form3.globalError(form),
               form3.actions(
@@ -67,6 +68,7 @@ object form {
                 fields.roundInterval,
                 swiss.isCreated option fields.startsAt
               ),
+              fields.password,
               condition(form, fields, swiss = none),
               form3.globalError(form),
               form3.actions(
@@ -168,4 +170,10 @@ final private class SwissFields(form: Form[_])(implicit ctx: Context) {
       frag("Tournament start date"),
       half = true
     )(form3.flatpickr(_))
+  def password =
+    form3.group(
+      form("password"),
+      trans.password(),
+      help = trans.makePrivateTournament().some
+    )(form3.input(_)(autocomplete := "off"))
 }

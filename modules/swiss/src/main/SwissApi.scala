@@ -104,6 +104,7 @@ final class SwissApi(
               roundInterval =
                 if (data.roundInterval.isDefined) data.realRoundInterval
                 else old.settings.roundInterval,
+              password = data.password,
               conditions = data.conditions.all
             )
           ) |> { s =>
@@ -138,18 +139,20 @@ final class SwissApi(
       case Some(user) => verify(swiss, user)
     }
 
-  def join(id: Swiss.Id, me: User, isInTeam: TeamId => Boolean): Fu[Boolean] =
+  def join(id: Swiss.Id, me: User, isInTeam: TeamId => Boolean, password: Option[String]): Fu[Boolean] =
     Sequencing(id)(notFinishedById) { swiss =>
-      playerColl // try a rejoin first
-        .updateField($id(SwissPlayer.makeId(swiss.id, me.id)), SwissPlayer.Fields.absent, false)
-        .flatMap { rejoin =>
-          fuccess(rejoin.n == 1) >>| { // if the match failed (not the update!), try a join
-            (swiss.isEnterable && isInTeam(swiss.teamId)) ?? {
-              playerColl.insert(SwissPlayer.make(swiss.id, me, swiss.perfLens)) zip
-                swissColl.update($id(swiss.id), $inc("nbPlayers" -> 1)) inject true
+      if (swiss.settings.password.exists(_ != ~password)) fuFalse
+      else
+        playerColl // try a rejoin first
+          .updateField($id(SwissPlayer.makeId(swiss.id, me.id)), SwissPlayer.Fields.absent, false)
+          .flatMap { rejoin =>
+            fuccess(rejoin.n == 1) >>| { // if the match failed (not the update!), try a join
+              (swiss.isEnterable && isInTeam(swiss.teamId)) ?? {
+                playerColl.insert(SwissPlayer.make(swiss.id, me, swiss.perfLens)) zip
+                  swissColl.update($id(swiss.id), $inc("nbPlayers" -> 1)) inject true
+              }
             }
           }
-        }
     } flatMap { res =>
       recomputeAndUpdateAll(id) inject res
     }

@@ -110,6 +110,7 @@ private object BsonHandlers {
       description = r.strO("d"),
       hasChat = r.boolO("c") | true,
       roundInterval = (r.intO("i") | 60).seconds,
+      password = r.strO("p"),
       conditions = r.getO[SwissCondition.All]("o") getOrElse SwissCondition.All.empty
     )
     def writes(w: BSON.Writer, s: Swiss.Settings) = $doc(
@@ -118,6 +119,7 @@ private object BsonHandlers {
       "d" -> s.description,
       "c" -> (!s.hasChat).option(false),
       "i" -> s.roundInterval.toSeconds.toInt,
+      "p" -> s.password,
       "o" -> s.conditions.ifNonEmpty
     )
   }
