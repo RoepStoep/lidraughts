@@ -28,7 +28,9 @@ object Bot extends LidraughtsController {
   def command(cmd: String) = ScopedBody(_.Bot.Play) { implicit req => me =>
     cmd.split('/') match {
       case Array("account", "upgrade") =>
-        lidraughts.user.UserRepo.setBot(me) >>
+        Env.tournament.api.withdrawAll(me)
+        Env.team.cached.teamIdsList(me.id).flatMap { Env.swiss.api.withdrawAll(me, _) } >>
+          lidraughts.user.UserRepo.setBot(me) >>
           Env.pref.api.setBot(me) >>-
           Env.user.uncacheLightUser(me.id) inject jsonOkResult recover {
             case e: lidraughts.base.LidraughtsException => BadRequest(jsonError(e.getMessage))

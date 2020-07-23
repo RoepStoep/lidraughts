@@ -96,9 +96,10 @@ final class Env(
     }
     _ <- Env.relation.api.unfollowAll(user.id)
     _ <- Env.user.rankingApi.remove(user.id)
-    _ <- Env.team.api.quitAll(user.id)
+    teamIds <- Env.team.api.quitAll(user.id)
     _ = Env.challenge.api.removeByUserId(user.id)
     _ = Env.tournament.api.withdrawAll(user)
+    _ = Env.swiss.api.withdrawAll(user, teamIds)
     _ <- Env.plan.api.cancel(user).nevermind
     _ <- Env.lobby.seekApi.removeByUser(user)
     _ <- Env.security.store.disconnect(user.id)
