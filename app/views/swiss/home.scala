@@ -3,21 +3,21 @@ package views.html.swiss
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
-import lidraughts.swiss.Swiss
+import lidraughts.swiss.{ FeaturedSwisses, Swiss }
 
 import controllers.routes
 
 object home {
 
-  def apply(now: List[Swiss], soon: List[Swiss])(implicit ctx: Context) =
+  def apply(featured: FeaturedSwisses)(implicit ctx: Context) =
     views.html.base.layout(
       title = trans.swiss.swissTournaments.txt(),
       moreCss = cssTag("swiss.home")
     ) {
         main(cls := "page-small box box-pad page swiss-home")(
           h1(trans.swiss.swissTournaments.txt() + " [BETA]"),
-          renderList("Now playing")(now),
-          renderList("Starting soon")(soon),
+          renderList("Now playing")(featured.started),
+          renderList("Starting soon")(featured.created),
           div(cls := "swiss-home__infos")(
             div(cls := "wiki")(
               iconTag(""),

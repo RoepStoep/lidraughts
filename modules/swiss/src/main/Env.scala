@@ -158,6 +158,11 @@ final class Env(
     isProd = isProd
   )
 
+  lazy val feature = new SwissFeature(
+    swissColl = swissColl,
+    asyncCache = asyncCache
+  )
+
   private lazy val cache = new SwissCache(
     asyncCache = asyncCache,
     swissColl = swissColl

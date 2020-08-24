@@ -1,7 +1,6 @@
 package lidraughts.swiss
 
 import scala.concurrent.duration._
-import org.joda.time.DateTime
 
 import lidraughts.db.dsl._
 import lidraughts.hub.lightTeam.TeamId
@@ -50,29 +49,4 @@ final private class SwissCache(
     def get(teamId: TeamId) = cache get teamId
     def invalidate(teamId: TeamId) = cache.put(teamId, compute(teamId))
   }
-
-  private[swiss] object feature {
-
-    private val cache = asyncCache.single[(List[Swiss], List[Swiss])](
-      name = "swiss.featurable",
-      f = compute($doc("$lt" -> DateTime.now)) zip
-        compute($doc("$gt" -> DateTime.now, "$lt" -> DateTime.now.plusHours(1))),
-      expireAfter = _.ExpireAfterWrite(10 seconds)
-    )
-
-    private def compute(startsAtRange: Bdoc): Fu[List[Swiss]] =
-      swissColl
-        .find(
-          $doc(
-            "featurable" -> true,
-            "settings.i" $lte 600, // hits the partial index
-            "startsAt" -> startsAtRange
-          )
-        )
-        .sort($sort desc "nbPlayers")
-        .list[Swiss](5)
-
-    def get = cache.get
-  }
-
 }
