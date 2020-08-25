@@ -3,12 +3,12 @@ package controllers
 import play.api.libs.json._
 import play.api.mvc._
 import scala.concurrent.duration._
+import views._
 
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.swiss.Swiss.{ Id => SwissId }
 import lidraughts.swiss.{ Swiss => SwissModel }
-import views._
 
 object Swiss extends LidraughtsController {
 
@@ -18,7 +18,8 @@ object Swiss extends LidraughtsController {
 
   def home =
     Secure(_.Beta) { implicit ctx => _ =>
-      env.api.feature.get map html.swiss.home.apply map { Ok(_) }
+      ctx.userId.??(Env.team.cached.teamIdsList) flatMap
+        env.feature.get map html.swiss.home.apply map { Ok(_) }
     }
 
   def show(id: String) = Secure(_.Beta) { implicit ctx => _ =>

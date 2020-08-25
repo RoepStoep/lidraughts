@@ -158,15 +158,16 @@ final class Env(
     isProd = isProd
   )
 
-  lazy val feature = new SwissFeature(
-    swissColl = swissColl,
-    asyncCache = asyncCache
-  )
-
   private lazy val cache = new SwissCache(
     asyncCache = asyncCache,
     swissColl = swissColl
   )(system)
+
+  lazy val feature = new SwissFeature(
+    swissColl = swissColl,
+    asyncCache = asyncCache,
+    swissCache = cache
+  )
 
   lazy val getName = new GetSwissName(cache.name.sync)
 
