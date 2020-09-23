@@ -442,6 +442,9 @@ final class SwissApi(
     else if (swiss.isCreated) destroy(swiss)
     else funit
 
+  def teamOf(id: Swiss.Id): Fu[Option[TeamId]] =
+    swissColl.primitiveOne[TeamId]($id(id), "teamId")
+
   private def recomputeAndUpdateAll(id: Swiss.Id): Funit =
     scoring(id).flatMap {
       _ ?? { res =>

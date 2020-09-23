@@ -132,6 +132,7 @@ final class Env(
     hub = hub,
     socketMap = socketMap,
     chat = hub.chat,
+    teamOf = api.teamOf,
     flood = flood
   )
 

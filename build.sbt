@@ -215,7 +215,7 @@ lazy val tournament = module("tournament", Seq(common, hub, socket, game, round,
   libraryDependencies ++= provided(play.api, scalatags, reactivemongo.driver, reactivemongo.iteratees)
 )
 
-lazy val swiss = module("swiss", Seq(common, hub, socket, game, round, security, chat, memo, quote, i18n)).settings(
+lazy val swiss = module("swiss", Seq(common, hub, socket, game, round, security, chat, memo, quote, i18n, team)).settings(
   libraryDependencies ++= provided(play.api, reactivemongo.driver, scalatags)
 )
 

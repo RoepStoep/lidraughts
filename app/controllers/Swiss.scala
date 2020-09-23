@@ -48,7 +48,8 @@ object Swiss extends LidraughtsController {
             _ <- chat ?? { c =>
               Env.user.lightUserApi.preloadMany(c.chat.userIds)
             }
-          } yield Ok(html.swiss.show(swiss, verdicts, json, chat))
+            isLocalMod <- canChat ?? canModChat(swiss)
+          } yield Ok(html.swiss.show(swiss, verdicts, json, chat, isLocalMod))
         },
         api = _ =>
           swissOption.fold(notFoundJson("No such swiss tournament")) { swiss =>
@@ -256,4 +257,8 @@ object Swiss extends LidraughtsController {
       if (isGranted(_.ChatTimeout)) fuTrue
       else Env.team.api.belongsTo(swiss.teamId, userId)
     }
+
+  private def canModChat(swiss: SwissModel)(implicit ctx: Context): Fu[Boolean] =
+    if (isGranted(_.ChatTimeout)) fuTrue
+    else ctx.userId ?? { lidraughts.team.TeamRepo.isCreator(swiss.teamId, _) }
 }

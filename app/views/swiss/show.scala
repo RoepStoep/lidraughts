@@ -16,7 +16,8 @@ object show {
     s: Swiss,
     verdicts: SwissCondition.All.WithVerdicts,
     data: play.api.libs.json.JsObject,
-    chatOption: Option[lidraughts.chat.UserChat.Mine]
+    chatOption: Option[lidraughts.chat.UserChat.Mine],
+    isLocalMod: Boolean
   )(implicit ctx: Context): Frag = {
     val isDirector = ctx.userId.has(s.createdBy)
     val hasScheduleInput = isDirector && s.settings.manualRounds && s.isNotFinished
@@ -38,7 +39,8 @@ object show {
                     name = trans.chatRoom.txt(),
                     timeout = c.timeout,
                     public = true,
-                    resourceId = lidraughts.chat.Chat.ResourceId(s"swiss/${c.chat.id}")
+                    resourceId = lidraughts.chat.Chat.ResourceId(s"swiss/${c.chat.id}"),
+                    localMod = isLocalMod
                   )
                 }
               )

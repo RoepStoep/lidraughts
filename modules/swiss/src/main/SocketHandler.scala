@@ -8,12 +8,12 @@ import akka.actor.ActorSelection
 import lidraughts.db.dsl._
 import lidraughts.chat.Chat
 import lidraughts.common.ApiVersion
-import lidraughts.hub.actorApi.map._
-import lidraughts.hub.Trouper
+import lidraughts.hub.lightTeam.TeamId
 import lidraughts.security.Flood
 import lidraughts.socket.actorApi.{ Connected => _, _ }
 import lidraughts.socket.Handler
 import lidraughts.socket.Socket
+import lidraughts.team.TeamRepo
 import lidraughts.user.User
 import makeTimeout.short
 
@@ -22,6 +22,7 @@ private[swiss] final class SocketHandler(
     hub: lidraughts.hub.Env,
     socketMap: SocketMap,
     chat: ActorSelection,
+    teamOf: Swiss.Id => Fu[Option[TeamId]],
     flood: Flood
 ) {
 
@@ -42,6 +43,15 @@ private[swiss] final class SocketHandler(
               chatId = Chat.Id(swissId),
               member = member,
               chat = chat,
+              canTimeout = Some { suspectId =>
+                teamOf(Swiss.Id(swissId)) flatMap {
+                  _ ?? { teamId =>
+                    user ?? { u =>
+                      lidraughts.team.TeamRepo.isCreator(teamId, u.id)
+                    }
+                  }
+                }
+              },
               publicSource = lidraughts.hub.actorApi.shutup.PublicSource.Swiss(swissId).some
             ),
             member,
