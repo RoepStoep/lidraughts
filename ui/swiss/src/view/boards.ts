@@ -46,7 +46,8 @@ function boardPlayer(board: Board, color: Color, draughtsResult: boolean) {
     board.clock ?
       h(`span.mini-game__clock.mini-game__clock--${color}`, {
         attrs: {
-          'data-time': board.clock[color]
+          'data-time': board.clock[color],
+          'data-managed': 1
         }
       }) :
       h('span.mini-game__result', board.winner ? 
