@@ -29,11 +29,13 @@ object Swiss extends LidraughtsController {
       negotiate(
         html = swissOption.fold(swissNotFound.fuccess) { swiss =>
           for {
+            verdicts <- env.api.verdicts(swiss, ctx.me)
             version <- env.version(swiss.id)
             isInTeam <- isCtxInTheTeam(swiss.teamId)
             json <- env.json(
               swiss = swiss,
               me = ctx.me,
+              verdicts = verdicts,
               pref = ctx.pref,
               reqPage = page,
               socketVersion = version.some,
@@ -47,7 +49,7 @@ object Swiss extends LidraughtsController {
             _ <- chat ?? { c =>
               Env.user.lightUserApi.preloadMany(c.chat.userIds)
             }
-          } yield Ok(html.swiss.show(swiss, json, chat))
+          } yield Ok(html.swiss.show(swiss, verdicts, json, chat))
         },
         api = _ =>
           swissOption.fold(notFoundJson("No such swiss tournament")) { swiss =>
@@ -55,9 +57,11 @@ object Swiss extends LidraughtsController {
               socketVersion <- getBool("socketVersion").??(env version swiss.id dmap some)
               isInTeam <- isCtxInTheTeam(swiss.teamId)
               playerInfo <- get("playerInfo").?? { env.api.playerInfo(swiss, _) }
+              verdicts <- env.api.verdicts(swiss, ctx.me)
               json <- env.json(
                 swiss = swiss,
                 me = ctx.me,
+                verdicts = verdicts,
                 pref = ctx.pref,
                 reqPage = page,
                 socketVersion = socketVersion,

@@ -101,20 +101,24 @@ private object BsonHandlers {
     )
   }
 
+  import SwissCondition.BSONHandlers.AllBSONHandler
+
   implicit val settingsHandler = new BSON[Swiss.Settings] {
     def reads(r: BSON.Reader) = Swiss.Settings(
       nbRounds = r.get[Int]("n"),
       rated = r.boolO("r") | true,
       description = r.strO("d"),
       hasChat = r.boolO("c") | true,
-      roundInterval = (r.intO("i") | 60).seconds
+      roundInterval = (r.intO("i") | 60).seconds,
+      conditions = r.getO[SwissCondition.All]("o") getOrElse SwissCondition.All.empty
     )
     def writes(w: BSON.Writer, s: Swiss.Settings) = $doc(
       "n" -> s.nbRounds,
       "r" -> (!s.rated).option(false),
       "d" -> s.description,
       "c" -> (!s.hasChat).option(false),
-      "i" -> s.roundInterval.toSeconds.toInt
+      "i" -> s.roundInterval.toSeconds.toInt,
+      "o" -> s.conditions.ifNonEmpty
     )
   }
 

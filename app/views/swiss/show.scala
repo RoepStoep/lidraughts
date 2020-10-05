@@ -1,20 +1,20 @@
 package views.html
 package swiss
 
+import controllers.routes
 import play.api.libs.json.Json
 
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
 import lidraughts.common.String.html.safeJsonValue
-import lidraughts.swiss.Swiss
-
-import controllers.routes
+import lidraughts.swiss.{ Swiss, SwissCondition }
 
 object show {
 
   def apply(
     s: Swiss,
+    verdicts: SwissCondition.All.WithVerdicts,
     data: play.api.libs.json.JsObject,
     chatOption: Option[lidraughts.chat.UserChat.Mine]
   )(implicit ctx: Context): Frag = {
@@ -65,7 +65,7 @@ object show {
     )(
         main(cls := "swiss")(
           st.aside(cls := "swiss__side")(
-            swiss.side(s, chatOption.isDefined)
+            swiss.side(s, verdicts, chatOption.isDefined)
           ),
           div(cls := "swiss__main")(div(cls := "box"))
         )

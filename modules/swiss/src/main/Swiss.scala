@@ -66,6 +66,10 @@ case class Swiss(
     if (minutes < 60) s"${minutes}m"
     else s"${minutes / 60}h" + (if (minutes % 60 != 0) s" ${(minutes % 60)}m" else "")
   }
+
+  def withConditions(conditions: SwissCondition.All) = copy(
+    settings = settings.copy(conditions = conditions)
+  )
 }
 
 object Swiss {
@@ -88,6 +92,7 @@ object Swiss {
       rated: Boolean,
       description: Option[String] = None,
       hasChat: Boolean = true,
+      conditions: SwissCondition.All,
       roundInterval: FiniteDuration
   ) {
     lazy val intervalSeconds = roundInterval.toSeconds.toInt

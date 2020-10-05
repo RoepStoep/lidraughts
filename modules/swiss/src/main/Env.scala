@@ -20,6 +20,7 @@ final class Env(
     chatApi: lidraughts.chat.ChatApi,
     lightUserApi: lidraughts.user.LightUserApi,
     onStart: String => Unit,
+    historyApi: lidraughts.history.HistoryApi,
     proxyGame: Game.ID => Fu[Option[Game]],
     proxyGames: List[Game.ID] => Fu[List[(Game.ID, Option[Game])]],
     val isProd: Boolean
@@ -88,6 +89,8 @@ final class Env(
     mongoCache = mongoCache
   )
 
+  lazy val verify = new SwissCondition.Verify(historyApi)
+
   lazy val api = new SwissApi(
     swissColl = swissColl,
     playerColl = playerColl,
@@ -99,6 +102,7 @@ final class Env(
     rankingApi = rankingApi,
     standingApi = standingApi,
     boardApi = boardApi,
+    verify = verify,
     chatApi = chatApi,
     lightUserApi = lightUserApi,
     proxyGames = proxyGames,
@@ -203,6 +207,7 @@ object Env {
     chatApi = lidraughts.chat.Env.current.api,
     lightUserApi = lidraughts.user.Env.current.lightUserApi,
     onStart = lidraughts.round.Env.current.onStart,
+    historyApi = lidraughts.history.Env.current.api,
     proxyGame = lidraughts.round.Env.current.proxy.game _,
     proxyGames = lidraughts.round.Env.current.proxy.games _,
     isProd = lidraughts.common.PlayApp.isProd

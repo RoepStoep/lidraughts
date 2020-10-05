@@ -28,7 +28,8 @@ final class SwissForm(isProd: Boolean) {
         "nbRounds" -> number(min = minRounds, max = 100),
         "description" -> optional(cleanNonEmptyText),
         "hasChat" -> optional(boolean),
-        "roundInterval" -> optional(numberIn(roundIntervals))
+        "roundInterval" -> optional(numberIn(roundIntervals)),
+        "conditions" -> SwissCondition.DataForm.all
       )(SwissData.apply)(SwissData.unapply)
     )
 
@@ -44,7 +45,8 @@ final class SwissForm(isProd: Boolean) {
       nbRounds = 8,
       description = none,
       hasChat = true.some,
-      roundInterval = Swiss.RoundInterval.auto.some
+      roundInterval = Swiss.RoundInterval.auto.some,
+      conditions = SwissCondition.DataForm.AllSetup.default
     )
 
   def edit(s: Swiss) =
@@ -57,7 +59,8 @@ final class SwissForm(isProd: Boolean) {
       nbRounds = s.settings.nbRounds,
       description = s.settings.description,
       hasChat = s.settings.hasChat.some,
-      roundInterval = s.settings.roundInterval.toSeconds.toInt.some
+      roundInterval = s.settings.roundInterval.toSeconds.toInt.some,
+      conditions = SwissCondition.DataForm.AllSetup(s.settings.conditions)
     )
 
   def nextRound =
@@ -124,7 +127,8 @@ object SwissForm {
       nbRounds: Int,
       description: Option[String],
       hasChat: Option[Boolean],
-      roundInterval: Option[Int]
+      roundInterval: Option[Int],
+      conditions: SwissCondition.DataForm.AllSetup
   ) {
     def realVariant = variant flatMap Variant.apply getOrElse Variant.default
     def realStartsAt = startsAt | DateTime.now.plusMinutes(10)

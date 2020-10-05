@@ -29,6 +29,7 @@ final class SwissApi(
     rankingApi: SwissRankingApi,
     standingApi: SwissStandingApi,
     boardApi: SwissBoardApi,
+    verify: SwissCondition.Verify,
     chatApi: ChatApi,
     lightUserApi: lidraughts.user.LightUserApi,
     proxyGames: List[Game.ID] => Fu[List[(Game.ID, Option[Game])]],
@@ -73,7 +74,8 @@ final class SwissApi(
         rated = data.rated | true,
         description = data.description,
         hasChat = data.hasChat | true,
-        roundInterval = data.realRoundInterval
+        roundInterval = data.realRoundInterval,
+        conditions = data.conditions.all
       )
     )
     swissColl.insert(addFeaturable(swiss)) >>-
@@ -100,7 +102,8 @@ final class SwissApi(
               hasChat = data.hasChat | old.settings.hasChat,
               roundInterval =
                 if (data.roundInterval.isDefined) data.realRoundInterval
-                else old.settings.roundInterval
+                else old.settings.roundInterval,
+              conditions = data.conditions.all
             )
           ) |> { s =>
               if (s.isStarted && s.nbOngoing == 0 && (s.nextRoundAt.isEmpty || old.settings.manualRounds) && !s.settings.manualRounds)
@@ -126,6 +129,12 @@ final class SwissApi(
           }
         else funit
       } >>- socketReload(swiss.id)
+    }
+
+  def verdicts(swiss: Swiss, me: Option[User]): Fu[SwissCondition.All.WithVerdicts] =
+    me match {
+      case None => fuccess(swiss.settings.conditions.accepted)
+      case Some(user) => verify(swiss, user)
     }
 
   def join(id: Swiss.Id, me: User, isInTeam: TeamId => Boolean): Fu[Boolean] =
