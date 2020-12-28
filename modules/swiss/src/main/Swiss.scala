@@ -70,6 +70,11 @@ case class Swiss(
   def withConditions(conditions: SwissCondition.All) = copy(
     settings = settings.copy(conditions = conditions)
   )
+
+  def unrealisticSettings =
+    !settings.manualRounds &&
+      settings.dailyInterval.isEmpty &&
+      clock.estimateTotalSeconds * 2 * settings.nbRounds > 3600 * 8
 }
 
 object Swiss {
