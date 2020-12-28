@@ -43,10 +43,13 @@ final class SwissFeature(
 
   private val cache = asyncCache.single[FeaturedSwisses](
     name = "swiss.featurable",
-    f = cacheCompute($doc("$gt" -> DateTime.now, "$lt" -> DateTime.now.plusHours(1))) zip
-      cacheCompute($doc("$lt" -> DateTime.now)) map {
-        case (created, started) => FeaturedSwisses(created, started)
-      },
+    f = {
+      val now = DateTime.now
+      cacheCompute($doc("$gt" -> now, "$lt" -> now.plusHours(1))) zip
+        cacheCompute($doc("$gt" -> now.minusHours(3), "$lt" -> now)) map {
+          case (created, started) => FeaturedSwisses(created, started)
+        }
+    },
     expireAfter = _.ExpireAfterWrite(10 seconds)
   )
 
