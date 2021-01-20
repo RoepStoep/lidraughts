@@ -48,8 +48,9 @@ object Swiss extends LidraughtsController {
             _ <- chat ?? { c =>
               Env.user.lightUserApi.preloadMany(c.chat.userIds)
             }
+            streamers <- streamerCache get swiss.id
             isLocalMod <- canChat ?? canModChat(swiss)
-          } yield Ok(html.swiss.show(swiss, verdicts, json, chat, isLocalMod))
+          } yield Ok(html.swiss.show(swiss, verdicts, json, chat, streamers, isLocalMod))
         },
         api = _ =>
           swissOption.fold(notFoundJson("No such swiss tournament")) { swiss =>
@@ -261,4 +262,12 @@ object Swiss extends LidraughtsController {
   private def canModChat(swiss: SwissModel)(implicit ctx: Context): Fu[Boolean] =
     if (isGranted(_.ChatTimeout)) fuTrue
     else ctx.userId ?? { lidraughts.team.TeamRepo.isCreator(swiss.teamId, _) }
+
+  private val streamerCache = Env.memo.asyncCache.multi[SwissModel.Id, List[lidraughts.user.User.ID]](
+    name = "swiss.streamers",
+    f = swissId => Env.streamer.liveStreamApi.all.flatMap { streams =>
+      env.api.filterPlaying(swissId, streams.streams.map(_.streamer.userId))
+    },
+    expireAfter = _.ExpireAfterWrite(15.seconds)
+  )
 }

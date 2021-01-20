@@ -14,7 +14,12 @@ object side {
 
   private val separator = " • "
 
-  def apply(s: Swiss, verdicts: SwissCondition.All.WithVerdicts, chat: Boolean)(implicit ctx: Context) = frag(
+  def apply(
+    s: Swiss,
+    verdicts: SwissCondition.All.WithVerdicts,
+    streamers: List[lidraughts.user.User.ID],
+    chat: Boolean
+  )(implicit ctx: Context) = frag(
     div(cls := "swiss__meta")(
       st.section(dataIcon := s.perfType.map(_.iconChar.toString))(
         div(
@@ -68,6 +73,7 @@ object side {
       else br,
       absClientDateTime(s.startsAt)
     ),
+    streamers map views.html.streamer.bits.contextual,
     chat option views.html.chat.frag
   )
 }

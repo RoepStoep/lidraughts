@@ -579,6 +579,23 @@ final class SwissApi(
         _.map { withdraw(_, user.id) }.sequenceFu.void
       }
 
+  def isUnfinished(id: Swiss.Id): Fu[Boolean] =
+    swissColl.exists($id(id) ++ $doc("finishedAt" $exists false))
+
+  def filterPlaying(id: Swiss.Id, userIds: Seq[User.ID]): Fu[List[User.ID]] =
+    userIds.nonEmpty ??
+      swissColl.exists($id(id) ++ $doc("finishedAt" $exists false)) flatMap {
+        _ ?? SwissPlayer.fields { f =>
+          playerColl.distinct[User.ID, List](
+            f.userId,
+            $doc(
+              f.id $in userIds.map(SwissPlayer.makeId(id, _)),
+              f.absent $ne true
+            ).some
+          )
+        }
+      }
+
   private def Sequencing[A: Zero](
     id: Swiss.Id
   )(fetch: Swiss.Id => Fu[Option[Swiss]])(run: Swiss => Fu[A]): Fu[A] =
