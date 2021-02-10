@@ -22,7 +22,7 @@ final class SwissTrf(
       sheetApi
         .source(swiss, sort = sorted.??($doc(f.rating -> -1)))
         .map { lines =>
-          tournamentLines(swiss) ::: lines
+          tournamentLines(swiss) ::: forbiddenPairings(swiss, playerIds) ::: lines
             .map((playerLine(swiss, playerIds) _).tupled)
             .map(formatLine)
         }
@@ -113,4 +113,18 @@ final class SwissTrf(
             }.toMap
           }
       }
+
+  private def forbiddenPairings(swiss: Swiss, playerIds: PlayerIds): List[String] =
+    if (swiss.settings.forbiddenPairings.isEmpty) List.empty[String]
+    else
+      swiss.settings.forbiddenPairings.lines.flatMap {
+        _.trim.toLowerCase.split(' ').map(_.trim) match {
+          case Array(u1, u2) if u1 != u2 =>
+            for {
+              id1 <- playerIds.get(u1)
+              id2 <- playerIds.get(u2)
+            } yield s"XXP $id1 $id2"
+          case _ => None
+        }
+      }.toList
 }

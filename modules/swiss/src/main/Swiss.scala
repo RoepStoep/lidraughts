@@ -100,7 +100,8 @@ object Swiss {
       hasChat: Boolean = true,
       password: Option[String] = None,
       conditions: SwissCondition.All,
-      roundInterval: FiniteDuration
+      roundInterval: FiniteDuration,
+      forbiddenPairings: String
   ) {
     lazy val intervalSeconds = roundInterval.toSeconds.toInt
     def manualRounds = intervalSeconds == Swiss.RoundInterval.manual

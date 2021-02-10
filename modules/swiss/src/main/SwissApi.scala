@@ -73,7 +73,8 @@ final class SwissApi(
         hasChat = data.hasChat | true,
         roundInterval = data.realRoundInterval,
         password = data.password,
-        conditions = data.conditions.all
+        conditions = data.conditions.all,
+        forbiddenPairings = ~data.forbiddenPairings
       ),
       isWfd = isWfd option true
     )
@@ -103,7 +104,8 @@ final class SwissApi(
                 if (data.roundInterval.isDefined) data.realRoundInterval
                 else old.settings.roundInterval,
               password = data.password,
-              conditions = data.conditions.all
+              conditions = data.conditions.all,
+              forbiddenPairings = ~data.forbiddenPairings
             )
           ) |> { s =>
               if (s.isStarted && s.nbOngoing == 0 && (s.nextRoundAt.isEmpty || old.settings.manualRounds) && !s.settings.manualRounds)
