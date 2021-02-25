@@ -13,7 +13,8 @@ final class ActivityReadApi(
     postApi: lidraughts.forum.PostApi,
     simulApi: lidraughts.simul.SimulApi,
     studyApi: lidraughts.study.StudyApi,
-    tourLeaderApi: lidraughts.tournament.LeaderboardApi
+    tourLeaderApi: lidraughts.tournament.LeaderboardApi,
+    swissApi: lidraughts.swiss.SwissApi
 ) {
 
   import Activity._
@@ -62,10 +63,10 @@ final class ActivityReadApi(
     }
     simuls <- a.simuls.?? { simuls =>
       simulApi byIds simuls.value.map(_.value) dmap some
-    }.map(_ filter (_.nonEmpty))
+    }.dmap(_ filter (_.nonEmpty))
     studies <- a.studies.?? { studies =>
       studyApi publicIdNames studies.value map some
-    }.map(_ filter (_.nonEmpty))
+    }.dmap(_ filter (_.nonEmpty))
     tours <- a.games.exists(_.hasNonCorres) ?? {
       val dateRange = a.date -> a.date.plusDays(1)
       tourLeaderApi.timeRange(a.id.userId, dateRange) map { entries =>
@@ -74,6 +75,18 @@ final class ActivityReadApi(
           best = entries.sortBy(_.rankRatio.value).take(activities.maxSubEntries)
         )
       }
+    }
+    swisses <- a.swisses.?? { swisses =>
+      swissApi
+        .idNames(swisses.value.map(_.id))
+        .map {
+          _.flatMap { idName =>
+            swisses.value.find(_.id == idName.id) map { s =>
+              (idName, s.rank)
+            }
+          }
+        }
+        .dmap(_.some.filter(_.nonEmpty))
     }
   } yield ActivityView(
     interval = a.interval,
@@ -91,6 +104,7 @@ final class ActivityReadApi(
     studies = studies,
     teams = a.teams,
     tours = tours,
+    swisses = swisses,
     stream = a.stream
   )
 

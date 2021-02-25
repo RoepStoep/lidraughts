@@ -1,11 +1,12 @@
 package lidraughts.activity
 
+import model._
 import ornicar.scalalib.Zero
 
 import lidraughts.rating.PerfType
 import lidraughts.study.Study
+import lidraughts.swiss.Swiss
 import lidraughts.user.User
-import model._
 
 object activities {
 
@@ -94,4 +95,10 @@ object activities {
     def +(s: String) = copy(value = (s :: value) take maxSubEntries)
   }
   implicit val TeamsZero = Zero.instance(Teams(Nil))
+
+  case class SwissRank(id: Swiss.Id, rank: Int)
+  case class Swisses(value: List[SwissRank]) extends AnyVal {
+    def +(s: SwissRank) = copy(value = (s :: value) take maxSubEntries)
+  }
+  implicit val SwissesZero = Zero.instance(Swisses(Nil))
 }

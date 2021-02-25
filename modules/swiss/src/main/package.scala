@@ -6,11 +6,11 @@ import lidraughts.user.User
 
 package object swiss extends PackageObject with WithSocket {
 
+  type Ranking = Map[lidraughts.user.User.ID, Int]
+
   private[swiss] type SocketMap = lidraughts.hub.TrouperMap[swiss.SwissSocket]
 
   private[swiss] val logger = lidraughts.log("swiss")
-
-  private[swiss] type Ranking = Map[lidraughts.user.User.ID, Int]
 
   private[swiss] type LightUsersGetter = (List[String], Boolean) => Fu[List[Either[Option[LightUser], Option[LightWfdUser]]]]
 

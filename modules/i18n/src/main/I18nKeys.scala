@@ -1080,6 +1080,8 @@ val `joinedNbSimuls` = new Translated("joinedNbSimuls", Activity)
 val `createdNbStudies` = new Translated("createdNbStudies", Activity)
 val `competedInNbTournaments` = new Translated("competedInNbTournaments", Activity)
 val `rankedInTournament` = new Translated("rankedInTournament", Activity)
+val `competedInNbSwissTournaments` = new Translated("competedInNbSwissTournaments", Activity)
+val `rankedInSwissTournament` = new Translated("rankedInSwissTournament", Activity)
 val `joinedNbTeams` = new Translated("joinedNbTeams", Activity)
 }
 

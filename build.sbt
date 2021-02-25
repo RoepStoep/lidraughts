@@ -195,7 +195,7 @@ lazy val pool = module("pool", Seq(common, game, user, playban)).settings(
   libraryDependencies ++= provided(play.api, reactivemongo.driver)
 )
 
-lazy val activity = module("activity", Seq(common, game, analyse, user, forum, study, pool, puzzle, tournament, practice, team)).settings(
+lazy val activity = module("activity", Seq(common, game, analyse, user, forum, study, pool, puzzle, tournament, swiss, practice, team)).settings(
   libraryDependencies ++= provided(play.api, reactivemongo.driver)
 )
 

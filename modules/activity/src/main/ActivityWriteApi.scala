@@ -132,6 +132,12 @@ final class ActivityWriteApi(
   def streamStart(userId: User.ID) =
     update(userId) { _.copy(stream = true).some }
 
+  def swiss(id: lidraughts.swiss.Swiss.Id, ranking: lidraughts.swiss.Ranking) =
+    ranking.map {
+      case (userId, rank) =>
+        update(userId) { a => a.copy(swisses = Some(~a.swisses + SwissRank(id, rank))).some }
+    }.sequenceFu
+
   def erase(user: User) = coll.remove(regexId(user.id))
 
   private def simulParticipant(simul: lidraughts.simul.Simul, userId: String, host: Boolean) =

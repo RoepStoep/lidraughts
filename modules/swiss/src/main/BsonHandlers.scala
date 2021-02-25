@@ -10,7 +10,7 @@ import lidraughts.db.dsl._
 import lidraughts.user.User
 import reactivemongo.bson._
 
-private object BsonHandlers {
+object BsonHandlers {
 
   implicit val clockHandler = new BSONHandler[BSONDocument, ClockConfig] {
     def read(doc: BSONDocument) = ClockConfig(
@@ -135,4 +135,7 @@ private object BsonHandlers {
         "garbage" -> s.unrealisticSettings.option(true)
       )
     }
+
+  import Swiss.IdName
+  implicit val SwissIdNameBSONHandler = Macros.handler[IdName]
 }

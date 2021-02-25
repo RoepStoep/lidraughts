@@ -6,6 +6,7 @@ import lidraughts.game.LightPov
 import lidraughts.practice.PracticeStudy
 import lidraughts.simul.Simul
 import lidraughts.study.Study
+import lidraughts.swiss.Swiss
 import lidraughts.tournament.LeaderboardApi.{ Entry => TourEntry }
 
 import activities._
@@ -27,6 +28,7 @@ case class ActivityView(
     studies: Option[List[Study.IdName]] = None,
     teams: Option[Teams] = None,
     tours: Option[ActivityView.Tours] = None,
+    swisses: Option[List[(Swiss.IdName, Int)]] = None,
     stream: Boolean = false,
     signup: Boolean = false
 )

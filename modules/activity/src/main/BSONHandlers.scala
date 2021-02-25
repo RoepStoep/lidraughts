@@ -8,6 +8,8 @@ import lidraughts.db.dsl._
 import lidraughts.rating.BSONHandlers.perfTypeKeyIso
 import lidraughts.rating.PerfType
 import lidraughts.study.Study
+import lidraughts.swiss.BsonHandlers.swissIdHandler
+import lidraughts.swiss.Swiss
 import lidraughts.user.User
 
 private object BSONHandlers {
@@ -103,6 +105,13 @@ private object BSONHandlers {
   private implicit val studiesHandler = isoHandler[Studies, List[Study.Id], Barr]((s: Studies) => s.value, Studies.apply _)
   private implicit val teamsHandler = isoHandler[Teams, List[String], Barr]((s: Teams) => s.value, Teams.apply _)
 
+  implicit lazy val swissRankHandler = new lidraughts.db.BSON[SwissRank] {
+    def reads(r: lidraughts.db.BSON.Reader) = SwissRank(Swiss.Id(r.str("i")), r.intD("r"))
+    def writes(w: lidraughts.db.BSON.Writer, s: SwissRank) = BSONDocument("i" -> s.id, "r" -> s.rank)
+  }
+  implicit private lazy val swissesHandler =
+    isoHandler[Swisses, List[SwissRank], Barr]((s: Swisses) => s.value, Swisses.apply _)
+
   object ActivityFields {
     val id = "_id"
     val games = "g"
@@ -118,6 +127,7 @@ private object BSONHandlers {
     val follows = "f"
     val studies = "t"
     val teams = "e"
+    val swisses = "w"
     val stream = "st"
   }
 
@@ -140,6 +150,7 @@ private object BSONHandlers {
       follows = r.getO[Follows](follows).filterNot(_.isEmpty),
       studies = r.getO[Studies](studies),
       teams = r.getO[Teams](teams),
+      swisses = r.getO[Swisses](swisses),
       stream = r.getD[Boolean](stream)
     )
 
@@ -158,6 +169,7 @@ private object BSONHandlers {
       follows -> o.follows,
       studies -> o.studies,
       teams -> o.teams,
+      swisses -> o.swisses,
       stream -> o.stream.option(true)
     )
   }

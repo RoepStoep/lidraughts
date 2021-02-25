@@ -3,6 +3,7 @@ package lidraughts.activity
 import org.joda.time.{ DateTime, Days, Interval }
 
 import lidraughts.user.User
+import lidraughts.swiss.Swiss
 
 import activities._
 
@@ -21,6 +22,7 @@ case class Activity(
     follows: Option[Follows] = None,
     studies: Option[Studies] = None,
     teams: Option[Teams] = None,
+    swisses: Option[Swisses] = None,
     stream: Boolean = false
 ) {
 
@@ -28,7 +30,7 @@ case class Activity(
 
   def interval = new Interval(date, date plusDays 1)
 
-  def isEmpty = !stream && List(games, posts, puzzles, puzzlesFrisian, puzzlesRussian, learn, practice, simuls, corres, patron, follows, studies, teams).forall(_.isEmpty)
+  def isEmpty = !stream && List(games, posts, puzzles, puzzlesFrisian, puzzlesRussian, learn, practice, simuls, corres, patron, follows, studies, teams, swisses).forall(_.isEmpty)
 }
 
 object Activity {

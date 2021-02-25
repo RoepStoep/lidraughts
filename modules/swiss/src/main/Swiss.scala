@@ -93,6 +93,10 @@ object Swiss {
   case class Performance(value: Double) extends AnyVal
   case class Score(value: Int) extends AnyVal
 
+  case class IdName(_id: Id, name: String) {
+    def id = _id
+  }
+
   case class Settings(
       nbRounds: Int,
       rated: Boolean,

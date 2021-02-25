@@ -17,7 +17,8 @@ final class Env(
     lightUserApi: lidraughts.user.LightUserApi,
     tourLeaderApi: lidraughts.tournament.LeaderboardApi,
     getTourName: lidraughts.tournament.Tournament.ID => Option[String],
-    getTeamName: lidraughts.team.Team.ID => Option[String]
+    getTeamName: lidraughts.team.Team.ID => Option[String],
+    swissApi: lidraughts.swiss.SwissApi
 ) {
 
   private val activityColl = db(config getString "collection.activity")
@@ -33,7 +34,8 @@ final class Env(
     postApi = postApi,
     simulApi = simulApi,
     studyApi = studyApi,
-    tourLeaderApi = tourLeaderApi
+    tourLeaderApi = tourLeaderApi,
+    swissApi = swissApi
   )
 
   lazy val jsonView = new JsonView(
@@ -44,7 +46,7 @@ final class Env(
 
   system.lidraughtsBus.subscribeFun(
     'finishGame, 'forumPost, 'finishPuzzle, 'finishPractice, 'team,
-    'startSimul, 'moveEventCorres, 'plan, 'relation, 'startStudy, 'streamStart
+    'startSimul, 'moveEventCorres, 'plan, 'relation, 'startStudy, 'streamStart, 'gdprErase, 'swissFinish
   ) {
       case lidraughts.game.actorApi.FinishGame(game, _, _) if !game.aborted => write game game
       case lidraughts.forum.actorApi.CreatePost(post, topic) if !topic.isStaff => write.forumPost(post, topic)
@@ -61,6 +63,7 @@ final class Env(
       case lidraughts.hub.actorApi.team.JoinTeam(id, userId) => write.team(id, userId)
       case lidraughts.hub.actorApi.streamer.StreamStart(userId) => write.streamStart(userId)
       case lidraughts.user.User.GDPRErase(user) => write erase user
+      case lidraughts.swiss.SwissFinish(swissId, ranking) => write.swiss(swissId, ranking)
     }
 }
 
@@ -77,6 +80,7 @@ object Env {
     lightUserApi = lidraughts.user.Env.current.lightUserApi,
     tourLeaderApi = lidraughts.tournament.Env.current.leaderboardApi,
     getTourName = lidraughts.tournament.Env.current.cached.name _,
-    getTeamName = lidraughts.team.Env.current.cached.name _
+    getTeamName = lidraughts.team.Env.current.cached.name _,
+    swissApi = lidraughts.swiss.Env.current.api
   )
 }
