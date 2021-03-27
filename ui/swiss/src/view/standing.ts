@@ -40,7 +40,7 @@ function playerTr(ctrl: SwissCtrl, player: Player) {
             hook: onInsert(window.lidraughts.powertip.manualGame)
           }, p.o ? '*' : (p.w === true ? winChar : (p.w === false ? '0' : drawChar)))))
           ).concat(
-          [...Array(ctrl.data.nbRounds - player.sheet.length)].map(_ => h('r'))
+          [...Array(Math.max(0, ctrl.data.nbRounds - player.sheet.length))].map(_ => h('r'))
         )
       )),
     h('td.points', title(noarg('points')), '' + (ctrl.draughtsResult ? player.points * 2 : player.points)),
