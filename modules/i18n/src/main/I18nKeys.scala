@@ -1564,6 +1564,7 @@ val `nextRound` = new Translated("nextRound", Swiss)
 val `numberOfRounds` = new Translated("numberOfRounds", Swiss)
 val `scheduleTheNextRound` = new Translated("scheduleTheNextRound", Swiss)
 val `nbRounds` = new Translated("nbRounds", Swiss)
+val `viewAllXRounds` = new Translated("viewAllXRounds", Swiss)
 }
 
 object challenge {

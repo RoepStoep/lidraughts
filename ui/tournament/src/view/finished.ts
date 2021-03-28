@@ -19,7 +19,8 @@ function confetti(data: TournamentData): VNode | undefined {
     });
 }
 
-function stats(data: TournamentData, noarg: any): VNode {
+function stats(data: TournamentData, trans: Trans): VNode {
+  const noarg = trans.noarg;
   const tableData = [
     numberRow(noarg('averageElo'), data.stats.averageRating, 'raw'),
     numberRow(noarg('gamesPlayed'), data.stats.games),
@@ -61,7 +62,7 @@ export function main(ctrl: TournamentController): MaybeVNodes {
 export function table(ctrl: TournamentController): VNode | undefined {
   return ctrl.playerInfo.id ? playerInfo(ctrl) : (
     ctrl.teamInfo.requested ? teamInfo(ctrl) : (
-      stats ? stats(ctrl.data, ctrl.trans.noarg) : undefined
+      stats ? stats(ctrl.data, ctrl.trans) : undefined
     )
   );
 }

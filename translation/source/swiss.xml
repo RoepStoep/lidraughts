@@ -14,4 +14,8 @@
   <string name="nextRound">Next round</string>
   <string name="numberOfRounds">Number of rounds</string>
   <string name="scheduleTheNextRound">Schedule the next round</string>
+  <plurals name="viewAllXRounds">
+    <item quantity="one">View the round</item>
+    <item quantity="other">View all %s rounds</item>
+  </plurals>
 </resources>

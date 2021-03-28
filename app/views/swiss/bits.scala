@@ -114,6 +114,7 @@ object bits {
     trans.swiss.tieBreak,
     trans.swiss.nextRound,
     trans.swiss.scheduleTheNextRound,
+    trans.swiss.viewAllXRounds,
     trans.team.joinTeam
   )
 }
