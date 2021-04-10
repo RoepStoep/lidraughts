@@ -25,7 +25,7 @@ call gulp prod
 call cd ..\..
 call xcopy /y public\compiled\draughtsground.min.js public\javascripts\vendor\
 
-set apps=site chat cli swiss challenge notify round analyse editor puzzle lobby tournament tournamentSchedule tournamentCalendar simul dasher speech palantir
+set apps=site chat cli swiss challenge notify round analyse editor puzzle lobby tournament tournamentSchedule tournamentCalendar externalTournament simul dasher speech palantir
 
 for %%a in (%apps%) do @(
   call echo Building: %%a

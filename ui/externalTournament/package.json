@@ -1,0 +1,34 @@
+{
+  "name": "externalTournament",
+  "version": "2.0.0",
+  "description": "lidraughts.org external tournament",
+  "main": "src/main.js",
+  "keywords": [
+    "draughts",
+    "lidraughts",
+    "tournament"
+  ],
+  "author": "Stefan Schermann",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "@types/jquery": "^2.0",
+    "@types/lidraughts": "1.0.0",
+    "browserify": "^16",
+    "fancy-log": "^1",
+    "gulp": "^4",
+    "gulp-size": "^3",
+    "gulp-terser": "^1",
+    "tsify": "^4",
+    "typescript": "^3",
+    "vinyl-source-stream": "^2",
+    "vinyl-buffer": "^1",
+    "watchify": "^3"
+  },
+  "dependencies": {
+    "chat": "2.0.0",
+    "draughtsground": "^7.6",
+    "common": "1.0.0",
+    "game": "1.0.0",
+    "snabbdom": "ornicar/snabbdom#0.7.1-lichess"
+  }
+}

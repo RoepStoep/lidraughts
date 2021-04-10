@@ -4,7 +4,7 @@ import lidraughts.user.User
 
 case class ExternalTournament(
     _id: String,
-    title: String,
+    name: String,
     createdBy: User.ID
 ) {
 

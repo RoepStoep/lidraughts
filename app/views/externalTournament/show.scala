@@ -6,6 +6,7 @@ import play.api.libs.json.Json
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
+import lidraughts.common.String.html.safeJsonValue
 import lidraughts.externalTournament.ExternalTournament
 import lidraughts.user.User
 
@@ -15,50 +16,40 @@ object show {
 
   def apply(
     tour: ExternalTournament,
-    upcoming: List[lidraughts.challenge.Challenge],
-    finished: List[lidraughts.game.Game]
-  )(implicit ctx: Context) = views.html.base.layout(
-    title = tour.title,
-    moreCss = cssTag("tour-ext"),
-    draughtsground = false
-  )(
-      main(cls := s"page-small box box-pad tour-ext")(
-        h1(cls := "text tour-title")(tour.title),
-        h2("Upcoming games"),
-        table(cls := "slist slist-pad")(tbody(
-          upcoming map { c =>
-            val challenger = c.challenger.fold(
-              _ => User.anonymous,
-              reg => s"${usernameOrId(reg.id)} (${reg.rating.show})"
+    data: play.api.libs.json.JsObject,
+    chatOption: Option[lidraughts.chat.UserChat.Mine]
+  )(implicit ctx: Context) =
+    views.html.base.layout(
+      title = tour.name,
+      moreJs = frag(
+        jsAt(s"compiled/lidraughts.externalTournament${isProd ?? (".min")}.js"),
+        embedJsUnsafe(s"""LidraughtsExternalTournament.start(${
+          safeJsonValue(
+            Json.obj(
+              "data" -> data,
+              "i18n" -> bits.jsI18n,
+              "userId" -> ctx.userId,
+              "chat" -> chatOption.map { c =>
+                chat.json(
+                  c.chat,
+                  name = trans.chatRoom.txt(),
+                  timeout = c.timeout,
+                  public = true,
+                  resourceId = lidraughts.chat.Chat.ResourceId(s"tour-ext/${c.chat.id}")
+                )
+              }
             )
-            val players = c.destUser.fold(s"Challenge from $challenger") { dest =>
-              val destUser = s"${usernameOrId(dest.id)} (${dest.rating.show})"
-              c.finalColor.fold(s"$challenger vs $destUser", s"$destUser vs $challenger")
-            }
-            tr(
-              td(
-                c.external.flatMap(_.startsAt).fold(frag("Unknown"))(absClientDateTime)
-              ),
-              td(
-                a(href := routes.Challenge.show(c.id))(players)
-              )
-            )
-          }
-        )),
-        h2("Finished games"),
-        table(cls := "slist slist-pad")(tbody(
-          finished map { g =>
-            val players = s"${playerText(g.whitePlayer)} vs ${playerText(g.blackPlayer)}"
-            tr(
-              td(
-                absClientDateTime(g.createdAt)
-              ),
-              td(
-                a(href := routes.Round.watcher(g.id, "white"))(players)
-              )
-            )
-          }
-        ))
+          )
+        })""")
+      ),
+      moreCss = cssTag("tournament.external.show"),
+      draughtsground = false
+    )(
+        main(cls := "tour-ext")(
+          st.aside(cls := "tour-ext__side")(
+            side(tour, chatOption.isDefined)
+          ),
+          div(cls := "tour-ext__main")(div(cls := "box"))
+        )
       )
-    )
 }

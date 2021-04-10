@@ -71,6 +71,7 @@ package shutup {
     case class Watcher(gameId: String) extends PublicSource
     case class Team(id: String) extends PublicSource
     case class Swiss(id: String) extends PublicSource
+    case class ExternalTournament(id: String) extends PublicSource
   }
 }
 

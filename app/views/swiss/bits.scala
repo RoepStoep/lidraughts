@@ -88,6 +88,7 @@ object bits {
     JsDump.keysToObject(i18nTeamKeys, I18nDb.Team, ctx.lang)
 
   private val i18nKeys = List(
+    trans.spectators,
     trans.join,
     trans.withdraw,
     trans.youArePlaying,

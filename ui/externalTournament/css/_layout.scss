@@ -1,0 +1,34 @@
+@include breakpoint($mq-col2) {
+  #main-wrap {
+    --main-max-width: auto;
+  }
+}
+
+$chat-optimal-size: calc(100vh - #{$site-header-outer-height} - #{$block-gap} - 3rem);
+
+.tour-ext {
+
+  display: grid;
+
+  &__side { grid-area: side }
+  &__main { grid-area: main }
+  .chat__members { grid-area: uchat; }
+
+  grid-template-areas:
+  'main'
+  'side'
+  'uchat';
+
+  grid-gap: $block-gap;
+
+  @include breakpoint($mq-col2) {
+    grid-template-columns: $col2-uniboard-table $col2-uniboard-default-width;
+    grid-template-rows: $chat-optimal-size min-content;
+    grid-template-areas:
+    'side  main'
+    'uchat main';
+    .mchat__messages {
+      max-height: inherit;
+    }
+  }
+}

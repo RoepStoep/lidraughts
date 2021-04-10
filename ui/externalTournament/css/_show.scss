@@ -1,3 +1,9 @@
+$mq-col1: $mq-col1-uniboard;
+$mq-col2: $mq-small;
+
+@import 'layout';
+@import 'side';
+
 .tour-ext {
   h2 {
     font-size: 2em;
