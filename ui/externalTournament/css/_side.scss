@@ -13,7 +13,9 @@
   background: $c-bg-box;
   padding: #{$block-gap * 0.6} $block-gap;
   section {
-    margin-bottom: $block-gap;
+    border-bottom: $border;
+    margin-bottom: #{$block-gap * 2 / 3};
+    padding-bottom: #{$block-gap * 2 / 3};
     &[data-icon] {
       @extend %flex-center-nowrap;
     }

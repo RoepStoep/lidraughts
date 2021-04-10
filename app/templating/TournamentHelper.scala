@@ -42,7 +42,7 @@ trait TournamentHelper { self: I18nHelper with DateHelper with UserHelper =>
     dataIcon := "g",
     cls := "text",
     href := routes.ExternalTournament.show(tourId).url
-  )(lidraughts.externalTournament.Env.current.name(tourId))
+  )(lidraughts.externalTournament.Env.current.cached.name(tourId))
 
   object scheduledTournamentNameShortHtml {
     private def icon(c: Char) = s"""<span data-icon="$c"></span>"""

@@ -17,6 +17,7 @@ final class JsonView(
   def apply(
     tour: ExternalTournament,
     upcoming: List[Challenge],
+    ongoing: List[Game],
     finished: List[Game],
     socketVersion: Option[SocketVersion] = None
   ): Fu[JsObject] = fuccess(
@@ -24,6 +25,7 @@ final class JsonView(
       "id" -> tour.id,
       "name" -> tour.name,
       "upcoming" -> upcoming.map(challengeJson),
+      "ongoing" -> ongoing.map(gameJson),
       "finished" -> finished.map(gameJson)
     )
       .add("socketVersion" -> socketVersion.map(_.value))

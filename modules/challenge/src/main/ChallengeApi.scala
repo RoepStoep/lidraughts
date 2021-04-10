@@ -25,12 +25,14 @@ final class ChallengeApi(
   def allFor(userId: User.ID): Fu[AllChallenges] =
     createdByDestId(userId) zip createdByChallengerId(userId) map (AllChallenges.apply _).tupled
 
-  def forExternalTournament(tourId: String): Fu[List[Challenge]] =
+  def allForExternalTournament(tourId: String): Fu[List[Challenge]] =
     repo externalByTournamentId tourId
 
   // returns boolean success
   def create(c: Challenge): Fu[Boolean] =
-    if (c.isExternal) (repo insert c) inject true
+    if (c.isExternal) (repo insert c) >>- {
+      lidraughtsBus.publish(Event.Create(c), 'challenge)
+    } inject true
     else isLimitedByMaxPlaying(c) flatMap {
       case true => fuFalse
       case false => {

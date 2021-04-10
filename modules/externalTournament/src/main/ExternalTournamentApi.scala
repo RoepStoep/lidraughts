@@ -1,13 +1,14 @@
 package lidraughts.externalTournament
 
-import scala.concurrent.duration._
-
+import actorApi._
 import lidraughts.db.dsl._
+import lidraughts.game.Game
 import lidraughts.user.User
 
 final class ExternalTournamentApi(
     coll: Coll,
-    asyncCache: lidraughts.memo.AsyncCache.Builder
+    socketMap: SocketMap,
+    cached: Cached
 ) {
 
   import BsonHandlers._
@@ -23,4 +24,13 @@ final class ExternalTournamentApi(
   }
 
   def byId(id: String) = coll.byId[ExternalTournament](id)
+
+  def finishGame(game: Game): Unit = {
+    game.externalTournamentId.foreach { tourId =>
+      cached.finishedGamesCache.invalidate(tourId)
+      socketReload(tourId)
+    }
+  }
+
+  def socketReload(tourId: String): Unit = socketMap.tell(tourId, Reload)
 }

@@ -2,11 +2,10 @@ package lidraughts.externalTournament
 
 import akka.actor._
 import com.typesafe.config.Config
-import scala.concurrent.duration._
 
+import scala.concurrent.duration._
 import lidraughts.socket.History
 import lidraughts.socket.Socket.{ GetVersion, SocketVersion }
-import lidraughts.memo._
 
 final class Env(
     config: Config,
@@ -26,18 +25,13 @@ final class Env(
   }
   import settings._
 
+  private val bus = system.lidraughtsBus
+
   private lazy val externalTournamentColl = db(CollectionExternalTournament)
 
-  private lazy val nameCache = new Syncache[String, Option[String]](
-    name = "externalTournament.name",
-    compute = id => api byId id map2 { (tour: ExternalTournament) => tour.name },
-    default = _ => none,
-    strategy = Syncache.WaitAfterUptime(20 millis),
-    expireAfter = Syncache.ExpireAfterAccess(1 hour),
-    logger = logger
+  lazy val cached = new Cached(
+    asyncCache = asyncCache
   )(system)
-
-  def name(id: String): Option[String] = nameCache sync id
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
     system = system,
@@ -69,7 +63,23 @@ final class Env(
 
   lazy val api = new ExternalTournamentApi(
     coll = externalTournamentColl,
-    asyncCache = asyncCache
+    socketMap = socketMap,
+    cached = cached
+  )
+
+  bus.subscribeFuns(
+    'challenge -> {
+      case lidraughts.challenge.Event.Create(c) if c.isExternalTournament =>
+        c.externalTournamentId.foreach { api.socketReload }
+    },
+    'startGame -> {
+      case lidraughts.game.actorApi.StartGame(g) if g.isExternalTournament =>
+        g.externalTournamentId.foreach { api.socketReload }
+    },
+    'finishGame -> {
+      case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament =>
+        api finishGame g
+    }
   )
 }
 

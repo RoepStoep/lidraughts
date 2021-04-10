@@ -175,7 +175,7 @@ object Env {
     getSimul = lidraughts.simul.Env.current.repo.find,
     getSimulName = lidraughts.simul.Env.current.api.idToName,
     getTournamentName = lidraughts.tournament.Env.current.cached.name,
-    getExternalTournamentName = lidraughts.externalTournament.Env.current.name,
+    getExternalTournamentName = lidraughts.externalTournament.Env.current.cached.name,
     getTeamName = lidraughts.team.Env.current.cached.name _,
     roundJsonView = lidraughts.round.Env.current.jsonView,
     noteApi = lidraughts.round.Env.current.noteApi,

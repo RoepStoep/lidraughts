@@ -51,7 +51,7 @@ final class EventStream(
 
             case UserStartGame(userId, game) if userId == me.id => channel push toJson(game).some
 
-            case lidraughts.challenge.Event.Create(c) if c.destUserId has me.id => channel push toJson(c).some
+            case lidraughts.challenge.Event.Create(c) if !c.isExternal && c.destUserId.has(me.id) => channel push toJson(c).some
 
             // pretend like the rematch is a challenge
             case lidraughts.hub.actorApi.round.RematchOffer(gameId) => ChallengeMaker.makeRematchFor(gameId, me) foreach {

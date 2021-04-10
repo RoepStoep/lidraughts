@@ -49,7 +49,7 @@ object show {
           st.aside(cls := "tour-ext__side")(
             side(tour, chatOption.isDefined)
           ),
-          div(cls := "tour-ext__main")(div(cls := "box"))
+          div(cls := "tour-ext__main")(div(cls := "box box-pad"))
         )
       )
 }

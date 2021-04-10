@@ -14,24 +14,46 @@ object ExternalTournament extends LidraughtsController {
   private def api = Env.externalTournament.api
 
   def show(id: String) = Open { implicit ctx =>
-    OptionFuOk(api byId id) { tour =>
-      for {
-        upcoming <- Env.challenge.api.forExternalTournament(tour.id)
-        finished <- GameRepo.finishedByExternalTournament(id, 10)
-        version <- env.version(tour.id)
-        json <- env.jsonView(
-          tour = tour,
-          upcoming = upcoming,
-          finished = finished,
-          socketVersion = version.some
-        )
-        chat <- canHaveChat(tour) ?? Env.chat.api.userChat.cached
-          .findMine(lidraughts.chat.Chat.Id(tour.id), ctx.me)
-          .dmap(some)
-        _ <- chat ?? { c =>
-          Env.user.lightUserApi.preloadMany(c.chat.userIds)
-        }
-      } yield html.externalTournament.show(tour, json, chat)
+    api byId id flatMap { tourOption =>
+      negotiate(
+        html = tourOption.fold(notFound) { tour =>
+          for {
+            upcoming <- Env.challenge.api.allForExternalTournament(tour.id)
+            ongoing <- GameRepo.ongoingByExternalTournament(id)
+            finished <- env.cached.getFinishedGames(id)
+            version <- env.version(tour.id)
+            json <- env.jsonView(
+              tour = tour,
+              upcoming = upcoming,
+              ongoing = ongoing,
+              finished = finished,
+              socketVersion = version.some
+            )
+            chat <- canHaveChat(tour) ?? Env.chat.api.userChat.cached
+              .findMine(lidraughts.chat.Chat.Id(tour.id), ctx.me)
+              .dmap(some)
+            _ <- chat ?? { c =>
+              Env.user.lightUserApi.preloadMany(c.chat.userIds)
+            }
+          } yield html.externalTournament.show(tour, json, chat)
+        },
+        api = _ =>
+          tourOption.fold(notFoundJson("No such external tournament")) { tour =>
+            for {
+              upcoming <- Env.challenge.api.allForExternalTournament(tour.id)
+              ongoing <- GameRepo.ongoingByExternalTournament(id)
+              finished <- env.cached.getFinishedGames(id)
+              version <- env.version(tour.id)
+              json <- env.jsonView(
+                tour = tour,
+                upcoming = upcoming,
+                ongoing = ongoing,
+                finished = finished,
+                socketVersion = version.some
+              )
+            } yield Ok(json)
+          }
+      )
     }
   }
 

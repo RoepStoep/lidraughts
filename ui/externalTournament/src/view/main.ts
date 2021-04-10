@@ -17,37 +17,53 @@ export default function(ctrl: ExternalTournamentCtrl) {
         $(el).replaceWith($('.tour-ext__underchat.none').removeClass('none'));
       })
     }),
-    h('div.tour-ext__main.box', [
-      h('h1.text.tour-title', d.name),
-      h('h2', 'Upcoming games'),
-      h('table.slist.slist-pad', 
-        h('tbody',
-          d.upcoming.map(c => h('tr', [
-            h('td', c.startsAt ? dateFormatter(new Date(c.startsAt)) : 'Unknown'),
-            h('td', 
-              h('a', 
-                { attrs: { href: '/' + c.id } },
-                c.whitePlayer + ' vs ' + c.blackPlayer
+    h('div.tour-ext__main',
+      h('div.box.box-pad', [
+        h('h1.text.tour-title', d.name),
+        h('h2', 'Upcoming games'),
+        h('table.slist.slist-pad', 
+          h('tbody',
+            d.upcoming.map(c => h('tr', [
+              h('td', c.startsAt ? dateFormatter(new Date(c.startsAt)) : 'Unknown'),
+              h('td', 
+                h('a', 
+                  { attrs: { href: '/' + c.id } },
+                  c.whitePlayer + ' vs ' + c.blackPlayer
+                )
               )
-            )
-          ]))
-        )
-      ),
-      h('h2', 'Finished games'),
-      h('table.slist.slist-pad', 
-        h('tbody',
-          d.finished.map(g => h('tr', [
-            h('td', dateFormatter(new Date(g.createdAt))),
-            h('td', 
-              h('a', 
-                { attrs: { href: '/' + g.id } },
-                g.whitePlayer + ' vs ' + g.blackPlayer
+            ]))
+          )
+        ),
+        h('h2', 'Ongoing games'),
+        h('table.slist.slist-pad', 
+          h('tbody',
+            d.ongoing.map(g => h('tr', [
+              h('td', dateFormatter(new Date(g.createdAt))),
+              h('td', 
+                h('a', 
+                  { attrs: { href: '/' + g.id } },
+                  g.whitePlayer + ' vs ' + g.blackPlayer
+                )
               )
-            )
-          ]))
-        )
-      ),
-    ]),
+            ]))
+          )
+        ),
+        h('h2', 'Finished games'),
+        h('table.slist.slist-pad', 
+          h('tbody',
+            d.finished.map(g => h('tr', [
+              h('td', dateFormatter(new Date(g.createdAt))),
+              h('td', 
+                h('a', 
+                  { attrs: { href: '/' + g.id } },
+                  g.whitePlayer + ' vs ' + g.blackPlayer
+                )
+              )
+            ]))
+          )
+        ),
+      ])
+    ),
     ctrl.opts.chat ? h('div.chat__members.none', [
       h('span.number', '\xa0'), ' ', ctrl.trans.noarg('spectators'), ' ', h('span.list')
     ]) : null

@@ -18,6 +18,7 @@ export interface ExternalTournamentData {
   id: string;
   name: string;
   upcoming: ChallengeData[];
+  ongoing: GameData[];
   finished: GameData[];
   socketVersion?: number;
 }

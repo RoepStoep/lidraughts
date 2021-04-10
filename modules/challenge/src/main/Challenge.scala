@@ -73,6 +73,7 @@ case class Challenge(
       (fromPositionVariants(variant) && initialFen.isDefined && !initialFen.exists(_.value == variant.initialFen))
 
   def isExternal = external.isDefined
+  def isExternalTournament = externalTournamentId.isDefined
 
   def isMicroMatch = ~microMatch
 

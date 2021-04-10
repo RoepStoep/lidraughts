@@ -19,7 +19,8 @@ object side {
         div(
           p("Tournament side...?")
         )
-      )
+      ),
+      trans.by(userIdLink(tour.createdBy.some))
     ),
     chat option views.html.chat.frag
   )

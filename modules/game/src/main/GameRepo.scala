@@ -105,11 +105,20 @@ object GameRepo {
     .sort($sort asc F.createdAt)
     .list[Game](nb, ReadPreference.secondaryPreferred)
 
-  def finishedByExternalTournament(tourId: String, nb: Int): Fu[List[Game]] = coll.find(
-    Query.finished ++ Query.externalTournament(tourId)
+  def finishedByExternalTournament(tourId: String): Fu[List[Game]] = coll.find(
+    Query.externalTournament(tourId)
+      ++ Query.finished
   )
     .sort($sort desc F.createdAt)
-    .list[Game](nb, ReadPreference.secondaryPreferred)
+    .list[Game](limit = none, ReadPreference.secondaryPreferred)
+
+  def ongoingByExternalTournament(tourId: String): Fu[List[Game]] = coll.find(
+    Query.externalTournament(tourId)
+      ++ Query.notFinished
+      ++ Query.started
+  )
+    .sort($sort desc F.createdAt)
+    .list[Game]()
 
   def extraGamesForIrwin(userId: String, nb: Int): Fu[List[Game]] = coll.find(
     Query.finished
