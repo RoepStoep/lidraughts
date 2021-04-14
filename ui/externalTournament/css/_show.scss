@@ -4,12 +4,16 @@ $mq-col3: $mq-col3-uniboard;
 
 @import 'layout';
 @import 'side';
+@import 'boards';
 
 .tour-ext {
   h2 {
     font-size: 2em;
     margin-top: 2em;
     text-align: center;
+  }
+  a.text {
+    color: $c-font-dim;
   }
   .tour-title {
     background: #303F9F;
@@ -22,5 +26,9 @@ $mq-col3: $mq-col3-uniboard;
   .slist {
     border: $border;
     margin-top: 1em;
+  }
+  .result {
+    font-weight: bold;
+    font-size: 1.2em;
   }
 }

@@ -19,10 +19,10 @@ object ExternalTournament extends LidraughtsController {
         html = tourOption.fold(notFound) { tour =>
           for {
             upcoming <- Env.challenge.api.allForExternalTournament(tour.id)
-            ongoing <- GameRepo.ongoingByExternalTournament(id)
+            ongoing <- env.cached.getOngoingGames(id)
             finished <- env.cached.getFinishedGames(id)
             version <- env.version(tour.id)
-            json <- env.jsonView(
+            json = env.jsonView(
               tour = tour,
               upcoming = upcoming,
               ongoing = ongoing,
@@ -41,10 +41,10 @@ object ExternalTournament extends LidraughtsController {
           tourOption.fold(notFoundJson("No such external tournament")) { tour =>
             for {
               upcoming <- Env.challenge.api.allForExternalTournament(tour.id)
-              ongoing <- GameRepo.ongoingByExternalTournament(id)
+              ongoing <- env.cached.getOngoingGames(id)
               finished <- env.cached.getFinishedGames(id)
               version <- env.version(tour.id)
-              json <- env.jsonView(
+              json = env.jsonView(
                 tour = tour,
                 upcoming = upcoming,
                 ongoing = ongoing,
@@ -61,7 +61,7 @@ object ExternalTournament extends LidraughtsController {
     if (me.isBot || me.lame) notFoundJson("This account cannot create tournaments")
     else api.createForm.bindFromRequest.fold(
       jsonFormErrorDefaultLang,
-      data => api.create(data, me.id) flatMap { tour =>
+      data => api.create(data, me.id) map { tour =>
         env.jsonView.api(tour)
       } map { Ok(_) }
     )

@@ -23,6 +23,7 @@ export function start(opts: ExternalTournamentOpts) {
   opts.socketSend = li.socket.send;
   opts.element = element;
   opts.$side = $('.tour-ext__side').clone();
+  opts.draughtsResult = !$('body').hasClass('standard-result');
 
   let vnode: VNode;
 

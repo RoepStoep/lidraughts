@@ -6,7 +6,8 @@ import lidraughts.game.{ Game, GameRepo }
 import lidraughts.memo._
 
 private[externalTournament] final class Cached(
-    asyncCache: lidraughts.memo.AsyncCache.Builder
+    asyncCache: lidraughts.memo.AsyncCache.Builder,
+    proxyGame: Game.ID => Fu[Option[Game]]
 )(implicit system: akka.actor.ActorSystem) {
 
   def api = Env.current.api
@@ -29,4 +30,17 @@ private[externalTournament] final class Cached(
   )
 
   def getFinishedGames(id: String): Fu[List[Game]] = finishedGamesCache.get(id)
+
+  private[externalTournament] val ongoingGameIdsCache = asyncCache.clearable[String, List[Game.ID]](
+    name = "externalTournament.ongoingGameIds",
+    f = id => GameRepo.ongoingIdsByExternalTournament(id),
+    expireAfter = _.ExpireAfterWrite(1 minute)
+  )
+
+  def getOngoingGames(id: String): Fu[List[Game]] =
+    ongoingGameIdsCache.get(id).flatMap { gameIds =>
+      gameIds.map(proxyGame)
+        .sequenceFu
+        .dmap(_.flatten)
+    }
 }

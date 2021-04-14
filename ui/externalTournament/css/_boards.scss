@@ -1,0 +1,21 @@
+.tour-ext__boards {
+  margin: $block-gap 0;
+  grid-gap: 1ch;
+  --np-min-width: 200px;
+}
+.tour-ext__board {
+  @extend %box-neat-force, %flex-column;
+  
+  .mini-game__player {
+    @extend %flex-center-nowrap;
+    padding: .2em;
+  }
+  .mini-game__user {
+    display: flex;
+
+    strong {
+      text-align: center;
+      margin-right: 1ch;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Attrs } from 'snabbdom/modules/attributes'
 import { h } from 'snabbdom'
 import { Hooks } from 'snabbdom/hooks'
 import { VNode } from 'snabbdom/vnode';
+import { Player } from '../interfaces';
 
 export function bind(eventName: string, f: (e: Event) => any, redraw?: () => void): Hooks {
   return onInsert(el =>
@@ -38,6 +39,18 @@ export const userName = (u: LightUser) => {
     ), 
     ' ' + u.name
   ];
+}
+
+export function player(p: Player, asLink: boolean, withRating: boolean) {
+  return h('a.ulpt.user-link' + (((p.user.title || '') + p.user.name).length > 15 ? '.long' : ''), {
+    attrs: asLink ? { href: '/@/' + p.user.name } : { 'data-href': '/@/' + p.user.name },
+    hook: {
+      destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
+    }
+  }, [
+    h('span.name', userName(p.user)),
+    withRating ? h('span.rating', ' (' + p.rating + (p.provisional ? '?)' : ')')) : null
+  ]);
 }
 
 export const ratio2percent = (r: number) => Math.round(100 * r) + '%';

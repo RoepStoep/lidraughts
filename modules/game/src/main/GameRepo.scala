@@ -112,13 +112,17 @@ object GameRepo {
     .sort($sort desc F.createdAt)
     .list[Game](limit = none, ReadPreference.secondaryPreferred)
 
-  def ongoingByExternalTournament(tourId: String): Fu[List[Game]] = coll.find(
+  def ongoingIdsByExternalTournament(tourId: String): Fu[List[Game.ID]] = coll.find(
     Query.externalTournament(tourId)
       ++ Query.notFinished
-      ++ Query.started
+      ++ Query.started,
+    $doc("_id" -> true)
   )
     .sort($sort desc F.createdAt)
-    .list[Game]()
+    .list[Bdoc]
+    .map {
+      _.flatMap(_.getAs[Game.ID]("_id"))
+    }
 
   def extraGamesForIrwin(userId: String, nb: Int): Fu[List[Game]] = coll.find(
     Query.finished

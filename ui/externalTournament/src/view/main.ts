@@ -1,11 +1,20 @@
 import { h } from 'snabbdom'
 import { onInsert } from './util';
 import ExternalTournamentCtrl from '../ctrl';
+import { player as renderPlayer } from './util';
+import * as boards from './boards';
+import { BaseGame } from '../interfaces';
 
 export default function(ctrl: ExternalTournamentCtrl) {
   const d = ctrl.data,
     dateFormatter = getDateFormatter();
-  return h('main.' + ctrl.opts.classes, [
+  return h('main.' + ctrl.opts.classes,{
+    hook: {
+      postpatch() {
+        window.lidraughts.miniGame.initAll();
+      }
+    }
+  }, [
     h('aside.tour-ext__side', {
       hook: onInsert(el => {
         $(el).replaceWith(ctrl.opts.$side);
@@ -20,31 +29,19 @@ export default function(ctrl: ExternalTournamentCtrl) {
     h('div.tour-ext__main',
       h('div.box.box-pad', [
         h('h1.text.tour-title', d.name),
+        d.ongoing.length ? h('h2', 'Currently playing') : null,
+        d.ongoing.length ? boards.many(d.ongoing, ctrl.opts.draughtsResult) : null,
         h('h2', 'Upcoming games'),
         h('table.slist.slist-pad', 
           h('tbody',
             d.upcoming.map(c => h('tr', [
-              h('td', c.startsAt ? dateFormatter(new Date(c.startsAt)) : 'Unknown'),
               h('td', 
-                h('a', 
+                h('a.text',
                   { attrs: { href: '/' + c.id } },
-                  c.whitePlayer + ' vs ' + c.blackPlayer
+                  c.startsAt ? dateFormatter(new Date(c.startsAt)) : 'Unknown'
                 )
-              )
-            ]))
-          )
-        ),
-        h('h2', 'Ongoing games'),
-        h('table.slist.slist-pad', 
-          h('tbody',
-            d.ongoing.map(g => h('tr', [
-              h('td', dateFormatter(new Date(g.createdAt))),
-              h('td', 
-                h('a', 
-                  { attrs: { href: '/' + g.id } },
-                  g.whitePlayer + ' vs ' + g.blackPlayer
-                )
-              )
+              ),
+              h('td', renderPlayers(c))
             ]))
           )
         ),
@@ -52,11 +49,17 @@ export default function(ctrl: ExternalTournamentCtrl) {
         h('table.slist.slist-pad', 
           h('tbody',
             d.finished.map(g => h('tr', [
-              h('td', dateFormatter(new Date(g.createdAt))),
               h('td', 
-                h('a', 
+                h('a.text',
                   { attrs: { href: '/' + g.id } },
-                  g.whitePlayer + ' vs ' + g.blackPlayer
+                  dateFormatter(new Date(g.createdAt))
+                )
+              ),
+              h('td', renderPlayers(g)),
+              h('td',
+                h('div.result', g.winner ? 
+                  (g.winner == 'white' ? (ctrl.opts.draughtsResult ? '2-0' : '1-0') : (ctrl.opts.draughtsResult ? '0-2' : '0-1')) :
+                  (ctrl.opts.draughtsResult ? '1-1' : '½-½')
                 )
               )
             ]))
@@ -69,6 +72,24 @@ export default function(ctrl: ExternalTournamentCtrl) {
     ]) : null
   ]);
 }
+
+function renderPlayers(g: BaseGame) {
+  return h('div.players', { 
+      hook: {
+        insert(vnode) {
+          window.lidraughts.powertip.manualUserIn(vnode.elm as HTMLElement);
+        }
+      }
+    },
+    [
+      playerWrapper(g, 'white'),
+      playerWrapper(g, 'black')
+    ]
+  );
+}
+
+const playerWrapper = (g: BaseGame, c: Color) =>
+  h(`div.player.color-icon.is.${c}.text`, renderPlayer(g[c], true, true));
 
 let cachedDateFormatter: (date: Date) => string;
 

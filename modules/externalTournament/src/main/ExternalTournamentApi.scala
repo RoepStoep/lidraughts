@@ -25,12 +25,23 @@ final class ExternalTournamentApi(
 
   def byId(id: String) = coll.byId[ExternalTournament](id)
 
-  def finishGame(game: Game): Unit = {
+  def finishGame(game: Game): Unit =
     game.externalTournamentId.foreach { tourId =>
       cached.finishedGamesCache.invalidate(tourId)
+      cached.ongoingGameIdsCache.invalidate(tourId)
       socketReload(tourId)
     }
-  }
+
+  def startGame(game: Game): Unit =
+    game.externalTournamentId.foreach { tourId =>
+      cached.ongoingGameIdsCache.invalidate(tourId)
+      socketReload(tourId)
+    }
+
+  def addChallenge(c: lidraughts.challenge.Challenge): Unit =
+    c.externalTournamentId.foreach { tourId =>
+      socketReload(tourId)
+    }
 
   def socketReload(tourId: String): Unit = socketMap.tell(tourId, Reload)
 }

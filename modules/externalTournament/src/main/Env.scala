@@ -4,6 +4,7 @@ import akka.actor._
 import com.typesafe.config.Config
 
 import scala.concurrent.duration._
+import lidraughts.game.Game
 import lidraughts.socket.History
 import lidraughts.socket.Socket.{ GetVersion, SocketVersion }
 
@@ -14,7 +15,8 @@ final class Env(
     flood: lidraughts.security.Flood,
     hub: lidraughts.hub.Env,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
-    lightUserApi: lidraughts.user.LightUserApi
+    lightUserApi: lidraughts.user.LightUserApi,
+    proxyGame: Game.ID => Fu[Option[Game]]
 ) {
 
   private val settings = new {
@@ -30,7 +32,8 @@ final class Env(
   private lazy val externalTournamentColl = db(CollectionExternalTournament)
 
   lazy val cached = new Cached(
-    asyncCache = asyncCache
+    asyncCache = asyncCache,
+    proxyGame = proxyGame
   )(system)
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
@@ -70,11 +73,11 @@ final class Env(
   bus.subscribeFuns(
     'challenge -> {
       case lidraughts.challenge.Event.Create(c) if c.isExternalTournament =>
-        c.externalTournamentId.foreach { api.socketReload }
+        api addChallenge c
     },
     'startGame -> {
       case lidraughts.game.actorApi.StartGame(g) if g.isExternalTournament =>
-        g.externalTournamentId.foreach { api.socketReload }
+        api startGame g
     },
     'finishGame -> {
       case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament =>
@@ -92,6 +95,7 @@ object Env {
     hub = lidraughts.hub.Env.current,
     db = lidraughts.db.Env.current,
     asyncCache = lidraughts.memo.Env.current.asyncCache,
-    lightUserApi = lidraughts.user.Env.current.lightUserApi
+    lightUserApi = lidraughts.user.Env.current.lightUserApi,
+    proxyGame = lidraughts.round.Env.current.proxy.game _
   )
 }

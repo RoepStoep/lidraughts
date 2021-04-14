@@ -12,27 +12,53 @@ export interface ExternalTournamentOpts {
   chat: any;
   i18n: any;
   classes: string | null;
+  draughtsResult: boolean;
 }
 
 export interface ExternalTournamentData {
   id: string;
   name: string;
-  upcoming: ChallengeData[];
-  ongoing: GameData[];
-  finished: GameData[];
+  upcoming: Challenge[];
+  ongoing: Board[];
+  finished: Game[];
   socketVersion?: number;
 }
 
-export interface ChallengeData {
+
+export interface BaseGame {
   id: string;
-  startsAt?: string;
-  whitePlayer: string;
-  blackPlayer: string;
+  variant: VariantData;
+  white: Player;
+  black: Player;
 }
 
-export interface GameData {
-  id: string;
+export interface Challenge extends BaseGame {
+  startsAt?: string;
+}
+
+export interface Game extends BaseGame {
   createdAt: string;
-  whitePlayer: string;
-  blackPlayer: string;
+  winner?: Color;
+}
+
+export interface Player {
+  user: LightUser;
+  rating: number;
+  provisional?: boolean;
+}
+
+export interface Board extends BaseGame {
+  fen: string;
+  lastMove?: string;
+  orientation: Color;
+  clock?: {
+    white: number;
+    black: number;
+  }
+  winner?: Color;
+}
+
+export interface VariantData {
+  key: VariantKey
+  board: BoardData
 }
