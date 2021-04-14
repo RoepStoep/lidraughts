@@ -8,27 +8,35 @@ object DataForm {
 
   import lidraughts.common.Form.cleanNonEmptyText
 
-  val form = Form(mapping(
+  val tournament = Form(mapping(
     "name" -> cleanNonEmptyText(minLength = 3, maxLength = 40)
-  )(Data.apply)(Data.unapply)) fill Data(
+  )(TournamentData.apply)(TournamentData.unapply)) fill TournamentData(
     name = ""
   )
 
-  case class Data(
+  val player = Form(mapping(
+    "userId" -> lidraughts.user.DataForm.historicalUsernameField
+  )(PlayerData.apply)(PlayerData.unapply)) fill PlayerData(
+    userId = ""
+  )
+
+  case class TournamentData(
       name: String
   ) {
 
-    def make(userId: String) = ExternalTournament(
-      _id = ExternalTournament.makeId,
+    def make(userId: String) = ExternalTournament.make(
       name = name,
-      createdBy = userId
+      userId = userId
     )
   }
 
-  object Data {
+  case class PlayerData(
+      userId: String
+  ) {
 
-    def make(tour: ExternalTournament) = Data(
-      name = tour.name
+    def make(tourId: String) = ExternalPlayer.make(
+      tourId = tourId,
+      userId = userId
     )
   }
 }

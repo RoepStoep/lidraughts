@@ -3,7 +3,7 @@ package lidraughts.externalTournament
 import lidraughts.user.User
 
 case class ExternalTournament(
-    _id: String,
+    _id: ExternalTournament.ID,
     name: String,
     createdBy: User.ID
 ) {
@@ -13,5 +13,14 @@ case class ExternalTournament(
 
 object ExternalTournament {
 
-  def makeId = ornicar.scalalib.Random nextString 8
+  type ID = String
+
+  private[externalTournament] def make(
+    name: String,
+    userId: User.ID
+  ): ExternalTournament = new ExternalTournament(
+    _id = ornicar.scalalib.Random nextString 8,
+    name = name,
+    createdBy = userId
+  )
 }

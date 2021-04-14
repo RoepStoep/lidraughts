@@ -18,6 +18,7 @@ export interface ExternalTournamentOpts {
 export interface ExternalTournamentData {
   id: string;
   name: string;
+  players: ExternalPlayer[];
   upcoming: Challenge[];
   ongoing: Board[];
   finished: Game[];
@@ -39,6 +40,11 @@ export interface Challenge extends BaseGame {
 export interface Game extends BaseGame {
   createdAt: string;
   winner?: Color;
+}
+
+export interface ExternalPlayer {
+  userId: string;
+  autoStart: boolean;
 }
 
 export interface Player {

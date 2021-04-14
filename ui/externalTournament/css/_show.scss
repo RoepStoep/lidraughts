@@ -4,6 +4,7 @@ $mq-col3: $mq-col3-uniboard;
 
 @import 'layout';
 @import 'side';
+@import 'app-header';
 @import 'boards';
 
 .tour-ext {
@@ -11,24 +12,23 @@ $mq-col3: $mq-col3-uniboard;
     font-size: 2em;
     margin-top: 2em;
     text-align: center;
+    border-bottom: $border;
+    padding-bottom: #{$block-gap * 2 / 3};
   }
   a.text {
     color: $c-font-dim;
   }
-  .tour-title {
-    background: #303F9F;
-    color: #ddd;
-    letter-spacing: 0.1em;
-    padding: 30px;
-    font-size: 3em;
-    text-align: center;
-  }
   .slist {
     border: $border;
-    margin-top: 1em;
+    border-top: 0px;
   }
   .result {
     font-weight: bold;
     font-size: 1.2em;
+  }
+  .empty {
+    font-size: 1.2em;
+    margin-top: 1em;
+    text-align: center;
   }
 }

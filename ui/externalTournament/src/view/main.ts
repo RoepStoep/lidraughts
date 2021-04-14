@@ -1,7 +1,8 @@
 import { h } from 'snabbdom'
+import { VNode } from 'snabbdom/vnode';
 import { onInsert } from './util';
 import ExternalTournamentCtrl from '../ctrl';
-import { player as renderPlayer } from './util';
+import { player as renderPlayer, dataIcon } from './util';
 import * as boards from './boards';
 import { BaseGame } from '../interfaces';
 
@@ -28,11 +29,11 @@ export default function(ctrl: ExternalTournamentCtrl) {
     }),
     h('div.tour-ext__main',
       h('div.box.box-pad', [
-        h('h1.text.tour-title', d.name),
+        header(ctrl),
         d.ongoing.length ? h('h2', 'Currently playing') : null,
         d.ongoing.length ? boards.many(d.ongoing, ctrl.opts.draughtsResult) : null,
         h('h2', 'Upcoming games'),
-        h('table.slist.slist-pad', 
+        d.upcoming.length ? h('table.slist.slist-pad', 
           h('tbody',
             d.upcoming.map(c => h('tr', [
               h('td', 
@@ -44,9 +45,9 @@ export default function(ctrl: ExternalTournamentCtrl) {
               h('td', renderPlayers(c))
             ]))
           )
-        ),
+        ) : h('div.empty', ctrl.trans.noarg('noneYet')),
         h('h2', 'Finished games'),
-        h('table.slist.slist-pad', 
+        d.finished.length ? h('table.slist.slist-pad', 
           h('tbody',
             d.finished.map(g => h('tr', [
               h('td', 
@@ -64,12 +65,19 @@ export default function(ctrl: ExternalTournamentCtrl) {
               )
             ]))
           )
-        ),
+        ) : h('div.empty', ctrl.trans.noarg('noneYet')),
       ])
     ),
     ctrl.opts.chat ? h('div.chat__members.none', [
       h('span.number', '\xa0'), ' ', ctrl.trans.noarg('spectators'), ' ', h('span.list')
     ]) : null
+  ]);
+}
+
+function header(ctrl: ExternalTournamentCtrl): VNode {
+  return h('div.tour-ext__main__header', [
+    h('i.img', { attrs: dataIcon('g') }),
+    h('h1', ctrl.data.name),
   ]);
 }
 

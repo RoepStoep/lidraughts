@@ -6,5 +6,6 @@ import lidraughts.db.dsl._
 
 private[externalTournament] object BsonHandlers {
 
-  implicit val TournamentBsonHandler = Macros.handler[ExternalTournament]
+  implicit val ExternalTournamentBsonHandler = Macros.handler[ExternalTournament]
+  implicit val ExternalPlayerBsonHandler = Macros.handler[ExternalPlayer]
 }

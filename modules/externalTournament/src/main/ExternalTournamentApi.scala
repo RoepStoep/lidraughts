@@ -13,17 +13,26 @@ final class ExternalTournamentApi(
 
   import BsonHandlers._
 
-  def createForm = DataForm.form
+  def tournamentForm = DataForm.tournament
+  def playerForm = DataForm.player
+
+  def byId(id: ExternalTournament.ID) = coll.byId[ExternalTournament](id)
 
   def create(
-    data: DataForm.Data,
-    userId: User.ID
+    data: DataForm.TournamentData,
+    me: User
   ): Fu[ExternalTournament] = {
-    val tour = data make userId
+    val tour = data make me.id
     coll.insert(tour) inject tour
   }
 
-  def byId(id: String) = coll.byId[ExternalTournament](id)
+  def addPlayer(
+    tour: ExternalTournament,
+    data: DataForm.PlayerData
+  ): Fu[ExternalPlayer] = {
+    val player = data make tour.id
+    coll.insert(player) inject player
+  }
 
   def finishGame(game: Game): Unit =
     game.externalTournamentId.foreach { tourId =>
@@ -43,5 +52,5 @@ final class ExternalTournamentApi(
       socketReload(tourId)
     }
 
-  def socketReload(tourId: String): Unit = socketMap.tell(tourId, Reload)
+  def socketReload(tourId: ExternalTournament.ID): Unit = socketMap.tell(tourId, Reload)
 }

@@ -18,6 +18,7 @@ final class JsonView(
 
   def apply(
     tour: ExternalTournament,
+    players: List[ExternalPlayer],
     upcoming: List[Challenge],
     ongoing: List[Game],
     finished: List[Game],
@@ -26,17 +27,27 @@ final class JsonView(
     Json.obj(
       "id" -> tour.id,
       "name" -> tour.name,
+      "players" -> players.map(externalPlayerJson),
       "upcoming" -> upcoming.map(challengeJson),
       "ongoing" -> ongoing.map(boardJson),
       "finished" -> finished.map(gameJson)
     ).add("socketVersion" -> socketVersion.map(_.value))
 
-  def api(
+  def apiTournament(
     tour: ExternalTournament
   ): JsObject =
     Json.obj(
       "id" -> tour.id,
       "name" -> tour.name
+    )
+
+  def apiPlayer(
+    player: ExternalPlayer
+  ): JsObject =
+    Json.obj(
+      "id" -> player.id,
+      "userId" -> player.userId,
+      "autoStart" -> player.autoStart
     )
 
   def challengeJson(c: Challenge) = {
@@ -92,6 +103,12 @@ final class JsonView(
       .obj("rating" -> p.rating.int)
       .add("user" -> lightUserApi.sync(p.id))
       .add("provisional" -> p.rating.provisional.option(true))
+
+  private def externalPlayerJson(p: ExternalPlayer): JsObject =
+    Json.obj(
+      "userId" -> p.userId,
+      "autoStart" -> p.autoStart
+    )
 }
 
 object JsonView {

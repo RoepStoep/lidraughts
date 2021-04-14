@@ -21,6 +21,7 @@ final class Env(
 
   private val settings = new {
     val CollectionExternalTournament = config getString "collection.externalTournament"
+    val CollectionExternalPlayer = config getString "collection.externalPlayer"
     val HistoryMessageTtl = config duration "history.message.ttl"
     val UidTimeout = config duration "uid.timeout"
     val SocketTimeout = config duration "socket.timeout"
@@ -29,7 +30,8 @@ final class Env(
 
   private val bus = system.lidraughtsBus
 
-  private lazy val externalTournamentColl = db(CollectionExternalTournament)
+  private[externalTournament] lazy val externalTournamentColl = db(CollectionExternalTournament)
+  private[externalTournament] lazy val externalPlayerColl = db(CollectionExternalPlayer)
 
   lazy val cached = new Cached(
     asyncCache = asyncCache,
