@@ -29,7 +29,6 @@ export default class TournamentController {
   joinWithTeamSelector: boolean = false;
   redraw: () => void;
 
-  private watchingGameId: string;
   private lastStorage = window.lidraughts.storage.make('last-redirect');
 
   constructor(opts: TournamentOpts, redraw: () => void) {
@@ -47,7 +46,6 @@ export default class TournamentController {
     sound.countDown(this.data);
     this.recountTeams();
     this.redirectToMyGame();
-    if (this.data.featured) this.startWatching(this.data.featured.id);
   }
 
   askReload = (): void => {
@@ -67,7 +65,6 @@ export default class TournamentController {
       this.playerInfo.data = data.playerInfo;
     this.loadPage(data.standing);
     if (this.focusOnMe) this.scrollToMe();
-    if (data.featured) this.startWatching(data.featured.id);
     sound.end(data);
     sound.countDown(data);
     this.joinSpinner = false;
@@ -147,13 +144,6 @@ export default class TournamentController {
     }
   }
 
-  private startWatching(id: string) {
-    if (id !== this.watchingGameId) {
-      this.watchingGameId = id;
-      setTimeout(() => this.socket.send("startWatching", id), 1000);
-    }
-  };
-
   scrollToMe = () => {
     const page = myPage(this);
     if (page && page !== this.page) this.setPage(page);
@@ -166,6 +156,7 @@ export default class TournamentController {
   };
 
   showPlayerInfo = (player) => {
+    if (this.data.secondsToStart) return;
     const userId = player.name.toLowerCase();
     this.teamInfo.requested = undefined;
     this.playerInfo = {

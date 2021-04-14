@@ -331,13 +331,13 @@ object Round extends LidraughtsController with TheftPrevention {
 
   def mini(gameId: String, color: String) = Open { implicit ctx =>
     OptionOk(draughts.Color(color).??(env.proxy.povIfPresent(gameId, _)) orElse GameRepo.pov(gameId, color))(
-      html.game.bits.mini(_, ~getBoolOpt("result", ctx.req))
+      html.game.mini(_, withUserId = ~getBoolOpt("userid", ctx.req))
     )
   }
 
   def miniFullId(fullId: String) = Open { implicit ctx =>
     OptionOk(env.proxy.povIfPresent(fullId) orElse GameRepo.pov(fullId))(
-      html.game.bits.mini(_, ~getBoolOpt("result", ctx.req))
+      html.game.mini(_, withUserId = ~getBoolOpt("userid", ctx.req))
     )
   }
 }

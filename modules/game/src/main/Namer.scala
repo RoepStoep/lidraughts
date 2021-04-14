@@ -19,4 +19,7 @@ object Namer {
     case Some(rating) => s"$rating${if (p.provisional) "?" else ""}"
     case _ => "?"
   }
+
+  def ratingStringIfUser(p: Player) =
+    (p.aiLevel.isEmpty && p.userId.isDefined) option ratingString(p)
 }

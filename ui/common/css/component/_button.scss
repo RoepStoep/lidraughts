@@ -6,8 +6,9 @@
   border: none;
   cursor: pointer;
   text-align: center;
-  @include transition();
+  user-select: none;
   white-space: nowrap;
+  @include transition();
   &,
   &:visited,
   &.disabled:hover {

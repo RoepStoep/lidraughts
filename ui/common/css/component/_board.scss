@@ -8,11 +8,12 @@
   }
 }
 
-.cg-wrap {
-  display: table; // part of hack to round to full pixel size in chrome
+.mini-board,
+.mini-game .cg-wrap {
+  @extend %square;
 }
 
-.mini-board {
-  @extend %square;
-  display: table;
+.cg-wrap,
+.mini-game .cg-wrap {
+  display: table; // part of hack to round to full pixel size in chrome
 }

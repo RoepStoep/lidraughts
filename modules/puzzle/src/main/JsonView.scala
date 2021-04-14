@@ -33,7 +33,7 @@ final class JsonView(
           id = UciCharPair(puzzle.initialMove),
           ply = puzzle.initialPly,
           move = Uci.WithSan(puzzle.initialMove, puzzle.initialMove.toSan),
-          fen = puzzle.fenAfterInitialMove.getOrElse(puzzle.fen)
+          fen = puzzle.fenAfterInitialMove.map(_.value).getOrElse(puzzle.fen)
         ),
         "mode" -> mode,
         "voted" -> voted,
@@ -73,7 +73,7 @@ final class JsonView(
             id = UciCharPair(puzzle.initialMove),
             ply = puzzle.initialPly,
             move = Uci.WithSan(puzzle.initialMove, puzzle.initialMove.toSan),
-            fen = puzzle.fenAfterInitialMove.getOrElse(puzzle.fen)
+            fen = puzzle.fenAfterInitialMove.map(_.value).getOrElse(puzzle.fen)
           )
         ))
       }
@@ -108,7 +108,7 @@ final class JsonView(
         fullSolution
       } //else if (fullSolution.size % 2 == 0) fullSolution.init
       else fullSolution
-    val init = draughts.DraughtsGame(puzzle.variant.some, puzzle.fenAfterInitialMove).withTurns(puzzle.initialPly)
+    val init = draughts.DraughtsGame(puzzle.variant.some, puzzle.fenAfterInitialMove.map(_.value)).withTurns(puzzle.initialPly)
     val (_, branchList) = solution.foldLeft[(draughts.DraughtsGame, List[tree.Branch])]((init, Nil)) {
       case ((prev, branches), uci) =>
         val (game, move) = prev(uci.orig, uci.dest, uci.promotion).prefixFailuresWith(s"puzzle ${puzzle.id}").err

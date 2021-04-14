@@ -7,7 +7,9 @@ import { MaybeVNodes, Player, Pager } from '../interfaces';
 
 function playerTr(ctrl: SwissCtrl, player: Player) {
   const userId = player.user.id,
-    noarg = ctrl.trans.noarg;
+    noarg = ctrl.trans.noarg,
+    winChar = ctrl.draughtsResult ? '2' : '1',
+    drawChar = ctrl.draughtsResult ? '1' : '½';
   return h('tr', {
     key: userId,
     class: {
@@ -27,20 +29,20 @@ function playerTr(ctrl: SwissCtrl, player: Player) {
       h('div',
           player.sheet.map(p =>
             p == 'absent' ? h(p, title(noarg('absent')), '-') : (
-              p == 'bye' ? h(p, title(noarg('byte')), '1') : (
-              p == 'late' ? h(p, title(noarg('late')), '½') :
+              p == 'bye' ? h(p, title(noarg('bye')), winChar) : (
+              p == 'late' ? h(p, title(noarg('late')), drawChar) :
           h('a.glpt.' + (p.o ? 'ongoing' : (p.w === true ? 'win' : (p.w === false ? 'loss' : 'draw'))), {
             attrs: {
               key: p.g,
               href: `/${p.g}`
             },
             hook: onInsert(window.lidraughts.powertip.manualGame)
-          }, p.o ? '*' : (p.w === true ? '1' : (p.w === false ? '0' : '½')))))
+          }, p.o ? '*' : (p.w === true ? winChar : (p.w === false ? '0' : drawChar)))))
           ).concat(
           [...Array(ctrl.data.nbRounds - player.sheet.length)].map(_ => h('r'))
         )
       )),
-    h('td.points', title(noarg('points')), '' + player.points),
+    h('td.points', title(noarg('points')), '' + (ctrl.draughtsResult ? player.points * 2 : player.points)),
     h('td.tieBreak', title(noarg('tieBreak')), '' + player.tieBreak)
   ]);
 }

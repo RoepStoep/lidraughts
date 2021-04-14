@@ -25,21 +25,21 @@ object embed {
         layout.pieceSprite(lidraughts.pref.PieceSet.default),
         cssTagWithTheme("tv.embed", config.bg)
       ),
-      body(
-        cls := s"base ${config.board}",
-        dataStreamUrl := routes.Tv.feed
-      )(
-          div(id := "daily-puzzle", cls := "embedded", title := trans.clickToSolve.txt())(
+      body(cls := s"base ${config.board}")(
+        a(
+          href := routes.Puzzle.daily(),
+          target := "_blank",
+          id := "daily-puzzle",
+          cls := "embedded",
+          title := trans.clickToSolve.txt()
+        )(
+            span(cls := "text")(trans.puzzleOfTheDay()),
             raw(daily.html),
-            div(cls := "vstext", style := "text-align: center; justify-content: center")(
-              trans.puzzleOfTheDay(), br,
-              daily.color.fold(trans.whitePlays, trans.blackPlays)()
-            )
+            span(cls := "text")(daily.color.fold(trans.whitePlays, trans.blackPlays)())
           ),
-          jQueryTag,
-          jsAt("javascripts/vendor/draughtsground.min.js", false),
-          jsAt("compiled/puzzle.js", false)
-        )
+        jsAt("javascripts/vendor/draughtsground.min.js", false),
+        jsAt("compiled/puzzle.js", false)
+      )
     )
   )
 }

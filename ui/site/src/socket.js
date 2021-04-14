@@ -237,7 +237,7 @@ lidraughts.StrongSocket = function(url, version, settings) {
   var onSuccess = function() {
     nbConnects++;
     if (nbConnects == 1) {
-      options.onFirstConnect();
+      resolveFirstConnect(send);
       var disconnectTimeout;
       lidraughts.idleTimer(10 * 60 * 1000, function() {
         options.idle = true;
@@ -297,21 +297,21 @@ try {
 
 lidraughts.StrongSocket.defaults = {
   events: {
-    fen: function(e) {
-      $('.mini-board-' + e.id).each(function() {
-        lidraughts.parseFen($(this).data('fen', e.fen).data('lastmove', e.lm));
+    fen(e) {
+      $('.mini-game-' + e.id).each(function() {
+        lidraughts.miniGame.update(this, e);
       });
     },
-    res: function(e) {
-      $('.mini-board-' + e.id).each(function() {
-        $(this).data('result', e.res);
+    finish(e) {
+      $('.mini-game-' + e.id).each(function() {
+        lidraughts.miniGame.finish(this, e.win);
       });
-      lidraughts.pubsub.emit('game.result', e);
+      lidraughts.pubsub.emit('game.finish', e);
     },
-    challenges: function(d) {
+    challenges(d) {
       lidraughts.challengeApp.update(d);
     },
-    notifications: function(d) {
+    notifications(d) {
       lidraughts.notifyApp.update(d, true);
     }
   },
@@ -327,7 +327,11 @@ lidraughts.StrongSocket.defaults = {
     protocol: location.protocol === 'https:' ? 'wss:' : 'ws:',
     baseUrls: (function(d) {
       return [d];
-    })(document.body.getAttribute('data-socket-domain')),
-    onFirstConnect: $.noop
+    })(document.body.getAttribute('data-socket-domain'))
   }
 };
+
+let resolveFirstConnect;
+lidraughts.StrongSocket.firstConnect = new Promise(r => {
+  resolveFirstConnect = r;
+});

@@ -6,7 +6,6 @@ import scala.concurrent.duration._
 
 import lidraughts.api.Context
 import lidraughts.app._
-import lidraughts.chat.Chat
 import lidraughts.swiss.Swiss.{ Id => SwissId }
 import lidraughts.swiss.{ Swiss => SwissModel }
 import views._
@@ -35,6 +34,7 @@ object Swiss extends LidraughtsController {
             json <- env.json(
               swiss = swiss,
               me = ctx.me,
+              pref = ctx.pref,
               reqPage = page,
               socketVersion = version.some,
               playerInfo = none,
@@ -58,6 +58,7 @@ object Swiss extends LidraughtsController {
               json <- env.json(
                 swiss = swiss,
                 me = ctx.me,
+                pref = ctx.pref,
                 reqPage = page,
                 socketVersion = socketVersion,
                 playerInfo = playerInfo,

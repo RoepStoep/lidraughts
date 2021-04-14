@@ -185,6 +185,12 @@ object Forsyth {
     fenW.toString
   }
 
+  def boardAndColor(situation: Situation): String =
+    boardAndColor(situation.board, situation.color)
+
+  def boardAndColor(board: Board, turnColor: Color): String =
+    s"${turnColor.letter.toUpper}:${exportBoard(board)}"
+
   def compressedBoard(board: Board): String = {
     def posAt(f: Int) = board.boardSize.pos.posAt(f)
     // roles as numbers to prevent conflict with position piotrs

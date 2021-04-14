@@ -18,6 +18,12 @@
   <string name="white">Białe</string>
   <string name="black">Czarne</string>
   <string name="randomColor">Losowo</string>
+  <string name="microMatch">Mikro-mecz</string>
+  <string name="microMatchChallenge">To wyzwanie jest mikro-meczem!</string>
+  <string name="microMatchExplanation">Po zakończeniu tej gry zostanie natychmiastowo rozegrany rewanż ze zmianą kolorów.</string>
+  <string name="microMatchRematchStarted">Rozpoczęto drugą grę mikro-meczu</string>
+  <string name="microMatchRematchAwaiting">Oczekiwanie na drugą grę mikro-meczu</string>
+  <string name="microMatchGameX">Mikro-mecz gra %s</string>
   <string name="createAGame">Nowa partia</string>
   <string name="whiteIsVictorious">Wygrana białych</string>
   <string name="blackIsVictorious">Wygrana czarnych</string>
@@ -84,6 +90,7 @@
   <string name="averageRatingX">Średni ranking: %s</string>
   <string name="recentGames">Ostatnie partie</string>
   <string name="topGames">Najlepsze partie</string>
+  <string name="masterDbExplanation">Rzeczywiste gry %1$s+ graczy o tytułach mistrzowskich o rankingu od %2$s do %3$s</string>
   <plurals name="winInXHalfMoves">
     <item quantity="one">Zwycięstwo po %s ruchu cząstkowym</item>
     <item quantity="few">Zwycięstwo po %s ruchach cząstkowych</item>
@@ -146,6 +153,7 @@
   <string name="currentGames">Partie w toku</string>
   <string name="gamesInTimeout">Gry po czasie</string>
   <string name="yourTurnInX">Twój ruch za %s</string>
+  <string name="gameNumberX">Gra %s</string>
   <plurals name="nbGames">
     <item quantity="one">%s partia</item>
     <item quantity="few">%s partie</item>
@@ -167,6 +175,7 @@
   <string name="viewInFullSize">Zobacz w pełnym rozmiarze</string>
   <string name="logOut">Wyloguj</string>
   <string name="signIn">Zaloguj się</string>
+  <string name="youMustSignInToJoinIt">Musisz %s aby dołączyć</string>
   <string name="newToLidraughts">Nowy na Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Musisz mieć konto, aby to zrobić</string>
   <string name="signUp">Zarejestruj się</string>
@@ -418,6 +427,13 @@
   <string name="xCreatedTeamY">%1$s stworzył klub %2$s</string>
   <string name="xStartedStreaming">%s rozpoczął streaming</string>
   <string name="averageElo">Średni ranking</string>
+  <string name="averagePerformance">Średnia skuteczność</string>
+  <string name="averageScore">Średni wynik</string>
+  <string name="teamPage">Strona zespołu</string>
+  <string name="viewAllTeams">Zobacz wszystkie zespoły</string>
+  <string name="pickYourTeam">Wybierz twój zespół</string>
+  <string name="whichTeamWillYouRepresent">Który zespół będziesz reprezentował w tej bitwie?</string>
+  <string name="youMustJoinOneOfTheseTeams">Musisz dołączyć do jednego z tych zespołów aby wziąć udział!</string>
   <string name="location">Lokalizacja</string>
   <string name="settings">Ustawienia</string>
   <string name="filterGames">Filtruj partie</string>
@@ -429,6 +445,7 @@
   <string name="fromPosition">Z pozycji</string>
   <string name="continueFromHere">Kontynuuj z tej pozycji</string>
   <string name="toStudy">Opracowanie</string>
+  <string name="pdnImportBy">Import pliku PDN przez %s</string>
   <string name="importGame">Import partii</string>
   <string name="importGameExplanation">Wklejając zapis partii będziesz miał możliwość jej odtworzenia,
 poproszenia o analizę komputerową, omówienia jej z innymi oraz udostępnienia linku do niej innym.</string>
@@ -553,6 +570,7 @@ poproszenia o analizę komputerową, omówienia jej z innymi oraz udostępnienia
   <string name="noBerserkAllowed">Uzywanie agresji jest niedozwolone</string>
   <string name="editTournament">Edytuj turniej</string>
   <string name="tournamentDescription">Opis turnieju</string>
+  <string name="tournamentDescriptionHelp">Czy chcesz powiedzieć coś szczególnego uczestnikom? Pisz krótko i na temat. Istnieje możliwość dodania odnośników: [text](https://url)</string>
   <string name="cancelTheTournament">Anuluj turniej</string>
   <string name="reportXToModerators">Zgłoś %s do moderatora</string>
   <string name="profileCompletion">Kompletność profilu: %s</string>
@@ -782,6 +800,7 @@ jeden adres URL na linię</string>
   <string name="opponent">Przeciwnik</string>
   <string name="learnMenu">Nauka</string>
   <string name="studyMenu">Opracowania</string>
+  <string name="practice">Ćwiczenia</string>
   <string name="community">Społeczność</string>
   <string name="tools">Narzędzia</string>
   <string name="increment">Dodawany czas</string>
@@ -996,6 +1015,7 @@ jeden adres URL na linię</string>
   <string name="coaches">Trenerzy</string>
   <string name="invalidPdn">Niepraidłowy plik PDN</string>
   <string name="invalidFen">Nieprawidłowy plik FEN</string>
+  <string name="invalidPosition">Nieprawidłowa pozycja</string>
   <string name="tooManyKings">Nie możesz grać przeciwko silnikowi Scan z więcej niż 30 damkami na warcabnicy.</string>
   <string name="error.minLength">Minimalna długość to %s znaków</string>
   <string name="error.maxLength">Maksymalna długość to %s znaków</string>
@@ -1003,11 +1023,15 @@ jeden adres URL na linię</string>
   <string name="error.max">Musi być mniejsze lub równe %s</string>
   <string name="error.unknown">Wystąpił błąd</string>
   <string name="error.pattern">Zawiera niedozwolone znaki</string>
+  <string name="error.eventName">Zawiera nieprawidłowe znaki. Akceptowane są tylko litery, cyfry i wspólne znaki interpunkcyjne.</string>
   <string name="mustNotContainLidraughts">Nie może zawierać \"lidraughts\"</string>
   <string name="mustNotContainATitleThatIsNotVerified">Nie może zawierać tytułu który nie jest zweryfikowany z Twoim kontem</string>
   <string name="custom">Niestandardowa</string>
   <string name="notifications">Powiadomienia</string>
   <string name="challenges">Wyzwania</string>
+  <string name="noChallenges">Brak wyzwań</string>
+  <string name="challengeSomeone">Rzuć komuś wyzwanie</string>
+  <string name="openChallenge">Otwórz wyzwanie</string>
   <string name="startsAtX">Zaczyna się o %s</string>
   <string name="challengeDeclined">Wyzwanie odrzucone</string>
   <string name="challengeAccepted">Wyzwanie przyjęte!</string>

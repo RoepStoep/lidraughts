@@ -19,6 +19,7 @@ export default class SwissCtrl {
   playerInfoId?: string;
   disableClicks: boolean = true;
   searching: boolean = false;
+  draughtsResult: boolean;
   redraw: () => void;
 
   private lastStorage = window.lidraughts.storage.make('last-redirect');
@@ -26,6 +27,7 @@ export default class SwissCtrl {
   constructor(opts: SwissOpts, redraw: () => void) {
     this.opts = opts;
     this.data = this.readData(opts.data);
+    this.draughtsResult = !!this.data.draughtsResult;
     this.redraw = redraw;
     this.trans = window.lidraughts.trans(opts.i18n);
     this.socket = makeSocket(opts.socketSend, this);

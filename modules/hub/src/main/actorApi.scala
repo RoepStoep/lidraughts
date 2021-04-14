@@ -235,7 +235,9 @@ package round {
   case class MoveEvent(
       gameId: String,
       fen: String,
-      move: String
+      move: String,
+      whiteClock: Option[Int],
+      blackClock: Option[Int]
   )
   case class CorresMoveEvent(
       move: MoveEvent,
@@ -253,7 +255,7 @@ package round {
   )
   case class ResultEvent(
       gameId: String,
-      result: String
+      result: Option[String]
   )
   case class NbRounds(nb: Int)
   case class Berserk(gameId: String, userId: String)
@@ -268,6 +270,7 @@ package round {
   case class RematchNo(playerId: String)
   case class Abort(playerId: String)
   case class Resign(playerId: String)
+  case class SimulTimeOut(seconds: Int)
   case object AnalysisComplete
   case object MicroRematch
 }

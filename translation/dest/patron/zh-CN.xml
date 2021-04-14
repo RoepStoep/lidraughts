@@ -6,11 +6,13 @@
   <string name="becomePatron">成为 Lidraughts 赞助者</string>
   <string name="xBecamePatron">%s 成为了 Lidraughts 的赞助者</string>
   <string name="newPatrons">新赞助者</string>
+  <string name="freeDraughts">人人都可免费使用的国际跳棋平台, 永远!</string>
   <string name="noAdsNoSubs">没有广告，无需订阅；保持开源和热情。</string>
   <string name="thankYou">感谢您的捐赠！</string>
   <string name="youHaveLifetime">你有一个终身赞助者帐户。这太棒了！</string>
   <string name="patronUntil">您的赞助帐户直到 %s。</string>
   <string name="ifNotRenewed">如果没有续订，你将被降级为免费账户。</string>
+  <string name="weAreVolunteers">我们是一个志愿者小团队，我们相信每个人都应享有一个免费的、世界级的国际跳棋平台。</string>
   <string name="weRelyOnSupport">我们能做到现在，就是依靠像您这样的人的支持。 如果您喜欢使用 Lidraughts，请考虑捐赠并成为赞助者来支持我们！</string>
   <string name="lifetime">终生</string>
   <string name="payLifetimeOnce">支付 %s 一次。永远成为 Lidraughts 赞助者！</string>
@@ -21,16 +23,25 @@
   <string name="onetime">单次</string>
   <string name="singleDonation">单次捐赠会赠予您一个月的赞助者之翼。</string>
   <string name="otherAmount">其他</string>
+  <string name="pleaseEnterAmount">请输入捐赠金额（欧元）</string>
   <string name="withCreditCard">信用卡</string>
+  <string name="withPaypal">使用 PayPal 捐赠</string>
+  <string name="donatingPubliclyAs">公开捐赠信息 %s</string>
   <string name="weAreSmallTeam">我们作为一个小团队，有你的支持将带来巨大的变化！</string>
   <string name="celebratedPatrons">著名的赞助者让 Lidraughts 成为可能。</string>
   <string name="whereMoneyGoes">捐助都会去哪儿？</string>
+  <string name="serversAndExpenses">运行 Lidraughts 和 Scan 分析引擎的网络服务器.
+其它运营开销例如邮件服务和网络服务器托管费用.</string>
   <string name="changeMonthlySupport">我可以更改或取消我的每月捐赠吗？</string>
+  <string name="changeOrContact">当然, 您可以随时更改. 登录您的 PayPal 账户, 重新设置自动付款. 
+或者你可以%s</string>
+  <string name="contactSupport">联系 Lidraughts 支持团队</string>
   <string name="otherMethods">其他捐赠方法？</string>
+  <string name="bankTransfers">我们同时也接受银行转账. 请发送邮件到 %s 咨询详情.</string>
   <string name="bitcoin">还有我们的比特币地址：%s</string>
   <string name="patronFeatures">赞助者会有特殊功能吗？</string>
   <string name="noPatronFeatures">没有，Lidraughts 是完全免费的。这是我们的承诺。
-当然，赞助者都说他们有一个很酷的个人资料图标。</string>
+然而，赞助者可以拥有一个很酷的个人资料图标。</string>
   <string name="featuresComparison">查看详细的功能比较</string>
   <plurals name="patronForMonths">
     <item quantity="other">已成为 Lidraughts 赞助者 %s 个月</item>
@@ -42,7 +53,7 @@
   <string name="youWillBeChargedXOnY">您将于 %2$s 为 %1$s 充值</string>
   <string name="makeAdditionalDonation">立即捐款</string>
   <string name="update">更新</string>
-  <string name="changeMonthlyAmount">更改每月数量 (%s)</string>
+  <string name="changeMonthlyAmount">更改每月金额 (%s)</string>
   <string name="cancelSupport">取消您的赞助</string>
   <string name="xOrY">%1$s 或 %2$s</string>
   <string name="decideHowMuch">决定什么 Lidraughts 对您来说是值得的：</string>
@@ -55,6 +66,8 @@
   <string name="amount">数量</string>
   <string name="transactionCompleted">您的交易已完成，您的捐款收据已通过电子邮件发送给您。</string>
   <string name="permanentPatron">您现在拥有一个永久赞助者账号。</string>
+  <string name="paypalRenew">一个月后, PayPal 会自动续费.
+如果要取消每月自动捐助, 请登录您的 PayPal 账户, 重新设置自动付款.</string>
   <string name="checkOutProfile">查看您的个人资料页面！</string>
   <string name="nowLifetime">您现在是Lidraughts终身会员</string>
   <string name="nowOneMonth">从现在起为期一个月，您是 Lidraughts 的赞助者！</string>

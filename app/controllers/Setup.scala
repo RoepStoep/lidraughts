@@ -211,7 +211,7 @@ object Setup extends LidraughtsController with TheftPrevention {
     get("fen") flatMap ValidFen(v, getBool("strict")) match {
       case None => BadRequest.fuccess
       case Some(v) if getBool("kings") && v.tooManyKings => BadRequest.fuccess
-      case Some(v) => Ok(html.game.bits.miniBoard(v.fen, v.color, v.boardSize)).fuccess
+      case Some(v) => Ok(html.board.bits.miniSpan(v.fen, v.boardSize, v.color)).fuccess
     }
   }
 
@@ -227,7 +227,7 @@ object Setup extends LidraughtsController with TheftPrevention {
           else trans.invalidFen.txt()
         BadRequest("<p class=\"errortext\">" + errorText + "</p>").fuccess
       case Some(v) if getBool("kings") && v.tooManyKings => BadRequest("<p class=\"errortext\">" + trans.tooManyKings.txt() + "</p>").fuccess
-      case Some(v) => Ok(html.game.bits.miniBoard(v.fen, v.color, v.boardSize)).fuccess
+      case Some(v) => Ok(html.board.bits.miniSpan(v.fen, v.boardSize, v.color)).fuccess
     }
   }
 

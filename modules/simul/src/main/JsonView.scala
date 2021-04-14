@@ -100,7 +100,7 @@ final class JsonView(
         "online" -> isOnline(host.id),
         "patron" -> host.isPatron,
         "rating" -> simul.hostRating
-      ).add("gameId" -> simul.hostGameId)
+      ).add("gameId" -> simul.hostGameId.ifTrue(simul.isRunning))
         .add("title" -> host.title)
         .add("officialRating" -> simul.hasFmjd.option(simul.spotlight.flatMap(_.hostFmjdRating)))
     },
@@ -228,14 +228,25 @@ final class JsonView(
       )
     }
 
-  private def gameJson(hostId: User.ID, g: Game) = Json.obj(
-    "id" -> g.id,
-    "status" -> g.status.id,
-    "fen" -> (draughts.format.Forsyth exportBoard g.board),
-    "lastMove" -> ~g.lastMoveKeys,
-    "orient" -> g.playerByUserId(hostId).map(_.color),
-    "board" -> g.variant.boardSize
-  )
+  private def gameJson(hostId: User.ID, g: Game) =
+    Json
+      .obj(
+        "id" -> g.id,
+        "status" -> g.status.id,
+        "fen" -> (draughts.format.Forsyth boardAndColor g.situation),
+        "lastMove" -> ~g.lastMoveKeys,
+        "orient" -> g.playerByUserId(hostId).map(_.color),
+        "board" -> g.variant.boardSize
+      )
+      .add(
+        "clock" -> g.clock.ifTrue(g.isBeingPlayed).map { c =>
+          Json.obj(
+            "white" -> c.remainingTime(draughts.White).roundSeconds,
+            "black" -> c.remainingTime(draughts.Black).roundSeconds
+          )
+        }
+      )
+      .add("winner" -> g.winnerColor.map(_.name))
 
   private def pairingJson(games: List[Game], hostId: String, fmjd: Option[ShowFmjdRating])(p: SimulPairing): Fu[Option[JsObject]] =
     games.find(_.id == p.gameId) ?? { game =>

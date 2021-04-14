@@ -13,7 +13,13 @@ import playerInfo from './playerInfo';
 export default function(ctrl: SwissCtrl) {
   const d = ctrl.data;
   const content = (d.status == 'created' ? created(ctrl) : (d.status == 'started' ? started(ctrl) : finished(ctrl)));
-  return h('main.' + ctrl.opts.classes, [
+  return h('main.' + ctrl.opts.classes, {
+    hook: {
+      postpatch() {
+        window.lidraughts.miniGame.initAll();
+      }
+    }
+  }, [
     h('aside.swiss__side', {
       hook: onInsert(el => {
         $(el).replaceWith(ctrl.opts.$side);
@@ -25,10 +31,10 @@ export default function(ctrl: SwissCtrl) {
         $(el).replaceWith($('.swiss__underchat.none').removeClass('none'));
       })
     }),
-    playerInfo(ctrl) || stats(ctrl) || boards.top(d.boards, d.variant.board),
+    playerInfo(ctrl) || stats(ctrl) || boards.top(d.boards, d.variant.board, !!d.draughtsResult),
     h('div.swiss__main', [
       h('div.box.swiss__main-' + d.status, content),
-      boards.many(d.boards, d.variant.board)
+      boards.many(d.boards, d.variant.board, !!d.draughtsResult)
     ]),
     ctrl.opts.chat ? h('div.chat__members.none', [
       h('span.number', '\xa0'), ' ', ctrl.trans.noarg('spectators'), ' ', h('span.list')

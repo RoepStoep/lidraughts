@@ -16,8 +16,6 @@ case class Pov(game: Game, color: Color) {
 
   def opponent = game player !color
 
-  def isFirstPlayer = game.firstPlayer.color == color
-
   def unary_! = Pov(game, !color)
 
   def ref = PovRef(game.id, color)
@@ -50,10 +48,10 @@ object Pov {
 
   def apply(game: Game): List[Pov] = game.players.map { apply(game, _) }
 
-  def first(game: Game) = apply(game, game.firstPlayer)
-  def second(game: Game) = apply(game, game.secondPlayer)
   def white(game: Game) = apply(game, game.whitePlayer)
   def black(game: Game) = apply(game, game.blackPlayer)
+  def naturalOrientation(game: Game) = apply(game, game.naturalOrientation)
+
   def player(game: Game) = apply(game, game.player)
   def opponent(game: Game) = apply(game, game.opponent(game.player))
 

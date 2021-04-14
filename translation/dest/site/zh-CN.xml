@@ -6,6 +6,7 @@
   <string name="toInviteSomeoneToPlayGiveThisUrl">邀请朋友下棋，请分享这个网址</string>
   <string name="gameOver">棋局结束</string>
   <string name="waitingForOpponent">等待对手</string>
+  <string name="waitingForPlayer">等待棋手</string>
   <string name="waiting">等待中</string>
   <string name="yourTurn">该你走</string>
   <string name="aiNameLevelAiLevel">%1$s级别%2$s</string>
@@ -17,6 +18,12 @@
   <string name="white">白方</string>
   <string name="black">黑方</string>
   <string name="randomColor">黑白随机</string>
+  <string name="microMatch">双盘制</string>
+  <string name="microMatchChallenge">本次挑战是双盘制！</string>
+  <string name="microMatchExplanation">本局结束后，黑白双方将互换立即进行双盘制的第二盘。</string>
+  <string name="microMatchRematchStarted">开始双盘制的第二盘</string>
+  <string name="microMatchRematchAwaiting">等待双盘制的第二盘</string>
+  <string name="microMatchGameX">双盘制棋局%s</string>
   <string name="createAGame">创建对局</string>
   <string name="whiteIsVictorious">白方获胜</string>
   <string name="blackIsVictorious">黑方获胜</string>
@@ -130,9 +137,11 @@
   <plurals name="nbOpponents">
     <item quantity="other">%s位对手</item>
   </plurals>
+  <string name="ongoingGames">进行中棋局</string>
   <string name="currentGames">当前对局</string>
   <string name="gamesInTimeout">超时棋局</string>
   <string name="yourTurnInX">该你走棋%s</string>
+  <string name="gameNumberX">棋局%s</string>
   <plurals name="nbGames">
     <item quantity="other">棋局总计[%s]</item>
   </plurals>
@@ -145,6 +154,7 @@
   <string name="viewInFullSize">全屏观看</string>
   <string name="logOut">退出</string>
   <string name="signIn">登录</string>
+  <string name="youMustSignInToJoinIt">您必须%s才能加入</string>
   <string name="newToLidraughts">新访客？</string>
   <string name="youNeedAnAccountToDoThat">请注册以完成该操作</string>
   <string name="signUp">注册</string>
@@ -213,6 +223,7 @@
   <string name="yourOpponentOffersADraw">你的对手提出和棋</string>
   <string name="accept">接受</string>
   <string name="decline">拒绝</string>
+  <string name="startingIn">开始于</string>
   <string name="startingSoon"> - 即将开始 - </string>
   <string name="playingRightNow">正在对局</string>
   <string name="eventInProgress">正在进行</string>
@@ -226,10 +237,14 @@
   <string name="variantTitleFrysk">弗里斯兰跳棋开局每方5枚棋子。</string>
   <string name="variantTitleAntidraughts">失去你所有的棋子（或无法行棋）将赢得比赛。</string>
   <string name="variantTitleBreakthrough">优先让兵升变成王的一方获胜。</string>
+  <string name="variantTitleRussian">可选择吃子路线，吃子到对方底线时可以升变成王并继续吃子。</string>
+  <string name="variantTitleBrazilian">行棋规则和标准国际跳棋一致，但使用8x8棋盘。</string>
+  <string name="customStartingPosition">自定义开局棋位</string>
   <string name="unlimited">无限时间</string>
   <string name="mode">比赛模式</string>
   <string name="casual">无积分</string>
   <string name="rated">有积分</string>
+  <string name="gamesWillImpactThePlayersRating">棋局将影响棋手排名</string>
   <string name="casualTournament">无积分</string>
   <string name="ratedTournament">有积分</string>
   <string name="thisGameIsRated">这盘棋是有积分的</string>
@@ -303,6 +318,7 @@
   <string name="tournaments">锦标赛</string>
   <string name="xTournaments">%s锦标赛</string>
   <string name="myTournaments">我的锦标赛</string>
+  <string name="createdTournaments">已创建</string>
   <string name="recentlyPlayed">近期参加</string>
   <string name="bestResults">最佳成绩</string>
   <string name="tournamentPoints">锦标赛分数</string>
@@ -339,6 +355,13 @@
   <string name="xCreatedTeamY">%1$s组建%2$s队</string>
   <string name="xStartedStreaming">%s 开始直播</string>
   <string name="averageElo">平均积分</string>
+  <string name="averagePerformance">平均表现</string>
+  <string name="averageScore">平均得分</string>
+  <string name="teamPage">团队页面</string>
+  <string name="viewAllTeams">查看所有团队</string>
+  <string name="pickYourTeam">选择您的团队</string>
+  <string name="whichTeamWillYouRepresent">你将代表哪个团队出战？</string>
+  <string name="youMustJoinOneOfTheseTeams">您必须加入这些团队之一才能参与！</string>
   <string name="location">地址</string>
   <string name="settings">设置</string>
   <string name="filterGames">筛选棋局</string>
@@ -350,9 +373,11 @@
   <string name="fromPosition">自定义局面</string>
   <string name="continueFromHere">继续下棋</string>
   <string name="toStudy">研究</string>
+  <string name="pdnImportBy">由 %s 导入的PDN</string>
   <string name="importGame">导入棋局</string>
   <string name="importGameExplanation">当您在此处粘贴PDN棋谱后，您将能够重放棋局、
 使用电脑分析、使用对局聊天室以及分享棋局链接。</string>
+  <string name="orUploadAPdnFile">或者上传一个 PDN 文件</string>
   <plurals name="nbImportedGames">
     <item quantity="other">导入[%s]</item>
   </plurals>
@@ -458,6 +483,7 @@
   <string name="noBerserkAllowed">不允许快棋</string>
   <string name="editTournament">编辑锦标赛</string>
   <string name="tournamentDescription">锦标赛描述</string>
+  <string name="tournamentDescriptionHelp">您有其它信息要告知参赛者？请尽量保持此信息简明扼要。可以使用标记语言链接：[text](https://url)</string>
   <string name="cancelTheTournament">取消锦标赛</string>
   <string name="reportXToModerators">举报%s</string>
   <string name="profileCompletion">资料完善: %s</string>
@@ -470,6 +496,7 @@
   <string name="lastName">姓</string>
   <string name="biography">个人简介</string>
   <string name="country">国家</string>
+  <string name="countryOrRegion">国家／地区</string>
   <string name="socialMediaLinks">社交媒体链接</string>
   <string name="linkSuggestions">比如Twitter, Facebook, GitHub, Lichess, Wechat...
 一行一个地址</string>
@@ -674,6 +701,7 @@
   <string name="opponent">对手</string>
   <string name="learnMenu">学习</string>
   <string name="studyMenu">专题课程</string>
+  <string name="practice">练习</string>
   <string name="community">社区</string>
   <string name="tools">工具</string>
   <string name="increment">加秒</string>
@@ -879,15 +907,29 @@
   <string name="coaches">教练</string>
   <string name="invalidPdn">无效的PDN棋谱</string>
   <string name="invalidFen">无效的FEN局面</string>
+  <string name="invalidPosition">无效棋位</string>
   <string name="tooManyKings">您不能在棋盘上设置30个以上的王棋来对弈Scan</string>
   <string name="error.minLength">最小长度：%s</string>
   <string name="error.maxLength">最大长度：%s</string>
   <string name="error.min">大于或等于%s</string>
   <string name="error.max">小于或等于%s</string>
   <string name="error.unknown">错误</string>
+  <string name="error.pattern">包含无效字符</string>
+  <string name="error.eventName">包含无效字符。只可使用字母、数字和常见标点符号。</string>
+  <string name="mustNotContainLidraughts">不能包含 \"lidraughts\"</string>
+  <string name="mustNotContainATitleThatIsNotVerified">不能包含未经确认的等级称号</string>
   <string name="custom">自定义</string>
   <string name="notifications">通知</string>
   <string name="challenges">挑战</string>
+  <string name="noChallenges">暂无挑战</string>
+  <string name="challengeSomeone">挑战其他棋手</string>
+  <string name="openChallenge">打开挑战</string>
+  <string name="startsAtX">开始于%s</string>
+  <string name="challengeDeclined">挑战已拒绝</string>
+  <string name="challengeAccepted">挑战已接受!</string>
+  <string name="challengeCanceled">挑战已取消</string>
+  <string name="challengeAcceptedAndWaiting">挑战已接受！等待对手...</string>
+  <string name="youWillBeRedirectedToTheGame">当两位玩家都接受挑战时，您将被重新导向到棋局中。</string>
   <string name="perfRatingX">积分：%s</string>
   <plurals name="nbSecondsToPlayTheFirstMove">
     <item quantity="other">还剩%s秒走第一步</item>

@@ -6,11 +6,13 @@
   <string name="becomePatron">Zostań patronem Lidraughts</string>
   <string name="xBecamePatron">%s został patronem Lidraughts</string>
   <string name="newPatrons">Nowi patroni</string>
+  <string name="freeDraughts">Darmowe warcaby dla wszystkich i na zawsze!</string>
   <string name="noAdsNoSubs">Bez reklam, bez abonamentu, za to z otwartym kodem i pełne pasji.</string>
   <string name="thankYou">Dziękuję za darowiznę!</string>
   <string name="youHaveLifetime">Masz konto Dożywotnego Patrona. To całkiem niesamowite!</string>
   <string name="patronUntil">Masz konto patrona do %s.</string>
   <string name="ifNotRenewed">Jeśli nie zostanie odnowione, stanie się ponownie zwykłym kontem.</string>
+  <string name="weAreVolunteers">Jesteśmy niewielkim zespołem ochotników, którzy uważają, że każdy powinien mieć dostęp do darmowej platformy warcabowej światowej klasy.</string>
   <string name="weRelyOnSupport">Żeby było to możliwe, liczymy na wsparcie ze strony osób takich jak Ty. Jeśli lubisz korzystać z Lidraughts, rozważ wsparcie nas poprzez darowizny i stań się naszym patronem!</string>
   <string name="lifetime">Dożywotnie</string>
   <string name="payLifetimeOnce">Wpłać %s raz. Bądź patronem Lidraughts na zawsze!</string>
@@ -23,11 +25,19 @@
   <string name="otherAmount">Inne</string>
   <string name="pleaseEnterAmount">Wprowadź proszę kwotę w EUR</string>
   <string name="withCreditCard">Karta płatnicza</string>
+  <string name="withPaypal">Wesprzyj nas przez PayPal</string>
+  <string name="donatingPubliclyAs">Wspiera publicznie jako %s</string>
   <string name="weAreSmallTeam">Jesteśmy małym zespołem, więc Twoje wsparcie ma ogromne znaczenie!</string>
   <string name="celebratedPatrons">Znamienici patroni, dzięki którym działa Lidraughts</string>
   <string name="whereMoneyGoes">Na co zostaną wydane przekazane pieniądze?</string>
+  <string name="serversAndExpenses">Serwery, które obsługują portal lidraughts oraz silnik warcabowy \"Scan\".
+Pozostałe wydatki takie jak koszty hostingu strony, czy też usługi mailgun.</string>
   <string name="changeMonthlySupport">Czy mogę zmienić/anulować moje wsparcie miesięczne?</string>
+  <string name="changeOrContact">Tak, w każdej chwili. Zaloguj się na swoje konto PayPal i przejdź do automatycznych płatności.
+Możesz również %s.</string>
+  <string name="contactSupport">skontaktuj się z obsługą serwisu Lidraughts</string>
   <string name="otherMethods">Inne metody wspierania?</string>
+  <string name="bankTransfers">Akceptujemy również przelewy bankowe. Prosimy o wysłanie e-maila do %s, aby uzyskać szczegółowe informacje.</string>
   <string name="bitcoin">A to nasz adres bitcoin: %s</string>
   <string name="patronFeatures">Czy niektóre funkcje są dostępne tylko dla patronów?</string>
   <string name="noPatronFeatures">Nie, ponieważ Lidraughts jest całkowicie darmowy, na zawsze i dla wszystkich. To obietnica.
@@ -59,6 +69,8 @@ Patroni zyskują jedynie unikalną ikonę profilu (skrzydełka).</string>
   <string name="amount">Kwota</string>
   <string name="transactionCompleted">Twoja transakcja została zakończona, a potwierdzenie darowizny zostało wysłane do Ciebie.</string>
   <string name="permanentPatron">Masz teraz stałe konto patrona.</string>
+  <string name="paypalRenew">Za miesiąc PayPal automatycznie odnowi płatność.
+Aby anulować miesięczne wsparcie, zaloguj się na swoje konto PayPal i przejdź do automatycznych płatności.</string>
   <string name="checkOutProfile">Sprawdź swoją stronę profilową!</string>
   <string name="nowLifetime">Jesteś teraz dożywotnim patronem Lidraughts!</string>
   <string name="nowOneMonth">Jesteś teraz patronem Lidraughts na jeden miesiąc!</string>

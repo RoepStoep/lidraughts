@@ -25,7 +25,7 @@ object Auth extends LidraughtsController {
     Env.round.proxy urgentGames u map { povs =>
       Ok {
         Env.user.jsonView(u) ++ Json.obj(
-          "nowPlaying" -> JsArray(povs take 20 map Env.api.lobbyApi.nowPlaying),
+          "nowPlaying" -> JsArray(povs take 20 map { Env.api.lobbyApi.nowPlaying(_) }),
           "sessionId" -> sessionId
         )
       }

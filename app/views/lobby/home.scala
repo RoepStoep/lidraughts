@@ -125,18 +125,14 @@ object home {
         ),
         featured map { g =>
           div(cls := "lobby__tv")(
-            gameFen(Pov first g, tv = true),
-            views.html.game.bits.vstext(Pov first g)(ctx.some)
+            views.html.game.mini(Pov naturalOrientation g, tv = true)
           )
         },
         puzzle map { p =>
-          div(cls := "lobby__puzzle", title := trans.clickToSolve.txt())(
+          a(href := routes.Puzzle.daily(), cls := "lobby__puzzle", title := trans.clickToSolve.txt())(
+            span(cls := "text")(trans.puzzleOfTheDay()),
             raw(p.html),
-            div(cls := "vstext")(
-              trans.puzzleOfTheDay(),
-              br,
-              p.color.fold(trans.whitePlays, trans.blackPlays)()
-            )
+            span(cls := "text")(p.color.fold(trans.whitePlays, trans.blackPlays)())
           )
         },
         ctx.noBot option bits.underboards(tours, simuls, leaderboard, tournamentWinners),

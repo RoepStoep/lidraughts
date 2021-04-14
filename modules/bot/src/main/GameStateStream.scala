@@ -12,7 +12,6 @@ import lidraughts.chat.UserLine
 import lidraughts.game.actorApi.{ FinishGame, AbortedBy, MoveGameEvent }
 import lidraughts.game.Game
 import lidraughts.hub.actorApi.map.Tell
-import lidraughts.hub.actorApi.round.MoveEvent
 import lidraughts.socket.actorApi.BotConnected
 import lidraughts.user.User
 

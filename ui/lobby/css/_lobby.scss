@@ -1,6 +1,5 @@
 @import 'layout';
 @import 'app/app';
-@import 'puzzle';
 @import 'table';
 @import 'stream';
 @import 'spotlight';
@@ -54,5 +53,36 @@ body {
 @include breakpoint($mq-not-col3) {
   .about-side, .lobby__streams, .lobby__about {
     margin-left: $block-gap;
+  }
+}
+
+.lobby__tv .mini-game {
+  overflow: visible;
+}
+.lobby__puzzle {
+  .text {
+    color: $c-font-dim;
+    display: block;
+    text-align: right;
+    margin-right: 1ch;
+  }
+}
+
+.now-playing {
+
+  .meta {
+    @extend %flex-column;
+    align-items: center;
+
+    .title {
+      color: $c-brag;
+      font-weight: bold;
+      &[data-bot] {
+        color: $c-bot;
+      }
+      &[data-title64] {
+        color: $c-title64;
+      }
+    }
   }
 }

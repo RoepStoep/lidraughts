@@ -61,7 +61,7 @@ object Account extends LidraughtsController {
                 import lidraughts.pref.JsonView._
                 Env.user.jsonView(me) ++ Json.obj(
                   "prefs" -> prefs,
-                  "nowPlaying" -> JsArray(povs take 50 map Env.api.lobbyApi.nowPlaying),
+                  "nowPlaying" -> JsArray(povs take 50 map { Env.api.lobbyApi.nowPlaying(_) }),
                   "nbFollowing" -> nbFollowing,
                   "nbFollowers" -> nbFollowers,
                   "nbChallenges" -> nbChallenges
@@ -77,7 +77,7 @@ object Account extends LidraughtsController {
   def nowPlaying = Auth { implicit ctx => me =>
     negotiate(
       html = notFound,
-      api = _ => doNowPlaying(me, ctx.req)
+      api = _ => doApiNowPlaying(me, ctx.req)
     )
   }
 
@@ -86,13 +86,13 @@ object Account extends LidraughtsController {
   }
 
   def apiNowPlaying = Scoped() { req => me =>
-    doNowPlaying(me, req)
+    doApiNowPlaying(me, req)
   }
 
-  private def doNowPlaying(me: lidraughts.user.User, req: RequestHeader) =
+  private def doApiNowPlaying(me: lidraughts.user.User, req: RequestHeader) =
     Env.round.proxy.urgentGames(me) map { povs =>
       val nb = (getInt("nb", req) | 9) atMost 50
-      Ok(Json.obj("nowPlaying" -> JsArray(povs take nb map Env.api.lobbyApi.nowPlaying)))
+      Ok(Json.obj("nowPlaying" -> JsArray(povs take nb map { Env.api.lobbyApi.nowPlaying(_) })))
     }
 
   def dasher = Auth { implicit ctx => me =>

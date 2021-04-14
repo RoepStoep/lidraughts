@@ -17,13 +17,6 @@ module.exports = function(cfg, element) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   };
-  var onFirstConnect = function() {
-    var gameId = getParameterByName('hook_like');
-    if (!gameId) return;
-    $.post('/setup/hook/' + lidraughts.StrongSocket.sri + '/like/' + gameId);
-    lobby.setTab('real_time');
-    history.replaceState(null, null, '/');
-  };
   var filterStreams = function() {
     var langs = navigator.languages;
     if (!langs) return; // tss... https://developer.mozilla.org/en-US/docs/Web/API/NavigatorLanguage/languages
@@ -98,10 +91,17 @@ module.exports = function(cfg, element) {
         }
       },
       options: {
-        name: 'lobby',
-        onFirstConnect: onFirstConnect
+        name: 'lobby'
       }
     });
+  
+  lidraughts.StrongSocket.firstConnect.then(() => {
+    var gameId = getParameterByName('hook_like');
+    if (!gameId) return;
+    $.post('/setup/hook/' + lidraughts.StrongSocket.sri + '/like/' + gameId);
+    lobby.setTab('real_time');
+    history.replaceState(null, '', '/');
+  });
 
   cfg.trans = lidraughts.trans(cfg.i18n);
   cfg.socketSend = lidraughts.socket.send;

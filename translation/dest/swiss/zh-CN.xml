@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">瑞士锦标赛</string>
+  <string name="bye">轮空</string>
+  <string name="byes">轮空</string>
+  <string name="absent">缺席</string>
+  <string name="absences">缺席情况</string>
+  <string name="late">迟到</string>
+  <string name="tieBreak">破同分</string>
+  <plurals name="nbRounds">
+    <item quantity="other">%s 轮</item>
+  </plurals>
+  <string name="nextRound">下一轮</string>
+  <string name="numberOfRounds">比赛轮次数</string>
+  <string name="scheduleTheNextRound">编排下一轮</string>
 </resources>

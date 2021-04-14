@@ -6,11 +6,13 @@
   <string name="becomePatron">Werde Lidraughts Patron</string>
   <string name="xBecamePatron">%s wurde Lidraughts Patron</string>
   <string name="newPatrons">Neue Unterstützer</string>
+  <string name="freeDraughts">Dame für jeden umsonst, für immer!</string>
   <string name="noAdsNoSubs">Keine Werbung, keine Abonnements; aber quelloffen und mit Leidenschaft.</string>
   <string name="thankYou">Vielen Dank für die Spende!</string>
   <string name="youHaveLifetime">Du besitzt ein lebenslanges Unterstützerkonto. Das ist einfach großartig!</string>
   <string name="patronUntil">Du besitzt ein Unterstützerkonto bis %s.</string>
   <string name="ifNotRenewed">Falls nicht erneuert, wird dein Konto zu einem kostenlosen herabgestuft.</string>
+  <string name="weAreVolunteers">Wir sind ein kleines Team Freiwilliger, die daran glauben, dass jeder Zugang zu einer kostenfreien Weltklasse-Dame-Plattform haben sollte.</string>
   <string name="weRelyOnSupport">Wir sind auf Unterstützung von Leuten wie dir angewiesen, um das möglich zu machen. Falls dir Lidraughts gefällt, kannst du Lidraughts unterstützen, indem du spendest und ein Patron wirst!</string>
   <string name="lifetime">Lebenslang</string>
   <string name="payLifetimeOnce">Bezahle einmalig %s. Werde für immer Lidraughts Patron!</string>
@@ -24,11 +26,18 @@
   <string name="pleaseEnterAmount">Bitte gib einen Betrag in EUR ein</string>
   <string name="withCreditCard">Kreditkarte</string>
   <string name="withPaypal">Spenden mit PayPal</string>
+  <string name="donatingPubliclyAs">Öffentlich spenden als %s</string>
   <string name="weAreSmallTeam">Wir sind ein kleines Team, deswegen macht deine Unterstützung einen riesen Unterschied!</string>
   <string name="celebratedPatrons">Die gefeierten Unterstützer, die Lidraughts möglich machen</string>
   <string name="whereMoneyGoes">Wohin fließt das Geld?</string>
+  <string name="serversAndExpenses">Die Server auf denen lidraughts und die Analyse-Engine läuft. 
+Andere laufende Kosten, wie Mailgun und Hosting.</string>
   <string name="changeMonthlySupport">Kann ich meine monatliche Unterstützung ändern/beenden?</string>
+  <string name="changeOrContact">Ja, zu jeder Zeit. Melde dich mit deinem PayPal-Konto an und gehe zu automatische Zahlungen. 
+Oder du kannst %s.</string>
+  <string name="contactSupport">kontaktiere den Lidraughts-Support</string>
   <string name="otherMethods">Andere Möglichkeiten um zu spenden?</string>
+  <string name="bankTransfers">Wir akzeptieren auch Banküberweisungen. Bitte sende eine E-Mail an %s für Details.</string>
   <string name="bitcoin">Und hier ist unsere Bitcoinadresse: %s</string>
   <string name="patronFeatures">Gibt es zusätzliche Funktionen für Unterstützer?</string>
   <string name="noPatronFeatures">Nein, denn Lidraughts ist komplett kostenlos, für immer und für alle. Das ist ein Versprechen.
@@ -58,6 +67,8 @@ Jedoch erhalten Unterstützer das Recht, mit ihrem coolen neuen Profil-Icon anzu
   <string name="amount">Betrag</string>
   <string name="transactionCompleted">Deine Transaktion war erfolgreich und eine Spendenquittung wurde dir per E-Mail zugestellt.</string>
   <string name="permanentPatron">Du besitzt jetzt ein dauerhaftes Unterstützerkonto.</string>
+  <string name="paypalRenew">In einem Monat wird PayPal deine Zahlung automatisch verlängern.
+Um deinen monatlichen Support zu kündigen, melden dich bei deinem PayPal-Konto an und gehe zu automatischen Zahlungen.</string>
   <string name="checkOutProfile">Sieh dir deine Profilseite an!</string>
   <string name="nowLifetime">Du bist jetzt lebenslanger Lidraughts-Patron!</string>
   <string name="nowOneMonth">Du bist jetzt für einen Monat Lidraughts Patron!</string>

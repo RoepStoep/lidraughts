@@ -26,12 +26,22 @@ interface Lidraughts {
   powertip: any
   userAutocomplete: any
   StrongSocket: {
-    sri: string
+    sri: string;
     (url: string, version: number, cfg: any): any;
+    firstConnect: Promise<(tpe: string, data: any) => void>;
   }
   socket: any;
   idleTimer(delay: number, onIdle: () => void, onWakeUp: () => void): void;
-  parseFen(el: any): void;
+  miniBoard: {
+    init(node: HTMLElement): void;
+    initAll(parent?: HTMLElement): void;
+  };
+  miniGame: {
+    init(node: HTMLElement): string | null;
+    initAll(parent?: HTMLElement): void;
+    update(node: HTMLElement, data: { fen: string, lm: string, wc?: number, bc?: number }): void;
+    finish(node: HTMLElement, win?: Color): void;
+  };
   hasToReload: boolean;
   ab: any;
   challengeApp: any;
@@ -61,7 +71,6 @@ interface Lidraughts {
   isCol1(): boolean;
   pushSubscribe(ask: boolean): void;
   formAjax(form: JQuery): any;
-  reverse(s: string): string;
 }
 
 interface LidraughtsSpeech {
@@ -343,8 +352,6 @@ declare namespace PowerTip {
   type Placement = 'n' | 'e' | 's' | 'w' | 'nw' | 'ne' | 'sw' | 'se' | 'nw-alt' | 'ne-alt' | 'sw-alt' | 'se-alt';
 
   interface Options {
-    followMouse?: boolean;
-    mouseOnToPopup?: boolean;
     placement?: Placement;
     smartPlacement?: boolean;
     popupId?: string;

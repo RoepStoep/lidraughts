@@ -47,6 +47,10 @@ Make any move to continue.</string>
   <string name="getAFreeLidraughtsAccount">Get a free Lidraughts account</string>
   <string name="practice">Practice</string>
   <string name="learnCommonDraughtsPositions">Learn common draughts positions</string>
+  <string name="signUpToSaveYourProgress">Sign up to save your progress</string>
+  <string name="goToNextExercise">Go to next exercise</string>
+  <string name="practiceList">Practice list</string>
+  <string name="backToPracticeMenu">Back to practice menu</string>
   <string name="exerciseYourTacticalSkills">Exercise your tactical skills</string>
   <string name="videos">Videos</string>
   <string name="watchInstructiveDraughtsVideos">Watch instructive draughts videos</string>
@@ -73,4 +77,6 @@ Make any move to continue.</string>
   <string name="backToMenu">Back to menu</string>
   <string name="puzzleFailed">Puzzle failed!</string>
   <string name="retry">Retry</string>
+  <string name="clickToRetry">Click to retry</string>
+  <string name="winTheGame">Win the game</string>
 </resources>

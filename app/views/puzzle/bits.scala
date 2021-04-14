@@ -5,20 +5,12 @@ import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
 
-import controllers.routes
-
 object bits {
 
   private val dataLastmove = attr("data-lastmove")
 
-  def daily(p: lidraughts.puzzle.Puzzle, fen: String, lastMove: String) = a(
-    href := routes.Puzzle.daily(),
-    cls := s"mini-board cg-wrap parse-fen is2d is${p.variant.boardSize.key}",
-    dataColor := p.color.name,
-    dataFen := fen,
-    dataBoard := s"${p.variant.boardSize.width}x${p.variant.boardSize.height}",
-    dataLastmove := lastMove
-  )(cgWrapContent)
+  def daily(p: lidraughts.puzzle.Puzzle, fen: draughts.format.FEN, lastMove: String) =
+    views.html.board.bits.mini(fen, p.variant.boardSize, p.color, lastMove)(span)
 
   def jsI18n()(implicit ctx: Context) = i18nJsObject(translations)
 

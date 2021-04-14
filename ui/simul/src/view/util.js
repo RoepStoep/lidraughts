@@ -38,11 +38,7 @@ module.exports = {
   player: function(p, r, pr, fmjd, href) {
     return m.trust(playerHtml(p, r, pr, (p && fmjd === undefined) ? p.officialRating : fmjd, href));
   },
-  playerVariant: function(ctrl, p) {
-    return ctrl.data.variants.find(function(v) {
-      return v.key === p.variant;
-    });
-  },
+  playerVariant: (ctrl, p) => ctrl.data.variants.find(v => v.key === p.variant),
   exportGames: function(ctrl) {
     return m('a', {
       'data-icon': 'x',

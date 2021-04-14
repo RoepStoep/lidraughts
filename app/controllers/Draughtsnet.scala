@@ -45,7 +45,7 @@ object Draughtsnet extends LidraughtsController {
       case e => fuccess(Left(InternalServerError(e.getMessage)))
     }, {
       case PostAnalysisResult.Complete(analysis) =>
-        Env.round.setAnalysedIfPresent(analysis.id)
+        Env.round.proxy.setAnalysedIfPresent(analysis.id)
         acquireNext
       case _: PostAnalysisResult.Partial => fuccess(Left(NoContent))
       case PostAnalysisResult.UnusedPartial => fuccess(Left(NoContent))

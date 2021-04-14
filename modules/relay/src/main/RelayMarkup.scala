@@ -1,7 +1,6 @@
 package lidraughts.relay
 
 import scala.concurrent.duration._
-import java.util.Arrays
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.ast.Node
@@ -16,7 +15,7 @@ private final class RelayMarkup {
   type Html = String
 
   private val options = new MutableDataSet()
-  options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()))
+  options.set(Parser.EXTENSIONS, java.util.Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()))
   options.set(HtmlRenderer.SOFT_BREAK, "<br />\n")
   options.set(TablesExtension.CLASS_NAME, "slist")
   private val parser = Parser.builder(options).build()

@@ -146,7 +146,8 @@ object layout {
           "kid" -> ctx.kid,
           "mobile" -> ctx.isMobileBrowser,
           "playing fixed-scroll" -> playing,
-          "coords-out" -> (ctx.pref.coords == Pref.Coords.OUTSIDE)
+          "coords-out" -> (ctx.pref.coords == Pref.Coords.OUTSIDE),
+          "standard-result" -> !ctx.pref.draughtsResult
         ),
         dataDev := (!isProd).option("true"),
         dataVapid := (ctx.userId.isDefined && isGranted(_.Beta)) option vapidPublicKey,

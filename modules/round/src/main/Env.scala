@@ -10,7 +10,7 @@ import actorApi.{ GetSocketStatus, SocketStatus }
 
 import lidraughts.game.{ Game, GameRepo, Pov, PlayerRef }
 import lidraughts.hub.actorApi.map.{ Tell, TellMany }
-import lidraughts.hub.actorApi.round.{ Abort, Resign, AnalysisComplete, MicroRematch }
+import lidraughts.hub.actorApi.round.{ Abort, Resign, AnalysisComplete, MicroRematch, SimulTimeOut }
 import lidraughts.hub.actorApi.socket.HasUserId
 import lidraughts.hub.actorApi.{ Announce, DeployPost }
 import lidraughts.user.User
@@ -173,10 +173,13 @@ final class Env(
       try { povs.sortBy(_.game.metadata.simulPairing.getOrElse(Int.MaxValue)) }
       catch { case e: IllegalArgumentException => povs sortBy (-_.game.movedAt.getSeconds) }
     }
-  }
 
-  def setAnalysedIfPresent(gameId: Game.ID) =
-    roundMap.tellIfPresent(gameId, AnalysisComplete)
+    def setAnalysedIfPresent(gameId: Game.ID) =
+      roundMap.tellIfPresent(gameId, AnalysisComplete)
+
+    def simulTimeOutIfPresent(gameId: Game.ID, seconds: Int) =
+      roundMap.tellIfPresent(gameId, SimulTimeOut(seconds))
+  }
 
   private def scheduleExpiration(game: Game): Unit = game.timeBeforeExpiration foreach { centis =>
     system.scheduler.scheduleOnce((centis.millis + 1000).millis) {

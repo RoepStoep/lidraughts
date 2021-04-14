@@ -10,26 +10,6 @@ import controllers.routes
 
 object bits {
 
-  private val dataUserId = attr("data-userid")
-
-  def featuredJs(pov: Pov): Frag = frag(
-    gameFenNoCtx(pov, tv = true),
-    vstext(pov)(none)
-  )
-
-  def mini(pov: Pov, withResult: Boolean = false)(implicit ctx: Context): Frag =
-    a(href := gameLink(pov))(
-      gameFen(pov, withLink = false, withResult = withResult),
-      vstext(pov, withResult)(ctx.some)
-    )
-
-  def miniBoard(fen: draughts.format.FEN, color: draughts.Color = draughts.White, boardSize: draughts.Board.BoardSize): Frag = div(
-    cls := s"mini-board parse-fen cg-wrap is2d is${boardSize.key}",
-    dataColor := color.name,
-    dataFen := fen.value,
-    dataBoard := s"${boardSize.width}x${boardSize.height}"
-  )(cgWrapContent)
-
   def gameIcon(game: Game): Char = game.perfType match {
     case _ if game.fromPosition => '*'
     case _ if game.imported => '/'
@@ -80,20 +60,16 @@ object bits {
       )(if (title64) t.value.dropRight(3) else t.value)
     }
 
-  def vstext(pov: Pov, withResult: Boolean = false)(ctxOption: Option[Context]): Frag =
+  def vstext(pov: Pov)(ctxOption: Option[Context]): Frag =
     span(cls := "vstext")(
-      span(cls := "vstext__pl user-link", dataUserId := withResult ?? pov.player.userId)(
+      span(cls := "vstext__pl user-link")(
         playerUsername(pov.player, withRating = false, withTitle = false),
         br,
         playerTitle(pov.player) map { t => frag(t, " ") },
         pov.player.rating,
         pov.player.provisional option "?"
       ),
-      if (withResult && pov.game.finishedOrAborted) {
-        span(cls := "vstext__res")(
-          draughts.Color.showResult(pov.game.winnerColor, ctxOption.map(_.pref.draughtsResult).getOrElse(lidraughts.pref.Pref.default.draughtsResult))
-        ).some
-      } else pov.game.clock map { c =>
+      pov.game.clock map { c =>
         span(cls := "vstext__clock")(shortClockName(c.config))
       } orElse {
         ctxOption flatMap { implicit ctx =>
@@ -104,7 +80,7 @@ object bits {
           }
         }
       },
-      span(cls := "vstext__op user-link", dataUserId := withResult ?? pov.opponent.userId)(
+      span(cls := "vstext__op user-link")(
         playerUsername(pov.opponent, withRating = false, withTitle = false),
         br,
         pov.opponent.rating,

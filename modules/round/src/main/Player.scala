@@ -155,8 +155,10 @@ private[round] final class Player(
 
     val moveEvent = MoveEvent(
       gameId = game.id,
-      fen = Forsyth exportBoard game.board,
-      move = moveOrDrop.toUci.keys
+      fen = Forsyth boardAndColor game.situation,
+      move = moveOrDrop.toUci.keys,
+      whiteClock = game.clock.map(_.remainingTime(draughts.White).roundSeconds),
+      blackClock = game.clock.map(_.remainingTime(draughts.Black).roundSeconds)
     )
 
     // publish all moves

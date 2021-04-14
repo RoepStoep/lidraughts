@@ -1,43 +1,62 @@
-var m = require('mithril');
-var util = require('./util');
-var ceval = require('./ceval');
-var status = require('game/status');
+const m = require('mithril');
+const ceval = require('./ceval');
+const util = require('draughtsground/util');
 
 function miniPairing(ctrl) {
   return function(pairing) {
-    var game = pairing.game,
+    const game = pairing.game,
       player = pairing.player,
-      result = pairing.game.status >= status.ids.aborted ? (
-        pairing.winnerColor === 'white' ? (ctrl.pref.draughtsResult ? '2-0' : '1-0')
-        : (pairing.winnerColor === 'black' ? (ctrl.pref.draughtsResult ? '0-2' : '0-1')
-        : (ctrl.pref.draughtsResult ? '1-1' : '½-½'))
-      ) : '*';
-    return m('a', {
+      title64 = player.title && player.title.endsWith('-64');
+    return m(`span.mini-game.mini-game-${game.id}.is2d.is${game.board.key}`, {
       class: (ctrl.data.host.gameId === game.id ? 'host ' : '') + (ctrl.evals !== undefined ? 'gauge_displayed' : ''),
-      href: '/' + game.id + '/' + game.orient
-    }, [
-      m('span', {
-        class: 'mini-board mini-board-' + game.id + ' parse-fen is2d is' + game.board.key,
-        'data-color': game.orient,
-        'data-fen': game.fen,
-        'data-lastmove': game.lastMove,
-        'data-board': `${game.board.size[0]}x${game.board.size[1]}`,
-        config: function(el, isUpdate) {
-          if (!isUpdate) lidraughts.parseFen($(el));
+      'data-state': `${game.fen}|${game.board.size[0]}x${game.board.size[1]}|${game.orient}|${game.lastMove || ''}`,
+      'data-live': game.clock ? game.id : '',
+      config(el, isUpdate) {
+        if (!isUpdate) {
+          window.lidraughts.miniGame.init(el);
+          window.lidraughts.powertip.manualUserIn(el);
         }
-      }, m('div.cg-wrap')),
-      m('span.vstext', [
-        m('span.vstext__pl', [
-          util.playerVariant(ctrl, player).name,
-          m('br'),
-          result
+      }
+    }, [
+      m('span.mini-game__player', [
+        m('a.mini-game__user.ulpt', {
+          href: `/@/${player.name}`
+        }, [
+          m('span.name', 
+            !player.title ? [player.name] : [
+              m('span.title', 
+                title64 ? { 'data-title64': true } : (player.title == 'BOT' ? { 'data-bot': true } : {}),
+                title64 ? player.title.slice(0, player.title.length - 3) : player.title
+              ),
+              ' ',
+              player.name
+            ]
+          ),
+          ' ',
+          m('span.rating', player.rating)
         ]),
-        m('div.vstext__op', [
-          player.name,
-          m('br'),
-          player.title ? (player.title.endsWith('-64') ? player.title.slice(0, player.title.length - 3) : player.title) + ' ' : '',
-          player.officialRating ? ('FMJD ' + player.officialRating) : player.rating
-        ])
+        game.clock ?
+          m(`span.mini-game__clock.mini-game__clock--${util.opposite(game.orient)}`, {
+            'data-time': game.clock[util.opposite(game.orient)]
+          }) :
+          m('span.mini-game__result', game.winner ?
+            (game.winner == game.orient ? '0' : (ctrl.pref.draughtsResult ? '2' : '1')) : 
+            (ctrl.pref.draughtsResult ? '1' : '½')
+          )
+      ]),
+      m('a.cg-wrap', {
+        href: `/${game.id}/${game.orient}`
+      }),
+      m('span.mini-game__player', [
+        m('span'),
+        game.clock ?
+        m(`span.mini-game__clock.mini-game__clock--${game.orient}`, {
+          'data-time': game.clock[game.orient]
+        }) :
+        m('span.mini-game__result', game.winner ?
+          (game.winner == game.orient ? (ctrl.pref.draughtsResult ? '2' : '1') : '0') : 
+          (ctrl.pref.draughtsResult ? '1' : '½')
+        )
       ]),
       ctrl.evals !== undefined ? ceval.renderGauge(pairing, ctrl.evals) : null
     ]);

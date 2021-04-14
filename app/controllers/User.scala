@@ -89,7 +89,7 @@ object User extends LidraughtsController {
         (GameRepo lastPlayed user) flatMap {
           _.?? { p =>
             Env.round.proxy updateIfPresent p.game flatMap { game =>
-              fuccess(html.game.bits.mini(Pov(game, p.color), true))
+              fuccess(html.game.mini(Pov(game, p.color)))
             }
           }
         }

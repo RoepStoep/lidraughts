@@ -27,11 +27,16 @@ private final class TvBroadcast extends Actor {
       featuredId = id.some
       channel push msg
 
-    case MoveGameEvent(_, fen, move) =>
-      channel push makeMessage("fen", Json.obj(
-        "fen" -> fen,
-        "lm" -> move
-      ))
+    case MoveGameEvent(game, fen, move) =>
+      channel push makeMessage(
+        "fen",
+        Json.obj(
+          "fen" -> s"${game.turnColor.letter.toUpper}:$fen",
+          "lm" -> move
+        )
+          .add("wc" -> game.clock.map(_.remainingTime(draughts.White).roundSeconds))
+          .add("bc" -> game.clock.map(_.remainingTime(draughts.Black).roundSeconds))
+      )
   }
 
   private def bus = context.system.lidraughtsBus

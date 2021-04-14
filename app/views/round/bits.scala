@@ -151,17 +151,8 @@ object bits {
         div(cls := "now-playing")(
           noTimeOut.partition(_.isMyTurn) |> {
             case (myTurn, otherTurn) =>
-              (myTurn ++ otherTurn.take(6 - myTurn.size)) take 9 map { pov =>
-                a(href := routes.Round.player(pov.fullId), cls := pov.isMyTurn.option("my_turn"), id := "others_" + pov.gameId)(
-                  gameFen(pov, withLink = false, withTitle = false, withLive = simul.isDefined),
-                  span(cls := "meta")(
-                    playerText(pov.opponent),
-                    span(cls := "indicator")(
-                      if (pov.isMyTurn) pov.remainingSeconds.fold(frag(trans.yourTurn()))(secondsFromNow(_, true))
-                      else nbsp
-                    )
-                  )
-                )
+              (myTurn ++ otherTurn) take 9 map {
+                views.html.game.mini(_)
               }
           }
         ),
@@ -169,10 +160,9 @@ object bits {
           h3(cls := "timeouts-title")(trans.gamesInTimeout()),
           div(cls := "now-playing simul-timeouts")(
             inTimeOut take 9 map { pov =>
-              a(href := routes.Round.player(pov.fullId), cls := "game-timeout" + ~pov.isMyTurn.option(" my_turn"), id := "others_" + pov.gameId)(
-                gameFen(pov, withLink = false, withTitle = false),
+              a(href := routes.Round.player(pov.fullId), cls := "game-timeout", id := "others_" + pov.gameId)(
+                views.html.game.mini(pov, withLink = false),
                 span(cls := "meta")(
-                  playerText(pov.opponent),
                   span(cls := "indicator")(
                     "Timeout ",
                     secondsFromNow(pov.game.timeOutRemaining, true)

@@ -216,8 +216,8 @@ object GameRepo {
       Query.notFromPosition
   ).sort(Query.sortAntiChronological).uno[Game]
 
-  def setTimeOut(id: ID, seconds: Int) =
-    coll.updateFieldUnchecked($id(id), F.timeOutUntil, DateTime.now plusSeconds seconds)
+  def setTimeOut(id: ID, until: DateTime) =
+    coll.updateFieldUnchecked($id(id), F.timeOutUntil, until)
 
   def unsetTimeOut(id: ID) =
     coll.update($id(id), $unset(F.timeOutUntil), writeConcern = GetLastError.Unacknowledged)

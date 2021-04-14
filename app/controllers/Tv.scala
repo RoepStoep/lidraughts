@@ -5,6 +5,7 @@ import play.api.mvc._
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.game.Pov
+import lidraughts.user.{ User => UserModel, UserRepo }
 import views._
 
 object Tv extends LidraughtsController {
@@ -35,7 +36,8 @@ object Tv extends LidraughtsController {
     Env.tv.tv getGameAndHistory channel flatMap {
       case Some((game, history)) =>
         val flip = getBool("flip")
-        val pov = if (flip) Pov second game else Pov first game
+        val natural = Pov naturalOrientation game
+        val pov = if (flip) !natural else natural
         val onTv = lidraughts.round.OnLidraughtsTv(channel.key, flip)
         negotiate(
           html = Env.tournament.api.gameView.watcher(pov.game) flatMap { tour =>
@@ -63,7 +65,7 @@ object Tv extends LidraughtsController {
     (lidraughts.tv.Tv.Channel.byKey get chanKey) ?? { channel =>
       Env.tv.tv.getChampions zip Env.tv.tv.getGames(channel, 15) map {
         case (champs, games) => NoCache {
-          Ok(html.tv.games(channel, games map Pov.first, champs))
+          Ok(html.tv.games(channel, games map Pov.naturalOrientation, champs))
         }
       }
     }
@@ -102,7 +104,7 @@ object Tv extends LidraughtsController {
       case _ => Nil
     }
     val povsFu = userIds map { userId =>
-      lidraughts.user.UserRepo.named(userId) flatMap {
+      UserRepo.named(userId) flatMap {
         _ ?? { u => lidraughts.game.GameRepo.lastPlayedPlayingId(u.id).flatMap(_ ?? { Env.round.proxy.pov(_, u) }) }
       }
     } sequenceFu
@@ -110,7 +112,7 @@ object Tv extends LidraughtsController {
       povs flatMap {
         _ map { pov =>
           Json.obj(
-            pov.player.userId.getOrElse(lidraughts.user.User.anonymous) -> html.game.bits.mini(pov, true).toString
+            pov.player.userId.getOrElse(UserModel.anonymous) -> html.game.mini(pov, withUserId = true).toString
           )
         }
       }
@@ -146,7 +148,7 @@ object Tv extends LidraughtsController {
   def frame = Action.async { implicit req =>
     Env.tv.tv.getBestGame map {
       case None => NotFound
-      case Some(game) => Ok(views.html.tv.embed(Pov first game))
+      case Some(game) => Ok(views.html.tv.embed(Pov naturalOrientation game))
     }
   }
 }

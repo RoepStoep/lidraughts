@@ -2,13 +2,13 @@ package lidraughts.round
 
 import scala.concurrent.duration._
 
+import actorApi._
 import akka.actor._
 import akka.pattern.{ ask, pipe }
 import draughts.{ Color, White, Black, Speed }
 import play.api.libs.iteratee._
 import play.api.libs.json._
 
-import actorApi._
 import lidraughts.chat.Chat
 import lidraughts.common.LightUser
 import lidraughts.game.actorApi.{ SimulNextGame, StartGame, UserStartGame }

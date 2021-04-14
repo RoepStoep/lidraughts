@@ -45,7 +45,13 @@
   <string name="register">注册</string>
   <string name="getAFreeLidraughtsAccount">获得一个免费的Lidraughts账户</string>
   <string name="practice">练习</string>
+  <string name="makesYourDraughtsPerfect">提高您的国际跳棋水平</string>
   <string name="learnCommonDraughtsPositions">学习常见的国际跳棋局面</string>
+  <string name="signUpToSaveYourProgress">注册登录以保存您的进度</string>
+  <string name="goToNextExercise">进入下一个练习</string>
+  <string name="loadNextExerciseImmediately">立即加载下一个练习</string>
+  <string name="practiceList">练习列表</string>
+  <string name="backToPracticeMenu">返回练习菜单</string>
   <string name="exerciseYourTacticalSkills">练习您的国际跳棋战术</string>
   <string name="videos">观看视频</string>
   <string name="watchInstructiveDraughtsVideos">观看国际跳棋教学视频</string>
@@ -72,4 +78,21 @@
   <string name="backToMenu">返回菜单</string>
   <string name="puzzleFailed">解题失败！</string>
   <string name="retry">重试</string>
+  <string name="clickToRetry">点击重试</string>
+  <string name="winTheGame">赢得对局</string>
+  <plurals name="winTheGameInX">
+    <item quantity="other">%s着棋后将获胜</item>
+  </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="other">%s着棋后将锁定和棋</item>
+  </plurals>
+  <plurals name="equalizeInX">
+    <item quantity="other">%s着棋后均势</item>
+  </plurals>
+  <plurals name="defendForX">
+    <item quantity="other">防守%s着棋</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="other">%s着棋后将赢得获胜局面</item>
+  </plurals>
 </resources>

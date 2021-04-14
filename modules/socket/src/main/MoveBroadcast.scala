@@ -1,5 +1,6 @@
 package lidraughts.socket
 
+import play.api.libs.json.Json
 import scala.collection.mutable.AnyRefMap
 
 import actorApi.{ SocketLeave, StartWatching }
@@ -20,13 +21,18 @@ private final class MoveBroadcast(system: akka.actor.ActorSystem) extends Troupe
 
   val process: Trouper.Receive = {
 
-    case MoveEvent(gameId, fen, move) =>
+    case MoveEvent(gameId, fen, move, whiteClock, blackClock) =>
       games get gameId foreach { mIds =>
-        val msg = Socket.makeMessage("fen", play.api.libs.json.Json.obj(
-          "id" -> gameId,
-          "fen" -> fen,
-          "lm" -> move
-        ))
+        val msg = Socket.makeMessage(
+          "fen",
+          Json.obj(
+            "id" -> gameId,
+            "fen" -> fen,
+            "lm" -> move
+          )
+            .add("wc" -> whiteClock)
+            .add("bc" -> blackClock)
+        )
         mIds foreach { mId =>
           members get mId foreach (_.member push msg)
         }
@@ -34,10 +40,13 @@ private final class MoveBroadcast(system: akka.actor.ActorSystem) extends Troupe
 
     case ResultEvent(gameId, result) =>
       games get gameId foreach { mIds =>
-        val msg = Socket.makeMessage("res", play.api.libs.json.Json.obj(
-          "id" -> gameId,
-          "res" -> result
-        ))
+        val msg = Socket.makeMessage(
+          "finish",
+          Json.obj(
+            "id" -> gameId,
+            "win" -> result
+          )
+        )
         mIds foreach { mId =>
           members get mId foreach (_.member push msg)
         }

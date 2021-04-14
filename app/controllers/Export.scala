@@ -1,12 +1,13 @@
 package controllers
 
+import draughts.format.FEN
+import draughts.variant.{ Variant, Standard }
 import scala.concurrent.duration._
 
 import lidraughts.app._
 import lidraughts.common.HTTPRequest
 import lidraughts.pref.Pref.puzzleVariants
 import lidraughts.game.{ Game => GameModel, GameRepo, PdnDump }
-import draughts.variant.{ Variant, Standard }
 
 object Export extends LidraughtsController {
 
@@ -43,7 +44,7 @@ object Export extends LidraughtsController {
         lidraughts.mon.export.png.puzzle()
         OptionFuResult(Env.puzzle.api.puzzle.find(id, variant)) { puzzle =>
           env.pngExport(
-            fen = draughts.format.FEN(puzzle.fenAfterInitialMove | puzzle.fen),
+            fen = puzzle.fenAfterInitialMove | FEN(puzzle.fen),
             variant = variant,
             lastMove = puzzle.initialMove.uci.some,
             orientation = puzzle.color.some,

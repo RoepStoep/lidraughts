@@ -9,13 +9,11 @@ import scala.concurrent.duration._
 import actorApi._, round._
 import draughts.{ Color, Pos }
 import draughts.format.Uci
-import lidraughts.game.{ Event, Game, Pov, Progress, Source, Player => GamePlayer }
+import lidraughts.game.{ Event, Game, GameRepo, Pov, Player => GamePlayer }
 import lidraughts.hub.actorApi.DeployPost
-import lidraughts.hub.actorApi.map._
-import lidraughts.hub.actorApi.round.{ DraughtsnetPlay, BotPlay, RematchYes, RematchNo, Abort, Resign, AnalysisComplete, MicroRematch }
+import lidraughts.hub.actorApi.round.{ DraughtsnetPlay, BotPlay, RematchYes, RematchNo, Abort, Resign, AnalysisComplete, MicroRematch, SimulTimeOut }
 import lidraughts.hub.Duct
 import lidraughts.socket.UserLagCache
-import makeTimeout.large
 
 private[round] final class RoundDuct(
     dependencies: RoundDuct.Dependencies,
@@ -165,7 +163,7 @@ private[round] final class RoundDuct(
     }
 
     case HoldAlert(playerId, mean, sd, ip) => handle(playerId) { pov =>
-      lidraughts.game.GameRepo hasHoldAlert pov flatMap {
+      GameRepo hasHoldAlert pov flatMap {
         case true => funit
         case false =>
           lidraughts.log("cheat").info(s"hold alert $ip https://lidraughts.org/${pov.gameId}/${pov.color.name}#${pov.game.turns} ${pov.player.userId | "anon"} mean: $mean SD: $sd")
@@ -226,6 +224,18 @@ private[round] final class RoundDuct(
 
     case AnalysisComplete => handle { game =>
       proxy set game.withMetadata(_.copy(analysed = true))
+      fuccess(Nil)
+    }
+
+    case SimulTimeOut(seconds) => handle { game =>
+      if (seconds == 0) {
+        GameRepo unsetTimeOut game.id
+        proxy set game.withMetadata(_.copy(timeOutUntil = none))
+      } else {
+        val until = DateTime.now.plusSeconds(seconds atMost 600)
+        GameRepo.setTimeOut(game.id, until)
+        proxy set game.withMetadata(_.copy(timeOutUntil = until.some))
+      }
       fuccess(Nil)
     }
 

@@ -103,7 +103,7 @@ object Tournament extends LidraughtsController {
               socketVersion = version.some,
               partial = false,
               lang = ctx.lang,
-              ctx.pref.some
+              pref = ctx.pref.some
             )
             chat <- canHaveChat(tour, json.some) ?? Env.chat.api.userChat.cached
               .findMine(Chat.Id(tour.id), ctx.me)
@@ -129,7 +129,7 @@ object Tournament extends LidraughtsController {
                   socketVersion = socketVersion,
                   partial = partial,
                   lang = ctx.lang,
-                  ctx.pref.some
+                  pref = ctx.pref.some
                 )
             } map { Ok(_) }
         }.mon(_.http.response.tournament.show.mobile)

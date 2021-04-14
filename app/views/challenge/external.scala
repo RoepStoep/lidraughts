@@ -37,7 +37,7 @@ object external {
                   val orientation =
                     if (player && ctx.userId == blackUserId) draughts.Color.black
                     else draughts.Color.white
-                  div(cls := "board-preview", views.html.game.bits.miniBoard(fen, color = orientation, boardSize = c.variant.boardSize))
+                  div(cls := "board-preview", views.html.board.bits.mini(fen, c.variant.boardSize, orientation)(div))
                 },
                 if (startsAt.isDefined) startsAt.map { dt =>
                   div(cls := "starts-at")(

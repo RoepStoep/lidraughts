@@ -111,7 +111,6 @@ lidraughts.powertip = (() => {
       intentPollInterval: 200,
       placement: pos,
       smartPlacement: true,
-      mouseOnToPopup: true,
       closeDelay: 200
     }).data('powertip', ' ').on({
       powerTipRender: onPowertipPreRender('powerTip', (url) => {
@@ -131,7 +130,6 @@ lidraughts.powertip = (() => {
       intentPollInterval: 200,
       placement: inCrosstable(el) ? 'n' : 'w',
       smartPlacement: true,
-      mouseOnToPopup: true,
       closeDelay: 200,
       popupId: 'miniGame'
     }).on({
@@ -147,9 +145,9 @@ lidraughts.powertip = (() => {
   };
 
   function onIdleForAll(par, sel, fun) {
-    lidraughts.requestIdleCallback(function() {
-      Array.prototype.forEach.call(par.querySelectorAll(sel), fun);
-    });
+    lidraughts.requestIdleCallback(() =>
+      Array.prototype.forEach.call(par.querySelectorAll(sel), el => fun(el)) // do not codegolf to `fun`
+    )
   }
 
   return {
@@ -164,7 +162,7 @@ lidraughts.powertip = (() => {
     },
     manualGame: gamePowertip,
     manualUserIn(parent) {
-      onIdleForAll(parent, '.ulpt', (el) => userPowertip(el));
+      onIdleForAll(parent, '.ulpt', userPowertip);
     }
   };
 })();
@@ -177,19 +175,15 @@ lidraughts.widget = (name, prototype) => {
   };
   constructor.prototype = prototype;
   $.fn[name] = function(method) {
-    var returnValue = this;
     var args = Array.prototype.slice.call(arguments, 1);
     if (typeof method === 'string') this.each(function() {
-      var instance = $.data(this, name);
-      if (!instance) return;
-      if (!$.isFunction(instance[method]) || method.charAt(0) === "_")
-        return $.error("no such method '" + method + "' for " + name + " widget instance");
-      returnValue = instance[method].apply(instance, args);
+      const instance = $.data(this, name);
+      if (instance && $.isFunction(instance[method])) instance[method].apply(instance, args);
     });
     else this.each(function() {
       if (!$.data(this, name)) $.data(this, name, new constructor(method, this));
     });
-    return returnValue;
+    return this;
   };
 };
 lidraughts.isHoverable = () => {
@@ -382,3 +376,143 @@ $.modal.close = function() {
     $(this).remove();
   });
 };
+
+lidraughts.miniBoard = {
+  initAll(parent) {
+    Array.from((parent || document).getElementsByClassName('mini-board--init')).forEach(lidraughts.miniBoard.init);
+  },
+  init(node) {
+    if (!window.Draughtsground) return setTimeout(() => lidraughts.miniBoard.init(node), 500);
+    const $el = $(node).removeClass('mini-board--init'),
+      [fen, board, orientation, lm] = $el.data('state').split('|');
+    $el.data('draughtsground', Draughtsground(node, {
+      coordinates: 0,
+      boardSize: board ? board.split('x').map(s => parseInt(s)) : [10, 10],
+      viewOnly: !node.getAttribute('data-playable'),
+      resizable: false,
+      fen,
+      orientation,
+      lastMove: lm && [lm.slice(-4, -2), lm.slice(-2)],
+      drawable: {
+        enabled: false,
+        visible: false
+      }
+    }));  
+  }
+};
+
+lidraughts.miniGame = (() => {
+  const fenColor = fen => fen.startsWith('B:') ? 'black' : 'white';
+  const draughtsResult = !$('body').hasClass('standard-result');
+  return {
+    init(node) {
+      if (!window.Draughtsground) setTimeout(() => lidraughts.miniGame.init(node), 200);
+      else {
+        const [fen, board, orientation, lm] = node.getAttribute('data-state').split('|'),
+          config = {
+            coordinates: 0,
+            boardSize: board ? board.split('x').map(s => parseInt(s)) : [10, 10],
+            viewOnly: true,
+            resizable: false,
+            fen,
+            orientation,
+            lastMove: lm && [lm.slice(-4, -2), lm.slice(-2)],
+            drawable: {
+              enabled: false,
+              visible: false
+            }
+          },
+          $el = $(node).removeClass('mini-game--init'),
+          $cg = $el.find('.cg-wrap'),
+          turnColor = fenColor(fen);
+        $cg.data('draughtsground', Draughtsground($cg[0], config));
+        ['white', 'black'].forEach(color =>
+          $el.find('.mini-game__clock--' + color).each(function() {
+            $(this).clock({
+              time: parseInt(this.getAttribute('data-time')),
+              pause: color != turnColor
+            });
+          })
+        );
+      }
+      return node.getAttribute('data-live');
+    },
+    initAll(parent) {
+      const nodes = Array.from((parent || document).getElementsByClassName('mini-game--init')),
+        ids = nodes.map(lidraughts.miniGame.init).filter(id => id);
+      if (ids.length) lidraughts.StrongSocket.firstConnect.then(send =>
+        send('startWatching', ids.join(' '))
+      );
+    },
+    update(node, data) {
+      const $el = $(node),
+        lm = data.lm ? String(data.lm) : data.lm,
+        lastMove = lm && [lm.slice(-4, -2), lm.slice(-2)],
+        cg = $el.find('.cg-wrap').data('draughtsground');
+      if (cg) cg.set({
+        fen: data.fen,
+        lastMove
+      });
+      const turnColor = fenColor(data.fen);
+      const renderClock = (time, color) => {
+        if (!isNaN(time)) $el.find('.mini-game__clock--' + color).clock('set', {
+          time,
+          pause: color != turnColor
+        });
+      };
+      renderClock(data.wc, 'white');
+      renderClock(data.bc, 'black');
+    },
+    finish(node, win) {
+      ['white', 'black'].forEach(color => {
+          const resultHtml = `<span class="mini-game__result">${win ? (win == color[0] ? (draughtsResult ? '2' : '1') : '0') : (draughtsResult ? '1' : '½')}</span>`,
+            $clock = $(node).find('.mini-game__clock--' + color);
+          if ($clock.length) {
+            $clock.each(function() {
+              $(this).clock('destroy');
+            }).replaceWith(resultHtml)
+          } else {
+            $(node).find('.mini-game__user--' + color).after(resultHtml);
+          }
+        }
+      );
+    }
+  }
+})();
+
+lidraughts.widget('clock', {
+  _create: function() {
+    this.target = this.options.time * 1000 + Date.now();
+    if (!this.options.pause) this.interval = setInterval(this.render.bind(this), 1000);
+    this.render();
+  },
+
+  set: function(opts) {
+    this.options = opts;
+    this.target = this.options.time * 1000 + Date.now();
+    this.render();
+    clearInterval(this.interval);
+    if (!opts.pause) this.interval = setInterval(this.render.bind(this), 1000);
+  },
+
+  render: function() {
+    if (document.body.contains(this.element[0])) {
+      this.element.text(this.formatMs(this.target - Date.now()));
+      this.element.toggleClass('clock--run', !this.options.pause);
+    } else clearInterval(this.interval);
+  },
+
+  pad: function(x) {
+    return (x < 10 ? '0' : '') + x;
+  },
+
+  formatMs: function(msTime) {
+    const date = new Date(Math.max(0, msTime + 500)),
+      hours = date.getUTCHours(),
+      minutes = date.getUTCMinutes(),
+      seconds = date.getUTCSeconds();
+    return hours > 0 ?
+      hours + ':' + this.pad(minutes) + ':' + this.pad(seconds) :
+      minutes + ':' + this.pad(seconds);
+  }
+});

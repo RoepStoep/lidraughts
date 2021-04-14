@@ -29,16 +29,7 @@ private object bits {
             validFen map { vf =>
               if (limitKings && vf.tooManyKings)
                 p(cls := "errortext")(trans.tooManyKings())
-              else {
-                val boardSize = vf.situation.board.boardSize
-                div(
-                  cls := s"mini-board cg-wrap parse-fen is2d is${boardSize.key}",
-                  dataColor := vf.color.name,
-                  dataFen := vf.fen.value,
-                  dataBoard := s"${boardSize.width}x${boardSize.height}",
-                  dataResizable := "1"
-                )(cgWrapContent)
-              }
+              else views.html.board.bits.mini(vf.fen, vf.situation.board.boardSize, vf.color)(div)
             }
           )
         ),

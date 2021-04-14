@@ -171,15 +171,10 @@ object Simul extends LidraughtsController {
 
   def timeOutGame(simulId: String, gameId: String, seconds: Int) = Open { implicit ctx =>
     AsHostOnly(simulId) { simul =>
-      simul.pairings.find(p => p.gameId == gameId && p.ongoing) map {
-        case pairing if seconds == 0 =>
-          GameRepo.unsetTimeOut(pairing.gameId)
-          Ok(Json.obj("ok" -> true)) as JSON
-        case pairing if seconds > 0 && seconds <= 600 =>
-          GameRepo.setTimeOut(pairing.gameId, seconds)
-          Ok(Json.obj("ok" -> true)) as JSON
-        case _ => BadRequest
-      } getOrElse BadRequest
+      if (simul.pairings.exists(p => p.gameId == gameId && p.ongoing)) {
+        Env.round.proxy.simulTimeOutIfPresent(gameId, seconds)
+        Ok(Json.obj("ok" -> true)) as JSON
+      } else BadRequest
     }
   }
 

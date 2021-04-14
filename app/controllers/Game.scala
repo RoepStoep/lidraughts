@@ -23,7 +23,7 @@ object Game extends LidraughtsController {
           Env.game.cached.clearNbImportedByCache(me.id) inject
           Redirect(routes.User.show(me.username))
       } else fuccess {
-        Redirect(routes.Round.watcher(game.id, game.firstColor.name))
+        Redirect(routes.Round.watcher(game.id, game.naturalOrientation.name))
       }
     }
   }

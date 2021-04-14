@@ -55,6 +55,8 @@
   <string name="last">末尾</string>
   <string name="shareAndExport">分享 &amp; 导出</string>
   <string name="cloneStudy">克隆</string>
+  <string name="studyPdn">课程 PDN</string>
+  <string name="chapterPdn">章节 PDN</string>
   <string name="studyUrl">课程网址</string>
   <string name="currentChapterUrl">本章节网址</string>
   <string name="youCanPasteThisInTheForumToEmbedTheChapter">您可以在论坛里粘贴，嵌入本章节。</string>
@@ -62,6 +64,7 @@
   <string name="startAtX">起始于%s</string>
   <string name="embedThisChapter">将本章节嵌入到您的网站或博客</string>
   <string name="readMoreAboutEmbeddingAStudyChapter">获取更多关于嵌入课程章节的信息</string>
+  <string name="onlyPublicStudiesCanBeEmbedded">只有公开课程才能嵌入</string>
   <string name="open">打开</string>
   <string name="xBroughtToYouByY">%1$s, 来自%2$s</string>
   <string name="studyNotFound">课程未找到</string>

@@ -3,7 +3,7 @@ package lidraughts.puzzle
 import scala.collection.breakOut
 import draughts.Color
 import draughts.format.Forsyth.SituationPlus
-import draughts.format.{ Forsyth, Uci }
+import draughts.format.{ FEN, Forsyth, Uci }
 import draughts.variant.{ Variant, Standard }
 import org.joda.time.DateTime
 
@@ -50,11 +50,11 @@ case class Puzzle(
         }
   } err s"Bad initial move $this"
 
-  def fenAfterInitialMove: Option[String] = {
+  def fenAfterInitialMove: Option[FEN] = {
     for {
       sit1 <- Forsyth.<<@(variant, fen)
       sit2 <- sit1.move(initialMove.orig, initialMove.dest, initialMove.promotion, true).toOption.map(_.situationAfter)
-    } yield Forsyth >> SituationPlus(sit2, fenFullMove + color.fold(1, 0))
+    } yield FEN(Forsyth >> SituationPlus(sit2, fenFullMove + color.fold(1, 0)))
   }
 }
 

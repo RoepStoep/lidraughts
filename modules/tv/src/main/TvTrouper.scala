@@ -57,7 +57,7 @@ private[tv] final class TvTrouper(
 
     case Selected(channel, game) =>
       import lidraughts.socket.Socket.makeMessage
-      val player = game.firstPlayer
+      val player = game player game.naturalOrientation
       val user = player.userId flatMap lightUser
       (user |@| player.rating) apply {
         case (u, r) => channelChampions += (channel -> Tv.Champion(u, r, game.id))
@@ -66,7 +66,7 @@ private[tv] final class TvTrouper(
       selectChannel ! lidraughts.socket.Channel.Publish(makeMessage("tvSelect", Json.obj(
         "channel" -> channel.key,
         "id" -> game.id,
-        "color" -> game.firstColor.name,
+        "color" -> game.naturalOrientation.name,
         "player" -> user.map { u =>
           Json.obj(
             "name" -> u.name,
@@ -83,7 +83,7 @@ private[tv] final class TvTrouper(
               game.id,
               makeMessage("featured", Json.obj(
                 "html" -> html,
-                "color" -> game.firstColor.name,
+                "color" -> game.naturalOrientation.name,
                 "id" -> game.id
               ))
             )

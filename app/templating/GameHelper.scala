@@ -1,7 +1,6 @@
 package lidraughts.app
 package templating
 
-import draughts.format.Forsyth
 import draughts.{ Status => S, Color, Clock, Mode }
 import controllers.routes
 
@@ -11,10 +10,6 @@ import lidraughts.i18n.{ I18nKeys => trans, enLang }
 import lidraughts.user.{ User, UserContext, Title }
 
 trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHelper with DraughtsgroundHelper =>
-
-  private val dataLive = attr("data-live")
-  private val dataLastmove = attr("data-lastmove")
-  private val dataResult = attr("data-result")
 
   def netBaseUrl: String
   def cdnUrl(path: String): String
@@ -119,8 +114,11 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
             " "
           )
         }
-        if (withRating) frag(title, user.name, " ", "(", lidraughts.game.Namer ratingString player, ")")
-        else frag(title, user.name)
+        frag(
+          title,
+          if (withRating) s"${user.name} (${lidraughts.game.Namer ratingString player})"
+          else user.name
+        )
       }
     ) { level => raw(s"A.I. level $level") }
 
@@ -203,7 +201,7 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
     case _ => ""
   }
 
-  private def gameTitle(game: Game, color: Color): String = {
+  def gameTitle(game: Game, color: Color): String = {
     val u1 = playerText(game player color, withRating = true)
     val u2 = playerText(game opponent color, withRating = true)
     val clock = game.clock ?? { c => " • " + c.config.show }
@@ -229,58 +227,7 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
 
   def gameLink(pov: Pov)(implicit ctx: UserContext): String = gameLink(pov.game, pov.color)
 
-  def gameFen(
-    pov: Pov,
-    ownerLink: Boolean = false,
-    tv: Boolean = false,
-    withTitle: Boolean = true,
-    withLink: Boolean = true,
-    withLive: Boolean = true,
-    withResult: Boolean = true
-  )(implicit ctx: UserContext): Frag = {
-    val game = pov.game
-    val isLive = withLive && game.isBeingPlayed
-    val cssClass = isLive ?? "live"
-    val variant = game.variant.key
-    val tag = if (withLink) a else span
-    val boardClass = s"is${pov.game.variant.boardSize.key}"
-    val boardSize = s"${pov.game.variant.boardSize.width}x${pov.game.variant.boardSize.height}"
-    val classes = s"mini-board mini-board-${game.id} cg-wrap parse-fen is2d $boardClass $cssClass $variant"
-    tag(
-      href := withLink.option(gameLink(game, pov.color, ownerLink, tv)),
-      title := withTitle.option(gameTitle(game, pov.color)),
-      cls := classes,
-      dataLive := isLive.option(game.id),
-      dataColor := pov.color.name,
-      dataFen := Forsyth.exportBoard(game.board),
-      dataBoard := boardSize,
-      dataLastmove := ~game.lastMoveKeys,
-      dataResult := withResult.option(game.resultChar)
-    )(cgWrapContent)
-  }
-
-  def gameFenNoCtx(pov: Pov, tv: Boolean = false, blank: Boolean = false): Frag = {
-    val isLive = pov.game.isBeingPlayed
-    val variant = pov.game.variant.key
-    val boardClass = s"is${pov.game.variant.boardSize.key}"
-    val boardSize = s"${pov.game.variant.boardSize.width}x${pov.game.variant.boardSize.height}"
-    a(
-      href := (if (tv) routes.Tv.index() else routes.Round.watcher(pov.gameId, pov.color.name)),
-      title := gameTitle(pov.game, pov.color),
-      cls := List(
-        s"mini-board mini-board-${pov.gameId} cg-wrap parse-fen is2d $boardClass $variant" -> true,
-        s"live mini-board-${pov.gameId}" -> isLive
-      ),
-      dataLive := isLive.option(pov.gameId),
-      dataColor := pov.color.name,
-      dataFen := Forsyth.exportBoard(pov.game.board),
-      dataBoard := boardSize,
-      dataLastmove := ~pov.game.lastMoveKeys,
-      target := blank.option("_blank")
-    )(cgWrapContent)
-  }
-
-  def challengeTitle(c: lidraughts.challenge.Challenge)(implicit ctx: UserContext) = {
+  def challengeTitle(c: lidraughts.challenge.Challenge) = {
     val speed = c.clock.map(_.config).fold(draughts.Speed.Correspondence.name) { clock =>
       s"${draughts.Speed(clock).name} (${clock.show})"
     }

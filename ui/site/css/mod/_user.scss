@@ -181,6 +181,9 @@
 .mz_reports button strong {
   display: inline;
 }
+.mz_reports .atoms .atom {
+  @extend %break-word-hard;
+}
 #mz_assessments table {
   margin-top: 10px;
 }

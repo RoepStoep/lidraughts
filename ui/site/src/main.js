@@ -142,9 +142,6 @@
     }
   });
 
-  lidraughts.reverse = s => s.split('').reverse().join('');
-  lidraughts.readServerFen = t => atob(lidraughts.reverse(t));
-
   lidraughts.userAutocomplete = ($input, opts) => {
     opts = opts || {};
     lidraughts.loadCssPath('autocomplete');
@@ -191,37 +188,6 @@
         .on('keypress', function(e) {
           if (e.which == 10 || e.which == 13) opts.onSelect($(this).val());
         });
-    });
-  };
-
-  lidraughts.parseFen = function($elem) {
-    if (!window.Draughtsground) return setTimeout(function() {
-      lidraughts.parseFen($elem);
-    }, 500); // if not loaded yet
-    // sometimes $elem is not a jQuery, can happen when content_loaded is triggered with random args
-    if (!$elem || !$elem.each) $elem = $('.parse-fen');
-    $elem.each(function() {
-      var $this = $(this).removeClass('parse-fen');
-      var lm = $this.data('lastmove');
-      if (lm) lm = String(lm);
-      var lastMove = lm && [lm.slice(-4, -2), lm.slice(-2)];
-      var color = $this.data('color') || lidraughts.readServerFen($(this).data('y'));
-      var ground = $this.data('draughtsground');
-      var board = $this.data('board');
-      var playable = !!$this.data('playable');
-      var resizable = !!$this.data('resizable');
-      var config = {
-        coordinates: 0,
-        boardSize: board ? board.split('x').map(s => parseInt(s)) : [10, 10],
-        viewOnly: !playable,
-        resizable: resizable,
-        fen: $this.data('fen') || lidraughts.readServerFen($this.data('z')),
-        lastMove: lastMove,
-        drawable: { enabled: false, visible: false }
-      };
-      if (color) config.orientation = color;
-      if (ground) ground.set(config);
-      else $this.data('draughtsground', Draughtsground(this, config));
     });
   };
 
@@ -287,6 +253,7 @@
           lidraughts.timeago.render([].slice.call(document.getElementsByClassName('timeago'), 0, 99))
         );
       }
+
       function setTimeago(interval) {
         renderTimeago();
         setTimeout(() => setTimeago(interval * 1.1), interval);
@@ -659,8 +626,8 @@
     api.warmup = function() {
       if (enabled()) {
         // See goldfire/howler.js#715
-        Howler._autoResume();   // This resumes sound if suspended.
-        Howler._autoSuspend();  // This starts the 30s timer to suspend.
+        Howler._autoResume(); // This resumes sound if suspended.
+        Howler._autoSuspend(); // This starts the 30s timer to suspend.
       }
     };
 
@@ -694,7 +661,7 @@
     }
   });
 
-  lidraughts.widget("friends", (function() {
+  lidraughts.widget('friends', (function() {
     var getId = function(titleName) {
       return titleName.toLowerCase().replace(/^[\w\-]+\s/, '');
     };
@@ -743,7 +710,9 @@
           this.$friendBoxTitle.html(this.trans.vdomPlural('nbFriendsOnline', ids.length, $('<strong>').text(ids.length)));
           this.$nobody.toggleNone(!ids.length);
           this.element.find('.list').html(
-            ids.map(function(id) { return renderUser(users[id]); }).join('')
+            ids.map(function(id) {
+              return renderUser(users[id]);
+            }).join('')
           );
         }.bind(this));
       },
@@ -791,61 +760,19 @@
     };
   })());
 
-  lidraughts.widget("clock", {
-    _create: function() {
-      var self = this;
-      var target = this.options.time * 1000 + Date.now();
-      var timeEl = this.element.find('.time')[0];
-      var tick = function() {
-        var remaining = target - Date.now();
-        if (remaining <= 0) clearInterval(self.interval);
-        timeEl.innerHTML = self._formatMs(remaining);
-      };
-      this.interval = setInterval(tick, 1000);
-      tick();
-    },
-
-    _pad: function(x) { return (x < 10 ? '0' : '') + x; },
-
-    _formatMs: function(msTime) {
-      var date = new Date(Math.max(0, msTime + 500));
-
-      var hours = date.getUTCHours(),
-        minutes = date.getUTCMinutes(),
-        seconds = date.getUTCSeconds();
-
-      if (hours > 0) {
-        return hours + ':' + this._pad(minutes) + ':' + this._pad(seconds);
-      } else {
-        return minutes + ':' + this._pad(seconds);
-      }
-    }
-  });
-
   $(function() {
-    lidraughts.pubsub.on('content_loaded', lidraughts.parseFen);
-
-    var socketOpened = false;
-
-    function startWatching() {
-      if (!socketOpened) return;
-      var ids = [];
-      $('.mini-board.live').removeClass("live").each(function() {
-        ids.push(this.getAttribute("data-live"));
-      });
-      if (ids.length) lidraughts.socket.send("startWatching", ids.join(" "));
-    }
-    lidraughts.pubsub.on('content_loaded', startWatching);
-    lidraughts.pubsub.on('socket.open', function() {
-      socketOpened = true;
-      startWatching();
-    });
+    lidraughts.pubsub.on('content_loaded', lidraughts.miniBoard.initAll);
+    lidraughts.pubsub.on('content_loaded', lidraughts.miniGame.initAll);
 
     lidraughts.requestIdleCallback(function() {
-      lidraughts.parseFen();
+      lidraughts.miniBoard.initAll();
+      lidraughts.miniGame.initAll();
       $('.chat__members').watchers();
       if (location.hash === '#blind' && !$('body').hasClass('blind-mode'))
-        $.post('/toggle-blind-mode', { enable: 1, redirect: '/' }, lidraughts.reload);
+      $.post('/toggle-blind-mode', {
+        enable: 1,
+        redirect: '/'
+      }, lidraughts.reload);
     });
   });
 
@@ -891,7 +818,9 @@
     $('#team-subscribe').on('change', function() {
       const v = this.checked;
       $(this).parents('form').each(function() {
-        $.post($(this).attr('action'), { v: v });
+        $.post($(this).attr('action'), {
+          v: v
+        });
       });
     });
   }

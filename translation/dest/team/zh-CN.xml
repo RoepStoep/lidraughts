@@ -22,6 +22,9 @@
   <string name="teamRecentMembers">本队新成员</string>
   <string name="kickSomeone">把一个用户退出团队</string>
   <string name="whoToKick">您想把谁退出团队？</string>
+  <string name="deleteTeamWarning">删除团队及其成员。此操作将无法还原！</string>
+  <string name="appointOwner">指定新队长</string>
+  <string name="changeOwner">您想指定谁作为新队长?</string>
   <plurals name="xJoinRequests">
     <item quantity="other">%s 件加入请求</item>
   </plurals>
@@ -31,6 +34,9 @@
   <string name="teamBattleOverview">一场由多个团队组成的战斗，每个玩家都可以为其团队得分</string>
   <string name="teamTournament">团队比赛</string>
   <string name="teamTournamentOverview">只有您的团队成员可以加入的竞技场比赛</string>
+  <string name="swissTournament">瑞士制锦标赛</string>
+  <string name="swissTournamentOverview">只有您的团队成员可以加入的瑞士制锦标赛</string>
+  <string name="subscribeToTeamMessages">订阅团队消息</string>
   <string name="messageAllMembers">向所有成员发送消息</string>
   <string name="messageAllMembersOverview">发送一条私密消息给团队中的每个玩家</string>
   <string name="messageAllMembersLongDescription">向团队的所有成员发送私信。
@@ -40,4 +46,5 @@
   <string name="youMayWantToLinkOneOfTheseTournaments">您可能想要链接这些即将到来的锦标赛中的一个？</string>
   <string name="usersWhoCanManageThisTeam">可以管理此团队的用户</string>
   <string name="leadersChat">领队聊天</string>
+  <string name="enableMembersChat">启用聊天框 (仅供成员使用)</string>
 </resources>

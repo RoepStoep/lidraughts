@@ -33,7 +33,7 @@ export function joinWithTeamSelector(ctrl: TournamentController) {
           }, tb.teams[id]))
         ] : [
           h('p', noarg('youMustJoinOneOfTheseTeams')),
-          h('ul', shuffleArray(Object.keys(tb.teams)).map(t =>
+          h('ul', shuffleArray(Object.keys(tb.teams)).map((t: string) =>
             h('li', h('a', {
               attrs: { href: '/team/' + t }
             }, tb.teams[t]))
@@ -122,7 +122,7 @@ function teamTr(ctrl: TournamentController, battle: TeamBattle, team: RankedTeam
 }
 
 /* Randomize array element order in-place. Using Durstenfeld shuffle algorithm. */
-function shuffleArray(array) {
+function shuffleArray<A>(array: A[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];

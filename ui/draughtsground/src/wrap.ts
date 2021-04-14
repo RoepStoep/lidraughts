@@ -7,7 +7,7 @@ import { Elements} from './types'
 
 export default function wrap(element: HTMLElement, s: State, relative: boolean): Elements {
 
-  // .cg-wrap (element passed to Chessground)
+  // .cg-wrap (element passed to Draughtsground)
   //   cg-helper (10.0%)
   //     cg-container (1000%)
   //       cg-board

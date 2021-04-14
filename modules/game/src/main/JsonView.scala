@@ -26,6 +26,7 @@ final class JsonView(rematchOf: Game.ID => Option[Game.ID]) {
   ).add("threefold" -> game.history.threefoldRepetition)
     .add("boosted" -> game.boosted)
     .add("tournamentId" -> game.tournamentId)
+    .add("swissId" -> game.swissId)
     .add("winner" -> game.winnerColor)
     .add("lastMove" -> game.lastMoveKeys)
     .add("rematch" -> rematchOf(game.id))

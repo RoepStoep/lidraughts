@@ -21,7 +21,7 @@ final class Tv(trouper: Trouper, roundProxyGame: Game.ID => Fu[Option[Game]]) {
         games <- historyIds.map { id =>
           roundProxyGame(id) orElse GameRepo.game(id)
         }.sequenceFu.map(_.flatten)
-        history = games map Pov.first
+        history = games map Pov.naturalOrientation
       } yield game map (_ -> history)
     }
 

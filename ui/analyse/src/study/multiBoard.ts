@@ -1,6 +1,5 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode'
-import { Draughtsground } from 'draughtsground';
 import { opposite } from 'draughtsground/util';
 import { resultOf } from './studyChapters';
 import * as draughtsUtil from 'draughts';
@@ -16,7 +15,7 @@ export class MultiBoardCtrl {
   pager?: Paginator<ChapterPreview>;
   playing: boolean = false;
 
-  constructor(readonly studyId: string, readonly redraw: () => void, readonly trans: Trans) {}
+  constructor(readonly studyId: string, readonly redraw: () => void, readonly trans: Trans) { }
 
   addNode(pos, node) {
     const cp = this.pager && this.pager.currentPageResults.find(cp => cp.id == pos.chapterId);
@@ -108,8 +107,8 @@ function renderPlayingToggle(ctrl: MultiBoardCtrl): VNode {
 
 function renderPagerNav(pager: Paginator<ChapterPreview>, ctrl: MultiBoardCtrl): VNode {
   const page = ctrl.page,
-  from = Math.min(pager.nbResults, (page - 1) * pager.maxPerPage + 1),
-  to = Math.min(pager.nbResults, page * pager.maxPerPage);
+    from = Math.min(pager.nbResults, (page - 1) * pager.maxPerPage + 1),
+    to = Math.min(pager.nbResults, page * pager.maxPerPage);
   return h('div.pager', [
     pagerButton(ctrl.trans.noarg('first'), 'W', () => ctrl.setPage(1), page > 1, ctrl),
     pagerButton(ctrl.trans.noarg('previous'), 'Y', ctrl.prevPage, page > 1, ctrl),
@@ -139,9 +138,9 @@ function makePreview(study: StudyCtrl) {
       preview.result ? h('span.player-result', [resultOf([['result', preview.result]], preview.orientation == 'white', true)]) : undefined,
       makePlayer(preview.players[preview.orientation])
     ] : [
-      h('div.name', preview.name),
-      makeCg(preview)
-    ];
+        h('div.name', preview.name),
+        makeCg(preview)
+      ];
     return h('a.' + preview.id, {
       attrs: { title: preview.name },
       class: { active: !study.multiBoard.loading && study.vm.chapterId == preview.id && (!study.relay || !study.relay.intro.active) },
@@ -151,7 +150,7 @@ function makePreview(study: StudyCtrl) {
 }
 
 function makePlayer(player: ChapterPreviewPlayer): VNode {
-  return h('div.player', [
+  return h('span.player', [
     player.title ? `${player.title.endsWith('-64') ? player.title.slice(0, player.title.length - 3) : player.title} ${player.name}` : player.name,
     player.rating && h('span', '' + player.rating)
   ]);
@@ -162,30 +161,25 @@ function uciToLastMove(lm?: string): Key[] | undefined {
 }
 
 function makeCg(preview: ChapterPreview): VNode {
-  return h('div.mini-board.cg-wrap.is2d.is' + preview.board.key, {
+  const board = preview.board;
+  return h('span.mini-board.cg-wrap.is2d.is' + board.key, {
+    attrs: {
+      'data-state': `${preview.fen}|${board.size[0]}x${board.size[1]}|${preview.orientation}|${preview.lastMove}`
+    },
     hook: {
       insert(vnode) {
-        const cg = Draughtsground(vnode.elm as HTMLElement, {
-          coordinates: 0,
-          boardSize: preview.board.size,
-          drawable: { enabled: false, visible: false },
-          resizable: false,
-          viewOnly: true,
-          orientation: preview.orientation,
-          fen: preview.fen,
-          lastMove: uciToLastMove(preview.lastMove)
-        });
-        vnode.data!.cp = { cg, fen: preview.fen };
+        window.lidraughts.miniBoard.init(vnode.elm as HTMLElement);
+        vnode.data!.fen = preview.fen;
       },
       postpatch(old, vnode) {
-        if (old.data!.cp.fen !== preview.fen) {
-          old.data!.cp.cg.set({
+        if (old.data!.fen !== preview.fen) {
+          const lm = preview.lastMove ? String(preview.lastMove) : preview.lastMove!;
+          $(vnode.elm as HTMLElement).data('draughtsground').set({
             fen: preview.fen,
-            lastMove: uciToLastMove(preview.lastMove)
+            lastMove: uciToLastMove(lm)
           });
-          old.data!.cp.fen = preview.fen;
         }
-        vnode.data!.cp = old.data!.cp;
+        vnode.data!.fen = preview.fen;
       }
     }
   })

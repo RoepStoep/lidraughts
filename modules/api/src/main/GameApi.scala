@@ -167,7 +167,7 @@ private[api] final class GameApi(
       }
     }
 
-  private def makeUrl(game: Game) = s"$netBaseUrl/${game.id}/${game.firstPlayer.color.name}"
+  private def makeUrl(game: Game) = s"$netBaseUrl/${game.id}/${game.naturalOrientation.name}"
 
   private def gamesJson(withFlags: WithFlags)(games: Seq[Game]): Fu[Seq[JsObject]] = {
     val allAnalysis =

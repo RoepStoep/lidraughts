@@ -1,5 +1,6 @@
 package views.html.board
 
+import draughts.format.{ FEN, Forsyth }
 import play.api.libs.json.Json
 import scala.concurrent.duration.Duration
 
@@ -7,10 +8,25 @@ import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
 import lidraughts.game.JsonView.boardSizeWriter
+import lidraughts.game.Pov
 
 import controllers.routes
 
 object bits {
+
+  private val dataState = attr("data-state")
+
+  def mini(pov: Pov): Tag => Tag =
+    mini(FEN(Forsyth.boardAndColor(pov.game.situation)), pov.game.variant.boardSize, pov.color, ~pov.game.lastMoveKeys) _
+
+  def mini(fen: draughts.format.FEN, boardSize: draughts.Board.BoardSize, color: draughts.Color = draughts.White, lastMove: String = "")(tag: Tag): Tag =
+    tag(
+      cls := s"mini-board mini-board--init cg-wrap is2d is${boardSize.key}",
+      dataState := s"${fen.value}|${boardSize.width}x${boardSize.height}|${color.name}|$lastMove"
+    )(cgWrapContent)
+
+  def miniSpan(fen: draughts.format.FEN, boardSize: draughts.Board.BoardSize, color: draughts.Color = draughts.White, lastMove: String = "") =
+    mini(fen, boardSize, color, lastMove)(span)
 
   def jsData(
     sit: draughts.Situation,

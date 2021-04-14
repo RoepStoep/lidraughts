@@ -1,7 +1,6 @@
 $(function() {
   var maxGames = 21,
     trans = window.lidraughts.trans(window.lidraughts.collectionI18n),
-    draughtsResult = window.lidraughts.draughtsResult,
     editState = false,
     $gameList = $('.page-menu__content.now-playing');
   if (!$gameList) return;
@@ -47,13 +46,17 @@ $(function() {
     });
     return gameIds;
   }
-  var getFinishedUserIds = function(short) {
-    var userIds = [];
+  var getUserId = function($board, black) {
+    const users = $board.find('.mini-game__user');
+    if (users.length != 2) return;
+    return black ? $(users[0]).data('userid') : $(users[1]).data('userid');
+  }
+  var getFinishedUserIds = function() {
+    const userIds = [];
     $gameList.children().each(function() {
-      var self = $(this),
-        result = self.find('.mini-board').data('result');
-      if (result && result !== '*') {
-        var userId = self.find('.vstext__pl').data('userid');
+      const self = $(this);
+      if (self.find('.mini-game__result').length) {
+        const userId = getUserId(self);
         if (userId && !userIds.includes(userId)) {
           userIds.push(userId);
         }
@@ -62,11 +65,11 @@ $(function() {
     return userIds;
   }
   var getCollectionHref = function(gameIds) {
-    var url = window.location.protocol + '//' + window.location.hostname + '/games/collection';
+    const url = window.location.protocol + '//' + window.location.hostname + '/games/collection';
     return gameIds.length ? (url + '?games=' + encodeURIComponent(gameIds.join(','))) : url;
   }
   var updateCollection = function(noHref) {
-    var hasFinished = getFinishedUserIds().length ? true : false;
+    const hasFinished = getFinishedUserIds().length ? true : false;
     $('#links-next').toggleClass('visible', hasFinished);
     if (noHref) return;
     var gameIds = getGameIds(),
@@ -84,13 +87,11 @@ $(function() {
     return br !== -1 ? html.slice(0, br) : html;
   }
   var buildEditWrapper = function($board) {
-    var removeButton = '<a class="edit-button remove-game" title="' + trans.noarg('removeGame') + '" data-icon="q"></a>',
-      result = $board.data('result'), bottomWrapper;
-    if (result && result !== '*') {
-      var $pl = $board.parent().find('span.vstext__pl'),
-        username = $pl.data('userid') && parseUsername($pl);
-      if (username) {
-        nextGameButton = '<a class="edit-button next-game" title="' + trans('reloadWithCurrentGameOfX', username) + '" data-icon="P"></a>';
+    const removeButton = '<a class="edit-button remove-game" title="' + trans.noarg('removeGame') + '" data-icon="q"></a>';
+    if ($board.find('.mini-game__result').length) {
+      const userid = getUserId($board);
+      if (userid) {
+        nextGameButton = '<a class="edit-button next-game" title="' + trans('reloadWithCurrentGameOfX', userid) + '" data-icon="P"></a>';
         return removeButton + nextGameButton;
       }
     }
@@ -105,7 +106,7 @@ $(function() {
     if (editState) {
       $gameList.children().each(function() {
         var self = $(this),
-          $board = self.find('.mini-board'),
+          $board = self.find('.mini-game'),
           flipButton = '<a class="edit-button flip-game" title="' + trans.noarg('flipBoard') + '" data-icon="B"></a>';
         function bindRemoveButton() {
           self.find('a.remove-game').on('click', (ev) => {
@@ -119,7 +120,7 @@ $(function() {
         function bindNextGameButton() {
           self.find('a.next-game').on('click', (ev) => {
             ev.stopPropagation();
-            fetchNewGames([self.find('span.vstext__pl').data('userid')], self);
+            fetchNewGames([getUserId(self)], self);
           });
         };
         self.append('<div class="edit-overlay">' + flipButton + '<div class="edit-wrapper">' + buildEditWrapper($board) + '</div></div>');
@@ -128,21 +129,20 @@ $(function() {
             gameId = getGameId($gameLink, true);
           if (editState && $board.length && gameId) {
             ev.stopPropagation();
-            var color = $board.data('color');
-            if (color === 'white') color = 'black';
-            else color = 'white';
-            var $pl = self.find('span.vstext__pl'),
-              $op = self.find('span.vstext__op');
-            if ($pl.length && $op.length) {
-              var plHtml = $pl.html(), plUserId = $pl.data('userid');
-              $pl.html($op.html());
-              $pl.data('userid', $op.data('userid') || '');
-              $op.html(plHtml);
-              $op.data('userid', plUserId || '');
+            const state = $board.data('state').split('|'),
+              color = state[2] === 'white' ? 'black' : 'white',
+              $wrap = $board.find('.cg-wrap'),
+              players = self.find('.mini-game__player');
+            if (players.length === 2) {
+              const $white = $(players[1]), 
+                $black = $(players[0]);
+              $wrap.before($white);
+              $wrap.after($black);
             }
-            $board.data('color', color);
+            state[2] = color;
+            $board.data('state', state.join('|'));
             $gameLink.attr('href', '/' + gameId + (color === 'black' ? '/' + color : ''));
-            $board.data('draughtsground').set({ orientation: color });
+            $wrap.data('draughtsground').set({ orientation: color });
             self.find('.edit-wrapper').html(buildEditWrapper($board));
             bindRemoveButton();
             bindNextGameButton();
@@ -169,10 +169,10 @@ $(function() {
     if (gameId.length < 8) return;
     $.ajax({
       method: 'get',
-      url: '/' + gameId + '/mini?result=1',
-      success: (result) => {
-        if (checkExistingGames(result)) {
-          insertBoard(result);
+      url: '/' + gameId + '/mini?userid=1',
+      success: (res) => {
+        if (checkExistingGames(res)) {
+          insertBoard(res);
           $gameId.val('');
         }
         $gameId.focus();
@@ -186,9 +186,9 @@ $(function() {
     $.ajax({
       method: 'get',
       url: '/@/' + username + '/recent',
-      success: (result) => {
-        if (checkExistingGames(result)) {
-          insertBoard(result);
+      success: (res) => {
+        if (checkExistingGames(res)) {
+          insertBoard(res);
           $username.typeahead('val', '');
         }
         $username.focus();
@@ -200,12 +200,11 @@ $(function() {
       method: 'get',
       url: '/games/collection/next?userids=' + encodeURIComponent(userIds.join(',')),
       success: (newGames) => {
-        var updated = false;
+        let updated = false;
         (parent || $gameList.children()).each(function() {
-          var self = $(this),
-            result = self.find('.mini-board').data('result');
-          if (result && result !== '*') {
-            var userId = self.find('.vstext__pl').data('userid'),
+          const self = $(this);
+          if (self.find('.mini-game__result').length) {
+            const userId = getUserId(self),
               newGame = userId && newGames.hasOwnProperty(userId) && newGames[userId];
             if (newGame) {
               self.html(newGame);
@@ -227,29 +226,15 @@ $(function() {
     setEditState(editState);
     updateCollection();
   };
-  var insertResult = function(e) {
-    var $board = $gameList.find('.mini-board-' + e.id), outcome;
-    switch (e.res) {
-      case 'w':
-        outcome = draughtsResult ? '2-0' : '1-0';
-        break;
-      case 'b':
-        outcome = draughtsResult ? '0-2' : '0-1';
-        break;
-      case 'd':
-        outcome = draughtsResult ? '1-1' : '½-½';
-        break;
-    }
-    if (outcome && $board.length) {
-      var $vstext = $board.parent().find('span.vstext');
-      $vstext.find('.vstext__clock').remove();
-      $vstext.find('.vstext__pl').after('<span class="vstext__res">' + outcome + '</span>');
+
+  var processFinish = function(e) {
+    if ($gameList.find('.mini-game-' + e.id).length) {
       setEditState(editState);
       updateCollection(true);
     }
   };
 
-  window.lidraughts.pubsub.on('game.result', insertResult);
+  window.lidraughts.pubsub.on('game.finish', processFinish);
 
   $('#submit-gameid').on('click', submitGameId);
   $('#collection-gameid').on('keypress', (ev) => {
