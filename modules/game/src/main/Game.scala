@@ -517,7 +517,7 @@ case class Game(
     if (isCorrespondence) outoftimeCorrespondence else outoftimeClock(withGrace)
 
   private def outoftimeClock(withGrace: Boolean): Boolean = clock ?? { c =>
-    started && playable && (bothPlayersHaveMoved || isSimul || isSwiss) && {
+    started && playable && (bothPlayersHaveMoved || isSimul || isSwiss || isExternalTournament) && {
       (!c.isRunning && !c.isInit) || c.outOfTime(turnColor, withGrace)
     }
   }
