@@ -21,12 +21,20 @@ object external {
       moreCss = cssTag("challenge.page")
     ) {
         val startsAt = c.external.flatMap(_.startsAt).filter(_.isAfterNow)
+        val autoStart = ~c.external.map(c => ~c.autoStart && c.tournamentId.isDefined && c.startsAt.isDefined)
+        val tournamentHeader = c.externalTournamentId.map { tourId =>
+          h1(
+            cls := "tournament",
+            externalTournamentLink(tourId)
+          )
+        }
         main(cls := "page-small challenge-page challenge-external box box-pad")(
           c.status match {
             case Status.Created | Status.External | Status.Offline =>
               val whiteUserId = c.finalColor.fold(c.challengerUserId, c.destUserId)
               val blackUserId = c.finalColor.fold(c.destUserId, c.challengerUserId)
               frag(
+                tournamentHeader,
                 h1(
                   userIdLink(whiteUserId),
                   " vs ",
@@ -52,15 +60,17 @@ object external {
                 else if (player) frag(
                   (c.mode.rated && c.unlimited) option
                     badTag(trans.bewareTheGameIsRatedButHasNoClock()),
-                  if (c.hasAcceptedExternal(ctx.me)) frag(
-                    p(cls := "player-accepted")(trans.challengeAcceptedAndWaiting()),
-                    p(cls := "accepting-message")(trans.youWillBeRedirectedToTheGame())
-                  )
-                  else postForm(cls := "accept", action := routes.Challenge.accept(c.id))(
-                    submitButton(cls := "text button button-fat", dataIcon := "G")(trans.joinTheGame())
-                  )
+                  !autoStart option {
+                    if (c.hasAcceptedExternal(ctx.me)) frag(
+                      p(cls := "player-accepted")(trans.challengeAcceptedAndWaiting()),
+                      p(cls := "accepting-message")(trans.youWillBeRedirectedToTheGame())
+                    )
+                    else postForm(cls := "accept", action := routes.Challenge.accept(c.id))(
+                      submitButton(cls := "text button button-fat", dataIcon := "G")(trans.joinTheGame())
+                    )
+                  }
                 )
-                else c.external map { e =>
+                else !autoStart ?? c.external.map { e =>
                   val accepted = div(cls := "status")(span(dataIcon := "E"), trans.challengeAccepted())
                   val waiting = div(cls := "status")(trans.waitingForPlayer())
                   frag(
@@ -89,7 +99,8 @@ object external {
               bits.details(c)
             )
             case Status.Accepted => div(cls := "follow-up")(
-              h1(trans.challengeAccepted()),
+              tournamentHeader,
+              h1(if (autoStart) trans.gameStarted() else trans.challengeAccepted()),
               bits.details(c),
               a(id := "challenge-redirect", href := routes.Round.watcher(c.id, "white"), cls := "button button-fat")(
                 if (player) trans.joinTheGame()

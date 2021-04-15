@@ -966,6 +966,7 @@ One URL per line</string>
   <string name="challengeCanceled">Challenge cancelled</string>
   <string name="challengeAcceptedAndWaiting">Challenge accepted! Waiting for your opponent...</string>
   <string name="youWillBeRedirectedToTheGame">You will be redirected to the game when both players have accepted the challenge.</string>
+  <string name="gameStarted">Game started</string>
   <string name="perfRatingX">Rating: %s</string>
   <plurals name="nbSecondsToPlayTheFirstMove">
     <item quantity="one">%s second to play the first move</item>

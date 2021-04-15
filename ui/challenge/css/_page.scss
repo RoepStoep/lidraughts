@@ -78,6 +78,15 @@ $c-challenge: $c-secondary;
     margin: 0 auto 2rem auto;
     max-width: 300px;
   }
+  h1.tournament {
+    text-align: center;
+    a {
+      color: $c-font;
+      &:hover {
+        color: $c-link;
+      }
+    }
+  }
 }
 
 .challenge-theirs,

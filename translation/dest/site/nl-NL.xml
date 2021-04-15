@@ -966,6 +966,7 @@ Een URL per regel</string>
   <string name="challengeCanceled">Uitdaging geannuleerd</string>
   <string name="challengeAcceptedAndWaiting">Uitdaging geaccepteerd! Wachten op je tegenstander...</string>
   <string name="youWillBeRedirectedToTheGame">Je wordt doorgestuurd naar de partij zodra beide spelers de uitdaging hebben geaccepteerd.</string>
+  <string name="gameStarted">Partij gestart</string>
   <string name="perfRatingX">Rating: %s</string>
   <plurals name="nbSecondsToPlayTheFirstMove">
     <item quantity="one">%s seconde om de eerste zet te spelen</item>
