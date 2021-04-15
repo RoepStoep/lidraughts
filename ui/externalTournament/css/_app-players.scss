@@ -57,4 +57,49 @@
     $c-active-border: mix($c-primary, $c-bg-box, 70%);
     background: linear-gradient(to left, $c-active-border 0px, $c-active-border 5px, rgba(0,0,0,0) 5px, rgba(0,0,0,0) 100%);
   }
+  .games {
+    padding: 0;
+    font-weight: bold;
+    width: 100%;
+    div {
+      @extend %flex-center;
+      justify-content: flex-end;
+      align-items: stretch;
+      min-height: 3.5em;
+      & > * {
+        @extend %flex-center;
+        justify-content: center;
+        flex: 0 0 2em;
+        text-align: center;
+      }
+    }
+    .ongoing {
+      color: $c-link;
+      // background: mix($c-link, $c-bg-box, 15%);
+      &:hover {
+        background: mix($c-link, $c-bg-box, 35%);
+      }
+    }
+    .win {
+      color: $c-good;
+      // background: mix($c-good, $c-bg-box, 15%);
+      &:hover {
+        background: mix($c-good, $c-bg-box, 35%);
+      }
+    }
+    .loss {
+      color: mix($c-bad, $c-bg-box, 60%);
+      // background: mix($c-bad, $c-bg-box, 10%);
+      &:hover {
+        background: mix($c-bad, $c-bg-box, 20%);
+      }
+    }
+    .draw {
+      color: mix($c-brag, $c-bg-box, 70);
+    }
+  }
+  .points {
+    text-align: right;
+    font-weight: bold;
+  }
 }

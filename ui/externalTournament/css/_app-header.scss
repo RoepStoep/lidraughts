@@ -2,7 +2,6 @@
   @extend %flex-center-nowrap;
   min-height: 7em;
   padding: 0 #{$block-gap * 1.5};
-  justify-content: center;
   h1 {
     font-size: 3em;
     margin: 0;

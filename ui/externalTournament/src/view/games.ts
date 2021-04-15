@@ -3,7 +3,7 @@ import { VNode } from 'snabbdom/vnode';
 import * as boards from './boards';
 import ExternalTournamentCtrl from '../ctrl';
 import { BaseGame } from '../interfaces';
-import { player as renderPlayer, preloadUserTips } from './util';
+import { player as renderPlayer, preloadUserTips, bind } from './util';
 
 export function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
   return ctrl.data.ongoing.length ? h('div.tour-ext__main__ongoing', [
@@ -17,24 +17,23 @@ export function upcoming(ctrl: ExternalTournamentCtrl): VNode {
   return h('div.tour-ext__main__upcoming', [
     h('h2', 'Upcoming games'),
     ctrl.data.upcoming.length ? h('table.slist.slist-pad', 
-      h('tbody',
-        ctrl.data.upcoming.map(c => h('tr', [
-          h('td', 
-            h('a.text',
-              { attrs: { href: '/' + c.id } },
-              c.startsAt ? dateFormatter(new Date(c.startsAt)) : 'Unknown'
-            )
-          ),
-          h('td', renderPlayers(c))
-        ]))
-      )
+      h('tbody', ctrl.data.upcoming.map(c => 
+        h('tr', {
+            hook: bind('click', _ => window.lidraughts.redirect('/' + c.id))
+          },
+          [
+            h('td', c.startsAt ? dateFormatter(new Date(c.startsAt)) : 'Open'),
+            h('td', renderPlayers(c))
+          ]
+        )
+      ))
     ) : h('div.empty', ctrl.trans.noarg('noneYet'))
   ]);
 }
 
 export function finished(ctrl: ExternalTournamentCtrl): VNode {
   const dateFormatter = getDateFormatter();
-  return h('div.tour-ext__main__upcoming', [
+  return h('div.tour-ext__main__finished', [
     h('h2', 'Finished games'),
       ctrl.data.finished.length ? h('table.slist.slist-pad', 
       h('tbody',

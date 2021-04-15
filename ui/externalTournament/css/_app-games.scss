@@ -1,0 +1,6 @@
+.tour-ext__main__upcoming {
+  tbody tr:hover {
+    background: mix($c-primary, $c-bg-box, 30%);
+    cursor: pointer;
+  }
+}
