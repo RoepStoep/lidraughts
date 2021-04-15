@@ -1,0 +1,36 @@
+.tour-ext__main__join-tournament {
+  .choices {
+    margin-top: 1.4em;
+  }
+  .button::before {
+    margin-right: .4em;
+  }
+  .button-green {
+    margin-left: .4em;
+  }
+  .spinner {
+    margin: 1em 0 0 3.5em;
+    width: 2.5em;
+    height: 2.5em;
+  }
+}
+
+.tour-ext__main__join-game {
+  @extend %flex-column;
+  text-align: center;
+  font-size: 1.5em;
+  position: relative;
+  &::before,
+  &::after {
+    content: 'U';
+    font-size: 2rem;
+    position: absolute;
+    top: 30px;
+  }
+  &::before {
+    left: 30px;
+  }
+  &::after {
+    right: 30px;
+  }
+}

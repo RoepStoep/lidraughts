@@ -15,7 +15,7 @@ object PlayerRepo {
 
   private lazy val coll = Env.current.playerColl
 
-  private def selectId(id: Tournament.ID) = $doc("_id" -> id)
+  private def selectId(id: Player.ID) = $doc("_id" -> id)
   private def selectTour(tourId: Tournament.ID) = $doc("tid" -> tourId)
   private def selectTourUser(tourId: Tournament.ID, userId: User.ID) = $doc(
     "tid" -> tourId,

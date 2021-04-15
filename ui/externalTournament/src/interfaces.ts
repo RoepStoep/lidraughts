@@ -17,14 +17,20 @@ export interface ExternalTournamentOpts {
 
 export interface ExternalTournamentData {
   id: string;
+  createdBy: string;
   name: string;
   players: ExternalPlayer[];
   upcoming: Challenge[];
   ongoing: Board[];
   finished: Game[];
+  me?: MyInfo;
   socketVersion?: number;
 }
 
+export interface MyInfo {
+  userId: string;
+  canJoin?: boolean;
+}
 
 export interface BaseGame {
   id: string;
@@ -43,8 +49,8 @@ export interface Game extends BaseGame {
 }
 
 export interface ExternalPlayer {
-  userId: string;
-  autoStart: boolean;
+  user: LightUser;
+  joined: boolean;
 }
 
 export interface Player {

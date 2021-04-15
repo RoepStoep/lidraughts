@@ -22,6 +22,10 @@ export function onInsert(f: (element: HTMLElement) => void): Hooks {
   };
 }
 
+export function preloadUserTips(el: HTMLElement) {
+  window.lidraughts.powertip.manualUserIn(el);
+}
+
 export function dataIcon(icon: string): Attrs {
   return {
     'data-icon': icon
@@ -50,6 +54,17 @@ export function player(p: Player, asLink: boolean, withRating: boolean) {
   }, [
     h('span.name', userName(p.user)),
     withRating ? h('span.rating', ' (' + p.rating + (p.provisional ? '?)' : ')')) : null
+  ]);
+}
+
+export function userTip(u: LightUser) {
+  return h('a.ulpt.user-link' + (((u.title || '') + u.name).length > 15 ? '.long' : ''), {
+    attrs: { 'data-href': '/@/' + u.name.toLowerCase() },
+    hook: {
+      destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
+    }
+  }, [
+    h('span.name', userName(u))
   ]);
 }
 

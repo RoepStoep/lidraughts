@@ -16,7 +16,7 @@ object DataForm {
 
   val player = Form(mapping(
     "userId" -> lidraughts.user.DataForm.historicalUsernameField
-  )(PlayerData.apply)(PlayerData.unapply)) fill PlayerData(
+  )(PlayerData.normalized)(PlayerData.unapply)) fill PlayerData(
     userId = ""
   )
 
@@ -34,9 +34,17 @@ object DataForm {
       userId: String
   ) {
 
-    def make(tourId: String) = ExternalPlayer.make(
-      tourId = tourId,
-      userId = userId
+    def make(tour: ExternalTournament) = ExternalPlayer.make(
+      tourId = tour.id,
+      userId = userId,
+      autoJoin = tour.createdBy == userId
+    )
+  }
+
+  object PlayerData {
+
+    def normalized(username: String) = new PlayerData(
+      userId = lidraughts.user.User normalize username
     )
   }
 }

@@ -4,6 +4,7 @@ import actorApi._
 import lidraughts.db.dsl._
 import lidraughts.game.Game
 import lidraughts.user.User
+import ExternalPlayer.Status
 
 final class ExternalTournamentApi(
     coll: Coll,
@@ -29,10 +30,33 @@ final class ExternalTournamentApi(
   def addPlayer(
     tour: ExternalTournament,
     data: DataForm.PlayerData
-  ): Fu[ExternalPlayer] = {
-    val player = data make tour.id
-    coll.insert(player) inject player
-  }
+  ): Fu[Option[ExternalPlayer]] =
+    ExternalPlayerRepo.exists(tour.id, data.userId) flatMap { exists =>
+      if (exists) fuccess(none)
+      else {
+        val player = data make tour
+        ExternalPlayerRepo.insert(player) >>- {
+          socketReload(tour.id)
+        } inject player.some
+      }
+    }
+
+  def answer(
+    tourId: ExternalTournament.ID,
+    me: User,
+    accept: Boolean
+  ): Fu[Boolean] =
+    ExternalPlayerRepo.find(tourId, me.id) flatMap {
+      case Some(player) if !player.joined && accept =>
+        ExternalPlayerRepo.setStatus(player.id, Status.Joined) >>- {
+          socketReload(tourId)
+        } inject true
+      case Some(player) if player.invited && !accept =>
+        ExternalPlayerRepo.setStatus(player.id, Status.Rejected) >>- {
+          socketReload(tourId)
+        } inject true
+      case _ => fuFalse
+    }
 
   def finishGame(game: Game): Unit =
     game.externalTournamentId.foreach { tourId =>

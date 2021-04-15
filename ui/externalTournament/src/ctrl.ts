@@ -10,6 +10,7 @@ export default class ExternalTournamentCtrl {
   data: ExternalTournamentData;
   trans: Trans;
   socket: ExternalTournamentSocket;
+  joinSpinner: boolean = false;
   redraw: () => void;
 
   private lastStorage = window.lidraughts.storage.make('last-redirect');
@@ -22,8 +23,17 @@ export default class ExternalTournamentCtrl {
     this.socket = makeSocket(opts.socketSend, this);
   }
 
+  isCreator = () => this.data.me?.userId === this.data.createdBy;
+  isMe = (user: LightUser) => this.data.me?.userId === user.id;
+
+  answer = (accept: boolean) => () => {
+    xhr.answer(this, accept);
+    this.joinSpinner = true;
+  }
+
   reload = (data: ExternalTournamentData): void => {
     this.data = {...this.data, ...data};
+    this.joinSpinner = false;
   };
 
   askReload = () => {

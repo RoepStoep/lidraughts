@@ -9,6 +9,7 @@ import lidraughts.challenge.Challenge
 import lidraughts.game.{ Game, Player }
 import lidraughts.game.JsonView.boardSizeWriter
 import lidraughts.socket.Socket.SocketVersion
+import lidraughts.user.User
 
 final class JsonView(
     lightUserApi: lidraughts.user.LightUserApi
@@ -22,16 +23,25 @@ final class JsonView(
     upcoming: List[Challenge],
     ongoing: List[Game],
     finished: List[Game],
+    me: Option[User],
     socketVersion: Option[SocketVersion] = None
-  ): JsObject =
-    Json.obj(
-      "id" -> tour.id,
-      "name" -> tour.name,
-      "players" -> players.map(externalPlayerJson),
-      "upcoming" -> upcoming.map(challengeJson),
-      "ongoing" -> ongoing.map(boardJson),
-      "finished" -> finished.map(gameJson)
-    ).add("socketVersion" -> socketVersion.map(_.value))
+  ): JsObject = {
+    val playersForMe =
+      if (me.exists(_.id == tour.createdBy)) players
+      else players.filter(_.joined)
+    Json
+      .obj(
+        "id" -> tour.id,
+        "createdBy" -> tour.createdBy,
+        "name" -> tour.name,
+        "players" -> playersForMe.map(externalPlayerJson),
+        "upcoming" -> upcoming.map(challengeJson),
+        "ongoing" -> ongoing.map(boardJson),
+        "finished" -> finished.map(gameJson)
+      )
+      .add("me" -> me.map(myInfo(_, players)))
+      .add("socketVersion" -> socketVersion.map(_.value))
+  }
 
   def apiTournament(
     tour: ExternalTournament
@@ -47,10 +57,15 @@ final class JsonView(
     Json.obj(
       "id" -> player.id,
       "userId" -> player.userId,
-      "autoStart" -> player.autoStart
+      "joined" -> player.joined
     )
 
-  def challengeJson(c: Challenge) = {
+  private def myInfo(me: User, players: List[ExternalPlayer]) =
+    Json
+      .obj("userId" -> me.id)
+      .add("canJoin" -> players.exists(p => p.invited && p.userId == me.id).option(true))
+
+  private def challengeJson(c: Challenge) = {
     val challenger = c.challenger.fold(_ => none[Challenge.Registered], _.some)
     Json
       .obj(
@@ -62,7 +77,7 @@ final class JsonView(
       .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
   }
 
-  def gameJson(g: Game) =
+  private def gameJson(g: Game) =
     Json.obj(
       "id" -> g.id,
       "variant" -> g.variant,
@@ -106,8 +121,8 @@ final class JsonView(
 
   private def externalPlayerJson(p: ExternalPlayer): JsObject =
     Json.obj(
-      "userId" -> p.userId,
-      "autoStart" -> p.autoStart
+      "user" -> lightUserApi.sync(p.userId),
+      "joined" -> p.joined
     )
 }
 
