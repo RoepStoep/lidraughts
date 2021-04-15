@@ -98,6 +98,9 @@ case class Challenge(
     case _ => false
   }
 
+  def withExternal(ext: Challenge.ExternalChallenge) =
+    copy(external = ext.some)
+
   lazy val perfType = perfTypeOf(variant, timeControl)
 }
 

@@ -2,8 +2,8 @@ package lidraughts.externalTournament
 
 import akka.actor._
 import com.typesafe.config.Config
-
 import scala.concurrent.duration._
+
 import lidraughts.game.Game
 import lidraughts.socket.History
 import lidraughts.socket.Socket.{ GetVersion, SocketVersion }

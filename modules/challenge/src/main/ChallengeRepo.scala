@@ -44,6 +44,13 @@ private final class ChallengeRepo(coll: Coll, maxPerUser: Int) {
       .sort($doc("external.startsAt" -> 1))
       .list[Challenge]()
 
+  def expiredAutoStart(max: Int): Fu[List[Challenge]] =
+    coll
+      .find(selectExternal ++ selectAutoStart ++ $doc(
+        "external.startsAt" -> $lt(DateTime.now)
+      ))
+      .list[Challenge](max)
+
   def like(c: Challenge) = ~(for {
     challengerId <- c.challengerUserId
     destUserId <- c.destUserId
@@ -106,6 +113,7 @@ private final class ChallengeRepo(coll: Coll, maxPerUser: Int) {
 
   private val selectCreated = $doc("status" -> Status.Created.id)
   private val selectExternal = $doc("status" -> Status.External.id)
+  private val selectAutoStart = $doc("external.autoStart" -> true)
   private val selectClock = $doc("timeControl.l" $exists true)
 }
 

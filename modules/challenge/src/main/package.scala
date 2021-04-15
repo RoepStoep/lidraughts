@@ -11,4 +11,6 @@ package object challenge extends PackageObject with WithSocket {
   private[challenge] type SocketMap = lidraughts.hub.TrouperMap[ChallengeSocket]
 
   private[challenge] def inTwoWeeks = DateTime.now plusWeeks 2
+
+  private[challenge] val logger = lidraughts.log("challenge")
 }

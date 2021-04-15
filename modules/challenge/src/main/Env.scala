@@ -4,6 +4,7 @@ import akka.actor._
 import com.typesafe.config.Config
 import scala.concurrent.duration._
 
+import lidraughts.common.{ AtMost, Every, ResilientScheduler }
 import lidraughts.game.Game
 import lidraughts.hub.TrouperMap
 import lidraughts.socket.Socket.{ SocketVersion, GetVersion }
@@ -85,6 +86,13 @@ final class Env(
   scheduler.future(3 seconds, "sweep challenges") {
     api.sweep
   }
+
+  ResilientScheduler(
+    every = Every(1 second),
+    atMost = AtMost(20 seconds),
+    initialDelay = 20 seconds,
+    logger = logger branch "autoStartGames"
+  ) { api.autoStartGames }(system)
 }
 
 object Env {

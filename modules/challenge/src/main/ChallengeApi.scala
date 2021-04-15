@@ -85,20 +85,33 @@ final class ChallengeApi(
     user match {
       case Some(u) if challenge.external.flatMap(_.startsAt).fold(true)(_.isBeforeNow) =>
         val c = challenge.acceptExternal(u)
-        (c.external ?? { _.bothAccepted }) ?? {
-          c.destUserId.??(UserRepo.byId) flatMap { destUser => joiner(c, destUser) }
-        } flatMap {
-          case None =>
-            (repo update c) >>- {
-              socketReload(c.id)
-            } inject None
-          case Some(pov) =>
-            val c2 = c.copy(status = Status.Accepted, expiresAt = DateTime.now.plusHours(3))
-            (repo update c2) >>- {
-              socketReload(c2.id)
-            } inject pov.some
-        }
+        doAcceptExternal(c)
       case _ => fuccess(None)
+    }
+
+  private def doAcceptExternal(c: Challenge) =
+    (c.external ?? { _.bothAccepted }) ?? {
+      c.destUserId.??(UserRepo.byId) flatMap { destUser => joiner(c, destUser) }
+    } flatMap {
+      case None =>
+        (repo update c) >>- {
+          socketReload(c.id)
+        } inject None
+      case Some(pov) =>
+        val c2 = c.copy(status = Status.Accepted, expiresAt = DateTime.now.plusHours(3))
+        (repo update c2) >>- {
+          socketReload(c2.id)
+        } inject pov.some
+    }
+
+  private def autoStart(c: Challenge) =
+    c.external.fold(funit) { external =>
+      doAcceptExternal(c.withExternal(
+        external.copy(
+          challengerAccepted = true,
+          destUserAccepted = true
+        )
+      )).void
     }
 
   def sendRematchOf(game: Game, user: User): Fu[Boolean] =
@@ -115,6 +128,11 @@ final class ChallengeApi(
   def removeByUserId(userId: User.ID) = repo allWithUserId userId flatMap { cs =>
     lidraughts.common.Future.applySequentially(cs)(remove).void
   }
+
+  private[challenge] def autoStartGames: Funit =
+    repo.expiredAutoStart(50).flatMap { cs =>
+      lidraughts.common.Future.applySequentially(cs)(autoStart).void
+    }
 
   private def isLimitedByMaxPlaying(c: Challenge) =
     if (c.hasClock) fuFalse
