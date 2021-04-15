@@ -152,7 +152,8 @@ object Challenge {
       challengerAccepted: Boolean = false,
       destUserAccepted: Boolean = false,
       startsAt: Option[DateTime] = None,
-      tournamentId: Option[String] = None
+      tournamentId: Option[String] = None,
+      autoStart: Option[Boolean] = None
   ) {
 
     def bothAccepted = challengerAccepted && destUserAccepted
@@ -197,6 +198,7 @@ object Challenge {
     rematchOf: Option[String],
     external: Boolean = false,
     startsAt: Option[DateTime] = None,
+    autoStart: Boolean = false,
     microMatch: Boolean = false,
     externalTournamentId: Option[String] = None
   ): Challenge = {
@@ -224,7 +226,8 @@ object Challenge {
     }
     val externalData = external option ExternalChallenge(
       startsAt = startsAt,
-      tournamentId = externalTournamentId
+      tournamentId = externalTournamentId,
+      autoStart = externalTournamentId.isDefined ?? autoStart.some
     )
     new Challenge(
       _id = randomId,

@@ -41,6 +41,15 @@ final class ExternalTournamentApi(
       }
     }
 
+  def isAutoStartAllowed(
+    tourId: ExternalTournament.ID,
+    userId1: User.ID,
+    userId2: User.ID
+  ): Fu[(Boolean, Boolean)] =
+    ExternalPlayerRepo.filterJoined(tourId, List(userId1, userId2)) map { joinedUsers =>
+      (joinedUsers.contains(userId1), joinedUsers.contains(userId2))
+    }
+
   def answer(
     tourId: ExternalTournament.ID,
     me: User,

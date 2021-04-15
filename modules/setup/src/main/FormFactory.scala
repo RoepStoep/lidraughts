@@ -102,6 +102,7 @@ private[setup] final class FormFactory(
 
   def hookConfig(implicit ctx: UserContext): Fu[HookConfig] = savedConfig map (_.hook)
 
+  import lidraughts.common.Form._
   import lidraughts.common.Form.UTCDate._
 
   lazy val api = Form(
@@ -116,12 +117,14 @@ private[setup] final class FormFactory(
       "color" -> optional(color),
       "fen" -> fen,
       "opponent" -> optional(nonEmptyText),
-      "startsAt" -> optional(utcDate),
+      "startsAt" -> optional(inTheFuture(utcDate)),
+      "autoStart" -> optional(boolean),
       "microMatch" -> optional(boolean),
       "externalTournamentId" -> optional(nonEmptyText(minLength = 8, maxLength = 8))
     )(ApiConfig.<<)(_.>>)
       .verifying("A custom fen is not allowed for this variant", _.validVariantForFen)
       .verifying("invalidFen", _.validFen)
+      .verifying("Must specify startsAt and externalTournamentId to autoStart a game", _.validAutoStart)
   )
 
   def savedConfig(implicit ctx: UserContext): Fu[UserConfig] =
