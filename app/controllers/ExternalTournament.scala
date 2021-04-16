@@ -29,9 +29,9 @@ object ExternalTournament extends LidraughtsController {
             json <- env.jsonView(
               tour = tour,
               players = players,
-              upcoming = upcoming,
+              upcoming = upcoming take 5,
               ongoing = ongoing,
-              finished = finished.take(10),
+              finished = finished take 5,
               me = ctx.me,
               pref = ctx.pref,
               reqPage = page,
@@ -58,9 +58,9 @@ object ExternalTournament extends LidraughtsController {
               json <- env.jsonView(
                 tour = tour,
                 players = players,
-                upcoming = upcoming,
+                upcoming = upcoming take 5,
                 ongoing = ongoing,
-                finished = finished.take(10),
+                finished = finished take 5,
                 me = ctx.me,
                 pref = ctx.pref,
                 reqPage = page,

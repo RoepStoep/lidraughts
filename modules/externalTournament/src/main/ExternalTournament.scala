@@ -14,7 +14,9 @@ case class ExternalTournament(
     createdBy: User.ID,
     clock: Option[ClockConfig],
     days: Option[Int],
-    variant: Variant
+    rated: Boolean,
+    variant: Variant,
+    rounds: Option[Int]
 ) {
 
   def id = _id
@@ -30,17 +32,16 @@ object ExternalTournament {
   type ID = String
 
   private[externalTournament] def make(
-    name: String,
-    clock: Option[ClockConfig],
-    days: Option[Int],
     userId: User.ID,
-    variant: Variant
+    config: DataForm.TournamentData
   ): ExternalTournament = new ExternalTournament(
     _id = ornicar.scalalib.Random nextString 8,
-    name = name,
+    name = config.name,
     createdBy = userId,
-    clock = clock,
-    days = days,
-    variant = variant
+    clock = config.clock,
+    days = config.days,
+    rated = config.rated,
+    variant = Variant.orDefault(~config.variant),
+    rounds = config.rounds
   )
 }

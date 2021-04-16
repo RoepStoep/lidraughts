@@ -20,12 +20,16 @@ object DataForm {
       "limit" -> number(min = 0, max = maxClockSeconds),
       "increment" -> number(min = 0, max = maxClockIncrement)
     )(draughts.Clock.Config.apply)(draughts.Clock.Config.unapply)),
-    "days" -> optional(number(min = 1, max = 14))
+    "days" -> optional(number(min = 1, max = 14)),
+    "rated" -> boolean,
+    "rounds" -> optional(number(min = 1, max = 99))
   )(TournamentData.apply)(TournamentData.unapply)) fill TournamentData(
     variant = none,
     name = "",
     clock = none,
-    days = none
+    days = none,
+    rated = false,
+    rounds = none
   )
 
   val player = Form(mapping(
@@ -38,16 +42,16 @@ object DataForm {
       variant: Option[String],
       name: String,
       clock: Option[draughts.Clock.Config],
-      days: Option[Int]
+      days: Option[Int],
+      rated: Boolean,
+      rounds: Option[Int]
   ) {
 
-    def make(userId: String) = ExternalTournament.make(
-      variant = Variant.orDefault(~variant),
-      name = name,
-      clock = clock,
-      days = days,
-      userId = userId
-    )
+    def make(userId: String) =
+      ExternalTournament.make(
+        userId = userId,
+        config = this
+      )
   }
 
   case class PlayerData(

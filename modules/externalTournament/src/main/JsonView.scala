@@ -40,13 +40,16 @@ final class JsonView(
           "id" -> tour.id,
           "createdBy" -> tour.createdBy,
           "name" -> tour.name,
-          "nbPlayers" -> players.count(_.rank.isDefined),
+          "nbPlayers" -> players.count(_.joined),
+          "nbUpcoming" -> upcoming.length,
+          "nbFinished" -> finished.length,
           "standing" -> standing,
           "upcoming" -> upcoming.map(challengeJson),
           "ongoing" -> ongoing.map(boardJson),
           "finished" -> finished.map(gameJson),
           "draughtsResult" -> pref.draughtsResult
         )
+        .add("rounds" -> tour.rounds)
         .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
         .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
         .add("playerInfo" -> playerInfo.map(playerInfoJson))

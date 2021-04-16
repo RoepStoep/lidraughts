@@ -66,11 +66,26 @@
       justify-content: flex-end;
       align-items: stretch;
       min-height: 3.5em;
+      margin-right: .2em;
       & > * {
         @extend %flex-center;
         justify-content: center;
         flex: 0 0 2em;
         text-align: center;
+      }
+    }
+    &.rounds {
+      .ongoing, .win, .loss, .draw,
+      r {
+        border-left: 1px dotted $c-border;
+        &:last-child {
+          border-right: 1px dotted $c-border;
+        }
+      }
+    }
+    &:not(.rounds) {
+      div {
+        margin-right: .8em;
       }
     }
     .ongoing {
@@ -112,6 +127,11 @@
     }
     .pairings div > * {
       flex: 0 0 1.5em;
+    }
+    &:not(.rounds) {
+      div {
+        margin-right: 0;
+      }
     }
   }
   &.xlong & {

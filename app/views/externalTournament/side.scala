@@ -27,7 +27,13 @@ object side {
               )
             } else t.perfType.map(_.name),
             separator,
-            trans.ratedTournament()
+            if (t.rated) trans.ratedTournament() else trans.casualTournament(),
+            t.rounds map { rounds =>
+              frag(
+                br,
+                trans.swiss.nbRounds(rounds)
+              )
+            }
           )
         )
       ),

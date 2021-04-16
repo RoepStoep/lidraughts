@@ -26,7 +26,10 @@ export interface ExternalTournamentData {
   id: string;
   createdBy: string;
   name: string;
+  rounds?: number;
   nbPlayers: number;
+  nbUpcoming: number;
+  nbFinished: number;
   invited?: InvitedPlayer[];
   upcoming: Challenge[];
   ongoing: Board[];

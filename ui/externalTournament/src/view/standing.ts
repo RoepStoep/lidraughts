@@ -18,7 +18,7 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
     }, [
       h('td.rank', [p.rank]),
       h('td.player', renderPlayer(p, false, true)),
-      h('td.games',
+      h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
         h('div', 
           p.sheet.map(r => {
             const color = r.c ? 'white' : 'black',
@@ -32,7 +32,9 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
               },
               hook: onInsert(window.lidraughts.powertip.manualGame)
             }, result)
-          })
+          }).concat(
+            [...Array((ctrl.data.rounds || p.sheet.length) - p.sheet.length)].map(_ => h('r'))
+          )
         )),
       h('td.points', title(noarg('points')), '' + (draughtsResult ? p.points : p.points / 2)),
     ])
@@ -50,9 +52,9 @@ export default function standing(ctrl: ExternalTournamentCtrl, pag: Pager): VNod
   if (pag.currentPageResults) lastBody = tableBody;
   return h('table.slist.tour-ext__standing', {
     class: {
-      loading: !pag.currentPageResults
-      // long: ctrl.data.round > 10,
-      // xlong: ctrl.data.round > 20,
+      loading: !pag.currentPageResults,
+      long: !!ctrl.data.rounds && ctrl.data.rounds > 10,
+      xlong: !!ctrl.data.rounds && ctrl.data.rounds > 20,
     },
   }, [
     h('tbody', {
