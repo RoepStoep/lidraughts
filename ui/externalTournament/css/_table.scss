@@ -1,8 +1,9 @@
-.tour-ext__upcoming {
+.tour-ext__games {
   @extend %box-neat;
   background: $c-bg-box;
   padding-top: 1.7em;
   align-self: flex-start;
+  width: 100%;
 
   h2 {
     font-size: 1.5em;
@@ -19,5 +20,12 @@
   .empty {
     margin-bottom: 1em;
     text-align: center;
+    padding-bottom: 1em;
+  }
+  .result {
+    font-weight: bold;
+    font-size: 1.2rem;
+    white-space: nowrap;
   }
 }
+

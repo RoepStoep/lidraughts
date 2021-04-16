@@ -26,7 +26,7 @@ object side {
                 t.variant.name
               )
             } else t.perfType.map(_.name),
-            br,
+            separator,
             trans.ratedTournament()
           )
         )

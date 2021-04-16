@@ -28,6 +28,7 @@ object bits {
     trans.points,
     trans.winRate,
     trans.averageOpponent,
+    trans.recentlyFinished,
     trans.spectators
   )
 }

@@ -2,9 +2,17 @@ import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
 import { opposite } from 'draughtsground/util';
 import { player as renderPlayer } from './util';
+import ExternalTournamentCtrl from '../ctrl';
 import { Board } from '../interfaces';
 
-export function many(boards: Board[], draughtsResult: boolean): VNode {
+export default function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
+  return ctrl.data.ongoing.length ? h('div.tour-ext__main__ongoing', [
+    h('h2', 'Currently playing'),
+    many(ctrl.data.ongoing, ctrl.data.draughtsResult)
+  ]) : null;
+}
+
+function many(boards: Board[], draughtsResult: boolean): VNode {
   return h('div.tour-ext__boards.now-playing', boards.map(board => renderBoard(board, draughtsResult)));
 }
 

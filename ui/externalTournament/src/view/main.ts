@@ -5,9 +5,9 @@ import ExternalTournamentCtrl from '../ctrl';
 import { Pager } from '../interfaces';
 import * as pagination from '../pagination';
 import { dataIcon, bind, spinner } from './util';
-import { ongoing, upcoming, finished } from './games'
+import table from './table'
 import standing from './standing'
-import playerInfo from './playerInfo';
+import ongoing from './boards'
 
 export default function(ctrl: ExternalTournamentCtrl) {
   const pag = pagination.players(ctrl);
@@ -29,15 +29,14 @@ export default function(ctrl: ExternalTournamentCtrl) {
         $(el).replaceWith($('.tour-ext__underchat.none').removeClass('none'));
       })
     }),
-    playerInfo(ctrl) || upcoming(ctrl),
+    table(ctrl),
     h('div.tour-ext__main',
       h('div.box', [
         header(ctrl),
         joinTournament(ctrl) || joinGame(ctrl),
         controls(ctrl, pag),
         standing(ctrl, pag),
-        ongoing(ctrl),
-        finished(ctrl),
+        ongoing(ctrl)
       ])
     ),
     ctrl.opts.chat ? h('div.chat__members.none', [

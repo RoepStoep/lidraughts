@@ -5,7 +5,10 @@ import lidraughts.game.Game
 case class PlayerInfo(
     player: ExternalPlayer,
     results: List[PlayerInfo.Result]
-)
+) {
+
+  def reverse = copy(results = results.reverse)
+}
 
 object PlayerInfo {
 

@@ -20,7 +20,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
     wins = data.sheet.filter(p => p.w).length,
     points = data.sheet.reduce((r, p) => r + (p.w === true ? 1.0 : (p.w === false ? 0.0 : 0.5)), 0),
     avgOp: number | undefined = games ?
-        Math.round(data.sheet.reduce((r, p) => r + ((p as any).rating || 1), 0) / games) :
+        Math.round(data.sheet.reduce((r, p) => r + (p.rating || 1), 0) / games) :
         undefined;
   return h(tag, {
     hook: {

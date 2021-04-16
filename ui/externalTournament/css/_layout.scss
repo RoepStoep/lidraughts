@@ -11,7 +11,7 @@ $chat-optimal-size: calc(100vh - #{$site-header-outer-height} - #{$block-gap} - 
   display: grid;
 
   &__side { grid-area: side }
-  &__table, &__upcoming { grid-area: table }
+  &__table { grid-area: table }
   &__main { grid-area: main }
   .chat__members { grid-area: uchat; }
 
@@ -33,8 +33,15 @@ $chat-optimal-size: calc(100vh - #{$site-header-outer-height} - #{$block-gap} - 
 
     &__table {
       display: flex;
+      justify-content: space-between;
       > * {
-        flex: 0 0 50%;
+        flex: 0 0 49%;
+      }
+      .tour-ext__games {
+        margin-top: 0;
+        .empty {
+          padding-bottom: 0;
+        }
       }
     }
     .mchat__messages {
@@ -51,8 +58,14 @@ $chat-optimal-size: calc(100vh - #{$site-header-outer-height} - #{$block-gap} - 
 
     &__table {
       flex-flow: column;
+      justify-content: inherit;
       > * {
         flex: inherit;
+      }
+      .tour-ext__games {
+        &:not(:first-child) {
+          margin-top: $block-gap;
+        }
       }
     }
   }

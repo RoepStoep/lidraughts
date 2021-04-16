@@ -1,20 +1,20 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import * as boards from './boards';
 import ExternalTournamentCtrl from '../ctrl';
 import { BaseGame } from '../interfaces';
 import { player as renderPlayer, preloadUserTips, bind } from './util';
+import playerInfo from './playerInfo'
 
-export function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
-  return ctrl.data.ongoing.length ? h('div.tour-ext__main__ongoing', [
-    h('h2', 'Currently playing'),
-    boards.many(ctrl.data.ongoing, ctrl.data.draughtsResult)
-  ]) : null;
+export default function table(ctrl: ExternalTournamentCtrl): VNode {
+  return ctrl.data.finished.length ? h('div.tour-ext__table', [
+    playerInfo(ctrl) || upcoming(ctrl, true),
+    finished(ctrl)
+  ]) : (playerInfo(ctrl) || upcoming(ctrl, false))
 }
 
-export function upcoming(ctrl: ExternalTournamentCtrl): VNode {
+function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
   const dateFormatter = getDateFormatter();
-  return h('div.tour-ext__upcoming', [
+  return h('div.tour-ext__games' + (table ? '' : '.tour-ext__upcoming'), [
     h('h2', 'Upcoming games'),
     ctrl.data.upcoming.length ? h('table.slist', 
       h('tbody', ctrl.data.upcoming.map(c => 
@@ -31,12 +31,12 @@ export function upcoming(ctrl: ExternalTournamentCtrl): VNode {
   ]);
 }
 
-export function finished(ctrl: ExternalTournamentCtrl): VNode | null {
+function finished(ctrl: ExternalTournamentCtrl): VNode | null {
   const dateFormatter = getDateFormatter(),
     draughtsResult = ctrl.data.draughtsResult;
-  return ctrl.data.finished.length ? h('div.tour-ext__main__finished', [
-    h('h2', 'Finished games'),
-      h('table.slist.slist-pad', h('tbody',
+  return ctrl.data.finished.length ? h('div.tour-ext__games.tour-ext__finished', [
+    h('h2', ctrl.trans.noarg('recentlyFinished')),
+      h('table.slist', h('tbody',
         ctrl.data.finished.map(g => h('tr', [
           h('td', 
             h('a.text',

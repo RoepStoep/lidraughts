@@ -70,6 +70,6 @@ private[externalTournament] final class Cached(
       games <- getFinishedGames(page._1)
     } yield Json.obj(
       "page" -> page._2,
-      "players" -> rankedPlayers.map(p => PlayerInfo.make(p, games)).map(Env.current.jsonView.playerInfoJson)
+      "players" -> rankedPlayers.map(p => PlayerInfo.make(p, games).reverse).map(Env.current.jsonView.playerInfoJson)
     )
 }
