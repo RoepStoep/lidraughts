@@ -6,7 +6,7 @@ import ExternalTournamentCtrl from './ctrl';
 const onFail = () => window.lidraughts.reload();
 
 const reload = (ctrl: ExternalTournamentCtrl) =>
-  json(`/tournament/external/${ctrl.data.id}`).then(data => {
+  json(`/tournament/external/${ctrl.data.id}?playerInfo=${ctrl.playerInfoId || ''}`).then(data => {
     ctrl.reload(data);
     ctrl.redraw();
   }).catch(onFail);
@@ -18,7 +18,14 @@ const answer = (ctrl: ExternalTournamentCtrl, accept: boolean) =>
     headers: { 'Content-Type': 'application/json' },
   }).catch(onFail);
 
+const playerInfo = (ctrl: ExternalTournamentCtrl, userId: string) =>
+  json(`/tournament/external/${ctrl.data.id}/player/${userId}`).then(data => {
+    ctrl.data.playerInfo = data;
+    ctrl.redraw();
+  }).catch(onFail);
+
 export default {
   answer: throttle(1000, answer),
-  reloadNow: reload
+  reloadNow: reload,
+  playerInfo
 };

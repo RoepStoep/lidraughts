@@ -1,7 +1,7 @@
 import makeSocket from './socket';
 import xhr from './xhr';
 import throttle from 'common/throttle';
-import { ExternalTournamentData, ExternalTournamentOpts } from './interfaces';
+import { ExternalTournamentData, ExternalTournamentOpts, ExternalPlayer, PlayerInfo } from './interfaces';
 import { ExternalTournamentSocket } from './socket';
 
 export default class ExternalTournamentCtrl {
@@ -11,6 +11,7 @@ export default class ExternalTournamentCtrl {
   trans: Trans;
   socket: ExternalTournamentSocket;
   joinSpinner: boolean = false;
+  playerInfoId?: string;
   redraw: () => void;
 
   private lastStorage = window.lidraughts.storage.make('last-redirect');
@@ -30,6 +31,11 @@ export default class ExternalTournamentCtrl {
     xhr.answer(this, accept);
     this.joinSpinner = true;
   }
+
+  showPlayerInfo = (player: ExternalPlayer | PlayerInfo) => {
+    this.playerInfoId = this.playerInfoId === player.user.id ? undefined : player.user.id;
+    if (this.playerInfoId) xhr.playerInfo(this, this.playerInfoId);
+  };
 
   reload = (data: ExternalTournamentData): void => {
     this.data = {...this.data, ...data};

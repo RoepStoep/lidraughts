@@ -1,0 +1,23 @@
+.tour-ext__upcoming {
+  @extend %box-neat;
+  background: $c-bg-box;
+  padding-top: 1.7em;
+  align-self: flex-start;
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  .slist {
+    border-top: $border;
+    tbody tr:hover {
+      background: mix($c-primary, $c-bg-box, 30%);
+      cursor: pointer;
+    }
+  }
+  .empty {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+}

@@ -24,12 +24,24 @@ export interface ExternalTournamentData {
   ongoing: Board[];
   finished: Game[];
   me?: MyInfo;
+  playerInfo?: PlayerInfo;
   socketVersion?: number;
 }
 
 export interface MyInfo {
   userId: string;
   canJoin?: boolean;
+}
+
+export interface PlayerInfo {
+  user: LightUser;
+  sheet: GameResult[];
+}
+
+export interface GameResult extends Player {
+  g: string; // game
+  w?: boolean; // won
+  c: boolean; // color
 }
 
 export interface BaseGame {

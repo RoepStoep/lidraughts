@@ -5,6 +5,7 @@ import ExternalTournamentCtrl from '../ctrl';
 import { dataIcon, bind, spinner } from './util';
 import { ongoing, upcoming, finished } from './games'
 import players from './players'
+import playerInfo from './playerInfo';
 
 export default function(ctrl: ExternalTournamentCtrl) {
   return h('main.' + ctrl.opts.classes,{
@@ -25,13 +26,13 @@ export default function(ctrl: ExternalTournamentCtrl) {
         $(el).replaceWith($('.tour-ext__underchat.none').removeClass('none'));
       })
     }),
+    playerInfo(ctrl) || upcoming(ctrl),
     h('div.tour-ext__main',
-      h('div.box.box-pad', [
+      h('div.box', [
         header(ctrl),
         joinTournament(ctrl) || joinGame(ctrl),
         players(ctrl),
         ongoing(ctrl),
-        upcoming(ctrl),
         finished(ctrl),
       ])
     ),

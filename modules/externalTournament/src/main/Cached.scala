@@ -26,7 +26,7 @@ private[externalTournament] final class Cached(
   private[externalTournament] val finishedGamesCache = asyncCache.clearable[String, List[Game]](
     name = "externalTournament.finishedGames",
     f = GameRepo.finishedByExternalTournament,
-    expireAfter = _.ExpireAfterAccess(1 hour)
+    expireAfter = _.ExpireAfterWrite(1 minute)
   )
 
   def getFinishedGames(id: String): Fu[List[Game]] = finishedGamesCache.get(id)

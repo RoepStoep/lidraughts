@@ -57,9 +57,9 @@ export function player(p: Player, asLink: boolean, withRating: boolean) {
   ]);
 }
 
-export function userTip(u: LightUser) {
+export function userTip(u: LightUser, asLink: boolean = false) {
   return h('a.ulpt.user-link' + (((u.title || '') + u.name).length > 15 ? '.long' : ''), {
-    attrs: { 'data-href': '/@/' + u.name.toLowerCase() },
+    attrs: asLink ? { href: '/@/' + u.name } : { 'data-href': '/@/' + u.name.toLowerCase() },
     hook: {
       destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
     }

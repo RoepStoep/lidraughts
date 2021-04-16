@@ -24,6 +24,7 @@ final class JsonView(
     ongoing: List[Game],
     finished: List[Game],
     me: Option[User],
+    playerInfo: Option[PlayerInfo],
     socketVersion: Option[SocketVersion] = None
   ): JsObject = {
     val playersForMe =
@@ -40,6 +41,7 @@ final class JsonView(
         "finished" -> finished.map(gameJson)
       )
       .add("me" -> me.map(myInfo(_, players)))
+      .add("playerInfo" -> playerInfo.map(playerInfoJson))
       .add("socketVersion" -> socketVersion.map(_.value))
   }
 
@@ -59,6 +61,20 @@ final class JsonView(
       "userId" -> player.userId,
       "joined" -> player.joined
     )
+
+  def playerInfoJson(
+    info: PlayerInfo
+  ): JsObject =
+    Json.obj(
+      "sheet" -> info.results.map(resultJson)
+    ).add("user" -> lightUserApi.sync(info.userId))
+
+  private def resultJson(result: PlayerResult) =
+    playerJson(result.game.player(!result.color)) ++
+      Json.obj(
+        "g" -> result.game.id,
+        "c" -> (result.color == draughts.White)
+      ).add("w" -> result.win)
 
   private def myInfo(me: User, players: List[ExternalPlayer]) =
     Json

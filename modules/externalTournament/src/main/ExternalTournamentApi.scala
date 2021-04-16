@@ -3,7 +3,7 @@ package lidraughts.externalTournament
 import actorApi._
 import lidraughts.db.dsl._
 import lidraughts.game.Game
-import lidraughts.user.User
+import lidraughts.user.{ User, UserRepo }
 import ExternalPlayer.Status
 
 final class ExternalTournamentApi(
@@ -65,6 +65,29 @@ final class ExternalTournamentApi(
           socketReload(tourId)
         } inject true
       case _ => fuFalse
+    }
+
+  def playerInfo(
+    tour: ExternalTournament,
+    userId: User.ID
+  ): Fu[Option[PlayerInfo]] =
+    UserRepo named userId flatMap {
+      _ ?? { user =>
+        cached.getFinishedGames(tour.id).map { games =>
+          PlayerInfo(
+            userId = user.id,
+            results = games.flatMap { game =>
+              game.player(user) map { player =>
+                PlayerResult(
+                  game = game,
+                  color = player.color,
+                  win = game.winnerColor.map(player.color ==)
+                )
+              }
+            }
+          ).some
+        }
+      }
     }
 
   def finishGame(game: Game): Unit =

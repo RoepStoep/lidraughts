@@ -14,9 +14,9 @@ export function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
 
 export function upcoming(ctrl: ExternalTournamentCtrl): VNode {
   const dateFormatter = getDateFormatter();
-  return h('div.tour-ext__main__upcoming', [
+  return h('div.tour-ext__upcoming', [
     h('h2', 'Upcoming games'),
-    ctrl.data.upcoming.length ? h('table.slist.slist-pad', 
+    ctrl.data.upcoming.length ? h('table.slist', 
       h('tbody', ctrl.data.upcoming.map(c => 
         h('tr', {
             hook: bind('click', _ => window.lidraughts.redirect('/' + c.id))
@@ -27,16 +27,15 @@ export function upcoming(ctrl: ExternalTournamentCtrl): VNode {
           ]
         )
       ))
-    ) : h('div.empty', ctrl.trans.noarg('noneYet'))
+    ) : h('div.empty', ctrl.trans.noarg('none'))
   ]);
 }
 
-export function finished(ctrl: ExternalTournamentCtrl): VNode {
+export function finished(ctrl: ExternalTournamentCtrl): VNode | null {
   const dateFormatter = getDateFormatter();
-  return h('div.tour-ext__main__finished', [
+  return ctrl.data.finished.length ? h('div.tour-ext__main__finished', [
     h('h2', 'Finished games'),
-      ctrl.data.finished.length ? h('table.slist.slist-pad', 
-      h('tbody',
+      h('table.slist.slist-pad', h('tbody',
         ctrl.data.finished.map(g => h('tr', [
           h('td', 
             h('a.text',
@@ -52,9 +51,8 @@ export function finished(ctrl: ExternalTournamentCtrl): VNode {
             )
           )
         ]))
-      )
-    ) : h('div.empty', ctrl.trans.noarg('noneYet'))
-  ]);
+      ))
+  ]) : null;
 }
 
 function renderPlayers(g: BaseGame) {

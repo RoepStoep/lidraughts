@@ -32,6 +32,7 @@ object ExternalTournament extends LidraughtsController {
               ongoing = ongoing,
               finished = finished,
               me = ctx.me,
+              playerInfo = none,
               socketVersion = version.some
             )
             chat <- canHaveChat(tour) ?? Env.chat.api.userChat.cached
@@ -49,6 +50,7 @@ object ExternalTournament extends LidraughtsController {
               upcoming <- Env.challenge.api.allForExternalTournament(id)
               ongoing <- env.cached.getOngoingGames(id)
               finished <- env.cached.getFinishedGames(id)
+              playerInfo <- get("playerInfo").?? { env.api.playerInfo(tour, _) }
               version <- env.version(tour.id)
               json = env.jsonView(
                 tour = tour,
@@ -57,6 +59,7 @@ object ExternalTournament extends LidraughtsController {
                 ongoing = ongoing,
                 finished = finished,
                 me = ctx.me,
+                playerInfo = playerInfo,
                 socketVersion = version.some
               )
             } yield Ok(json)
@@ -79,12 +82,12 @@ object ExternalTournament extends LidraughtsController {
     val accept = ~ctx.body.body.\("accept").asOpt[Boolean]
     env.api.answer(id, me, accept) map { result =>
       if (result) jsonOkResult
-      else BadRequest(Json.obj("joined" -> false))
+      else BadRequest(Json.obj("ok" -> false))
     }
   }
 
   def playerAdd(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
-    TournamentOwner(me, id) { tour =>
+    WithOwnTournament(me, id) { tour =>
       api.playerForm.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => api.addPlayer(tour, data) map {
@@ -94,14 +97,27 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
+  def playerInfo(id: String, userId: String) = Action.async {
+    WithTournament(id) { tour =>
+      env.api.playerInfo(tour, userId) flatMap {
+        _.fold(notFoundJson()) { info =>
+          JsonOk(fuccess(env.jsonView.playerInfoJson(info)))
+        }
+      }
+    }
+  }
+
   def websocket(id: String, apiVersion: Int) = SocketOption[JsValue] { implicit ctx =>
     getSocketUid("sri") ?? { uid =>
       env.socketHandler.join(id, uid, ctx.me, getSocketVersion, apiVersion)
     }
   }
 
-  private def TournamentOwner(me: lidraughts.user.User, tourId: ExternalTournamentModel.ID)(f: ExternalTournamentModel => Fu[Result]): Fu[Result] =
-    api.byId(tourId) flatMap {
+  private def WithTournament(id: String)(f: ExternalTournamentModel => Fu[Result]): Fu[Result] =
+    env.api.byId(id) flatMap { _ ?? f }
+
+  private def WithOwnTournament(me: lidraughts.user.User, id: String)(f: ExternalTournamentModel => Fu[Result]): Fu[Result] =
+    api.byId(id) flatMap {
       case None => notFoundJson("No such tournament")
       case Some(tour) if me.id == tour.createdBy => f(tour)
       case _ => fuccess(Unauthorized)
