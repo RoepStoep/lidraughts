@@ -54,6 +54,13 @@ export interface MyInfo {
   gameId?: string;
 }
 
+export interface BasePlayer {
+  user: LightUser;
+  rating: number;
+  provisional?: boolean;
+  rank?: number;
+}
+
 export interface PlayerInfo extends BasePlayer {
   sheet: GameResult[];
   points: number;
@@ -83,13 +90,6 @@ export interface Challenge extends BaseGame {
 export interface Game extends BaseGame {
   createdAt: string;
   winner?: Color;
-}
-
-export interface BasePlayer {
-  user: LightUser;
-  rating: number;
-  provisional?: boolean;
-  rank?: number;
 }
 
 export interface Board extends BaseGame {

@@ -321,6 +321,7 @@ GET   /tournament/external/$id<\w{8}>/player/:user          controllers.External
 GET   /tournament/external/$id<\w{8}>/page-of/:userId       controllers.ExternalTournament.pageOf(id: String, userId: String)
 POST  /tournament/external/$id<\w{8}>/answer                controllers.ExternalTournament.answer(id: String)
 GET   /tournament/external/$id<\w{8}>/socket/v:apiVersion   controllers.ExternalTournament.websocket(id: String, apiVersion: Int)
+GET   /tournament/external/$id<\w{8}>/results               controllers.ExternalTournament.tournamentResults(id: String)
 
 # Team
 GET   /team                                   controllers.Team.home(page: Int ?= 1)

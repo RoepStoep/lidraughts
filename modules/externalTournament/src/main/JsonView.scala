@@ -32,29 +32,30 @@ final class JsonView(
   ): Fu[JsObject] = {
     def myPlayer = me.flatMap(u => players.find(_.userId == u.id))
     def myGame = me.flatMap(u => ongoing.find(_.player(u).isDefined))
-    val createdByMe = me.exists(_.id == tour.createdBy)
     val page = reqPage orElse myPlayer.map(_.page) getOrElse 1
-    cached.getStanding(tour.id, page) map { standing =>
-      Json
-        .obj(
-          "id" -> tour.id,
-          "createdBy" -> tour.createdBy,
-          "name" -> tour.name,
-          "nbPlayers" -> players.count(_.joined),
-          "nbUpcoming" -> upcoming.length,
-          "nbFinished" -> finished.length,
-          "standing" -> standing,
-          "upcoming" -> upcoming.map(challengeJson),
-          "ongoing" -> ongoing.map(boardJson),
-          "finished" -> finished.map(gameJson),
-          "draughtsResult" -> pref.draughtsResult
-        )
-        .add("rounds" -> tour.rounds)
-        .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
-        .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
-        .add("playerInfo" -> playerInfo.map(playerInfoJson))
-        .add("socketVersion" -> socketVersion.map(_.value))
-    }
+    for {
+      standing <- cached.getStanding(tour.id, page)
+      createdByMe = me.exists(_.id == tour.createdBy)
+      userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId)
+      _ <- lightUserApi.preloadMany(userIds.toList)
+    } yield Json.obj(
+      "id" -> tour.id,
+      "createdBy" -> tour.createdBy,
+      "name" -> tour.name,
+      "nbPlayers" -> players.count(_.joined),
+      "nbUpcoming" -> upcoming.take(5).length,
+      "nbFinished" -> finished.length,
+      "standing" -> standing,
+      "upcoming" -> upcoming.map(challengeJson),
+      "ongoing" -> ongoing.map(boardJson(_, players)),
+      "finished" -> finished.take(5).map(gameJson),
+      "draughtsResult" -> pref.draughtsResult
+    )
+      .add("rounds" -> tour.rounds)
+      .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
+      .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
+      .add("playerInfo" -> playerInfo.map(playerInfoJson))
+      .add("socketVersion" -> socketVersion.map(_.value))
   }
 
   def apiTournament(
@@ -118,7 +119,7 @@ final class JsonView(
       "createdAt" -> formatDate(g.createdAt)
     ).add("winner" -> g.winnerColor.map(_.name))
 
-  private def boardJson(g: Game) =
+  private def boardJson(g: Game, players: List[ExternalPlayer]) =
     Json
       .obj(
         "id" -> g.id,
@@ -126,8 +127,8 @@ final class JsonView(
         "fen" -> draughts.format.Forsyth.boardAndColor(g.situation),
         "lastMove" -> ~g.lastMoveKeys,
         "orientation" -> g.naturalOrientation.name,
-        "white" -> basePlayerJson(g.whitePlayer),
-        "black" -> basePlayerJson(g.blackPlayer)
+        "white" -> boardPlayerJson(g.whitePlayer, players),
+        "black" -> boardPlayerJson(g.blackPlayer, players)
       )
       .add(
         "clock" -> g.clock.ifTrue(g.isBeingPlayed).map { c =>
@@ -144,6 +145,12 @@ final class JsonView(
       Json.obj(
         "status" -> p.status.id
       )
+
+  private def boardPlayerJson(player: Player, players: List[ExternalPlayer]): JsObject = {
+    val playerExt = players.find(p => player.userId.contains(p.userId))
+    basePlayerJson(player)
+      .add("rank" -> playerExt.flatMap(_.rank))
+  }
 
   private def basePlayerJson(p: Player): JsObject =
     Json.obj()

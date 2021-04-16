@@ -34,7 +34,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
     }),
     h('div.stats', [
       h('h2', [
-        h('span.rank', data.rank + '. '),
+        data.rank ? h('span.rank', data.rank + '. ') : null,
         renderPlayer(data, true, false)
       ]),
       h('table', [
@@ -56,7 +56,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
             res = result(p, draughtsResult);
         return h('tr.glpt.' + (p.w === true ? '.win' : (p.w === false ? '.loss' : '')), {
           key: round,
-          attrs: { 'data-href': '/' + p.g + (p.c ? '' : '/black') },
+          attrs: { 'data-href': '/' + p.g + (p.c === false ? '/black' : '') },
           hook: {
             destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
           }

@@ -16,25 +16,29 @@ $mq-col3: $mq-col3-uniboard;
   a.text {
     color: $c-font-dim;
   }
-  &__main__invited {
+  &__main {
     h2 {
       font-size: 2em;
       margin-top: 1em;
-      border-bottom: $border;
-      padding: 0 #{$block-gap} #{$block-gap} #{$block-gap * 2 / 3};
+      padding: 0 #{$block-gap} 0 #{$block-gap * 2 / 3};
     }
-    td.status {
-      @extend %roboto;
-      padding: 1em .5em 1em 10px;
-      width: 1px; /* helps keeping it as small as possible */
-      i {
-        opacity: .6;
-        font-size: 1.2em;
+    &__invited {
+      h2 {
+        border-bottom: $border;
+        padding-bottom: #{$block-gap};
       }
-      &.rejected {
-        color: $c-bad;
+      td.status {
+        @extend %roboto;
+        padding: 1em .5em 1em 10px;
+        width: 1px; /* helps keeping it as small as possible */
+        i {
+          opacity: .6;
+          font-size: 1.2em;
+        }
+        &.rejected {
+          color: $c-bad;
+        }
       }
     }
   }
-
 }

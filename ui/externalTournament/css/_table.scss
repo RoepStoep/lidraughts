@@ -26,6 +26,16 @@
     font-weight: bold;
     font-size: 1.2rem;
     white-space: nowrap;
+    margin-right: 0.4em;
+  }
+  .all-results {
+    padding: 0 !important;
+
+    a {
+      padding: 1rem 0;
+      display: block;
+      text-align: center;
+    }
   }
 }
 

@@ -45,6 +45,20 @@ export const userName = (u: LightUser) => {
   ];
 }
 
+export function drawTime(date: Date) {
+  const li = window.lidraughts as any;
+  return h('time.timeago', {
+    attrs: {
+      title: date.toLocaleString(),
+    },
+    hook: {
+      insert(vnode) {
+        (vnode.elm as HTMLElement).setAttribute('datetime', '' + date);
+      }
+    }
+  }, li.timeagoLocale ? li.timeago.format(date) : date.toLocaleString());
+}
+
 export function player(p: BasePlayer, asLink: boolean, withRating: boolean) {
   return h('a.ulpt.user-link' + (((p.user.title || '') + p.user.name).length > 15 ? '.long' : ''), {
     attrs: asLink ? { href: '/@/' + p.user.name } : { 'data-href': '/@/' + p.user.name },

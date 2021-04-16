@@ -16,7 +16,7 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
       },
       hook: bind('click', _ => ctrl.showPlayerInfo(p), ctrl.redraw)
     }, [
-      h('td.rank', [p.rank]),
+      h('td.rank', p.rank ? [p.rank] : []),
       h('td.player', renderPlayer(p, false, true)),
       h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
         h('div', 

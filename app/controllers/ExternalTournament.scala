@@ -29,9 +29,9 @@ object ExternalTournament extends LidraughtsController {
             json <- env.jsonView(
               tour = tour,
               players = players,
-              upcoming = upcoming take 5,
+              upcoming = upcoming,
               ongoing = ongoing,
-              finished = finished take 5,
+              finished = finished,
               me = ctx.me,
               pref = ctx.pref,
               reqPage = page,
@@ -58,9 +58,9 @@ object ExternalTournament extends LidraughtsController {
               json <- env.jsonView(
                 tour = tour,
                 players = players,
-                upcoming = upcoming take 5,
+                upcoming = upcoming,
                 ongoing = ongoing,
-                finished = finished take 5,
+                finished = finished,
                 me = ctx.me,
                 pref = ctx.pref,
                 reqPage = page,
@@ -81,6 +81,14 @@ object ExternalTournament extends LidraughtsController {
         env.jsonView.apiTournament(t)
       } map { Ok(_) }
     )
+  }
+
+  def tournamentResults(id: String) = Open { implicit ctx =>
+    WithTournament(id) { tour =>
+      env.cached.getFinishedGames(id) map { results =>
+        Ok(html.externalTournament.results(tour, results))
+      }
+    }
   }
 
   def answer(id: String) = AuthBody(BodyParsers.parse.json) { implicit ctx => me =>
