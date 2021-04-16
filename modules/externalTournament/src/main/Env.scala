@@ -75,7 +75,7 @@ final class Env(
     coll = externalTournamentColl,
     socketMap = socketMap,
     cached = cached
-  )
+  )(system)
 
   bus.subscribeFuns(
     'challenge -> {

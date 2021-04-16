@@ -14,7 +14,6 @@ import lidraughts.common.{ Bus, GreatPlayer, LightUser }
 import lidraughts.db.dsl._
 import lidraughts.game.{ Game, Pov }
 import lidraughts.hub.lightTeam.TeamId
-import lidraughts.hub.{ Duct, DuctMap }
 import lidraughts.round.actorApi.round.QuietFlag
 import lidraughts.user.{ User, UserRepo }
 

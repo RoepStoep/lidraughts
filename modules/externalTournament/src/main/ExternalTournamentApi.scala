@@ -1,16 +1,28 @@
 package lidraughts.externalTournament
 
+import akka.actor.ActorSystem
+import ornicar.scalalib.Zero
+import scala.concurrent.duration._
+
 import actorApi._
+import ExternalPlayer.Status
 import lidraughts.db.dsl._
 import lidraughts.game.Game
 import lidraughts.user.{ User, UserRepo }
-import ExternalPlayer.Status
 
 final class ExternalTournamentApi(
     coll: Coll,
     socketMap: SocketMap,
     cached: Cached
-) {
+)(implicit system: ActorSystem) {
+
+  private val sequencer =
+    new lidraughts.hub.DuctSequencers(
+      maxSize = 1024, // queue many game finished events
+      expiration = 20 minutes,
+      timeout = 10 seconds,
+      name = "externalTournament.api"
+    )
 
   import BsonHandlers._
 
@@ -28,18 +40,20 @@ final class ExternalTournamentApi(
   }
 
   def addPlayer(
-    tour: ExternalTournament,
+    tourId: ExternalTournament.ID,
     data: DataForm.PlayerData
   ): Fu[Option[ExternalPlayer]] =
-    UserRepo.named(data.userId) flatMap {
-      _ ?? { user =>
-        ExternalPlayerRepo.exists(tour.id, user.id) flatMap { exists =>
-          if (exists) fuccess(none)
-          else {
-            val player = ExternalPlayer.make(tour, user)
-            ExternalPlayerRepo.insert(player) >>- {
-              socketReload(tour.id)
-            } inject player.some
+    Sequencing(tourId)(byId) { tour =>
+      UserRepo.named(data.userId) flatMap {
+        _ ?? { user =>
+          ExternalPlayerRepo.exists(tour.id, user.id) flatMap { exists =>
+            if (exists) fuccess(none)
+            else {
+              val player = ExternalPlayer.make(tour, user)
+              ExternalPlayerRepo.insert(player) >>- {
+                socketReload(tour.id)
+              } inject player.some
+            }
           }
         }
       }
@@ -55,22 +69,24 @@ final class ExternalTournamentApi(
     }
 
   def answer(
-    tour: ExternalTournament,
+    tourId: ExternalTournament.ID,
     me: User,
     accept: Boolean
   ): Fu[Boolean] =
-    ExternalPlayerRepo.find(tour.id, me.id) flatMap {
-      case Some(player) if !player.joined && accept =>
-        ExternalPlayerRepo.setStatus(player.id, Status.Joined) >>
-          updateRanking(tour) >>
-          cached.invalidateStandings(tour.id) >>- {
-            socketReload(tour.id)
+    Sequencing(tourId)(byId) { tour =>
+      ExternalPlayerRepo.find(tourId, me.id) flatMap {
+        case Some(player) if !player.joined && accept =>
+          ExternalPlayerRepo.setStatus(player.id, Status.Joined) >>
+            updateRanking(tour) >>
+            cached.invalidateStandings(tourId) >>- {
+              socketReload(tourId)
+            } inject true
+        case Some(player) if player.invited && !accept =>
+          ExternalPlayerRepo.setStatus(player.id, Status.Rejected) >>- {
+            socketReload(tourId)
           } inject true
-      case Some(player) if player.invited && !accept =>
-        ExternalPlayerRepo.setStatus(player.id, Status.Rejected) >>- {
-          socketReload(tour.id)
-        } inject true
-      case _ => fuFalse
+        case _ => fuFalse
+      }
     }
 
   private def updateRanking(tour: ExternalTournament) =
@@ -106,19 +122,17 @@ final class ExternalTournamentApi(
     }
 
   def finishGame(game: Game): Funit =
-    game.externalTournamentId.map(byId).fold(funit) {
-      _ flatMap {
-        _ ?? { tour =>
-          game.winnerUserId.fold(game.userIds.map(ExternalPlayerRepo.incPoints(tour.id, _, 1)).sequenceFu.void) {
-            ExternalPlayerRepo.incPoints(tour.id, _, 2).void
-          } >>
-            updateRanking(tour) >>
-            cached.invalidateStandings(tour.id) >>- {
-              cached.finishedGamesCache.invalidate(tour.id)
-              cached.ongoingGameIdsCache.invalidate(tour.id)
-              socketReload(tour.id)
-            }
-        }
+    game.externalTournamentId.fold(funit) { tourId =>
+      Sequencing(tourId)(byId) { tour =>
+        game.winnerUserId.fold(game.userIds.map(ExternalPlayerRepo.incPoints(tourId, _, 1)).sequenceFu.void) {
+          ExternalPlayerRepo.incPoints(tourId, _, 2).void
+        } >>
+          updateRanking(tour) >>
+          cached.invalidateStandings(tourId) >>- {
+            cached.finishedGamesCache.invalidate(tourId)
+            cached.ongoingGameIdsCache.invalidate(tourId)
+            socketReload(tourId)
+          }
       }
     } void
 
@@ -133,5 +147,15 @@ final class ExternalTournamentApi(
       socketReload(tourId)
     }
 
-  def socketReload(tourId: ExternalTournament.ID): Unit = socketMap.tell(tourId, Reload)
+  private def Sequencing[A: Zero](
+    id: ExternalTournament.ID
+  )(fetch: ExternalTournament.ID => Fu[Option[ExternalTournament]])(run: ExternalTournament => Fu[A]): Fu[A] =
+    sequencer(id) {
+      fetch(id) flatMap {
+        _ ?? run
+      }
+    }
+
+  private def socketReload(tourId: ExternalTournament.ID): Unit =
+    socketMap.tell(tourId, Reload)
 }

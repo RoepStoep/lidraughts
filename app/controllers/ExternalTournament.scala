@@ -86,7 +86,7 @@ object ExternalTournament extends LidraughtsController {
   def answer(id: String) = AuthBody(BodyParsers.parse.json) { implicit ctx => me =>
     WithTournament(id) { tour =>
       val accept = ~ctx.body.body.\("accept").asOpt[Boolean]
-      env.api.answer(tour, me, accept) map { result =>
+      env.api.answer(tour.id, me, accept) map { result =>
         if (result) jsonOkResult
         else BadRequest(Json.obj("ok" -> false))
       }
@@ -97,7 +97,7 @@ object ExternalTournament extends LidraughtsController {
     WithOwnTournament(me, id) { tour =>
       api.playerForm.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
-        data => api.addPlayer(tour, data) map {
+        data => api.addPlayer(tour.id, data) map {
           _.fold(jsonError("A player with this userId already exists"))(env.jsonView.apiPlayer)
         } map { Ok(_) }
       )
