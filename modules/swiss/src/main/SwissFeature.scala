@@ -21,8 +21,8 @@ final class SwissFeature(
     cache.get zip getForTeams(teams) map {
       case (cached, teamed) =>
         FeaturedSwisses(
-          created = teamed.created ::: cached.created,
-          started = teamed.started ::: cached.started
+          created = (teamed.created ::: cached.created).distinct,
+          started = (teamed.started ::: cached.started).distinct
         )
     }
 
