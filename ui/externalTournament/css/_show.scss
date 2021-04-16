@@ -4,10 +4,11 @@ $mq-col3: $mq-col3-uniboard;
 
 @import 'layout';
 @import 'side';
+@import 'boards';
 @import 'app-header';
 @import 'app-notice';
-@import 'app-players';
-@import 'boards';
+@import 'app-control';
+@import 'app-standing';
 @import 'upcoming';
 @import 'player-info';
 

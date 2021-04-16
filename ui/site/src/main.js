@@ -160,6 +160,7 @@
               friend: opts.friend ? 1 : 0,
               tour: opts.tour,
               swiss: opts.swiss,
+              tourExt: opts.tourExt,
               object: 1
             },
             success(res) {

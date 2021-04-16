@@ -64,7 +64,12 @@ final class Env(
     flood = flood
   )
 
-  lazy val jsonView = new JsonView(lightUserApi)
+  lazy val jsonView = new JsonView(
+    lightUserApi = lightUserApi,
+    cached = cached
+  )
+
+  def playerRepo = ExternalPlayerRepo
 
   lazy val api = new ExternalTournamentApi(
     coll = externalTournamentColl,
@@ -82,7 +87,7 @@ final class Env(
         api startGame g
     },
     'finishGame -> {
-      case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament =>
+      case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament && !g.aborted =>
         api finishGame g
     }
   )

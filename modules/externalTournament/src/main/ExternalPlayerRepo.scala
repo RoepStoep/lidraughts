@@ -1,5 +1,6 @@
 package lidraughts.externalTournament
 
+import reactivemongo.api.commands.GetLastError
 import reactivemongo.bson._
 
 import BsonHandlers._
@@ -56,6 +57,33 @@ object ExternalPlayerRepo {
     coll.find(selectTour(tourId))
       .list[ExternalPlayer]()
 
+  def joinedByTour(tourId: ExternalTournament.ID): Fu[List[ExternalPlayer]] =
+    coll.find(selectTour(tourId) ++ selectJoined)
+      .list[ExternalPlayer]()
+
   def setStatus(id: ExternalPlayer.ID, status: ExternalPlayer.Status) =
     coll.updateField(selectId(id), "status", status.id) void
+
+  def setRank(id: ExternalPlayer.ID, rank: Int) =
+    coll.updateField(selectId(id), "rank", rank) void
+
+  def incPoints(tourId: ExternalTournament.ID, userId: User.ID, inc: Int) =
+    coll.update(
+      selectTourUser(tourId, userId),
+      $inc("points" -> inc),
+      writeConcern = GetLastError.Unacknowledged
+    ) void
+
+  def searchPlayers(tourId: ExternalTournament.ID, term: String, nb: Int): Fu[List[User.ID]] =
+    User.couldBeUsername(term) ?? {
+      coll.primitive[User.ID](
+        selector = $doc(
+          "tourId" -> tourId,
+          "userId" $startsWith term.toLowerCase
+        ),
+        sort = $sort desc "points",
+        nb = nb,
+        field = "userId"
+      )
+    }
 }

@@ -2,12 +2,15 @@ import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
 import { onInsert } from './util';
 import ExternalTournamentCtrl from '../ctrl';
+import { Pager } from '../interfaces';
+import * as pagination from '../pagination';
 import { dataIcon, bind, spinner } from './util';
 import { ongoing, upcoming, finished } from './games'
-import players from './players'
+import standing from './standing'
 import playerInfo from './playerInfo';
 
 export default function(ctrl: ExternalTournamentCtrl) {
+  const pag = pagination.players(ctrl);
   return h('main.' + ctrl.opts.classes,{
     hook: {
       postpatch() {
@@ -31,7 +34,8 @@ export default function(ctrl: ExternalTournamentCtrl) {
       h('div.box', [
         header(ctrl),
         joinTournament(ctrl) || joinGame(ctrl),
-        players(ctrl),
+        controls(ctrl, pag),
+        standing(ctrl, pag),
         ongoing(ctrl),
         finished(ctrl),
       ])
@@ -39,6 +43,12 @@ export default function(ctrl: ExternalTournamentCtrl) {
     ctrl.opts.chat ? h('div.chat__members.none', [
       h('span.number', '\xa0'), ' ', ctrl.trans.noarg('spectators'), ' ', h('span.list')
     ]) : null
+  ]);
+}
+
+function controls(ctrl: ExternalTournamentCtrl, pag: Pager): VNode {
+  return h('div.tour-ext__controls', [
+    h('div.pager', pagination.renderPager(ctrl, pag))
   ]);
 }
 

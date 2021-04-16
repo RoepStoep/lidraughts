@@ -2,7 +2,7 @@ import { Attrs } from 'snabbdom/modules/attributes'
 import { h } from 'snabbdom'
 import { Hooks } from 'snabbdom/hooks'
 import { VNode } from 'snabbdom/vnode';
-import { Player } from '../interfaces';
+import { BasePlayer } from '../interfaces';
 
 export function bind(eventName: string, f: (e: Event) => any, redraw?: () => void): Hooks {
   return onInsert(el =>
@@ -45,7 +45,7 @@ export const userName = (u: LightUser) => {
   ];
 }
 
-export function player(p: Player, asLink: boolean, withRating: boolean) {
+export function player(p: BasePlayer, asLink: boolean, withRating: boolean) {
   return h('a.ulpt.user-link' + (((p.user.title || '') + p.user.name).length > 15 ? '.long' : ''), {
     attrs: asLink ? { href: '/@/' + p.user.name } : { 'data-href': '/@/' + p.user.name },
     hook: {
@@ -53,18 +53,7 @@ export function player(p: Player, asLink: boolean, withRating: boolean) {
     }
   }, [
     h('span.name', userName(p.user)),
-    withRating ? h('span.rating', ' (' + p.rating + (p.provisional ? '?)' : ')')) : null
-  ]);
-}
-
-export function userTip(u: LightUser, asLink: boolean = false) {
-  return h('a.ulpt.user-link' + (((u.title || '') + u.name).length > 15 ? '.long' : ''), {
-    attrs: asLink ? { href: '/@/' + u.name } : { 'data-href': '/@/' + u.name.toLowerCase() },
-    hook: {
-      destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
-    }
-  }, [
-    h('span.name', userName(u))
+    withRating ? h('span.rating', ' ' + p.rating + (p.provisional ? '?' : '')) : null
   ]);
 }
 

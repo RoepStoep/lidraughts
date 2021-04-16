@@ -17,6 +17,7 @@ object ExternalTournament extends LidraughtsController {
 
   def show(id: String) = Open { implicit ctx =>
     api byId id flatMap { tourOption =>
+      val page = getInt("page").filter(0.<)
       negotiate(
         html = tourOption.fold(tournamentNotFound.fuccess) { tour =>
           for {
@@ -25,13 +26,15 @@ object ExternalTournament extends LidraughtsController {
             ongoing <- env.cached.getOngoingGames(id)
             finished <- env.cached.getFinishedGames(id)
             version <- env.version(tour.id)
-            json = env.jsonView(
+            json <- env.jsonView(
               tour = tour,
               players = players,
               upcoming = upcoming,
               ongoing = ongoing,
               finished = finished,
               me = ctx.me,
+              pref = ctx.pref,
+              reqPage = page,
               playerInfo = none,
               socketVersion = version.some
             )
@@ -52,13 +55,15 @@ object ExternalTournament extends LidraughtsController {
               finished <- env.cached.getFinishedGames(id)
               playerInfo <- get("playerInfo").?? { env.api.playerInfo(tour, _) }
               version <- env.version(tour.id)
-              json = env.jsonView(
+              json <- env.jsonView(
                 tour = tour,
                 players = players,
                 upcoming = upcoming,
                 ongoing = ongoing,
                 finished = finished,
                 me = ctx.me,
+                pref = ctx.pref,
+                reqPage = page,
                 playerInfo = playerInfo,
                 socketVersion = version.some
               )
@@ -79,10 +84,12 @@ object ExternalTournament extends LidraughtsController {
   }
 
   def answer(id: String) = AuthBody(BodyParsers.parse.json) { implicit ctx => me =>
-    val accept = ~ctx.body.body.\("accept").asOpt[Boolean]
-    env.api.answer(id, me, accept) map { result =>
-      if (result) jsonOkResult
-      else BadRequest(Json.obj("ok" -> false))
+    WithTournament(id) { tour =>
+      val accept = ~ctx.body.body.\("accept").asOpt[Boolean]
+      env.api.answer(tour, me, accept) map { result =>
+        if (result) jsonOkResult
+        else BadRequest(Json.obj("ok" -> false))
+      }
     }
   }
 
@@ -103,6 +110,26 @@ object ExternalTournament extends LidraughtsController {
         _.fold(notFoundJson()) { info =>
           JsonOk(fuccess(env.jsonView.playerInfoJson(info)))
         }
+      }
+    }
+  }
+
+  def pageOf(id: String, userId: String) = Open { implicit ctx =>
+    WithTournament(id) { tour =>
+      env.api.pageOf(tour, lidraughts.user.User normalize userId) flatMap {
+        _ ?? { page =>
+          JsonOk {
+            env.cached.getStanding(tour.id, page)
+          }
+        }
+      }
+    }
+  }
+
+  def standing(id: String, page: Int) = Open { implicit ctx =>
+    WithTournament(id) { tour =>
+      JsonOk {
+        env.cached.getStanding(tour.id, page.atLeast(1))
       }
     }
   }

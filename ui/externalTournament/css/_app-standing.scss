@@ -1,4 +1,4 @@
-.tour-ext__main__players {
+.tour-ext__standing {
   .player {
     padding-left: 0px;
     padding-right: 0px;
@@ -95,11 +95,28 @@
       }
     }
     .draw {
-      color: mix($c-brag, $c-bg-box, 70);
+      color: mix($c-brag, $c-bg-box, 70%);
+      &:hover {
+        background: mix($c-brag, $c-bg-box, 25%);
+      }
     }
   }
   .points {
     text-align: right;
     font-weight: bold;
+  }
+  &.long {
+    .user-link .rating {
+      display: block;
+      padding-left: 0px;
+    }
+    .pairings div > * {
+      flex: 0 0 1.5em;
+    }
+  }
+  &.xlong & {
+    .pairings div > * {
+      flex: 0 0 1.3em;
+    }
   }
 }

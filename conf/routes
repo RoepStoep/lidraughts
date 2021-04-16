@@ -315,8 +315,10 @@ POST  /simul/manager                          controllers.SimulCrud.create
 # External Tournaments
 POST  /tournament/external                                  controllers.ExternalTournament.create
 GET   /tournament/external/$id<\w{8}>                       controllers.ExternalTournament.show(id: String)
+GET   /tournament/external/$id<\w{8}>/standing/:page        controllers.ExternalTournament.standing(id: String, page: Int)
 POST  /tournament/external/$id<\w{8}>/player                controllers.ExternalTournament.playerAdd(id: String)
 GET   /tournament/external/$id<\w{8}>/player/:user          controllers.ExternalTournament.playerInfo(id: String, user: String)
+GET   /tournament/external/$id<\w{8}>/page-of/:userId       controllers.ExternalTournament.pageOf(id: String, userId: String)
 POST  /tournament/external/$id<\w{8}>/answer                controllers.ExternalTournament.answer(id: String)
 GET   /tournament/external/$id<\w{8}>/socket/v:apiVersion   controllers.ExternalTournament.websocket(id: String, apiVersion: Int)
 

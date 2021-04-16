@@ -1,6 +1,6 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import { spinner, bind, userName, dataIcon, userTip, numberRow  } from './util';
+import { player as renderPlayer, spinner, bind, userName, dataIcon, numberRow  } from './util';
 import { GameResult } from '../interfaces';
 import ExternalTournamentCtrl from '../ctrl';
 
@@ -15,7 +15,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
     ])
   ]);
   const noarg = ctrl.trans.noarg,
-    draughtsResult = ctrl.opts.draughtsResult,
+    draughtsResult = ctrl.data.draughtsResult,
     games = data.sheet.filter(p => p.g).length,
     wins = data.sheet.filter(p => p.w).length,
     points = data.sheet.reduce((r, p) => r + (p.w === true ? 1.0 : (p.w === false ? 0.0 : 0.5)), 0),
@@ -33,7 +33,10 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
       hook: bind('click', () => ctrl.showPlayerInfo(data), ctrl.redraw)
     }),
     h('div.stats', [
-      h('h2', userTip(data.user, true)),
+      h('h2', [
+        h('span.rank', data.rank + '. '),
+        renderPlayer(data, true, false)
+      ]),
       h('table', [
           numberRow(noarg('points'), draughtsResult ? points * 2 : points, 'raw'),
           ...(games ? [

@@ -8,7 +8,7 @@ import { player as renderPlayer, preloadUserTips, bind } from './util';
 export function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
   return ctrl.data.ongoing.length ? h('div.tour-ext__main__ongoing', [
     h('h2', 'Currently playing'),
-    boards.many(ctrl.data.ongoing, ctrl.opts.draughtsResult)
+    boards.many(ctrl.data.ongoing, ctrl.data.draughtsResult)
   ]) : null;
 }
 
@@ -32,7 +32,8 @@ export function upcoming(ctrl: ExternalTournamentCtrl): VNode {
 }
 
 export function finished(ctrl: ExternalTournamentCtrl): VNode | null {
-  const dateFormatter = getDateFormatter();
+  const dateFormatter = getDateFormatter(),
+    draughtsResult = ctrl.data.draughtsResult;
   return ctrl.data.finished.length ? h('div.tour-ext__main__finished', [
     h('h2', 'Finished games'),
       h('table.slist.slist-pad', h('tbody',
@@ -46,8 +47,8 @@ export function finished(ctrl: ExternalTournamentCtrl): VNode | null {
           h('td', renderPlayers(g)),
           h('td',
             h('div.result', g.winner ? 
-              (g.winner == 'white' ? (ctrl.opts.draughtsResult ? '2-0' : '1-0') : (ctrl.opts.draughtsResult ? '0-2' : '0-1')) :
-              (ctrl.opts.draughtsResult ? '1-1' : '½-½')
+              (g.winner == 'white' ? (draughtsResult ? '2-0' : '1-0') : (draughtsResult ? '0-2' : '0-1')) :
+              (draughtsResult ? '1-1' : '½-½')
             )
           )
         ]))
