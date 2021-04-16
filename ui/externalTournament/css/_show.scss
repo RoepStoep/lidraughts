@@ -16,12 +16,24 @@ $mq-col3: $mq-col3-uniboard;
   a.text {
     color: $c-font-dim;
   }
-  &__main {
+  &__main__invited {
     h2 {
       font-size: 2em;
-      text-align: center;
+      margin-top: 1em;
       border-bottom: $border;
-      padding-bottom: #{$block-gap * 2 / 3};
+      padding: 0 #{$block-gap} #{$block-gap} #{$block-gap * 2 / 3};
+    }
+    td.status {
+      @extend %roboto;
+      padding: 1em .5em 1em 10px;
+      width: 1px; /* helps keeping it as small as possible */
+      i {
+        opacity: .6;
+        font-size: 1.2em;
+      }
+      &.rejected {
+        color: $c-bad;
+      }
     }
   }
 

@@ -4,6 +4,14 @@ export type MaybeVNode = VNode | string | null | undefined;
 export type MaybeVNodes = MaybeVNode[];
 export type Redraw = () => void;
 
+// modules/externalTournament/src/main/ExternalPlayer.scala
+
+export const playerStatus = {
+  invited: 0,
+  rejected: 10,
+  joined: 20
+};
+
 export interface ExternalTournamentOpts {
   data: ExternalTournamentData;
   element: HTMLElement;
@@ -19,7 +27,7 @@ export interface ExternalTournamentData {
   createdBy: string;
   name: string;
   nbPlayers: number;
-  invited?: BasePlayer[];
+  invited?: InvitedPlayer[];
   upcoming: Challenge[];
   ongoing: Board[];
   finished: Game[];
@@ -46,6 +54,10 @@ export interface MyInfo {
 export interface PlayerInfo extends BasePlayer {
   sheet: GameResult[];
   points: number;
+}
+
+export interface InvitedPlayer extends BasePlayer {
+  status: number;
 }
 
 export interface GameResult extends BasePlayer {

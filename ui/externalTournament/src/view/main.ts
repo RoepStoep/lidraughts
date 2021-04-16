@@ -2,9 +2,9 @@ import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
 import { onInsert } from './util';
 import ExternalTournamentCtrl from '../ctrl';
-import { Pager } from '../interfaces';
+import { Pager, playerStatus } from '../interfaces';
 import * as pagination from '../pagination';
-import { dataIcon, bind, spinner } from './util';
+import { dataIcon, bind, spinner, preloadUserTips, player as renderPlayer } from './util';
 import table from './table'
 import standing from './standing'
 import ongoing from './boards'
@@ -36,7 +36,8 @@ export default function(ctrl: ExternalTournamentCtrl) {
         joinTournament(ctrl) || joinGame(ctrl),
         controls(ctrl, pag),
         standing(ctrl, pag),
-        ongoing(ctrl)
+        ongoing(ctrl),
+        invited(ctrl)
       ])
     ),
     ctrl.opts.chat ? h('div.chat__members.none', [
@@ -79,3 +80,30 @@ function header(ctrl: ExternalTournamentCtrl): VNode {
     h('h1', ctrl.data.name),
   ]);
 }
+
+function invited(ctrl: ExternalTournamentCtrl) {
+  return ctrl.isCreator() && ctrl.data.invited?.length ? h('div.tour-ext__main__invited', [
+    h('h2', 'Invited players'),
+    h('table.slist', 
+      h('tbody', {
+          hook: {
+            insert: vnode => preloadUserTips(vnode.elm as HTMLElement),
+            update(_, vnode) { preloadUserTips(vnode.elm as HTMLElement) }
+          }
+        },
+        ctrl.data.invited.map(p => {
+          return h('tr', [
+            h('td.status' + (p.status === playerStatus.rejected ? '.rejected' : ''), h('i', {
+              attrs: {
+                'data-icon': (p.status === playerStatus.invited ? 'p' : 'L'),
+                title: p.status === playerStatus.invited ? 'Invited' : 'Rejected'
+              }
+            })),
+            h('td.player', renderPlayer(p, true, false))
+          ])
+        })
+      )
+    )
+  ]) : null;
+}
+

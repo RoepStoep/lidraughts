@@ -15,7 +15,7 @@ export default function table(ctrl: ExternalTournamentCtrl): VNode {
 function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
   const dateFormatter = getDateFormatter();
   return h('div.tour-ext__games' + (table ? '' : '.tour-ext__upcoming'), [
-    h('h2', 'Upcoming games'),
+    h('h2', ctrl.trans.noarg('upcomingGames')),
     ctrl.data.upcoming.length ? h('table.slist', 
       h('tbody', ctrl.data.upcoming.map(c => 
         h('tr', {

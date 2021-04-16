@@ -47,7 +47,7 @@ final class JsonView(
           "finished" -> finished.map(gameJson),
           "draughtsResult" -> pref.draughtsResult
         )
-        .add("invited" -> createdByMe.option(players.filter(!_.joined).map(basePlayerJson)))
+        .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
         .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
         .add("playerInfo" -> playerInfo.map(playerInfoJson))
         .add("socketVersion" -> socketVersion.map(_.value))
@@ -135,6 +135,12 @@ final class JsonView(
         }
       )
       .add("winner" -> g.winnerColor.map(_.name))
+
+  private def invitedPlayerJson(p: ExternalPlayer): JsObject =
+    basePlayerJson(p) ++
+      Json.obj(
+        "status" -> p.status.id
+      )
 
   private def basePlayerJson(p: Player): JsObject =
     Json.obj()

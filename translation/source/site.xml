@@ -242,6 +242,7 @@
   <string name="finished">Finished</string>
   <string name="finishesX">finishes %s</string>
   <string name="recentlyFinished">Recently finished</string>
+  <string name="upcomingGames">Upcoming games</string>
   <string name="abortGame">Abort game</string>
   <string name="gameAborted">Game aborted</string>
   <string name="standard">Standard</string>

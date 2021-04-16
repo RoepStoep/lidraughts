@@ -44,6 +44,7 @@ function boardPlayer(board: Board, color: Color, draughtsResult: boolean) {
   const player = board[color];
   return h('span.mini-game__player', [
     h('span.mini-game__user', [
+      h('strong', '#' + player.rank),
       renderPlayer(player, true, true)
     ]),
     board.clock ?

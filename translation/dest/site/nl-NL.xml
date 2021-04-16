@@ -241,7 +241,8 @@
   <string name="eventInProgress">Nu aan het spelen</string>
   <string name="finished">Afgelopen</string>
   <string name="finishesX">klaar %s</string>
-  <string name="recentlyFinished">Recent beeindigd</string>
+  <string name="recentlyFinished">Recent beëindigd</string>
+  <string name="upcomingGames">Aankomende partijen</string>
   <string name="abortGame">Partij afbreken</string>
   <string name="gameAborted">Partij afgebroken</string>
   <string name="standard">Standaard</string>
