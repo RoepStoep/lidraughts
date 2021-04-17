@@ -31,4 +31,5 @@ private[externalTournament] object BsonHandlers {
 
   implicit val ExternalTournamentBSONHandler = Macros.handler[ExternalTournament]
   implicit val ExternalPlayerBSONHandler = Macros.handler[ExternalPlayer]
+  implicit val FmjdPlayerBSONHandler = Macros.handler[FmjdPlayer]
 }

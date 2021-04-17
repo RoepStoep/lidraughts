@@ -16,15 +16,19 @@ final class Env(
     hub: lidraughts.hub.Env,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     lightUserApi: lidraughts.user.LightUserApi,
-    proxyGame: Game.ID => Fu[Option[Game]]
+    proxyGame: Game.ID => Fu[Option[Game]],
+    scheduler: lidraughts.common.Scheduler
 ) {
 
   private val settings = new {
     val CollectionExternalTournament = config getString "collection.externalTournament"
     val CollectionExternalPlayer = config getString "collection.externalPlayer"
+    val CollectionFmjdPlayer = config getString "collection.externalFmjdPlayer"
     val HistoryMessageTtl = config duration "history.message.ttl"
     val UidTimeout = config duration "uid.timeout"
     val SocketTimeout = config duration "socket.timeout"
+    val FmjdPlayersBaseUrl = config getString "fmjd_players.base_url"
+    val FmjdPlayersRefreshDelay = config duration "fmjd_players.refresh_delay"
   }
   import settings._
 
@@ -32,11 +36,17 @@ final class Env(
 
   private[externalTournament] lazy val externalTournamentColl = db(CollectionExternalTournament)
   private[externalTournament] lazy val externalPlayerColl = db(CollectionExternalPlayer)
+  private[externalTournament] lazy val fmjdPlayerColl = db(CollectionFmjdPlayer)
 
   lazy val cached = new Cached(
     asyncCache = asyncCache,
     proxyGame = proxyGame
   )(system)
+
+  private lazy val fmjdPlayerApi = new FmjdPlayerApi(
+    FmjdPlayersBaseUrl,
+    fmjdPlayerColl
+  )
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
     system = system,
@@ -91,6 +101,9 @@ final class Env(
         api finishGame g
     }
   )
+
+  scheduler.once(45 seconds)(fmjdPlayerApi.refresh)
+  scheduler.effect(FmjdPlayersRefreshDelay, "Refresh FMJD player data")(fmjdPlayerApi.refresh)
 }
 
 object Env {
@@ -103,6 +116,7 @@ object Env {
     db = lidraughts.db.Env.current,
     asyncCache = lidraughts.memo.Env.current.asyncCache,
     lightUserApi = lidraughts.user.Env.current.lightUserApi,
-    proxyGame = lidraughts.round.Env.current.proxy.game _
+    proxyGame = lidraughts.round.Env.current.proxy.game _,
+    scheduler = lidraughts.common.PlayApp.scheduler
   )
 }
