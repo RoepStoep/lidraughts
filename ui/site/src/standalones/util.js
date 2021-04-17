@@ -466,13 +466,12 @@ lidraughts.miniGame = (() => {
     finish(node, win) {
       ['white', 'black'].forEach(color => {
           const resultHtml = `<span class="mini-game__result">${win ? (win == color[0] ? (draughtsResult ? '2' : '1') : '0') : (draughtsResult ? '1' : '½')}</span>`,
-            $clock = $(node).find('.mini-game__clock--' + color);
-          if ($clock.length) {
-            $clock.each(function() {
+            $clock = $(node).find('.mini-game__clock--' + color).each(function() {
               $(this).clock('destroy');
-            }).replaceWith(resultHtml)
-          } else {
-            $(node).find('.mini-game__user--' + color).after(resultHtml);
+            });
+          if (!$clock.data('managed')) {
+            if ($clock.length) $clock.replaceWith(resultHtml)
+            else $(node).find('.mini-game__user--' + color).after(resultHtml);
           }
         }
       );

@@ -37,7 +37,8 @@ function miniPairing(ctrl) {
         ]),
         game.clock ?
           m(`span.mini-game__clock.mini-game__clock--${util.opposite(game.orient)}`, {
-            'data-time': game.clock[util.opposite(game.orient)]
+            'data-time': game.clock[util.opposite(game.orient)],
+            'data-managed': 1
           }) :
           m('span.mini-game__result', game.winner ?
             (game.winner == game.orient ? '0' : (ctrl.pref.draughtsResult ? '2' : '1')) : 
@@ -51,7 +52,8 @@ function miniPairing(ctrl) {
         m('span'),
         game.clock ?
         m(`span.mini-game__clock.mini-game__clock--${game.orient}`, {
-          'data-time': game.clock[game.orient]
+          'data-time': game.clock[game.orient],
+          'data-managed': 1
         }) :
         m('span.mini-game__result', game.winner ?
           (game.winner == game.orient ? (ctrl.pref.draughtsResult ? '2' : '1') : '0') : 
