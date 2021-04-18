@@ -46,30 +46,34 @@
     }
     .fmjd-info {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       margin: 1em 1em 0 1em;
-      padding: 0.6em;
+      padding: .6em;
       border: $border;
       background: $c-bg-zebra;
 
       table {
-        margin: auto 0 auto 2em;
+        margin-top: .5em;
       }
       td {
-        line-height: 1.5em;
+        line-height: 1.6em;
       }
-      img {
+      .photo {
         width: 80px;
         display: block;
         margin: 0 auto;
+        &.not-found {
+          opacity: 0.4;
+        }
       }
-      a.name {
-        color: $c-font;
+      .flag {
+        margin-right: .2em;
+        vertical-align: text-bottom;
+      }
+      .name {
         display: block;
         text-align: center;
-        &:hover {
-          color: $c-link;
-        }
+        margin-top: .2em;
       }
     }
   }

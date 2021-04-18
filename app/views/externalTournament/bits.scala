@@ -28,10 +28,13 @@ object bits {
     trans.points,
     trans.winRate,
     trans.averageOpponent,
-    trans.allResults,
+    trans.viewAllResults,
     trans.latestResults,
     trans.upcomingGames,
     trans.rating,
+    trans.countryOrRegion,
+    trans.draughtsTitle,
+    trans.unknown,
     trans.spectators
   )
 }

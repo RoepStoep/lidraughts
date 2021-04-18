@@ -9,7 +9,7 @@ import lidraughts.challenge.Challenge
 import lidraughts.game.{ Game, Player }
 import lidraughts.game.JsonView.boardSizeWriter
 import lidraughts.socket.Socket.SocketVersion
-import lidraughts.user.User
+import lidraughts.user.{ Countries, User }
 
 final class JsonView(
     lightUserApi: lidraughts.user.LightUserApi,
@@ -91,7 +91,7 @@ final class JsonView(
     }
 
   private def resultJson(result: PlayerInfo.Result) =
-    basePlayerJson(result.game.player(!result.color)) ++
+    basePlayerJsonSync(result.game.player(!result.color)) ++
       Json.obj(
         "g" -> result.game.id,
         "c" -> (result.color == draughts.White)
@@ -104,6 +104,20 @@ final class JsonView(
       .add("rank" -> player.flatMap(_.rank))
       .add("gameId" -> game.map(_.id))
 
+  private def countryJson(cc: String) =
+    Countries.info(cc) match {
+      case Some(c) =>
+        Json.obj(
+          "code" -> c.code,
+          "name" -> c.name
+        )
+      case _ =>
+        Json.obj(
+          "code" -> Countries.unknown,
+          "name" -> "Unknown"
+        )
+    }
+
   private def challengeJson(c: Challenge) = {
     val challenger = c.challenger.fold(_ => none[Challenge.Registered], _.some)
     Json
@@ -111,8 +125,8 @@ final class JsonView(
         "id" -> c.id,
         "variant" -> c.variant
       )
-      .add("white" -> c.finalColor.fold(challenger, c.destUser).map(basePlayerJson))
-      .add("black" -> c.finalColor.fold(c.destUser, challenger).map(basePlayerJson))
+      .add("white" -> c.finalColor.fold(challenger, c.destUser).map(basePlayerJsonSync))
+      .add("black" -> c.finalColor.fold(c.destUser, challenger).map(basePlayerJsonSync))
       .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
   }
 
@@ -120,8 +134,8 @@ final class JsonView(
     Json.obj(
       "id" -> g.id,
       "variant" -> g.variant,
-      "white" -> basePlayerJson(g.whitePlayer),
-      "black" -> basePlayerJson(g.blackPlayer),
+      "white" -> basePlayerJsonSync(g.whitePlayer),
+      "black" -> basePlayerJsonSync(g.blackPlayer),
       "createdAt" -> formatDate(g.createdAt)
     ).add("winner" -> g.winnerColor.map(_.name))
 
@@ -150,36 +164,36 @@ final class JsonView(
     Json.obj(
       "id" -> p.id,
       "name" -> p.displayName,
-      "country" -> p.country,
+      "country" -> countryJson(p.country),
       "picUrl" -> fmjdPlayerApi.profilePicUrl(p.id)
     ).add("title" -> p.title)
       .add("rating" -> p.rating)
 
   private def invitedPlayerJson(p: ExternalPlayer): JsObject =
-    basePlayerJson(p) ++
+    basePlayerJsonSync(p) ++
       Json.obj(
         "status" -> p.status.id
       )
 
   private def boardPlayerJson(player: Player, players: List[ExternalPlayer]): JsObject = {
     val playerExt = players.find(p => player.userId.contains(p.userId))
-    basePlayerJson(player)
+    basePlayerJsonSync(player)
       .add("rank" -> playerExt.flatMap(_.rank))
   }
 
-  private def basePlayerJson(p: Player): JsObject =
+  private def basePlayerJsonSync(p: Player): JsObject =
     Json.obj()
       .add("rating" -> p.rating)
       .add("user" -> p.userId.fold(none[LightUser])(lightUserApi.sync))
       .add("provisional" -> p.provisional)
 
-  private def basePlayerJson(p: Challenge.Registered): JsObject =
+  private def basePlayerJsonSync(p: Challenge.Registered): JsObject =
     Json
       .obj("rating" -> p.rating.int)
       .add("user" -> lightUserApi.sync(p.id))
       .add("provisional" -> p.rating.provisional.option(true))
 
-  private def basePlayerJson(p: ExternalPlayer): JsObject =
+  private def basePlayerJsonSync(p: ExternalPlayer): JsObject =
     basePlayerJsonWithoutUser(p) ++
       Json.obj("user" -> lightUserApi.sync(p.userId))
 

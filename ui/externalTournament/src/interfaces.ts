@@ -109,9 +109,14 @@ export interface FmjdPlayer {
   name: string;
   picUrl: string;
   profileUrl: string;
-  country: string;
+  country: Country;
   title?: string;
   rating?: number;
+}
+
+export interface Country {
+  code: string;
+  name: string;
 }
 
 export interface Pager {

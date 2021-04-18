@@ -193,6 +193,7 @@
   <string name="time">Tijd</string>
   <string name="rating">Rating</string>
   <string name="ratingStats">Ratingsstatistieken</string>
+  <string name="draughtsTitle">Titel</string>
   <string name="username">Gebruikersnaam</string>
   <string name="usernameOrEmail">Gebruikersnaam of email</string>
   <string name="changeUsername">Wijzig gebruikersnaam</string>
@@ -241,7 +242,7 @@
   <string name="eventInProgress">Nu aan het spelen</string>
   <string name="finished">Afgelopen</string>
   <string name="finishesX">klaar %s</string>
-  <string name="allResults">Alle uitslagen</string>
+  <string name="viewAllResults">Bekijk alle uitslagen</string>
   <string name="latestResults">Laatste uitslagen</string>
   <string name="upcomingGames">Aankomende partijen</string>
   <string name="abortGame">Partij afbreken</string>

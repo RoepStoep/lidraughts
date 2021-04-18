@@ -43,14 +43,14 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
   ]);
 }
 
-function allResults(tour: ExternalTournamentData, noarg: TransNoArg): VNode {
+function viewAllResults(tour: ExternalTournamentData, noarg: TransNoArg): VNode {
   return h('tr',
     h('td.all-results', {
       attrs: { colspan: 3 }
     }, [
       h('a', 
         { attrs: { href: `/tournament/external/${tour.id}/results` } },
-        noarg('allResults')
+        noarg('viewAllResults')
       )
     ])
   );
@@ -88,7 +88,7 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
                 )
               ])
             ])
-          }).concat(ctrl.data.nbFinished > ctrl.data.finished.length ? [allResults(ctrl.data, noarg)] : [])
+          }).concat(ctrl.data.nbFinished > ctrl.data.finished.length ? [viewAllResults(ctrl.data, noarg)] : [])
         )
       ]
     )

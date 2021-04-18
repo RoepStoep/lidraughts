@@ -22,6 +22,7 @@ object Countries {
     C("AI", "Anguilla"),
     C("AL", "Albania"),
     C("AM", "Armenia"),
+    C("AN", "Netherlands Antilles"),
     C("AO", "Angola"),
     C("AQ", "Antarctica"),
     C("AR", "Argentina"),
@@ -279,6 +280,8 @@ object Countries {
       C("_rainbow", "Rainbow"),
       C("_pirate", "Pirate")
     )
+
+  val unknown = "_unknown"
 
   val allPairs = all map { c => c.code -> c.name }
 

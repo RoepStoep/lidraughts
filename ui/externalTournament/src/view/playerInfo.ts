@@ -76,23 +76,43 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
 function renderFmjdInfo(p: FmjdPlayer | undefined, noarg: TransNoArg) {
   return p ? h('div.fmjd-info', [
     h('div', [
-      h('img', {
+      h('img.photo', {
         attrs: { src: p.picUrl },
-        hook: bind('error', e => (e.target as HTMLElement).setAttribute('src', '/assets/images/streamer-nopic.svg'))
+        hook: bind('error', e => {
+          const el = e.target as HTMLElement;
+          el.setAttribute('src', '/assets/images/no-profile-pic.png');
+          el.className += ' not-found';
+        }) 
       }),
-      h('a.name', {
-        attrs: { 
-          href: 'https://www.fmjd.org/?p=pcard&id=' + p.id,
-          target: '_blank',
-          rel: 'noopener'
-        }
-      }, p.name)
+      h('span.name', p.name)
     ]),
     h('table', [
-      stringRow('FMJD ID', p.id),
-      stringRow('Country', p.country),
+      h('tr', [
+        h('th', 'FMJD ID'), 
+        h('td', 
+          h('a', {
+            attrs: { 
+              href: 'https://www.fmjd.org/?p=pcard&id=' + p.id,
+              target: '_blank',
+              rel: 'noopener'
+            }
+          }, p.id)
+        )
+      ]),
+      h('tr', [
+        h('th', noarg('countryOrRegion')), 
+        h('td', [
+          h('img.flag', {
+            attrs: { 
+              src: `/assets/images/flags/${p.country.code}.png`,
+              title: p.country.code === '_unknown' ? noarg('unknown') : p.country.name
+            }
+          }),
+          p.country.code[0] !== '_' ? p.country.code : ''
+        ])
+      ]),
       stringRow(noarg('rating'), p.rating ? '' + p.rating : '-'),
-      p.title ? stringRow('Title', p.title) : null
+      p.title ? stringRow(noarg('draughtsTitle'), p.title) : null
     ])
    ]) : null;
   }

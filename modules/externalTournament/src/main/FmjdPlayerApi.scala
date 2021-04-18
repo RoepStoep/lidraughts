@@ -7,6 +7,7 @@ import play.api.Play.current
 import play.api.libs.ws.WS
 
 import lidraughts.db.dsl._
+import lidraughts.user.Countries
 
 final class FmjdPlayerApi(
     baseUrl: String,
@@ -111,7 +112,7 @@ final class FmjdPlayerApi(
         _id = id,
         firstName = firstName,
         lastName = lastName,
-        country = country,
+        country = parseCountryCode(country),
         userId = cleanField(fields, userIdF).map(_.toLowerCase),
         title = cleanField(fields, titleF).map(_.toUpperCase),
         rating = cleanField(fields, ratingF).flatMap(parseIntOption),
@@ -159,6 +160,31 @@ object FmjdPlayerApi {
     titleW = none,
     ratingW = none
   )
+
+  def parseCountryCode(country: String) = {
+    val code = country.toUpperCase match {
+      case "AFG" => "AF"
+      case "ALY" => "AL"
+      case "ANB" | "ANM" => "AN"
+      case "CAR" => "CA"
+      case "CIV" => "CI"
+      case "GAB" => "GA"
+      case "NER" => "NE"
+      case "VCT" => "VC"
+      case "" | "1N" | "CE" | "CTP" | "JZ" | "RY" | "XCZ" | "XSU" =>
+        Countries.unknown // ??? probably entry errors
+      case "XYU" =>
+        Countries.unknown // former Yugoslavia
+      case cc @ _ => cc
+    }
+    if (code == Countries.unknown) code
+    else Countries.info(code) match {
+      case Some(c) => c.code
+      case _ =>
+        logger.warn(s"Unknown country code '$code'")
+        Countries.unknown
+    }
+  }
 
   object Headers {
 

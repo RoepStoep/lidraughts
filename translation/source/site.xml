@@ -193,6 +193,7 @@
   <string name="time">Time</string>
   <string name="rating">Rating</string>
   <string name="ratingStats">Rating stats</string>
+  <string name="draughtsTitle">Title</string>
   <string name="username">User name</string>
   <string name="usernameOrEmail">User name or email</string>
   <string name="changeUsername">Change username</string>
@@ -241,7 +242,7 @@
   <string name="eventInProgress">Playing right now</string>
   <string name="finished">Finished</string>
   <string name="finishesX">finishes %s</string>
-  <string name="allResults">All results</string>
+  <string name="viewAllResults">View all results</string>
   <string name="latestResults">Latest results</string>
   <string name="upcomingGames">Upcoming games</string>
   <string name="abortGame">Abort game</string>
