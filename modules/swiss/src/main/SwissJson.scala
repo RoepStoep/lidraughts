@@ -93,7 +93,7 @@ final class SwissJson(
               }
               .flatMap { gameId =>
                 rankingApi(swiss).dmap(_ get player.userId) map2 { rank: Int =>
-                  MyInfo(rank + 1, gameId, me, player)
+                  MyInfo(rank, gameId, me, player)
                 }
               }
           }
