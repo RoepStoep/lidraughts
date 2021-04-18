@@ -79,7 +79,6 @@ final class Syncache[K, V](
   // maybe optimize later with cach batching
   def preloadMany(ks: Seq[K]): Funit = ks.distinct.map(preloadOne).sequenceFu.void
   def preloadSet(ks: Set[K]): Funit = ks.map(preloadOne).sequenceFu.void
-  // def preloadSet(ks: Set[K]): Funit = ks.map(preloadOne).sequenceFu.void
 
   def setOneIfAbsent(k: K, v: => V): Unit =
     if (cache.getIfPresent(k) == null) {

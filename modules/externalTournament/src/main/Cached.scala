@@ -46,11 +46,13 @@ private[externalTournament] final class Cached(
         .dmap(_.flatten)
     }
 
-  private[externalTournament] val standingPageCache = asyncCache.clearable[(String, Int), JsObject](
+  private val standingPageCache = asyncCache.clearable[(String, Int), JsObject](
     name = "externalTournament.standingPages",
     f = computePage,
     expireAfter = _.ExpireAfterAccess(1 hour)
   )
+
+  def invalidateStandings = standingPageCache.invalidateAll
 
   def invalidateStandings(tourId: ExternalTournament.ID) =
     ExternalPlayerRepo.byTour(tourId).map { players =>
@@ -60,16 +62,18 @@ private[externalTournament] final class Cached(
       }
     }
 
-  def getStanding(tourId: ExternalTournament.ID, page: Int): Fu[JsObject] =
+  def getStandingPage(tourId: ExternalTournament.ID, page: Int): Fu[JsObject] =
     standingPageCache.get(tourId -> page)
 
   private def computePage(page: (String, Int)) =
     for {
       players <- ExternalPlayerRepo.byTour(page._1)
-      rankedPlayers = players.filter(p => p.rank ?? { r => r > 10 * (page._2 - 1) && r <= 10 * page._2 }).sortBy(_.rank)
+      rankedPlayers = players.filter(p => p.ranked && p.page == page._2).sortBy(_.rank)
       games <- getFinishedGames(page._1)
+      playerInfos = rankedPlayers.map(p => PlayerInfo.make(p, games).reverse)
+      playerInfoJson <- playerInfos.map(Env.current.jsonView.playerInfoJson).sequenceFu
     } yield Json.obj(
       "page" -> page._2,
-      "players" -> rankedPlayers.map(p => PlayerInfo.make(p, games).reverse).map(Env.current.jsonView.playerInfoJson)
+      "players" -> playerInfoJson
     )
 }

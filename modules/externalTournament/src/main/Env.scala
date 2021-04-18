@@ -28,6 +28,7 @@ final class Env(
     val UidTimeout = config duration "uid.timeout"
     val SocketTimeout = config duration "socket.timeout"
     val FmjdPlayersBaseUrl = config getString "fmjd_players.base_url"
+    val FmjdPlayersPictureBaseUrl = config getString "fmjd_players.base_picture_url"
     val FmjdPlayersRefreshDelay = config duration "fmjd_players.refresh_delay"
   }
   import settings._
@@ -44,8 +45,10 @@ final class Env(
   )(system)
 
   private lazy val fmjdPlayerApi = new FmjdPlayerApi(
-    FmjdPlayersBaseUrl,
-    fmjdPlayerColl
+    baseUrl = FmjdPlayersBaseUrl,
+    basePictureUrl = FmjdPlayersPictureBaseUrl,
+    coll = fmjdPlayerColl,
+    cached = cached
   )
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
@@ -76,6 +79,7 @@ final class Env(
 
   lazy val jsonView = new JsonView(
     lightUserApi = lightUserApi,
+    fmjdPlayerApi = fmjdPlayerApi,
     cached = cached
   )
 

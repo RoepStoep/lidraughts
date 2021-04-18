@@ -18,4 +18,6 @@ private[externalTournament] case class FmjdPlayer(
 
   def is(uid: User.ID): Boolean = userId.contains(uid)
   def is(user: User): Boolean = is(user.id)
+
+  def displayName = s"${lastName.capitalize}, ${firstName.capitalize}"
 }

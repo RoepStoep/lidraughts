@@ -30,16 +30,46 @@
       padding: .6rem 1rem;
       border-bottom: $border;
     }
-    table {
+    table.tour-info {
       margin: 1em auto;
+      td {
+        text-align: right;
+        line-height: 1.8em;
+      }
     }
     td {
       font-weight: bold;
       padding-left: 10px;
-      text-align: right;
-      line-height: 1.8em;
       &:last-child {
         @extend %roboto;
+      }
+    }
+    .fmjd-info {
+      display: flex;
+      justify-content: center;
+      margin: 1em 1em 0 1em;
+      padding: 0.6em;
+      border: $border;
+      background: $c-bg-zebra;
+
+      table {
+        margin: auto 0 auto 2em;
+      }
+      td {
+        line-height: 1.5em;
+      }
+      img {
+        width: 80px;
+        display: block;
+        margin: 0 auto;
+      }
+      a.name {
+        color: $c-font;
+        display: block;
+        text-align: center;
+        &:hover {
+          color: $c-link;
+        }
       }
     }
   }

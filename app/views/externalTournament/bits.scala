@@ -31,6 +31,7 @@ object bits {
     trans.allResults,
     trans.latestResults,
     trans.upcomingGames,
+    trans.rating,
     trans.spectators
   )
 }

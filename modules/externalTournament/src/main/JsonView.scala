@@ -13,6 +13,7 @@ import lidraughts.user.User
 
 final class JsonView(
     lightUserApi: lidraughts.user.LightUserApi,
+    fmjdPlayerApi: FmjdPlayerApi,
     cached: Cached
 ) {
 
@@ -34,10 +35,11 @@ final class JsonView(
     def myGame = me.flatMap(u => ongoing.find(_.player(u).isDefined))
     val page = reqPage orElse myPlayer.map(_.page) getOrElse 1
     for {
-      standing <- cached.getStanding(tour.id, page)
+      standing <- cached.getStandingPage(tour.id, page)
       createdByMe = me.exists(_.id == tour.createdBy)
       userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId)
-      _ <- lightUserApi.preloadMany(userIds.toList)
+      _ <- lightUserApi.preloadSet(userIds)
+      playerInfoJson <- playerInfo.fold(fuccess(none[JsObject])) { playerInfoJson(_).map(_.some) }
     } yield Json.obj(
       "id" -> tour.id,
       "createdBy" -> tour.createdBy,
@@ -54,7 +56,7 @@ final class JsonView(
       .add("rounds" -> tour.rounds)
       .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
-      .add("playerInfo" -> playerInfo.map(playerInfoJson))
+      .add("playerInfo" -> playerInfoJson)
       .add("socketVersion" -> socketVersion.map(_.value))
   }
 
@@ -77,12 +79,16 @@ final class JsonView(
 
   def playerInfoJson(
     info: PlayerInfo
-  ): JsObject =
-    basePlayerJson(info.player) ++
-      Json.obj(
+  ): Fu[JsObject] =
+    for {
+      baseJson <- basePlayerJsonAsync(info.player)
+      fmjdPlayer <- info.player.fmjdId ?? fmjdPlayerApi.byId
+    } yield {
+      baseJson ++ Json.obj(
         "points" -> info.player.points,
         "sheet" -> info.results.map(resultJson)
-      )
+      ).add("fmjd" -> fmjdPlayer.map(fmjdPlayerJson))
+    }
 
   private def resultJson(result: PlayerInfo.Result) =
     basePlayerJson(result.game.player(!result.color)) ++
@@ -140,6 +146,15 @@ final class JsonView(
       )
       .add("winner" -> g.winnerColor.map(_.name))
 
+  private def fmjdPlayerJson(p: FmjdPlayer): JsObject =
+    Json.obj(
+      "id" -> p.id,
+      "name" -> p.displayName,
+      "country" -> p.country,
+      "picUrl" -> fmjdPlayerApi.profilePicUrl(p.id)
+    ).add("title" -> p.title)
+      .add("rating" -> p.rating)
+
   private def invitedPlayerJson(p: ExternalPlayer): JsObject =
     basePlayerJson(p) ++
       Json.obj(
@@ -165,11 +180,18 @@ final class JsonView(
       .add("provisional" -> p.rating.provisional.option(true))
 
   private def basePlayerJson(p: ExternalPlayer): JsObject =
+    basePlayerJsonWithoutUser(p) ++
+      Json.obj("user" -> lightUserApi.sync(p.userId))
+
+  private def basePlayerJsonAsync(p: ExternalPlayer): Fu[JsObject] =
+    lightUserApi.async(p.userId) map { u =>
+      basePlayerJsonWithoutUser(p) ++
+        Json.obj("user" -> u)
+    }
+
+  private def basePlayerJsonWithoutUser(p: ExternalPlayer): JsObject =
     Json
-      .obj(
-        "user" -> lightUserApi.sync(p.userId),
-        "rating" -> p.rating
-      )
+      .obj("rating" -> p.rating)
       .add("provisional" -> p.provisional.option(true))
       .add("rank" -> p.rank)
 }

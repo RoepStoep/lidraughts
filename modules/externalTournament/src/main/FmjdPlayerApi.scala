@@ -10,13 +10,17 @@ import lidraughts.db.dsl._
 
 final class FmjdPlayerApi(
     baseUrl: String,
-    coll: Coll
+    basePictureUrl: String,
+    coll: Coll,
+    cached: Cached
 ) {
 
   import FmjdPlayerApi._
   import BsonHandlers._
 
   def byId(id: String) = coll.byId[FmjdPlayer](id)
+
+  def profilePicUrl(fmjdId: String) = s"$picUrlPrefix$fmjdId.PNG"
 
   private[externalTournament] def refresh: Unit =
     for {
@@ -72,6 +76,11 @@ final class FmjdPlayerApi(
                     val newAdmin = adminOpt.getOrElse(emptyAdmin).copy(firstName = url)
                     if (adminOpt.isDefined) coll.update($id(adminId), newAdmin)
                     else coll.insert(newAdmin)
+                  } >>- {
+                    if (addedOrUpdated.nonEmpty) {
+                      // FMJD player info is cached in standings
+                      cached.invalidateStandings
+                    }
                   }
                 }
             }
@@ -129,6 +138,8 @@ final class FmjdPlayerApi(
       }
     }
   }
+
+  private val picUrlPrefix = if (basePictureUrl.endsWith("/")) basePictureUrl else basePictureUrl + "/"
 }
 
 object FmjdPlayerApi {

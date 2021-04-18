@@ -33,9 +33,11 @@ object DataForm {
   )
 
   val player = Form(mapping(
-    "userId" -> lidraughts.user.DataForm.historicalUsernameField
+    "userId" -> lidraughts.user.DataForm.historicalUsernameField,
+    "fmjdId" -> optional(nonEmptyText(minLength = 5, maxLength = 6))
   )(PlayerData.apply)(PlayerData.unapply)) fill PlayerData(
-    userId = ""
+    userId = "",
+    fmjdId = none
   )
 
   case class TournamentData(
@@ -55,6 +57,7 @@ object DataForm {
   }
 
   case class PlayerData(
-      userId: String
+      userId: String,
+      fmjdId: Option[String]
   )
 }

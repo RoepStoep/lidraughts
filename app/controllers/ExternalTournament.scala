@@ -116,7 +116,7 @@ object ExternalTournament extends LidraughtsController {
     WithTournament(id) { tour =>
       env.api.playerInfo(tour, userId) flatMap {
         _.fold(notFoundJson()) { info =>
-          JsonOk(fuccess(env.jsonView.playerInfoJson(info)))
+          JsonOk(env.jsonView.playerInfoJson(info))
         }
       }
     }
@@ -127,7 +127,7 @@ object ExternalTournament extends LidraughtsController {
       env.api.pageOf(tour, lidraughts.user.User normalize userId) flatMap {
         _ ?? { page =>
           JsonOk {
-            env.cached.getStanding(tour.id, page)
+            env.cached.getStandingPage(tour.id, page)
           }
         }
       }
@@ -137,7 +137,7 @@ object ExternalTournament extends LidraughtsController {
   def standing(id: String, page: Int) = Open { implicit ctx =>
     WithTournament(id) { tour =>
       JsonOk {
-        env.cached.getStanding(tour.id, page.atLeast(1))
+        env.cached.getStandingPage(tour.id, page.atLeast(1))
       }
     }
   }

@@ -64,6 +64,7 @@ export interface BasePlayer {
 export interface PlayerInfo extends BasePlayer {
   sheet: GameResult[];
   points: number;
+  fmjd?: FmjdPlayer;
 }
 
 export interface InvitedPlayer extends BasePlayer {
@@ -101,6 +102,16 @@ export interface Board extends BaseGame {
     black: number;
   }
   winner?: Color;
+}
+
+export interface FmjdPlayer {
+  id: string;
+  name: string;
+  picUrl: string;
+  profileUrl: string;
+  country: string;
+  title?: string;
+  rating?: number;
 }
 
 export interface Pager {

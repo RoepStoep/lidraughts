@@ -49,7 +49,7 @@ final class ExternalTournamentApi(
           ExternalPlayerRepo.exists(tour.id, user.id) flatMap { exists =>
             if (exists) fuccess(none)
             else {
-              val player = ExternalPlayer.make(tour, user)
+              val player = ExternalPlayer.make(tour, user, data.fmjdId)
               ExternalPlayerRepo.insert(player) >>- {
                 socketReload(tour.id)
               } inject player.some

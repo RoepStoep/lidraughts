@@ -81,6 +81,13 @@ export function numberRow(name: string, value: any, typ?: string) {
   )]);
 }
 
+export function stringRow(name: string, value: string) {
+  return h('tr', [
+    h('th', name), 
+    h('td', value)
+  ]);
+}
+
 export function spinner(): VNode {
   return h('div.spinner', [
     h('svg', { attrs: { viewBox: '0 0 40 40' } }, [

@@ -21,6 +21,7 @@ final class LightUserApi(coll: Coll)(implicit system: akka.actor.ActorSystem) {
 
   def preloadOne = cache preloadOne _
   def preloadMany = cache preloadMany _
+  def preloadSet = cache preloadSet _
   def preloadUser(user: User) = cache.setOneIfAbsent(user.id, user.light.some)
 
   def isBotSync(id: User.ID) = sync(id).exists(_.isBot)

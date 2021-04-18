@@ -8,6 +8,7 @@ private[externalTournament] case class ExternalPlayer(
     _id: ExternalPlayer.ID, // random
     tourId: ExternalTournament.ID,
     userId: User.ID,
+    fmjdId: Option[String],
     rating: Int,
     provisional: Boolean,
     status: ExternalPlayer.Status,
@@ -23,6 +24,7 @@ private[externalTournament] case class ExternalPlayer(
 
   def joined = status.is(_.Joined)
   def invited = status.is(_.Invited)
+  def ranked = rank.isDefined
 
   def page = rank.fold(1) { r => (math.floor((r - 1) / 10) + 1).toInt }
 
@@ -53,13 +55,15 @@ private[externalTournament] object ExternalPlayer {
 
   private[externalTournament] def make(
     tour: ExternalTournament,
-    user: User
+    user: User,
+    fmjdId: Option[String]
   ): ExternalPlayer = {
     val perf = tour.perfLens(user.perfs)
     new ExternalPlayer(
       _id = Random.nextString(8),
       tourId = tour.id,
       userId = user.id,
+      fmjdId = fmjdId,
       status = Status.Invited,
       rating = perf.intRating,
       provisional = perf.provisional,
