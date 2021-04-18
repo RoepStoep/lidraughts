@@ -67,11 +67,13 @@ private[externalTournament] final class Cached(
 
   private def computePage(page: (String, Int)) =
     for {
+      tourOpt <- Env.current.api.byId(page._1)
+      tour = tourOpt err "Invalid tournament ID"
       players <- ExternalPlayerRepo.byTour(page._1)
       rankedPlayers = players.filter(p => p.ranked && p.page == page._2).sortBy(_.rank)
       games <- getFinishedGames(page._1)
       playerInfos = rankedPlayers.map(p => PlayerInfo.make(p, games).reverse)
-      playerInfoJson <- playerInfos.map(Env.current.jsonView.playerInfoJson).sequenceFu
+      playerInfoJson <- playerInfos.map(Env.current.jsonView.playerInfoJson(tour, _, players)).sequenceFu
     } yield Json.obj(
       "page" -> page._2,
       "players" -> playerInfoJson

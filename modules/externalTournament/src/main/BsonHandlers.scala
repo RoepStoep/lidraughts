@@ -29,6 +29,8 @@ private[externalTournament] object BsonHandlers {
     def write(x: ExternalPlayer.Status) = BSONInteger(x.id)
   }
 
+  import ExternalTournament.Settings
+  implicit val ExternalTournamentSettingsBSONHandler = Macros.handler[Settings]
   implicit val ExternalTournamentBSONHandler = Macros.handler[ExternalTournament]
   implicit val ExternalPlayerBSONHandler = Macros.handler[ExternalPlayer]
   implicit val FmjdPlayerBSONHandler = Macros.handler[FmjdPlayer]

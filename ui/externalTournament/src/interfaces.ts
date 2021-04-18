@@ -39,6 +39,7 @@ export interface ExternalTournamentData {
   playerInfo?: PlayerInfo;
   socketVersion?: number;
   draughtsResult: boolean;
+  displayFmjd: boolean;
 }
 
 export interface Standing {
@@ -56,6 +57,7 @@ export interface MyInfo {
 
 export interface BasePlayer {
   user: LightUser;
+  fmjd?: LightFmjdUser;
   rating: number;
   provisional?: boolean;
   rank?: number;
@@ -75,6 +77,7 @@ export interface GameResult extends BasePlayer {
   g: string; // game
   c: boolean; // color
   w?: boolean; // won
+  fmjd?: FmjdPlayer
 }
 
 export interface BaseGame {
@@ -104,13 +107,10 @@ export interface Board extends BaseGame {
   winner?: Color;
 }
 
-export interface FmjdPlayer {
-  id: string;
-  name: string;
+export interface FmjdPlayer extends LightFmjdUser {
   picUrl: string;
   profileUrl: string;
   country: Country;
-  title?: string;
   rating?: number;
 }
 

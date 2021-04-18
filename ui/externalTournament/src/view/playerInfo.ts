@@ -1,6 +1,6 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import { player as renderPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow  } from './util';
+import { player as lidraughtsPlayer, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink  } from './util';
 import { FmjdPlayer, GameResult } from '../interfaces';
 import ExternalTournamentCtrl from '../ctrl';
 
@@ -16,11 +16,13 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
   ]);
   const noarg = ctrl.trans.noarg,
     draughtsResult = ctrl.data.draughtsResult,
+    displayFmjd = ctrl.data.displayFmjd,
     games = data.sheet.filter(p => p.g).length,
     wins = data.sheet.filter(p => p.w).length,
     points = data.sheet.reduce((r, p) => r + (p.w === true ? 1.0 : (p.w === false ? 0.0 : 0.5)), 0),
-    avgOp: number | undefined = games ?
-        Math.round(data.sheet.reduce((r, p) => r + (p.rating || 1), 0) / games) :
+    ratedGames = data.sheet.filter(p => p.g && (displayFmjd ? p.fmjd?.rating : p.rating)),
+    avgOp = ratedGames.length ?
+        Math.round(ratedGames.reduce((r, p) => r + ((displayFmjd ? p.fmjd?.rating : p.rating) || 0), 0) / ratedGames.length) :
         undefined;
   return h(tag, {
     hook: {
@@ -35,14 +37,15 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
     h('div.stats', [
       h('h2', [
         data.rank ? h('span.rank', data.rank + '. ') : null,
-        renderPlayer(data, true, false)
+        displayFmjd ? fmjdPlayer(data, true, false) : lidraughtsPlayer(data, true, false, false)
       ]),
-      renderFmjdInfo(data.fmjd, noarg),
+      renderFmjdInfo(data.fmjd, data.user, noarg, displayFmjd),
       h('table.tour-info', [
-          numberRow(noarg('points'), draughtsResult ? points * 2 : points, 'raw'),
+          numberRow(noarg('gamesPlayed'), games),
           ...(games ? [
+            numberRow(noarg('points'), draughtsResult ? points * 2 : points, 'raw'),
             numberRow(noarg('winRate'), [wins, games], 'percent'),
-            numberRow(noarg('averageOpponent'), avgOp, 'raw')
+            avgOp ? numberRow(noarg('averageOpponent'), avgOp, 'raw') : null
           ] : [])
       ])
     ]),
@@ -63,8 +66,8 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
           }
         }, [
           h('th', '' + round),
-          h('td', userName(p.user)),
-          h('td', '' + p.rating),
+          h('td', userName(displayFmjd ? p.fmjd || p.user : p.user)),
+          h('td', '' + (displayFmjd ? p.fmjd?.rating || '' : (p.rating + (p.provisional ? '?' : '')))),
           h('td.is.color-icon.' + (p.c ? 'white' : 'black')),
           h('td', res)
         ]);
@@ -73,47 +76,57 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
   ]);
 };
 
-function renderFmjdInfo(p: FmjdPlayer | undefined, noarg: TransNoArg) {
+function renderFmjdInfo(p: FmjdPlayer | undefined, u: LightUser, noarg: TransNoArg, displayFmjd: boolean) {
   return p ? h('div.fmjd-info', [
-    h('div', [
+    h('div' + (displayFmjd ? '.photo-only' : ''), [
       h('img.photo', {
-        attrs: { src: p.picUrl },
+        attrs: { 
+          src: p.picUrl,
+          title: p.name
+         },
         hook: bind('error', e => {
           const el = e.target as HTMLElement;
           el.setAttribute('src', '/assets/images/no-profile-pic.png');
+          el.setAttribute('title', 'No picture');
           el.className += ' not-found';
         }) 
       }),
-      h('span.name', p.name)
+      !displayFmjd ? h('span.full-name', p.name) : null
     ]),
-    h('table', [
-      h('tr', [
-        h('th', 'FMJD ID'), 
-        h('td', 
-          h('a', {
-            attrs: { 
-              href: 'https://www.fmjd.org/?p=pcard&id=' + p.id,
-              target: '_blank',
-              rel: 'noopener'
-            }
-          }, p.id)
-        )
-      ]),
-      h('tr', [
-        h('th', noarg('countryOrRegion')), 
-        h('td', [
-          h('img.flag', {
-            attrs: { 
-              src: `/assets/images/flags/${p.country.code}.png`,
-              title: p.country.code === '_unknown' ? noarg('unknown') : p.country.name
-            }
-          }),
-          p.country.code[0] !== '_' ? p.country.code : ''
+    h('div.fmjd-fields' + (!displayFmjd ? '.with-name' : ''),
+      h('table', [
+        h('tr', [
+          h('th', 'FMJD ID'), 
+          h('td', 
+            h('a', {
+              attrs: { 
+                href: 'https://www.fmjd.org/?p=pcard&id=' + p.id,
+                target: '_blank',
+                rel: 'noopener'
+              }
+            }, p.id)
+          )
+        ]),
+        h('tr', [
+          h('th', noarg('countryOrRegion')), 
+          h('td', [
+            h('img.flag', {
+              attrs: { 
+                src: `/assets/images/flags/${p.country.code}.png`,
+                title: p.country.code === '_unknown' ? noarg('unknown') : p.country.name
+              }
+            }),
+            p.country.code[0] !== '_' ? p.country.code : ''
+          ])
+        ]),
+        stringRow(noarg('rating'), p.rating ? '' + p.rating : '-'),
+        p.title ? stringRow(noarg('draughtsTitle'), p.title) : null,
+        !displayFmjd ? null : h('tr', [
+          h('th', noarg('username')), 
+          h('td', userLink(u, false))
         ])
-      ]),
-      stringRow(noarg('rating'), p.rating ? '' + p.rating : '-'),
-      p.title ? stringRow(noarg('draughtsTitle'), p.title) : null
-    ])
+      ])
+    )
    ]) : null;
   }
 

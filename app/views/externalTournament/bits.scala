@@ -24,6 +24,7 @@ object bits {
     trans.decline,
     trans.youArePlaying,
     trans.joinTheGame,
+    trans.gamesPlayed,
     trans.none,
     trans.points,
     trans.winRate,
@@ -35,6 +36,7 @@ object bits {
     trans.countryOrRegion,
     trans.draughtsTitle,
     trans.unknown,
+    trans.username,
     trans.spectators
   )
 }

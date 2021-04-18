@@ -115,20 +115,8 @@ export default class ExternalTournamentCtrl {
   userLastPage = () => this.userSetPage(players(this).nbPages);
 
   showPlayerInfo = (player: BasePlayer) => {
-    const newPlayerInfoId = this.playerInfoId === player.user.id ? undefined : player.user.id;
-    if (newPlayerInfoId) {
-      xhr.playerInfo(this, newPlayerInfoId);
-      const self = this;
-      setTimeout(function() { 
-        /* timeout prevents flickering on quick response */
-        if (self.playerInfoId !== newPlayerInfoId) {
-          self.playerInfoId = newPlayerInfoId;
-          self.redraw(); 
-        }
-      }, 100);
-    } else {
-      this.playerInfoId = newPlayerInfoId;
-    }
+    this.playerInfoId = this.playerInfoId === player.user.id ? undefined : player.user.id;
+    if (this.playerInfoId) xhr.playerInfo(this, this.playerInfoId);
   };
 
   askReload = () => {

@@ -4,7 +4,7 @@ package html.externalTournament
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
-import lidraughts.common.String.html.richText
+import lidraughts.common.String.html.markdownLinksOrRichText
 import lidraughts.externalTournament.ExternalTournament
 
 import controllers.routes
@@ -28,7 +28,7 @@ object side {
             } else t.perfType.map(_.name),
             separator,
             if (t.rated) trans.ratedTournament() else trans.casualTournament(),
-            t.rounds map { rounds =>
+            t.settings.nbRounds map { rounds =>
               frag(
                 br,
                 trans.swiss.nbRounds(rounds)
@@ -37,6 +37,9 @@ object side {
           )
         )
       ),
+      t.settings.description map { d =>
+        st.section(cls := "description")(markdownLinksOrRichText(d))
+      },
       trans.by(userIdLink(t.createdBy.some))
     ),
     chat option views.html.chat.frag

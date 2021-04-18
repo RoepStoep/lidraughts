@@ -30,7 +30,6 @@ const answer = (ctrl: ExternalTournamentCtrl, accept: boolean) =>
 const playerInfo = (ctrl: ExternalTournamentCtrl, userId: string) =>
   json(`/tournament/external/${ctrl.data.id}/player/${userId}`).then(data => {
     ctrl.data.playerInfo = data;
-    ctrl.playerInfoId = userId
     ctrl.redraw();
   }).catch(onFail);
 

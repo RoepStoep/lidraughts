@@ -116,7 +116,9 @@ object ExternalTournament extends LidraughtsController {
     WithTournament(id) { tour =>
       env.api.playerInfo(tour, userId) flatMap {
         _.fold(notFoundJson()) { info =>
-          JsonOk(env.jsonView.playerInfoJson(info))
+          ExternalPlayerRepo.byTour(id) flatMap { players =>
+            JsonOk(env.jsonView.playerInfoJson(tour, info, players))
+          }
         }
       }
     }
@@ -159,5 +161,5 @@ object ExternalTournament extends LidraughtsController {
     }
 
   private def canHaveChat(tour: ExternalTournamentModel)(implicit ctx: Context): Boolean =
-    ctx.noKid
+    tour.settings.hasChat && ctx.noKid
 }

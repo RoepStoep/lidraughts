@@ -39,17 +39,19 @@ final class Env(
   private[externalTournament] lazy val externalPlayerColl = db(CollectionExternalPlayer)
   private[externalTournament] lazy val fmjdPlayerColl = db(CollectionFmjdPlayer)
 
-  lazy val cached = new Cached(
-    asyncCache = asyncCache,
-    proxyGame = proxyGame
-  )(system)
-
   private lazy val fmjdPlayerApi = new FmjdPlayerApi(
     baseUrl = FmjdPlayersBaseUrl,
     basePictureUrl = FmjdPlayersPictureBaseUrl,
     coll = fmjdPlayerColl,
-    cached = cached
+    lightFmjdUserApi = lightFmjdUserApi
   )
+
+  lazy val lightFmjdUserApi = new LightFmjdUserApi(fmjdPlayerColl)(system)
+
+  lazy val cached = new Cached(
+    asyncCache = asyncCache,
+    proxyGame = proxyGame
+  )(system)
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
     system = system,
@@ -79,6 +81,7 @@ final class Env(
 
   lazy val jsonView = new JsonView(
     lightUserApi = lightUserApi,
+    lightFmjdUserApi = lightFmjdUserApi,
     fmjdPlayerApi = fmjdPlayerApi,
     cached = cached
   )

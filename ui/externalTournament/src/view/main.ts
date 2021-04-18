@@ -99,7 +99,7 @@ function invited(ctrl: ExternalTournamentCtrl) {
                 title: p.status === playerStatus.invited ? 'Invited' : 'Rejected'
               }
             })),
-            h('td.player', renderPlayer(p, true, false))
+            h('td.player', renderPlayer(p, true, false, ctrl.data.displayFmjd))
           ])
         })
       )

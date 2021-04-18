@@ -52,13 +52,20 @@
       border: $border;
       background: $c-bg-zebra;
 
-      table {
-        margin-top: .5em;
+      .fmjd-fields {
+        margin: auto 0;
+        &.with-name table {
+          margin: 0 0 1.6em 0;
+        }
+        td {
+          line-height: 1.6em;
+        }
       }
-      td {
-        line-height: 1.6em;
+      .photo-only {
+        display: flex;
       }
       .photo {
+        align-self: center;
         width: 80px;
         display: block;
         margin: 0 auto;
@@ -70,7 +77,7 @@
         margin-right: .2em;
         vertical-align: text-bottom;
       }
-      .name {
+      .full-name {
         display: block;
         text-align: center;
         margin-top: .2em;

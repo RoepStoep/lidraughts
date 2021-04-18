@@ -13,7 +13,7 @@ final class FmjdPlayerApi(
     baseUrl: String,
     basePictureUrl: String,
     coll: Coll,
-    cached: Cached
+    lightFmjdUserApi: LightFmjdUserApi
 ) {
 
   import FmjdPlayerApi._
@@ -79,8 +79,9 @@ final class FmjdPlayerApi(
                     else coll.insert(newAdmin)
                   } >>- {
                     if (addedOrUpdated.nonEmpty) {
+                      addedOrUpdated.foreach(p => lightFmjdUserApi.invalidate(p._2.id))
                       // FMJD player info is cached in standings
-                      cached.invalidateStandings
+                      Env.current.cached.invalidateStandings
                     }
                   }
                 }
@@ -123,7 +124,7 @@ final class FmjdPlayerApi(
   }
 
   private def cleanField(fields: Array[String], index: Int) =
-    fields.lift(index).map(clean)
+    fields.lift(index).map(clean).filter(_.nonEmpty)
 
   private def clean(s: String) =
     if (s.startsWith("\"") && s.endsWith("\"")) s.slice(1, s.length - 1).trim

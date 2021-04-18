@@ -4,7 +4,7 @@ package html.swiss
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
-import lidraughts.common.String.html.richText
+import lidraughts.common.String.html.markdownLinksOrRichText
 import lidraughts.swiss.Swiss
 
 import controllers.routes
@@ -43,7 +43,7 @@ object side {
         )
       ),
       s.settings.description map { d =>
-        st.section(cls := "description")(richText(d))
+        st.section(cls := "description")(markdownLinksOrRichText(d))
       },
       teamLink(s.teamId),
       separator,

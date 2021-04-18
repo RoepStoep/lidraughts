@@ -34,7 +34,7 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
               },
               [
                 h('td.date', hrefAttr, c.startsAt ? [drawTime(new Date(c.startsAt))] : ['-']),
-                h('td', hrefAttr, renderPlayers(c))
+                h('td', hrefAttr, renderPlayers(c, ctrl.data.displayFmjd))
               ]
             )
           }))
@@ -80,7 +80,7 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
             },
             [
               h('td.date', dateFormatter(new Date(g.createdAt))),
-              h('td', hrefAttr, renderPlayers(g)),
+              h('td', hrefAttr, renderPlayers(g, ctrl.data.displayFmjd)),
               h('td', hrefAttr, [
                 h('div.result', g.winner ? 
                   (g.winner == 'white' ? (draughtsResult ? '2-0' : '1-0') : (draughtsResult ? '0-2' : '0-1')) :
@@ -95,15 +95,14 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
   ]) : null;
 }
 
-function renderPlayers(g: BaseGame) {
+function renderPlayers(g: BaseGame, fmjd: boolean) {
+  const playerWrapper = (g: BaseGame, c: Color) =>
+    h(`div.player.color-icon.is.${c}.text`, renderPlayer(g[c], true, true, fmjd));
   return [
     playerWrapper(g, 'white'),
     playerWrapper(g, 'black')
   ];
 }
-
-const playerWrapper = (g: BaseGame, c: Color) =>
-  h(`div.player.color-icon.is.${c}.text`, renderPlayer(g[c], true, true));
 
 let cachedDateFormatter: (date: Date) => string;
 

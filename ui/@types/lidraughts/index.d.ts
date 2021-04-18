@@ -165,6 +165,12 @@ interface LightUser {
   patron?: boolean
 }
 
+interface LightFmjdUser {
+  id: string
+  name: string
+  title?: string
+}
+
 interface WebAssemblyStatic {
   validate(bufferSource: ArrayBuffer | Uint8Array): boolean
 }

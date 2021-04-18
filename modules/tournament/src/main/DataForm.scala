@@ -88,7 +88,7 @@ final class DataForm {
     "teamBattleByTeam" -> optional(nonEmptyText),
     "berserkable" -> optional(boolean),
     "streakable" -> optional(boolean),
-    "description" -> optional(cleanNonEmptyText(maxLength = 800))
+    "description" -> optional(cleanNonEmptyText(maxLength = 1200))
   )(TournamentSetup.apply)(TournamentSetup.unapply)
     .verifying("Invalid clock", _.validClock)
     .verifying("15s variant games cannot be rated", _.validRatedUltraBulletVariant)

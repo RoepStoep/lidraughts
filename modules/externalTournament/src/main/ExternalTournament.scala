@@ -16,7 +16,7 @@ case class ExternalTournament(
     days: Option[Int],
     rated: Boolean,
     variant: Variant,
-    rounds: Option[Int]
+    settings: ExternalTournament.Settings
 ) {
 
   def id = _id
@@ -31,6 +31,13 @@ object ExternalTournament {
 
   type ID = String
 
+  case class Settings(
+      nbRounds: Option[Int],
+      description: Option[String],
+      displayFmjd: Boolean,
+      hasChat: Boolean
+  )
+
   private[externalTournament] def make(
     userId: User.ID,
     config: DataForm.TournamentData
@@ -42,6 +49,11 @@ object ExternalTournament {
     days = config.days,
     rated = config.rated,
     variant = Variant.orDefault(~config.variant),
-    rounds = config.rounds
+    settings = Settings(
+      nbRounds = config.rounds,
+      description = config.description,
+      hasChat = config.chat.getOrElse(true),
+      displayFmjd = ~config.fmjd
+    )
   )
 }

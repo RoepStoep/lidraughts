@@ -1,7 +1,7 @@
 import { h } from 'snabbdom'
 import { VNode,  } from 'snabbdom/vnode';
 import ExternalTournamentCtrl from '../ctrl';
-import { player as renderPlayer, onInsert, bind } from './util';
+import { player as lidraughtsPlayer, fmjdPlayer, onInsert, bind } from './util';
 import { MaybeVNodes, Pager, PlayerInfo } from '../interfaces';
 
 function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
@@ -17,7 +17,7 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
       hook: bind('click', _ => ctrl.showPlayerInfo(p), ctrl.redraw)
     }, [
       h('td.rank', p.rank ? [p.rank] : []),
-      h('td.player', renderPlayer(p, false, true)),
+      h('td.player', ctrl.data.displayFmjd ? fmjdPlayer(p, false, true) : lidraughtsPlayer(p, false, true, false)),
       h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
         h('div', 
           p.sheet.map(r => {

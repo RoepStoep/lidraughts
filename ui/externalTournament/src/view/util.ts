@@ -2,7 +2,7 @@ import { Attrs } from 'snabbdom/modules/attributes'
 import { h } from 'snabbdom'
 import { Hooks } from 'snabbdom/hooks'
 import { VNode } from 'snabbdom/vnode';
-import { BasePlayer } from '../interfaces';
+import { BasePlayer, PlayerInfo } from '../interfaces';
 
 export function bind(eventName: string, f: (e: Event) => any, redraw?: () => void): Hooks {
   return onInsert(el =>
@@ -32,8 +32,8 @@ export function dataIcon(icon: string): Attrs {
   };
 }
 
-export const userName = (u: LightUser) => {
-  if (!u.title) return [u.name];
+export const userName = (u: LightUser | LightFmjdUser, withTitle: boolean = true) => {
+  if (!u.title || !withTitle) return [u.name];
   const title64 = u.title.endsWith('-64');
   return [
     h(
@@ -43,6 +43,17 @@ export const userName = (u: LightUser) => {
     ), 
     ' ' + u.name
   ];
+}
+
+export function userLink(u: LightUser, withTitle: boolean = true) {
+  return h('a.ulpt.user-link' + (((u.title || '') + u.name).length > 15 ? '.long' : ''), {
+    attrs: { href: '/@/' + u.name },
+    hook: {
+      destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
+    }
+  }, [
+    h('span.name', userName(u, withTitle))
+  ]);
 }
 
 export function drawTime(date: Date) {
@@ -59,15 +70,31 @@ export function drawTime(date: Date) {
   }, li.timeagoLocale ? li.timeago.format(date) : date.toLocaleString());
 }
 
-export function player(p: BasePlayer, asLink: boolean, withRating: boolean) {
-  return h('a.ulpt.user-link' + (((p.user.title || '') + p.user.name).length > 15 ? '.long' : ''), {
+export function player(p: BasePlayer, asLink: boolean, withRating: boolean, displayFmjd: boolean) {
+  const name = (displayFmjd && p.fmjd) ? p.fmjd.name : p.user.name,
+    title = (displayFmjd && p.fmjd?.title) || p.user.title || '';
+  return h('a.ulpt.user-link' + ((title + name).length > 15 ? '.long' : ''), {
     attrs: asLink ? { href: '/@/' + p.user.name } : { 'data-href': '/@/' + p.user.name },
     hook: {
       destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
     }
   }, [
-    h('span.name', userName(p.user)),
-    withRating ? h('span.rating', ' ' + p.rating + (p.provisional ? '?' : '')) : null
+    h('span.name', (displayFmjd && p.fmjd) ? userName(p.fmjd) : userName(p.user)),
+    withRating && !displayFmjd ? h('span.rating', ' ' + p.rating + (p.provisional ? '?' : '')) : null
+  ]);
+}
+
+export function fmjdPlayer(p: PlayerInfo, asLink: boolean, withRating: boolean) {
+  const name = p.fmjd ? p.fmjd.name : p.user.name,
+    title = (p.fmjd ? p.fmjd.title : p.user.title) || '';
+  return h('a.ulpt.user-link' + ((title + name).length > 15 ? '.long' : ''), {
+    attrs: asLink ? { href: '/@/' + p.user.name } : { 'data-href': '/@/' + p.user.name },
+    hook: {
+      destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
+    }
+  }, [
+    h('span.name', p.fmjd ? userName(p.fmjd) : userName(p.user)),
+    withRating ? h('span.rating', p.fmjd?.rating ? ' ' + p.fmjd.rating : '') : null
   ]);
 }
 
