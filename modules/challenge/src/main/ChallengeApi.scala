@@ -30,9 +30,7 @@ final class ChallengeApi(
 
   // returns boolean success
   def create(c: Challenge): Fu[Boolean] =
-    if (c.isExternal) (repo insert c) >>- {
-      lidraughtsBus.publish(Event.Create(c), 'challenge)
-    } inject true
+    if (c.isExternal) (repo insert c) inject true
     else isLimitedByMaxPlaying(c) flatMap {
       case true => fuFalse
       case false => {
@@ -69,7 +67,9 @@ final class ChallengeApi(
     case _ => fuccess(socketReload(id))
   }
 
-  def decline(c: Challenge) = (repo decline c) >>- uncacheAndNotify(c)
+  def decline(c: Challenge) =
+    if (c.isExternal) funit
+    else (repo decline c) >>- uncacheAndNotify(c)
 
   def accept(c: Challenge, user: Option[User]): Fu[Option[Pov]] =
     if (c.isExternal) acceptExternal(c, user)
@@ -83,7 +83,7 @@ final class ChallengeApi(
 
   private def acceptExternal(challenge: Challenge, user: Option[User]): Fu[Option[Pov]] =
     user match {
-      case Some(u) if challenge.external.flatMap(_.startsAt).fold(true)(_.isBeforeNow) =>
+      case Some(u) if !challenge.autoStart && challenge.external.flatMap(_.startsAt).fold(true)(_.isBeforeNow) =>
         val c = challenge.acceptExternal(u)
         doAcceptExternal(c)
       case _ => fuccess(None)

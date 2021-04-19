@@ -75,6 +75,8 @@ case class Challenge(
   def isExternal = external.isDefined
   def isExternalTournament = externalTournamentId.isDefined
 
+  def autoStart = ~external.flatMap(_.autoStart)
+
   def isMicroMatch = ~microMatch
 
   def externalTournamentId = external.flatMap(_.tournamentId)

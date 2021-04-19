@@ -130,7 +130,7 @@ object Challenge extends LidraughtsController {
 
   def cancel(id: String) = Open { implicit ctx =>
     OptionFuResult(env.api byId id) { c =>
-      if (isMine(c)) env.api cancel c
+      if (isMine(c) && !c.isExternal) env.api cancel c
       else notFound
     }
   }
