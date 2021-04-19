@@ -44,7 +44,7 @@ export default class ExternalTournamentCtrl {
     this.redirectToMyGame();
   };
 
-  isCreator = () => this.data.me?.userId === this.data.createdBy;
+  isCreator = () => this.data.me?.userId === this.data.createdBy.id;
   isMe = (user: LightUser) => this.data.me?.userId === user.id;
 
   myGameId = () => this.data.me?.gameId;

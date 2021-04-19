@@ -90,22 +90,25 @@ object ExternalTournament extends LidraughtsController {
       env.forms.tournamentUpdate(tour).bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => {
-          val checkGames = data.changedGameSettings(tour)
-          val tournamentHasGamesFu = checkGames ?? {
+          val tournamentHasGamesFu = {
             for {
+              nbAccepted <- ExternalPlayerRepo.countAccepted(tour.id)
               finished <- env.cached.getFinishedGames(id)
               ongoing <- finished.isEmpty ?? env.cached.getOngoingGames(id)
               upcoming <- ongoing.isEmpty ?? Env.challenge.api.allForExternalTournament(id)
-            } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
+            } yield (finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty, nbAccepted)
           }
-          tournamentHasGamesFu flatMap { hasGames =>
-            if (hasGames && checkGames)
-              fuccess(BadRequest(jsonError("Cannot change game settings once games are added to the tournament")))
-            else api.update(id, data) map { opt =>
-              opt.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
-                Ok(env.jsonView.apiTournament(t))
+          tournamentHasGamesFu flatMap {
+            case (hasGames, nbAccepted) =>
+              if (hasGames && data.changedGameSettings(tour))
+                fuccess(BadRequest(jsonError("Cannot change game settings once games are added")))
+              else if (nbAccepted > 0 && data.autoStart != tour.settings.autoStart)
+                fuccess(BadRequest(jsonError("Cannot change autoStart once players have joined")))
+              else api.update(id, data) map { opt =>
+                opt.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
+                  Ok(env.jsonView.apiTournament(t))
+                }
               }
-            }
           }
         }
       )
@@ -166,42 +169,46 @@ object ExternalTournament extends LidraughtsController {
       env.forms.gameCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => {
-          import lidraughts.challenge.Challenge._
-          val challengeFu = for {
-            whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
-            blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
-            _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
-            _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
-          } yield lidraughts.challenge.Challenge.make(
-            variant = tour.variant,
-            fenVariant = none,
-            initialFen = none,
-            timeControl = tour.clock map { c =>
-              TimeControl.Clock(c)
-            } orElse tour.days.map {
-              TimeControl.Correspondence.apply
-            } getOrElse TimeControl.Unlimited,
-            mode = draughts.Mode(tour.rated),
-            color = draughts.White.name,
-            challenger = Right(whiteUser),
-            destUser = blackUser.some,
-            rematchOf = none,
-            external = true,
-            startsAt = data.startsAt,
-            autoStart = ~data.autoStart,
-            externalTournamentId = tourId.some
-          )
-          challengeFu.flatFold(
-            err => badRequestJson(err.getMessage),
-            challenge => Env.challenge.api.create(challenge) map {
-              case true =>
-                api addChallenge challenge
-                lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
-                JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
-              case false =>
-                BadRequest(jsonError("Challenge not created"))
-            }
-          )
+          if (tour.settings.autoStart && data.startsAt.isEmpty)
+            badRequestJson("Tournament autoStart requires startsAt to be specified")
+          else {
+            import lidraughts.challenge.Challenge._
+            val challengeFu = for {
+              whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
+              blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
+              _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
+              _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
+            } yield lidraughts.challenge.Challenge.make(
+              variant = tour.variant,
+              fenVariant = none,
+              initialFen = none,
+              timeControl = tour.clock map { c =>
+                TimeControl.Clock(c)
+              } orElse tour.days.map {
+                TimeControl.Correspondence.apply
+              } getOrElse TimeControl.Unlimited,
+              mode = draughts.Mode(tour.rated),
+              color = draughts.White.name,
+              challenger = Right(whiteUser),
+              destUser = blackUser.some,
+              rematchOf = none,
+              external = true,
+              startsAt = data.startsAt,
+              autoStart = tour.settings.autoStart,
+              externalTournamentId = tourId.some
+            )
+            challengeFu.flatFold(
+              err => badRequestJson(err.getMessage),
+              challenge => Env.challenge.api.create(challenge) map {
+                case true =>
+                  api addChallenge challenge
+                  lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
+                  JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
+                case false =>
+                  BadRequest(jsonError("Challenge not created"))
+              }
+            )
+          }
         }
       )
     }

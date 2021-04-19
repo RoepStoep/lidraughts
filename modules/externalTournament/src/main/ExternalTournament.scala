@@ -35,6 +35,7 @@ object ExternalTournament {
       nbRounds: Option[Int],
       description: Option[String],
       userDisplay: UserDisplay,
+      autoStart: Boolean,
       hasChat: Boolean
   )
 
@@ -69,6 +70,7 @@ object ExternalTournament {
       nbRounds = config.rounds,
       description = config.description,
       hasChat = config.chat.getOrElse(true),
+      autoStart = config.autoStart,
       userDisplay = config.userDisplay.flatMap(UserDisplay.apply).getOrElse(UserDisplay.Lidraughts)
     )
   )

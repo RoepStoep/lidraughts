@@ -40,12 +40,12 @@ final class JsonView(
     for {
       standing <- cached.getStandingPage(tour.id, page)
       createdByMe = me.exists(_.id == tour.createdBy)
-      userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId)
+      userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId) + tour.createdBy
       _ <- lightUserApi.preloadSet(userIds)
       playerInfoJson <- playerInfo.fold(fuccess(none[JsObject])) { playerInfoJson(tour, _, players).map(_.some) }
     } yield Json.obj(
       "id" -> tour.id,
-      "createdBy" -> tour.createdBy,
+      "createdBy" -> lightUserApi.sync(tour.createdBy),
       "name" -> tour.name,
       "nbPlayers" -> players.count(_.accepted),
       "nbUpcoming" -> upcoming.take(5).length,
@@ -55,7 +55,8 @@ final class JsonView(
       "ongoing" -> ongoing.map(boardJson(_, players)),
       "finished" -> finished.take(5).map(gameJson(_, fetch)),
       "draughtsResult" -> pref.draughtsResult,
-      "displayFmjd" -> tour.settings.userDisplay.fmjd
+      "displayFmjd" -> tour.settings.userDisplay.fmjd,
+      "autoStart" -> tour.settings.autoStart
     )
       .add("rounds" -> tour.settings.nbRounds)
       .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
@@ -80,7 +81,8 @@ final class JsonView(
       "variant" -> tour.variant.key,
       "rated" -> tour.rated,
       "displayFmjd" -> tour.settings.userDisplay.fmjd,
-      "hasChat" -> tour.settings.hasChat
+      "hasChat" -> tour.settings.hasChat,
+      "autoStart" -> tour.settings.autoStart
     )
       .add("clock" -> tour.clock)
       .add("days" -> tour.days)
@@ -138,6 +140,7 @@ final class JsonView(
   private def myInfoJson(me: User, player: Option[ExternalPlayer], game: Option[Game]) =
     Json
       .obj("userId" -> me.id)
+      .add("fmjdId" -> player.flatMap(_.fmjdId))
       .add("canJoin" -> player.exists(p => p.invited).option(true))
       .add("rank" -> player.flatMap(_.rank))
       .add("gameId" -> game.map(_.id))

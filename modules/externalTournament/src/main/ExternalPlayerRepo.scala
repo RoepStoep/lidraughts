@@ -19,7 +19,8 @@ object ExternalPlayerRepo {
   )
   private val selectAccepted = $doc("status" -> ExternalPlayer.Status.Accepted.id)
 
-  def count(tourId: ExternalTournament.ID): Fu[Int] = coll.countSel(selectTour(tourId))
+  def countAccepted(tourId: ExternalTournament.ID): Fu[Int] =
+    coll.countSel(selectTour(tourId) ++ selectAccepted)
 
   def insert(player: ExternalPlayer) =
     coll.insert(player).void

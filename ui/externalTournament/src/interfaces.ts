@@ -24,7 +24,7 @@ export interface ExternalTournamentOpts {
 
 export interface ExternalTournamentData {
   id: string;
-  createdBy: string;
+  createdBy: LightUser;
   name: string;
   rounds?: number;
   nbPlayers: number;
@@ -50,6 +50,7 @@ export interface Standing {
 
 export interface MyInfo {
   userId: string;
+  fmjdId?: string;
   rank?: number;
   canJoin?: boolean;
   gameId?: string;

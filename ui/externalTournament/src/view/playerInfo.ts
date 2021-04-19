@@ -1,6 +1,6 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import { player as lidraughtsPlayer, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink  } from './util';
+import { player as lidraughtsPlayer, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink, fmjdLink  } from './util';
 import { FmjdPlayer, GameResult } from '../interfaces';
 import ExternalTournamentCtrl from '../ctrl';
 
@@ -97,15 +97,7 @@ function renderFmjdInfo(p: FmjdPlayer | undefined, u: LightUser, noarg: TransNoA
       h('table', [
         h('tr', [
           h('th', 'FMJD ID'), 
-          h('td', 
-            h('a', {
-              attrs: { 
-                href: 'https://www.fmjd.org/?p=pcard&id=' + p.id,
-                target: '_blank',
-                rel: 'noopener'
-              }
-            }, p.id)
-          )
+          h('td', fmjdLink(p.id))
         ]),
         h('tr', [
           h('th', noarg('countryOrRegion')), 

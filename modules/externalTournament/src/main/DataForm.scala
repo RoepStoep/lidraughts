@@ -20,6 +20,7 @@ object DataForm {
     "days" -> optional(Fields.days),
     "rated" -> boolean,
     "hasChat" -> optional(boolean),
+    "autoStart" -> boolean,
     "userDisplay" -> optional(Fields.userDisplay),
     "rounds" -> optional(Fields.rounds)
   )(TournamentData.apply)(TournamentData.unapply)
@@ -33,6 +34,7 @@ object DataForm {
     days = none,
     rated = false,
     chat = true.some,
+    autoStart = false,
     userDisplay = none,
     rounds = none
   )
@@ -45,6 +47,7 @@ object DataForm {
     days = t.days,
     rated = t.rated,
     chat = t.settings.hasChat.some,
+    autoStart = t.settings.autoStart,
     userDisplay = t.settings.userDisplay.key.some,
     rounds = t.settings.nbRounds
   )
@@ -61,14 +64,11 @@ object DataForm {
     "whiteUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "blackUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "startsAt" -> optional(inTheFuture(utcDate)),
-    "autoStart" -> optional(boolean),
     "round" -> optional(Fields.rounds)
-  )(GameData.apply)(GameData.unapply)
-    .verifying("Autostart requires startsAt to be specified", _.validAutoStart)) fill GameData(
+  )(GameData.apply)(GameData.unapply)) fill GameData(
     whiteUserId = "",
     blackUserId = "",
     startsAt = none,
-    autoStart = none,
     round = none
   )
 
@@ -80,6 +80,7 @@ object DataForm {
       days: Option[Int],
       rated: Boolean,
       chat: Option[Boolean],
+      autoStart: Boolean,
       userDisplay: Option[String],
       rounds: Option[Int]
   ) {
@@ -103,12 +104,8 @@ object DataForm {
       whiteUserId: String,
       blackUserId: String,
       startsAt: Option[DateTime],
-      autoStart: Option[Boolean],
       round: Option[Int]
-  ) {
-
-    def validAutoStart = !(~autoStart) || startsAt.isDefined
-  }
+  )
 
   case class PlayerData(
       userId: String,
