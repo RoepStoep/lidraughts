@@ -47,7 +47,7 @@ final class JsonView(
       "id" -> tour.id,
       "createdBy" -> tour.createdBy,
       "name" -> tour.name,
-      "nbPlayers" -> players.count(_.joined),
+      "nbPlayers" -> players.count(_.accepted),
       "nbUpcoming" -> upcoming.take(5).length,
       "nbFinished" -> finished.length,
       "standing" -> standing,
@@ -58,7 +58,7 @@ final class JsonView(
       "displayFmjd" -> tour.settings.userDisplay.fmjd
     )
       .add("rounds" -> tour.settings.nbRounds)
-      .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
+      .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
       .add("playerInfo" -> playerInfoJson)
       .add("socketVersion" -> socketVersion.map(_.value))
@@ -91,10 +91,14 @@ final class JsonView(
     player: ExternalPlayer
   ): JsObject =
     Json.obj(
-      "id" -> player.id,
       "userId" -> player.userId,
-      "joined" -> player.joined
-    )
+      "status" -> player.status.key
+    ).add("fmjdId", player.fmjdId)
+
+  def apiPlayers(
+    players: List[ExternalPlayer]
+  ): JsArray =
+    JsArray(players.map(apiPlayer))
 
   def playerInfoJson(
     tour: ExternalTournament,

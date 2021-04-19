@@ -79,8 +79,8 @@ final class ExternalTournamentApi(
   ): Fu[Boolean] =
     Sequencing(tourId)(byId) { tour =>
       ExternalPlayerRepo.find(tourId, me.id) flatMap {
-        case Some(player) if !player.joined && accept =>
-          ExternalPlayerRepo.setStatus(player.id, Status.Joined) >>
+        case Some(player) if !player.accepted && accept =>
+          ExternalPlayerRepo.setStatus(player.id, Status.Accepted) >>
             updateRanking(tour) >>
             cached.invalidateStandings(tourId) >>- {
               socketReload(tourId)
@@ -94,7 +94,7 @@ final class ExternalTournamentApi(
     }
 
   private def updateRanking(tour: ExternalTournament) =
-    ExternalPlayerRepo.joinedByTour(tour.id) flatMap { currentPlayers =>
+    ExternalPlayerRepo.acceptedByTour(tour.id) flatMap { currentPlayers =>
       val updatedPlayers = currentPlayers.sortWith {
         (p1, p2) =>
           if (p1.points == p2.points) p1.rating > p2.rating

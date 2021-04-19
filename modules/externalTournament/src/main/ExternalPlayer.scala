@@ -22,7 +22,7 @@ private[externalTournament] case class ExternalPlayer(
   def is(user: User): Boolean = is(user.id)
   def is(other: ExternalPlayer): Boolean = is(other.userId)
 
-  def joined = status.is(_.Joined)
+  def accepted = status.is(_.Accepted)
   def invited = status.is(_.Invited)
   def ranked = rank.isDefined
 
@@ -35,7 +35,7 @@ private[externalTournament] object ExternalPlayer {
 
   type ID = String
 
-  sealed abstract class Status(val id: Int) {
+  sealed abstract class Status(val id: Int, val key: String) {
 
     def is(s: Status): Boolean = this == s
     def is(f: Status.type => Status): Boolean = is(f(Status))
@@ -43,11 +43,11 @@ private[externalTournament] object ExternalPlayer {
 
   object Status {
 
-    case object Invited extends Status(0)
-    case object Rejected extends Status(10)
-    case object Joined extends Status(20)
+    case object Invited extends Status(0, "invited")
+    case object Rejected extends Status(10, "rejected")
+    case object Accepted extends Status(20, "accepted")
 
-    val all = List(Invited, Rejected, Joined)
+    val all = List(Invited, Rejected, Accepted)
     val byId = all map { v => (v.id, v) } toMap
 
     def apply(id: Int): Option[Status] = byId get id

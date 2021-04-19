@@ -17,7 +17,7 @@ object ExternalPlayerRepo {
     "tourId" -> tourId,
     "userId" -> userId
   )
-  private val selectJoined = $doc("status" -> ExternalPlayer.Status.Joined.id)
+  private val selectAccepted = $doc("status" -> ExternalPlayer.Status.Accepted.id)
 
   def count(tourId: ExternalTournament.ID): Fu[Int] = coll.countSel(selectTour(tourId))
 
@@ -26,42 +26,26 @@ object ExternalPlayerRepo {
   def remove(tourId: ExternalTournament.ID, userId: User.ID) =
     coll.remove(selectTourUser(tourId, userId)).void
 
-  def filterJoined(tourId: ExternalTournament.ID, userIds: List[User.ID]): Fu[List[User.ID]] =
-    coll.primitive[User.ID](
-      $doc("userId" $in userIds)
-        ++ selectTour(tourId)
-        ++ selectJoined,
-      "userId"
-    )
-
   def exists(tourId: ExternalTournament.ID, userId: User.ID) =
     coll.exists(selectTourUser(tourId, userId))
 
   def find(tourId: ExternalTournament.ID, userId: User.ID): Fu[Option[ExternalPlayer]] =
     coll.find(selectTourUser(tourId, userId)).uno[ExternalPlayer]
 
-  def findJoined(tourId: ExternalTournament.ID, userId: User.ID): Fu[Option[ExternalPlayer]] =
-    coll.find(selectTourUser(tourId, userId) ++ selectJoined).uno[ExternalPlayer]
+  def findAccepted(tourId: ExternalTournament.ID, userId: User.ID): Fu[Option[ExternalPlayer]] =
+    coll.find(selectTourUser(tourId, userId) ++ selectAccepted).uno[ExternalPlayer]
 
   def update(tourId: ExternalTournament.ID, userId: User.ID)(f: ExternalPlayer => Fu[ExternalPlayer]) =
     find(tourId, userId) flatten s"No such player: $tourId/$userId" flatMap f flatMap { player =>
       coll.update(selectId(player._id), player).void
     }
 
-  private[externalTournament] def userIds(tourId: ExternalTournament.ID): Fu[List[User.ID]] =
-    coll.distinct[User.ID, List]("userId", selectTour(tourId).some)
-
-  private[externalTournament] def joinedUserIds(tourId: ExternalTournament.ID): Fu[List[User.ID]] =
-    coll.distinct[User.ID, List](
-      "userId", (selectTour(tourId) ++ selectJoined).some
-    )
-
   def byTour(tourId: ExternalTournament.ID): Fu[List[ExternalPlayer]] =
     coll.find(selectTour(tourId))
       .list[ExternalPlayer]()
 
-  def joinedByTour(tourId: ExternalTournament.ID): Fu[List[ExternalPlayer]] =
-    coll.find(selectTour(tourId) ++ selectJoined)
+  def acceptedByTour(tourId: ExternalTournament.ID): Fu[List[ExternalPlayer]] =
+    coll.find(selectTour(tourId) ++ selectAccepted)
       .list[ExternalPlayer]()
 
   def setStatus(id: ExternalPlayer.ID, status: ExternalPlayer.Status) =

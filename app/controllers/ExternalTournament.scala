@@ -154,8 +154,8 @@ object ExternalTournament extends LidraughtsController {
           val challengeFu = for {
             whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
             blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
-            _ <- ExternalPlayerRepo.findJoined(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
-            _ <- ExternalPlayerRepo.findJoined(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
+            _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
+            _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
           } yield lidraughts.challenge.Challenge.make(
             variant = tour.variant,
             fenVariant = none,
@@ -187,6 +187,14 @@ object ExternalTournament extends LidraughtsController {
           )
         }
       )
+    }
+  }
+
+  def apiPlayers(id: String) = Scoped() { implicit req => me =>
+    WithMyTournament(me, id) { tour =>
+      ExternalPlayerRepo.byTour(id) map { players =>
+        JsonOk(env.jsonView.apiPlayers(players))
+      }
     }
   }
 
