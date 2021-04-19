@@ -73,14 +73,38 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def create = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def apiCreate = ScopedBody(_.Tournament.Write) { implicit req => me =>
     if (me.isBot || me.lame) notFoundJson("This account cannot create tournaments")
-    else api.tournamentForm.bindFromRequest.fold(
+    else env.forms.tournamentCreate.bindFromRequest.fold(
       jsonFormErrorDefaultLang,
       data => api.create(data, me) map { t =>
         env.jsonView.apiTournament(t)
       } map { Ok(_) }
     )
+  }
+
+  def apiUpdate(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+    WithMyTournament(me, id) { tour =>
+      env.forms.tournamentUpdate(tour).bindFromRequest.fold(
+        jsonFormErrorDefaultLang,
+        data => {
+          val gamesPlayedFu = for {
+            finished <- env.cached.getFinishedGames(id)
+            ongoing <- finished.isEmpty ?? env.cached.getOngoingGames(id)
+            upcoming <- ongoing.isEmpty ?? Env.challenge.api.allForExternalTournament(id)
+          } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
+          gamesPlayedFu flatMap { gamesPlayed =>
+            if (gamesPlayed && data.changedGameSettings(tour))
+              fuccess(BadRequest(jsonError("Cannot change game settings once games are added to the tournament")))
+            else api.update(id, data) map { opt =>
+              opt.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
+                Ok(env.jsonView.apiTournament(t))
+              }
+            }
+          }
+        }
+      )
+    }
   }
 
   def tournamentResults(id: String) = Open { implicit ctx =>
@@ -102,8 +126,8 @@ object ExternalTournament extends LidraughtsController {
   }
 
   def playerAdd(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
-    WithOwnTournament(me, id) { tour =>
-      api.playerForm.bindFromRequest.fold(
+    WithMyTournament(me, id) { tour =>
+      env.forms.playerCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => api.addPlayer(tour.id, data) map {
           _.fold(jsonError("A player with this userId already exists"))(env.jsonView.apiPlayer)
@@ -153,7 +177,7 @@ object ExternalTournament extends LidraughtsController {
   private def WithTournament(id: String)(f: ExternalTournamentModel => Fu[Result]): Fu[Result] =
     env.api.byId(id) flatMap { _ ?? f }
 
-  private def WithOwnTournament(me: lidraughts.user.User, id: String)(f: ExternalTournamentModel => Fu[Result]): Fu[Result] =
+  private def WithMyTournament(me: lidraughts.user.User, id: String)(f: ExternalTournamentModel => Fu[Result]): Fu[Result] =
     api.byId(id) flatMap {
       case None => notFoundJson("No such tournament")
       case Some(tour) if me.id == tour.createdBy => f(tour)

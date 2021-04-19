@@ -26,9 +26,6 @@ final class ExternalTournamentApi(
 
   import BsonHandlers._
 
-  def tournamentForm = DataForm.tournament
-  def playerForm = DataForm.player
-
   def byId(id: ExternalTournament.ID) = coll.byId[ExternalTournament](id)
 
   def create(
@@ -38,6 +35,25 @@ final class ExternalTournamentApi(
     val tour = data make me.id
     coll.insert(tour) inject tour
   }
+
+  def update(
+    tourId: ExternalTournament.ID,
+    data: DataForm.TournamentData
+  ): Fu[Option[ExternalTournament]] =
+    Sequencing(tourId)(byId) { old =>
+      val newTour = data make old.createdBy
+      val updated = old.copy(
+        name = newTour.name,
+        variant = newTour.variant,
+        clock = newTour.clock,
+        days = newTour.days,
+        rated = newTour.rated,
+        settings = newTour.settings
+      )
+      coll.update($id(tourId), updated) >>- {
+        socketReload(tourId)
+      } inject updated.some
+    }
 
   def addPlayer(
     tourId: ExternalTournament.ID,

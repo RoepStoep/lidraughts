@@ -10,23 +10,20 @@ object DataForm {
 
   import lidraughts.common.Form.cleanNonEmptyText
 
-  private val maxClockSeconds = 180 * 60
-  private val maxClockIncrement = 180 * 60
-
-  val tournament = Form(mapping(
-    "variant" -> optional(text.verifying(Variant.byKey.contains _)),
-    "name" -> cleanNonEmptyText(minLength = 3, maxLength = 40),
-    "description" -> optional(cleanNonEmptyText(maxLength = 20000)),
-    "clock" -> optional(mapping(
-      "limit" -> number(min = 0, max = maxClockSeconds),
-      "increment" -> number(min = 0, max = maxClockIncrement)
-    )(draughts.Clock.Config.apply)(draughts.Clock.Config.unapply)),
-    "days" -> optional(number(min = 1, max = 14)),
+  private val tournamentForm = Form(mapping(
+    "variant" -> optional(Fields.variant),
+    "name" -> Fields.name,
+    "description" -> optional(Fields.description),
+    "clock" -> optional(Fields.clock),
+    "days" -> optional(Fields.days),
     "rated" -> boolean,
     "hasChat" -> optional(boolean),
     "displayFmjd" -> optional(boolean),
-    "rounds" -> optional(number(min = 1, max = 99))
-  )(TournamentData.apply)(TournamentData.unapply)) fill TournamentData(
+    "rounds" -> optional(Fields.rounds)
+  )(TournamentData.apply)(TournamentData.unapply)
+    .verifying("Unlimited timecontrol cannot be rated", _.validateUnlimited))
+
+  def tournamentCreate = tournamentForm fill TournamentData(
     variant = none,
     name = "",
     description = none,
@@ -38,7 +35,19 @@ object DataForm {
     rounds = none
   )
 
-  val player = Form(mapping(
+  def tournamentUpdate(t: ExternalTournament) = tournamentForm fill TournamentData(
+    variant = t.variant.key.some,
+    name = t.name,
+    description = t.settings.description,
+    clock = t.clock,
+    days = t.days,
+    rated = t.rated,
+    chat = t.settings.hasChat.some,
+    fmjd = t.settings.displayFmjd.some,
+    rounds = t.settings.nbRounds
+  )
+
+  val playerCreate = Form(mapping(
     "userId" -> lidraughts.user.DataForm.historicalUsernameField,
     "fmjdId" -> optional(nonEmptyText(minLength = 5, maxLength = 6))
   )(PlayerData.apply)(PlayerData.unapply)) fill PlayerData(
@@ -63,10 +72,35 @@ object DataForm {
         userId = userId,
         config = this
       )
+
+    def changedGameSettings(tour: ExternalTournament) =
+      Variant.orDefault(~variant) != tour.variant ||
+        clock != tour.clock ||
+        days != tour.days ||
+        rated != tour.rated
+
+    def validateUnlimited = !rated || (clock.isDefined || days.isDefined)
   }
 
   case class PlayerData(
       userId: String,
       fmjdId: Option[String]
   )
+
+  private object Fields {
+
+    private val maxClockSeconds = 180 * 60
+    private val maxClockIncrement = 180 * 60
+
+    val variant = text.verifying(Variant.byKey.contains _)
+    val name = cleanNonEmptyText(minLength = 3, maxLength = 40)
+    val description = cleanNonEmptyText(maxLength = 20000)
+    val clock = mapping(
+      "limit" -> number(min = 0, max = maxClockSeconds),
+      "increment" -> number(min = 0, max = maxClockIncrement)
+    )(draughts.Clock.Config.apply)(draughts.Clock.Config.unapply)
+    val days = number(min = 1, max = 14)
+    val rounds = number(min = 1, max = 100)
+  }
+
 }

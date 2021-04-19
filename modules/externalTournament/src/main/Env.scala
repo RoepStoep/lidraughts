@@ -88,6 +88,8 @@ final class Env(
 
   def playerRepo = ExternalPlayerRepo
 
+  def forms = DataForm
+
   lazy val api = new ExternalTournamentApi(
     coll = externalTournamentColl,
     socketMap = socketMap,

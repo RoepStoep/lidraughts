@@ -302,6 +302,12 @@ object Api extends LidraughtsController {
     }
   }
 
+  def externalTournament(id: String) = ApiRequest { req =>
+    Env.externalTournament.api byId id map {
+      _ map Env.externalTournament.jsonView.apiTournament
+    } map toApiResult
+  }
+
   def swissGames(id: String) =
     Action.async { req =>
       Env.swiss.api byId lidraughts.swiss.Swiss.Id(id) flatMap {

@@ -75,8 +75,17 @@ final class JsonView(
   ): JsObject =
     Json.obj(
       "id" -> tour.id,
-      "name" -> tour.name
+      "createdBy" -> tour.createdBy,
+      "name" -> tour.name,
+      "variant" -> tour.variant.key,
+      "rated" -> tour.rated,
+      "displayFmjd" -> tour.settings.displayFmjd,
+      "hasChat" -> tour.settings.hasChat
     )
+      .add("clock" -> tour.clock)
+      .add("days" -> tour.days)
+      .add("rounds" -> tour.settings.nbRounds)
+      .add("description" -> tour.settings.description)
 
   def apiPlayer(
     player: ExternalPlayer
@@ -258,6 +267,13 @@ object JsonView {
     Json.obj(
       "key" -> v.key,
       "board" -> v.boardSize
+    )
+  }
+
+  implicit val clockWriter: OWrites[draughts.Clock.Config] = OWrites { clock =>
+    Json.obj(
+      "limit" -> clock.limitSeconds,
+      "increment" -> clock.incrementSeconds
     )
   }
 }

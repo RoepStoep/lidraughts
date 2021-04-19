@@ -46,7 +46,7 @@ object ExternalTournament {
     name = config.name,
     createdBy = userId,
     clock = config.clock,
-    days = config.days,
+    days = config.clock.isEmpty ?? config.days,
     rated = config.rated,
     variant = Variant.orDefault(~config.variant),
     settings = Settings(
