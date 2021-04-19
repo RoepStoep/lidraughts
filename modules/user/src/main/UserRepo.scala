@@ -93,6 +93,9 @@ object UserRepo {
   def enabledById(id: ID): Fu[Option[User]] =
     coll.uno[User](enabledSelect ++ $id(id))
 
+  def enabledByName(username: String): Fu[Option[User]] =
+    enabledById(normalize(username))
+
   def named(username: String): Fu[Option[User]] = coll.byId[User](normalize(username))
 
   def enabledNameds(usernames: List[String]): Fu[List[User]] =

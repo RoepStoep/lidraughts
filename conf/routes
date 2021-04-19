@@ -323,7 +323,8 @@ GET   /tournament/external/$id<\w{8}>/results               controllers.External
 POST  /api/tournament/external                              controllers.ExternalTournament.apiCreate
 POST  /api/tournament/external/$id<\w{8}>                   controllers.ExternalTournament.apiUpdate(id: String)
 GET   /api/tournament/external/$id<\w{8}>                   controllers.Api.externalTournament(id: String)
-POST  /api/tournament/external/$id<\w{8}>/player            controllers.ExternalTournament.playerAdd(id: String)
+POST  /api/tournament/external/$id<\w{8}>/player            controllers.ExternalTournament.playerCreate(id: String)
+POST  /api/tournament/external/$id<\w{8}>/game              controllers.ExternalTournament.gameCreate(id: String)
 
 # Team
 GET   /team                                   controllers.Team.home(page: Int ?= 1)

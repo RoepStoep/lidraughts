@@ -358,6 +358,10 @@ private[controllers] trait LidraughtsController
     NotFound(jsonError(msg))
   }
 
+  def badRequestJson(msg: String): Fu[Result] = fuccess {
+    BadRequest(jsonError(msg))
+  }
+
   def jsonError[A: Writes](err: A): JsObject = Json.obj("error" -> err)
 
   def ridiculousBackwardCompatibleJsonError(err: JsObject): JsObject =

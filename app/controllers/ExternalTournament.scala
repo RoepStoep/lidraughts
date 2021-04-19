@@ -6,6 +6,8 @@ import play.api.mvc._
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo }
+import lidraughts.socket.Socket.SocketVersion
+import lidraughts.user.UserRepo
 import views._
 
 object ExternalTournament extends LidraughtsController {
@@ -125,13 +127,65 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def playerAdd(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def playerCreate(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
       env.forms.playerCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
-        data => api.addPlayer(tour.id, data) map {
-          _.fold(jsonError("A player with this userId already exists"))(env.jsonView.apiPlayer)
-        } map { Ok(_) }
+        data =>
+          UserRepo.enabledByName(data.userId) flatMap { userOpt =>
+            userOpt.fold(badRequestJson("Invalid userId")) { user =>
+              api.addPlayer(tour.id, data, user) map {
+                _.fold(BadRequest(jsonError("A player with this userId already exists"))) { p =>
+                  JsonOk(env.jsonView.apiPlayer(p))
+                }
+              }
+            }
+          }
+      )
+    }
+  }
+
+  def gameCreate(tourId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+    WithMyTournament(me, tourId) { tour =>
+      env.forms.gameCreate.bindFromRequest.fold(
+        jsonFormErrorDefaultLang,
+        data => {
+          import lidraughts.challenge.Challenge._
+          val challengeFu = for {
+            whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
+            blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
+            _ <- ExternalPlayerRepo.findJoined(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
+            _ <- ExternalPlayerRepo.findJoined(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
+          } yield lidraughts.challenge.Challenge.make(
+            variant = tour.variant,
+            fenVariant = none,
+            initialFen = none,
+            timeControl = tour.clock map { c =>
+              TimeControl.Clock(c)
+            } orElse tour.days.map {
+              TimeControl.Correspondence.apply
+            } getOrElse TimeControl.Unlimited,
+            mode = draughts.Mode(tour.rated),
+            color = draughts.White.name,
+            challenger = Right(whiteUser),
+            destUser = blackUser.some,
+            rematchOf = none,
+            external = true,
+            startsAt = data.startsAt,
+            autoStart = ~data.autoStart,
+            externalTournamentId = tourId.some
+          )
+          challengeFu.flatFold(
+            err => badRequestJson(err.getMessage),
+            challenge => Env.challenge.api.create(challenge) map {
+              case true =>
+                lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
+                JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
+              case false =>
+                BadRequest(jsonError("Challenge not created"))
+            }
+          )
+        }
       )
     }
   }

@@ -1,5 +1,6 @@
 package lidraughts.externalTournament
 
+import org.joda.time.DateTime
 import play.api.data._
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
@@ -8,7 +9,8 @@ import draughts.variant.Variant
 
 object DataForm {
 
-  import lidraughts.common.Form.cleanNonEmptyText
+  import lidraughts.common.Form._
+  import lidraughts.common.Form.UTCDate._
 
   private val tournamentForm = Form(mapping(
     "variant" -> optional(Fields.variant),
@@ -47,12 +49,27 @@ object DataForm {
     rounds = t.settings.nbRounds
   )
 
-  val playerCreate = Form(mapping(
+  lazy val playerCreate = Form(mapping(
     "userId" -> lidraughts.user.DataForm.historicalUsernameField,
     "fmjdId" -> optional(nonEmptyText(minLength = 5, maxLength = 6))
   )(PlayerData.apply)(PlayerData.unapply)) fill PlayerData(
     userId = "",
     fmjdId = none
+  )
+
+  lazy val gameCreate = Form(mapping(
+    "whiteUserId" -> lidraughts.user.DataForm.historicalUsernameField,
+    "blackUserId" -> lidraughts.user.DataForm.historicalUsernameField,
+    "startsAt" -> optional(inTheFuture(utcDate)),
+    "autoStart" -> optional(boolean),
+    "round" -> optional(Fields.rounds)
+  )(GameData.apply)(GameData.unapply)
+    .verifying("Autostart requires startsAt to be specified", _.validAutoStart)) fill GameData(
+    whiteUserId = "",
+    blackUserId = "",
+    startsAt = none,
+    autoStart = none,
+    round = none
   )
 
   case class TournamentData(
@@ -82,6 +99,17 @@ object DataForm {
     def validateUnlimited = !rated || (clock.isDefined || days.isDefined)
   }
 
+  case class GameData(
+      whiteUserId: String,
+      blackUserId: String,
+      startsAt: Option[DateTime],
+      autoStart: Option[Boolean],
+      round: Option[Int]
+  ) {
+
+    def validAutoStart = !(~autoStart) || startsAt.isDefined
+  }
+
   case class PlayerData(
       userId: String,
       fmjdId: Option[String]
@@ -91,6 +119,8 @@ object DataForm {
 
     private val maxClockSeconds = 180 * 60
     private val maxClockIncrement = 180 * 60
+
+    private val colors = Set(draughts.White, draughts.Black).map(_.name)
 
     val variant = text.verifying(Variant.byKey.contains _)
     val name = cleanNonEmptyText(minLength = 3, maxLength = 40)

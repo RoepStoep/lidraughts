@@ -57,31 +57,19 @@ final class ExternalTournamentApi(
 
   def addPlayer(
     tourId: ExternalTournament.ID,
-    data: DataForm.PlayerData
+    data: DataForm.PlayerData,
+    user: User
   ): Fu[Option[ExternalPlayer]] =
     Sequencing(tourId)(byId) { tour =>
-      UserRepo.named(data.userId) flatMap {
-        _ ?? { user =>
-          ExternalPlayerRepo.exists(tour.id, user.id) flatMap { exists =>
-            if (exists) fuccess(none)
-            else {
-              val player = ExternalPlayer.make(tour, user, data.fmjdId)
-              ExternalPlayerRepo.insert(player) >>- {
-                socketReload(tour.id)
-              } inject player.some
-            }
-          }
+      ExternalPlayerRepo.exists(tour.id, user.id) flatMap { exists =>
+        if (exists) fuccess(none)
+        else {
+          val player = ExternalPlayer.make(tour, user, data.fmjdId)
+          ExternalPlayerRepo.insert(player) >>- {
+            socketReload(tour.id)
+          } inject player.some
         }
       }
-    }
-
-  def isAutoStartAllowed(
-    tourId: ExternalTournament.ID,
-    userId1: User.ID,
-    userId2: User.ID
-  ): Fu[(Boolean, Boolean)] =
-    ExternalPlayerRepo.filterJoined(tourId, List(userId1, userId2)) map { joinedUsers =>
-      (joinedUsers.contains(userId1), joinedUsers.contains(userId2))
     }
 
   def answer(

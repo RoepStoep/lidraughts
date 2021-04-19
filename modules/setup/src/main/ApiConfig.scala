@@ -19,14 +19,12 @@ case class ApiConfig(
     position: Option[FEN] = None,
     opponent: Option[String] = None,
     startsAt: Option[DateTime] = None,
-    autoStart: Boolean = false,
-    microMatch: Boolean,
-    externalTournamentId: Option[String]
+    microMatch: Boolean
 ) extends {
 
   val strictFen = false
 
-  def >> = (variant.key.some, clock, days, rated, color.name.some, position.map(_.value), opponent, startsAt, autoStart option true, microMatch option true, externalTournamentId).some
+  def >> = (variant.key.some, clock, days, rated, color.name.some, position.map(_.value), opponent, startsAt, microMatch option true).some
 
   def perfType: Option[PerfType] = PerfPicker.perfType(draughts.Speed(clock), variant, days)
 
@@ -45,8 +43,6 @@ case class ApiConfig(
     position ?? { f => ~Forsyth.<<<@(variant, f.value).map(_.situation playable strictFen) }
   }
 
-  def validAutoStart = !autoStart || (externalTournamentId.isDefined && startsAt.isDefined)
-
   def mode = draughts.Mode(rated)
 }
 
@@ -54,7 +50,7 @@ object ApiConfig extends BaseHumanConfig {
 
   lazy val clockLimitSeconds: Set[Int] = Set(0, 15, 30, 45, 60, 90) ++ (2 to 180).map(60*)(breakOut)
 
-  def <<(v: Option[String], cl: Option[Clock.Config], d: Option[Int], r: Boolean, c: Option[String], pos: Option[String], opp: Option[String], start: Option[DateTime], autoStart: Option[Boolean], mm: Option[Boolean], ext: Option[String]) =
+  def <<(v: Option[String], cl: Option[Clock.Config], d: Option[Int], r: Boolean, c: Option[String], pos: Option[String], opp: Option[String], start: Option[DateTime], mm: Option[Boolean]) =
     new ApiConfig(
       variant = draughts.variant.Variant.orDefault(~v),
       clock = cl,
@@ -64,8 +60,6 @@ object ApiConfig extends BaseHumanConfig {
       position = pos map FEN,
       opponent = opp,
       startsAt = start,
-      autoStart = ~autoStart,
-      microMatch = ~mm,
-      externalTournamentId = ext
+      microMatch = ~mm
     )
 }

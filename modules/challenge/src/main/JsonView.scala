@@ -60,6 +60,8 @@ final class JsonView(
     .add("external" -> c.isExternal.option(true))
     .add("startsAt" -> c.external.flatMap(_.startsAt))
     .add("microMatch" -> c.microMatch)
+    .add("autoStart" -> c.external.flatMap(_.autoStart))
+    .add("externalTournamentId" -> c.external.flatMap(_.tournamentId))
 
   private def iconChar(c: Challenge) =
     if (c.variant == draughts.variant.FromPosition) '*'

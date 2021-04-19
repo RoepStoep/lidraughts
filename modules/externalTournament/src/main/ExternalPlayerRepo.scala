@@ -40,6 +40,9 @@ object ExternalPlayerRepo {
   def find(tourId: ExternalTournament.ID, userId: User.ID): Fu[Option[ExternalPlayer]] =
     coll.find(selectTourUser(tourId, userId)).uno[ExternalPlayer]
 
+  def findJoined(tourId: ExternalTournament.ID, userId: User.ID): Fu[Option[ExternalPlayer]] =
+    coll.find(selectTourUser(tourId, userId) ++ selectJoined).uno[ExternalPlayer]
+
   def update(tourId: ExternalTournament.ID, userId: User.ID)(f: ExternalPlayer => Fu[ExternalPlayer]) =
     find(tourId, userId) flatten s"No such player: $tourId/$userId" flatMap f flatMap { player =>
       coll.update(selectId(player._id), player).void
