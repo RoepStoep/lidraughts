@@ -13,16 +13,17 @@ export default function table(ctrl: ExternalTournamentCtrl): VNode {
 }
 
 function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
+  const d = ctrl.data;
   return h('div.tour-ext__games' + (table ? '' : '.tour-ext__upcoming'), [
     h('h2', ctrl.trans.noarg('upcomingGames')),
-    ctrl.data.upcoming.length ? 
+    d.upcoming.length ? 
       h('table.slist', {
           hook: bind('click', e => {
             const href = ((e.target as HTMLElement).parentNode as HTMLElement).getAttribute('data-href');
             if (href) window.open(href, '_blank');
           })
         }, [
-          h('tbody', ctrl.data.upcoming.map((c, i) => {
+          h('tbody', d.upcoming.map((c, i) => {
             const hrefAttr = { attrs: { 'data-href': '/' + c.id } };
             return h('tr', {
                 key: i,
@@ -34,12 +35,12 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
               },
               [
                 h('td.date', hrefAttr, c.startsAt ? [drawTime(new Date(c.startsAt))] : ['-']),
-                h('td', hrefAttr, renderPlayers(c, ctrl.data.displayFmjd))
+                h('td', hrefAttr, renderPlayers(c, d.displayFmjd))
               ]
             )
           }))
         ]
-      ) : h('div.empty', ctrl.trans.noarg('none'))
+      ) : h('div.empty', ctrl.trans.noarg((d.ongoing.length + d.nbFinished) ? 'none' : 'noneYet'))
   ]);
 }
 

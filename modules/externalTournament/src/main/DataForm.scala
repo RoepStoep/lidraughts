@@ -18,7 +18,7 @@ object DataForm {
     "days" -> optional(Fields.days),
     "rated" -> boolean,
     "hasChat" -> optional(boolean),
-    "displayFmjd" -> optional(boolean),
+    "userDisplay" -> optional(Fields.userDisplay),
     "rounds" -> optional(Fields.rounds)
   )(TournamentData.apply)(TournamentData.unapply)
     .verifying("Unlimited timecontrol cannot be rated", _.validateUnlimited))
@@ -31,7 +31,7 @@ object DataForm {
     days = none,
     rated = false,
     chat = true.some,
-    fmjd = none,
+    userDisplay = none,
     rounds = none
   )
 
@@ -43,7 +43,7 @@ object DataForm {
     days = t.days,
     rated = t.rated,
     chat = t.settings.hasChat.some,
-    fmjd = t.settings.displayFmjd.some,
+    userDisplay = t.settings.userDisplay.key.some,
     rounds = t.settings.nbRounds
   )
 
@@ -63,7 +63,7 @@ object DataForm {
       days: Option[Int],
       rated: Boolean,
       chat: Option[Boolean],
-      fmjd: Option[Boolean],
+      userDisplay: Option[String],
       rounds: Option[Int]
   ) {
 
@@ -101,6 +101,7 @@ object DataForm {
     )(draughts.Clock.Config.apply)(draughts.Clock.Config.unapply)
     val days = number(min = 1, max = 14)
     val rounds = number(min = 1, max = 100)
+    val userDisplay = text.verifying(ExternalTournament.UserDisplay.byKey.contains _)
   }
 
 }

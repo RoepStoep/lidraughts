@@ -34,9 +34,25 @@ object ExternalTournament {
   case class Settings(
       nbRounds: Option[Int],
       description: Option[String],
-      displayFmjd: Boolean,
+      userDisplay: UserDisplay,
       hasChat: Boolean
   )
+
+  sealed abstract class UserDisplay(val key: String) {
+
+    def fmjd = this == UserDisplay.Fmjd
+  }
+
+  object UserDisplay {
+
+    case object Lidraughts extends UserDisplay("lidraughts")
+    case object Fmjd extends UserDisplay("fmjd")
+
+    val all = List(Lidraughts, Fmjd)
+    val byKey = all map { v => (v.key, v) } toMap
+
+    def apply(key: String): Option[UserDisplay] = byKey get key
+  }
 
   private[externalTournament] def make(
     userId: User.ID,
@@ -53,7 +69,7 @@ object ExternalTournament {
       nbRounds = config.rounds,
       description = config.description,
       hasChat = config.chat.getOrElse(true),
-      displayFmjd = ~config.fmjd
+      userDisplay = config.userDisplay.flatMap(UserDisplay.apply).getOrElse(UserDisplay.Lidraughts)
     )
   )
 }

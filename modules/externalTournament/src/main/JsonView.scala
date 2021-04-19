@@ -35,7 +35,7 @@ final class JsonView(
     def myPlayer = me.flatMap(u => players.find(_.userId == u.id))
     def myGame = me.flatMap(u => ongoing.find(_.player(u).isDefined))
     def fetchFmjd: FetchFmjdSync = fetchLightFmjdUserSync(players, _)
-    val fetch = if (tour.settings.displayFmjd) fetchFmjd else fetchNone
+    val fetch = if (tour.settings.userDisplay.fmjd) fetchFmjd else fetchNone
     val page = reqPage orElse myPlayer.map(_.page) getOrElse 1
     for {
       standing <- cached.getStandingPage(tour.id, page)
@@ -55,7 +55,7 @@ final class JsonView(
       "ongoing" -> ongoing.map(boardJson(_, players)),
       "finished" -> finished.take(5).map(gameJson(_, fetch)),
       "draughtsResult" -> pref.draughtsResult,
-      "displayFmjd" -> tour.settings.displayFmjd
+      "displayFmjd" -> tour.settings.userDisplay.fmjd
     )
       .add("rounds" -> tour.settings.nbRounds)
       .add("invited" -> createdByMe.option(players.filter(!_.joined).map(invitedPlayerJson)))
@@ -79,7 +79,7 @@ final class JsonView(
       "name" -> tour.name,
       "variant" -> tour.variant.key,
       "rated" -> tour.rated,
-      "displayFmjd" -> tour.settings.displayFmjd,
+      "displayFmjd" -> tour.settings.userDisplay.fmjd,
       "hasChat" -> tour.settings.hasChat
     )
       .add("clock" -> tour.clock)
@@ -116,7 +116,7 @@ final class JsonView(
     val opponent = result.game.player(!result.color)
     for {
       lightUser <- opponent.userId ?? lightUserApi.async
-      externalPlayer = tour.settings.displayFmjd ?? opponent.userId.flatMap(id => players.find(_.userId == id))
+      externalPlayer = tour.settings.userDisplay.fmjd ?? opponent.userId.flatMap(id => players.find(_.userId == id))
       fmjdPlayer <- externalPlayer.flatMap(_.fmjdId) ?? fmjdPlayerApi.byId
     } yield {
       minimalPlayerJson(result.game.player(!result.color)) ++

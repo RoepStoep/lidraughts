@@ -9,7 +9,7 @@
   <string name="whatAreStudies">Kas ir izpētes?</string>
   <string name="allStudies">Visas izpētes</string>
   <string name="studiesCreatedByX">Izpētes, ko izveidoja %s</string>
-  <string name="noneYet">Vēl nav.</string>
+  <string name="noneYet">Vēl nav</string>
   <string name="hot">Nesen populārās</string>
   <string name="dateAddedNewest">Pievienošanas datums (jaunākās)</string>
   <string name="dateAddedOldest">Pievienošanas datums (vecākās)</string>
