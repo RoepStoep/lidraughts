@@ -149,9 +149,7 @@ final class ExternalTournamentApi(
   def finishGame(game: Game): Funit =
     game.externalTournamentId.fold(funit) { tourId =>
       Sequencing(tourId)(byId) { tour =>
-        game.winnerUserId.fold(game.userIds.map(ExternalPlayerRepo.incPoints(tourId, _, 1)).sequenceFu.void) {
-          ExternalPlayerRepo.incPoints(tourId, _, 2).void
-        } >>
+        game.userIds.map(updatePlayer(tour, game)).sequenceFu >>
           updateRanking(tour) >>
           cached.invalidateStandings(tourId) >>- {
             cached.finishedGamesCache.invalidate(tourId)
@@ -160,6 +158,20 @@ final class ExternalTournamentApi(
           }
       }
     } void
+
+  private def updatePlayer(
+    tour: ExternalTournament,
+    game: Game
+  )(userId: User.ID): Funit =
+    ExternalPlayerRepo.update(tour.id, userId) { player =>
+      UserRepo.perfOf(userId, tour.perfType) map { perf =>
+        player.copy(
+          rating = perf.fold(player.rating)(_.intRating),
+          provisional = perf.fold(player.provisional)(_.provisional),
+          points = player.points + game.winnerUserId.fold(1)(id => if (id == userId) 2 else 0)
+        )
+      }
+    }
 
   def startGame(game: Game): Unit =
     game.externalTournamentId.foreach { tourId =>
