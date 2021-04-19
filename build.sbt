@@ -71,7 +71,7 @@ lazy val api = module("api", moduleCPDeps)
     aggregate in Test := true  // Test <: Runtime
   ) aggregate (moduleRefs: _*)
 
-lazy val i18n = module("i18n", Seq(common, db, user, hub)).settings(
+lazy val i18n = module("i18n", Seq(common, db, hub)).settings(
   sourceGenerators in Compile += Def.task {
     MessageCompiler(
       sourceDir = new File("translation/source"),
@@ -118,8 +118,8 @@ lazy val evaluation = module("evaluation", Seq(common, hub, db, user, game, anal
   libraryDependencies ++= provided(play.api, reactivemongo.driver)
 )
 
-lazy val rating = module("rating", Seq(common, db, draughts)).settings(
-  libraryDependencies ++= provided(play.api, reactivemongo.driver)
+lazy val rating = module("rating", Seq(common, db, draughts, i18n)).settings(
+  libraryDependencies ++= provided(play.api, reactivemongo.driver, scalatags)
 )
 
 lazy val perfStat = module("perfStat", Seq(common, db, user, game, rating)).settings(
@@ -150,7 +150,7 @@ lazy val timeline = module("timeline", Seq(common, db, game, user, hub, security
   libraryDependencies ++= provided(play.api, play.test, reactivemongo.driver)
 )
 
-lazy val event = module("event", Seq(common, db, memo, i18n)).settings(
+lazy val event = module("event", Seq(common, db, memo, i18n, user)).settings(
   libraryDependencies ++= provided(play.api, play.test, scalatags, reactivemongo.driver)
 )
 

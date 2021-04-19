@@ -31,7 +31,7 @@ object side {
                 tour.variant,
                 tour.variant.name
               )
-            } else tour.perfType.map(_.name),
+            } else tour.perfType.map(_.trans),
             tour.isThematic ?? s"$separator ${trans.thematic.txt()}",
             separator,
             tour.durationString

@@ -14,7 +14,7 @@ import controllers.routes
 object ratingDistribution {
 
   def apply(perfType: PerfType, data: List[Int])(implicit ctx: Context) = views.html.base.layout(
-    title = trans.monthlyPerfTypeRatingDistribution.txt(perfType.name),
+    title = trans.monthlyPerfTypeRatingDistribution.txt(perfType.trans),
     moreCss = cssTag("user.rating.stats"),
     wrapClass = "full-screen-force",
     moreJs = frag(
@@ -38,27 +38,27 @@ object ratingDistribution {
         div(cls := "rating-stats page-menu__content box box-pad")(
           h1(trans.monthlyPerfTypeRatingDistribution(views.html.base.bits.mselect(
             "variant-stats",
-            span(perfType.name),
+            span(perfType.trans),
             PerfType.leaderboardable map { pt =>
               a(
                 dataIcon := pt.iconChar,
                 cls := (perfType == pt).option("current"),
                 href := routes.Stat.ratingDistribution(pt.key)
-              )(pt.name)
+              )(pt.trans)
             }
           ))),
           div(cls := "desc", dataIcon := perfType.iconChar)(
             ctx.me.flatMap(_.perfs(perfType).glicko.establishedIntRating).map { rating =>
               lidraughts.user.Stat.percentile(data, rating) match {
                 case (under, sum) => div(
-                  trans.nbPerfTypePlayersThisMonth(raw(s"""<strong>${sum.localize}</strong>"""), perfType.name), br,
-                  trans.yourPerfTypeRatingIsRating(perfType.name, raw(s"""<strong>$rating</strong>""")), br,
-                  trans.youAreBetterThanPercentOfPerfTypePlayers(raw(s"""<strong>${"%.1f" format under * 100.0 / sum}%</strong>"""), perfType.name)
+                  trans.nbPerfTypePlayersThisMonth(raw(s"""<strong>${sum.localize}</strong>"""), perfType.trans), br,
+                  trans.yourPerfTypeRatingIsRating(perfType.trans, raw(s"""<strong>$rating</strong>""")), br,
+                  trans.youAreBetterThanPercentOfPerfTypePlayers(raw(s"""<strong>${"%.1f" format under * 100.0 / sum}%</strong>"""), perfType.trans)
                 )
               }
             } getOrElse div(
-              trans.nbPerfTypePlayersThisMonth.plural(data.sum, raw(s"""<strong>${data.sum.localize}</strong>"""), perfType.name), br,
-              trans.youDoNotHaveAnEstablishedPerfTypeRating(perfType.name)
+              trans.nbPerfTypePlayersThisMonth.plural(data.sum, raw(s"""<strong>${data.sum.localize}</strong>"""), perfType.trans), br,
+              trans.youDoNotHaveAnEstablishedPerfTypeRating(perfType.trans)
             )
           ),
           div(id := "rating_distribution_chart")(spinner)

@@ -62,7 +62,7 @@ object variant {
               cls := List("text" -> true, "active" -> active.has(pt)),
               href := routes.Page.variant(pt.key),
               dataIcon := pt.iconChar
-            )(pt.name)
+            )(pt.trans)
           }
         ),
         div(cls := s"page-menu__content box $klass")(body)

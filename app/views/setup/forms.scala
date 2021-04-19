@@ -146,7 +146,7 @@ object forms {
           lidraughts.rating.PerfType.nonPuzzle.map { perfType =>
             div(cls := perfType.key)(
               trans.perfRatingX(
-                raw(s"""<strong data-icon="${perfType.iconChar}">${me.perfs(perfType.key).map(_.intRating).getOrElse("?")}</strong> ${perfType.name}""")
+                raw(s"""<strong data-icon="${perfType.iconChar}">${me.perfs(perfType.key).map(_.intRating).getOrElse("?")}</strong> ${perfType.trans}""")
               )
             )
           }

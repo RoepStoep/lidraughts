@@ -157,7 +157,7 @@ object Challenge extends LidraughtsController {
   }
 
   def apiCreate(userId: String) = ScopedBody(_.Challenge.Write, _.Bot.Play) { implicit req => me =>
-    implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.some)
+    implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.lang)
     Setup.PostRateLimit(HTTPRequest lastRemoteAddress req) {
       Env.setup.forms.api.bindFromRequest.fold(
         jsonFormErrorDefaultLang,

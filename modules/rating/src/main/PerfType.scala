@@ -3,6 +3,9 @@ package lidraughts.rating
 import draughts.Centis
 import draughts.Speed
 
+import lidraughts.common.Lang
+import lidraughts.i18n.I18nKeys
+
 sealed abstract class PerfType(
     val id: Perf.ID,
     val key: Perf.Key,
@@ -14,6 +17,8 @@ sealed abstract class PerfType(
   def shortName = name
 
   def iconString = iconChar.toString
+
+  def trans(implicit lang: Lang): String = PerfType.trans(this)
 }
 
 object PerfType {
@@ -222,4 +227,10 @@ object PerfType {
 
   def iconByVariant(variant: draughts.variant.Variant): Char =
     byVariant(variant).fold('C')(_.iconChar)
+
+  def trans(pt: PerfType)(implicit lang: Lang): String =
+    pt match {
+      case Correspondence => I18nKeys.correspondence.txt()
+      case pt => pt.name
+    }
 }

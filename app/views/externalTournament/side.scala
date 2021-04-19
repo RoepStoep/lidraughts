@@ -25,7 +25,7 @@ object side {
                 t.variant,
                 t.variant.name
               )
-            } else t.perfType.map(_.name),
+            } else t.perfType.map(_.trans),
             separator,
             if (t.rated) trans.ratedTournament() else trans.casualTournament(),
             t.settings.nbRounds map { rounds =>

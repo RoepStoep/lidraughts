@@ -145,6 +145,7 @@
   <string name="currentGames">Current games</string>
   <string name="gamesInTimeout">Games in timeout</string>
   <string name="yourTurnInX">Your turn in %s</string>
+  <string name="viewTheGames">View the games</string>
   <string name="gameNumberX">Game %s</string>
   <plurals name="nbGames">
     <item quantity="one">%s game</item>

@@ -31,7 +31,7 @@ object side {
         ),
         href := isGame option routes.User.perfStat(u.username, perfType.key).url,
         span(
-          h3(name.getOrElse(perfType.name).toUpperCase),
+          h3(name.getOrElse(perfType.trans).toUpperCase),
           st.rating(
             strong(
               perf.glicko.intRating,

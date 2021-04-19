@@ -33,15 +33,15 @@ object bits {
         div(
           if (c.variant.exotic) {
             frag(
-              views.html.game.bits.variantLink(c.variant, variantName(c.variant), c.initialFen),
+              views.html.game.bits.variantLink(c.variant, translatedVariantName(c.variant), c.initialFen),
               (!c.variant.fromPosition && c.customStartingPosition) option {
                 span(cls := "variant_info")(
-                  " ", variantName(draughts.variant.FromPosition)
+                  " ", translatedVariantName(draughts.variant.FromPosition)
                 )
               }
             )
           } else
-            c.perfType.name,
+            c.perfType.trans,
           br,
           span(cls := "clock")(
             c.daysPerTurn map { days =>

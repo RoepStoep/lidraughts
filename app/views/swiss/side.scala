@@ -25,7 +25,7 @@ object side {
                 s.variant,
                 s.variant.name
               )
-            } else s.perfType.map(_.name),
+            } else s.perfType.map(_.trans),
             separator,
             if (s.settings.rated) trans.ratedTournament() else trans.casualTournament()
           ),

@@ -408,14 +408,14 @@ private[controllers] trait LidraughtsController
 
   protected def reqToCtx(req: RequestHeader): Fu[HeaderContext] = restoreUser(req) flatMap {
     case (d, impersonatedBy) =>
-      val ctx = UserContext(req, d.map(_.user), impersonatedBy, lidraughts.i18n.I18nLangPicker(req, d.map(_.user)))
+      val ctx = UserContext(req, d.map(_.user), impersonatedBy, lidraughts.i18n.I18nLangPicker(req, d.map(_.user).flatMap(_.lang)))
       pageDataBuilder(ctx, d.exists(_.hasFingerPrint)) dmap { Context(ctx, _) }
   }
 
   protected def reqToCtx[A](req: Request[A]): Fu[BodyContext[A]] =
     restoreUser(req) flatMap {
       case (d, impersonatedBy) =>
-        val ctx = UserContext(req, d.map(_.user), impersonatedBy, lidraughts.i18n.I18nLangPicker(req, d.map(_.user)))
+        val ctx = UserContext(req, d.map(_.user), impersonatedBy, lidraughts.i18n.I18nLangPicker(req, d.map(_.user).flatMap(_.lang)))
         pageDataBuilder(ctx, d.exists(_.hasFingerPrint)) dmap { Context(ctx, _) }
     }
 

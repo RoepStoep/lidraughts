@@ -20,7 +20,7 @@ object perfStat {
     stat: PerfStat,
     ratingChart: Option[String]
   )(implicit ctx: Context) = views.html.base.layout(
-    title = s"${u.username} ${perfType.name} stats",
+    title = s"${u.username} ${perfType.trans} stats",
     robots = false,
     moreJs = frag(
       jsAt("compiled/user.js"),
@@ -39,14 +39,14 @@ object perfStat {
           div(cls := "box__top")(
             h1(
               a(href := routes.User.show(u.username))(u.username),
-              span(perfType.name, " stats")
+              span(perfType.trans, " stats")
             ),
             div(cls := "box__top__actions")(
               u.perfs(perfType).nb > 0 option a(
                 cls := "button button-empty text",
                 dataIcon := perfType.iconChar,
                 href := s"${routes.User.games(u.username, "search")}?perf=${perfType.id}"
-              )("View the games"),
+              )(trans.viewTheGames()),
               bits.perfTrophies(u, rankMap.filterKeys(perfType==))
             )
           ),

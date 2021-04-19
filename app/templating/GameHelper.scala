@@ -60,7 +60,7 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
     s"$p1 plays $p2 in a $mode $speedAndClock game of $variant. $result after $moves. Click to replay, analyse, and discuss the game!"
   }
 
-  def variantName(variant: draughts.variant.Variant)(implicit ctx: UserContext) = variant match {
+  def translatedVariantName(variant: draughts.variant.Variant)(implicit ctx: UserContext) = variant match {
     case draughts.variant.Standard => trans.standard.txt()
     case draughts.variant.FromPosition => trans.fromPosition.txt()
     case v => v.name

@@ -78,7 +78,7 @@ object timeline {
               case None => trans.draw()
             }),
           userIdLink(opponent, withOnline = false),
-          perf.name
+          perf.trans
         )
       }
       case StudyCreate(userId, studyId, studyName) => trans.xCreatesStudyY(

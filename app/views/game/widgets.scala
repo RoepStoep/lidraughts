@@ -40,7 +40,7 @@ object widgets {
               else frag(
                 showClock(g),
                 separator,
-                g.perfType.fold(draughts.variant.FromPosition.name)(_.name),
+                g.perfType.fold(translatedVariantName(draughts.variant.FromPosition))(_.trans),
                 separator,
                 if (g.rated) trans.rated.txt() else trans.casual.txt()
               )

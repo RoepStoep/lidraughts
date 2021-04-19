@@ -45,7 +45,7 @@ object tournaments {
                       span(cls := "setup")(
                         t.clock.show,
                         " • ",
-                        if (t.variant.exotic) t.variant.name else t.perfType.map(_.name),
+                        if (t.variant.exotic) t.variant.name else t.perfType.map(_.trans),
                         t.isThematic option frag(" • ", trans.thematic()),
                         " • ",
                         t.mode.fold(trans.casualTournament, trans.ratedTournament)(),
@@ -59,7 +59,7 @@ object tournaments {
                       span(cls := "setup")(
                         s.clock.show,
                         " • ",
-                        if (s.variant.exotic) s.variant.name else s.perfType.map(_.name),
+                        if (s.variant.exotic) s.variant.name else s.perfType.map(_.trans),
                         " • ",
                         (if (s.settings.rated) trans.ratedTournament else trans.casualTournament)()
                       )
