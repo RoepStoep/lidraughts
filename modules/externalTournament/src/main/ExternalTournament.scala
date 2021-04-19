@@ -23,8 +23,8 @@ case class ExternalTournament(
 
   def speed = Speed(clock)
 
-  def perfType: Option[PerfType] = PerfPicker.perfType(speed, variant, none)
-  def perfLens = PerfPicker.mainOrDefault(speed, variant, none)
+  def perfType: PerfType = PerfPicker.perfType(speed, variant, days) getOrElse PerfType.Standard
+  def perfLens = PerfPicker.mainOrDefault(speed, variant, days)
 }
 
 object ExternalTournament {

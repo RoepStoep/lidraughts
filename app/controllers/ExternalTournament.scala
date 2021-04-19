@@ -90,13 +90,16 @@ object ExternalTournament extends LidraughtsController {
       env.forms.tournamentUpdate(tour).bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => {
-          val gamesPlayedFu = for {
-            finished <- env.cached.getFinishedGames(id)
-            ongoing <- finished.isEmpty ?? env.cached.getOngoingGames(id)
-            upcoming <- ongoing.isEmpty ?? Env.challenge.api.allForExternalTournament(id)
-          } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
-          gamesPlayedFu flatMap { gamesPlayed =>
-            if (gamesPlayed && data.changedGameSettings(tour))
+          val checkGames = data.changedGameSettings(tour)
+          val tournamentHasGamesFu = checkGames ?? {
+            for {
+              finished <- env.cached.getFinishedGames(id)
+              ongoing <- finished.isEmpty ?? env.cached.getOngoingGames(id)
+              upcoming <- ongoing.isEmpty ?? Env.challenge.api.allForExternalTournament(id)
+            } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
+          }
+          tournamentHasGamesFu flatMap { hasGames =>
+            if (hasGames && checkGames)
               fuccess(BadRequest(jsonError("Cannot change game settings once games are added to the tournament")))
             else api.update(id, data) map { opt =>
               opt.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
@@ -145,6 +148,19 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
+  def playerDelete(id: String, userId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+    WithMyTournament(me, id) { tour =>
+      ExternalPlayerRepo.find(tour.id, userId.toLowerCase) flatMap { playerOpt =>
+        playerOpt.fold(badRequestJson("User not found")) { player =>
+          api.deletePlayer(tour.id, player) map { deleted =>
+            if (deleted) jsonOkResult
+            else BadRequest(jsonError("Cannot delete a player with games (upcoming / ongoing / finished)"))
+          }
+        }
+      }
+    }
+  }
+
   def gameCreate(tourId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
     WithMyTournament(me, tourId) { tour =>
       env.forms.gameCreate.bindFromRequest.fold(
@@ -179,6 +195,7 @@ object ExternalTournament extends LidraughtsController {
             err => badRequestJson(err.getMessage),
             challenge => Env.challenge.api.create(challenge) map {
               case true =>
+                api addChallenge challenge
                 lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
                 JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
               case false =>
@@ -190,9 +207,9 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def apiPlayers(id: String) = Scoped() { implicit req => me =>
+  def apiPlayers(id: String) = Scoped(_.Tournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
-      ExternalPlayerRepo.byTour(id) map { players =>
+      ExternalPlayerRepo.byTour(tour.id) map { players =>
         JsonOk(env.jsonView.apiPlayers(players))
       }
     }

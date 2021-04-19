@@ -16,6 +16,7 @@ final class Env(
     hub: lidraughts.hub.Env,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     lightUserApi: lidraughts.user.LightUserApi,
+    challengeApi: lidraughts.challenge.ChallengeApi,
     proxyGame: Game.ID => Fu[Option[Game]],
     scheduler: lidraughts.common.Scheduler
 ) {
@@ -93,14 +94,11 @@ final class Env(
   lazy val api = new ExternalTournamentApi(
     coll = externalTournamentColl,
     socketMap = socketMap,
-    cached = cached
+    cached = cached,
+    challengeApi = challengeApi
   )(system)
 
   bus.subscribeFuns(
-    'challenge -> {
-      case lidraughts.challenge.Event.Create(c) if c.isExternalTournament =>
-        api addChallenge c
-    },
     'startGame -> {
       case lidraughts.game.actorApi.StartGame(g) if g.isExternalTournament =>
         api startGame g
@@ -125,6 +123,7 @@ object Env {
     db = lidraughts.db.Env.current,
     asyncCache = lidraughts.memo.Env.current.asyncCache,
     lightUserApi = lidraughts.user.Env.current.lightUserApi,
+    challengeApi = lidraughts.challenge.Env.current.api,
     proxyGame = lidraughts.round.Env.current.proxy.game _,
     scheduler = lidraughts.common.PlayApp.scheduler
   )

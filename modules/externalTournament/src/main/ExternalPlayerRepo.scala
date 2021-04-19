@@ -21,10 +21,11 @@ object ExternalPlayerRepo {
 
   def count(tourId: ExternalTournament.ID): Fu[Int] = coll.countSel(selectTour(tourId))
 
-  def insert(player: ExternalPlayer) = coll.insert(player)
+  def insert(player: ExternalPlayer) =
+    coll.insert(player).void
 
-  def remove(tourId: ExternalTournament.ID, userId: User.ID) =
-    coll.remove(selectTourUser(tourId, userId)).void
+  def remove(player: ExternalPlayer) =
+    coll.remove(selectId(player.id)).void
 
   def exists(tourId: ExternalTournament.ID, userId: User.ID) =
     coll.exists(selectTourUser(tourId, userId))
@@ -53,13 +54,6 @@ object ExternalPlayerRepo {
 
   def setRank(id: ExternalPlayer.ID, rank: Int) =
     coll.updateField(selectId(id), "rank", rank) void
-
-  def incPoints(tourId: ExternalTournament.ID, userId: User.ID, inc: Int) =
-    coll.update(
-      selectTourUser(tourId, userId),
-      $inc("points" -> inc),
-      writeConcern = GetLastError.Unacknowledged
-    ) void
 
   def searchPlayers(tourId: ExternalTournament.ID, term: String, nb: Int): Fu[List[User.ID]] =
     User.couldBeUsername(term) ?? {

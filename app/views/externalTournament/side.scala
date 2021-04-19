@@ -15,7 +15,7 @@ object side {
 
   def apply(t: ExternalTournament, chat: Boolean)(implicit ctx: Context) = frag(
     div(cls := "tour-ext__meta")(
-      st.section(dataIcon := t.perfType.map(_.iconChar.toString))(
+      st.section(dataIcon := t.perfType.iconChar.toString)(
         div(
           p(
             showClock(t),
@@ -25,7 +25,7 @@ object side {
                 t.variant,
                 t.variant.name
               )
-            } else t.perfType.map(_.trans),
+            } else t.perfType.trans,
             separator,
             if (t.rated) trans.ratedTournament() else trans.casualTournament(),
             t.settings.nbRounds map { rounds =>

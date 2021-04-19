@@ -13,7 +13,8 @@ import lidraughts.user.{ User, UserRepo }
 final class ExternalTournamentApi(
     coll: Coll,
     socketMap: SocketMap,
-    cached: Cached
+    cached: Cached,
+    challengeApi: lidraughts.challenge.ChallengeApi
 )(implicit system: ActorSystem) {
 
   private val sequencer =
@@ -69,6 +70,26 @@ final class ExternalTournamentApi(
             socketReload(tour.id)
           } inject player.some
         }
+      }
+    }
+
+  def deletePlayer(
+    tourId: ExternalTournament.ID,
+    player: ExternalPlayer
+  ): Fu[Boolean] =
+    Sequencing(tourId)(byId) { tour =>
+      val userHasGamesFu = for {
+        finished <- cached.getFinishedGames(tour.id).map(_.filter(_.userIds.contains(player.userId)))
+        ongoing <- finished.isEmpty ?? cached.getOngoingGames(tour.id).map(_.filter(_.userIds.contains(player.userId)))
+        upcoming <- ongoing.isEmpty ?? challengeApi.allForExternalTournament(tour.id).map(_.filter(_.userIds.contains(player.userId)))
+      } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
+      userHasGamesFu flatMap { hasGames =>
+        if (hasGames) fuFalse
+        else ExternalPlayerRepo.remove(player) >>
+          updateRanking(tour) >>
+          cached.invalidateStandings(tourId) >>- {
+            socketReload(tourId)
+          } inject true
       }
     }
 
