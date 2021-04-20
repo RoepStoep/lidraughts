@@ -14,10 +14,11 @@ object PlayerInfo {
 
   def make(
     player: ExternalPlayer,
-    games: List[GameWithMeta]
+    games: List[GameWithMeta],
+    ongoing: List[GameWithMeta]
   ) = new PlayerInfo(
     player = player,
-    results = games.flatMap { withMeta =>
+    results = (ongoing.filter(_.game.userIds.contains(player.userId)) ::: games).flatMap { withMeta =>
       withMeta.game.playerByUserId(player.userId) map { player =>
         PlayerInfo.Result(
           game = withMeta,

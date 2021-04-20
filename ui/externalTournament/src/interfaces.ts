@@ -81,6 +81,7 @@ export interface GameResult extends BasePlayer {
   c: boolean; // color
   w?: boolean; // won
   r?: number; // round
+  o?: boolean; // ongoing
   fmjd?: FmjdPlayer
 }
 

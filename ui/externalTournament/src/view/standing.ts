@@ -1,7 +1,7 @@
 import { h } from 'snabbdom'
 import { VNode,  } from 'snabbdom/vnode';
 import ExternalTournamentCtrl from '../ctrl';
-import { player as lidraughtsPlayer, fmjdPlayer, onInsert, bind } from './util';
+import { player as lidraughtsPlayer, result as renderResult, fmjdPlayer, onInsert, bind } from './util';
 import { MaybeVNodes, Pager, PlayerInfo } from '../interfaces';
 
 function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
@@ -21,19 +21,16 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
       h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
         h('div', 
           p.sheet.map(r => {
-            const color = r.c ? 'white' : 'black',
-              result = r.w === true ? 
-                (draughtsResult ? '2' : '1') :
-                (r.w === false ? '0' : (draughtsResult ? '1' : '½'))
-            return h('a.glpt.' + (r.w === true ? 'win' : (r.w === false ? 'loss' : 'draw')), {
+            const color = r.c ? 'white' : 'black';
+            return h('a.glpt.' + (r.o ? 'ongoing' : (r.w === true ? 'win' : (r.w === false ? 'loss' : 'draw'))), {
               attrs: {
                 key: r.g,
                 href: `/${r.g}${color === 'white' ? '' : '/black'}`
               },
               hook: onInsert(window.lidraughts.powertip.manualGame)
-            }, result)
+            }, renderResult(r, draughtsResult))
           }).concat(
-            [...Array(Math.max(0, (ctrl.data.roundsPlayed || p.sheet.length) - p.sheet.length))].map(_ => h('r'))
+            [...Array(Math.max(ctrl.data.roundsPlayed || 0, p.sheet.length) - p.sheet.length)].map(_ => h('r'))
           )
         )),
       h('td.points', title(noarg('points')), '' + (draughtsResult ? p.points : p.points / 2)),

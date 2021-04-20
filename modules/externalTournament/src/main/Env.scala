@@ -108,7 +108,7 @@ final class Env(
   bus.subscribeFuns(
     'startGame -> {
       case lidraughts.game.actorApi.StartGame(g) if g.isExternalTournament =>
-        api startGame g
+        api.startGame(g) void
     },
     'finishGame -> {
       case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament =>

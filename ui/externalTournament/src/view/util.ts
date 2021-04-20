@@ -2,7 +2,7 @@ import { Attrs } from 'snabbdom/modules/attributes'
 import { h } from 'snabbdom'
 import { Hooks } from 'snabbdom/hooks'
 import { VNode } from 'snabbdom/vnode';
-import { BasePlayer, PlayerInfo } from '../interfaces';
+import { BasePlayer, PlayerInfo, GameResult } from '../interfaces';
 
 export function bind(eventName: string, f: (e: Event) => any, redraw?: () => void): Hooks {
   return onInsert(el =>
@@ -30,6 +30,17 @@ export function dataIcon(icon: string): Attrs {
   return {
     'data-icon': icon
   };
+}
+
+export function result(p: GameResult, draughtsResult: boolean): string {
+  switch (p.w) {
+    case true:
+      return draughtsResult ? '2' : '1';
+    case false:
+      return '0';
+    default:
+      return p.o ? '*' : (draughtsResult ? '1' : '½');
+  }
 }
 
 export const userName = (u: LightUser | LightFmjdUser, withTitle: boolean = true) => {

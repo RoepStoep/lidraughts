@@ -46,7 +46,8 @@ object ExternalTournament extends LidraughtsController {
             _ <- chat ?? { c =>
               Env.user.lightUserApi.preloadMany(c.chat.userIds)
             }
-          } yield html.externalTournament.show(tour, finished.rounds, json, chat)
+
+          } yield html.externalTournament.show(tour, finished.actualRoundsPlayed(ongoing), json, chat)
         },
         api = _ =>
           tourOption.fold(notFoundJson("No such tournament")) { tour =>

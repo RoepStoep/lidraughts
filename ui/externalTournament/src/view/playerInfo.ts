@@ -1,7 +1,7 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import { player as lidraughtsPlayer, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink, fmjdLink  } from './util';
-import { FmjdPlayer, GameResult } from '../interfaces';
+import { player as lidraughtsPlayer, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink, fmjdLink, result  } from './util';
+import { FmjdPlayer } from '../interfaces';
 import ExternalTournamentCtrl from '../ctrl';
 
 export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
@@ -119,18 +119,7 @@ function renderFmjdInfo(p: FmjdPlayer | undefined, u: LightUser, noarg: TransNoA
         ])
       ])
     )
-   ]) : null;
-  }
-
-function result(p: GameResult, draughtsResult: boolean): string {
-  switch (p.w) {
-    case true:
-      return draughtsResult ? '2' : '1';
-    case false:
-      return '0';
-    default:
-      return draughtsResult ? '1' : '½';
-  }
+  ]) : null;
 }
 
 function setup(vnode: VNode) {

@@ -136,9 +136,10 @@ final class ExternalTournamentApi(
   ): Fu[Option[PlayerInfo]] =
     ExternalPlayerRepo.find(tour.id, userId) flatMap {
       _ ?? { player =>
-        cached.getFinishedGames(tour.id).map { finished =>
-          PlayerInfo.make(player, finished.games).some
-        }
+        for {
+          finished <- cached.getFinishedGames(tour.id)
+          ongoing <- cached.getOngoingGames(tour.id)
+        } yield PlayerInfo.make(player, finished.games, ongoing).some
       }
     }
 
@@ -148,7 +149,7 @@ final class ExternalTournamentApi(
     }
 
   def finishGame(game: Game): Funit =
-    game.externalTournamentId.fold(funit) { tourId =>
+    game.externalTournamentId.?? { tourId =>
       Sequencing(tourId)(byId) { tour =>
         if (game.aborted) {
           cached.ongoingGameIdsCache.invalidate(tourId)
@@ -156,10 +157,11 @@ final class ExternalTournamentApi(
           funit
         } else gameMetaApi.withMeta(game).flatMap { gameMeta =>
           game.userIds.map(updatePlayer(tour, game)).sequenceFu.void >>
-            updateRanking(tour) >>
-            cached.invalidateStandings(tourId) >>- {
-              cached.addFinishedGame(tourId, gameMeta)
+            updateRanking(tour) >> {
               cached.ongoingGameIdsCache.invalidate(tourId)
+              cached.addFinishedGame(tourId, gameMeta)
+              cached.invalidateStandings(tourId)
+            } >>- {
               socketReload(tourId)
             }
         }
@@ -180,10 +182,13 @@ final class ExternalTournamentApi(
       }
     }
 
-  def startGame(game: Game): Unit =
-    game.externalTournamentId.foreach { tourId =>
-      cached.ongoingGameIdsCache.invalidate(tourId)
-      socketReload(tourId)
+  def startGame(game: Game): Funit =
+    game.externalTournamentId ?? { tourId =>
+      Sequencing(tourId)(byId) { tour =>
+        cached.ongoingGameIdsCache.invalidate(tour.id)
+        cached.invalidateStandings(tour.id) >>-
+          socketReload(tour.id)
+      }
     }
 
   def addChallenge(c: lidraughts.challenge.Challenge): Unit =

@@ -62,7 +62,7 @@ final class JsonView(
       "autoStart" -> tour.settings.autoStart
     )
       .add("rounds" -> tour.settings.nbRounds)
-      .add("roundsPlayed" -> finished.rounds)
+      .add("roundsPlayed" -> finished.actualRoundsPlayed(ongoing))
       .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
       .add("playerInfo" -> playerInfoJson)
@@ -136,6 +136,7 @@ final class JsonView(
           "g" -> game.id,
           "c" -> (result.color == draughts.White)
         )
+        .add("o" -> result.game.game.isBeingPlayed.option(true))
         .add("w" -> result.win)
         .add("r" -> result.game.round)
         .add("user" -> lightUser)

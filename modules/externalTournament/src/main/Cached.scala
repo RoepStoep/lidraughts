@@ -95,14 +95,15 @@ final class Cached(
   def getStandingPage(tourId: ExternalTournament.ID, page: Int): Fu[JsObject] =
     standingPageCache.get(tourId -> page)
 
-  private def computePage(page: (String, Int)) =
+  private def computePage(page: (ExternalTournament.ID, Int)) =
     for {
       tourOpt <- Env.current.api.byId(page._1)
       tour = tourOpt err "Invalid tournament ID"
       players <- ExternalPlayerRepo.byTour(page._1)
       rankedPlayers = players.filter(p => p.ranked && p.page == page._2).sortBy(_.rank)
       finished <- getFinishedGames(page._1)
-      playerInfos = rankedPlayers.map(p => PlayerInfo.make(p, finished.games).reverse)
+      ongoing <- getOngoingGames(page._1)
+      playerInfos = rankedPlayers.map(p => PlayerInfo.make(p, finished.games, ongoing).reverse)
       playerInfoJson <- playerInfos.map(Env.current.jsonView.playerInfoJson(tour, _, players)).sequenceFu
     } yield Json.obj(
       "page" -> page._2,
@@ -115,5 +116,19 @@ object Cached {
   case class FinishedGames(
       rounds: Option[Int],
       games: List[GameWithMeta]
-  )
+  ) {
+
+    def actualRoundsPlayed(ongoing: List[GameWithMeta]) = {
+      val ongoingRound = ongoing.foldLeft(none[Int]) { (acc, g) =>
+        g.round match {
+          case o @ Some(r) if r > ~acc => o
+          case _ => acc
+        }
+      }
+      ongoingRound match {
+        case o @ Some(r) if r > ~rounds => o
+        case _ => rounds
+      }
+    }
+  }
 }
