@@ -11,7 +11,7 @@ import controllers.routes
 
 object results {
 
-  def apply(tour: ExternalTournament, results: List[Game])(implicit ctx: Context) =
+  def apply(tour: ExternalTournament, results: List[lidraughts.externalTournament.GameWithMeta])(implicit ctx: Context) =
     views.html.base.layout(
       title = tour.name,
       moreCss = cssTag("tournament.external.show")
@@ -22,9 +22,9 @@ object results {
             tbody(
               results.map { r =>
                 tr(
-                  td(cls := "date")(absClientDateTime(r.createdAt)),
-                  td(cls := "players")(gameVsText(r, true)),
-                  td(cls := "result")(draughts.Color.showResult(r.winnerColor, ctx.pref.draughtsResult))
+                  td(cls := "date")(absClientDateTime(r.game.createdAt)),
+                  td(cls := "players")(gameVsText(r.game, true)),
+                  td(cls := "result")(draughts.Color.showResult(r.game.winnerColor, ctx.pref.draughtsResult))
                 )
               }
             )

@@ -14,7 +14,8 @@ final class ExternalTournamentApi(
     coll: Coll,
     socketMap: SocketMap,
     cached: Cached,
-    challengeApi: lidraughts.challenge.ChallengeApi
+    challengeApi: lidraughts.challenge.ChallengeApi,
+    gameMetaApi: GameMetaApi
 )(implicit system: ActorSystem) {
 
   private val sequencer =
@@ -79,8 +80,8 @@ final class ExternalTournamentApi(
   ): Fu[Boolean] =
     Sequencing(tourId)(byId) { tour =>
       val userHasGamesFu = for {
-        finished <- cached.getFinishedGames(tour.id).map(_.filter(_.userIds.contains(player.userId)))
-        ongoing <- finished.isEmpty ?? cached.getOngoingGames(tour.id).map(_.filter(_.userIds.contains(player.userId)))
+        finished <- cached.getFinishedGames(tour.id).map(_.filter(_.game.userIds.contains(player.userId)))
+        ongoing <- finished.isEmpty ?? cached.getOngoingGames(tour.id).map(_.filter(_.game.userIds.contains(player.userId)))
         upcoming <- ongoing.isEmpty ?? challengeApi.allForExternalTournament(tour.id).map(_.filter(_.userIds.contains(player.userId)))
       } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
       userHasGamesFu flatMap { hasGames =>
@@ -149,15 +150,17 @@ final class ExternalTournamentApi(
   def finishGame(game: Game): Funit =
     game.externalTournamentId.fold(funit) { tourId =>
       Sequencing(tourId)(byId) { tour =>
-        game.userIds.map(updatePlayer(tour, game)).sequenceFu >>
-          updateRanking(tour) >>
-          cached.invalidateStandings(tourId) >>- {
-            cached.finishedGamesCache.invalidate(tourId)
-            cached.ongoingGameIdsCache.invalidate(tourId)
-            socketReload(tourId)
-          }
+        gameMetaApi.withMeta(game).flatMap { gameMeta =>
+          game.userIds.map(updatePlayer(tour, game)).sequenceFu.void >>
+            updateRanking(tour) >>
+            cached.invalidateStandings(tourId) >>- {
+              cached.addFinishedGame(tourId, gameMeta)
+              cached.ongoingGameIdsCache.invalidate(tourId)
+              socketReload(tourId)
+            }
+        }
       }
-    } void
+    }
 
   private def updatePlayer(
     tour: ExternalTournament,

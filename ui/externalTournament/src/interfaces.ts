@@ -79,6 +79,7 @@ export interface GameResult extends BasePlayer {
   g: string; // game
   c: boolean; // color
   w?: boolean; // won
+  r?: number; // round
   fmjd?: FmjdPlayer
 }
 
@@ -87,6 +88,7 @@ export interface BaseGame {
   variant: VariantData;
   white: BasePlayer;
   black: BasePlayer;
+  round?: number;
 }
 
 export interface Challenge extends BaseGame {

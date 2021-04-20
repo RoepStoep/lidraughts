@@ -24,8 +24,8 @@ final class JsonView(
     tour: ExternalTournament,
     players: List[ExternalPlayer],
     upcoming: List[Challenge],
-    ongoing: List[Game],
-    finished: List[Game],
+    ongoing: List[GameWithMeta],
+    finished: List[GameWithMeta],
     me: Option[User],
     pref: lidraughts.pref.Pref,
     reqPage: Option[Int] = None, // None = focus on me
@@ -33,7 +33,7 @@ final class JsonView(
     socketVersion: Option[SocketVersion] = None
   ): Fu[JsObject] = {
     def myPlayer = me.flatMap(u => players.find(_.userId == u.id))
-    def myGame = me.flatMap(u => ongoing.find(_.player(u).isDefined))
+    def myGame = me.flatMap(u => ongoing.find(_.game.userIds.contains(u.id)))
     def fetchFmjd: FetchFmjdSync = fetchLightFmjdUserSync(players, _)
     val fetch = if (tour.settings.userDisplay.fmjd) fetchFmjd else fetchNone
     val page = reqPage orElse myPlayer.map(_.page) getOrElse 1
@@ -42,7 +42,7 @@ final class JsonView(
       createdByMe = me.exists(_.id == tour.createdBy)
       userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId) + tour.createdBy
       _ <- lightUserApi.preloadSet(userIds)
-      playerInfoJson <- playerInfo.fold(fuccess(none[JsObject])) { playerInfoJson(tour, _, players).map(_.some) }
+      playerInfoJson <- playerInfo.fold(fuccess(none[JsObject])) { playerInfoJson(tour, _, players).dmap(_.some) }
     } yield Json.obj(
       "id" -> tour.id,
       "createdBy" -> lightUserApi.sync(tour.createdBy),
@@ -119,31 +119,33 @@ final class JsonView(
     }
 
   private def resultJson(tour: ExternalTournament, result: PlayerInfo.Result, players: List[ExternalPlayer]) = {
-    val opponent = result.game.player(!result.color)
+    val game = result.game.game
+    val opponent = game.player(!result.color)
     for {
       lightUser <- opponent.userId ?? lightUserApi.async
       externalPlayer = tour.settings.userDisplay.fmjd ?? opponent.userId.flatMap(id => players.find(_.userId == id))
       fmjdPlayer <- externalPlayer.flatMap(_.fmjdId) ?? fmjdPlayerApi.byId
     } yield {
-      minimalPlayerJson(result.game.player(!result.color)) ++
+      minimalPlayerJson(game.player(!result.color)) ++
         Json
         .obj(
-          "g" -> result.game.id,
+          "g" -> game.id,
           "c" -> (result.color == draughts.White)
         )
         .add("w" -> result.win)
+        .add("r" -> result.game.round)
         .add("user" -> lightUser)
         .add("fmjd" -> fmjdPlayer.map(fmjdPlayerJson))
     }
   }
 
-  private def myInfoJson(me: User, player: Option[ExternalPlayer], game: Option[Game]) =
+  private def myInfoJson(me: User, player: Option[ExternalPlayer], gm: Option[GameWithMeta]) =
     Json
       .obj("userId" -> me.id)
       .add("fmjdId" -> player.flatMap(_.fmjdId))
       .add("canJoin" -> player.exists(p => p.invited).option(true))
       .add("rank" -> player.flatMap(_.rank))
-      .add("gameId" -> game.map(_.id))
+      .add("gameId" -> gm.map(_.game.id))
 
   private def countryJson(cc: String) =
     Countries.info(cc) match {
@@ -171,16 +173,22 @@ final class JsonView(
       .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
   }
 
-  private def gameJson(g: Game, fetch: FetchFmjdSync) =
-    Json.obj(
-      "id" -> g.id,
-      "variant" -> g.variant,
-      "white" -> basePlayerJsonSync(g.whitePlayer, fetch),
-      "black" -> basePlayerJsonSync(g.blackPlayer, fetch),
-      "createdAt" -> formatDate(g.createdAt)
-    ).add("winner" -> g.winnerColor.map(_.name))
+  private def gameJson(gameMeta: GameWithMeta, fetch: FetchFmjdSync): JsObject = {
+    val g = gameMeta.game
+    Json
+      .obj(
+        "id" -> g.id,
+        "variant" -> g.variant,
+        "white" -> basePlayerJsonSync(g.whitePlayer, fetch),
+        "black" -> basePlayerJsonSync(g.blackPlayer, fetch),
+        "createdAt" -> formatDate(g.createdAt)
+      )
+      .add("winner" -> g.winnerColor.map(_.name))
+      .add("round" -> gameMeta.round)
+  }
 
-  private def boardJson(g: Game, players: List[ExternalPlayer]) =
+  private def boardJson(gameMeta: GameWithMeta, players: List[ExternalPlayer]): JsObject = {
+    val g = gameMeta.game
     Json
       .obj(
         "id" -> g.id,
@@ -200,6 +208,8 @@ final class JsonView(
         }
       )
       .add("winner" -> g.winnerColor.map(_.name))
+      .add("round" -> gameMeta.round)
+  }
 
   private def fmjdPlayerJson(p: FmjdPlayer): JsObject =
     Json.obj(
@@ -212,9 +222,7 @@ final class JsonView(
 
   private def invitedPlayerJson(p: ExternalPlayer): JsObject =
     basePlayerJsonSync(p) ++
-      Json.obj(
-        "status" -> p.status.id
-      )
+      Json.obj("status" -> p.status.id)
 
   private def boardPlayerJsonSync(player: Player, players: List[ExternalPlayer]): JsObject = {
     val playerExt = players.find(p => player.userId.contains(p.userId))

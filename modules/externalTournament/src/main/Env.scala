@@ -24,6 +24,7 @@ final class Env(
   private val settings = new {
     val CollectionExternalTournament = config getString "collection.externalTournament"
     val CollectionExternalPlayer = config getString "collection.externalPlayer"
+    val CollectionExternalGameMeta = config getString "collection.externalGameMeta"
     val CollectionFmjdPlayer = config getString "collection.externalFmjdPlayer"
     val HistoryMessageTtl = config duration "history.message.ttl"
     val UidTimeout = config duration "uid.timeout"
@@ -39,6 +40,7 @@ final class Env(
   private[externalTournament] lazy val externalTournamentColl = db(CollectionExternalTournament)
   private[externalTournament] lazy val externalPlayerColl = db(CollectionExternalPlayer)
   private[externalTournament] lazy val fmjdPlayerColl = db(CollectionFmjdPlayer)
+  private[externalTournament] lazy val gameMetaColl = db(CollectionExternalGameMeta)
 
   private lazy val fmjdPlayerApi = new FmjdPlayerApi(
     baseUrl = FmjdPlayersBaseUrl,
@@ -49,9 +51,12 @@ final class Env(
 
   lazy val lightFmjdUserApi = new LightFmjdUserApi(fmjdPlayerColl)(system)
 
+  lazy val gameMetaApi = new GameMetaApi(gameMetaColl)
+
   lazy val cached = new Cached(
     asyncCache = asyncCache,
-    proxyGame = proxyGame
+    proxyGame = proxyGame,
+    gameMetaApi = gameMetaApi
   )(system)
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
@@ -95,7 +100,8 @@ final class Env(
     coll = externalTournamentColl,
     socketMap = socketMap,
     cached = cached,
-    challengeApi = challengeApi
+    challengeApi = challengeApi,
+    gameMetaApi = gameMetaApi
   )(system)
 
   bus.subscribeFuns(

@@ -1,6 +1,6 @@
 package lidraughts.externalTournament
 
-import com.github.blemale.scaffeine.Scaffeine
+import org.joda.time.DateTime
 import play.api.libs.json._
 import scala.concurrent.duration._
 
@@ -9,7 +9,8 @@ import lidraughts.memo._
 
 private[externalTournament] final class Cached(
     asyncCache: lidraughts.memo.AsyncCache.Builder,
-    proxyGame: Game.ID => Fu[Option[Game]]
+    proxyGame: Game.ID => Fu[Option[Game]],
+    gameMetaApi: GameMetaApi
 )(implicit system: akka.actor.ActorSystem) {
 
   def api = Env.current.api
@@ -21,27 +22,33 @@ private[externalTournament] final class Cached(
     strategy = Syncache.WaitAfterUptime(20 millis),
     expireAfter = Syncache.ExpireAfterAccess(1 hour),
     logger = logger
-  )(system)
+  )
 
   def name(id: String): Option[String] = nameCache sync id
 
-  private[externalTournament] val finishedGamesCache = asyncCache.clearable[String, List[Game]](
+  private val gameSortDesc = Ordering[DateTime].reverse
+
+  private val finishedGamesCache = asyncCache.clearable[String, List[GameWithMeta]](
     name = "externalTournament.finishedGames",
-    f = GameRepo.finishedByExternalTournament,
+    f = id => GameRepo.finishedByExternalTournament(id).flatMap(_.map(gameMetaApi.withMeta).sequenceFu),
     expireAfter = _.ExpireAfterAccess(1 hour)
   )
 
-  def getFinishedGames(id: String): Fu[List[Game]] = finishedGamesCache.get(id)
+  def getFinishedGames(tourId: ExternalTournament.ID): Fu[List[GameWithMeta]] =
+    finishedGamesCache.get(tourId)
 
-  private[externalTournament] val ongoingGameIdsCache = asyncCache.clearable[String, List[Game.ID]](
+  def addFinishedGame(tourId: ExternalTournament.ID, g: GameWithMeta) =
+    finishedGamesCache.update(tourId, games => (g :: games).sortBy(_.game.createdAt)(gameSortDesc))
+
+  private[externalTournament] val ongoingGameIdsCache = asyncCache.clearable[String, List[GameIdWithMeta]](
     name = "externalTournament.ongoingGameIds",
-    f = id => GameRepo.ongoingIdsByExternalTournament(id),
+    f = id => GameRepo.ongoingIdsByExternalTournament(id).flatMap(_.map(gameMetaApi.idWithMeta).sequenceFu),
     expireAfter = _.ExpireAfterWrite(1 minute)
   )
 
-  def getOngoingGames(id: ExternalTournament.ID): Fu[List[Game]] =
+  def getOngoingGames(id: ExternalTournament.ID): Fu[List[GameWithMeta]] =
     ongoingGameIdsCache.get(id).flatMap { gameIds =>
-      gameIds.map(proxyGame)
+      gameIds.map(_.fetchGame(proxyGame))
         .sequenceFu
         .dmap(_.flatten)
     }

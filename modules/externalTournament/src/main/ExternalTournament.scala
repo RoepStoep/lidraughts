@@ -21,6 +21,8 @@ case class ExternalTournament(
 
   def id = _id
 
+  def hasRounds = settings.nbRounds.nonEmpty
+
   def speed = Speed(clock)
 
   def perfType: PerfType = PerfPicker.perfType(speed, variant, days) getOrElse PerfType.Standard

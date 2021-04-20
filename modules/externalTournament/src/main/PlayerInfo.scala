@@ -14,19 +14,19 @@ object PlayerInfo {
 
   def make(
     player: ExternalPlayer,
-    games: List[Game]
+    games: List[GameWithMeta]
   ) = new PlayerInfo(
     player = player,
-    results = games.flatMap { game =>
-      game.playerByUserId(player.userId) map { player =>
+    results = games.flatMap { withMeta =>
+      withMeta.game.playerByUserId(player.userId) map { player =>
         PlayerInfo.Result(
-          game = game,
+          game = withMeta,
           color = player.color,
-          win = game.winnerColor.map(player.color ==)
+          win = withMeta.game.winnerColor.map(player.color ==)
         )
       }
     }
   )
 
-  case class Result(game: Game, color: draughts.Color, win: Option[Boolean])
+  case class Result(game: GameWithMeta, color: draughts.Color, win: Option[Boolean])
 }

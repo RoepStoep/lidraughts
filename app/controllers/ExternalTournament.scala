@@ -5,7 +5,7 @@ import play.api.mvc._
 
 import lidraughts.api.Context
 import lidraughts.app._
-import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo }
+import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo, GameMeta }
 import lidraughts.socket.Socket.SocketVersion
 import lidraughts.user.UserRepo
 import views._
@@ -101,7 +101,9 @@ object ExternalTournament extends LidraughtsController {
           tournamentHasGamesFu flatMap {
             case (hasGames, nbAccepted) =>
               if (hasGames && data.changedGameSettings(tour))
-                fuccess(BadRequest(jsonError("Cannot change game settings once games are added")))
+                fuccess(BadRequest(jsonError("Cannot change game settings once games have been added")))
+              else if (hasGames && data.rounds.isDefined != tour.hasRounds)
+                fuccess(BadRequest(jsonError(s"Cannot ${if (tour.hasRounds) "unset" else "set"} rounds once games have been added")))
               else if (nbAccepted > 0 && data.autoStart != tour.settings.autoStart)
                 fuccess(BadRequest(jsonError("Cannot change autoStart once players have joined")))
               else api.update(id, data) map { opt =>
@@ -170,34 +172,38 @@ object ExternalTournament extends LidraughtsController {
         jsonFormErrorDefaultLang,
         data => {
           import lidraughts.challenge.Challenge._
-          val challengeFu = for {
-            whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
-            blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
-            _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
-            _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
-          } yield lidraughts.challenge.Challenge.make(
-            variant = tour.variant,
-            fenVariant = none,
-            initialFen = none,
-            timeControl = tour.clock map { c =>
-              TimeControl.Clock(c)
-            } orElse tour.days.map {
-              TimeControl.Correspondence.apply
-            } getOrElse TimeControl.Unlimited,
-            mode = draughts.Mode(tour.rated),
-            color = draughts.White.name,
-            challenger = Right(whiteUser),
-            destUser = blackUser.some,
-            rematchOf = none,
-            external = true,
-            startsAt = data.startsAt.some,
-            autoStart = tour.settings.autoStart,
-            externalTournamentId = tourId.some
-          )
-          challengeFu.flatFold(
+          val validateChallengeFu = {
+            if (tour.hasRounds != data.round.isDefined) fufail("Round must be specified")
+            else for {
+              whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
+              blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
+              _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
+              _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
+            } yield lidraughts.challenge.Challenge.make(
+              variant = tour.variant,
+              fenVariant = none,
+              initialFen = none,
+              timeControl = tour.clock map { c =>
+                TimeControl.Clock(c)
+              } orElse tour.days.map {
+                TimeControl.Correspondence.apply
+              } getOrElse TimeControl.Unlimited,
+              mode = draughts.Mode(tour.rated),
+              color = draughts.White.name,
+              challenger = Right(whiteUser),
+              destUser = blackUser.some,
+              rematchOf = none,
+              external = true,
+              startsAt = data.startsAt.some,
+              autoStart = tour.settings.autoStart,
+              externalTournamentId = tourId.some
+            )
+          }
+          validateChallengeFu.flatFold(
             err => badRequestJson(err.getMessage),
             challenge => Env.challenge.api.create(challenge) map {
               case true =>
+                env.gameMetaApi insert GameMeta(challenge.id, data.round)
                 api addChallenge challenge
                 lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
                 JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
