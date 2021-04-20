@@ -29,12 +29,13 @@ object side {
             separator,
             if (t.rated) trans.ratedTournament() else trans.casualTournament(),
             t.settings.nbRounds map { rounds =>
+              val actualRounds = math.max(~roundsPlayed, rounds)
               frag(
                 br,
-                roundsPlayed.fold[Frag](trans.swiss.nbRounds(rounds)) { round =>
+                roundsPlayed.fold[Frag](trans.swiss.nbRounds(actualRounds)) { round =>
                   frag(
-                    span(cls := "swiss__meta__round")(s"${round}/${rounds}"),
-                    trans.swiss.nbRounds.plural(rounds, "")
+                    span(cls := "swiss__meta__round")(s"${round}/${actualRounds}"),
+                    trans.swiss.nbRounds.plural(actualRounds, "")
                   )
                 }
               )

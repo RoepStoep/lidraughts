@@ -112,7 +112,7 @@ final class Env(
     },
     'finishGame -> {
       case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament =>
-        api finishGame g
+        api.finishGame(g) void
     }
   )
 

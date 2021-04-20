@@ -11,14 +11,6 @@ case class GameWithMeta(
   def round = meta.flatMap(_.round)
 }
 
-case class ChallengeWithMeta(
-    challenge: Challenge,
-    meta: Option[GameMeta]
-) {
-
-  def round = meta.flatMap(_.round)
-}
-
 case class GameIdWithMeta(
     gameId: Game.ID,
     meta: Option[GameMeta]

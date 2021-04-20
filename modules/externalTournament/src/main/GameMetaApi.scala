@@ -13,9 +13,6 @@ final class GameMetaApi(
   def withMeta(g: Game): Fu[GameWithMeta] =
     coll.byId[GameMeta](g.id) dmap { GameWithMeta(g, _) }
 
-  def withMeta(c: Challenge): Fu[ChallengeWithMeta] =
-    coll.byId[GameMeta](c.id) dmap { ChallengeWithMeta(c, _) }
-
   def withMeta(id: Game.ID): Fu[GameIdWithMeta] =
     coll.byId[GameMeta](id) dmap { GameIdWithMeta(id, _) }
 

@@ -77,6 +77,8 @@ case class Challenge(
 
   def autoStart = ~external.flatMap(_.autoStart)
 
+  def round = external.flatMap(_.round)
+
   def isMicroMatch = ~microMatch
 
   def externalTournamentId = external.flatMap(_.tournamentId)
@@ -158,6 +160,7 @@ object Challenge {
       destUserAccepted: Boolean = false,
       startsAt: Option[DateTime] = None,
       tournamentId: Option[String] = None,
+      round: Option[Int] = None,
       autoStart: Option[Boolean] = None
   ) {
 
@@ -205,7 +208,8 @@ object Challenge {
     startsAt: Option[DateTime] = None,
     autoStart: Boolean = false,
     microMatch: Boolean = false,
-    externalTournamentId: Option[String] = None
+    externalTournamentId: Option[String] = None,
+    externalTournamentRound: Option[Int] = None
   ): Challenge = {
     val (colorChoice, finalColor) = color match {
       case "white" => ColorChoice.White -> draughts.White
@@ -232,7 +236,8 @@ object Challenge {
     val externalData = external option ExternalChallenge(
       startsAt = startsAt,
       tournamentId = externalTournamentId,
-      autoStart = externalTournamentId.isDefined ?? autoStart.some
+      autoStart = externalTournamentId.isDefined ?? autoStart.some,
+      round = externalTournamentRound
     )
     new Challenge(
       _id = randomId,

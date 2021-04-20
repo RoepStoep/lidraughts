@@ -6,6 +6,7 @@ import scala.concurrent.duration._
 
 import actorApi._
 import ExternalPlayer.Status
+import lidraughts.challenge.Challenge
 import lidraughts.db.dsl._
 import lidraughts.game.Game
 import lidraughts.user.{ User, UserRepo }
@@ -191,10 +192,27 @@ final class ExternalTournamentApi(
       }
     }
 
-  def addChallenge(c: lidraughts.challenge.Challenge): Unit =
-    c.externalTournamentId.foreach { tourId =>
-      socketReload(tourId)
+  def addChallenge(c: Challenge): Funit =
+    c.externalTournamentId ?? { tourId =>
+      gameMetaApi.insert(GameMeta(c.id, c.round)) >>-
+        socketReload(tourId)
     }
+
+  def forbiddenRounds(tour: ExternalTournament, userIds: (User.ID, User.ID)) = {
+    def challenge(c: Challenge) = c.round.isDefined && c.userIds.exists(id => userIds._1 == id || userIds._2 == id)
+    def game(g: GameWithMeta) = g.round.isDefined && g.game.userIds.exists(id => userIds._1 == id || userIds._2 == id)
+    for {
+      upcoming <- challengeApi.allForExternalTournament(tour.id).map(_.filter(challenge))
+      ongoing <- cached.getOngoingGames(tour.id).map(_.filter(game))
+      finished <- cached.getFinishedGames(tour.id).map(_.games.filter(game))
+    } yield {
+      def toSet(id: User.ID) = {
+        val upcomingRounds = upcoming.foldLeft(Set.empty[Int]) { (set, c) => if (c.userIds.contains(id)) set + ~c.round else set }
+        (ongoing ::: finished).foldLeft(upcomingRounds) { (set, g) => if (g.game.userIds.contains(id)) set + ~g.round else set }
+      }
+      toSet(userIds._1) -> toSet(userIds._2)
+    }
+  }
 
   private def Sequencing[A: Zero](
     id: ExternalTournament.ID

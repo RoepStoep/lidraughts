@@ -180,6 +180,17 @@ object ExternalTournament extends LidraughtsController {
               blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
               _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
               _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
+              userIds = whiteUser.id -> blackUser.id
+              forbiddenRounds <- data.round.?? { round =>
+                api.forbiddenRounds(tour, userIds).dmap { forbidden =>
+                  (forbidden._1.contains(round) -> forbidden._2.contains(round)).some
+                }
+              }
+              _ <- forbiddenRounds match {
+                case Some((true, _)) => fufail(s"Round ${~data.round} game already exists for ${data.whiteUserId}")
+                case Some((_, true)) => fufail(s"Round ${~data.round} game already exists for ${data.blackUserId}")
+                case _ => funit
+              }
             } yield lidraughts.challenge.Challenge.make(
               variant = tour.variant,
               fenVariant = none,
@@ -197,19 +208,20 @@ object ExternalTournament extends LidraughtsController {
               external = true,
               startsAt = data.startsAt.some,
               autoStart = tour.settings.autoStart,
-              externalTournamentId = tourId.some
+              externalTournamentId = tourId.some,
+              externalTournamentRound = data.round
             )
           }
           validateChallengeFu.flatFold(
             err => badRequestJson(err.getMessage),
-            challenge => Env.challenge.api.create(challenge) map {
+            challenge => Env.challenge.api.create(challenge) flatMap {
               case true =>
-                env.gameMetaApi insert GameMeta(challenge.id, data.round)
-                api addChallenge challenge
-                lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
-                JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
+                api.addChallenge(challenge) inject {
+                  lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
+                  JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
+                }
               case false =>
-                BadRequest(jsonError("Challenge not created"))
+                badRequestJson("Challenge not created")
             }
           )
         }
