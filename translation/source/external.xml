@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="youHaveBeenInvitedToPlay">You have been invited to play in this tournament!</string>
+  <string name="pleaseReviewTheFollowing">Please review the following before you join:</string>
+  <string name="youHaveBeenAssignedFmjdIdX">You have been assigned FMJD ID %s.</string>
+  <string name="toFmjdProfile">To FMJD profile</string>
+  <string name="contactTournamentOrganizerXIfNotCorrect">Contact tournament organizer %s if this is not your ID.</string>
+  <string name="yourPublicFmjdDataWillBeVisible">Your public FMJD data (name, picture, etc) will be visible in the tournament lobby.</string>
+  <string name="yourGamesStartAutomatically">Your games start automatically, so be aware of the tournament schedule!</string>
+  <string name="invitedPlayers">Invited players</string>
+  <string name="awaiting">Awaiting</string>
+  <string name="rejected">Rejected</string>
+</resources>

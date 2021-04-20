@@ -40,6 +40,7 @@ export interface ExternalTournamentData {
   socketVersion?: number;
   draughtsResult: boolean;
   displayFmjd: boolean;
+  autoStart: boolean;
 }
 
 export interface Standing {

@@ -18,7 +18,6 @@
     }
   }
   .empty {
-    margin-bottom: 1em;
     text-align: center;
     padding-bottom: 1em;
   }
@@ -38,4 +37,8 @@
     }
   }
 }
-
+.tour-ext__table {
+  .empty {
+    margin-bottom: 1em;
+  }
+}

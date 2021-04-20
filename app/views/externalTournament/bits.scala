@@ -18,7 +18,8 @@ object bits {
       }
 
   def jsI18n(implicit ctx: Context) = i18nJsObject(i18nKeys) ++
-    JsDump.keysToObject(i18nStudyKeys, I18nDb.Study, ctx.lang)
+    JsDump.keysToObject(i18nStudyKeys, I18nDb.Study, ctx.lang) ++
+    JsDump.keysToObject(i18nExternalKeys, I18nDb.External, ctx.lang)
 
   private val i18nKeys = List(
     trans.join,
@@ -39,6 +40,19 @@ object bits {
     trans.unknown,
     trans.username,
     trans.spectators
+  )
+
+  private val i18nExternalKeys = List(
+    trans.external.youHaveBeenInvitedToPlay,
+    trans.external.pleaseReviewTheFollowing,
+    trans.external.youHaveBeenAssignedFmjdIdX,
+    trans.external.toFmjdProfile,
+    trans.external.contactTournamentOrganizerXIfNotCorrect,
+    trans.external.yourPublicFmjdDataWillBeVisible,
+    trans.external.yourGamesStartAutomatically,
+    trans.external.invitedPlayers,
+    trans.external.awaiting,
+    trans.external.rejected
   )
 
   private val i18nStudyKeys = List(

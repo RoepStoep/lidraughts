@@ -1,7 +1,7 @@
 // Generated with bin/trans-dump.js
 package lidraughts.i18n
 
-import I18nDb.{ Site, Arena, Emails, Learn, Activity, Coordinates, Study, Tfa, Team, Swiss, Broadcast, Streamer, Lag, Patron }
+import I18nDb.{ Site, Arena, Emails, Learn, Activity, Coordinates, Study, Tfa, Team, Swiss, Broadcast, Streamer, Lag, Patron, External }
 
 // format: OFF
 object I18nKeys {
@@ -1463,6 +1463,19 @@ val `nowLifetime` = new Translated("nowLifetime", Patron)
 val `nowOneMonth` = new Translated("nowOneMonth", Patron)
 val `downgradeNextMonth` = new Translated("downgradeNextMonth", Patron)
 val `patronForMonths` = new Translated("patronForMonths", Patron)
+}
+
+object external {
+val `youHaveBeenInvitedToPlay` = new Translated("youHaveBeenInvitedToPlay", External)
+val `pleaseReviewTheFollowing` = new Translated("pleaseReviewTheFollowing", External)
+val `youHaveBeenAssignedFmjdIdX` = new Translated("youHaveBeenAssignedFmjdIdX", External)
+val `toFmjdProfile` = new Translated("toFmjdProfile", External)
+val `contactTournamentOrganizerXIfNotCorrect` = new Translated("contactTournamentOrganizerXIfNotCorrect", External)
+val `yourPublicFmjdDataWillBeVisible` = new Translated("yourPublicFmjdDataWillBeVisible", External)
+val `yourGamesStartAutomatically` = new Translated("yourGamesStartAutomatically", External)
+val `invitedPlayers` = new Translated("invitedPlayers", External)
+val `awaiting` = new Translated("awaiting", External)
+val `rejected` = new Translated("rejected", External)
 }
 
 }

@@ -56,14 +56,14 @@ export function userLink(u: LightUser, withTitle: boolean = true) {
   ]);
 }
 
-export function fmjdLink(fmjdId: string, text?: string) {
-  return h('a', {
-    attrs: { 
-      href: 'https://www.fmjd.org/?p=pcard&id=' + fmjdId,
-      target: '_blank',
-      rel: 'noopener'
-    }
-  }, text || fmjdId);
+export function fmjdLink(fmjdId: string, title?: string) {
+  const attrs: any = { 
+    href: 'https://www.fmjd.org/?p=pcard&id=' + fmjdId,
+    target: '_blank',
+    rel: 'noopener'
+  };
+  if (title) attrs.title = title;
+  return h('a', { attrs }, fmjdId);
 }
 
 export function drawTime(date: Date) {

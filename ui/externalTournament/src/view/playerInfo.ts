@@ -97,7 +97,7 @@ function renderFmjdInfo(p: FmjdPlayer | undefined, u: LightUser, noarg: TransNoA
       h('table', [
         h('tr', [
           h('th', 'FMJD ID'), 
-          h('td', fmjdLink(p.id))
+          h('td', fmjdLink(p.id, noarg('toFmjdProfile')))
         ]),
         h('tr', [
           h('th', noarg('countryOrRegion')), 

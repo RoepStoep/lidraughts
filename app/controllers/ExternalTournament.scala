@@ -169,46 +169,42 @@ object ExternalTournament extends LidraughtsController {
       env.forms.gameCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => {
-          if (tour.settings.autoStart && data.startsAt.isEmpty)
-            badRequestJson("Tournament autoStart requires startsAt to be specified")
-          else {
-            import lidraughts.challenge.Challenge._
-            val challengeFu = for {
-              whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
-              blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
-              _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
-              _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
-            } yield lidraughts.challenge.Challenge.make(
-              variant = tour.variant,
-              fenVariant = none,
-              initialFen = none,
-              timeControl = tour.clock map { c =>
-                TimeControl.Clock(c)
-              } orElse tour.days.map {
-                TimeControl.Correspondence.apply
-              } getOrElse TimeControl.Unlimited,
-              mode = draughts.Mode(tour.rated),
-              color = draughts.White.name,
-              challenger = Right(whiteUser),
-              destUser = blackUser.some,
-              rematchOf = none,
-              external = true,
-              startsAt = data.startsAt,
-              autoStart = tour.settings.autoStart,
-              externalTournamentId = tourId.some
-            )
-            challengeFu.flatFold(
-              err => badRequestJson(err.getMessage),
-              challenge => Env.challenge.api.create(challenge) map {
-                case true =>
-                  api addChallenge challenge
-                  lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
-                  JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
-                case false =>
-                  BadRequest(jsonError("Challenge not created"))
-              }
-            )
-          }
+          import lidraughts.challenge.Challenge._
+          val challengeFu = for {
+            whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
+            blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
+            _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
+            _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
+          } yield lidraughts.challenge.Challenge.make(
+            variant = tour.variant,
+            fenVariant = none,
+            initialFen = none,
+            timeControl = tour.clock map { c =>
+              TimeControl.Clock(c)
+            } orElse tour.days.map {
+              TimeControl.Correspondence.apply
+            } getOrElse TimeControl.Unlimited,
+            mode = draughts.Mode(tour.rated),
+            color = draughts.White.name,
+            challenger = Right(whiteUser),
+            destUser = blackUser.some,
+            rematchOf = none,
+            external = true,
+            startsAt = data.startsAt.some,
+            autoStart = tour.settings.autoStart,
+            externalTournamentId = tourId.some
+          )
+          challengeFu.flatFold(
+            err => badRequestJson(err.getMessage),
+            challenge => Env.challenge.api.create(challenge) map {
+              case true =>
+                api addChallenge challenge
+                lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
+                JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
+              case false =>
+                BadRequest(jsonError("Challenge not created"))
+            }
+          )
         }
       )
     }

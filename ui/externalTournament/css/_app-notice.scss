@@ -1,7 +1,21 @@
 .tour-ext__main__join-tournament {
-  padding: 1em;
+  @extend %box-neat;
+  background: $c-bg-zebra;
+  padding: 1em 1.4em;
+  margin: 1em 2em 2em 2em;
+
+  .explanation {
+    span:not(.name) {
+      display: block;
+      &.first {
+        margin-bottom: .8em;
+      }
+    }
+  }
   .choices {
-    margin: 1.4em 0;
+    margin: 1em 2em 0 0;
+    display: flex;
+    justify-content: flex-end;
   }
   .button::before {
     margin-right: .4em;
@@ -10,9 +24,13 @@
     margin-left: .4em;
   }
   .spinner {
-    margin: 1em 0 0 3.5em;
+    margin: .4em 3.5em 0 0;
     width: 2.5em;
     height: 2.5em;
+  }
+  ul li {
+    list-style: disc outside;
+    margin: .5em 0 0 1.5em;
   }
 }
 

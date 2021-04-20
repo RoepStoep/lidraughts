@@ -63,12 +63,12 @@ object DataForm {
   lazy val gameCreate = Form(mapping(
     "whiteUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "blackUserId" -> lidraughts.user.DataForm.historicalUsernameField,
-    "startsAt" -> optional(inTheFuture(utcDate)),
+    "startsAt" -> inTheFuture(utcDate),
     "round" -> optional(Fields.rounds)
   )(GameData.apply)(GameData.unapply)) fill GameData(
     whiteUserId = "",
     blackUserId = "",
-    startsAt = none,
+    startsAt = DateTime.now,
     round = none
   )
 
@@ -103,7 +103,7 @@ object DataForm {
   case class GameData(
       whiteUserId: String,
       blackUserId: String,
-      startsAt: Option[DateTime],
+      startsAt: DateTime,
       round: Option[Int]
   )
 
@@ -116,8 +116,6 @@ object DataForm {
 
     private val maxClockSeconds = 180 * 60
     private val maxClockIncrement = 180 * 60
-
-    private val colors = Set(draughts.White, draughts.Black).map(_.name)
 
     val variant = text.verifying(Variant.byKey.contains _)
     val name = cleanNonEmptyText(minLength = 3, maxLength = 40)
