@@ -13,7 +13,8 @@ export default function table(ctrl: ExternalTournamentCtrl): VNode {
 }
 
 function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
-  const d = ctrl.data;
+  const d = ctrl.data,
+    me = ctrl.data.me?.userId;
   return h('div.tour-ext__games' + (table ? '' : '.tour-ext__upcoming'), [
     h('h2', ctrl.trans.noarg('upcomingGames')),
     d.upcoming.length ? 
@@ -25,11 +26,16 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
         }, [
           h('tbody', d.upcoming.map((c, i) => {
             const hrefAttr = { attrs: { 'data-href': '/' + c.id } };
+            const isMe = c.white.user.id === me || c.black.user.id === me;
             return h('tr', {
                 key: i,
+                class: { 'me': isMe },
                 attrs: { 'data-href': '/' + c.id },
                 hook: {
-                  insert: vnode => preloadUserTips(vnode.elm as HTMLElement),
+                  insert: vnode => {
+                    preloadUserTips(vnode.elm as HTMLElement)
+                    window.lidraughts.pubsub.emit('content_loaded');
+                  },
                   destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
                 }
               },

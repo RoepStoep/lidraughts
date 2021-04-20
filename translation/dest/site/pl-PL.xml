@@ -260,7 +260,7 @@
   <string name="accept">Akceptuję</string>
   <string name="decline">Odrzuć</string>
   <string name="startingIn">Zaczynamy za</string>
-  <string name="startingSoon"> - Zaczynamy wkrótce -</string>
+  <string name="startingSoon">Zaczynamy wkrótce</string>
   <string name="playingRightNow">W toku</string>
   <string name="eventInProgress">W toku</string>
   <string name="finished">Zakończone</string>

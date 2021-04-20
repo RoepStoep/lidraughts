@@ -238,7 +238,7 @@
   <string name="accept">Accept</string>
   <string name="decline">Decline</string>
   <string name="startingIn">Starting in</string>
-  <string name="startingSoon"> - Starting soon - </string>
+  <string name="startingSoon">Starting soon</string>
   <string name="playingRightNow">Playing right now</string>
   <string name="eventInProgress">Playing right now</string>
   <string name="finished">Finished</string>
@@ -246,6 +246,7 @@
   <string name="viewAllResults">View all results</string>
   <string name="latestResults">Latest results</string>
   <string name="upcomingGames">Upcoming games</string>
+  <string name="nowPlaying">Now playing</string>
   <string name="abortGame">Abort game</string>
   <string name="gameAborted">Game aborted</string>
   <string name="standard">Standard</string>

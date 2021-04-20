@@ -34,7 +34,7 @@ export default function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
   }
 
   return ctrl.data.ongoing.length ? h('div.tour-ext__main__ongoing', [
-    h('h2', 'Currently playing'),
+    h('h2', ctrl.trans.noarg('nowPlaying')),
     many(ctrl.data.ongoing)
   ]) : null;
 

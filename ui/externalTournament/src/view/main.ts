@@ -83,7 +83,7 @@ function joinTournament(ctrl: ExternalTournamentCtrl): VNode | null {
 
 function joinGame(ctrl: ExternalTournamentCtrl): VNode | null {
   const gameId = ctrl.myGameId();
-  return gameId ? h('div.tour-ext__main__join-game.button.is.is-after', {
+  return gameId ? h('a.tour-ext__main__join-game.button.is.is-after', {
     attrs: { href: '/' + gameId }
   }, [
     ctrl.trans.noarg('youArePlaying'), h('br'),

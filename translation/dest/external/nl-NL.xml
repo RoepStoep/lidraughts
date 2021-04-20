@@ -6,7 +6,7 @@
   <string name="toFmjdProfile">Naar FMJD profiel</string>
   <string name="contactTournamentOrganizerXIfNotCorrect">Neem contact op met toernooi organisator %s als dit niet jouw ID is.</string>
   <string name="yourPublicFmjdDataWillBeVisible">Je openbare FMJD gegevens (naam, foto, etc) zullen zichtbaar zijn in de toernooilobby.</string>
-  <string name="yourGamesStartAutomatically">Je partijen starten automatisch, dus hou het toernooi schema in de gaten!</string>
+  <string name="yourGamesStartAutomatically">Je partijen starten automatisch, dus hou het toernooi schema goed in de gaten!</string>
   <string name="invitedPlayers">Uitgenodigde spelers</string>
   <string name="awaiting">In afwachting</string>
   <string name="rejected">Afgewezen</string>

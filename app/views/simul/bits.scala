@@ -44,7 +44,7 @@ object bits {
             span(cls := "headline")(spot.headline),
             span(cls := "more")(
               if (s.isRunning) trans.eventInProgress()
-              else if (spot.isNow) trans.startingSoon()
+              else if (spot.isNow) frag(" - ", trans.startingSoon(), " - ")
               else momentFromNow(spot.startsAt)
             )
           )).getOrElse(

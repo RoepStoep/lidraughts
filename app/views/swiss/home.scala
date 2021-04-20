@@ -16,8 +16,8 @@ object home {
     ) {
         main(cls := "page-small box box-pad page swiss-home")(
           h1(trans.swiss.swissTournaments.txt() + " [BETA]"),
-          renderList("Now playing")(now),
-          renderList("Starting soon")(soon),
+          renderList(trans.nowPlaying.txt())(now),
+          renderList(trans.startingSoon.txt())(soon),
           div(cls := "swiss-home__infos")(
             div(cls := "wiki")(
               iconTag(""),

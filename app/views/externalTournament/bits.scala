@@ -34,6 +34,7 @@ object bits {
     trans.viewAllResults,
     trans.latestResults,
     trans.upcomingGames,
+    trans.nowPlaying,
     trans.rating,
     trans.countryOrRegion,
     trans.draughtsTitle,

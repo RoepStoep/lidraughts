@@ -224,7 +224,7 @@
   <string name="accept">接受</string>
   <string name="decline">拒绝</string>
   <string name="startingIn">开始于</string>
-  <string name="startingSoon"> - 即将开始 - </string>
+  <string name="startingSoon">即将开始</string>
   <string name="playingRightNow">正在对局</string>
   <string name="eventInProgress">正在进行</string>
   <string name="finished">已结束</string>
