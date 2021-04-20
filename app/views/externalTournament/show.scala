@@ -16,6 +16,7 @@ object show {
 
   def apply(
     tour: ExternalTournament,
+    roundsPlayed: Option[Int],
     data: play.api.libs.json.JsObject,
     chatOption: Option[lidraughts.chat.UserChat.Mine]
   )(implicit ctx: Context) =
@@ -47,7 +48,7 @@ object show {
     )(
         main(cls := "tour-ext")(
           st.aside(cls := "tour-ext__side")(
-            side(tour, chatOption.isDefined)
+            side(tour, roundsPlayed, chatOption.isDefined)
           ),
           div(cls := "tour-ext__main")(div(cls := "box"))
         )

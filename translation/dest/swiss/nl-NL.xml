@@ -7,6 +7,7 @@
   <string name="absences">Aantal afwezig</string>
   <string name="late">Te laat</string>
   <string name="tieBreak">Weerstandspunten</string>
+  <string name="roundX">Ronde %s</string>
   <plurals name="nbRounds">
     <item quantity="one">%s ronde</item>
     <item quantity="other">%s rondes</item>

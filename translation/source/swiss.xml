@@ -7,6 +7,7 @@
   <string name="absences">Absences</string>
   <string name="late">Late</string>
   <string name="tieBreak">Tie break</string>
+  <string name="roundX">Round %s</string>
   <plurals name="nbRounds">
     <item quantity="one">%s round</item>
     <item quantity="other">%s rounds</item>

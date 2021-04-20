@@ -4,9 +4,10 @@ import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
 import play.api.libs.json._
 
+import Cached.FinishedGames
 import lidraughts.common.{ LightUser, LightFmjdUser }
 import lidraughts.challenge.Challenge
-import lidraughts.game.{ Game, Player }
+import lidraughts.game.Player
 import lidraughts.game.JsonView.boardSizeWriter
 import lidraughts.socket.Socket.SocketVersion
 import lidraughts.user.{ Countries, User }
@@ -15,6 +16,7 @@ final class JsonView(
     lightUserApi: lidraughts.user.LightUserApi,
     lightFmjdUserApi: LightFmjdUserApi,
     fmjdPlayerApi: FmjdPlayerApi,
+    gameMetaApi: GameMetaApi,
     cached: Cached
 ) {
 
@@ -25,7 +27,7 @@ final class JsonView(
     players: List[ExternalPlayer],
     upcoming: List[Challenge],
     ongoing: List[GameWithMeta],
-    finished: List[GameWithMeta],
+    finished: FinishedGames,
     me: Option[User],
     pref: lidraughts.pref.Pref,
     reqPage: Option[Int] = None, // None = focus on me
@@ -43,22 +45,24 @@ final class JsonView(
       userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId) + tour.createdBy
       _ <- lightUserApi.preloadSet(userIds)
       playerInfoJson <- playerInfo.fold(fuccess(none[JsObject])) { playerInfoJson(tour, _, players).dmap(_.some) }
+      upcomingMeta <- upcoming.take(5).map(gameMetaApi.withMeta).sequenceFu
     } yield Json.obj(
       "id" -> tour.id,
       "createdBy" -> lightUserApi.sync(tour.createdBy),
       "name" -> tour.name,
       "nbPlayers" -> players.count(_.accepted),
-      "nbUpcoming" -> upcoming.take(5).length,
-      "nbFinished" -> finished.length,
+      "nbUpcoming" -> upcoming.length,
+      "nbFinished" -> finished.games.length,
       "standing" -> standing,
-      "upcoming" -> upcoming.map(challengeJson(_, fetch)),
+      "upcoming" -> upcomingMeta.map(challengeJson(_, fetch)),
       "ongoing" -> ongoing.map(boardJson(_, players)),
-      "finished" -> finished.take(5).map(gameJson(_, fetch)),
+      "finished" -> finished.games.take(5).map(gameJson(_, fetch)),
       "draughtsResult" -> pref.draughtsResult,
       "displayFmjd" -> tour.settings.userDisplay.fmjd,
       "autoStart" -> tour.settings.autoStart
     )
       .add("rounds" -> tour.settings.nbRounds)
+      .add("roundsPlayed" -> finished.rounds)
       .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
       .add("playerInfo" -> playerInfoJson)
@@ -161,7 +165,8 @@ final class JsonView(
         )
     }
 
-  private def challengeJson(c: Challenge, fetch: FetchFmjdSync) = {
+  private def challengeJson(withMeta: ChallengeWithMeta, fetch: FetchFmjdSync) = {
+    val c = withMeta.challenge
     val challenger = c.challenger.fold(_ => none[Challenge.Registered], _.some)
     Json
       .obj(
@@ -171,6 +176,7 @@ final class JsonView(
       .add("white" -> c.finalColor.fold(challenger, c.destUser).map(basePlayerJsonSync(_, fetch)))
       .add("black" -> c.finalColor.fold(c.destUser, challenger).map(basePlayerJsonSync(_, fetch)))
       .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
+      .add("round" -> withMeta.round)
   }
 
   private def gameJson(gameMeta: GameWithMeta, fetch: FetchFmjdSync): JsObject = {

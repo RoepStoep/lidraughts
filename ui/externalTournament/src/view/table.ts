@@ -40,7 +40,7 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
                 }
               },
               [
-                h('td.date', hrefAttr, c.startsAt ? [drawTime(new Date(c.startsAt))] : ['-']),
+                h('td.meta', hrefAttr, [drawTime(new Date(c.startsAt))]),
                 h('td', hrefAttr, renderPlayers(c, d.displayFmjd))
               ]
             )
@@ -86,7 +86,7 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
               }
             },
             [
-              h('td.date', dateFormatter(new Date(g.createdAt))),
+              h('td.meta', dateFormatter(new Date(g.createdAt))),
               h('td', hrefAttr, renderPlayers(g, ctrl.data.displayFmjd)),
               h('td', hrefAttr, [
                 h('div.result', g.winner ? 

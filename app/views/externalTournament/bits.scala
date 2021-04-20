@@ -18,8 +18,9 @@ object bits {
       }
 
   def jsI18n(implicit ctx: Context) = i18nJsObject(i18nKeys) ++
-    JsDump.keysToObject(i18nStudyKeys, I18nDb.Study, ctx.lang) ++
-    JsDump.keysToObject(i18nExternalKeys, I18nDb.External, ctx.lang)
+    JsDump.keysToObject(i18nExternalKeys, I18nDb.External, ctx.lang) ++
+    JsDump.keysToObject(i18nSwissKeys, I18nDb.Swiss, ctx.lang) ++
+    JsDump.keysToObject(i18nStudyKeys, I18nDb.Study, ctx.lang)
 
   private val i18nKeys = List(
     trans.join,
@@ -54,6 +55,10 @@ object bits {
     trans.external.invitedPlayers,
     trans.external.awaiting,
     trans.external.rejected
+  )
+
+  private val i18nSwissKeys = List(
+    trans.swiss.roundX
   )
 
   private val i18nStudyKeys = List(

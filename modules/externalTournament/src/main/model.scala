@@ -1,9 +1,18 @@
 package lidraughts.externalTournament
 
+import lidraughts.challenge.Challenge
 import lidraughts.game.Game
 
 case class GameWithMeta(
     game: Game,
+    meta: Option[GameMeta]
+) {
+
+  def round = meta.flatMap(_.round)
+}
+
+case class ChallengeWithMeta(
+    challenge: Challenge,
     meta: Option[GameMeta]
 ) {
 

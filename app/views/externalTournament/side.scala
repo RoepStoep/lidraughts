@@ -13,7 +13,7 @@ object side {
 
   private val separator = " • "
 
-  def apply(t: ExternalTournament, chat: Boolean)(implicit ctx: Context) = frag(
+  def apply(t: ExternalTournament, roundsPlayed: Option[Int], chat: Boolean)(implicit ctx: Context) = frag(
     div(cls := "tour-ext__meta")(
       st.section(dataIcon := t.perfType.iconChar.toString)(
         div(
@@ -31,7 +31,12 @@ object side {
             t.settings.nbRounds map { rounds =>
               frag(
                 br,
-                trans.swiss.nbRounds(rounds)
+                roundsPlayed.fold[Frag](trans.swiss.nbRounds(rounds)) { round =>
+                  frag(
+                    span(cls := "swiss__meta__round")(s"${round}/${rounds}"),
+                    trans.swiss.nbRounds.plural(rounds, "")
+                  )
+                }
               )
             }
           )

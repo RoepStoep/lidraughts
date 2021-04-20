@@ -46,7 +46,7 @@ object ExternalTournament extends LidraughtsController {
             _ <- chat ?? { c =>
               Env.user.lightUserApi.preloadMany(c.chat.userIds)
             }
-          } yield html.externalTournament.show(tour, json, chat)
+          } yield html.externalTournament.show(tour, finished.rounds, json, chat)
         },
         api = _ =>
           tourOption.fold(notFoundJson("No such tournament")) { tour =>
@@ -93,7 +93,7 @@ object ExternalTournament extends LidraughtsController {
           val tournamentHasGamesFu = {
             for {
               nbAccepted <- ExternalPlayerRepo.countAccepted(tour.id)
-              finished <- env.cached.getFinishedGames(id)
+              finished <- env.cached.getFinishedGames(id).dmap(_.games)
               ongoing <- finished.isEmpty ?? env.cached.getOngoingGames(id)
               upcoming <- ongoing.isEmpty ?? Env.challenge.api.allForExternalTournament(id)
             } yield (finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty, nbAccepted)
@@ -119,8 +119,8 @@ object ExternalTournament extends LidraughtsController {
 
   def tournamentResults(id: String) = Open { implicit ctx =>
     WithTournament(id) { tour =>
-      env.cached.getFinishedGames(id) map { results =>
-        Ok(html.externalTournament.results(tour, results))
+      env.cached.getFinishedGames(id) map { finished =>
+        Ok(html.externalTournament.results(tour, finished))
       }
     }
   }

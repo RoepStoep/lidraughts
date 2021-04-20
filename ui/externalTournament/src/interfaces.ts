@@ -27,6 +27,7 @@ export interface ExternalTournamentData {
   createdBy: LightUser;
   name: string;
   rounds?: number;
+  roundsPlayed?: number;
   nbPlayers: number;
   nbUpcoming: number;
   nbFinished: number;
@@ -92,7 +93,7 @@ export interface BaseGame {
 }
 
 export interface Challenge extends BaseGame {
-  startsAt?: string;
+  startsAt: string;
 }
 
 export interface Game extends BaseGame {

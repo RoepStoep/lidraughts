@@ -33,7 +33,7 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
               hook: onInsert(window.lidraughts.powertip.manualGame)
             }, result)
           }).concat(
-            [...Array((ctrl.data.rounds || p.sheet.length) - p.sheet.length)].map(_ => h('r'))
+            [...Array(Math.max(0, (ctrl.data.roundsPlayed || p.sheet.length) - p.sheet.length))].map(_ => h('r'))
           )
         )),
       h('td.points', title(noarg('points')), '' + (draughtsResult ? p.points : p.points / 2)),

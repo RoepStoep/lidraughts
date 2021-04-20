@@ -2,10 +2,10 @@
 <resources>
   <string name="youHaveBeenInvitedToPlay">Je bent uitgenodigd om deel te nemen aan dit toernooi!</string>
   <string name="pleaseReviewTheFollowing">Lees het volgende goed voordat je je inschrijft:</string>
-  <string name="youHaveBeenAssignedFmjdIdX">Je krijgt FMJD ID %s toegekend.</string>
+  <string name="youHaveBeenAssignedFmjdIdX">Je bent ingeschreven met FMJD ID %s.</string>
   <string name="toFmjdProfile">Naar FMJD profiel</string>
   <string name="contactTournamentOrganizerXIfNotCorrect">Neem contact op met toernooi organisator %s als dit niet jouw ID is.</string>
-  <string name="yourPublicFmjdDataWillBeVisible">Je openbare FMJD gegevens (naam, foto, etc) zullen zichtbaar zijn in de toernooilobby.</string>
+  <string name="yourPublicFmjdDataWillBeVisible">Je openbare FMJD gegevens (naam, foto, etc) worden getoond in de toernooilobby.</string>
   <string name="yourGamesStartAutomatically">Je partijen starten automatisch, dus hou het toernooi schema goed in de gaten!</string>
   <string name="invitedPlayers">Uitgenodigde spelers</string>
   <string name="awaiting">In afwachting</string>

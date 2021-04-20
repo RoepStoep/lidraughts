@@ -7,11 +7,13 @@ import scala.concurrent.duration._
 import lidraughts.game.{ Game, GameRepo }
 import lidraughts.memo._
 
-private[externalTournament] final class Cached(
+final class Cached(
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     proxyGame: Game.ID => Fu[Option[Game]],
     gameMetaApi: GameMetaApi
 )(implicit system: akka.actor.ActorSystem) {
+
+  import Cached._
 
   def api = Env.current.api
 
@@ -28,21 +30,42 @@ private[externalTournament] final class Cached(
 
   private val gameSortDesc = Ordering[DateTime].reverse
 
-  private val finishedGamesCache = asyncCache.clearable[String, List[GameWithMeta]](
+  private val finishedGamesCache = asyncCache.clearable[ExternalTournament.ID, FinishedGames](
     name = "externalTournament.finishedGames",
-    f = id => GameRepo.finishedByExternalTournament(id).flatMap(_.map(gameMetaApi.withMeta).sequenceFu),
+    f = computeFinished,
     expireAfter = _.ExpireAfterAccess(1 hour)
   )
 
-  def getFinishedGames(tourId: ExternalTournament.ID): Fu[List[GameWithMeta]] =
+  private def computeFinished(id: ExternalTournament.ID) =
+    GameRepo
+      .finishedByExternalTournament(id)
+      .flatMap(_.map(gameMetaApi.withMeta).sequenceFu)
+      .map { games =>
+        val rounds = games.foldLeft(none[Int]) { (acc, g) =>
+          g.round match {
+            case o @ Some(r) if r > ~acc => o
+            case _ => acc
+          }
+        }
+        FinishedGames(rounds, games)
+      }
+
+  def getFinishedGames(tourId: ExternalTournament.ID): Fu[FinishedGames] =
     finishedGamesCache.get(tourId)
 
   def addFinishedGame(tourId: ExternalTournament.ID, g: GameWithMeta) =
-    finishedGamesCache.update(tourId, games => (g :: games).sortBy(_.game.createdAt)(gameSortDesc))
+    finishedGamesCache.update(tourId, { finished =>
+      val rounds = g.round match {
+        case o @ Some(r) if r > ~finished.rounds => o
+        case _ => finished.rounds
+      }
+      val games = (g :: finished.games).sortBy(_.game.createdAt)(gameSortDesc)
+      FinishedGames(rounds, games)
+    })
 
   private[externalTournament] val ongoingGameIdsCache = asyncCache.clearable[String, List[GameIdWithMeta]](
     name = "externalTournament.ongoingGameIds",
-    f = id => GameRepo.ongoingIdsByExternalTournament(id).flatMap(_.map(gameMetaApi.idWithMeta).sequenceFu),
+    f = id => GameRepo.ongoingIdsByExternalTournament(id).flatMap(_.map(gameMetaApi.withMeta).sequenceFu),
     expireAfter = _.ExpireAfterWrite(1 minute)
   )
 
@@ -78,11 +101,19 @@ private[externalTournament] final class Cached(
       tour = tourOpt err "Invalid tournament ID"
       players <- ExternalPlayerRepo.byTour(page._1)
       rankedPlayers = players.filter(p => p.ranked && p.page == page._2).sortBy(_.rank)
-      games <- getFinishedGames(page._1)
-      playerInfos = rankedPlayers.map(p => PlayerInfo.make(p, games).reverse)
+      finished <- getFinishedGames(page._1)
+      playerInfos = rankedPlayers.map(p => PlayerInfo.make(p, finished.games).reverse)
       playerInfoJson <- playerInfos.map(Env.current.jsonView.playerInfoJson(tour, _, players)).sequenceFu
     } yield Json.obj(
       "page" -> page._2,
       "players" -> playerInfoJson
     )
+}
+
+object Cached {
+
+  case class FinishedGames(
+      rounds: Option[Int],
+      games: List[GameWithMeta]
+  )
 }

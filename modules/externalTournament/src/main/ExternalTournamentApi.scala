@@ -80,7 +80,7 @@ final class ExternalTournamentApi(
   ): Fu[Boolean] =
     Sequencing(tourId)(byId) { tour =>
       val userHasGamesFu = for {
-        finished <- cached.getFinishedGames(tour.id).map(_.filter(_.game.userIds.contains(player.userId)))
+        finished <- cached.getFinishedGames(tour.id).map(_.games.filter(_.game.userIds.contains(player.userId)))
         ongoing <- finished.isEmpty ?? cached.getOngoingGames(tour.id).map(_.filter(_.game.userIds.contains(player.userId)))
         upcoming <- ongoing.isEmpty ?? challengeApi.allForExternalTournament(tour.id).map(_.filter(_.userIds.contains(player.userId)))
       } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
@@ -136,8 +136,8 @@ final class ExternalTournamentApi(
   ): Fu[Option[PlayerInfo]] =
     ExternalPlayerRepo.find(tour.id, userId) flatMap {
       _ ?? { player =>
-        cached.getFinishedGames(tour.id).map { games =>
-          PlayerInfo.make(player, games).some
+        cached.getFinishedGames(tour.id).map { finished =>
+          PlayerInfo.make(player, finished.games).some
         }
       }
     }
@@ -150,7 +150,11 @@ final class ExternalTournamentApi(
   def finishGame(game: Game): Funit =
     game.externalTournamentId.fold(funit) { tourId =>
       Sequencing(tourId)(byId) { tour =>
-        gameMetaApi.withMeta(game).flatMap { gameMeta =>
+        if (game.aborted) {
+          cached.ongoingGameIdsCache.invalidate(tourId)
+          socketReload(tourId)
+          funit
+        } else gameMetaApi.withMeta(game).flatMap { gameMeta =>
           game.userIds.map(updatePlayer(tour, game)).sequenceFu.void >>
             updateRanking(tour) >>
             cached.invalidateStandings(tourId) >>- {

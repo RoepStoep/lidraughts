@@ -1,5 +1,6 @@
 package lidraughts.externalTournament
 
+import lidraughts.challenge.Challenge
 import lidraughts.db.dsl._
 import lidraughts.game.Game
 
@@ -12,7 +13,10 @@ final class GameMetaApi(
   def withMeta(g: Game): Fu[GameWithMeta] =
     coll.byId[GameMeta](g.id) dmap { GameWithMeta(g, _) }
 
-  def idWithMeta(id: Game.ID): Fu[GameIdWithMeta] =
+  def withMeta(c: Challenge): Fu[ChallengeWithMeta] =
+    coll.byId[GameMeta](c.id) dmap { ChallengeWithMeta(c, _) }
+
+  def withMeta(id: Game.ID): Fu[GameIdWithMeta] =
     coll.byId[GameMeta](id) dmap { GameIdWithMeta(id, _) }
 
   def insert(m: GameMeta): Funit = {

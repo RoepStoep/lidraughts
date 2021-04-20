@@ -89,6 +89,7 @@ final class Env(
     lightUserApi = lightUserApi,
     lightFmjdUserApi = lightFmjdUserApi,
     fmjdPlayerApi = fmjdPlayerApi,
+    gameMetaApi = gameMetaApi,
     cached = cached
   )
 
@@ -110,7 +111,7 @@ final class Env(
         api startGame g
     },
     'finishGame -> {
-      case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament && !g.aborted =>
+      case lidraughts.game.actorApi.FinishGame(g, _, _) if g.isExternalTournament =>
         api finishGame g
     }
   )
