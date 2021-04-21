@@ -177,7 +177,7 @@ final class GameApiV2(
         // .add("moveCentis" -> withFlags.moveTimes ?? g.moveTimes(p.color).map(_.map(_.centis)))
       })
     ).add("initialFen" -> initialFen.map(f => Forsyth.shorten(f.value)))
-      .add("microMatch" -> g.metadata.microMatchGameId)
+      .add("microMatch" -> g.metadata.microMatchGameIdText)
       .add("winner" -> g.winnerColor.map(_.name))
       .add("opening" -> g.opening.ifTrue(withFlags.opening))
       .add("moves" -> withFlags.moves.option {

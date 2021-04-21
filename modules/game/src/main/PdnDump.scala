@@ -149,7 +149,7 @@ final class PdnDump(
         bu.flatMap(_.shortTitle).map { t => Tag(_.BlackTitle, t) },
         Tag(_.GameType, game.variant.gameType).some,
         Tag.timeControl(game.clock.map(_.config)).some,
-        game.metadata.microMatchGameId.map(gameId => Tag(_.MicroMatch, gameId)),
+        game.metadata.microMatchGameIdText.map(gameId => Tag(_.MicroMatch, gameId)),
         withOpening option Tag(_.Opening, game.opening.fold("?")(_.opening.name)),
         Tag(_.Termination, {
           import draughts.Status._

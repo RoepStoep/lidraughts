@@ -32,7 +32,7 @@ private[challenge] final class Joiner(onStart: String => Unit) {
                 makeDraughts(draughts.variant.Standard) -> none
               else game -> baseState
           }
-          val microMatch = c.isMicroMatch && c.customStartingPosition option "micromatch"
+          val microMatch = c.isMicroMatch option "micromatch"
           val perfPicker = (perfs: lidraughts.user.Perfs) => perfs(c.perfType)
           val game = Game.make(
             draughts = draughtsGame,
@@ -44,7 +44,7 @@ private[challenge] final class Joiner(onStart: String => Unit) {
             pdnImport = None,
             microMatch = microMatch
           ).withId(c.id).|> { g =>
-              c.externalTournamentId.fold(g)(g.withExternalTournamentId(_))
+              c.externalTournamentId.fold(g)(g.withExternalTournamentId)
             }.|> { g =>
               state.fold(g) {
                 case sit @ SituationPlus(Situation(board, _), _) => g.copy(

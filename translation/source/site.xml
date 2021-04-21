@@ -19,6 +19,7 @@
   <string name="black">Black</string>
   <string name="randomColor">Random side</string>
   <string name="microMatch">Micro-match</string>
+  <string name="microMatches">Micro-matches</string>
   <string name="microMatchChallenge">This challenge is a micro-match!</string>
   <string name="microMatchExplanation">A rematch with colors reversed will be played immediately after this game.</string>
   <string name="microMatchRematchStarted">Started second game of micro-match</string>

@@ -39,7 +39,8 @@ object ExternalTournament {
       description: Option[String],
       userDisplay: UserDisplay,
       autoStart: Boolean,
-      hasChat: Boolean
+      hasChat: Boolean,
+      microMatches: Boolean
   )
 
   sealed abstract class UserDisplay(val key: String) {
@@ -74,6 +75,7 @@ object ExternalTournament {
       description = config.description,
       hasChat = config.chat.getOrElse(true),
       autoStart = config.autoStart,
+      microMatches = ~config.microMatches,
       userDisplay = config.userDisplay.flatMap(UserDisplay.apply).getOrElse(UserDisplay.Lidraughts)
     )
   )

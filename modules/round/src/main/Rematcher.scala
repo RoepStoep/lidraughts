@@ -42,7 +42,7 @@ private[round] final class Rematcher(
     fuccess(List(Event.RematchOffer(by = none)))
   }
 
-  def microMatch(game: Game): Fu[Events] =
+  def microRematch(game: Game): Fu[Events] =
     rematchJoin(game)
 
   private def rematchExists(pov: Pov)(nextId: Game.ID): Fu[Events] =
@@ -58,7 +58,7 @@ private[round] final class Rematcher(
         _ = rematches.put(game.id, nextGame.id)
         _ ← GameRepo insertDenormalized nextGame
       } yield {
-        if (nextGame.metadata.microMatchGameNr.contains(2)) messenger.system(game, _.microMatchRematchStarted)
+        if (nextGame.metadata.isMicroRematch) messenger.system(game, _.microMatchRematchStarted)
         else messenger.system(game, _.rematchOfferAccepted)
         onStart(nextGame.id)
         redirectEvents(nextGame)
@@ -99,12 +99,14 @@ private[round] final class Rematcher(
       ),
       whitePlayer = returnPlayer(g, White, users),
       blackPlayer = returnPlayer(g, Black, users),
-      mode = if (users.exists(_.lame)) draughts.Mode.Casual else g.mode,
+      mode = if (!g.isExternalTournament && users.exists(_.lame)) draughts.Mode.Casual else g.mode,
       source = g.source | Source.Lobby,
       daysPerTurn = g.daysPerTurn,
       pdnImport = None,
       microMatch = nextMicroMatch(g)
-    ).withUniqueId
+    ).withUniqueId.dmap { game =>
+        g.externalTournamentId.fold(game)(game.withExternalTournamentId)
+      }
   } yield game
 
   private def returnPlayer(game: Game, color: DraughtsColor, users: List[User]): lidraughts.game.Player =

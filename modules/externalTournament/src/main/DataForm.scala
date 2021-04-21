@@ -22,7 +22,8 @@ object DataForm {
     "hasChat" -> optional(boolean),
     "autoStart" -> boolean,
     "userDisplay" -> optional(Fields.userDisplay),
-    "rounds" -> optional(Fields.round)
+    "rounds" -> optional(Fields.round),
+    "microMatches" -> optional(boolean)
   )(TournamentData.apply)(TournamentData.unapply)
     .verifying("Unlimited timecontrol cannot be rated", _.validateUnlimited))
 
@@ -36,7 +37,8 @@ object DataForm {
     chat = true.some,
     autoStart = false,
     userDisplay = none,
-    rounds = none
+    rounds = none,
+    microMatches = none
   )
 
   def tournamentUpdate(t: ExternalTournament) = tournamentForm fill TournamentData(
@@ -49,7 +51,8 @@ object DataForm {
     chat = t.settings.hasChat.some,
     autoStart = t.settings.autoStart,
     userDisplay = t.settings.userDisplay.key.some,
-    rounds = t.settings.nbRounds
+    rounds = t.settings.nbRounds,
+    microMatches = t.settings.microMatches option true
   )
 
   lazy val playerCreate = Form(mapping(
@@ -92,7 +95,8 @@ object DataForm {
       chat: Option[Boolean],
       autoStart: Boolean,
       userDisplay: Option[String],
-      rounds: Option[Int]
+      rounds: Option[Int],
+      microMatches: Option[Boolean]
   ) {
 
     def make(userId: String) =
@@ -105,7 +109,8 @@ object DataForm {
       Variant.orDefault(~variant) != tour.variant ||
         clock != tour.clock ||
         days != tour.days ||
-        rated != tour.rated
+        rated != tour.rated ||
+        ~microMatches != tour.settings.microMatches
 
     def validateUnlimited = !rated || (clock.isDefined || days.isDefined)
   }

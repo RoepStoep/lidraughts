@@ -13,43 +13,49 @@ object side {
 
   private val separator = " • "
 
-  def apply(t: ExternalTournament, roundsPlayed: Option[Int], chat: Boolean)(implicit ctx: Context) = frag(
-    div(cls := "tour-ext__meta")(
-      st.section(dataIcon := t.perfType.iconChar.toString)(
-        div(
-          p(
-            showClock(t),
-            separator,
-            if (t.variant.exotic) {
-              views.html.game.bits.variantLink(
-                t.variant,
-                t.variant.name
-              )
-            } else t.perfType.trans,
-            separator,
-            if (t.rated) trans.ratedTournament() else trans.casualTournament(),
-            t.settings.nbRounds map { rounds =>
-              val actualRounds = math.max(~roundsPlayed, rounds)
-              frag(
-                br,
-                roundsPlayed.fold[Frag](trans.swiss.nbRounds(actualRounds)) { round =>
-                  frag(
-                    span(cls := "swiss__meta__round")(s"${round}/${actualRounds}"),
-                    trans.swiss.nbRounds.plural(actualRounds, "")
-                  )
-                }
-              )
-            }
+  def apply(t: ExternalTournament, roundsPlayed: Option[Int], chat: Boolean)(implicit ctx: Context) = {
+    val optionalInfo = List(
+      t.settings.microMatches option trans.microMatches(),
+      t.settings.nbRounds map { rounds =>
+        val actualRounds = math.max(~roundsPlayed, rounds)
+        roundsPlayed.fold[Frag](trans.swiss.nbRounds(actualRounds)) { round =>
+          frag(
+            span(cls := "tour-ext__meta__round")(s"$round/$actualRounds"),
+            trans.swiss.nbRounds.plural(actualRounds, "")
           )
-        )
+        }
+      }
+    ).flatten
+    frag(
+      div(cls := "tour-ext__meta")(
+        st.section(dataIcon := t.perfType.iconChar.toString)(
+          div(
+            p(
+              showClock(t),
+              separator,
+              if (t.variant.exotic) {
+                views.html.game.bits.variantLink(
+                  t.variant,
+                  t.variant.name
+                )
+              } else t.perfType.trans,
+              separator,
+              if (t.rated) trans.ratedTournament() else trans.casualTournament(),
+              optionalInfo.nonEmpty option frag(
+                br,
+                optionalInfo.intersperse(separator)
+              )
+            )
+          )
+        ),
+        t.settings.description map { d =>
+          st.section(cls := "description")(markdownLinksOrRichText(d))
+        },
+        trans.by(userIdLink(t.createdBy.some))
       ),
-      t.settings.description map { d =>
-        st.section(cls := "description")(markdownLinksOrRichText(d))
-      },
-      trans.by(userIdLink(t.createdBy.some))
-    ),
-    chat option views.html.chat.frag
-  )
+      chat option views.html.chat.frag
+    )
+  }
 
   private def showClock(t: ExternalTournament)(implicit ctx: Context) = t.clock.map { config =>
     frag(config.show)

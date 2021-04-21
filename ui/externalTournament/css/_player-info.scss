@@ -85,53 +85,24 @@
     }
   }
 
-  .sublist {
-    width: 100%;
-    tr {
-      cursor: pointer;
-      @include transition(background-color);
-      &:nth-child(odd) {
-        background: $c-bg-zebra;
-      }
-      &:hover {
-        background: mix($c-link, $c-bg-box, 10%);
-      }
-    }
-    th, td {
-      padding: .3em;
-    }
-    th {
-      @extend %roboto;
-      padding-left: 7px;
-    }
-    .title {
-      color: $c-brag;
-      font-weight: bold;
-      &[data-bot] {
-        color: $c-bot;
-      }
-      &[data-title64] {
-        color: $c-title64;
-      }
-    }
-  }
-
   .games {
     width: 100%;
     tr {
       cursor: pointer;
       @include transition(background-color);
-      &:nth-child(odd) {
+      &.odd {
         background: $c-bg-zebra;
       }
-      &:hover {
+      &:hover:not(.micromatch) {
         background: mix($c-link, $c-bg-box, 10%);
       }
     }
-    th, td {
+    th, td:not(.micromatch) {
       padding: .3em;
     }
     th {
+      @extend %roboto;
+      padding-left: 7px;
       border-left: 3px solid transparent;
       @include transition();
     }
@@ -148,7 +119,7 @@
       @extend %nowrap-ellipsis;
       max-width: 200px;
     }
-    td:last-child {
+    td:last-child:not(.micromatch) {
       font-weight: bold;
       opacity: .8;
     }
@@ -164,6 +135,16 @@
       font-style: italic;
       color: $c-font-dimmer;
       text-align: center;
+    }
+    .title {
+      color: $c-brag;
+      font-weight: bold;
+      &[data-bot] {
+        color: $c-bot;
+      }
+      &[data-title64] {
+        color: $c-title64;
+      }
     }
   }
   .color-icon {

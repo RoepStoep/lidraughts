@@ -2,7 +2,7 @@ import { h } from 'snabbdom'
 import { VNode,  } from 'snabbdom/vnode';
 import ExternalTournamentCtrl from '../ctrl';
 import { player as lidraughtsPlayer, result as renderResult, fmjdPlayer, onInsert, bind } from './util';
-import { MaybeVNodes, Pager, PlayerInfo } from '../interfaces';
+import { MaybeVNodes, Pager, PlayerInfo, GameResult } from '../interfaces';
 
 function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
   const noarg = ctrl.trans.noarg,
@@ -23,22 +23,28 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
       h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
         h('div',
           p.sheet.map(r => {
-            if (r.b) return h('bye', title(noarg('bye')), r.b === 2 ? winChar : drawChar)
-            else if (r.b === 0) return h('r')
-            const color = r.c ? 'white' : 'black';
-            return h('a.glpt.' + (r.o ? 'ongoing' : (r.w === true ? 'win' : (r.w === false ? 'loss' : 'draw'))), {
-              attrs: {
-                key: r.g,
-                href: `/${r.g}${color === 'white' ? '' : '/black'}`
-              },
-              hook: onInsert(window.lidraughts.powertip.manualGame)
-            }, renderResult(r, draughtsResult))
+            if (r.b) return h('bye', title(noarg('bye')), r.b === 2 ? winChar : drawChar);
+            else if (r.b === 0) return h('r');
+            return gameResult(r, draughtsResult);
           }).concat(
             [...Array(Math.max(ctrl.data.roundsPlayed || 0, p.sheet.length) - p.sheet.length)].map(_ => h('r'))
           )
         )),
       h('td.points', title(noarg('points')), '' + (draughtsResult ? p.points : p.points / 2)),
     ])
+}
+
+function gameResult(r: GameResult, draughtsResult: boolean, klass?: string) {
+  const color = r.c ? 'white' : 'black',
+    microMatch = r.mm?.length,
+    tag = microMatch ? 'mm.' : 'a.glpt.';
+  return h(tag + (r.o ? 'ongoing' : (r.w === true ? 'win' : (r.w === false ? 'loss' : 'draw'))) + (klass ? '.' + klass : ''), {
+    attrs: {
+      key: r.g,
+      href: `/${r.g}${color === 'white' ? '' : '/black'}`
+    },
+    hook: !microMatch ? onInsert(window.lidraughts.powertip.manualGame) : undefined
+  }, microMatch ? r.mm!.map(mr => gameResult(mr, draughtsResult, 'mm')) : [renderResult(r, draughtsResult)])
 }
 
 const title = (str: string) => ({ attrs: { title: str } });

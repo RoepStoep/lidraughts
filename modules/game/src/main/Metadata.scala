@@ -19,6 +19,7 @@ private[game] case class Metadata(
 ) {
 
   def needsMicroRematch = microMatch.contains("micromatch")
+  def isMicroRematch = microMatchGameNr.contains(2)
 
   def microMatchGameNr = microMatch ?? { mm =>
     if (mm == "micromatch" || mm.startsWith("2:")) 1.some
@@ -26,7 +27,12 @@ private[game] case class Metadata(
     else none
   }
 
-  def microMatchGameId = microMatch.map { mm =>
+  def microMatchGameId = microMatch.flatMap { mm =>
+    if (mm.startsWith("2:") || mm.startsWith("1:")) mm.drop(2).some
+    else none
+  }
+
+  def microMatchGameIdText = microMatch.map { mm =>
     if (mm.startsWith("2:") || mm.startsWith("1:")) mm.drop(2)
     else "*"
   }

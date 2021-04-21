@@ -176,7 +176,7 @@ private[round] final class RoundDuct(
     case RematchNo(playerRef) => handle(playerRef)(rematcher.no)
 
     case MicroRematch => handle { game =>
-      rematcher.microMatch(game) map { events =>
+      rematcher.microRematch(game) map { events =>
         events.foreach {
           case Event.RematchTaken(gameId) =>
             val microMatch = s"2:$gameId"

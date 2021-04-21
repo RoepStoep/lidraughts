@@ -76,10 +76,12 @@
     }
     &.rounds {
       .ongoing, .win, .loss, .draw,
-      r {
-        border-left: 1px dotted $c-border;
-        &:last-child {
-          border-right: 1px dotted $c-border;
+      r, bye {
+        &:not(.mm) {
+          border-left: 1px dotted $c-border;
+          &:last-child {
+            border-right: 1px dotted $c-border;
+          }
         }
       }
     }
@@ -115,11 +117,11 @@
         background: mix($c-brag, $c-bg-box, 25%);
       }
     }
+    .mm {
+      margin: 0 1px;
+    }
     bye {
       color: $c-font-dim;
-    }
-    r {
-      border-left: 1px dotted $c-border;
     }
   }
   .points {

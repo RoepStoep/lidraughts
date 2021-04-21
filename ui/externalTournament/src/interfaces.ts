@@ -42,6 +42,7 @@ export interface ExternalTournamentData {
   draughtsResult: boolean;
   displayFmjd: boolean;
   autoStart: boolean;
+  microMatches: boolean;
 }
 
 export interface Standing {
@@ -83,7 +84,9 @@ export interface GameResult extends BasePlayer {
   r?: number; // round
   o?: boolean; // ongoing
   b?: number; // bye
+  mm?: GameResult[]; // micro-match
   fmjd?: FmjdPlayer
+  i?: number; 
 }
 
 export interface BaseGame {

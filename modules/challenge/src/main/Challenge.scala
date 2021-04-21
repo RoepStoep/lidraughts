@@ -260,10 +260,6 @@ object Challenge {
       external = externalData,
       microMatch = microMatch option true
     ) |> { challenge =>
-      if (microMatch && !challenge.customStartingPosition)
-        challenge.copy(microMatch = none)
-      else challenge
-    } |> { challenge =>
       if (challenge.mode.rated && !challenge.isMicroMatch && challenge.customStartingPosition)
         challenge.copy(mode = Mode.Casual)
       else challenge

@@ -189,6 +189,23 @@ final class ExternalTournamentApi(
       }
     }
 
+  def startGame(game: Game): Funit =
+    game.externalTournamentId ?? { tourId =>
+      Sequencing(tourId)(byId) { tour =>
+        (tour.hasRounds && game.metadata.isMicroRematch) ?? {
+          game.metadata.microMatchGameId.fold(fuccess(none[GameMeta]))(gameMetaApi.find) flatMap {
+            case Some(previousGame) => gameMetaApi.insert(GameMeta(game.id, previousGame.round))
+            case _ => funit
+          }
+        } >> {
+          cached.ongoingGameIdsCache.invalidate(tour.id)
+          cached.invalidateStandings(tour.id)
+        } >>- {
+          socketReload(tour.id)
+        }
+      }
+    }
+
   private def updatePlayer(
     tour: ExternalTournament,
     game: Game
@@ -200,15 +217,6 @@ final class ExternalTournamentApi(
           provisional = perf.fold(player.provisional)(_.provisional),
           points = player.points + game.winnerUserId.fold(1)(id => if (id == userId) 2 else 0)
         )
-      }
-    }
-
-  def startGame(game: Game): Funit =
-    game.externalTournamentId ?? { tourId =>
-      Sequencing(tourId)(byId) { tour =>
-        cached.ongoingGameIdsCache.invalidate(tour.id)
-        cached.invalidateStandings(tour.id) >>-
-          socketReload(tour.id)
       }
     }
 
@@ -268,6 +276,7 @@ final class ExternalTournamentApi(
       external = true,
       startsAt = data.startsAt.some,
       autoStart = tour.settings.autoStart,
+      microMatch = tour.settings.microMatches,
       externalTournamentId = tour.id.some,
       externalTournamentRound = data.round
     )

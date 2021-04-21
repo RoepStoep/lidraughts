@@ -10,6 +10,9 @@ final class GameMetaApi(
 
   import BsonHandlers._
 
+  def find(id: Game.ID): Fu[Option[GameMeta]] =
+    coll.byId[GameMeta](id)
+
   def withMeta(g: Game): Fu[GameWithMeta] =
     coll.byId[GameMeta](g.id) dmap { GameWithMeta(g, _) }
 

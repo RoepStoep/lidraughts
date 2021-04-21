@@ -6,10 +6,13 @@ import { player as renderPlayer, preloadUserTips, bind, drawTime } from './util'
 import playerInfo from './playerInfo'
 
 export default function table(ctrl: ExternalTournamentCtrl): VNode {
-  return ctrl.data.finished.length ? h('div.tour-ext__table', [
-    playerInfo(ctrl) || upcoming(ctrl, true),
-    finished(ctrl)
-  ]) : (playerInfo(ctrl) || upcoming(ctrl, false))
+  return playerInfo(ctrl) || (
+    ctrl.data.finished.length ? 
+      h('div.tour-ext__table', [
+        upcoming(ctrl, true),
+        finished(ctrl)
+      ]) : upcoming(ctrl, false)
+  )
 }
 
 function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
@@ -28,7 +31,7 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
             const hrefAttr = { attrs: { 'data-href': '/' + c.id } };
             const isMe = c.white.user.id === me || c.black.user.id === me;
             return h('tr', {
-                key: i,
+                key: d.upcoming.length - i,
                 class: { 'me': isMe },
                 attrs: { 'data-href': '/' + c.id },
                 hook: {
@@ -78,7 +81,7 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
         h('tbody', ctrl.data.finished.map((g, i) => {
           const hrefAttr = { attrs: { 'data-href': '/' + g.id } };
           return h('tr', {
-              key: i,
+              key: ctrl.data.finished.length - i,
               attrs: { 'data-href': '/' + g.id },
               hook: {
                 insert: vnode => preloadUserTips(vnode.elm as HTMLElement),

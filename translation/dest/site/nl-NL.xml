@@ -19,6 +19,7 @@
   <string name="black">Zwart</string>
   <string name="randomColor">Willekeurige kleur</string>
   <string name="microMatch">Micro-match</string>
+  <string name="microMatches">Micro-matches</string>
   <string name="microMatchChallenge">Deze uitdaging is een micro-match!</string>
   <string name="microMatchExplanation">Na deze partij wordt er meteen een rematch gespeeld met omgekeerde kleuren.</string>
   <string name="microMatchRematchStarted">Tweede partij van micro-match gestart</string>

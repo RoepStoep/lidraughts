@@ -32,7 +32,7 @@ final class JsonView(rematchOf: Game.ID => Option[Game.ID]) {
     .add("rematch" -> rematchOf(game.id))
     .add("microMatch" -> game.metadata.microMatchGameNr.map { index =>
       Json.obj("index" -> index)
-        .add("gameId" -> game.metadata.microMatchGameId.filter("*" !=))
+        .add("gameId" -> game.metadata.microMatchGameId)
     })
 }
 
