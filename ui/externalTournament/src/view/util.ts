@@ -33,14 +33,11 @@ export function dataIcon(icon: string): Attrs {
 }
 
 export function result(p: GameResult, draughtsResult: boolean): string {
-  switch (p.w) {
-    case true:
-      return draughtsResult ? '2' : '1';
-    case false:
-      return '0';
-    default:
-      return p.o ? '*' : (draughtsResult ? '1' : '½');
-  }
+  if (p.w === true || p.b === 2)
+    return draughtsResult ? '2' : '1';
+  else if (p.w === false || p.b === 0)
+    return '0';
+  return p.o ? '*' : (draughtsResult ? '1' : '½');
 }
 
 export const userName = (u: LightUser | LightFmjdUser, withTitle: boolean = true) => {

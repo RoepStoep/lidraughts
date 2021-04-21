@@ -22,7 +22,7 @@ object DataForm {
     "hasChat" -> optional(boolean),
     "autoStart" -> boolean,
     "userDisplay" -> optional(Fields.userDisplay),
-    "rounds" -> optional(Fields.rounds)
+    "rounds" -> optional(Fields.round)
   )(TournamentData.apply)(TournamentData.unapply)
     .verifying("Unlimited timecontrol cannot be rated", _.validateUnlimited))
 
@@ -60,11 +60,21 @@ object DataForm {
     fmjdId = none
   )
 
+  lazy val playerBye = Form(mapping(
+    "userId" -> lidraughts.user.DataForm.historicalUsernameField,
+    "round" -> Fields.round,
+    "full" -> boolean
+  )(ByeData.apply)(ByeData.unapply)) fill ByeData(
+    userId = "",
+    round = 0,
+    full = false
+  )
+
   lazy val gameCreate = Form(mapping(
     "whiteUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "blackUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "startsAt" -> inTheFuture(utcDate),
-    "round" -> optional(Fields.rounds)
+    "round" -> optional(Fields.round)
   )(GameData.apply)(GameData.unapply)) fill GameData(
     whiteUserId = "",
     blackUserId = "",
@@ -112,6 +122,12 @@ object DataForm {
       fmjdId: Option[String]
   )
 
+  case class ByeData(
+      userId: String,
+      round: Int,
+      full: Boolean
+  )
+
   private object Fields {
 
     private val maxClockSeconds = 180 * 60
@@ -125,7 +141,7 @@ object DataForm {
       "increment" -> number(min = 0, max = maxClockIncrement)
     )(draughts.Clock.Config.apply)(draughts.Clock.Config.unapply)
     val days = number(min = 1, max = 14)
-    val rounds = number(min = 1, max = 100)
+    val round = number(min = 1, max = 100)
     val userDisplay = text.verifying(ExternalTournament.UserDisplay.byKey.contains _)
   }
 

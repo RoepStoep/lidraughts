@@ -58,7 +58,8 @@ object bits {
   )
 
   private val i18nSwissKeys = List(
-    trans.swiss.roundX
+    trans.swiss.roundX,
+    trans.swiss.bye
   )
 
   private val i18nStudyKeys = List(

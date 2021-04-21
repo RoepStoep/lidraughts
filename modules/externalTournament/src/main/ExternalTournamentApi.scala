@@ -6,7 +6,8 @@ import scala.concurrent.duration._
 
 import actorApi._
 import ExternalPlayer.Status
-import lidraughts.challenge.Challenge
+import lidraughts.challenge.{ Challenge, ChallengeApi }
+import lidraughts.challenge.Challenge.TimeControl
 import lidraughts.db.dsl._
 import lidraughts.game.Game
 import lidraughts.user.{ User, UserRepo }
@@ -15,7 +16,7 @@ final class ExternalTournamentApi(
     coll: Coll,
     socketMap: SocketMap,
     cached: Cached,
-    challengeApi: lidraughts.challenge.ChallengeApi,
+    challengeApi: ChallengeApi,
     gameMetaApi: GameMetaApi
 )(implicit system: ActorSystem) {
 
@@ -44,19 +45,38 @@ final class ExternalTournamentApi(
     data: DataForm.TournamentData
   ): Fu[Option[ExternalTournament]] =
     Sequencing(tourId)(byId) { old =>
-      val newTour = data make old.createdBy
-      val updated = old.copy(
-        name = newTour.name,
-        variant = newTour.variant,
-        clock = newTour.clock,
-        days = newTour.days,
-        rated = newTour.rated,
-        settings = newTour.settings
-      )
-      coll.update($id(tourId), updated) >>- {
-        socketReload(tourId)
-      } inject updated.some
+      validateUpdate(tourId) flatMap {
+        case (hasGames, nbAccepted) =>
+          if (hasGames && data.changedGameSettings(old))
+            fufail("Cannot change game settings once games have been added")
+          else if (hasGames && data.rounds.isDefined != old.hasRounds)
+            fufail(s"Cannot ${if (old.hasRounds) "unset" else "set"} rounds once games have been added")
+          else if (nbAccepted > 0 && data.autoStart != old.settings.autoStart)
+            fufail("Cannot change autoStart once players have joined")
+          else {
+            val newTour = data make old.createdBy
+            val updated = old.copy(
+              name = newTour.name,
+              variant = newTour.variant,
+              clock = newTour.clock,
+              days = newTour.days,
+              rated = newTour.rated,
+              settings = newTour.settings
+            )
+            coll.update($id(tourId), updated) >>- {
+              socketReload(tourId)
+            } inject updated.some
+          }
+      }
     }
+
+  private def validateUpdate(tourId: ExternalTournament.ID) =
+    for {
+      nbAccepted <- ExternalPlayerRepo.countAccepted(tourId)
+      finished <- cached.getFinishedGames(tourId).dmap(_.games)
+      ongoing <- finished.isEmpty ?? cached.getOngoingGames(tourId)
+      upcoming <- ongoing.isEmpty ?? challengeApi.allForExternalTournament(tourId)
+    } yield (finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty, nbAccepted)
 
   def addPlayer(
     tourId: ExternalTournament.ID,
@@ -140,7 +160,7 @@ final class ExternalTournamentApi(
         for {
           finished <- cached.getFinishedGames(tour.id)
           ongoing <- cached.getOngoingGames(tour.id)
-        } yield PlayerInfo.make(player, finished.games, ongoing).some
+        } yield PlayerInfo.make(tour, player, finished, ongoing).some
       }
     }
 
@@ -192,25 +212,107 @@ final class ExternalTournamentApi(
       }
     }
 
-  def addChallenge(c: Challenge): Funit =
-    c.externalTournamentId ?? { tourId =>
-      gameMetaApi.insert(GameMeta(c.id, c.round)) >>-
-        socketReload(tourId)
+  def addChallenge(tourId: ExternalTournament.ID, data: DataForm.GameData): Fu[Option[Challenge]] =
+    Sequencing(tourId)(byId) { tour =>
+      if (tour.hasRounds != data.round.isDefined) fufail("Round must be specified")
+      else validateChallenge(tour, data) flatMap { challenge =>
+        challengeApi.create(challenge) flatMap {
+          case true =>
+            gameMetaApi.insert(GameMeta(challenge.id, challenge.round)) >>- {
+              logger.info(s"Challenge ${challenge.id} created in tournament $tourId")
+              socketReload(tourId)
+            } inject challenge.some
+          case false =>
+            fufail("Could not create game")
+        }
+      }
     }
 
-  def forbiddenRounds(tour: ExternalTournament, userIds: (User.ID, User.ID)) = {
-    def challenge(c: Challenge) = c.round.isDefined && c.userIds.exists(id => userIds._1 == id || userIds._2 == id)
-    def game(g: GameWithMeta) = g.round.isDefined && g.game.userIds.exists(id => userIds._1 == id || userIds._2 == id)
+  private def validateChallenge(tour: ExternalTournament, data: DataForm.GameData) =
+    for {
+      whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid whiteUserId"
+      blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid blackUserId"
+      _ <- ExternalPlayerRepo.findAccepted(tour.id, whiteUser.id) flatMap {
+        case None => fufail(s"${data.whiteUserId} has not joined the tournament")
+        case Some(p) if data.round.??(p.hasBye) => fufail(s"Round ${~data.round} bye already exists for ${whiteUser.id}")
+        case _ => funit
+      }
+      _ <- ExternalPlayerRepo.findAccepted(tour.id, blackUser.id) flatMap {
+        case None => fufail(s"${data.blackUserId} has not joined the tournament")
+        case Some(p) if data.round.??(p.hasBye) => fufail(s"Round ${~data.round} bye already exists for ${blackUser.id}")
+        case _ => funit
+      }
+      _ <- data.round ?? { round =>
+        forbiddenRounds(tour, List(whiteUser.id, blackUser.id)) flatMap { forbidden =>
+          forbidden.map(_.contains(round)) match {
+            case List(true, _) => fufail(s"Round ${~data.round} game already exists for ${whiteUser.id}")
+            case List(_, true) => fufail(s"Round ${~data.round} game already exists for ${blackUser.id}")
+            case _ => funit
+          }
+        }
+      }
+    } yield Challenge.make(
+      variant = tour.variant,
+      fenVariant = none,
+      initialFen = none,
+      timeControl = tour.clock map { c =>
+        TimeControl.Clock(c)
+      } orElse tour.days.map {
+        TimeControl.Correspondence.apply
+      } getOrElse TimeControl.Unlimited,
+      mode = draughts.Mode(tour.rated),
+      color = draughts.White.name,
+      challenger = Right(whiteUser),
+      destUser = blackUser.some,
+      rematchOf = none,
+      external = true,
+      startsAt = data.startsAt.some,
+      autoStart = tour.settings.autoStart,
+      externalTournamentId = tour.id.some,
+      externalTournamentRound = data.round
+    )
+
+  def processBye(tourId: ExternalTournament.ID, data: DataForm.ByeData): Funit =
+    Sequencing(tourId)(byId) { tour =>
+      if (!tour.hasRounds) fufail("Cannot add byes in a tournament without rounds")
+      else UserRepo enabledByName data.userId flatten s"Invalid userId" flatMap { user =>
+        validateBye(tour, user, data) flatMap { bye =>
+          ExternalPlayerRepo.update(tour.id, user.id) { player =>
+            fuccess(player.copy(
+              points = player.points + (if (bye.f) 2 else 1),
+              byes = (bye :: ~player.byes).some
+            ))
+          } >>
+            updateRanking(tour) >>
+            cached.invalidateStandings(tourId) >>-
+            socketReload(tourId)
+        }
+      }
+    }
+
+  private def validateBye(tour: ExternalTournament, user: User, data: DataForm.ByeData) =
+    for {
+      _ <- ExternalPlayerRepo.findAccepted(tour.id, user.id) flatMap {
+        case None => fufail(s"${user.id} has not joined the tournament")
+        case Some(p) if p.hasBye(data.round) => fufail(s"Round ${data.round} bye already exists for ${user.id}")
+        case _ => fuTrue
+      }
+      _ <- forbiddenRounds(tour, List(user.id)).flatMap { forbidden =>
+        if (forbidden.exists(_.contains(data.round))) fufail(s"Round ${data.round} game already exists for ${user.id}")
+        else funit
+      }
+    } yield PlayerInfo.Bye(data.round, data.full)
+
+  private def forbiddenRounds(tour: ExternalTournament, userIds: List[User.ID]) = {
+    def challenge(c: Challenge) = c.round.isDefined && c.userIds.exists(userIds.contains)
+    def game(g: GameWithMeta) = g.round.isDefined && g.game.userIds.exists(userIds.contains)
     for {
       upcoming <- challengeApi.allForExternalTournament(tour.id).map(_.filter(challenge))
       ongoing <- cached.getOngoingGames(tour.id).map(_.filter(game))
       finished <- cached.getFinishedGames(tour.id).map(_.games.filter(game))
-    } yield {
-      def toSet(id: User.ID) = {
-        val upcomingRounds = upcoming.foldLeft(Set.empty[Int]) { (set, c) => if (c.userIds.contains(id)) set + ~c.round else set }
-        (ongoing ::: finished).foldLeft(upcomingRounds) { (set, g) => if (g.game.userIds.contains(id)) set + ~g.round else set }
-      }
-      toSet(userIds._1) -> toSet(userIds._2)
+    } yield userIds.map { id =>
+      val upcomingRounds = upcoming.foldLeft(Set.empty[Int]) { (set, c) => if (c.userIds.contains(id)) set + ~c.round else set }
+      (ongoing ::: finished).foldLeft(upcomingRounds) { (set, g) => if (g.game.userIds.contains(id)) set + ~g.round else set }
     }
   }
 

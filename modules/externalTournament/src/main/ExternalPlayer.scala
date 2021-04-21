@@ -13,7 +13,8 @@ private[externalTournament] case class ExternalPlayer(
     provisional: Boolean,
     status: ExternalPlayer.Status,
     rank: Option[Int],
-    points: Int
+    points: Int,
+    byes: Option[List[PlayerInfo.Bye]]
 ) {
 
   def id = _id
@@ -29,6 +30,8 @@ private[externalTournament] case class ExternalPlayer(
   def page = rank.fold(1) { r => (math.floor((r - 1) / 10) + 1).toInt }
 
   def withRank(r: Int) = copy(rank = r.some)
+
+  def hasBye(r: Int) = byes.exists(_.exists(_.r == r))
 }
 
 private[externalTournament] object ExternalPlayer {
@@ -68,7 +71,8 @@ private[externalTournament] object ExternalPlayer {
       rating = perf.intRating,
       provisional = perf.provisional,
       rank = none,
-      points = 0
+      points = 0,
+      byes = none
     )
   }
 }

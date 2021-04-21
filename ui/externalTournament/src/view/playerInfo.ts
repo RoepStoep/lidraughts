@@ -56,8 +56,16 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
           if (href) window.open(href, '_blank');
         })
       }, data.sheet.map((p, i) => {
-        const round = games - i,
+        const round = data.sheet.length - i,
             res = result(p, draughtsResult);
+        if (p.b === 0) return null
+        else if (p.b) return h('tr.' + p, {
+            key: round
+          }, [
+            h('th', '' + round),
+            h('td.outcome', { attrs: { colspan: 3 } }, noarg('bye')),
+            h('td', res)
+          ]);
         return h('tr.glpt.' + (p.w === true ? '.win' : (p.w === false ? '.loss' : '')), {
           key: round,
           attrs: { 'data-href': '/' + p.g + (p.c === false ? '/black' : '') },

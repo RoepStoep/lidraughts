@@ -5,7 +5,7 @@ import play.api.mvc._
 
 import lidraughts.api.Context
 import lidraughts.app._
-import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo, GameMeta }
+import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo }
 import lidraughts.socket.Socket.SocketVersion
 import lidraughts.user.UserRepo
 import views._
@@ -46,7 +46,6 @@ object ExternalTournament extends LidraughtsController {
             _ <- chat ?? { c =>
               Env.user.lightUserApi.preloadMany(c.chat.userIds)
             }
-
           } yield html.externalTournament.show(tour, finished.actualRoundsPlayed(ongoing), json, chat)
         },
         api = _ =>
@@ -90,30 +89,13 @@ object ExternalTournament extends LidraughtsController {
     WithMyTournament(me, id) { tour =>
       env.forms.tournamentUpdate(tour).bindFromRequest.fold(
         jsonFormErrorDefaultLang,
-        data => {
-          val tournamentHasGamesFu = {
-            for {
-              nbAccepted <- ExternalPlayerRepo.countAccepted(tour.id)
-              finished <- env.cached.getFinishedGames(id).dmap(_.games)
-              ongoing <- finished.isEmpty ?? env.cached.getOngoingGames(id)
-              upcoming <- ongoing.isEmpty ?? Env.challenge.api.allForExternalTournament(id)
-            } yield (finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty, nbAccepted)
-          }
-          tournamentHasGamesFu flatMap {
-            case (hasGames, nbAccepted) =>
-              if (hasGames && data.changedGameSettings(tour))
-                fuccess(BadRequest(jsonError("Cannot change game settings once games have been added")))
-              else if (hasGames && data.rounds.isDefined != tour.hasRounds)
-                fuccess(BadRequest(jsonError(s"Cannot ${if (tour.hasRounds) "unset" else "set"} rounds once games have been added")))
-              else if (nbAccepted > 0 && data.autoStart != tour.settings.autoStart)
-                fuccess(BadRequest(jsonError("Cannot change autoStart once players have joined")))
-              else api.update(id, data) map { opt =>
-                opt.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
-                  Ok(env.jsonView.apiTournament(t))
-                }
-              }
-          }
-        }
+        data =>
+          api.update(tour.id, data).fold(
+            err => BadRequest(jsonError(err.getMessage)),
+            tour => tour.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
+              Ok(env.jsonView.apiTournament(t))
+            }
+          )
       )
     }
   }
@@ -167,64 +149,30 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
+  def playerBye(tourId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+    WithMyTournament(me, tourId) { tour =>
+      env.forms.playerBye.bindFromRequest.fold(
+        jsonFormErrorDefaultLang,
+        data =>
+          api.processBye(tour.id, data).fold(
+            err => BadRequest(jsonError(err.getMessage)),
+            _ => jsonOkResult
+          )
+      )
+    }
+  }
+
   def gameCreate(tourId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
     WithMyTournament(me, tourId) { tour =>
       env.forms.gameCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
-        data => {
-          import lidraughts.challenge.Challenge._
-          val validateChallengeFu = {
-            if (tour.hasRounds != data.round.isDefined) fufail("Round must be specified")
-            else for {
-              whiteUser <- UserRepo enabledByName data.whiteUserId flatten s"Invalid white userId: ${data.whiteUserId}"
-              blackUser <- UserRepo enabledByName data.blackUserId flatten s"Invalid black userId: ${data.blackUserId}"
-              _ <- ExternalPlayerRepo.findAccepted(tourId, whiteUser.id) flatten s"${data.whiteUserId} has not joined the tournament"
-              _ <- ExternalPlayerRepo.findAccepted(tourId, blackUser.id) flatten s"${data.blackUserId} has not joined the tournament"
-              userIds = whiteUser.id -> blackUser.id
-              forbiddenRounds <- data.round.?? { round =>
-                api.forbiddenRounds(tour, userIds).dmap { forbidden =>
-                  (forbidden._1.contains(round) -> forbidden._2.contains(round)).some
-                }
-              }
-              _ <- forbiddenRounds match {
-                case Some((true, _)) => fufail(s"Round ${~data.round} game already exists for ${data.whiteUserId}")
-                case Some((_, true)) => fufail(s"Round ${~data.round} game already exists for ${data.blackUserId}")
-                case _ => funit
-              }
-            } yield lidraughts.challenge.Challenge.make(
-              variant = tour.variant,
-              fenVariant = none,
-              initialFen = none,
-              timeControl = tour.clock map { c =>
-                TimeControl.Clock(c)
-              } orElse tour.days.map {
-                TimeControl.Correspondence.apply
-              } getOrElse TimeControl.Unlimited,
-              mode = draughts.Mode(tour.rated),
-              color = draughts.White.name,
-              challenger = Right(whiteUser),
-              destUser = blackUser.some,
-              rematchOf = none,
-              external = true,
-              startsAt = data.startsAt.some,
-              autoStart = tour.settings.autoStart,
-              externalTournamentId = tourId.some,
-              externalTournamentRound = data.round
-            )
-          }
-          validateChallengeFu.flatFold(
-            err => badRequestJson(err.getMessage),
-            challenge => Env.challenge.api.create(challenge) flatMap {
-              case true =>
-                api.addChallenge(challenge) inject {
-                  lidraughts.log("external tournament").info(s"${me.id} created challenge ${challenge.id} in $tourId ")
-                  JsonOk(Env.challenge.jsonView.show(challenge, SocketVersion(0), none))
-                }
-              case false =>
-                badRequestJson("Challenge not created")
+        data =>
+          api.addChallenge(tour.id, data).fold(
+            err => BadRequest(jsonError(err.getMessage)),
+            challenge => challenge.fold(BadRequest(jsonError("Could not create game"))) { c =>
+              JsonOk(Env.challenge.jsonView.show(c, SocketVersion(0), none))
             }
           )
-        }
       )
     }
   }

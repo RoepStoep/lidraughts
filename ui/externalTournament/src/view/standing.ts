@@ -7,7 +7,9 @@ import { MaybeVNodes, Pager, PlayerInfo } from '../interfaces';
 function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
   const noarg = ctrl.trans.noarg,
     draughtsResult = ctrl.data.draughtsResult,
-    userId = p.user.id;
+    userId = p.user.id,
+    winChar = draughtsResult ? '2' : '1',
+    drawChar = draughtsResult ? '1' : '½';
   return h('tr', {
       key: userId,
       class: {
@@ -19,8 +21,10 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
       h('td.rank', p.rank ? [p.rank] : []),
       h('td.player', ctrl.data.displayFmjd ? fmjdPlayer(p, false, true) : lidraughtsPlayer(p, false, true, false)),
       h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
-        h('div', 
+        h('div',
           p.sheet.map(r => {
+            if (r.b) return h('bye', title(noarg('bye')), r.b === 2 ? winChar : drawChar)
+            else if (r.b === 0) return h('r')
             const color = r.c ? 'white' : 'black';
             return h('a.glpt.' + (r.o ? 'ongoing' : (r.w === true ? 'win' : (r.w === false ? 'loss' : 'draw'))), {
               attrs: {

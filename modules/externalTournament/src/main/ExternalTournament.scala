@@ -22,6 +22,7 @@ case class ExternalTournament(
   def id = _id
 
   def hasRounds = settings.nbRounds.nonEmpty
+  def rounds = settings.nbRounds
 
   def speed = Speed(clock)
 

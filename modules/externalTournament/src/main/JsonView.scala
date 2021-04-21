@@ -61,8 +61,8 @@ final class JsonView(
       "displayFmjd" -> tour.settings.userDisplay.fmjd,
       "autoStart" -> tour.settings.autoStart
     )
-      .add("rounds" -> tour.settings.nbRounds.map(rounds => math.max(~actualRounds, rounds)))
-      .add("roundsPlayed" -> finished.actualRoundsPlayed(ongoing))
+      .add("rounds" -> tour.rounds.map(rounds => math.max(~actualRounds, rounds)))
+      .add("roundsPlayed" -> actualRounds)
       .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
       .add("playerInfo" -> playerInfoJson)
@@ -122,27 +122,40 @@ final class JsonView(
       ).add("fmjd" -> fmjdPlayer.map(fmjdPlayerJson))
     }
 
-  private def resultJson(tour: ExternalTournament, result: PlayerInfo.Result, players: List[ExternalPlayer]) = {
-    val game = result.game.game
-    val opponent = game.player(!result.color)
-    for {
-      lightUser <- opponent.userId ?? lightUserApi.async
-      externalPlayer = tour.settings.userDisplay.fmjd ?? opponent.userId.flatMap(id => players.find(_.userId == id))
-      fmjdPlayer <- externalPlayer.flatMap(_.fmjdId) ?? fmjdPlayerApi.byId
-    } yield {
-      minimalPlayerJson(game.player(!result.color)) ++
-        Json
-        .obj(
-          "g" -> game.id,
-          "c" -> (result.color == draughts.White)
+  private def resultJson(tour: ExternalTournament, result: PlayerInfo.Pairing, players: List[ExternalPlayer]) =
+    result match {
+      case PlayerInfo.Result(gameMeta, color, win) =>
+        val game = gameMeta.game
+        val opponent = game.player(!color)
+        for {
+          lightUser <- opponent.userId ?? lightUserApi.async
+          externalPlayer = tour.settings.userDisplay.fmjd ?? opponent.userId.flatMap(id => players.find(_.userId == id))
+          fmjdPlayer <- externalPlayer.flatMap(_.fmjdId) ?? fmjdPlayerApi.byId
+        } yield minimalPlayerJson(opponent) ++
+          Json.obj(
+            "g" -> game.id,
+            "c" -> (color == draughts.White)
+          )
+          .add("o" -> game.isBeingPlayed.option(true))
+          .add("w" -> win)
+          .add("r" -> gameMeta.round)
+          .add("user" -> lightUser)
+          .add("fmjd" -> fmjdPlayer.map(fmjdPlayerJson))
+
+      case PlayerInfo.Bye(round, full) => fuccess(
+        Json.obj(
+          "r" -> round,
+          "b" -> (if (full) 2 else 1)
         )
-        .add("o" -> result.game.game.isBeingPlayed.option(true))
-        .add("w" -> result.win)
-        .add("r" -> result.game.round)
-        .add("user" -> lightUser)
-        .add("fmjd" -> fmjdPlayer.map(fmjdPlayerJson))
+      )
+
+      case PlayerInfo.Empty(round) => fuccess(
+        Json.obj(
+          "r" -> round,
+          "b" -> 0
+        )
+      )
     }
-  }
 
   private def myInfoJson(me: User, player: Option[ExternalPlayer], gm: Option[GameWithMeta]) =
     Json

@@ -9,6 +9,7 @@ import lidraughts.db.dsl._
 private[externalTournament] object BsonHandlers {
 
   import ExternalTournament._
+  import PlayerInfo.Bye
 
   implicit val ClockConfigBSONHandler = new BSONHandler[BSONDocument, ClockConfig] {
     def read(doc: BSONDocument) = ClockConfig(
@@ -37,6 +38,7 @@ private[externalTournament] object BsonHandlers {
     def write(x: ExternalPlayer.Status) = BSONInteger(x.id)
   }
 
+  implicit val ByeBSONHandler = Macros.handler[Bye]
   implicit val ExternalTournamentSettingsBSONHandler = Macros.handler[Settings]
   implicit val ExternalTournamentBSONHandler = Macros.handler[ExternalTournament]
   implicit val ExternalPlayerBSONHandler = Macros.handler[ExternalPlayer]

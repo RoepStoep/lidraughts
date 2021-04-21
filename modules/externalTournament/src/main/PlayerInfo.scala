@@ -4,7 +4,7 @@ import lidraughts.game.Game
 
 case class PlayerInfo(
     player: ExternalPlayer,
-    results: List[PlayerInfo.Result]
+    results: List[PlayerInfo.Pairing]
 ) {
 
   def reverse = copy(results = results.reverse)
@@ -13,12 +13,12 @@ case class PlayerInfo(
 object PlayerInfo {
 
   def make(
+    tour: ExternalTournament,
     player: ExternalPlayer,
-    games: List[GameWithMeta],
+    finished: Cached.FinishedGames,
     ongoing: List[GameWithMeta]
-  ) = new PlayerInfo(
-    player = player,
-    results = (ongoing.filter(_.game.userIds.contains(player.userId)) ::: games).flatMap { withMeta =>
+  ) =
+    ~player.byes ::: (ongoing.filter(_.game.userIds.contains(player.userId)) ::: finished.games).flatMap { withMeta =>
       withMeta.game.playerByUserId(player.userId) map { player =>
         PlayerInfo.Result(
           game = withMeta,
@@ -26,8 +26,33 @@ object PlayerInfo {
           win = withMeta.game.winnerColor.map(player.color ==)
         )
       }
+    } |> { results =>
+      if (results.isEmpty || !tour.hasRounds) results
+      else if (results.length >= ~finished.rounds) results.sortBy(p => -p.round)
+      else {
+        val actualRounds = ~finished.actualRoundsPlayed(ongoing)
+        val emptyRounds = (1 to actualRounds).toList filterNot { r => results.exists(_.round == r) }
+        (emptyRounds.map(Empty) ::: results).sortBy(p => -p.round)
+      }
+    } |> { sheet =>
+      new PlayerInfo(
+        player = player,
+        results = sheet
+      )
     }
-  )
 
-  case class Result(game: GameWithMeta, color: draughts.Color, win: Option[Boolean])
+  sealed trait Pairing {
+
+    def round: Int
+  }
+
+  case class Result(game: GameWithMeta, color: draughts.Color, win: Option[Boolean]) extends Pairing {
+
+    def round = ~game.round
+  }
+  case class Bye(r: Int, f: Boolean) extends Pairing {
+
+    def round = r
+  }
+  case class Empty(round: Int) extends Pairing
 }
