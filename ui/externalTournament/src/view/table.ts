@@ -98,7 +98,7 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
                 )
               ])
             ])
-          }).concat(ctrl.data.nbFinished > ctrl.data.finished.length ? [viewAllResults(ctrl.data, noarg)] : [])
+          }).concat(ctrl.data.nbFinished < ctrl.data.finished.length ? [viewAllResults(ctrl.data, noarg)] : [])
         )
       ]
     )
