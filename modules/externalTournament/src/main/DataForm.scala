@@ -77,12 +77,14 @@ object DataForm {
     "whiteUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "blackUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "startsAt" -> inTheFuture(utcDate),
-    "round" -> optional(Fields.round)
+    "round" -> optional(Fields.round),
+    "fen" -> optional(nonEmptyText)
   )(GameData.apply)(GameData.unapply)) fill GameData(
     whiteUserId = "",
     blackUserId = "",
     startsAt = DateTime.now,
-    round = none
+    round = none,
+    fen = none
   )
 
   case class TournamentData(
@@ -119,7 +121,8 @@ object DataForm {
       whiteUserId: String,
       blackUserId: String,
       startsAt: DateTime,
-      round: Option[Int]
+      round: Option[Int],
+      fen: Option[String]
   )
 
   case class PlayerData(

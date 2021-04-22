@@ -5,6 +5,8 @@ import ornicar.scalalib.Zero
 import scala.concurrent.duration._
 
 import actorApi._
+import draughts.format.{ Forsyth, FEN }
+import draughts.variant.FromPosition
 import ExternalPlayer.Status
 import lidraughts.challenge.{ Challenge, ChallengeApi }
 import lidraughts.challenge.Challenge.TimeControl
@@ -291,10 +293,24 @@ final class ExternalTournamentApi(
           }
         }
       }
+      validFen = data.fen.isEmpty || data.fen.contains("random") || {
+        data.fen ?? { f => ~Forsyth.<<<@(tour.variant, f).map(_.situation playable false) }
+      }
+      fenVariant <- validFen match {
+        case false =>
+          fufail("Invalid FEN")
+        case true if data.fen.contains("random") && !(tour.variant.russian || tour.variant.brazilian) =>
+          fufail("Random openings are only available for variants russian and brazilian")
+        case _ => fuccess(data.fen.nonEmpty option tour.variant)
+      }
+      initialFen = data.fen match {
+        case Some("random") => fenVariant.flatMap(_.openingTables.headOption).map(_.randomOpening._2.fen).map(FEN)
+        case f @ _ => f.map(FEN)
+      }
     } yield Challenge.make(
-      variant = tour.variant,
-      fenVariant = none,
-      initialFen = none,
+      variant = if (fenVariant.nonEmpty && tour.variant.standard) FromPosition else tour.variant,
+      fenVariant = fenVariant,
+      initialFen = initialFen,
       timeControl = tour.clock map { c =>
         TimeControl.Clock(c)
       } orElse tour.days.map {

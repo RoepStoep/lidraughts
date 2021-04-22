@@ -69,7 +69,10 @@ object ExternalTournament {
     clock = config.clock,
     days = config.clock.isEmpty ?? config.days,
     rated = config.rated,
-    variant = Variant.orDefault(~config.variant),
+    variant = Variant.orDefault(~config.variant) match {
+      case draughts.variant.FromPosition => draughts.variant.Standard
+      case v @ _ => v
+    },
     settings = Settings(
       nbRounds = config.rounds,
       description = config.description,
