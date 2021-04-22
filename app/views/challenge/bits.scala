@@ -35,8 +35,8 @@ object bits {
             frag(
               views.html.game.bits.variantLink(c.variant, translatedVariantName(c.variant), c.initialFen),
               (!c.variant.fromPosition && c.customStartingPosition) option {
-                span(cls := "variant_info")(
-                  " ", translatedVariantName(draughts.variant.FromPosition)
+                span(cls := "variant-extra")(
+                  translatedVariantName(draughts.variant.FromPosition)
                 )
               }
             )
@@ -48,12 +48,13 @@ object bits {
               if (days == 1) trans.oneDay()
               else trans.nbDays.pluralSame(days)
             } getOrElse shortClockName(c.clock.map(_.config))
-          )
+          ),
+          (c.isExternalTournament && c.isMicroMatch) option span(cls := "clock-extra")(trans.microMatch())
         )
       ),
       div(cls := "mode")(modeName(c.mode))
     ),
-    c.isMicroMatch option div(cls := "micro-match")(
+    !c.isExternalTournament && c.isMicroMatch option div(cls := "micro-match")(
       trans.microMatchChallenge(), " ",
       trans.microMatchExplanation()
     )

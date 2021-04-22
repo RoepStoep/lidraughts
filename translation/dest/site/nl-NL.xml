@@ -971,6 +971,7 @@ Een URL per regel</string>
   <string name="challengeSomeone">Daag iemand uit</string>
   <string name="openChallenge">Open uitdaging</string>
   <string name="startsAtX">Begint op %s</string>
+  <string name="autoStartsAtX">Start automatisch op %s</string>
   <string name="challengeDeclined">Uitdaging geweigerd</string>
   <string name="challengeAccepted">Uitdaging geaccepteerd!</string>
   <string name="challengeCanceled">Uitdaging geannuleerd</string>

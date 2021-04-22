@@ -23,8 +23,7 @@ object external {
         val startsAt = c.external.flatMap(_.startsAt).filter(_.isAfterNow)
         val autoStart = ~c.external.map(c => ~c.autoStart && c.tournamentId.isDefined && c.startsAt.isDefined)
         val tournamentHeader = c.externalTournamentId.map { tourId =>
-          h1(
-            cls := "tournament",
+          div(cls := "tournament-link")(
             externalTournamentLink(tourId)
           )
         }
@@ -34,12 +33,12 @@ object external {
               val whiteUserId = c.finalColor.fold(c.challengerUserId, c.destUserId)
               val blackUserId = c.finalColor.fold(c.destUserId, c.challengerUserId)
               frag(
-                tournamentHeader,
-                h1(
+                h1(cls := "players-vs")(
                   userIdLink(whiteUserId),
                   " vs ",
                   userIdLink(blackUserId)
                 ),
+                tournamentHeader,
                 bits.details(c),
                 c.notableInitialFen.map { fen =>
                   val orientation =
@@ -48,8 +47,9 @@ object external {
                   div(cls := "board-preview", views.html.board.bits.mini(fen, c.variant.boardSize, orientation)(div))
                 },
                 if (startsAt.isDefined) startsAt.map { dt =>
+                  val heading = if (autoStart) trans.autoStartsAtX else trans.startsAtX
                   div(cls := "starts-at")(
-                    trans.startsAtX(absClientDateTime(dt)),
+                    heading(absClientDateTime(dt)),
                     ul(cls := "countdown")(
                       List("Days", "Hours", "Minutes", "Seconds") map { t =>
                         li(cls := t.toLowerCase)(span, t)
