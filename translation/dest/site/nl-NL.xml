@@ -25,6 +25,9 @@
   <string name="microMatchRematchStarted">Tweede partij van micro-match gestart</string>
   <string name="microMatchRematchAwaiting">Wachten op tweede partij van micro-match</string>
   <string name="microMatchGameX">Micro-match partij %s</string>
+  <string name="microMatchWin">Micro-match gewonnen</string>
+  <string name="microMatchLoss">Micro-match verloren</string>
+  <string name="microMatchDraw">Micro-match remise</string>
   <string name="createAGame">Start een nieuwe partij</string>
   <string name="whiteIsVictorious">Wit heeft gewonnen</string>
   <string name="blackIsVictorious">Zwart heeft gewonnen</string>

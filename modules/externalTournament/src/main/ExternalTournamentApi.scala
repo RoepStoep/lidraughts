@@ -9,7 +9,7 @@ import ExternalPlayer.Status
 import lidraughts.challenge.{ Challenge, ChallengeApi }
 import lidraughts.challenge.Challenge.TimeControl
 import lidraughts.db.dsl._
-import lidraughts.game.Game
+import lidraughts.game.{ Game, GameRepo }
 import lidraughts.user.{ User, UserRepo }
 
 final class ExternalTournamentApi(
@@ -177,14 +177,25 @@ final class ExternalTournamentApi(
           socketReload(tourId)
           funit
         } else gameMetaApi.withMeta(game).flatMap { gameMeta =>
-          game.userIds.map(updatePlayer(tour, game)).sequenceFu.void >>
-            updateRanking(tour) >> {
-              cached.ongoingGameIdsCache.invalidate(tourId)
-              cached.addFinishedGame(tourId, gameMeta)
-              cached.invalidateStandings(tourId)
-            } >>- {
-              socketReload(tourId)
-            }
+          val updateFu: Fu[User.ID => Funit] = game.metadata.microMatchGameId match {
+            case Some(id) if game.metadata.microMatchGameNr.contains(2) =>
+              GameRepo.game(id).map { game2 =>
+                updatePlayerMicroMatch(tour, List(game2, game.some).flatten)
+              }
+            case _ if game.metadata.microMatchGameNr.contains(1) =>
+              fuccess(updatePlayer(tour, none)) // micromatch points are awarded after second game
+            case _ => fuccess(updatePlayer(tour, game.some))
+          }
+          updateFu flatMap { update =>
+            game.userIds.map(update).sequenceFu.void >>
+              updateRanking(tour) >> {
+                cached.ongoingGameIdsCache.invalidate(tourId)
+                cached.addFinishedGame(tourId, gameMeta)
+                cached.invalidateStandings(tourId)
+              } >>- {
+                socketReload(tourId)
+              }
+          }
         }
       }
     }
@@ -208,14 +219,30 @@ final class ExternalTournamentApi(
 
   private def updatePlayer(
     tour: ExternalTournament,
-    game: Game
+    game: Option[Game] // update only ratings if none
   )(userId: User.ID): Funit =
     ExternalPlayerRepo.update(tour.id, userId) { player =>
       UserRepo.perfOf(userId, tour.perfType) map { perf =>
+        def updatedPoints(g: Game) = player.points + g.winnerUserId.fold(1)(id => if (id == userId) 2 else 0)
         player.copy(
           rating = perf.fold(player.rating)(_.intRating),
           provisional = perf.fold(player.provisional)(_.provisional),
-          points = player.points + game.winnerUserId.fold(1)(id => if (id == userId) 2 else 0)
+          points = game.fold(player.points)(updatedPoints)
+        )
+      }
+    }
+
+  private def updatePlayerMicroMatch(
+    tour: ExternalTournament,
+    games: List[Game]
+  )(userId: User.ID): Funit =
+    ExternalPlayerRepo.update(tour.id, userId) { player =>
+      UserRepo.perfOf(userId, tour.perfType) map { perf =>
+        val totalPoints = games.foldLeft(0) { (t, g) => t + g.winnerUserId.fold(1)(id => if (id == userId) 2 else 0) }
+        player.copy(
+          rating = perf.fold(player.rating)(_.intRating),
+          provisional = perf.fold(player.provisional)(_.provisional),
+          points = player.points + (if (totalPoints > 2) 2 else if (totalPoints == 2) 1 else 0)
         )
       }
     }

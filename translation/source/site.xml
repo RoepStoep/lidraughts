@@ -25,6 +25,9 @@
   <string name="microMatchRematchStarted">Started second game of micro-match</string>
   <string name="microMatchRematchAwaiting">Awaiting second game of micro-match</string>
   <string name="microMatchGameX">Micro-match game %s</string>
+  <string name="microMatchWin">Micro-match win</string>
+  <string name="microMatchLoss">Micro-match loss</string>
+  <string name="microMatchDraw">Micro-match draw</string>
   <string name="createAGame">Create a game</string>
   <string name="whiteIsVictorious">White is victorious</string>
   <string name="blackIsVictorious">Black is victorious</string>

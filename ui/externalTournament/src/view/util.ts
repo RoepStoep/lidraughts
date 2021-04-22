@@ -53,6 +53,13 @@ export const userName = (u: LightUser | LightFmjdUser, withTitle: boolean = true
   ];
 }
 
+export const userNameHtml = (u: LightUser | LightFmjdUser, withTitle: boolean = true) => {
+  if (!u.title || !withTitle) return u.name;
+  const title64 = u.title.endsWith('-64'),
+    dataAttr = title64 ? ' data-title64' : (u.title == 'BOT' ? ' data-bot' : '');
+  return `<span class="title"${dataAttr}>${title64 ? u.title.slice(0, u.title.length - 3) : u.title}</span> ${u.name}`;
+}
+
 export function userLink(u: LightUser, withTitle: boolean = true) {
   return h('a.ulpt.user-link' + (((u.title || '') + u.name).length > 15 ? '.long' : ''), {
     attrs: { href: '/@/' + u.name },

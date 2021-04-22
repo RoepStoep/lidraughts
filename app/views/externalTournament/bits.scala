@@ -41,7 +41,11 @@ object bits {
     trans.draughtsTitle,
     trans.unknown,
     trans.username,
-    trans.spectators
+    trans.spectators,
+    trans.microMatch,
+    trans.microMatchWin,
+    trans.microMatchLoss,
+    trans.microMatchDraw
   )
 
   private val i18nExternalKeys = List(

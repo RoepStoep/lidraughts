@@ -1,5 +1,6 @@
 #powerTip,
-#miniGame {
+#miniGame,
+#microMatch {
   @extend %box-radius-force, %popup-shadow;
   width: 20rem;
   min-height: 3em;
@@ -30,6 +31,10 @@
       padding: 15px 15px;
     }
   }
+}
+#microMatch {
+  width: 22rem;
+  z-index: z('powertip') - 1;
 }
 .upt {
   &__info {

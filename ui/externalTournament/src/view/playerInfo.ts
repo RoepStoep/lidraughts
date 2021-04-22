@@ -1,6 +1,6 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import { player as lidraughtsPlayer, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink, fmjdLink, result  } from './util';
+import { player as lidraughtsPlayer, result as renderResult, fmjdPlayer, spinner, bind, userName, dataIcon, numberRow, stringRow, userLink, fmjdLink } from './util';
 import { FmjdPlayer, GameResult } from '../interfaces';
 import ExternalTournamentCtrl from '../ctrl';
 
@@ -17,18 +17,19 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
   const noarg = ctrl.trans.noarg,
     draughtsResult = ctrl.data.draughtsResult,
     displayFmjd = ctrl.data.displayFmjd,
-    games = data.sheet.filter(p => p.g).length,
-    wins = data.sheet.filter(p => p.w).length,
-    points = data.sheet.reduce((r, p) => r + (p.w === true ? 1.0 : (p.w === false ? 0.0 : 0.5)), 0),
-    ratedGames = data.sheet.filter(p => p.g && (displayFmjd ? p.fmjd?.rating : p.rating)),
+    flatSheet = flatten(data.sheet.map(p => p.mm || p)),
+    finishedGames = flatSheet.filter(p => p.g && !p.o),
+    nbGames = finishedGames.length,
+    nbWins = finishedGames.filter(p => p.w).length,
+    ratedGames =  displayFmjd ? data.sheet.filter(p => !p.o && (p.g || p.mm) && p.fmjd?.rating) :
+                                finishedGames.filter(p => p.rating),
     avgOp = ratedGames.length ?
-        Math.round(ratedGames.reduce((r, p) => r + ((displayFmjd ? p.fmjd?.rating : p.rating) || 0), 0) / ratedGames.length) :
-        undefined;
+              Math.round(ratedGames.reduce((r, p) => r + ((displayFmjd ? p.fmjd?.rating : p.rating) || 0), 0) / ratedGames.length) :
+              undefined;
   let sheetI = 0;
   for (let i = 0; i < data.sheet.length; i++) {
     if (data.sheet[i].b !== 0) {
       data.sheet[i].i = sheetI;
-      console.log(`${i} -> ${sheetI}`);
       sheetI++;
     }
   }
@@ -49,10 +50,10 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
       ]),
       renderFmjdInfo(data.fmjd, data.user, noarg, displayFmjd),
       h('table.tour-info', [
-          numberRow(noarg('gamesPlayed'), games),
-          ...(games ? [
-            numberRow(noarg('points'), draughtsResult ? points * 2 : points, 'raw'),
-            numberRow(noarg('winRate'), [wins, games], 'percent'),
+          numberRow(noarg('gamesPlayed'), nbGames),
+          ...(nbGames ? [
+            numberRow(noarg('points'), draughtsResult ? data.points : data.points / 2, 'raw'),
+            numberRow(noarg('winRate'), [nbWins, nbGames], 'percent'),
             avgOp ? numberRow(noarg('averageOpponent'), avgOp, 'raw') : null
           ] : [])
       ])
@@ -72,20 +73,20 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
           }, [
             h('th', round),
             h('td.outcome', { attrs: { colspan: 3 } }, noarg('bye')),
-            h('td', result(p, draughtsResult))
+            h('td', renderResult(p, draughtsResult))
           ]);
-        return gameResult(ctrl, p, round, isOdd);
+        return resultTr(ctrl, p, isOdd, round);
       })))
     ])
   ]);
 };
 
-function gameResult(ctrl: ExternalTournamentCtrl, p: GameResult, roundNr: string, isOdd: boolean, mm?: GameResult) {
+function resultTr(ctrl: ExternalTournamentCtrl, p: GameResult, isOdd: boolean, roundNr: string, mm?: GameResult) {
   const draughtsResult = ctrl.data.draughtsResult,
     displayFmjd = ctrl.data.displayFmjd,
     userData = mm || p;
   if (p.mm?.length) {
-    return p.mm.map((r, i) => gameResult(ctrl, r, roundNr + '.' + (i + 1), isOdd, p)).reverse()
+    return p.mm.map((r, i) => resultTr(ctrl, r, isOdd, roundNr + '.' + (i + 1), p)).reverse()
   }
   const round = (ctrl.data.microMatches && !mm && p.o) ? roundNr + '.1' : roundNr;
   return h('tr.glpt.' + (p.w === true ? '.win' : (p.w === false ? '.loss' : '')), {
@@ -96,11 +97,11 @@ function gameResult(ctrl: ExternalTournamentCtrl, p: GameResult, roundNr: string
       destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
     }
   }, [
-    round ? h('th', round) : null,
+    h('th', round || ''),
     h('td', userName(displayFmjd ? userData.fmjd || userData.user : userData.user)),
     h('td', '' + (displayFmjd ? userData.fmjd?.rating || '' : (p.rating + (p.provisional ? '?' : '')))),
     h('td.is.color-icon.' + (p.c ? 'white' : 'black')),
-    h('td', result(p, draughtsResult))
+    h('td', renderResult(p, draughtsResult))
   ]);
 }
 

@@ -77,11 +77,9 @@
     &.rounds {
       .ongoing, .win, .loss, .draw,
       r, bye {
-        &:not(.mm) {
-          border-left: 1px dotted $c-border;
-          &:last-child {
-            border-right: 1px dotted $c-border;
-          }
+        border-left: 1px dotted $c-border;
+        &:last-child {
+          border-right: 1px dotted $c-border;
         }
       }
     }
@@ -117,9 +115,6 @@
         background: mix($c-brag, $c-bg-box, 25%);
       }
     }
-    .mm {
-      margin: 0 1px;
-    }
     bye {
       color: $c-font-dim;
     }
@@ -146,5 +141,73 @@
     .pairings div > * {
       flex: 0 0 1.3em;
     }
+  }
+}
+
+#microMatch {
+  table {
+    width: 100%;
+    tr {
+      width: 100%;
+      cursor: pointer;
+      @include transition(background-color);
+      &:hover {
+        background: mix($c-link, $c-bg-box, 10%);
+      }
+    }
+    th, td {
+      padding: .2em;
+    }
+    th {
+      @extend %roboto;
+      padding-left: 7px;
+      border-left: 3px solid transparent;
+      @include transition();
+    }
+    tr:hover th {
+      border-color: $c-font-dimmer;
+    }
+    tr.win:hover th {
+      border-color: $c-good;
+    }
+    tr.loss:hover th {
+      border-color: $c-bad;
+    }
+    td:nth-child(2) {
+      @extend %nowrap-ellipsis;
+      max-width: 12em;
+    }
+    td:last-child {
+      font-weight: bold;
+      opacity: .8;
+    }
+    tr.win td:last-child {
+      color: $c-good;
+      opacity: 1;
+    }
+    tr.loss td:last-child {
+      color: $c-bad;
+      opacity: 1;
+    }
+  }
+  .header {
+    display: block;
+    text-align: center;
+    font-size: 1.1em;
+    padding: 2px 0;
+    background: $c-bg-zebra;
+  }
+  .title {
+    color: $c-brag;
+    font-weight: bold;
+    &[data-bot] {
+      color: $c-bot;
+    }
+    &[data-title64] {
+      color: $c-title64;
+    }
+  }
+  .color-icon {
+    opacity: .6;
   }
 }

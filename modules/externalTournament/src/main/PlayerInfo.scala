@@ -37,11 +37,11 @@ object PlayerInfo {
       if (results.isEmpty || !tour.settings.microMatches) results
       else {
         results.foldRight(List.empty[Pairing]) {
-          case (r, p :: tail) if p.round == r.round =>
+          case o @ (r, p :: tail) if p.round == r.round =>
             p -> r match {
               case (r1 @ Result(g1, _, _), r2 @ Result(g2, _, _)) if isMicroMatchPair(g1, g2) =>
                 MicroMatch(r1, r2) :: tail
-              case _ => r :: p :: tail
+              case _ => r :: o._2
             }
           case (r, acc) => r :: acc
         }
@@ -78,10 +78,12 @@ object PlayerInfo {
   }
   case class MicroMatch(r1: Result, r2: Result) extends Pairing {
 
-    def win = (r1.points + r2.points) |> { points =>
-      if (points == 2) none
-      else (points > 2).some
-    }
+    def win =
+      if (~ongoing) none
+      else (r1.points + r2.points) |> { points =>
+        if (points == 2) none
+        else (points > 2).some
+      }
 
     def ongoing = (~r1.ongoing || ~r2.ongoing) option true
 
