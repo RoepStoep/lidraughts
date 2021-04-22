@@ -35,10 +35,7 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
                 class: { 'me': isMe },
                 attrs: { 'data-href': '/' + c.id },
                 hook: {
-                  insert: vnode => {
-                    preloadUserTips(vnode.elm as HTMLElement)
-                    window.lidraughts.pubsub.emit('content_loaded');
-                  },
+                  insert: vnode => preloadUserTips(vnode.elm as HTMLElement),
                   destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
                 }
               },

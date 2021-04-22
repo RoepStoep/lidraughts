@@ -86,10 +86,11 @@ export function drawTime(date: Date) {
   return h('time.timeago', {
     attrs: {
       title: date.toLocaleString(),
+      datetime: '' + date
     },
     hook: {
-      insert(vnode) {
-        (vnode.elm as HTMLElement).setAttribute('datetime', '' + date);
+      update(vnode) {
+        (vnode.elm as any).date = undefined;
       }
     }
   }, li.timeagoLocale ? li.timeago.format(date) : date.toLocaleString());

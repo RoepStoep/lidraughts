@@ -309,7 +309,9 @@ lidraughts.StrongSocket.defaults = {
       lidraughts.pubsub.emit('game.finish', e);
     },
     challenges(d) {
-      lidraughts.challengeApp.update(d);
+      if (lidraughts.challengeApp) {
+        lidraughts.challengeApp.update(d);
+      }
     },
     notifications(d) {
       lidraughts.notifyApp.update(d, true);
