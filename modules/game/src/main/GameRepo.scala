@@ -124,6 +124,14 @@ object GameRepo {
       _.flatMap(_.getAs[Game.ID]("_id"))
     }
 
+  def ongoingExternalTournament(nb: Int): Fu[List[Game]] = coll.find(
+    Query.isExternalTournament
+      ++ Query.notFinished
+      ++ Query.started
+  )
+    .sort($sort asc F.createdAt)
+    .list[Game](nb, ReadPreference.secondaryPreferred)
+
   def extraGamesForIrwin(userId: String, nb: Int): Fu[List[Game]] = coll.find(
     Query.finished
       ++ Query.rated

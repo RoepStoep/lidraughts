@@ -51,6 +51,8 @@ object Query {
 
   def externalTournament(id: String): Bdoc = F.externalTournamentId $eq id
 
+  val isExternalTournament: Bdoc = F.externalTournamentId $exists true
+
   val noAi: Bdoc = $doc(
     "p0.ai" $exists false,
     "p1.ai" $exists false

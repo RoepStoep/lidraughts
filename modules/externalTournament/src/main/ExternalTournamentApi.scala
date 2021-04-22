@@ -8,8 +8,10 @@ import actorApi._
 import ExternalPlayer.Status
 import lidraughts.challenge.{ Challenge, ChallengeApi }
 import lidraughts.challenge.Challenge.TimeControl
+import lidraughts.common.Bus
 import lidraughts.db.dsl._
 import lidraughts.game.{ Game, GameRepo }
+import lidraughts.round.actorApi.round.QuietFlag
 import lidraughts.user.{ User, UserRepo }
 
 final class ExternalTournamentApi(
@@ -17,7 +19,9 @@ final class ExternalTournamentApi(
     socketMap: SocketMap,
     cached: Cached,
     challengeApi: ChallengeApi,
-    gameMetaApi: GameMetaApi
+    gameMetaApi: GameMetaApi,
+    updateIfPresent: Game => Fu[Game],
+    bus: Bus
 )(implicit system: ActorSystem) {
 
   private val sequencer =
@@ -174,6 +178,7 @@ final class ExternalTournamentApi(
       Sequencing(tourId)(byId) { tour =>
         if (game.aborted) {
           cached.ongoingGameIdsCache.invalidate(tourId)
+          cached.invalidateStandings(tourId)
           socketReload(tourId)
           funit
         } else gameMetaApi.withMeta(game).flatMap { gameMeta =>
@@ -351,6 +356,21 @@ final class ExternalTournamentApi(
       (ongoing ::: finished).foldLeft(upcomingRounds) { (set, g) => if (g.game.userIds.contains(id)) set + ~g.round else set }
     }
   }
+
+  private[externalTournament] def checkOngoingGames: Funit =
+    GameRepo.ongoingExternalTournament(100).flatMap { games =>
+      games.groupBy(_.externalTournamentId).map {
+        case (Some(tourId), games) =>
+          Sequencing(tourId)(byId) { _ =>
+            games.map(updateIfPresent).sequenceFu map { proxyGames =>
+              val flagged = proxyGames.filter(_ outoftime true)
+              if (flagged.nonEmpty)
+                bus.publish(lidraughts.hub.actorApi.map.TellMany(flagged.map(_.id), QuietFlag), 'roundMapTell)
+            }
+          }
+        case _ => funit
+      }.sequenceFu.void
+    }
 
   private def Sequencing[A: Zero](
     id: ExternalTournament.ID

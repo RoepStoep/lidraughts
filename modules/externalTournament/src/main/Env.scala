@@ -4,6 +4,7 @@ import akka.actor._
 import com.typesafe.config.Config
 import scala.concurrent.duration._
 
+import lidraughts.common.{ AtMost, Every, ResilientScheduler }
 import lidraughts.game.Game
 import lidraughts.socket.History
 import lidraughts.socket.Socket.{ GetVersion, SocketVersion }
@@ -18,6 +19,7 @@ final class Env(
     lightUserApi: lidraughts.user.LightUserApi,
     challengeApi: lidraughts.challenge.ChallengeApi,
     proxyGame: Game.ID => Fu[Option[Game]],
+    updateIfPresent: Game => Fu[Game],
     scheduler: lidraughts.common.Scheduler
 ) {
 
@@ -102,7 +104,9 @@ final class Env(
     socketMap = socketMap,
     cached = cached,
     challengeApi = challengeApi,
-    gameMetaApi = gameMetaApi
+    gameMetaApi = gameMetaApi,
+    updateIfPresent = updateIfPresent,
+    bus = bus
   )(system)
 
   bus.subscribeFuns(
@@ -118,6 +122,13 @@ final class Env(
 
   scheduler.once(45 seconds)(fmjdPlayerApi.refresh)
   scheduler.effect(FmjdPlayersRefreshDelay, "Refresh FMJD player data")(fmjdPlayerApi.refresh)
+
+  ResilientScheduler(
+    every = Every(10 seconds),
+    atMost = AtMost(15 seconds),
+    initialDelay = 22 seconds,
+    logger = logger branch "checkOngoingGames"
+  ) { api.checkOngoingGames }(system)
 }
 
 object Env {
@@ -132,6 +143,7 @@ object Env {
     lightUserApi = lidraughts.user.Env.current.lightUserApi,
     challengeApi = lidraughts.challenge.Env.current.api,
     proxyGame = lidraughts.round.Env.current.proxy.game _,
+    updateIfPresent = lidraughts.round.Env.current.proxy.updateIfPresent _,
     scheduler = lidraughts.common.PlayApp.scheduler
   )
 }
