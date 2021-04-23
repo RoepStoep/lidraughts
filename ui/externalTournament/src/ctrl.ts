@@ -42,6 +42,7 @@ export default class ExternalTournamentCtrl {
     if (this.focusOnMe) this.scrollToMe();
     this.joinSpinner = false;
     this.redirectToMyGame();
+    this.redrawNbRounds();
   };
 
   isCreator = () => this.data.me?.userId === this.data.createdBy.id;
@@ -118,6 +119,9 @@ export default class ExternalTournamentCtrl {
     this.playerInfoId = this.playerInfoId === player.user.id ? undefined : player.user.id;
     if (this.playerInfoId) xhr.playerInfo(this, this.playerInfoId);
   };
+
+  private redrawNbRounds = () =>
+    this.data.roundsPlayed && $('.tour-ext__meta__round').text(`${this.data.roundsPlayed}/${this.data.nbRounds}`);
 
   askReload = () => {
     this.reloadSoon();

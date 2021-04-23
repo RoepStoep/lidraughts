@@ -61,7 +61,7 @@ final class JsonView(
       "autoStart" -> tour.settings.autoStart,
       "microMatches" -> tour.settings.microMatches
     )
-      .add("rounds" -> tour.rounds.map(rounds => math.max(~actualRounds, rounds)))
+      .add("nbRounds" -> tour.rounds.map(rounds => math.max(~actualRounds, rounds)))
       .add("roundsPlayed" -> actualRounds)
       .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))

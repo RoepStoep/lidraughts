@@ -20,7 +20,7 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
     }, [
       h('td.rank', p.rank ? [p.rank] : []),
       h('td.player', ctrl.data.displayFmjd ? fmjdPlayer(p, false, true) : lidraughtsPlayer(p, false, true, false)),
-      h('td.games' + (ctrl.data.rounds ? '.rounds' : ''),
+      h('td.games' + (ctrl.data.nbRounds ? '.rounds' : ''),
         h('div',
           p.sheet.map(r => {
             if (r.b) return h('bye', title(noarg('bye')), r.b === 2 ? winChar : drawChar);
@@ -120,8 +120,9 @@ export default function standing(ctrl: ExternalTournamentCtrl, pag: Pager): VNod
   return h('table.slist.tour-ext__standing', {
     class: {
       loading: !pag.currentPageResults,
-      long: !!ctrl.data.rounds && ctrl.data.rounds > 10,
-      xlong: !!ctrl.data.rounds && ctrl.data.rounds > 20,
+      short: (ctrl.data.roundsPlayed || 0) < 8,
+      long: !!ctrl.data.roundsPlayed && ctrl.data.roundsPlayed > 10,
+      xlong: !!ctrl.data.roundsPlayed && ctrl.data.roundsPlayed > 20,
     },
   }, [
     h('tbody', {

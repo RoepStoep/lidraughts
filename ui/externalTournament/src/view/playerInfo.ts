@@ -48,7 +48,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
         data.rank ? h('span.rank', data.rank + '. ') : null,
         displayFmjd ? fmjdPlayer(data, true, false) : lidraughtsPlayer(data, true, false, false)
       ]),
-      renderFmjdInfo(data.fmjd, data.user, noarg, displayFmjd),
+      renderFmjdInfo(ctrl, data.fmjd, data.user, displayFmjd),
       h('table.tour-info', [
           numberRow(noarg('gamesPlayed'), nbGames),
           ...(nbGames ? [
@@ -105,7 +105,8 @@ function resultTr(ctrl: ExternalTournamentCtrl, p: GameResult, isOdd: boolean, r
   ]);
 }
 
-function renderFmjdInfo(p: FmjdPlayer | undefined, u: LightUser, noarg: TransNoArg, displayFmjd: boolean) {
+function renderFmjdInfo(ctrl: ExternalTournamentCtrl, p: FmjdPlayer | undefined, u: LightUser, displayFmjd: boolean) {
+  const noarg = ctrl.trans.noarg;
   return p ? h('div.fmjd-info', [
     h('div' + (displayFmjd ? '.photo-only' : ''), [
       h('img.photo', {
@@ -126,7 +127,7 @@ function renderFmjdInfo(p: FmjdPlayer | undefined, u: LightUser, noarg: TransNoA
       h('table', [
         h('tr', [
           h('th', 'FMJD ID'), 
-          h('td', fmjdLink(p.id, noarg('toFmjdProfile')))
+          h('td', fmjdLink(p.id, ctrl.trans('viewX', noarg('fmjdProfile'))))
         ]),
         h('tr', [
           h('th', noarg('countryOrRegion')), 

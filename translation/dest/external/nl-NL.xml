@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="youHaveBeenInvitedToPlay">Je bent uitgenodigd om deel te nemen aan dit toernooi!</string>
-  <string name="pleaseReviewTheFollowing">Lees het volgende goed voordat je je inschrijft:</string>
+  <string name="pleaseReadTheFollowingCarefully">Lees het volgende goed voordat je akkoord gaat met deelname:</string>
   <string name="youHaveBeenAssignedFmjdIdX">Je bent ingeschreven met FMJD ID %s.</string>
-  <string name="toFmjdProfile">Naar FMJD profiel</string>
-  <string name="contactTournamentOrganizerXIfNotCorrect">Neem contact op met toernooi organisator %s als dit niet jouw ID is.</string>
-  <string name="yourPublicFmjdDataWillBeVisible">Je openbare FMJD gegevens (naam, foto, etc) worden getoond in de toernooilobby.</string>
+  <string name="contactTournamentOrganizerXIfNotYourId">Neem contact op met toernooi organisator %s als dit niet jouw ID is.</string>
+  <string name="fmjdProfileInformationWillBeVisible">De gegevens uit je %s (naam, foto, etc) zullen worden getoond in deze toernooilobby.</string>
+  <string name="fmjdProfile">FMJD profiel</string>
   <string name="yourGamesStartAutomatically">Je partijen starten automatisch, dus hou het toernooi schema goed in de gaten!</string>
   <string name="invitedPlayers">Uitgenodigde spelers</string>
   <string name="awaiting">In afwachting</string>

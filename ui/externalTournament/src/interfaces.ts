@@ -26,7 +26,7 @@ export interface ExternalTournamentData {
   id: string;
   createdBy: LightUser;
   name: string;
-  rounds?: number;
+  nbRounds?: number;
   roundsPlayed?: number;
   nbPlayers: number;
   nbUpcoming: number;

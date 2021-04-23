@@ -71,14 +71,14 @@ export function userLink(u: LightUser, withTitle: boolean = true) {
   ]);
 }
 
-export function fmjdLink(fmjdId: string, title?: string) {
+export function fmjdLink(fmjdId: string, title?: string, text?: string) {
   const attrs: any = { 
     href: 'https://www.fmjd.org/?p=pcard&id=' + fmjdId,
     target: '_blank',
     rel: 'noopener'
   };
   if (title) attrs.title = title;
-  return h('a', { attrs }, fmjdId);
+  return h('a', { attrs }, text || fmjdId);
 }
 
 export function drawTime(date: Date) {
@@ -91,6 +91,7 @@ export function drawTime(date: Date) {
     hook: {
       update(vnode) {
         (vnode.elm as any).date = undefined;
+        window.lidraughts.pubsub.emit('content_loaded');
       }
     }
   }, li.timeagoLocale ? li.timeago.format(date) : date.toLocaleString());

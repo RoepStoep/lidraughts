@@ -25,6 +25,7 @@ object bits {
   private val i18nKeys = List(
     trans.join,
     trans.decline,
+    trans.viewX,
     trans.youArePlaying,
     trans.joinTheGame,
     trans.gamesPlayed,
@@ -50,11 +51,11 @@ object bits {
 
   private val i18nExternalKeys = List(
     trans.external.youHaveBeenInvitedToPlay,
-    trans.external.pleaseReviewTheFollowing,
+    trans.external.pleaseReadTheFollowingCarefully,
     trans.external.youHaveBeenAssignedFmjdIdX,
-    trans.external.toFmjdProfile,
-    trans.external.contactTournamentOrganizerXIfNotCorrect,
-    trans.external.yourPublicFmjdDataWillBeVisible,
+    trans.external.contactTournamentOrganizerXIfNotYourId,
+    trans.external.fmjdProfileInformationWillBeVisible,
+    trans.external.fmjdProfile,
     trans.external.yourGamesStartAutomatically,
     trans.external.invitedPlayers,
     trans.external.awaiting,

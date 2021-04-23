@@ -172,6 +172,18 @@ export default class RoundController {
     onNewPiece: sound.move,
   });
 
+  redirectSpectatorsToMicroRematch = (nextId?: string) => {
+    const d = this.data,
+      mm = d.game.microMatch, 
+      isRedirecting = this.redirecting || (li as any).redirectInProgress,
+      doRedirect = nextId && d.player.spectator && !isRedirecting && !d.tv && !d.userTv && mm?.index === 1 && !status.aborted(d);
+    if (doRedirect) {
+      this.setRedirecting();
+      li.redirect('/' + nextId)
+    }
+    return doRedirect;
+  }
+
   replaying = (): boolean => this.ply !== round.lastPly(this.data);
 
   userJump = (ply: Ply): void => {

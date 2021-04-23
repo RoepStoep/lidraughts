@@ -91,7 +91,7 @@ export function make(send: SocketSend, ctrl: RoundController): RoundSocket {
     },
     rematchTaken(nextId: string) {
       d.game.rematch = nextId;
-      if (!d.player.spectator) ctrl.setLoading(true);
+      if (!d.player.spectator || ctrl.redirectSpectatorsToMicroRematch(nextId)) ctrl.setLoading(true);
       else ctrl.redraw();
     },
     drawOffer(by) {

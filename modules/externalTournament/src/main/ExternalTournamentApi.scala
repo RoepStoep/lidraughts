@@ -267,7 +267,8 @@ final class ExternalTournamentApi(
 
   def addChallenge(tourId: ExternalTournament.ID, data: DataForm.GameData): Fu[Option[Challenge]] =
     Sequencing(tourId)(byId) { tour =>
-      if (tour.hasRounds != data.round.isDefined) fufail("Round must be specified")
+      if (tour.hasRounds && data.round.isEmpty) fufail("Round must be specified")
+      else if (!tour.hasRounds && data.round.isDefined) fufail("No rounds configured for this tournament")
       else validateChallenge(tour, data) flatMap { challenge =>
         challengeApi.create(challenge) flatMap {
           case true =>

@@ -7,7 +7,7 @@
       display:inline-block;
       vertical-align: middle;
       padding-right: 5px;
-      max-width: 160px;
+      max-width: 13em;
     }
   }
   .user-link.long {
@@ -123,6 +123,11 @@
     text-align: right;
     font-weight: bold;
   }
+  &.short {
+    .player .name {
+      max-width: 14em;
+    }
+  }
   &.long {
     .user-link .rating {
       display: block;
@@ -140,6 +145,9 @@
   &.xlong & {
     .pairings div > * {
       flex: 0 0 1.3em;
+    }
+    .player .name {
+      max-width: 11em;
     }
   }
 }

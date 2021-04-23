@@ -55,16 +55,17 @@ function controls(ctrl: ExternalTournamentCtrl, pag: Pager): VNode {
 function joinTournament(ctrl: ExternalTournamentCtrl): VNode | null {
   const myInfo = ctrl.data.me,
     noarg = ctrl.trans.noarg,
+    viewFmjdTitle = myInfo?.fmjdId ? ctrl.trans('viewX', noarg('fmjdProfile')) : '',
     lines = myInfo?.fmjdId ? [
       h('span', 
-        ctrl.trans.vdom('youHaveBeenAssignedFmjdIdX', fmjdLink(myInfo.fmjdId, noarg('toFmjdProfile')))
+        ctrl.trans.vdom('youHaveBeenAssignedFmjdIdX', fmjdLink(myInfo.fmjdId, viewFmjdTitle))
           .concat([' '])
-          .concat(ctrl.trans.vdom('contactTournamentOrganizerXIfNotCorrect', userLink(ctrl.data.createdBy, false)))
+          .concat(ctrl.trans.vdom('contactTournamentOrganizerXIfNotYourId', userLink(ctrl.data.createdBy, false)))
       ),  
-      h('span', noarg('yourPublicFmjdDataWillBeVisible'))
+      h('span.fmjd-warning', ctrl.trans.vdom('fmjdProfileInformationWillBeVisible', fmjdLink(myInfo.fmjdId, viewFmjdTitle, noarg('fmjdProfile'))))
     ] : [];
   if (ctrl.data.autoStart) lines.push(h('span', noarg('yourGamesStartAutomatically')))
-  const intro = noarg('youHaveBeenInvitedToPlay') + (lines.length > 1 ? ' ' + noarg('pleaseReviewTheFollowing') : '');
+  const intro = noarg('youHaveBeenInvitedToPlay') + (lines.length > 1 ? ' ' + noarg('pleaseReadTheFollowingCarefully') : '');
   return myInfo?.canJoin ? h('div.tour-ext__main__join-tournament', [
     h('div.explanation', [h('span.first', intro)].concat(
       lines.length === 1 ? [lines[0]] : [h('ul', lines.map(t => h('li', t)))])
