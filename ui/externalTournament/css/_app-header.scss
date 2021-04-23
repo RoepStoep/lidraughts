@@ -4,6 +4,7 @@
   padding: 0 #{$block-gap * 1.5};
   h1 {
     font-size: 2.2rem;
+    flex: 9 1 auto;
     margin: 0;
     overflow: hidden;
   }
@@ -12,5 +13,27 @@
   }
   i::before {
     font-size: 3em;
+  }
+  .clock {
+    flex: 0 0 auto;
+    font-weight: bold;
+    color: $c-font-dim;
+    &-created {
+      @extend %flex-column;
+      text-align: right;
+    }
+  }
+  .time {
+    @extend %roboto;
+    font-size: 1.5em;
+    margin-left: .2em;
+  }
+  .shy {
+    line-height: 20px;
+    font-size: .9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.6;
+    white-space: nowrap;
   }
 }

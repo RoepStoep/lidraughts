@@ -26,6 +26,8 @@ export interface ExternalTournamentData {
   id: string;
   createdBy: LightUser;
   name: string;
+  startsAt?: string;
+  secondsToStart?: number;
   nbRounds?: number;
   roundsPlayed?: number;
   nbPlayers: number;
@@ -41,7 +43,7 @@ export interface ExternalTournamentData {
   socketVersion?: number;
   draughtsResult: boolean;
   displayFmjd: boolean;
-  autoStart: boolean;
+  autoStartGames: boolean;
   microMatches: boolean;
 }
 

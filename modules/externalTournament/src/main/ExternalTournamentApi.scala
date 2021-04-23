@@ -53,12 +53,13 @@ final class ExternalTournamentApi(
     Sequencing(tourId)(byId) { old =>
       validateUpdate(tourId) flatMap {
         case (hasGames, nbAccepted) =>
-          if (hasGames && data.changedGameSettings(old))
-            fufail("Cannot change game settings once games have been added")
+          val illegalSettings = hasGames ?? data.changedGameSettings(old)
+          if (illegalSettings.nonEmpty)
+            fufail(s"Cannot change game settings once games are created: ${illegalSettings.mkString(", ")}")
           else if (hasGames && data.rounds.isDefined != old.hasRounds)
             fufail(s"Cannot ${if (old.hasRounds) "unset" else "set"} rounds once games have been added")
           else if (nbAccepted > 0 && data.autoStart != old.settings.autoStart)
-            fufail("Cannot change autoStart once players have joined")
+            fufail("Cannot change autoStartGames once players have joined")
           else {
             val newTour = data make old.createdBy
             val updated = old.copy(

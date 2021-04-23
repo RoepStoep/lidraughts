@@ -20,7 +20,8 @@ object DataForm {
     "days" -> optional(Fields.days),
     "rated" -> boolean,
     "hasChat" -> optional(boolean),
-    "autoStart" -> boolean,
+    "autoStartGames" -> boolean,
+    "startsAt" -> optional(Fields.startsAt),
     "userDisplay" -> optional(Fields.userDisplay),
     "rounds" -> optional(Fields.round),
     "microMatches" -> optional(boolean)
@@ -36,6 +37,7 @@ object DataForm {
     rated = false,
     chat = true.some,
     autoStart = false,
+    startsAt = none,
     userDisplay = none,
     rounds = none,
     microMatches = none
@@ -50,6 +52,7 @@ object DataForm {
     rated = t.rated,
     chat = t.settings.hasChat.some,
     autoStart = t.settings.autoStart,
+    startsAt = t.futureStartsAt,
     userDisplay = t.settings.userDisplay.key.some,
     rounds = t.settings.nbRounds,
     microMatches = t.settings.microMatches option true
@@ -76,7 +79,7 @@ object DataForm {
   lazy val gameCreate = Form(mapping(
     "whiteUserId" -> lidraughts.user.DataForm.historicalUsernameField,
     "blackUserId" -> lidraughts.user.DataForm.historicalUsernameField,
-    "startsAt" -> inTheFuture(utcDate),
+    "startsAt" -> Fields.startsAt,
     "round" -> optional(Fields.round),
     "fen" -> optional(nonEmptyText)
   )(GameData.apply)(GameData.unapply)) fill GameData(
@@ -96,6 +99,7 @@ object DataForm {
       rated: Boolean,
       chat: Option[Boolean],
       autoStart: Boolean,
+      startsAt: Option[DateTime],
       userDisplay: Option[String],
       rounds: Option[Int],
       microMatches: Option[Boolean]
@@ -107,12 +111,13 @@ object DataForm {
         config = this
       )
 
-    def changedGameSettings(tour: ExternalTournament) =
-      Variant.orDefault(~variant) != tour.variant ||
-        clock != tour.clock ||
-        days != tour.days ||
-        rated != tour.rated ||
-        ~microMatches != tour.settings.microMatches
+    def changedGameSettings(tour: ExternalTournament) = List(
+      Variant.orDefault(~variant) != tour.variant option "variant",
+      clock != tour.clock option "clock",
+      days != tour.days option "days",
+      rated != tour.rated option "rated",
+      ~microMatches != tour.settings.microMatches option "microMatches"
+    ).flatten
 
     def validateUnlimited = !rated || (clock.isDefined || days.isDefined)
   }
@@ -151,6 +156,7 @@ object DataForm {
     val days = number(min = 1, max = 14)
     val round = number(min = 1, max = 100)
     val userDisplay = text.verifying(ExternalTournament.UserDisplay.byKey.contains _)
+    val startsAt = inTheFuture(utcDate)
   }
 
 }

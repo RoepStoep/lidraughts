@@ -24,6 +24,7 @@ object bits {
 
   private val i18nKeys = List(
     trans.join,
+    trans.startingIn,
     trans.decline,
     trans.viewX,
     trans.youArePlaying,

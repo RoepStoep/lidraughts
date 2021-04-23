@@ -28,8 +28,8 @@ object side {
     ).flatten
     frag(
       div(cls := "tour-ext__meta")(
-        st.section(dataIcon := t.perfType.iconChar.toString)(
-          div(
+        st.section(
+          div(dataIcon := t.perfType.iconChar.toString)(
             p(
               showClock(t),
               separator,
@@ -46,7 +46,10 @@ object side {
                 optionalInfo.intersperse(separator)
               )
             )
-          )
+          ),
+          t.futureStartsAt map { startsAt =>
+            div(cls := "starts-at")(trans.startsAtX(absClientDateTime(startsAt)))
+          }
         ),
         t.settings.description map { d =>
           st.section(cls := "description")(markdownLinksOrRichText(d))

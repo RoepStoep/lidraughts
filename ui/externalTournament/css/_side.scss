@@ -16,12 +16,17 @@
     border-bottom: $border;
     margin-bottom: #{$block-gap * 2 / 3};
     padding-bottom: #{$block-gap * 2 / 3};
-    &[data-icon] {
-      @extend %flex-center-nowrap;
-    }
-    &::before {
-      font-size: 3rem;
-      margin-right: 4%;
+    div {
+      &[data-icon] {
+        @extend %flex-center-nowrap;
+      }
+      &::before {
+        font-size: 3rem;
+        margin-right: 4%;
+      }
+      &.starts-at {
+        margin-top: 0.2em;
+      }
     }
     p {
       margin: 0;

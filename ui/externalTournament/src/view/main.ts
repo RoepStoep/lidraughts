@@ -4,10 +4,11 @@ import { onInsert } from './util';
 import ExternalTournamentCtrl from '../ctrl';
 import { Pager, playerStatus } from '../interfaces';
 import * as pagination from '../pagination';
-import { dataIcon, bind, spinner, preloadUserTips, player as renderPlayer, userLink, fmjdLink } from './util';
+import { preloadUserTips, player as renderPlayer } from './util';
 import table from './table'
 import standing from './standing'
 import ongoing from './boards'
+import { header, joinButtons } from './header'
 
 export default function(ctrl: ExternalTournamentCtrl) {
   const pag = pagination.players(ctrl);
@@ -33,7 +34,7 @@ export default function(ctrl: ExternalTournamentCtrl) {
     h('div.tour-ext__main',
       h('div.box', [
         header(ctrl),
-        joinTournament(ctrl) || joinGame(ctrl),
+        joinButtons(ctrl),
         controls(ctrl, pag),
         standing(ctrl, pag),
         ongoing(ctrl),
@@ -49,53 +50,6 @@ export default function(ctrl: ExternalTournamentCtrl) {
 function controls(ctrl: ExternalTournamentCtrl, pag: Pager): VNode {
   return h('div.tour-ext__controls', [
     h('div.pager', pagination.renderPager(ctrl, pag))
-  ]);
-}
-
-function joinTournament(ctrl: ExternalTournamentCtrl): VNode | null {
-  const myInfo = ctrl.data.me,
-    noarg = ctrl.trans.noarg,
-    viewFmjdTitle = myInfo?.fmjdId ? ctrl.trans('viewX', noarg('fmjdProfile')) : '',
-    lines = myInfo?.fmjdId ? [
-      h('span', 
-        ctrl.trans.vdom('youHaveBeenAssignedFmjdIdX', fmjdLink(myInfo.fmjdId, viewFmjdTitle))
-          .concat([' '])
-          .concat(ctrl.trans.vdom('contactTournamentOrganizerXIfNotYourId', userLink(ctrl.data.createdBy, false)))
-      ),  
-      h('span.fmjd-warning', ctrl.trans.vdom('fmjdProfileInformationWillBeVisible', fmjdLink(myInfo.fmjdId, viewFmjdTitle, noarg('fmjdProfile'))))
-    ] : [];
-  if (ctrl.data.autoStart) lines.push(h('span', noarg('yourGamesStartAutomatically')))
-  const intro = noarg('youHaveBeenInvitedToPlay') + (lines.length > 1 ? ' ' + noarg('pleaseReadTheFollowingCarefully') : '');
-  return myInfo?.canJoin ? h('div.tour-ext__main__join-tournament', [
-    h('div.explanation', [h('span.first', intro)].concat(
-      lines.length === 1 ? [lines[0]] : [h('ul', lines.map(t => h('li', t)))])
-    ),
-    h('div.choices', ctrl.joinSpinner ? spinner() : [
-      h('a.button.button-empty.button-red', {
-        hook: bind('click', ctrl.answer(false), ctrl.redraw)
-      }, ctrl.trans.noarg('decline')),
-      h('a.button.button-green', {
-        attrs: dataIcon('G'),
-        hook: bind('click', ctrl.answer(true), ctrl.redraw)
-      }, ctrl.trans.noarg('join'))
-    ])
-  ]) : null;
-}
-
-function joinGame(ctrl: ExternalTournamentCtrl): VNode | null {
-  const gameId = ctrl.myGameId();
-  return gameId ? h('a.tour-ext__main__join-game.button.is.is-after', {
-    attrs: { href: '/' + gameId }
-  }, [
-    ctrl.trans.noarg('youArePlaying'), h('br'),
-    ctrl.trans.noarg('joinTheGame')
-  ]) : null;
-}
-
-function header(ctrl: ExternalTournamentCtrl): VNode {
-  return h('div.tour-ext__main__header', [
-    h('i.img', { attrs: dataIcon('g') }),
-    h('h1', ctrl.data.name),
   ]);
 }
 

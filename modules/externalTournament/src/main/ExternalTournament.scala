@@ -1,9 +1,10 @@
 package lidraughts.externalTournament
 
+import org.joda.time.DateTime
+
 import draughts.Clock.{ Config => ClockConfig }
 import draughts.Speed
 import draughts.variant.Variant
-
 import lidraughts.game.PerfPicker
 import lidraughts.rating.PerfType
 import lidraughts.user.User
@@ -28,6 +29,9 @@ case class ExternalTournament(
 
   def perfType: PerfType = PerfPicker.perfType(speed, variant, days) getOrElse PerfType.Standard
   def perfLens = PerfPicker.mainOrDefault(speed, variant, days)
+
+  def futureStartsAt = settings.startsAt.filter(DateTime.now.isBefore(_))
+  def secondsToStart = futureStartsAt.map(startsAt => (startsAt.getSeconds - nowSeconds).toInt atLeast 0)
 }
 
 object ExternalTournament {
@@ -35,6 +39,7 @@ object ExternalTournament {
   type ID = String
 
   case class Settings(
+      startsAt: Option[DateTime],
       nbRounds: Option[Int],
       description: Option[String],
       userDisplay: UserDisplay,
@@ -74,6 +79,7 @@ object ExternalTournament {
       case v @ _ => v
     },
     settings = Settings(
+      startsAt = config.startsAt,
       nbRounds = config.rounds,
       description = config.description,
       hasChat = config.chat.getOrElse(true),

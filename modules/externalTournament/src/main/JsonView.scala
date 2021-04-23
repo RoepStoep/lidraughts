@@ -58,11 +58,13 @@ final class JsonView(
       "finished" -> finished.games.take(5).map(gameJson(_, fetch)),
       "draughtsResult" -> pref.draughtsResult,
       "displayFmjd" -> tour.settings.userDisplay.fmjd,
-      "autoStart" -> tour.settings.autoStart,
+      "autoStartGames" -> tour.settings.autoStart,
       "microMatches" -> tour.settings.microMatches
     )
       .add("nbRounds" -> tour.rounds.map(rounds => math.max(~actualRounds, rounds)))
       .add("roundsPlayed" -> actualRounds)
+      .add("startsAt" -> tour.futureStartsAt.map(formatDate))
+      .add("secondsToStart" -> tour.secondsToStart)
       .add("invited" -> createdByMe.option(players.filter(!_.accepted).map(invitedPlayerJson)))
       .add("me" -> me.map(myInfoJson(_, myPlayer, myGame)))
       .add("playerInfo" -> playerInfoJson)
@@ -86,9 +88,10 @@ final class JsonView(
       "rated" -> tour.rated,
       "displayFmjd" -> tour.settings.userDisplay.fmjd,
       "hasChat" -> tour.settings.hasChat,
-      "autoStart" -> tour.settings.autoStart,
+      "autoStartGames" -> tour.settings.autoStart,
       "microMatches" -> tour.settings.microMatches
     )
+      .add("startsAt" -> tour.settings.startsAt.map(formatDate))
       .add("clock" -> tour.clock)
       .add("days" -> tour.days)
       .add("rounds" -> tour.settings.nbRounds)
