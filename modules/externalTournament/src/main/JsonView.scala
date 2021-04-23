@@ -24,8 +24,6 @@ final class JsonView(
 
   def apply(
     tour: ExternalTournament,
-    players: List[ExternalPlayer],
-    upcoming: List[Challenge],
     ongoing: List[GameWithMeta],
     finished: FinishedGames,
     me: Option[User],
@@ -34,18 +32,19 @@ final class JsonView(
     playerInfo: Option[PlayerInfo],
     socketVersion: Option[SocketVersion] = None
   ): Fu[JsObject] = {
-    def myPlayer = me.flatMap(u => players.find(_.userId == u.id))
-    def myGame = me.flatMap(u => ongoing.find(_.game.userIds.contains(u.id)))
-    def fetchFmjd: FetchFmjdSync = fetchLightFmjdUserSync(players, _)
-    val fetch = if (tour.settings.userDisplay.fmjd) fetchFmjd else fetchNone
-    val page = reqPage orElse myPlayer.map(_.page) getOrElse 1
-    val actualRounds = finished.actualRoundsPlayed(ongoing)
     for {
+      players <- ExternalPlayerRepo.byTour(tour.id)
+      upcoming <- cached.getUpcomingGames(tour.id)
+      myPlayer = me.flatMap(u => players.find(_.userId == u.id))
+      page = reqPage orElse myPlayer.map(_.page) getOrElse 1
       standing <- cached.getStandingPage(tour.id, page)
-      createdByMe = me.exists(_.id == tour.createdBy)
       userIds = players.foldLeft(Set.empty[String])((s, p) => s + p.userId) + tour.createdBy
       _ <- lightUserApi.preloadSet(userIds)
       playerInfoJson <- playerInfo.fold(fuccess(none[JsObject])) { playerInfoJson(tour, _, players).dmap(some) }
+      actualRounds = finished.actualRoundsPlayed(ongoing)
+      createdByMe = me.exists(_.id == tour.createdBy)
+      myGame = me.flatMap(u => ongoing.find(_.game.userIds.contains(u.id)))
+      fetch: FetchFmjdSync = if (tour.settings.userDisplay.fmjd) fetchLightFmjdUserSync(players, _) else fetchNone
     } yield Json.obj(
       "id" -> tour.id,
       "createdBy" -> lightUserApi.sync(tour.createdBy),

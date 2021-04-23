@@ -23,15 +23,11 @@ object ExternalTournament extends LidraughtsController {
       negotiate(
         html = tourOption.fold(tournamentNotFound.fuccess) { tour =>
           for {
-            players <- ExternalPlayerRepo.byTour(id)
-            upcoming <- Env.challenge.api.allForExternalTournament(id)
-            ongoing <- env.cached.getOngoingGames(id)
-            finished <- env.cached.getFinishedGames(id)
+            ongoing <- env.cached.getOngoingGames(tour.id)
+            finished <- env.cached.getFinishedGames(tour.id)
             version <- env.version(tour.id)
             json <- env.jsonView(
               tour = tour,
-              players = players,
-              upcoming = upcoming,
               ongoing = ongoing,
               finished = finished,
               me = ctx.me,
@@ -51,16 +47,12 @@ object ExternalTournament extends LidraughtsController {
         api = _ =>
           tourOption.fold(notFoundJson("No such tournament")) { tour =>
             for {
-              players <- ExternalPlayerRepo.byTour(id)
-              upcoming <- Env.challenge.api.allForExternalTournament(id)
-              ongoing <- env.cached.getOngoingGames(id)
-              finished <- env.cached.getFinishedGames(id)
+              ongoing <- env.cached.getOngoingGames(tour.id)
+              finished <- env.cached.getFinishedGames(tour.id)
               playerInfo <- get("playerInfo").?? { env.api.playerInfo(tour, _) }
               version <- env.version(tour.id)
               json <- env.jsonView(
                 tour = tour,
-                players = players,
-                upcoming = upcoming,
                 ongoing = ongoing,
                 finished = finished,
                 me = ctx.me,

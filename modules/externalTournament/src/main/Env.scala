@@ -58,7 +58,8 @@ final class Env(
   lazy val cached = new Cached(
     asyncCache = asyncCache,
     proxyGame = proxyGame,
-    gameMetaApi = gameMetaApi
+    gameMetaApi = gameMetaApi,
+    challengeApi = challengeApi
   )(system)
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[ExternalTournamentSocket](
@@ -122,6 +123,13 @@ final class Env(
 
   scheduler.once(45 seconds)(fmjdPlayerApi.refresh)
   scheduler.effect(FmjdPlayersRefreshDelay, "Refresh FMJD player data")(fmjdPlayerApi.refresh)
+
+  def cli = new lidraughts.common.Cli {
+    def process = {
+      case "external" :: "invalidate" :: tourId :: Nil =>
+        api.invalidateAll(tourId) inject "done!"
+    }
+  }
 
   ResilientScheduler(
     every = Every(10 seconds),

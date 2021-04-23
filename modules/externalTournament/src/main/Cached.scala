@@ -2,15 +2,17 @@ package lidraughts.externalTournament
 
 import org.joda.time.DateTime
 import play.api.libs.json._
-import scala.concurrent.duration._
 
+import scala.concurrent.duration._
+import lidraughts.challenge.Challenge
 import lidraughts.game.{ Game, GameRepo }
 import lidraughts.memo._
 
 final class Cached(
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     proxyGame: Game.ID => Fu[Option[Game]],
-    gameMetaApi: GameMetaApi
+    gameMetaApi: GameMetaApi,
+    challengeApi: lidraughts.challenge.ChallengeApi
 )(implicit system: akka.actor.ActorSystem) {
 
   import Cached._
@@ -30,10 +32,10 @@ final class Cached(
 
   private val gameSortDesc = Ordering[DateTime].reverse
 
-  private val finishedGamesCache = asyncCache.clearable[ExternalTournament.ID, FinishedGames](
+  private[externalTournament] val finishedGamesCache = asyncCache.clearable[ExternalTournament.ID, FinishedGames](
     name = "externalTournament.finishedGames",
     f = computeFinished,
-    expireAfter = _.ExpireAfterAccess(1 hour)
+    expireAfter = _.ExpireAfterAccess(1 minute)
   )
 
   private def computeFinished(id: ExternalTournament.ID) =
@@ -75,6 +77,15 @@ final class Cached(
         .sequenceFu
         .dmap(_.flatten)
     }
+
+  private[externalTournament] val upcomingGamesCache = asyncCache.clearable[String, List[Challenge]](
+    name = "externalTournament.upcomingGames",
+    f = id => challengeApi.allForExternalTournament(id),
+    expireAfter = _.ExpireAfterAccess(1 minute)
+  )
+
+  def getUpcomingGames(id: ExternalTournament.ID): Fu[List[Challenge]] =
+    upcomingGamesCache.get(id)
 
   private val standingPageCache = asyncCache.clearable[(String, Int), JsObject](
     name = "externalTournament.standingPages",
@@ -118,15 +129,11 @@ object Cached {
   ) {
 
     def actualRoundsPlayed(ongoing: List[GameWithMeta]) = {
-      val ongoingRound = ongoing.foldLeft(none[Int]) { (acc, g) =>
+      ongoing.foldLeft(rounds) { (acc, g) =>
         g.round match {
           case o @ Some(r) if r > ~acc => o
           case _ => acc
         }
-      }
-      ongoingRound match {
-        case o @ Some(r) if r > ~rounds => o
-        case _ => rounds
       }
     }
   }

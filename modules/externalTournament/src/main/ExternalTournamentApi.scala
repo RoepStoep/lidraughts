@@ -81,7 +81,7 @@ final class ExternalTournamentApi(
       nbAccepted <- ExternalPlayerRepo.countAccepted(tourId)
       finished <- cached.getFinishedGames(tourId).dmap(_.games)
       ongoing <- finished.isEmpty ?? cached.getOngoingGames(tourId)
-      upcoming <- ongoing.isEmpty ?? challengeApi.allForExternalTournament(tourId)
+      upcoming <- ongoing.isEmpty ?? cached.getUpcomingGames(tourId)
     } yield (finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty, nbAccepted)
 
   def addPlayer(
@@ -101,6 +101,16 @@ final class ExternalTournamentApi(
       }
     }
 
+  def invalidateAll(tourId: ExternalTournament.ID) =
+    Sequencing(tourId)(byId) { tour =>
+      cached.upcomingGamesCache.invalidate(tour.id)
+      cached.ongoingGameIdsCache.invalidate(tour.id)
+      cached.finishedGamesCache.invalidate(tour.id)
+      updateRanking(tour) >>
+        cached.invalidateStandings(tour.id) >>-
+        socketReload(tour.id)
+    }
+
   def deletePlayer(
     tourId: ExternalTournament.ID,
     player: ExternalPlayer
@@ -109,7 +119,7 @@ final class ExternalTournamentApi(
       val userHasGamesFu = for {
         finished <- cached.getFinishedGames(tour.id).map(_.games.filter(_.game.userIds.contains(player.userId)))
         ongoing <- finished.isEmpty ?? cached.getOngoingGames(tour.id).map(_.filter(_.game.userIds.contains(player.userId)))
-        upcoming <- ongoing.isEmpty ?? challengeApi.allForExternalTournament(tour.id).map(_.filter(_.userIds.contains(player.userId)))
+        upcoming <- ongoing.isEmpty ?? cached.getUpcomingGames(tour.id).map(_.filter(_.userIds.contains(player.userId)))
       } yield finished.nonEmpty || ongoing.nonEmpty || upcoming.nonEmpty
       userHasGamesFu flatMap { hasGames =>
         if (hasGames) fuFalse
@@ -216,6 +226,7 @@ final class ExternalTournamentApi(
             case _ => funit
           }
         } >> {
+          cached.upcomingGamesCache.invalidate(tour.id)
           cached.ongoingGameIdsCache.invalidate(tour.id)
           cached.invalidateStandings(tour.id)
         } >>- {
@@ -262,6 +273,7 @@ final class ExternalTournamentApi(
           case true =>
             gameMetaApi.insert(GameMeta(challenge.id, challenge.round)) >>- {
               logger.info(s"Challenge ${challenge.id} created in tournament $tourId")
+              cached.upcomingGamesCache.invalidate(tourId)
               socketReload(tourId)
             } inject challenge.some
           case false =>
@@ -364,7 +376,7 @@ final class ExternalTournamentApi(
     def challenge(c: Challenge) = c.round.isDefined && c.userIds.exists(userIds.contains)
     def game(g: GameWithMeta) = g.round.isDefined && g.game.userIds.exists(userIds.contains)
     for {
-      upcoming <- challengeApi.allForExternalTournament(tour.id).map(_.filter(challenge))
+      upcoming <- cached.getUpcomingGames(tour.id).map(_.filter(challenge))
       ongoing <- cached.getOngoingGames(tour.id).map(_.filter(game))
       finished <- cached.getFinishedGames(tour.id).map(_.games.filter(game))
     } yield userIds.map { id =>
