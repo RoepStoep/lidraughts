@@ -43,6 +43,8 @@ final class ChallengeApi(
 
   def byId = repo byId _
 
+  def externalById = repo externalById _
+
   def activeByIdFor(id: Challenge.ID, dest: User) = repo.byIdFor(id, dest).map(_.filter(_.active))
 
   def onlineByIdFor(id: Challenge.ID, dest: User) = repo.byIdFor(id, dest).map(_.filter(_.online))
@@ -58,6 +60,11 @@ final class ChallengeApi(
   def createdByDestId = repo createdByDestId _
 
   def cancel(c: Challenge) = (repo cancel c) >>- uncacheAndNotify(c)
+
+  def cancelExternal(c: Challenge) = {
+    val expireAt = c.external.flatMap(_.startsAt).getOrElse(DateTime.now.plusHours(24))
+    repo.setStatusExternal(c, Status.Canceled, expireAt) >>- socketReload(c.id)
+  }
 
   private def offline(c: Challenge) = (repo offline c) >>- uncacheAndNotify(c)
 

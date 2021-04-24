@@ -22,11 +22,6 @@ object external {
     ) {
         val startsAt = c.external.flatMap(_.startsAt).filter(_.isAfterNow)
         val autoStart = ~c.external.map(c => ~c.autoStart && c.tournamentId.isDefined && c.startsAt.isDefined)
-        val tournamentHeader = c.externalTournamentId.map { tourId =>
-          div(cls := "tournament-link")(
-            externalTournamentLink(tourId)
-          )
-        }
         main(cls := "page-small challenge-page challenge-external box box-pad")(
           c.status match {
             case Status.Created | Status.External | Status.Offline =>
@@ -38,7 +33,11 @@ object external {
                   " vs ",
                   userIdLink(blackUserId)
                 ),
-                tournamentHeader,
+                c.externalTournamentId.map { tourId =>
+                  div(cls := "tournament-link")(
+                    externalTournamentLink(tourId)
+                  )
+                },
                 bits.details(c),
                 c.notableInitialFen.map { fen =>
                   val orientation =
@@ -94,21 +93,16 @@ object external {
                   )
                 }
               )
-            case Status.Declined => div(cls := "follow-up")(
-              h1(trans.challengeDeclined()),
-              bits.details(c)
-            )
             case Status.Accepted => div(cls := "follow-up")(
-              tournamentHeader,
-              h1(if (autoStart) trans.gameStarted() else trans.challengeAccepted()),
+              h1(if (c.isExternalTournament) trans.gameStarted() else trans.challengeAccepted()),
               bits.details(c),
               a(id := "challenge-redirect", href := routes.Round.watcher(c.id, "white"), cls := "button button-fat")(
                 if (player) trans.joinTheGame()
                 else trans.watch()
               )
             )
-            case Status.Canceled => div(cls := "follow-up")(
-              h1(trans.challengeCanceled()),
+            case Status.Declined | Status.Canceled => div(cls := "follow-up")(
+              h1(if (c.isExternalTournament) trans.gameCanceled() else trans.challengeCanceled()),
               bits.details(c)
             )
           }

@@ -14,6 +14,9 @@ private final class ChallengeRepo(coll: Coll, maxPerUser: Int) {
   def byIdFor(id: Challenge.ID, dest: lidraughts.user.User) =
     coll.find($id(id) ++ $doc("destUser.id" -> dest.id)).uno[Challenge]
 
+  def externalById(id: Challenge.ID) =
+    coll.find($id(id) ++ selectExternal).uno[Challenge]
+
   def exists(id: Challenge.ID) = coll.exists($id(id))
 
   def insert(c: Challenge): Funit =
@@ -106,6 +109,18 @@ private final class ChallengeRepo(coll: Coll, maxPerUser: Int) {
     $doc("$set" -> $doc(
       "status" -> status.id,
       "expiresAt" -> expiresAt.fold(inTwoWeeks) { _(DateTime.now) }
+    ))
+  ).void
+
+  def setStatusExternal(
+    challenge: Challenge,
+    status: Status,
+    expiresAt: DateTime
+  ) = coll.update(
+    selectExternal ++ $id(challenge.id),
+    $doc("$set" -> $doc(
+      "status" -> status.id,
+      "expiresAt" -> expiresAt
     ))
   ).void
 

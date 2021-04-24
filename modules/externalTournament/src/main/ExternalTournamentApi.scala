@@ -266,6 +266,14 @@ final class ExternalTournamentApi(
       }
     }
 
+  def deleteChallenge(tourId: ExternalTournament.ID, challenge: Challenge): Funit =
+    Sequencing(tourId)(byId) { tour =>
+      challengeApi.cancelExternal(challenge) >>- {
+        cached.upcomingGamesCache.invalidate(tourId)
+        socketReload(tour.id)
+      }
+    }
+
   def addChallenge(tourId: ExternalTournament.ID, data: DataForm.GameData): Fu[Option[Challenge]] =
     Sequencing(tourId)(byId) { tour =>
       if (tour.hasRounds && data.round.isEmpty) fufail("Round must be specified")

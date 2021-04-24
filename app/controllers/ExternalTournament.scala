@@ -169,6 +169,17 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
+  def gameDelete(tourId: String, gameId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+    WithMyTournament(me, tourId) { tour =>
+      Env.challenge.api.externalById(gameId) flatMap { challengeOpt =>
+        challengeOpt.fold(notFoundJson("No such game")) { challenge =>
+          if (!challenge.externalTournamentId.contains(tour.id)) notFoundJson("No such game")
+          else api.deleteChallenge(tour.id, challenge) inject jsonOkResult
+        }
+      }
+    }
+  }
+
   def apiPlayers(id: String) = Scoped(_.Tournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
       ExternalPlayerRepo.byTour(tour.id) map { players =>
