@@ -322,8 +322,7 @@ GET   /tournament/external/$id<\w{8}>/socket/v:apiVersion   controllers.External
 GET   /tournament/external/$id<\w{8}>/results               controllers.ExternalTournament.tournamentResults(id: String)
 POST  /api/tournament/external                              controllers.ExternalTournament.apiCreate
 POST  /api/tournament/external/$id<\w{8}>                   controllers.ExternalTournament.apiUpdate(id: String)
-GET   /api/tournament/external/$id<\w{8}>                   controllers.Api.externalTournament(id: String)
-GET   /api/tournament/external/$id<\w{8}>/players           controllers.ExternalTournament.apiPlayers(id: String)
+GET   /api/tournament/external/$id<\w{8}>                   controllers.ExternalTournament.tournamentJson(id: String)
 POST  /api/tournament/external/$id<\w{8}>/player            controllers.ExternalTournament.playerCreate(id: String)
 POST  /api/tournament/external/$id<\w{8}>/bye               controllers.ExternalTournament.playerBye(id: String)
 DELETE /api/tournament/external/$id<\w{8}>/player/:userId   controllers.ExternalTournament.playerDelete(id: String, userId: String)

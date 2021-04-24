@@ -78,7 +78,9 @@ final class JsonView(
     player.flatMap(_.fmjdId).flatMap(lightFmjdUserApi.sync)
 
   def apiTournament(
-    tour: ExternalTournament
+    tour: ExternalTournament,
+    players: Option[List[ExternalPlayer]] = None,
+    upcoming: Option[List[Challenge]] = None
   ): JsObject =
     Json.obj(
       "id" -> tour.id,
@@ -96,6 +98,8 @@ final class JsonView(
       .add("days" -> tour.days)
       .add("rounds" -> tour.settings.nbRounds)
       .add("description" -> tour.settings.description)
+      .add("players" -> players.map(_.map(apiPlayer)))
+      .add("upcoming" -> upcoming.map(_.map(apiChallenge)))
 
   def apiPlayer(
     player: ExternalPlayer
@@ -105,10 +109,15 @@ final class JsonView(
       "status" -> player.status.key
     ).add("fmjdId", player.fmjdId)
 
-  def apiPlayers(
-    players: List[ExternalPlayer]
-  ): JsArray =
-    JsArray(players.map(apiPlayer))
+  private def apiChallenge(c: Challenge) = {
+    val challenger = c.challenger.fold(_ => none[Challenge.Registered], _.some)
+    Json
+      .obj("id" -> c.id)
+      .add("white" -> c.finalColor.fold(challenger, c.destUser).map(_.id))
+      .add("black" -> c.finalColor.fold(c.destUser, challenger).map(_.id))
+      .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
+      .add("round" -> c.round)
+  }
 
   def playerInfoJson(
     tour: ExternalTournament,

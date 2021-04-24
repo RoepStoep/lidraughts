@@ -67,6 +67,16 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
+  def tournamentJson(id: String) = Scoped(_.Tournament.Write) { implicit req => me =>
+    WithMyTournament(me, id) { tour =>
+      for {
+        players <- ExternalPlayerRepo.byTour(tour.id)
+        upcoming <- env.cached.getUpcomingGames(tour.id)
+        json = env.jsonView.apiTournament(tour, players.some, upcoming.some)
+      } yield JsonOk(json)
+    }
+  }
+
   def apiCreate = ScopedBody(_.Tournament.Write) { implicit req => me =>
     if (me.isBot || me.lame) notFoundJson("This account cannot create tournaments")
     else env.forms.tournamentCreate.bindFromRequest.fold(
@@ -176,14 +186,6 @@ object ExternalTournament extends LidraughtsController {
           if (!challenge.externalTournamentId.contains(tour.id)) notFoundJson("No such game")
           else api.deleteChallenge(tour.id, challenge) inject jsonOkResult
         }
-      }
-    }
-  }
-
-  def apiPlayers(id: String) = Scoped(_.Tournament.Write) { implicit req => me =>
-    WithMyTournament(me, id) { tour =>
-      ExternalPlayerRepo.byTour(tour.id) map { players =>
-        JsonOk(env.jsonView.apiPlayers(players))
       }
     }
   }
