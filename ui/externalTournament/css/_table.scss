@@ -10,6 +10,11 @@
     margin-bottom: 0.8em;
     text-align: center;
   }
+  .user-link .rating {
+    font-style: italic;
+    font-size: .8em;
+    margin-left: .3ch;
+  }
   .slist {
     border-top: $border;
     tbody tr:hover {

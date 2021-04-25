@@ -67,7 +67,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def tournamentJson(id: String) = Scoped(_.Tournament.Write) { implicit req => me =>
+  def tournamentJson(id: String) = Scoped(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
       for {
         players <- ExternalPlayerRepo.byTour(tour.id)
@@ -77,7 +77,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def apiCreate = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def apiCreate = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     if (me.isBot || me.lame) notFoundJson("This account cannot create tournaments")
     else env.forms.tournamentCreate.bindFromRequest.fold(
       jsonFormErrorDefaultLang,
@@ -87,7 +87,7 @@ object ExternalTournament extends LidraughtsController {
     )
   }
 
-  def apiUpdate(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def apiUpdate(id: String) = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
       env.forms.tournamentUpdate(tour).bindFromRequest.fold(
         jsonFormErrorDefaultLang,
@@ -120,7 +120,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def playerCreate(id: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def playerCreate(id: String) = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
       env.forms.playerCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
@@ -138,7 +138,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def playerDelete(id: String, userId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def playerDelete(id: String, userId: String) = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, id) { tour =>
       ExternalPlayerRepo.find(tour.id, userId.toLowerCase) flatMap { playerOpt =>
         playerOpt.fold(badRequestJson("User not found")) { player =>
@@ -151,7 +151,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def playerBye(tourId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def playerBye(tourId: String) = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, tourId) { tour =>
       env.forms.playerBye.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
@@ -164,7 +164,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def gameCreate(tourId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def gameCreate(tourId: String) = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, tourId) { tour =>
       env.forms.gameCreate.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
@@ -179,7 +179,7 @@ object ExternalTournament extends LidraughtsController {
     }
   }
 
-  def gameDelete(tourId: String, gameId: String) = ScopedBody(_.Tournament.Write) { implicit req => me =>
+  def gameDelete(tourId: String, gameId: String) = ScopedBody(_.ExternalTournament.Write) { implicit req => me =>
     WithMyTournament(me, tourId) { tour =>
       Env.challenge.api.externalById(gameId) flatMap { challengeOpt =>
         challengeOpt.fold(notFoundJson("No such game")) { challenge =>

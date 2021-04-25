@@ -24,6 +24,10 @@ object OAuthScope {
     case object Write extends OAuthScope("tournament:write", "Create tournaments")
   }
 
+  object ExternalTournament {
+    case object Write extends OAuthScope("tourext:write", "Manage external tournaments")
+  }
+
   object Puzzle {
     case object Read extends OAuthScope("puzzle:read", "Read puzzle activity")
   }
@@ -45,6 +49,7 @@ object OAuthScope {
     Email.Read,
     Challenge.Read, Challenge.Write,
     Tournament.Write,
+    ExternalTournament.Write,
     Puzzle.Read,
     Team.Write,
     Bot.Play
