@@ -70,8 +70,14 @@ object TeamBattle {
         teams: String,
         nbLeaders: Int
     ) {
-      def potentialTeamIds: Set[String] =
-        teams.lines.map(_.takeWhile(' ' !=)).filter(_.nonEmpty).toSet
+      // guess if newline or comma separated
+      def potentialTeamIds: Set[String] = {
+        val lines = teams.lines.toList
+        val dirtyIds =
+          if (lines.size > 1) lines.map(_.takeWhile(' ' !=))
+          else lines.headOption.??(_.split(',').toList)
+        dirtyIds.map(_.trim).filter(_.nonEmpty).toSet
+      }
     }
   }
 }

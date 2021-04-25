@@ -157,8 +157,12 @@ private[round] final class Player(
       gameId = game.id,
       fen = Forsyth boardAndColor game.situation,
       move = moveOrDrop.toUci.keys,
-      whiteClock = game.clock.map(_.remainingTime(draughts.White).roundSeconds),
-      blackClock = game.clock.map(_.remainingTime(draughts.Black).roundSeconds)
+      whiteClock = game.clock.fold(game.correspondenceClock.map(_.remainingTime(draughts.White).toInt)) {
+        _.remainingTime(draughts.White).roundSeconds.some
+      },
+      blackClock = game.clock.fold(game.correspondenceClock.map(_.remainingTime(draughts.Black).toInt)) {
+        _.remainingTime(draughts.Black).roundSeconds.some
+      }
     )
 
     // publish all moves

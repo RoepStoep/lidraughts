@@ -30,8 +30,8 @@ case class CorrespondenceClock(
   def incrementHours = increment / 60 / 60
 }
 
-private object CorrespondenceClock {
+object CorrespondenceClock {
 
-  private val hourSeconds = 60 * 60
-  private val daySeconds = 24 * hourSeconds
+  val hourSeconds = 60 * 60
+  val daySeconds = 24 * hourSeconds
 }

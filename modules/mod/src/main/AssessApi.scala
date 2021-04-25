@@ -111,7 +111,10 @@ final class AssessApi(
       case Some(playerAggregateAssessment) => playerAggregateAssessment.action match {
         case AccountAction.Engine | AccountAction.EngineAndBan =>
           UserRepo.getTitle(userId).flatMap {
-            case None => modApi.autoMark(SuspectId(userId), ModId.Lidraughts)
+            case None => fuccess {
+              val reason = s"Would mark as engine"
+              reporter ! lidraughts.hub.actorApi.report.Cheater(userId, playerAggregateAssessment.reportText(reason, 3))
+            }
             case Some(title) => fuccess {
               val reason = s"Would mark as engine, but has a $title title"
               reporter ! lidraughts.hub.actorApi.report.Cheater(userId, playerAggregateAssessment.reportText(reason, 3))

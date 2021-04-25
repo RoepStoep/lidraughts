@@ -454,6 +454,13 @@ lidraughts.miniGame = (() => {
         lastMove
       });
       const turnColor = fenColor(data.fen);
+      if ((turnColor === 'white' ? data.bc : data.wc) >= 24 * 60 * 60) {
+        // correspondence clock is always full for other side, so copy translated opponent clock after move
+        const $wc = $el.find('.mini-game__clock--white'), 
+              $bc = $el.find('.mini-game__clock--black');
+        if (turnColor === 'white') $bc.html($wc.html())
+        else $wc.html($bc.html());
+      }
       const renderClock = (time, color) => {
         if (!isNaN(time)) $el.find('.mini-game__clock--' + color).clock('set', {
           time,
@@ -482,7 +489,7 @@ lidraughts.miniGame = (() => {
 lidraughts.widget('clock', {
   _create: function() {
     this.target = this.options.time * 1000 + Date.now();
-    if (!this.options.pause) this.interval = setInterval(this.render.bind(this), 1000);
+    if (!this.options.pause && this.options.time < 6 * 60 * 60) this.interval = setInterval(this.render.bind(this), 1000);
     this.render();
   },
 
@@ -491,12 +498,13 @@ lidraughts.widget('clock', {
     this.target = this.options.time * 1000 + Date.now();
     this.render();
     clearInterval(this.interval);
-    if (!opts.pause) this.interval = setInterval(this.render.bind(this), 1000);
+    if (!opts.pause && this.options.time < 6 * 60 * 60) this.interval = setInterval(this.render.bind(this), 1000);
   },
 
   render: function() {
     if (document.body.contains(this.element[0])) {
-      this.element.text(this.formatMs(this.target - Date.now()));
+      const newTime = this.formatMs(this.target - Date.now());      
+      if (newTime) this.element.text(newTime);
       this.element.toggleClass('clock--run', !this.options.pause);
     } else clearInterval(this.interval);
   },
@@ -507,9 +515,11 @@ lidraughts.widget('clock', {
 
   formatMs: function(msTime) {
     const date = new Date(Math.max(0, msTime + 500)),
+      days = date.getUTCDate() - 1,
       hours = date.getUTCHours(),
       minutes = date.getUTCMinutes(),
       seconds = date.getUTCSeconds();
+    if (days !== 0 || hours >= 6) return undefined;
     return hours > 0 ?
       hours + ':' + this.pad(minutes) + ':' + this.pad(seconds) :
       minutes + ':' + this.pad(seconds);

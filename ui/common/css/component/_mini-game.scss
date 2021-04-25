@@ -32,7 +32,8 @@
     }
   }
 
-  .rating {
+  .rating,
+  .progress {
     @extend %roboto;
 
     font-size: .9em;

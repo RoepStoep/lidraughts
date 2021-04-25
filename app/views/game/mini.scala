@@ -3,7 +3,8 @@ package views.html.game
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
-import lidraughts.game.Pov
+import lidraughts.common.Lang
+import lidraughts.game.{ CorrespondenceClock, Pov }
 
 import controllers.routes
 import draughts.format.Forsyth
@@ -51,9 +52,9 @@ object mini {
       dataLive := isLive.option(game.id),
       renderState(pov)
     )(
-        renderPlayer(!pov, lidraughts.pref.Pref.default.draughtsResult),
+        renderPlayer(!pov, lidraughts.pref.Pref.default.draughtsResult)(lidraughts.i18n.defaultLang),
         cgWrap,
-        renderPlayer(pov, lidraughts.pref.Pref.default.draughtsResult)
+        renderPlayer(pov, lidraughts.pref.Pref.default.draughtsResult)(lidraughts.i18n.defaultLang)
       )
   }
 
@@ -62,14 +63,16 @@ object mini {
     dataState := s"${Forsyth.boardAndColor(pov.game.situation)}|${boardSize.width}x${boardSize.height}|${pov.color.name}|${~pov.game.lastMoveKeys}"
   }
 
-  private def renderPlayer(pov: Pov, draughtsResult: Boolean, withUserId: Boolean = false) =
+  private def renderPlayer(pov: Pov, draughtsResult: Boolean, withUserId: Boolean = false)(implicit lang: Lang) =
     span(cls := "mini-game__player")(
       span(cls := s"mini-game__user mini-game__user--${pov.color.name}", dataUserId := withUserId ?? pov.player.userId)(
         playerUsername(pov.player, withRating = false),
         span(cls := "rating")(lidraughts.game.Namer ratingStringIfUser pov.player)
       ),
       if (pov.game.finishedOrAborted) renderResult(pov, draughtsResult)
-      else pov.game.clock.map { renderClock(_, pov.color) }
+      else pov.game.clock.fold(pov.game.correspondenceClock.map { renderCorrespondence(_, pov.color) }) {
+        renderClock(_, pov.color).some
+      }
     )
 
   private def renderResult(pov: Pov, draughtsResult: Boolean) =
@@ -89,5 +92,25 @@ object mini {
     )(
         f"${s / 60}:${s % 60}%02d"
       )
+  }
+
+  private def renderCorrespondence(clock: CorrespondenceClock, color: draughts.Color)(implicit lang: Lang) = {
+    import CorrespondenceClock._
+    val s = clock.remainingTime(color).toInt
+    val time =
+      if (s >= daySeconds) {
+        val days = s / daySeconds
+        if (days == 1) trans.oneDay.txt()
+        else trans.nbDays.pluralSameTxt(days)
+      } else if (s >= 6 * hourSeconds) {
+        val hours = s / hourSeconds
+        trans.nbHours.pluralSameTxt(hours)
+      } else {
+        f"${s / 60}:${s % 60}%02d"
+      }
+    span(
+      cls := s"mini-game__clock mini-game__clock--${color.name}",
+      dataTime := s
+    )(time)
   }
 }

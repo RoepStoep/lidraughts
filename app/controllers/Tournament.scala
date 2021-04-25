@@ -299,7 +299,8 @@ object Tournament extends LidraughtsController {
       jsonFormErrorDefaultLang,
       setup => rateLimitCreation(me, setup.password.isDefined, req) {
         env.api.createTournament(setup, me, teams, getUserTeamIds, andJoin = false) flatMap { tour =>
-          Env.tournament.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, lidraughts.i18n.defaultLang, none)
+          val lang = me.lang flatMap lidraughts.i18n.I18nLangPicker.byStr getOrElse lidraughts.i18n.defaultLang
+          env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, lang, none)
         } map { Ok(_) }
       }
     )
@@ -338,6 +339,28 @@ object Tournament extends LidraughtsController {
     }
   }
 
+  def apiTeamBattleUpdate(id: String) =
+    ScopedBody(_.Tournament.Write) { implicit req => me =>
+      repo byId id flatMap {
+        _ ?? {
+          case tour if (tour.createdBy == me.id || isGranted(_.ManageTournament, me)) && !tour.isFinished =>
+            lidraughts.tournament.TeamBattle.DataForm.empty
+              .bindFromRequest()
+              .fold(
+                jsonFormErrorDefaultLang,
+                res =>
+                  env.api.teamBattleUpdate(tour, res, Env.team.api.filterExistingIds) >> {
+                    repo byId tour.id map (_ | tour) flatMap { tour =>
+                      val lang = me.lang flatMap lidraughts.i18n.I18nLangPicker.byStr getOrElse lidraughts.i18n.defaultLang
+                      env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, lang, none)
+                    } map { Ok(_) }
+                  }
+              )
+          case _ => BadRequest(jsonError("Can't update that tournament.")).fuccess
+        }
+      }
+    }
+
   def limitedInvitation = Auth { implicit ctx => me =>
     for {
       (tours, _) <- upcomingCache.get
@@ -357,7 +380,7 @@ object Tournament extends LidraughtsController {
     negotiate(
       html = notFound,
       api = _ =>
-        Env.tournament.cached.promotable.get.nevermind map {
+        env.cached.promotable.get.nevermind map {
           lidraughts.tournament.Spotlight.select(_, ctx.me, 4)
         } flatMap env.apiJsonView.featured map { Ok(_) }
     )
@@ -418,7 +441,7 @@ object Tournament extends LidraughtsController {
       repo byId id flatMap {
         _ ?? { tour =>
           tour.isTeamBattle ?? {
-            Env.tournament.cached.battle.teamStanding.get(tour.id) map { standing =>
+            env.cached.battle.teamStanding.get(tour.id) map { standing =>
               Ok(views.html.tournament.teamBattle.standing(tour, standing))
             }
           }
