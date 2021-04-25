@@ -45,7 +45,7 @@ object Api extends LidraughtsController {
   }
 
   def index = Action {
-    Ok(views.html.site.bits.api)
+    Ok(views.html.site.bits.api(Env.api.isStage))
   }
 
   def user(name: String) = CookieBasedApiRequest { ctx =>
