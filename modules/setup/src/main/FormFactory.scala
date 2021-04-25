@@ -103,7 +103,7 @@ private[setup] final class FormFactory(
   def hookConfig(implicit ctx: UserContext): Fu[HookConfig] = savedConfig map (_.hook)
 
   import lidraughts.common.Form._
-  import lidraughts.common.Form.UTCDate._
+  import lidraughts.common.Form.UTCDateOrTimestamp._
 
   lazy val api = Form(
     mapping(
@@ -117,7 +117,7 @@ private[setup] final class FormFactory(
       "color" -> optional(color),
       "fen" -> fen,
       "opponent" -> optional(nonEmptyText),
-      "startsAt" -> optional(inTheFuture(utcDate)),
+      "startsAt" -> optional(inTheFuture(utcDateOrTimestamp)),
       "microMatch" -> optional(boolean)
     )(ApiConfig.<<)(_.>>)
       .verifying("A custom fen is not allowed for this variant", _.validVariantForFen)

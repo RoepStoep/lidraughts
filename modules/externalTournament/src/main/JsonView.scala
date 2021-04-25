@@ -93,7 +93,7 @@ final class JsonView(
       "autoStartGames" -> tour.settings.autoStart,
       "microMatches" -> tour.settings.microMatches
     )
-      .add("startsAt" -> tour.settings.startsAt.map(formatDate))
+      .add("startsAt" -> tour.settings.startsAt)
       .add("clock" -> tour.clock)
       .add("days" -> tour.days)
       .add("rounds" -> tour.settings.nbRounds)
@@ -115,7 +115,7 @@ final class JsonView(
       .obj("id" -> c.id)
       .add("whiteUserId" -> c.finalColor.fold(challenger, c.destUser).map(_.id))
       .add("blackUserId" -> c.finalColor.fold(c.destUser, challenger).map(_.id))
-      .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
+      .add("startsAt", c.external.flatMap(_.startsAt))
       .add("round" -> c.round)
       .add("fen" -> c.customStartingPosition.??(c.initialFen.map(_.value)))
   }

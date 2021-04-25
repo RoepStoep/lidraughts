@@ -156,7 +156,7 @@ object DataForm {
     val days = number(min = 1, max = 14)
     val round = number(min = 1, max = 100)
     val userDisplay = text.verifying(ExternalTournament.UserDisplay.byKey.contains _)
-    val startsAt = inTheFuture(utcDate)
+    val startsAt = inTheFuture(ISODateTimeOrTimestamp.isoDateTimeOrTimestamp)
   }
 
 }

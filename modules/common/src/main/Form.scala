@@ -177,4 +177,12 @@ object Form {
     }
     val isoDateTimeOrTimestamp = of[org.joda.time.DateTime](formatter)
   }
+  object UTCDateOrTimestamp {
+    val formatter = new Formatter[org.joda.time.DateTime] {
+      def bind(key: String, data: Map[String, String]) =
+        UTCDate.dateTimeFormat.bind(key, data) orElse Timestamp.formatter.bind(key, data)
+      def unbind(key: String, value: org.joda.time.DateTime) = UTCDate.dateTimeFormat.unbind(key, value)
+    }
+    val utcDateOrTimestamp = of[org.joda.time.DateTime](formatter)
+  }
 }
