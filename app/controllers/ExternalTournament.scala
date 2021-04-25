@@ -144,7 +144,7 @@ object ExternalTournament extends LidraughtsController {
         playerOpt.fold(badRequestJson("User not found")) { player =>
           api.deletePlayer(tour.id, player) map { deleted =>
             if (deleted) jsonOkResult
-            else BadRequest(jsonError("Cannot delete a player with games (upcoming / ongoing / finished)"))
+            else BadRequest(jsonError("Cannot delete a player with upcoming / ongoing / finished games"))
           }
         }
       }
@@ -172,7 +172,7 @@ object ExternalTournament extends LidraughtsController {
           api.addChallenge(tour.id, data).fold(
             err => BadRequest(jsonError(err.getMessage)),
             challenge => challenge.fold(BadRequest(jsonError("Could not create game"))) { c =>
-              JsonOk(Env.challenge.jsonView.show(c, SocketVersion(0), none))
+              JsonOk(env.jsonView.apiChallenge(c))
             }
           )
       )

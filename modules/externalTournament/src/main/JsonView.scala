@@ -88,7 +88,7 @@ final class JsonView(
       "name" -> tour.name,
       "variant" -> tour.variant.key,
       "rated" -> tour.rated,
-      "displayFmjd" -> tour.settings.userDisplay.fmjd,
+      "userDisplay" -> tour.settings.userDisplay.key,
       "hasChat" -> tour.settings.hasChat,
       "autoStartGames" -> tour.settings.autoStart,
       "microMatches" -> tour.settings.microMatches
@@ -109,14 +109,15 @@ final class JsonView(
       "status" -> player.status.key
     ).add("fmjdId", player.fmjdId)
 
-  private def apiChallenge(c: Challenge) = {
+  def apiChallenge(c: Challenge) = {
     val challenger = c.challenger.fold(_ => none[Challenge.Registered], _.some)
     Json
       .obj("id" -> c.id)
-      .add("white" -> c.finalColor.fold(challenger, c.destUser).map(_.id))
-      .add("black" -> c.finalColor.fold(c.destUser, challenger).map(_.id))
+      .add("whiteUserId" -> c.finalColor.fold(challenger, c.destUser).map(_.id))
+      .add("blackUserId" -> c.finalColor.fold(c.destUser, challenger).map(_.id))
       .add("startsAt", c.external.flatMap(_.startsAt).map(formatDate))
       .add("round" -> c.round)
+      .add("fen" -> c.customStartingPosition.??(c.initialFen.map(_.value)))
   }
 
   def playerInfoJson(
