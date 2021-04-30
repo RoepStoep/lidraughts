@@ -57,7 +57,7 @@ object side {
         cls := List(
           "conditions" -> true,
           "accepted" -> (ctx.isAuth && verdicts.accepted),
-          "refused" -> (!ctx.isAuth || !verdicts.accepted)
+          "refused" -> (ctx.isAuth && !verdicts.accepted)
         )
       )(
           div(
@@ -66,8 +66,8 @@ object side {
               p(
                 cls := List(
                   "condition" -> true,
-                  "accepted" -> (v.verdict.accepted && ctx.isAuth),
-                  "refused" -> (!v.verdict.accepted || !ctx.isAuth)
+                  "accepted" -> (ctx.isAuth && v.verdict.accepted),
+                  "refused" -> (ctx.isAuth && !v.verdict.accepted)
                 )
               )(s.perfType map v.condition.name)
             }

@@ -65,7 +65,7 @@ object side {
         cls := List(
           "conditions" -> true,
           "accepted" -> (ctx.isAuth && verdicts.accepted),
-          "refused" -> (!ctx.isAuth || !verdicts.accepted)
+          "refused" -> (ctx.isAuth && !verdicts.accepted)
         )
       )(div(
           (verdicts.list.size < 2) option p(trans.conditionOfEntry()),
@@ -73,7 +73,7 @@ object side {
             p(cls := List(
               "condition" -> true,
               "accepted" -> (v.verdict.accepted && ctx.isAuth),
-              "refused" -> (!v.verdict.accepted || !ctx.isAuth)
+              "refused" -> (ctx.isAuth && !v.verdict.accepted)
             ))(v.condition match {
               case lidraughts.tournament.Condition.TeamMember(teamId, teamName) =>
                 trans.mustBeInTeam(teamLinkWithName(teamId, lidraughts.common.String.html.escapeHtml(teamName), withIcon = false))
