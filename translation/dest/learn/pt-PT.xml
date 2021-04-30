@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="learnDraughts">Aprender o jogo de damas</string>
   <string name="byPlaying">jogando!</string>
   <string name="menu">Menu</string>
   <string name="progressX">Progresso: %s</string>
   <string name="resetMyProgress">Reiniciar o meu progresso</string>
   <string name="youWillLoseAllYourProgress">Vais perder todo o teu progresso!</string>
   <string name="play">jogar!</string>
+  <string name="draughtsPieces">Peças do jogo de damas</string>
+  <string name="theMen">As peças</string>
   <string name="theKing">O rei</string>
   <string name="fundamentals">Fundamentos</string>
   <string name="capture">Captura</string>
@@ -13,6 +16,7 @@
   <string name="takeTheBlackPieces">Captura as peças negras!</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">Captura as peças negras!
 E não percas as tuas.</string>
+  <string name="captureComplete">Parabéns! Já sabe como capturar com peças de damas!</string>
   <string name="protection">Proteção</string>
   <string name="keepYourPiecesSafe">Mantém as tuas peças seguras</string>
   <string name="protectionIntro">Identifica as peças que o teu adversário está a atacar, e defende-as!</string>
@@ -26,17 +30,32 @@ as peças não defendidas!</string>
   <string name="combat">Combate</string>
   <string name="captureAndDefendPieces">Captura e defende peças</string>
   <string name="combatIntro">Um bom guerreiro sabe tanto atacar como defender!</string>
+  <string name="combatComplete">Parabéns! Sabe como jogar com peças de damas!</string>
   <string name="intermediate">Intermédio</string>
   <string name="boardSetup">Organização do tabuleiro</string>
   <string name="howTheGameStarts">Como começa o jogo</string>
   <string name="boardSetupIntro">Os dois exércitos cara a cara, preparados para a batalha.</string>
+  <string name="thisIsTheInitialPosition">Esta é a posição inicial
+de todos os jogos de damas!
+Faça qualquer movimento para continuar.</string>
+  <string name="boardSetupComplete">Parabéns! Sabe como preparar o tabuleiro do jogo de damas.</string>
+  <string name="theGameIsADraw">O jogo terminou em empate</string>
   <string name="advanced">Avançado</string>
   <string name="whatNext">O que se segue?</string>
+  <string name="youKnowHowToPlayDraughts">Você sabe como jogar damas, parabéns! Quer tornar-se um jogador mais forte?</string>
   <string name="register">Regista-te</string>
   <string name="getAFreeLidraughtsAccount">Obtém um conta gratuita no Lidraughts</string>
   <string name="practice">Pratica</string>
+  <string name="makesYourDraughtsPerfect">aperfeiçoa o seu jogo de damas</string>
+  <string name="learnCommonDraughtsPositions">Aprenda posições comuns do jogo de damas</string>
+  <string name="signUpToSaveYourProgress">Registe-se para registar o seu progresso</string>
+  <string name="goToNextExercise">Ir para o próximo exercício</string>
+  <string name="loadNextExerciseImmediately">Carregar o próximo exercício imediatamente</string>
+  <string name="practiceList">Lista de prática</string>
+  <string name="backToPracticeMenu">Voltar ao menu de prática</string>
   <string name="exerciseYourTacticalSkills">Pratica as tuas habilidades táticas</string>
   <string name="videos">Vídeos</string>
+  <string name="watchInstructiveDraughtsVideos">Assistir a vídeos instrutivos de jogo de damas</string>
   <string name="playPeople">Joga com pessoas</string>
   <string name="opponentsFromAroundTheWorld">Adversários de todo o mundo</string>
   <string name="playMachine">Joga com o computador</string>
@@ -60,4 +79,26 @@ as peças não defendidas!</string>
   <string name="backToMenu">Voltar ao menu</string>
   <string name="puzzleFailed">Exercício falhado!</string>
   <string name="retry">De novo</string>
+  <string name="clickToRetry">Clique para tentar novamente</string>
+  <string name="winTheGame">Vença a partida</string>
+  <plurals name="winTheGameInX">
+    <item quantity="one">Vença a partida em %s lances</item>
+    <item quantity="other">Vença a partida em %s lances</item>
+  </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="one">Assegure o empate em mais %s lance</item>
+    <item quantity="other">Assegure o empate em mais %s lances</item>
+  </plurals>
+  <plurals name="equalizeInX">
+    <item quantity="one">Equalize em %s lance</item>
+    <item quantity="other">Equalize em %s lances</item>
+  </plurals>
+  <plurals name="defendForX">
+    <item quantity="one">Defenda por %s lance</item>
+    <item quantity="other">Defenda por %s lances</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="one">Assegure uma posição vencedora em %s lance</item>
+    <item quantity="other">Assegure uma posição vencedora em %s lances</item>
+  </plurals>
 </resources>

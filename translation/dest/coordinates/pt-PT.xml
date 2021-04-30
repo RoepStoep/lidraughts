@@ -4,6 +4,9 @@
   <string name="coordinateTraining">Treino de coordenadas</string>
   <string name="averageScoreAsWhiteX">Pontuação média com as brancas: %s</string>
   <string name="averageScoreAsBlackX">Pontuação média com as pretas: %s</string>
+  <string name="knowingTheDraughtsBoard">Conhecer as coordenadas do tabuleiro é uma habilidade muito importante:</string>
+  <string name="mostDraughtsCourses">A maioria dos cursos e exercícios usam extensamente a notação algébrica.</string>
+  <string name="talkToYourDraughtsFriends">Torna mais fácil falar do jogo das damas com amigos, pois ambos compreendem a \"linguagem do tabuleiro\".</string>
   <string name="youCanAnalyseAGameMoreEffectively">Podes analisar um jogo com maior eficiência se não precisares de procurar o nome das diferentes casas.</string>
   <string name="aSquareNameAppears">O nome da casa aparece no tabuleiro e tens de clicar na casa correspondente. Tenta reconhecer o maior número de casas em 30 segundos!</string>
   <string name="startTraining">Começar o treino</string>

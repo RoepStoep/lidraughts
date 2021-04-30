@@ -190,6 +190,26 @@ object Auth extends LidraughtsController {
       authLog(username, email, s"Signup with unacceptable email")
   }
 
+  def adminSignup = ScopedBody() { implicit req => me =>
+    if (!isGranted(_.SuperAdmin, me)) fuccess(Unauthorized)
+    else forms.preloadEmailDns >>
+      forms.signup.mobile.bindFromRequest.fold(
+        jsonFormErrorDefaultLang,
+        data => {
+          implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.some)
+          val email = env.emailAddressValidator.validate(data.realEmail) err s"Invalid email ${data.email}"
+          authLog(data.username, data.email, s"Admin signup")
+          val passwordHash = Env.user.authenticator passEnc ClearPassword(data.password)
+          UserRepo.create(data.username, passwordHash, email.acceptable, false, none, false)
+            .flatten(s"No user could be created for ${data.username}")
+            .map(_ -> email)
+            .flatMap {
+              case (user, _) => env.automaticEmail.welcome(user, email.acceptable) inject jsonOkResult
+            }
+        }
+      )
+  }
+
   def signupPost = OpenBody { implicit ctx =>
     implicit val req = ctx.body
     NoTor {

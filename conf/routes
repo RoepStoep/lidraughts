@@ -434,6 +434,7 @@ POST  /password/reset/confirm/:token   controllers.Auth.passwordResetConfirmAppl
 POST  /auth/set-fp/:fp/:ms             controllers.Auth.setFingerPrint(fp: String, ms: Int)
 POST  /auth/token                      controllers.Auth.makeLoginToken
 GET   /auth/token/:token               controllers.Auth.loginWithToken(token: String)
+POST  /mod/signup                      controllers.Auth.adminSignup
 
 # Mod
 POST  /mod/:username/engine/:v         controllers.Mod.engine(username: String, v: Boolean)

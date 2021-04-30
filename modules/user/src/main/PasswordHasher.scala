@@ -81,22 +81,15 @@ object PasswordHasher {
   import lidraughts.common.{ IpAddress, HTTPRequest }
 
   private val rateLimitPerIP = new RateLimit[IpAddress](
-    credits = 20 * 2, // double cost in case of hash check failure
-    duration = 10 minutes,
+    credits = 40 * 2, // double cost in case of hash check failure
+    duration = 8 minutes,
     name = "Password hashes per IP",
     key = "password.hashes.ip"
   )
 
-  private val rateLimitPerUA = new RateLimit[String](
-    credits = 30,
-    duration = 20 seconds,
-    name = "Password hashes per UA",
-    key = "password.hashes.ua"
-  )
-
   private lazy val rateLimitPerUser = new RateLimit[String](
     credits = 10,
-    duration = 1.hour,
+    duration = 30 minutes,
     name = "Password hashes per user",
     key = "password.hashes.user"
   )
@@ -114,10 +107,8 @@ object PasswordHasher {
       val ip = HTTPRequest lastRemoteAddress req
       rateLimitPerUser(User normalize username, cost = cost) {
         rateLimitPerIP.chargeable(ip, cost = cost) { charge =>
-          rateLimitPerUA(~HTTPRequest.userAgent(req), cost = cost, msg = ip.value) {
-            rateLimitGlobal("-", cost = cost, msg = ip.value) {
-              run(charge)
-            }
+          rateLimitGlobal("-", cost = cost, msg = ip.value) {
+            run(charge)
           }
         }
       }

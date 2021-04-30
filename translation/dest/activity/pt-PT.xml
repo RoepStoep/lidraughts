@@ -14,6 +14,10 @@
     <item quantity="one">Resolveu %s quebra-cabeças</item>
     <item quantity="other">Resolveu %s quebra-cabeças</item>
   </plurals>
+  <plurals name="solvedNbVariantPuzzles">
+    <item quantity="one">Resolveu %1$s %2$s quebra-cabeças táticos</item>
+    <item quantity="other">Resolveu %1$s %2$s quebra-cabeças tácticos</item>
+  </plurals>
   <plurals name="playedNbGames">
     <item quantity="one">Jogou %1$s jogo em %2$s</item>
     <item quantity="other">Jogou %1$s jogos em %2$s</item>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="playInATournament">Participe num torneio</string>
   <string name="playWithAFriend">Jogar com um amigo</string>
   <string name="playWithTheMachine">Jogar contra o computador</string>
   <string name="toInviteSomeoneToPlayGiveThisUrl">Para convidar alguém para jogar, envie este endereço</string>
   <string name="gameOver">Fim da partida</string>
   <string name="waitingForOpponent">Aguardando oponente</string>
+  <string name="waitingForPlayer">Aguardando um jogador</string>
   <string name="waiting">Em espera</string>
   <string name="yourTurn">Sua vez</string>
   <string name="aiNameLevelAiLevel">%1$s nível %2$s</string>
@@ -16,9 +18,16 @@
   <string name="white">Brancas</string>
   <string name="black">Negras</string>
   <string name="randomColor">Cor aleatória</string>
+  <string name="microMatch">Micro-partida</string>
+  <string name="microMatchChallenge">Este desafio é um micro-jogo!</string>
+  <string name="microMatchExplanation">Uma partida de desforra com cores inversas será jogada imediatamente após este jogo.</string>
+  <string name="microMatchRematchStarted">Segunda partida de micro-jogo iniciada</string>
+  <string name="microMatchRematchAwaiting">A aguardar a segunda partida de micro-jogo</string>
+  <string name="microMatchGameX">Micro-jogo %s</string>
   <string name="createAGame">Criar uma partida</string>
   <string name="whiteIsVictorious">Brancas vencem</string>
   <string name="blackIsVictorious">Negras vencem</string>
+  <string name="promotion">Promoção</string>
   <string name="variantEnding">Fim da variante</string>
   <string name="important">Importante</string>
   <string name="yourQuestionMayHaveBeenAnswered">A tua pergunta pode já ter uma resposta %1$s</string>
@@ -118,9 +127,14 @@
     <item quantity="other">%s jogadores conectados</item>
   </plurals>
   <string name="currentGames">Partidas atuais</string>
+  <string name="gameNumberX">Partida %s</string>
   <plurals name="nbGames">
     <item quantity="one">%s jogo</item>
     <item quantity="other">%s jogos</item>
+  </plurals>
+  <plurals name="nbGamesOngoing">
+    <item quantity="one">%s partida a decorrer</item>
+    <item quantity="other">%s partidas a decorrer</item>
   </plurals>
   <plurals name="nbBookmarks">
     <item quantity="one">%s favorito</item>
@@ -129,10 +143,12 @@
   <string name="viewInFullSize">Ver jogo</string>
   <string name="logOut">Sair</string>
   <string name="signIn">Entrar</string>
+  <string name="youMustSignInToJoinIt">Você deve %s para participar</string>
   <string name="newToLidraughts">Novo no Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Você precisa de uma conta para fazer isso</string>
   <string name="signUp">Registrar</string>
   <string name="computersAreNotAllowedToPlay">O uso de motores de cálculo não é permitido. Por favor, não utilize programas, bancos de dados ou outros jogadores durante a partida. Além disso, a criação de contas múltiplas é fortemente desencorajada e sua prática excessiva acarretará banimento.</string>
+  <string name="gameByUsername">Jogo por nome de utilizador</string>
   <string name="games">Partidas</string>
   <string name="forum">Forum</string>
   <string name="xPostedInForumY">%1$s postou em %2$s</string>
@@ -243,6 +259,7 @@
     <item quantity="other">%s jogando</item>
   </plurals>
   <string name="exportGames">Exportar partidas</string>
+  <string name="exportSimulGames">Exportar partidas simul</string>
   <string name="ratingRange">Rating entre</string>
   <plurals name="giveNbSeconds">
     <item quantity="one">Dar %s segundos</item>
@@ -264,6 +281,8 @@
   <string name="advancedSearch">Busca avançada</string>
   <string name="tournament">Torneio</string>
   <string name="tournaments">Torneios</string>
+  <string name="myTournaments">Meus torneios</string>
+  <string name="createdTournaments">Criado</string>
   <string name="tournamentPoints">Pontos de torneios</string>
   <plurals name="nbTournamentPoints">
     <item quantity="one">%s ponto de torneio</item>
@@ -301,6 +320,10 @@
   <string name="xCreatedTeamY">%1$s criou a equipa %2$s</string>
   <string name="xStartedStreaming">%s começou uma stream</string>
   <string name="averageElo">Média de rating</string>
+  <string name="viewAllTeams">Ver todas as equipas</string>
+  <string name="pickYourTeam">Escolha a sua equipa</string>
+  <string name="whichTeamWillYouRepresent">Qual equipa você vai representar nesta batalha?</string>
+  <string name="youMustJoinOneOfTheseTeams">Você deve juntar-se a uma destas equipas para participar!</string>
   <string name="location">Localização</string>
   <string name="settings">Configurações</string>
   <string name="filterGames">Filtrar partidas</string>
@@ -312,13 +335,20 @@
   <string name="fromPosition">A partir da posição</string>
   <string name="continueFromHere">Continuar daqui</string>
   <string name="toStudy">Estudo</string>
+  <string name="pdnImportBy">Importar PDN por %s</string>
   <string name="importGame">Importar partida</string>
   <string name="importGameExplanation">Quando copias o PDN de um jogo, tens acesso a navegar pela repetição,
 análise de computador, sala de conversação e link de partilha.</string>
+  <string name="orUploadAPdnFile">Ou enviar um ficheiro PDN</string>
   <plurals name="nbImportedGames">
     <item quantity="one">%s partida importada</item>
     <item quantity="other">%s partidas importadas</item>
   </plurals>
+  <string name="thisIsADraughtsCaptcha">Este é um CAPTCHA de jogo de damas.</string>
+  <string name="clickOnTheBoardToMakeYourMove">Clique no tabuleiro para fazer a sua jogada, e prove que é um humano.</string>
+  <string name="captcha.fail">Por favor resolva o Captcha de jogo de damas.</string>
+  <string name="notTheBestCapture">Não é a melhor captura</string>
+  <string name="colorPlaysCapture">%s para mover; jogue a sequência de captura mais longa</string>
   <string name="retry">Tentar novamente</string>
   <string name="reconnecting">Reconectando</string>
   <plurals name="nbFriendsOnline">
@@ -350,6 +380,13 @@ análise de computador, sala de conversação e link de partilha.</string>
   <string name="challengeToPlay">Desafiar para jogar</string>
   <string name="player">Jogador</string>
   <string name="list">Lista</string>
+  <string name="sort">Ordenar</string>
+  <string name="sortBy">Por</string>
+  <string name="from">De</string>
+  <string name="to">Para</string>
+  <string name="ascending">Ascendente</string>
+  <string name="descending">Descendente</string>
+  <string name="source">Fonte</string>
   <string name="graph">Gráfico</string>
   <plurals name="lessThanNbMinutes">
     <item quantity="one">Menos de %s minuto</item>
@@ -358,15 +395,22 @@ análise de computador, sala de conversação e link de partilha.</string>
   <string name="required">Requerido.</string>
   <string name="openTournaments">Torneios abertos</string>
   <string name="duration">Duração</string>
+  <string name="date">Data</string>
+  <string name="numberOfTurns">Número de turnos</string>
   <string name="winner">Vencedor</string>
+  <string name="loser">Vencido</string>
+  <string name="result">Resultado</string>
+  <string name="winnerColor">Cor dos vencedor</string>
   <string name="standing">Aguardando</string>
   <string name="createANewTournament">Criar novo torneio</string>
   <string name="tournamentCalendar">Calendário de torneios</string>
   <string name="conditionOfEntry">Condições de participação:</string>
   <string name="advancedSettings">Configurações avançadas</string>
   <string name="safeTournamentName">Escolha um nome seguro para o torneio.</string>
+  <string name="safeSimulName">Escolha um nome muito seguro para a simul.</string>
   <string name="inappropriateNameWarning">Qualquer linguagem ligeiramente inadequada poderia banir a sua conta.</string>
   <string name="emptyTournamentName">Deixe em branco e o torneiro terá o nome aleatório de um Grande Mestre.</string>
+  <string name="emptySimulName">Deixe em branco para nomear a simul como um elemento químico ao acaso.</string>
   <string name="recommendNotTouching">Nós recomendamos que não toque nestas opções.</string>
   <string name="fewerPlayers">Se definires condições de participação, o teu torneio terá menos participantes.</string>
   <string name="showAdvancedSettings">Mostrar configurações avançadas</string>
@@ -398,10 +442,16 @@ análise de computador, sala de conversação e link de partilha.</string>
   <string name="popularOpenings">Aberturas populares</string>
   <string name="startPosition">Posição inicial</string>
   <string name="clearBoard">Limpar tabuleiro</string>
+  <string name="edit">Editar</string>
   <string name="save">Guardar</string>
   <string name="savePosition">Guardar posição</string>
   <string name="loadPosition">Carregar posição</string>
   <string name="isPrivate">Privado</string>
+  <string name="noBerserkAllowed">Nenhum berserk permitido</string>
+  <string name="editTournament">Editar torneio</string>
+  <string name="tournamentDescription">Descrição do torneio</string>
+  <string name="tournamentDescriptionHelp">Quer dizer algo aos participantes? Seja breve. Estão disponíveis ligações de Markdown: [text](https://url)</string>
+  <string name="cancelTheTournament">Cancelar o torneio</string>
   <string name="reportXToModerators">Reportar %s aos moderadores</string>
   <string name="profileCompletion">Perfil completo: %s</string>
   <string name="xRating">Pontuação %s</string>
@@ -413,15 +463,31 @@ análise de computador, sala de conversação e link de partilha.</string>
   <string name="lastName">Último nome</string>
   <string name="biography">Biografia</string>
   <string name="country">País</string>
+  <string name="countryOrRegion">País / Região</string>
   <string name="socialMediaLinks">Links das redes sociais</string>
+  <string name="linkSuggestions">Tais como Twitter, Facebook, GitHub, Lichess, ...
+Um URL por linha</string>
   <string name="preferences">Preferências</string>
   <string name="inlineNotation">Anotações em linha</string>
   <string name="watchLidraughtsTV">Assistir Lidraughts TV</string>
   <string name="previouslyOnLidraughtsTV">Anteriormente em Lidraughts TV</string>
+  <string name="collection">Coleção</string>
+  <string name="customGamesCollection">Coleção personalizada de jogos</string>
+  <string name="editCollection">Editar coleção</string>
+  <string name="copyCollectionUrl">Copiar URL da coleção</string>
+  <string name="reloadBoards">Recarregar tabuleiros</string>
+  <string name="reloadBoardsExplanation">Recarregar todos os tabuleiros terminados com a partida a decorrer do mesmo jogador (caso exista).</string>
+  <string name="reloadWithCurrentGameOfX">Recarregar com a partida actual de %s</string>
+  <string name="addOngoingOrRecentGame">Adicione a última partida que alguém jogou (seja a sua partida atual, ou a terminada mais recentemente).</string>
+  <string name="addGameByUrlOrId">Adicione uma partida por URL ou ID do jogo.</string>
+  <string name="removeGame">Remover partida</string>
   <string name="onlinePlayers">Jogadores online</string>
   <string name="activeToday">Ativos hoje</string>
   <string name="activePlayers">Jogadores ativos</string>
   <string name="bewareTheGameIsRatedButHasNoClock">Cuidado, o jogo vale pontos de rating, mas não há controle de tempo!</string>
+  <string name="standardFmjdRegulationsWithDrawingRules">As partidas padrão no lidraughts seguem as regras do jogo de damas internacional estabelecidas pela FMJD. Isso inclui as regras de sorteio automático aplicáveis quando restam apenas algumas peças no tabuleiro.</string>
+  <string name="exploreDraughtsVariants">Variantes do jogo de damas usam variações destas regras, ou podem introduzir novas mecânicas de jogo. Pense fora da caixa e explore as variantes disponibilizadas pelo lidraughts!</string>
+  <string name="rulesAndVariants">Regras &amp; Variantes</string>
   <string name="training">Treino</string>
   <string name="yourPuzzleRatingX">Sua classificação de quebra-cabeças: %s</string>
   <string name="findTheBestMoveForWhite">Procure o melhor lance para as brancas.</string>
@@ -442,6 +508,7 @@ análise de computador, sala de conversação e link de partilha.</string>
   <string name="pleaseVotePuzzle">Ajude o Lidraughts a melhorar através do seu voto, usando a seta para cima ou para baixo:</string>
   <string name="thankYou">Obrigado!</string>
   <string name="ratingX">Classificação: %s</string>
+  <string name="hidden">oculto</string>
   <plurals name="playedXTimes">
     <item quantity="one">Jogado %s vez</item>
     <item quantity="other">Jogado %s vezes</item>
@@ -456,8 +523,11 @@ análise de computador, sala de conversação e link de partilha.</string>
     <item quantity="other">%s jogos a decorrer</item>
   </plurals>
   <string name="automaticallyProceedToNextGameAfterMoving">Passar automaticamente ao jogo seguinte após o lance</string>
+  <string name="switchGamesInSameOrder">Percorrer as partidas por ordem fixa</string>
   <string name="autoSwitch">Alternar automaticamente</string>
+  <string name="sequentialSwitch">Ordem fixa</string>
   <string name="puzzles">Quebra-cabeças</string>
+  <string name="variantPuzzles">%s quebra-cabeças</string>
   <string name="latestUpdates">Atualizações mais recentes</string>
   <string name="tournamentWinners">Vencedores de torneio</string>
   <string name="name">Nome</string>
