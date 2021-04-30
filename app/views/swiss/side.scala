@@ -68,7 +68,8 @@ object side {
                   "condition" -> true,
                   "accepted" -> (ctx.isAuth && v.verdict.accepted),
                   "refused" -> (ctx.isAuth && !v.verdict.accepted)
-                )
+                ),
+                title := v.verdict.reason.map(_(ctx.lang))
               )(s.perfType map v.condition.name)
             }
           )

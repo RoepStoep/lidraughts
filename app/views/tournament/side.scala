@@ -70,15 +70,18 @@ object side {
       )(div(
           (verdicts.list.size < 2) option p(trans.conditionOfEntry()),
           verdicts.list map { v =>
-            p(cls := List(
-              "condition" -> true,
-              "accepted" -> (v.verdict.accepted && ctx.isAuth),
-              "refused" -> (ctx.isAuth && !v.verdict.accepted)
-            ))(v.condition match {
-              case lidraughts.tournament.Condition.TeamMember(teamId, teamName) =>
-                trans.mustBeInTeam(teamLinkWithName(teamId, lidraughts.common.String.html.escapeHtml(teamName), withIcon = false))
-              case c => c.name(ctx.lang)
-            })
+            p(
+              cls := List(
+                "condition" -> true,
+                "accepted" -> (ctx.isAuth && v.verdict.accepted),
+                "refused" -> (ctx.isAuth && !v.verdict.accepted)
+              ),
+              title := v.verdict.reason.map(_(ctx.lang))
+            )(v.condition match {
+                case lidraughts.tournament.Condition.TeamMember(teamId, teamName) =>
+                  trans.mustBeInTeam(teamLinkWithName(teamId, lidraughts.common.String.html.escapeHtml(teamName), withIcon = false))
+                case c => c.name(ctx.lang)
+              })
           }
         )),
       tour.spotlight.flatMap(_.drawLimit).map { lim =>
