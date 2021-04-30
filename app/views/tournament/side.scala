@@ -60,24 +60,27 @@ object side {
       tour.description map { d =>
         st.section(cls := "description")(markdownLinksOrRichText(d))
       },
-      verdicts.relevant option st.section(dataIcon := "7", cls := List(
-        "conditions" -> true,
-        "accepted" -> (ctx.isAuth && verdicts.accepted),
-        "refused" -> (ctx.isAuth && !verdicts.accepted)
-      ))(div(
-        (verdicts.list.size < 2) option p(trans.conditionOfEntry()),
-        verdicts.list map { v =>
-          p(cls := List(
-            "condition text" -> true,
-            "accepted" -> v.verdict.accepted,
-            "refused" -> !v.verdict.accepted
-          ))(v.condition match {
-            case lidraughts.tournament.Condition.TeamMember(teamId, teamName) =>
-              trans.mustBeInTeam(teamLinkWithName(teamId, lidraughts.common.String.html.escapeHtml(teamName), withIcon = false))
-            case c => c.name(ctx.lang)
-          })
-        }
-      )),
+      verdicts.relevant option st.section(
+        dataIcon := (if (ctx.isAuth && verdicts.accepted) "E" else "L"),
+        cls := List(
+          "conditions" -> true,
+          "accepted" -> (ctx.isAuth && verdicts.accepted),
+          "refused" -> (ctx.isAuth && !verdicts.accepted)
+        )
+      )(div(
+          (verdicts.list.size < 2) option p(trans.conditionOfEntry()),
+          verdicts.list map { v =>
+            p(cls := List(
+              "condition" -> true,
+              "accepted" -> (v.verdict.accepted && ctx.isAuth),
+              "refused" -> (!v.verdict.accepted || !ctx.isAuth)
+            ))(v.condition match {
+              case lidraughts.tournament.Condition.TeamMember(teamId, teamName) =>
+                trans.mustBeInTeam(teamLinkWithName(teamId, lidraughts.common.String.html.escapeHtml(teamName), withIcon = false))
+              case c => c.name(ctx.lang)
+            })
+          }
+        )),
       tour.spotlight.flatMap(_.drawLimit).map { lim =>
         div(cls := "text", dataIcon := "2")(
           if (lim > 0) trans.drawOffersAfterX(lim)

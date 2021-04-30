@@ -52,24 +52,27 @@ object side {
         st.section(cls := "description")(markdownLinksOrRichText(d))
       },
       teamLink(s.teamId),
-      if (verdicts.relevant) st.section(dataIcon := "7", cls := List(
-        "conditions" -> true,
-        "accepted" -> (ctx.isAuth && verdicts.accepted),
-        "refused" -> (ctx.isAuth && !verdicts.accepted)
-      ))(
-        div(
-          (verdicts.list.size < 2) option p(trans.conditionOfEntry()),
-          verdicts.list map { v =>
-            p(
-              cls := List(
-                "condition text" -> true,
-                "accepted" -> v.verdict.accepted,
-                "refused" -> !v.verdict.accepted
-              )
-            )(s.perfType map v.condition.name)
-          }
+      if (verdicts.relevant) st.section(
+        dataIcon := (if (ctx.isAuth && verdicts.accepted) "E" else "L"),
+        cls := List(
+          "conditions" -> true,
+          "accepted" -> (ctx.isAuth && verdicts.accepted),
+          "refused" -> (!ctx.isAuth || !verdicts.accepted)
         )
-      )
+      )(
+          div(
+            (verdicts.list.size < 2) option p(trans.conditionOfEntry()),
+            verdicts.list map { v =>
+              p(
+                cls := List(
+                  "condition" -> true,
+                  "accepted" -> (v.verdict.accepted && ctx.isAuth),
+                  "refused" -> (!v.verdict.accepted || !ctx.isAuth)
+                )
+              )(s.perfType map v.condition.name)
+            }
+          )
+        )
       else br,
       absClientDateTime(s.startsAt)
     ),
