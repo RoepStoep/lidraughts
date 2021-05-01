@@ -46,9 +46,8 @@ final class JsonView(
     playerInfoExt: Option[PlayerInfoExt],
     socketVersion: Option[SocketVersion],
     partial: Boolean,
-    lang: Lang,
     pref: Option[Pref]
-  ): Fu[JsObject] = for {
+  )(implicit lang: Lang): Fu[JsObject] = for {
     data <- cachableData get tour.id
     myInfo <- me ?? { fetchMyInfo(tour, _) }
     pauseDelay = me flatMap { u => pause.remainingDelay(u.id, tour) }

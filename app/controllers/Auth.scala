@@ -196,7 +196,7 @@ object Auth extends LidraughtsController {
       forms.signup.mobile.bindFromRequest.fold(
         jsonFormErrorDefaultLang,
         data => {
-          implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.some)
+          implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.lang)
           val email = env.emailAddressValidator.validate(data.realEmail) err s"Invalid email ${data.email}"
           authLog(data.username, data.email, s"Admin signup")
           val passwordHash = Env.user.authenticator passEnc ClearPassword(data.password)

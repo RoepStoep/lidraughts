@@ -231,9 +231,8 @@ object Api extends LidraughtsController {
           playerInfoExt = none,
           socketVersion = none,
           partial = false,
-          lang = lidraughts.i18n.defaultLang,
           none
-        ) map some
+        )(lidraughts.i18n.defaultLang) map some
       }
     } map toApiResult
   }

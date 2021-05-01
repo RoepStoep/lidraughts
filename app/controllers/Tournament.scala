@@ -102,7 +102,6 @@ object Tournament extends LidraughtsController {
               playerInfoExt = none,
               socketVersion = version.some,
               partial = false,
-              lang = ctx.lang,
               pref = ctx.pref.some
             )
             chat <- canHaveChat(tour, json.some) ?? Env.chat.api.userChat.cached
@@ -128,7 +127,6 @@ object Tournament extends LidraughtsController {
                   playerInfoExt = playerInfoExt,
                   socketVersion = socketVersion,
                   partial = partial,
-                  lang = ctx.lang,
                   pref = ctx.pref.some
                 )
             } map { Ok(_) }
@@ -299,8 +297,8 @@ object Tournament extends LidraughtsController {
       jsonFormErrorDefaultLang,
       setup => rateLimitCreation(me, setup.password.isDefined, req) {
         env.api.createTournament(setup, me, teams, getUserTeamIds, andJoin = false) flatMap { tour =>
-          val lang = lidraughts.i18n.I18nLangPicker(req, me.some)
-          env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, lang, none)
+          implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.lang)
+          env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, none)
         } map { Ok(_) }
       }
     )
@@ -351,8 +349,8 @@ object Tournament extends LidraughtsController {
                 res =>
                   env.api.teamBattleUpdate(tour, res, Env.team.api.filterExistingIds) >> {
                     repo byId tour.id map (_ | tour) flatMap { tour =>
-                      val lang = lidraughts.i18n.I18nLangPicker(req, me.some)
-                      env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, lang, none)
+                      implicit val lang = lidraughts.i18n.I18nLangPicker(req, me.lang)
+                      env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, none)
                     } map { Ok(_) }
                   }
               )
