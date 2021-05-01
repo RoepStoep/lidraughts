@@ -98,6 +98,7 @@ final class FmjdPlayerApi(
     val userIdF = headers.indexOf(Headers.userId)
     val lastNameF = headers.indexOf(Headers.lastName)
     val firstNameF = headers.indexOf(Headers.firstName)
+    val sexF = headers.indexOf(Headers.sex)
     val countryF = headers.indexOf(Headers.country)
     val titleF = headers.indexOf(Headers.title)
     val ratingF = headers.indexOf(Headers.rating)
@@ -107,17 +108,18 @@ final class FmjdPlayerApi(
       val firstName = cleanField(fields, firstNameF)
       val lastName = cleanField(fields, lastNameF)
       if (firstName.isEmpty && lastName.isEmpty) {
-        logger.warn(s"Missing name: $fields")
+        logger.warn(s"Missing name: ${fields.mkString(",")}")
         none[FmjdPlayer]
       } else cleanField(fields, idF).fold({
-        logger.warn(s"Missing ID: $fields")
+        logger.warn(s"Missing ID: ${fields.mkString(",")}")
         none[FmjdPlayer]
       }) { id =>
         FmjdPlayer(
           _id = id,
+          country = cleanField(fields, countryF).fold(Countries.unknown)(parseCountryCode),
           firstName = firstName,
           lastName = lastName,
-          country = cleanField(fields, countryF).fold(Countries.unknown)(parseCountryCode),
+          sex = cleanField(fields, sexF).map(_.toUpperCase),
           userId = cleanField(fields, userIdF).map(_.toLowerCase),
           title = cleanField(fields, titleF).map(_.toUpperCase),
           rating = cleanField(fields, ratingF).flatMap(parseIntOption),
@@ -157,10 +159,11 @@ object FmjdPlayerApi {
   val adminId = "00001"
   val emptyAdmin = FmjdPlayer(
     _id = adminId,
+    country = Countries.unknown,
     userId = none,
     firstName = none,
     lastName = none,
-    country = Countries.unknown,
+    sex = none,
     title = none,
     rating = none,
     titleW = none,
@@ -198,13 +201,14 @@ object FmjdPlayerApi {
     val userId = "nick"
     val lastName = "last_n"
     val firstName = "first_n"
+    val sex = "sex"
     val country = "country"
     val title = "title"
     val rating = "rating"
     val titleW = "wtitle"
     val ratingW = "wrating"
 
-    val all = List(id, userId, lastName, firstName, country, title, rating, titleW, ratingW)
+    val all = List(id, userId, lastName, firstName, sex, country, title, rating, titleW, ratingW)
   }
 }
 

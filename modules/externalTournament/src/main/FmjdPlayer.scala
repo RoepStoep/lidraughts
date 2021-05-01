@@ -5,10 +5,11 @@ import lidraughts.user.User
 
 private[externalTournament] case class FmjdPlayer(
     _id: FmjdPlayer.ID,
+    country: String,
     userId: Option[String],
     firstName: Option[String],
     lastName: Option[String],
-    country: String,
+    sex: Option[String],
     title: Option[String],
     rating: Option[Int],
     titleW: Option[String],
