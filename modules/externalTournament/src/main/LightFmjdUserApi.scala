@@ -42,8 +42,8 @@ private object LightFmjdUserApi {
   implicit val lightFmjdUserBSONReader = new BSONDocumentReader[LightFmjdUser] {
 
     def read(doc: BSONDocument) = {
-      val firstName = doc.getAs[String]("firstName") err "FmjdPlayer firstName missing"
-      val lastName = doc.getAs[String]("lastName") err "FmjdPlayer lastName missing"
+      val firstName = doc.getAs[String]("firstName")
+      val lastName = doc.getAs[String]("lastName")
       val title = doc.getAs[String]("title")
       LightFmjdUser(
         id = doc.getAs[FmjdPlayer.ID]("_id") err "FmjdPlayer id missing",

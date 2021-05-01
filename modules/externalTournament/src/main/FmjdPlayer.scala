@@ -6,8 +6,8 @@ import lidraughts.user.User
 private[externalTournament] case class FmjdPlayer(
     _id: FmjdPlayer.ID,
     userId: Option[String],
-    firstName: String,
-    lastName: String,
+    firstName: Option[String],
+    lastName: Option[String],
     country: String,
     title: Option[String],
     rating: Option[Int],
@@ -36,6 +36,12 @@ private[externalTournament] object FmjdPlayer {
 
   type ID = String
 
-  def toDisplayName(firstName: String, lastName: String) =
-    s"${lastName.capitalize}, ${firstName.capitalize}"
+  def toDisplayName(firstName: Option[String], lastName: Option[String]) = {
+    firstName -> lastName match {
+      case (Some(fn), Some(ln)) => s"${ln.capitalize}, ${fn.capitalize}"
+      case (Some(fn), _) => fn.capitalize
+      case (_, Some(ln)) => ln.capitalize
+      case _ => User.anonymous
+    }
+  }
 }

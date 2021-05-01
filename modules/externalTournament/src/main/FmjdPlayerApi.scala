@@ -33,7 +33,7 @@ final class FmjdPlayerApi(
     } yield urlOpt match {
       case None =>
         logger.warn(s"No FMJD player file found at $baseUrl")
-      case Some(url) if admin.firstName == url =>
+      case Some(url) if admin.firstName.contains(url) =>
         logger.info(s"FMJD player file up to date")
       case Some(url) =>
         logger.info(s"Downloading new FMJD player file $url")
@@ -74,7 +74,7 @@ final class FmjdPlayerApi(
                     ordered = false
                   ) >> {
                     logger.info(s"Inserted ${addedPlayers.length} players")
-                    val newAdmin = adminOpt.getOrElse(emptyAdmin).copy(firstName = url)
+                    val newAdmin = adminOpt.getOrElse(emptyAdmin).copy(firstName = url.some)
                     if (adminOpt.isDefined) coll.update($id(adminId), newAdmin)
                     else coll.insert(newAdmin)
                   } >>- {
@@ -104,22 +104,27 @@ final class FmjdPlayerApi(
     val titleWF = headers.indexOf(Headers.titleW)
     val ratingWF = headers.indexOf(Headers.ratingW)
     data.flatMap { fields =>
-      for {
-        id <- cleanField(fields, idF)
-        firstName <- cleanField(fields, firstNameF)
-        lastName <- cleanField(fields, lastNameF)
-        country <- cleanField(fields, countryF)
-      } yield FmjdPlayer(
-        _id = id,
-        firstName = firstName,
-        lastName = lastName,
-        country = parseCountryCode(country),
-        userId = cleanField(fields, userIdF).map(_.toLowerCase),
-        title = cleanField(fields, titleF).map(_.toUpperCase),
-        rating = cleanField(fields, ratingF).flatMap(parseIntOption),
-        titleW = cleanField(fields, titleWF).map(_.toUpperCase),
-        ratingW = cleanField(fields, ratingWF).flatMap(parseIntOption)
-      )
+      val firstName = cleanField(fields, firstNameF)
+      val lastName = cleanField(fields, lastNameF)
+      if (firstName.isEmpty && lastName.isEmpty) {
+        logger.warn(s"Missing name: $fields")
+        none[FmjdPlayer]
+      } else cleanField(fields, idF).fold({
+        logger.warn(s"Missing ID: $fields")
+        none[FmjdPlayer]
+      }) { id =>
+        FmjdPlayer(
+          _id = id,
+          firstName = firstName,
+          lastName = lastName,
+          country = cleanField(fields, countryF).fold(Countries.unknown)(parseCountryCode),
+          userId = cleanField(fields, userIdF).map(_.toLowerCase),
+          title = cleanField(fields, titleF).map(_.toUpperCase),
+          rating = cleanField(fields, ratingF).flatMap(parseIntOption),
+          titleW = cleanField(fields, titleWF).map(_.toUpperCase),
+          ratingW = cleanField(fields, ratingWF).flatMap(parseIntOption)
+        ).some
+      }
     }
   }
 
@@ -153,9 +158,9 @@ object FmjdPlayerApi {
   val emptyAdmin = FmjdPlayer(
     _id = adminId,
     userId = none,
-    firstName = "",
-    lastName = "",
-    country = "",
+    firstName = none,
+    lastName = none,
+    country = Countries.unknown,
     title = none,
     rating = none,
     titleW = none,
