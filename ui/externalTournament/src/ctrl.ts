@@ -36,9 +36,10 @@ export default class ExternalTournamentCtrl {
   }
 
   reload = (data: ExternalTournamentData): void => {
-    if (this.data.chat === 'players' && !!this.data.me?.canJoin !== !!data.me?.canJoin) {
-      // reload the page to show/hide players-only chat
-      window.lidraughts.reload();
+    if (this.data.chat !== data.chat ||
+       (this.data.chat === 'players' && !!this.data.me?.canJoin !== !!data.me?.canJoin)) {
+      // reload the page to show/hide chat
+      setTimeout(window.lidraughts.reload, Math.floor(Math.random() * 2000));
     }
     this.data = {...this.data, ...data};
     this.data.me = data.me; // to account for removal on withdraw
