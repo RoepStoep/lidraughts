@@ -5,12 +5,14 @@ export type MaybeVNodes = MaybeVNode[];
 export type Redraw = () => void;
 
 // modules/externalTournament/src/main/ExternalPlayer.scala
-
 export const playerStatus = {
   invited: 0,
   rejected: 10,
   joined: 20
 };
+
+declare type UserDisplay = 'lidraughts' | 'fmjd'
+declare type ChatVisibility = 'nobody' | 'players' | 'everyone'
 
 export interface ExternalTournamentOpts {
   data: ExternalTournamentData;
@@ -42,7 +44,8 @@ export interface ExternalTournamentData {
   playerInfo?: PlayerInfo;
   socketVersion?: number;
   draughtsResult: boolean;
-  displayFmjd: boolean;
+  userDisplay: UserDisplay;
+  chat: ChatVisibility;
   autoStartGames: boolean;
   microMatches: boolean;
 }

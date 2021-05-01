@@ -19,7 +19,7 @@ object DataForm {
     "clock" -> optional(Fields.clock),
     "days" -> optional(Fields.days),
     "rated" -> boolean,
-    "hasChat" -> optional(boolean),
+    "chat" -> optional(Fields.chat),
     "autoStartGames" -> boolean,
     "startsAt" -> optional(Fields.startsAt),
     "userDisplay" -> optional(Fields.userDisplay),
@@ -35,7 +35,7 @@ object DataForm {
     clock = none,
     days = none,
     rated = false,
-    chat = true.some,
+    chat = none,
     autoStart = false,
     startsAt = none,
     userDisplay = none,
@@ -50,7 +50,7 @@ object DataForm {
     clock = t.clock,
     days = t.days,
     rated = t.rated,
-    chat = t.settings.hasChat.some,
+    chat = t.settings.chat.key.some,
     autoStart = t.settings.autoStart,
     startsAt = t.futureStartsAt,
     userDisplay = t.settings.userDisplay.key.some,
@@ -97,7 +97,7 @@ object DataForm {
       clock: Option[draughts.Clock.Config],
       days: Option[Int],
       rated: Boolean,
-      chat: Option[Boolean],
+      chat: Option[String],
       autoStart: Boolean,
       startsAt: Option[DateTime],
       userDisplay: Option[String],
@@ -156,6 +156,7 @@ object DataForm {
     val days = number(min = 1, max = 14)
     val round = number(min = 1, max = 100)
     val userDisplay = text.verifying(ExternalTournament.UserDisplay.byKey.contains _)
+    val chat = text.verifying(ExternalTournament.ChatVisibility.byKey.contains _)
     val startsAt = inTheFuture(ISODateTimeOrTimestamp.isoDateTimeOrTimestamp)
   }
 

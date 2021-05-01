@@ -16,7 +16,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
   ]);
   const noarg = ctrl.trans.noarg,
     draughtsResult = ctrl.data.draughtsResult,
-    displayFmjd = ctrl.data.displayFmjd,
+    displayFmjd = ctrl.displayFmjd(),
     flatSheet = flatten(data.sheet.map(p => p.mm || p)),
     finishedGames = flatSheet.filter(p => p.g && !p.o),
     nbGames = finishedGames.length,
@@ -83,7 +83,7 @@ export default function(ctrl: ExternalTournamentCtrl): VNode | undefined {
 
 function resultTr(ctrl: ExternalTournamentCtrl, p: GameResult, isOdd: boolean, roundNr: string, mm?: GameResult) {
   const draughtsResult = ctrl.data.draughtsResult,
-    displayFmjd = ctrl.data.displayFmjd,
+    displayFmjd = ctrl.displayFmjd(),
     userData = mm || p;
   if (p.mm?.length) {
     return p.mm.map((r, i) => resultTr(ctrl, r, isOdd, roundNr + '.' + (i + 1), p)).reverse()

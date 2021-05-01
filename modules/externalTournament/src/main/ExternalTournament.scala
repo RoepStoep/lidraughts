@@ -44,24 +44,39 @@ object ExternalTournament {
       description: Option[String],
       userDisplay: UserDisplay,
       autoStart: Boolean,
-      hasChat: Boolean,
+      chat: ChatVisibility,
       microMatches: Boolean
   )
 
-  sealed abstract class UserDisplay(val key: String) {
+  sealed trait UserDisplay {
+    lazy val key = toString.toLowerCase
 
     def fmjd = this == UserDisplay.Fmjd
   }
-
   object UserDisplay {
 
-    case object Lidraughts extends UserDisplay("lidraughts")
-    case object Fmjd extends UserDisplay("fmjd")
+    case object Lidraughts extends UserDisplay
+    case object Fmjd extends UserDisplay
 
     val all = List(Lidraughts, Fmjd)
     val byKey = all map { v => (v.key, v) } toMap
 
     def apply(key: String): Option[UserDisplay] = byKey get key
+  }
+
+  sealed trait ChatVisibility {
+    lazy val key = toString.toLowerCase
+  }
+  object ChatVisibility {
+
+    case object Nobody extends ChatVisibility
+    case object Players extends ChatVisibility
+    case object Everyone extends ChatVisibility
+
+    val all = List(Nobody, Players, Everyone)
+    val byKey = all map { v => (v.key, v) } toMap
+
+    def apply(key: String): Option[ChatVisibility] = byKey get key
   }
 
   private[externalTournament] def make(
@@ -82,7 +97,7 @@ object ExternalTournament {
       startsAt = config.startsAt,
       nbRounds = config.rounds,
       description = config.description,
-      hasChat = config.chat.getOrElse(true),
+      chat = config.chat.flatMap(ChatVisibility.apply).getOrElse(ChatVisibility.Everyone),
       autoStart = config.autoStart,
       microMatches = ~config.microMatches,
       userDisplay = config.userDisplay.flatMap(UserDisplay.apply).getOrElse(UserDisplay.Lidraughts)

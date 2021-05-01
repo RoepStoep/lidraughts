@@ -16,7 +16,6 @@ final class JsonView(
     lightUserApi: lidraughts.user.LightUserApi,
     lightFmjdUserApi: LightFmjdUserApi,
     fmjdPlayerApi: FmjdPlayerApi,
-    gameMetaApi: GameMetaApi,
     cached: Cached
 ) {
 
@@ -57,7 +56,8 @@ final class JsonView(
       "ongoing" -> ongoing.map(boardJson(_, players)),
       "finished" -> finished.games.take(5).map(gameJson(_, fetch)),
       "draughtsResult" -> pref.draughtsResult,
-      "displayFmjd" -> tour.settings.userDisplay.fmjd,
+      "userDisplay" -> tour.settings.userDisplay.key,
+      "chat" -> tour.settings.chat.key,
       "autoStartGames" -> tour.settings.autoStart,
       "microMatches" -> tour.settings.microMatches
     )
@@ -76,49 +76,6 @@ final class JsonView(
 
   private def fetchLightFmjdUserSync(player: Option[ExternalPlayer]) =
     player.flatMap(_.fmjdId).flatMap(lightFmjdUserApi.sync)
-
-  def apiTournament(
-    tour: ExternalTournament,
-    players: Option[List[ExternalPlayer]] = None,
-    upcoming: Option[List[Challenge]] = None
-  ): JsObject =
-    Json.obj(
-      "id" -> tour.id,
-      "createdBy" -> tour.createdBy,
-      "name" -> tour.name,
-      "variant" -> tour.variant.key,
-      "rated" -> tour.rated,
-      "userDisplay" -> tour.settings.userDisplay.key,
-      "hasChat" -> tour.settings.hasChat,
-      "autoStartGames" -> tour.settings.autoStart,
-      "microMatches" -> tour.settings.microMatches
-    )
-      .add("startsAt" -> tour.settings.startsAt)
-      .add("clock" -> tour.clock)
-      .add("days" -> tour.days)
-      .add("rounds" -> tour.settings.nbRounds)
-      .add("description" -> tour.settings.description)
-      .add("players" -> players.map(_.map(apiPlayer)))
-      .add("upcoming" -> upcoming.map(_.map(apiChallenge)))
-
-  def apiPlayer(
-    player: ExternalPlayer
-  ): JsObject =
-    Json.obj(
-      "userId" -> player.userId,
-      "status" -> player.status.key
-    ).add("fmjdId", player.fmjdId)
-
-  def apiChallenge(c: Challenge) = {
-    val challenger = c.challenger.fold(_ => none[Challenge.Registered], _.some)
-    Json
-      .obj("id" -> c.id)
-      .add("whiteUserId" -> c.finalColor.fold(challenger, c.destUser).map(_.id))
-      .add("blackUserId" -> c.finalColor.fold(c.destUser, challenger).map(_.id))
-      .add("startsAt", c.external.flatMap(_.startsAt))
-      .add("round" -> c.round)
-      .add("fen" -> c.customStartingPosition.??(c.initialFen.map(_.value)))
-  }
 
   def playerInfoJson(
     tour: ExternalTournament,

@@ -92,7 +92,6 @@ final class Env(
     lightUserApi = lightUserApi,
     lightFmjdUserApi = lightFmjdUserApi,
     fmjdPlayerApi = fmjdPlayerApi,
-    gameMetaApi = gameMetaApi,
     cached = cached
   )
 

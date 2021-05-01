@@ -54,7 +54,8 @@ function controls(ctrl: ExternalTournamentCtrl, pag: Pager): VNode {
 }
 
 function invited(ctrl: ExternalTournamentCtrl) {
-  const noarg = ctrl.trans.noarg;
+  const noarg = ctrl.trans.noarg,
+    displayFmjd = ctrl.displayFmjd();
   return ctrl.isCreator() && ctrl.data.invited?.length ? h('div.tour-ext__main__invited', [
     h('h2', ctrl.trans.noarg('invitedPlayers')),
     h('table.slist', 
@@ -72,7 +73,7 @@ function invited(ctrl: ExternalTournamentCtrl) {
                 title: p.status === playerStatus.invited ? noarg('awaiting') : noarg('rejected')
               }
             })),
-            h('td.player', renderPlayer(p, true, false, ctrl.data.displayFmjd))
+            h('td.player', renderPlayer(p, true, false, displayFmjd))
           ])
         })
       )

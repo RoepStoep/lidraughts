@@ -7,6 +7,7 @@ import { MaybeVNodes, Pager, PlayerInfo, GameResult } from '../interfaces';
 function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
   const noarg = ctrl.trans.noarg,
     draughtsResult = ctrl.data.draughtsResult,
+    displayFmjd = ctrl.displayFmjd(),
     userId = p.user.id,
     winChar = draughtsResult ? '2' : '1',
     drawChar = draughtsResult ? '1' : '½';
@@ -19,7 +20,7 @@ function playerTr(ctrl: ExternalTournamentCtrl, p: PlayerInfo) {
       hook: bind('click', _ => ctrl.showPlayerInfo(p), ctrl.redraw)
     }, [
       h('td.rank', p.rank ? [p.rank] : []),
-      h('td.player', ctrl.data.displayFmjd ? fmjdPlayer(p, false, true) : lidraughtsPlayer(p, false, true, false)),
+      h('td.player', displayFmjd ? fmjdPlayer(p, false, true) : lidraughtsPlayer(p, false, true, false)),
       h('td.games' + (ctrl.data.nbRounds ? '.rounds' : ''),
         h('div',
           p.sheet.map(r => {
@@ -78,7 +79,7 @@ function microMatchPowertip(el: HTMLElement, html: string) {
 
 function resultHtml(ctrl: ExternalTournamentCtrl, mm: GameResult[], parent: GameResult) {
   const draughtsResult = ctrl.data.draughtsResult,
-    displayFmjd = ctrl.data.displayFmjd;
+    displayFmjd = ctrl.displayFmjd();
   let table = ''
   mm.forEach((r, i) => {
     const classes = 'glpt' + (r.w === true ? ' win' : (r.w === false ? ' loss' : ''));

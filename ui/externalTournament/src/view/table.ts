@@ -17,7 +17,8 @@ export default function table(ctrl: ExternalTournamentCtrl): VNode {
 
 function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
   const d = ctrl.data,
-    me = ctrl.data.me?.userId;
+    me = d.me?.userId,
+    displayFmjd = ctrl.displayFmjd();
   return h('div.tour-ext__games' + (table ? '' : '.tour-ext__upcoming'), [
     h('h2', ctrl.trans.noarg('upcomingGames')),
     d.upcoming.length ? 
@@ -41,7 +42,7 @@ function upcoming(ctrl: ExternalTournamentCtrl, table: boolean): VNode {
               },
               [
                 h('td.meta', hrefAttr, [drawTime(new Date(c.startsAt))]),
-                h('td', hrefAttr, renderPlayers(c, d.displayFmjd))
+                h('td', hrefAttr, renderPlayers(c, displayFmjd))
               ]
             )
           }))
@@ -66,8 +67,9 @@ function viewAllResults(tour: ExternalTournamentData, noarg: TransNoArg): VNode 
 function finished(ctrl: ExternalTournamentCtrl): VNode | null {
   const dateFormatter = getDateFormatter(),
     noarg = ctrl.trans.noarg,
-    draughtsResult = ctrl.data.draughtsResult;
-  return ctrl.data.finished.length ? h('div.tour-ext__games.tour-ext__finished', [
+    d = ctrl.data,
+    displayFmjd = ctrl.displayFmjd();
+  return d.finished.length ? h('div.tour-ext__games.tour-ext__finished', [
     h('h2', ctrl.trans.noarg('latestResults')),
     h('table.slist', {
         hook: bind('click', e => {
@@ -75,10 +77,10 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
           if (href) window.open(href, '_blank');
         })
       }, [
-        h('tbody', ctrl.data.finished.map((g, i) => {
+        h('tbody', d.finished.map((g, i) => {
           const hrefAttr = { attrs: { 'data-href': '/' + g.id } };
           return h('tr', {
-              key: ctrl.data.finished.length - i,
+              key: d.finished.length - i,
               attrs: { 'data-href': '/' + g.id },
               hook: {
                 insert: vnode => preloadUserTips(vnode.elm as HTMLElement),
@@ -87,15 +89,15 @@ function finished(ctrl: ExternalTournamentCtrl): VNode | null {
             },
             [
               h('td.meta', dateFormatter(new Date(g.createdAt))),
-              h('td', hrefAttr, renderPlayers(g, ctrl.data.displayFmjd)),
+              h('td', hrefAttr, renderPlayers(g, displayFmjd)),
               h('td', hrefAttr, [
                 h('div.result', g.winner ? 
-                  (g.winner == 'white' ? (draughtsResult ? '2-0' : '1-0') : (draughtsResult ? '0-2' : '0-1')) :
-                  (draughtsResult ? '1-1' : '½-½')
+                  (g.winner == 'white' ? (d.draughtsResult ? '2-0' : '1-0') : (d.draughtsResult ? '0-2' : '0-1')) :
+                  (d.draughtsResult ? '1-1' : '½-½')
                 )
               ])
             ])
-          }).concat(ctrl.data.nbFinished < ctrl.data.finished.length ? [viewAllResults(ctrl.data, noarg)] : [])
+          }).concat(d.nbFinished < d.finished.length ? [viewAllResults(d, noarg)] : [])
         )
       ]
     )

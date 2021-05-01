@@ -23,14 +23,19 @@ private[externalTournament] object BsonHandlers {
     )
   }
 
-  implicit val variantHandler = new BSONHandler[BSONInteger, Variant] {
+  implicit val VariantBSONHandler = new BSONHandler[BSONInteger, Variant] {
     def read(b: BSONInteger): Variant = Variant.orDefault(b.value)
     def write(x: Variant) = BSONInteger(x.id)
   }
 
-  implicit val userDisplayHandler = new BSONHandler[BSONString, UserDisplay] {
+  implicit val UserDisplayBSONHandler = new BSONHandler[BSONString, UserDisplay] {
     def read(b: BSONString): UserDisplay = UserDisplay(b.value) err s"No such userDisplay: ${b.value}"
     def write(x: UserDisplay) = BSONString(x.key)
+  }
+
+  implicit val ChatVisibilityBSONHandler = new BSONHandler[BSONString, ChatVisibility] {
+    def read(b: BSONString): ChatVisibility = ChatVisibility(b.value) err s"No such ChatVisibility: ${b.value}"
+    def write(x: ChatVisibility) = BSONString(x.key)
   }
 
   implicit val PlayerStatusBSONHandler = new BSONHandler[BSONInteger, ExternalPlayer.Status] {

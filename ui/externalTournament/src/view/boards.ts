@@ -7,7 +7,7 @@ import { Board } from '../interfaces';
 
 export default function ongoing(ctrl: ExternalTournamentCtrl): VNode | null {
   const draughtsResult = ctrl.data.draughtsResult,
-    displayFmjd = ctrl.data.displayFmjd;
+    displayFmjd = ctrl.displayFmjd();
 
   const renderBoard = (board: Board): VNode => {
     const boardSize = board.variant.board;

@@ -36,6 +36,10 @@ export default class ExternalTournamentCtrl {
   }
 
   reload = (data: ExternalTournamentData): void => {
+    if (this.data.chat === 'players' && !!this.data.me?.canJoin !== !!data.me?.canJoin) {
+      // reload the page to show/hide players-only chat
+      window.lidraughts.reload();
+    }
     this.data = {...this.data, ...data};
     this.data.me = data.me; // to account for removal on withdraw
     this.loadPage(this.data.standing);
@@ -49,6 +53,8 @@ export default class ExternalTournamentCtrl {
   isMe = (user: LightUser) => this.data.me?.userId === user.id;
 
   myGameId = () => this.data.me?.gameId;
+
+  displayFmjd = () => this.data.userDisplay === 'fmjd';
 
   answer = (accept: boolean) => () => {
     xhr.answer(this, accept);

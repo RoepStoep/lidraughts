@@ -5,8 +5,7 @@ import play.api.mvc._
 
 import lidraughts.api.Context
 import lidraughts.app._
-import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo }
-import lidraughts.socket.Socket.SocketVersion
+import lidraughts.externalTournament.{ ExternalTournament => ExternalTournamentModel, ExternalPlayerRepo, ApiJsonView }
 import lidraughts.user.UserRepo
 import views._
 
@@ -36,7 +35,8 @@ object ExternalTournament extends LidraughtsController {
               playerInfo = none,
               socketVersion = version.some
             )
-            chat <- canHaveChat(tour) ?? Env.chat.api.userChat.cached
+            canChat <- canHaveChat(tour)
+            chat <- canChat ?? Env.chat.api.userChat.cached
               .findMine(lidraughts.chat.Chat.Id(tour.id), ctx.me)
               .dmap(some)
             _ <- chat ?? { c =>
@@ -72,7 +72,7 @@ object ExternalTournament extends LidraughtsController {
       for {
         players <- ExternalPlayerRepo.byTour(tour.id)
         upcoming <- env.cached.getUpcomingGames(tour.id)
-        json = env.jsonView.apiTournament(tour, players.some, upcoming.some)
+        json = ApiJsonView.tournament(tour, players.some, upcoming.some)
       } yield JsonOk(json)
     }
   }
@@ -82,7 +82,7 @@ object ExternalTournament extends LidraughtsController {
     else env.forms.tournamentCreate.bindFromRequest.fold(
       jsonFormErrorDefaultLang,
       data => api.create(data, me) map { t =>
-        env.jsonView.apiTournament(t)
+        ApiJsonView.tournament(t)
       } map { Ok(_) }
     )
   }
@@ -95,7 +95,7 @@ object ExternalTournament extends LidraughtsController {
           api.update(tour.id, data).fold(
             err => BadRequest(jsonError(err.getMessage)),
             tour => tour.fold(BadRequest(jsonError("Could not update tournament"))) { t =>
-              Ok(env.jsonView.apiTournament(t))
+              Ok(ApiJsonView.tournament(t))
             }
           )
       )
@@ -129,7 +129,7 @@ object ExternalTournament extends LidraughtsController {
             userOpt.fold(badRequestJson("Invalid userId")) { user =>
               api.addPlayer(tour.id, data, user) map {
                 _.fold(BadRequest(jsonError("A player with this userId already exists"))) { p =>
-                  JsonOk(env.jsonView.apiPlayer(p))
+                  JsonOk(ApiJsonView.player(p))
                 }
               }
             }
@@ -172,7 +172,7 @@ object ExternalTournament extends LidraughtsController {
           api.addChallenge(tour.id, data).fold(
             err => BadRequest(jsonError(err.getMessage)),
             challenge => challenge.fold(BadRequest(jsonError("Could not create game"))) { c =>
-              JsonOk(env.jsonView.apiChallenge(c))
+              JsonOk(ApiJsonView.challenge(c))
             }
           )
       )
@@ -238,6 +238,11 @@ object ExternalTournament extends LidraughtsController {
       case _ => fuccess(Unauthorized)
     }
 
-  private def canHaveChat(tour: ExternalTournamentModel)(implicit ctx: Context): Boolean =
-    tour.settings.hasChat && ctx.noKid
+  private def canHaveChat(tour: ExternalTournamentModel)(implicit ctx: Context): Fu[Boolean] = {
+    import ExternalTournamentModel.ChatVisibility._
+    (tour.settings.chat != Nobody && ctx.noKid) ?? ctx.userId.fold(fuccess(tour.settings.chat == Everyone)) { userId =>
+      if (tour.settings.chat == Everyone || tour.createdBy == userId || isGranted(_.ChatTimeout)) fuTrue // moderators and creator
+      else ExternalPlayerRepo.find(tour.id, userId).dmap(_ ?? { !_.status.is(_.Rejected) }) // players unless rejected
+    }
+  }
 }
