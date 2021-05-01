@@ -42,6 +42,11 @@ private[externalTournament] final class SocketHandler(
               chatId = Chat.Id(tourId),
               member = member,
               chat = chat,
+              canTimeout = Some { suspectId =>
+                user.?? { u =>
+                  fetchCreatedBy(tourId).map(_ has u.id)
+                }
+              },
               publicSource = lidraughts.hub.actorApi.shutup.PublicSource.ExternalTournament(tourId).some
             ),
             member,
@@ -52,4 +57,7 @@ private[externalTournament] final class SocketHandler(
         } map some
       }
     }
+
+  private def fetchCreatedBy(id: ExternalTournament.ID): Fu[Option[User.ID]] =
+    coll.primitiveOne[User.ID]($id(id), "createdBy")
 }
