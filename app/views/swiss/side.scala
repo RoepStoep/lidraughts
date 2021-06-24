@@ -36,8 +36,7 @@ object side {
             if (s.settings.rated) trans.ratedTournament() else trans.casualTournament()
           ),
           p(
-            span(cls := "swiss__meta__round")(s"${s.round}/${s.actualNbRounds}"),
-            trans.swiss.nbRounds.plural(s.actualNbRounds, ""),
+            span(cls := "swiss__meta__round")(trans.swiss.nbRounds.plural(s.actualNbRounds, s"${s.round}/${s.actualNbRounds}")),
             separator,
             a(href := routes.Swiss.home)("Swiss [BETA]"),
             (isGranted(_.ManageTournament) || (ctx.userId.has(s.createdBy) && s.isCreated)) option frag(

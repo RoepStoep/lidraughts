@@ -1563,8 +1563,12 @@ val `tieBreak` = new Translated("tieBreak", Swiss)
 val `nextRound` = new Translated("nextRound", Swiss)
 val `numberOfRounds` = new Translated("numberOfRounds", Swiss)
 val `scheduleTheNextRound` = new Translated("scheduleTheNextRound", Swiss)
+val `roundsAreStartedManually` = new Translated("roundsAreStartedManually", Swiss)
 val `nbRounds` = new Translated("nbRounds", Swiss)
 val `viewAllXRounds` = new Translated("viewAllXRounds", Swiss)
+val `oneRoundEveryXDays` = new Translated("oneRoundEveryXDays", Swiss)
+val `xSecondsBetweenRounds` = new Translated("xSecondsBetweenRounds", Swiss)
+val `xMinutesBetweenRounds` = new Translated("xMinutesBetweenRounds", Swiss)
 }
 
 object challenge {

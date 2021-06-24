@@ -18,4 +18,17 @@
     <item quantity="one">View the round</item>
     <item quantity="other">View all %s rounds</item>
   </plurals>
+  <plurals name="oneRoundEveryXDays">
+    <item quantity="one">One round per day</item>
+    <item quantity="other">One round every %s days</item>
+  </plurals>
+  <string name="roundsAreStartedManually">Rounds are started manually</string>
+  <plurals name="xSecondsBetweenRounds">
+    <item quantity="one">%s second between rounds</item>
+    <item quantity="other">%s seconds between rounds</item>
+  </plurals>
+  <plurals name="xMinutesBetweenRounds">
+    <item quantity="one">%s minute between rounds</item>
+    <item quantity="other">%s minutes between rounds</item>
+  </plurals>
 </resources>
