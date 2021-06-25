@@ -3,6 +3,7 @@ package views.html.swiss
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
+import lidraughts.common.Lang
 import lidraughts.i18n.{ I18nKeys => trans, I18nDb, JsDump }
 import lidraughts.swiss.Swiss
 
@@ -70,7 +71,7 @@ object bits {
       )
     )
 
-  def showInterval(s: Swiss): Frag =
+  def showInterval(s: Swiss)(implicit lang: Lang): Frag =
     s.settings.dailyInterval match {
       case Some(d) => trans.swiss.oneRoundEveryXDays.pluralSame(d)
       case None if s.settings.manualRounds => trans.swiss.roundsAreStartedManually()
