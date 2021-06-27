@@ -14,7 +14,7 @@ object form {
 
   def create(form: Form[_], teamId: TeamId)(implicit ctx: Context) =
     views.html.base.layout(
-      title = "New Swiss tournament",
+      title = trans.swiss.newSwiss.txt(),
       moreCss = cssTag("swiss.form"),
       moreJs = frag(
         flatpickrTag,
@@ -24,7 +24,7 @@ object form {
         val fields = new SwissFields(form, none)
         main(cls := "page-small")(
           div(cls := "swiss__form tour__form box box-pad")(
-            h1("New Swiss tournament"),
+            h1(trans.swiss.newSwiss()),
             postForm(cls := "form3", action := routes.Swiss.create(teamId))(
               form3.split(fields.name, fields.nbRounds),
               form3.split(fields.rated, fields.variant),
@@ -132,9 +132,14 @@ final private class SwissFields(form: Form[_], swiss: Option[Swiss])(implicit ct
       )
     }
   def nbRounds =
-    form3.group(form("nbRounds"), trans.swiss.numberOfRounds(), half = true)(
-      form3.input(_, typ = "number")
-    )
+    form3.group(
+      form("nbRounds"),
+      trans.swiss.numberOfRounds(),
+      help = trans.swiss.numberOfRoundsHelp().some,
+      half = true
+    )(
+        form3.input(_, typ = "number")
+      )
 
   def rated =
     frag(
@@ -163,7 +168,7 @@ final private class SwissFields(form: Form[_], swiss: Option[Swiss])(implicit ct
       )
     )
   def roundInterval =
-    form3.group(form("roundInterval"), frag("Interval between rounds"), half = true)(
+    form3.group(form("roundInterval"), trans.swiss.roundInterval(), half = true)(
       form3.select(_, SwissForm.roundIntervalChoices)
     )
   def description =
@@ -175,7 +180,8 @@ final private class SwissFields(form: Form[_], swiss: Option[Swiss])(implicit ct
   def startsAt =
     form3.group(
       form("startsAt"),
-      frag("Tournament start date"),
+      trans.swiss.tournStartDate(),
+      help = trans.inYourLocalTimezone().some,
       half = true
     )(form3.flatpickr(_))
 
@@ -189,10 +195,8 @@ final private class SwissFields(form: Form[_], swiss: Option[Swiss])(implicit ct
   def forbiddenPairings =
     form3.group(
       form("forbiddenPairings"),
-      frag("Forbidden pairings"),
-      help = frag(
-        "Usernames of players that must not play together (Siblings, for instance). Two usernames per line, separated by a space."
-      ).some,
+      trans.swiss.forbiddenPairings(),
+      help = trans.swiss.forbiddenPairingsHelp().some,
       half = true
     )(form3.textarea(_)(rows := 4))
 }

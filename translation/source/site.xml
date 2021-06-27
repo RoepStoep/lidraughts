@@ -1029,4 +1029,9 @@ One URL per line</string>
   <string name="learnFromStudies">Learn from studies</string>
   <string name="configureLidraughts">Configure lidraughts to your liking</string>
   <string name="exploreTheSiteAndHaveFun">Explore the site and have fun :)</string>
+  <string name="inYourLocalTimezone">In your own local timezone</string>
+  <string name="tournChat">Tournament chat</string>
+  <string name="noChat">No chat</string>
+  <string name="onlyTeamLeaders">Only team leaders</string>
+  <string name="onlyTeamMembers">Only team members</string>
 </resources>
