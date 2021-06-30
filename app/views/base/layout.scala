@@ -93,6 +93,7 @@ object layout {
   private val dataPreload = attr("data-preload")
   private val dataNonce = attr("data-nonce")
   private val dataAnnounce = attr("data-announce")
+  val dataPieceSet = attr("data-piece-set")
 
   def apply(
     title: String,
@@ -158,6 +159,7 @@ object layout {
         dataAssetVersion := assetVersion.value,
         dataNonce := ctx.nonce.ifTrue(sameAssetDomain).map(_.value),
         dataTheme := ctx.currentBg,
+        dataPieceSet := ctx.currentPieceSet.name,
         dataAnnounce := AnnounceStore.get.map(a => safeJsonValue(a.json)),
         style := zoomable option s"--zoom:${ctx.zoom}"
       )(
