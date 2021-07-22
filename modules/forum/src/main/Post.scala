@@ -86,11 +86,11 @@ object Post {
     val Laugh = "laugh"
     val Thinking = "thinking"
     val Heart = "heart"
-    val Horsey = "horsey"
+    val Lidraughts = "lidraughts"
 
-    val list: List[String] = List(PlusOne, MinusOne, Laugh, Thinking, Heart, Horsey)
+    val list: List[String] = List(PlusOne, MinusOne, Laugh, Thinking, Heart, Lidraughts)
     val set = list.toSet
-    val positive: Set[String] = Set(PlusOne, Laugh, Heart, Horsey)
+    val positive: Set[String] = Set(PlusOne, Laugh, Heart, Lidraughts)
 
     def of(reactions: Reactions, me: User): Set[String] =
       reactions.view.collect {
