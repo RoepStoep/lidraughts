@@ -31,7 +31,12 @@ final class SwissForm(isProd: Boolean) {
         "roundInterval" -> optional(numberIn(roundIntervals)),
         "password" -> optional(cleanNonEmptyText),
         "conditions" -> SwissCondition.DataForm.all,
-        "forbiddenPairings" -> optional(cleanNonEmptyText)
+        "forbiddenPairings" -> optional(
+          cleanNonEmptyText.verifying(
+            s"Maximum forbidden pairings: ${Swiss.maxForbiddenPairings}",
+            str => str.lines.size <= Swiss.maxForbiddenPairings
+          )
+        )
       )(SwissData.apply)(SwissData.unapply)
     )
 
