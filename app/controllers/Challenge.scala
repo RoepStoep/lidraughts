@@ -207,7 +207,7 @@ object Challenge extends LidraughtsController {
             config.opponent.fold(BadRequest(jsonError("Opponent not specified")).fuccess) { opponentId =>
               UserRepo enabledById opponentId.toLowerCase flatMap {
                 case Some(opponentUser) if opponentUser.id == challengerUser.id =>
-                  BadRequest(jsonError("Opponent and challenger can't be the same")).fuccess
+                  BadRequest(jsonError("Opponent and challenger can't be same")).fuccess
                 case Some(opponentUser) =>
                   import lidraughts.challenge.Challenge._
                   val challenge = lidraughts.challenge.Challenge.make(
