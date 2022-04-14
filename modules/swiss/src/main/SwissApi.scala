@@ -482,20 +482,26 @@ final class SwissApi(
           Sequencing(id)(notFinishedById) { swiss =>
             if (swiss.round.value >= swiss.settings.nbRounds) doFinish(swiss)
             else if (swiss.nbPlayers >= 2)
-              director.startRound(swiss).flatMap {
-                _.fold {
-                  systemChat(swiss.id, "All possible pairings were played.")
+              countPresentPlayers(swiss) flatMap { nbPresent =>
+                if (nbPresent < 2) {
+                  systemChat(swiss.id, "Not enough players left.")
                   doFinish(swiss)
-                } {
-                  case s if s.nextRoundAt.isEmpty =>
-                    systemChat(s.id, s"Round ${s.round.value} started.")
-                    funit
-                  case s =>
-                    systemChat(s.id, s"Round ${s.round.value} failed.", true)
-                    swissColl
-                      .update($id(s.id), $set("nextRoundAt" -> DateTime.now.plusSeconds(61)))
-                      .void
-                }
+                } else
+                  director.startRound(swiss).flatMap {
+                    _.fold {
+                      systemChat(swiss.id, "All possible pairings were played.")
+                      doFinish(swiss)
+                    } {
+                      case s if s.nextRoundAt.isEmpty =>
+                        systemChat(s.id, s"Round ${s.round.value} started.")
+                        funit
+                      case s =>
+                        systemChat(s.id, s"Round ${s.round.value} failed.", true)
+                        swissColl
+                          .update($id(s.id), $set("nextRoundAt" -> DateTime.now.plusSeconds(61)))
+                          .void
+                    }
+                  }
               }
             else {
               if (swiss.startsAt isBefore DateTime.now.minusMinutes(60)) destroy(swiss)
@@ -509,6 +515,10 @@ final class SwissApi(
           } >> recomputeAndUpdateAll(id)
         }
       }
+
+  private def countPresentPlayers(swiss: Swiss) = SwissPlayer.fields { f =>
+    playerColl.countSel($doc(f.swissId -> swiss.id, f.absent $ne true))
+  }
 
   private[swiss] def checkOngoingGames: Funit =
     SwissPairing
