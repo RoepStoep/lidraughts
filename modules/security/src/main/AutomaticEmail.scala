@@ -30,6 +30,32 @@ ${Mailgun.txt.serviceNote}
     )
   }
 
+  def registerDfs(user: User, email: EmailAddress, data: DataForm.DfsSignupData)(implicit lang: Lang): Funit = {
+    val profileUrl = s"$baseUrl/@/${user.username}"
+    val fullName = s"${data.firstName} ${data.lastName}"
+    val body = s"""Gegevens op Lidraughts
+Gebruikersnaam: ${user.username} ($profileUrl)
+E-mail: ${email.value}
+Volledige naam: $fullName
+
+Gegevens voor DFS
+Woonplaats: ${data.woonplaats | "-"}
+School: ${data.school | "-"}
+Telefoonnummer: ${data.telefoonnummer | "-"}
+Bankrekening: ${data.bankrekening | "-"}
+"""
+    mailgun send Mailgun.Message(
+      to = EmailAddress("dokterom@gmail.com"),
+      subject = s"Aanmelding DFS Interland Aosta 2023: $fullName",
+      text = s"""
+ $body
+
+ Dit is een automatisch gegenereerde e-mail van $baseUrl.
+ """,
+      htmlBody = standardEmail(body).some
+    )
+  }
+
   def onTitleSet(username: String)(implicit lang: Lang): Funit = for {
     user <- UserRepo named username flatten s"No such user $username"
     emailOption <- UserRepo email user.id
@@ -42,7 +68,7 @@ ${Mailgun.txt.serviceNote}
     val body = s"""Hello,
 
 Thank you for confirming your $title title on lidraughts.org.
-It is now visible on your profile page: ${baseUrl}/@/${user.username}.
+It is now visible on your profile page: $profileUrl.
 
 Regards,
 

@@ -103,6 +103,6 @@ private[team] case class TeamEdit(
   )
 }
 
-private[team] case class RequestSetup(
+case class RequestSetup(
     message: String
 )

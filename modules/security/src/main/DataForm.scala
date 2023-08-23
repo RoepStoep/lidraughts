@@ -78,6 +78,20 @@ final class DataForm(
       "g-recaptcha-response" -> optional(nonEmptyText)
     )(SignupData.apply)(_ => None))
 
+    val websiteDfs = Form(mapping(
+      "username" -> username,
+      "password" -> text(minLength = 4),
+      "email" -> acceptableUniqueEmail(none),
+      "firstName" -> LidraughtsForm.cleanText(minLength = 2, maxLength = 20),
+      "lastName" -> LidraughtsForm.cleanText(minLength = 2, maxLength = 20),
+      "woonplaats" -> optional(nonEmptyText),
+      "telefoonnummer" -> optional(nonEmptyText),
+      "school" -> optional(nonEmptyText),
+      "bankrekening" -> optional(nonEmptyText),
+      "fp" -> optional(nonEmptyText),
+      "g-recaptcha-response" -> optional(nonEmptyText)
+    )(DfsSignupData.apply)(_ => None))
+
     val mobile = Form(mapping(
       "username" -> username,
       "password" -> text(minLength = 4),
@@ -168,6 +182,26 @@ object DataForm {
       username: String,
       password: String,
       email: String,
+      fp: Option[String],
+      `g-recaptcha-response`: Option[String]
+  ) {
+    def recaptchaResponse = `g-recaptcha-response`
+
+    def realEmail = EmailAddress(email)
+
+    def fingerPrint = fp.filter(_.nonEmpty) map FingerPrint.apply
+  }
+
+  case class DfsSignupData(
+      username: String,
+      password: String,
+      email: String,
+      firstName: String,
+      lastName: String,
+      woonplaats: Option[String],
+      school: Option[String],
+      bankrekening: Option[String],
+      telefoonnummer: Option[String],
       fp: Option[String],
       `g-recaptcha-response`: Option[String]
   ) {

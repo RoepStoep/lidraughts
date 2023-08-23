@@ -419,6 +419,10 @@ POST  /auth/token                      controllers.Auth.makeLoginToken
 GET   /auth/token/:token               controllers.Auth.loginWithToken(token: String)
 POST  /mod/signup                      controllers.Auth.adminSignup
 
+# Temporary DFS Interland
+GET   /dfs-interland                   controllers.Auth.signupDfs
+POST  /dfs-interland                   controllers.Auth.signupDfsPost
+
 # Mod
 POST  /mod/:username/engine/:v         controllers.Mod.engine(username: String, v: Boolean)
 POST  /mod/:username/booster/:v        controllers.Mod.booster(username: String, v: Boolean)

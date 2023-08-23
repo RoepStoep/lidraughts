@@ -148,6 +148,12 @@ object Auth extends LidraughtsController {
     }
   }
 
+  def signupDfs = Open { implicit ctx =>
+    NoTor {
+      Ok(html.auth.signupDfs(forms.signup.websiteDfs, env.recaptchaPublicConfig)).fuccess
+    }
+  }
+
   private sealed abstract class MustConfirmEmail(val value: Boolean)
   private object MustConfirmEmail {
 
@@ -276,6 +282,50 @@ object Auth extends LidraughtsController {
                 }
             }
           )
+        )
+      }
+    }
+  }
+
+  def signupDfsPost = OpenBody { implicit ctx =>
+    implicit val req = ctx.body
+    NoTor {
+      Firewall {
+        forms.signup.websiteDfs.bindFromRequest.fold(
+          err => {
+            signupErrLog(err)
+            BadRequest(html.auth.signupDfs(err, env.recaptchaPublicConfig)).fuccess
+          },
+          data => env.recaptcha.verify(~data.recaptchaResponse, req).flatMap {
+            case false =>
+              authLog(data.username, data.email, "Signup recaptcha fail")
+              BadRequest(html.auth.signupDfs(forms.signup.websiteDfs fill data, env.recaptchaPublicConfig)).fuccess
+            case true => HasherRateLimit(data.username, ctx.req) { _ =>
+              val email = env.emailAddressValidator.validate(data.realEmail) err s"Invalid email ${data.email}"
+              authLog(data.username, data.email, s"DFS: ${email.acceptable.value} fp: ${data.fingerPrint} req:${ctx.req}")
+              val passwordHash = Env.user.authenticator passEnc ClearPassword(data.password)
+              UserRepo.create(data.username, passwordHash, email.acceptable, ctx.blind, none,
+                mustConfirmEmail = false)
+                .flatten(s"No user could be created for ${data.username}")
+                .map(_ -> email).flatMap {
+                  case (user, EmailAddressValidator.Acceptable(email)) =>
+                    val profile = lidraughts.user.Profile(
+                      firstName = data.firstName.some,
+                      lastName = data.lastName.some
+                    )
+                    val teamRequest = lidraughts.team.RequestSetup(
+                      s"Aanmelding voor DFS Interland Aosta 2023: ${profile.nonEmptyRealName | "(naam onbekend)"}"
+                    )
+                    welcome(user, email) >>
+                      env.automaticEmail.registerDfs(user, email, data) >>
+                      UserRepo.setProfile(user.id, profile) >>
+                      lidraughts.team.TeamRepo.enabled("dfs-interland-aosta-2023").flatMap {
+                        _.fold(funit) { Env.team.api.createRequest(_, teamRequest, user) }
+                      } >>
+                      redirectNewUser(user)
+                }
+            }
+          }
         )
       }
     }
