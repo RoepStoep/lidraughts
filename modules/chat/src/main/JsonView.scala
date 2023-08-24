@@ -9,6 +9,7 @@ object JsonView {
   def apply(chat: AnyChat): JsValue = chat match {
     case c: MixedChat => mixedChatWriter writes c
     case c: UserChat => userChatWriter writes c
+    case c: PimpedUserChat => pimpedUserChatWriter writes c
   }
 
   def apply(line: Line): JsValue = lineWriter writes line
@@ -47,14 +48,27 @@ object JsonView {
     JsArray(c.lines map userLineWriter.writes)
   }
 
+  implicit val pimpedUserChatWriter: Writes[PimpedUserChat] = Writes[PimpedUserChat] { c =>
+    JsArray(c.lines map pimpedUserLineWriter.writes)
+  }
+
   private[chat] implicit val lineWriter: Writes[Line] = Writes[Line] {
     case l: UserLine => userLineWriter writes l
+    case l: PimpedUserLine => pimpedUserLineWriter writes l
     case l: PlayerLine => playerLineWriter writes l
   }
 
   private implicit val userLineWriter = Writes[UserLine] { l =>
     Json.obj(
       "u" -> l.username,
+      "t" -> l.text
+    ).add("r" -> l.troll).add("d" -> l.deleted).add("title" -> l.title)
+  }
+
+  private implicit val pimpedUserLineWriter = Writes[PimpedUserLine] { l =>
+    Json.obj(
+      "u" -> l.username,
+      "n" -> l.displayName,
       "t" -> l.text
     ).add("r" -> l.troll).add("d" -> l.deleted).add("title" -> l.title)
   }

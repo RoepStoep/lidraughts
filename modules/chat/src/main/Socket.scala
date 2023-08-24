@@ -38,11 +38,13 @@ object Socket {
   }
 
   type Send = (String, JsValue, Boolean) => Unit
+  type PimpUser = () => Option[String => Option[String]]
 
-  def out(send: Send): Actor.Receive = {
+  def out(send: Send, pimpUser: Option[PimpUser] = None): Actor.Receive = {
 
     case actorApi.ChatLine(_, line) => line match {
-      case line: UserLine => send("message", JsonView(line), line.troll)
+      case line: UserLine =>
+        send("message", JsonView(pimpUser.flatMap(_.apply).fold[Line](line)(line.pimp)), line.troll)
       case _ =>
     }
 

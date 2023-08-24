@@ -63,6 +63,7 @@ object Analyse extends LidraughtsController {
                     crosstable,
                     userTv,
                     chat,
+                    pimpChat = pov.game.isWfd option Env.user.wfdUsername,
                     bookmarked = bookmarked,
                     onCheatList = onCheatList
                   ))

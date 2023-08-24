@@ -95,6 +95,8 @@ case class Game(
   def isClassical = perfType contains lidraughts.rating.PerfType.Classical
   def nonMandatory = !isMandatory
 
+  def isWfd = metadata.isWfd
+
   def hasChat = !isTournament && !isSimul && !isSwiss && nonAi
 
   // we can't rely on the clock,
@@ -638,6 +640,8 @@ case class Game(
 
   def withSimul(id: String, pairing: Int) = copy(metadata = metadata.copy(simulId = id.some, simulPairing = pairing.some))
 
+  def withWfd(wfd: Boolean) = copy(metadata = metadata.copy(isWfd = wfd))
+
   def withId(newId: String) = copy(id = newId)
 
   def source = metadata.source
@@ -757,6 +761,7 @@ object Game {
         timeOutUntil = none,
         drawLimit = drawLimit,
         microMatch = microMatch,
+        isWfd = false,
         analysed = false
       ),
       createdAt = createdAt,
@@ -807,6 +812,7 @@ object Game {
     val timeOutUntil = "to"
     val microMatch = "mm"
     val drawLimit = "dl"
+    val isWfd = "wfd"
   }
 }
 

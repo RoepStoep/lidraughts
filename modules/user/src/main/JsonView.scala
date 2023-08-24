@@ -26,7 +26,7 @@ final class JsonView(isOnline: User.ID => Boolean) {
     .add("language" -> u.lang)
     .add("title" -> u.title)
 
-  def minimal(u: User, onlyPerf: Option[PerfType]) = Json.obj(
+  def minimal(u: User, onlyPerf: Option[PerfType], isWfd: Boolean) = Json.obj(
     "id" -> u.id,
     "username" -> u.username,
     "online" -> isOnline(u.id),
@@ -40,6 +40,7 @@ final class JsonView(isOnline: User.ID => Boolean) {
       Json.obj("country" -> country)
     })
     .add("patron" -> u.isPatron)
+    .add("displayName" -> isWfd.??(u.profileWfd.flatMap(_.nonEmptyRealName)))
 
   def lightPerfIsOnline(lp: LightPerf) =
     lightPerfWrites.writes(lp).add("online", isOnline(lp.user.id))

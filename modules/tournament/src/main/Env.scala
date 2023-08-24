@@ -5,6 +5,7 @@ import com.typesafe.config.Config
 import scala.concurrent.duration._
 import scala.concurrent.Promise
 
+import lidraughts.common.LightWfdUser
 import lidraughts.hub.{ Duct, DuctMap }
 import lidraughts.game.Game
 import lidraughts.socket.History
@@ -22,11 +23,9 @@ final class Env(
     flood: lidraughts.security.Flood,
     hub: lidraughts.hub.Env,
     roundMap: DuctMap[_],
-    lightUserApi: lidraughts.user.LightUserApi,
-    isOnline: User.ID => Boolean,
+    userEnv: lidraughts.user.Env,
     onStart: String => Unit,
     historyApi: lidraughts.history.HistoryApi,
-    trophyApi: lidraughts.user.TrophyApi,
     notifyApi: lidraughts.notify.NotifyApi,
     scheduler: lidraughts.common.Scheduler,
     startedSinceSeconds: Int => Boolean
@@ -102,18 +101,18 @@ final class Env(
     renderer = hub.renderer,
     timeline = hub.timeline,
     socketMap = socketMap,
-    trophyApi = trophyApi,
+    trophyApi = userEnv.trophyApi,
     verify = verify,
     indexLeaderboard = leaderboardIndexer.indexOne _,
     roundMap = roundMap,
     asyncCache = asyncCache,
     duelStore = duelStore,
     pause = pause,
-    lightUserApi = lightUserApi,
+    lightUserApi = userEnv.lightUserApi,
     proxyGame = proxyGame
   )
 
-  lazy val crudApi = new crud.CrudApi
+  lazy val crudApi = new crud.CrudApi(cached)
 
   lazy val socketHandler = new SocketHandler(
     hub = hub,
@@ -122,9 +121,9 @@ final class Env(
     flood = flood
   )
 
-  lazy val jsonView = new JsonView(lightUserApi, cached, statsApi, shieldApi, asyncCache, proxyGame, verify, duelStore, pause, startedSinceSeconds)
+  lazy val jsonView = new JsonView(userEnv.lightUserApi, userEnv.lightWfdUserApi, cached, statsApi, shieldApi, asyncCache, proxyGame, verify, duelStore, pause, startedSinceSeconds)
 
-  lazy val apiJsonView = new ApiJsonView(lightUserApi.async)
+  lazy val apiJsonView = new ApiJsonView(userEnv.lightUser)
 
   lazy val leaderboardApi = new LeaderboardApi(
     coll = leaderboardColl,
@@ -145,7 +144,10 @@ final class Env(
       tournamentId = tournamentId,
       history = new History(ttl = HistoryMessageTtl),
       jsonView = jsonView,
-      lightUser = lightUserApi.async,
+      lightUser = userEnv.lightUser,
+      lightWfdUser = userEnv.lightWfdUser,
+      toWfdName = userEnv.wfdUsername,
+      isWfdTournament = cached.isWfd,
       uidTtl = UidTimeout,
       keepMeAlive = () => socketMap touch tournamentId
     ),
@@ -166,7 +168,7 @@ final class Env(
 
   system.actorOf(Props(new CreatedOrganizer(
     api = api,
-    isOnline = isOnline
+    isOnline = userEnv.isOnline
   )))
 
   system.actorOf(Props(new StartedOrganizer(
@@ -215,11 +217,9 @@ object Env {
     flood = lidraughts.security.Env.current.flood,
     hub = lidraughts.hub.Env.current,
     roundMap = lidraughts.round.Env.current.roundMap,
-    lightUserApi = lidraughts.user.Env.current.lightUserApi,
-    isOnline = lidraughts.user.Env.current.isOnline,
+    userEnv = lidraughts.user.Env.current,
     onStart = lidraughts.round.Env.current.onStart,
     historyApi = lidraughts.history.Env.current.api,
-    trophyApi = lidraughts.user.Env.current.trophyApi,
     notifyApi = lidraughts.notify.Env.current.api,
     scheduler = lidraughts.common.PlayApp.scheduler,
     startedSinceSeconds = lidraughts.common.PlayApp.startedSinceSeconds

@@ -37,6 +37,9 @@ object TeamRepo {
   def isCreator(teamId: Team.ID, userId: User.ID): Fu[Boolean] =
     coll.exists($id(teamId) ++ $doc("createdBy" -> userId))
 
+  def isWfd(teamId: Team.ID): Fu[Boolean] =
+    enabled(teamId).dmap(t => ~t.map(_.isWfd))
+
   def name(id: Team.ID): Fu[Option[String]] =
     coll.primitiveOne[String]($id(id), "name")
 
@@ -58,6 +61,8 @@ object TeamRepo {
   def enable(team: Team) = coll.updateField($id(team.id), "enabled", true)
 
   def disable(team: Team) = coll.updateField($id(team.id), "enabled", false)
+
+  def setWfd(team: Team) = coll.updateField($id(team.id), "wfd", true)
 
   def addRequest(teamId: Team.ID, request: Request): Funit =
     coll.update(

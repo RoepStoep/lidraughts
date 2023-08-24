@@ -121,6 +121,7 @@ object BSONHandlers {
           timeOutUntil = r dateO F.timeOutUntil,
           microMatch = r strO F.microMatch,
           drawLimit = r intO F.drawLimit,
+          isWfd = r boolD F.isWfd,
           analysed = r boolD F.analysed
         )
       )
@@ -154,6 +155,7 @@ object BSONHandlers {
       F.timeOutUntil -> o.metadata.timeOutUntil.map(w.date),
       F.microMatch -> o.metadata.microMatch,
       F.drawLimit -> o.metadata.drawLimit,
+      F.isWfd -> w.boolO(o.metadata.isWfd),
       F.analysed -> w.boolO(o.metadata.analysed)
     ) ++ {
         o.pdnStorage match {

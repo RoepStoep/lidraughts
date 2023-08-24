@@ -10,7 +10,7 @@ import play.api.libs.iteratee._
 import play.api.libs.json._
 
 import lidraughts.chat.Chat
-import lidraughts.common.LightUser
+import lidraughts.common.{ LightUser, LightWfdUser }
 import lidraughts.game.actorApi.{ SimulNextGame, StartGame, UserStartGame }
 import lidraughts.game.{ Game, Event }
 import lidraughts.hub.actorApi.Deploy
@@ -30,7 +30,8 @@ private[round] final class RoundSocket(
     gameId: Game.ID,
     history: History,
     keepMeAlive: () => Unit,
-    getGoneWeights: Game => Fu[(Float, Float)]
+    getGoneWeights: Game => Fu[(Float, Float)],
+    toWfdName: String => Option[String]
 ) extends SocketTrouper[Member](dependencies.system, dependencies.uidTtl) {
 
   import dependencies._
@@ -44,6 +45,7 @@ private[round] final class RoundSocket(
   )
   private var tournamentId = none[String] // until set, to listen to standings
   private var simulId = none[String]
+  private var isWfd = false
 
   private var delayedCrowdNotification = false
 
@@ -141,6 +143,7 @@ private[round] final class RoundSocket(
 
     case SetGame(Some(game)) =>
       hasAi = game.hasAi
+      isWfd = game.isWfd
       whitePlayer.userId = game.player(White).userId
       blackPlayer.userId = game.player(Black).userId
       mightBeSimul = game.isSimul
@@ -233,7 +236,10 @@ private[round] final class RoundSocket(
     case eventList: EventList => notify(eventList.events)
 
     case lidraughts.chat.actorApi.ChatLine(chatId, line) => notify(List(line match {
-      case l: lidraughts.chat.UserLine => Event.UserMessage(l, chatId == chatIds.pub)
+      case l: lidraughts.chat.UserLine =>
+        if (isWfd) Event.PimpedUserMessage(l.pimp(toWfdName), chatId == chatIds.pub)
+        else Event.UserMessage(l, chatId == chatIds.pub)
+      case l: lidraughts.chat.PimpedUserLine => Event.PimpedUserMessage(l, chatId == chatIds.pub)
       case l: lidraughts.chat.PlayerLine => Event.PlayerMessage(l)
     }))
 
@@ -270,7 +276,7 @@ private[round] final class RoundSocket(
 
     case NotifyCrowd =>
       delayedCrowdNotification = false
-      showSpectators(lightUser)(members.values.filter(_.watcher)) foreach { spectators =>
+      showSpectators(lightUser, isWfd option lightWfdUser)(members.values.filter(_.watcher)) foreach { spectators =>
         val event = Event.Crowd(
           white = ownerIsHere(White),
           black = ownerIsHere(Black),
@@ -283,7 +289,8 @@ private[round] final class RoundSocket(
     case SimulStanding(json) => notifyAll("simulStanding", json)
 
   }: Trouper.Receive) orElse lidraughts.chat.Socket.out(
-    send = (t, d, _) => notifyAll(t, d)
+    send = (t, d, _) => notifyAll(t, d),
+    pimpUser = Some(() => isWfd option toWfdName)
   )
 
   override def broom = {
@@ -375,6 +382,7 @@ object RoundSocket {
   private[round] case class Dependencies(
       system: ActorSystem,
       lightUser: LightUser.Getter,
+      lightWfdUser: LightWfdUser.Getter,
       uidTtl: FiniteDuration,
       disconnectTimeout: FiniteDuration,
       ragequitTimeout: FiniteDuration,

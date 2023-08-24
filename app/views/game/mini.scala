@@ -23,7 +23,8 @@ object mini {
     ownerLink: Boolean = false,
     tv: Boolean = false,
     withLink: Boolean = true,
-    withUserId: Boolean = false
+    withUserId: Boolean = false,
+    isWfd: Boolean = false
   )(implicit ctx: Context): Tag = {
     val game = pov.game
     val isLive = game.isBeingPlayed
@@ -35,9 +36,9 @@ object mini {
       dataLive := isLive.option(game.id),
       renderState(pov)
     )(
-        renderPlayer(!pov, ctx.pref.draughtsResult, withUserId),
+        renderPlayer(!pov, ctx.pref.draughtsResult, withUserId, isWfd),
         cgWrap,
-        renderPlayer(pov, ctx.pref.draughtsResult, withUserId)
+        renderPlayer(pov, ctx.pref.draughtsResult, withUserId, isWfd)
       )
   }
 
@@ -64,10 +65,10 @@ object mini {
     dataState := s"${Forsyth.boardAndColor(pov.game.situation)}|${boardSize.width}x${boardSize.height}|${pov.color.name}|${~pov.game.lastMoveKeys}"
   }
 
-  private def renderPlayer(pov: Pov, draughtsResult: Boolean, withUserId: Boolean = false)(implicit lang: Lang) =
+  private def renderPlayer(pov: Pov, draughtsResult: Boolean, withUserId: Boolean = false, isWfd: Boolean = false)(implicit lang: Lang) =
     span(cls := "mini-game__player")(
       span(cls := s"mini-game__user mini-game__user--${pov.color.name}", dataUserId := withUserId ?? pov.player.userId)(
-        playerUsername(pov.player, withRating = false),
+        playerUsername(pov.player, withRating = false, isWfd = isWfd),
         span(cls := "rating")(lidraughts.game.Namer ratingStringIfUser pov.player)
       ),
       if (pov.game.finishedOrAborted) renderResult(pov, draughtsResult)

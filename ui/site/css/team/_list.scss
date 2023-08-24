@@ -11,6 +11,20 @@
     &.mine {
       color: $c-brag;
     }
+
+    .official-wfd {
+      display: inline-flex;
+      margin-left: 1rem;
+      font-family: 'lidraughts';
+    
+      text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+      color: $c-link-dim;
+      transition: transform 0.2s;
+      &:hover {
+        transform: translateY(-2px);
+        color: $c-link;
+      }
+    }
   }
   .info {
     font-size: .9em;

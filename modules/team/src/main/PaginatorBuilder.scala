@@ -2,16 +2,16 @@ package lidraughts.team
 
 import lidraughts.common.paginator._
 import lidraughts.common.MaxPerPage
-import lidraughts.common.LightUser
+import lidraughts.common.{ LightUser, LightWfdUser }
 import lidraughts.db.dsl._
 import lidraughts.db.paginator._
-import lidraughts.user.UserRepo
 
 private[team] final class PaginatorBuilder(
     coll: Colls,
     maxPerPage: MaxPerPage,
     maxUserPerPage: MaxPerPage,
-    lightUserApi: lidraughts.user.LightUserApi
+    lightUserApi: lidraughts.user.LightUserApi,
+    lightWfdUserApi: lidraughts.user.LightWfdUserApi
 ) {
 
   import BSONHandlers._
@@ -27,17 +27,17 @@ private[team] final class PaginatorBuilder(
     maxPerPage
   )
 
-  def teamMembers(team: Team, page: Int): Fu[Paginator[LightUser]] = Paginator(
+  def teamMembers(team: Team, page: Int): Fu[Paginator[Either[LightUser, LightWfdUser]]] = Paginator(
     adapter = new TeamAdapter(team),
     page,
     maxUserPerPage
   )
 
-  private final class TeamAdapter(team: Team) extends AdapterLike[LightUser] {
+  private final class TeamAdapter(team: Team) extends AdapterLike[Either[LightUser, LightWfdUser]] {
 
     val nbResults = fuccess(team.nbMembers)
 
-    def slice(offset: Int, length: Int): Fu[Seq[LightUser]] =
+    def slice(offset: Int, length: Int): Fu[Seq[Either[LightUser, LightWfdUser]]] =
       for {
         docs <- coll.member
           .find(selector, $doc("user" -> true, "_id" -> false))
@@ -45,8 +45,11 @@ private[team] final class PaginatorBuilder(
           .skip(offset)
           .list[Bdoc](length)
         userIds = docs.flatMap(_.getAs[String]("user"))
-        users <- lightUserApi asyncMany userIds
-      } yield users.flatten
+        users <- {
+          if (!team.isWfd) lightUserApi asyncMany userIds map { _.flatten.map(Left(_)) }
+          else lightWfdUserApi asyncMany userIds map { _.flatten.map(Right(_)) }
+        }
+      } yield users
     private def selector = MemberRepo teamQuery team.id
     private def sorting = $sort desc "date"
   }

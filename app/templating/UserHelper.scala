@@ -5,10 +5,10 @@ import controllers.routes
 import mashup._
 
 import lidraughts.app.ui.ScalatagsTemplate._
-import lidraughts.common.{ LightUser, Lang }
+import lidraughts.common.{ LightUser, LightWfdUser, Lang }
 import lidraughts.i18n.{ I18nKeys => trans }
 import lidraughts.rating.{ PerfType, Perf }
-import lidraughts.user.{ User, Title }
+import lidraughts.user.{ ProfileWfd, User, Title }
 
 trait UserHelper { self: I18nHelper with StringHelper with NumberHelper =>
 
@@ -53,6 +53,9 @@ trait UserHelper { self: I18nHelper with StringHelper with NumberHelper =>
   def lightUser(userId: String): Option[LightUser] = Env.user lightUserSync userId
   def lightUser(userId: Option[String]): Option[LightUser] = userId flatMap lightUser
 
+  def lightWfdUser(userId: String): Option[LightWfdUser] = Env.user lightWfdUserSync userId
+  def lightWfdUser(userId: Option[String]): Option[LightWfdUser] = userId flatMap lightWfdUser
+
   // def lightUserSync: LightUser.SyncGetter(userId: String): Option[LightUser] = Env.user lightUserSync userId
 
   def usernameOrId(userId: String) = lightUser(userId).fold(userId)(_.titleName)
@@ -69,9 +72,24 @@ trait UserHelper { self: I18nHelper with StringHelper with NumberHelper =>
     withTitle: Boolean = true,
     truncate: Option[Int] = None,
     params: String = "",
-    modIcon: Boolean = false
+    modIcon: Boolean = false,
+    isWfd: Boolean = false
   )(implicit lang: Lang): Frag =
-    userIdOption.flatMap(lightUser).fold[Frag](User.anonymous) { user =>
+    if (isWfd) userIdOption.flatMap(lightWfdUser).fold[Frag](User.anonymous) { user =>
+      userIdNameLink(
+        userId = user.id,
+        username = user.username,
+        isPatron = user.isPatron,
+        title = withTitle ?? user.title map Title.apply,
+        cssClass = cssClass,
+        withOnline = withOnline,
+        truncate = truncate,
+        params = params,
+        modIcon = modIcon,
+        displayName = user.name.some
+      )
+    }
+    else userIdOption.flatMap(lightUser).fold[Frag](User.anonymous) { user =>
       userIdNameLink(
         userId = user.id,
         username = user.name,
@@ -104,6 +122,26 @@ trait UserHelper { self: I18nHelper with StringHelper with NumberHelper =>
     modIcon = false
   )
 
+  def lightWfdUserLink(
+    user: LightWfdUser,
+    cssClass: Option[String] = None,
+    withOnline: Boolean = true,
+    withTitle: Boolean = true,
+    truncate: Option[Int] = None,
+    params: String = ""
+  )(implicit lang: Lang): Tag = userIdNameLink(
+    userId = user.id,
+    username = user.username,
+    isPatron = user.isPatron,
+    title = withTitle ?? user.title map Title.apply,
+    cssClass = cssClass,
+    withOnline = withOnline,
+    truncate = truncate,
+    params = params,
+    modIcon = false,
+    displayName = user.name.some
+  )
+
   def userIdLink(
     userId: String,
     cssClass: Option[String]
@@ -132,14 +170,15 @@ trait UserHelper { self: I18nHelper with StringHelper with NumberHelper =>
     truncate: Option[Int],
     title: Option[Title],
     params: String,
-    modIcon: Boolean
+    modIcon: Boolean,
+    displayName: Option[String] = None
   )(implicit lang: Lang): Tag = a(
     cls := userClass(userId, cssClass, withOnline),
     href := userUrl(username, params = params)
   )(
       withOnline ?? (if (modIcon) moderatorIcon else lineIcon(isPatron)),
       titleTag(title),
-      truncate.fold(username)(username.take)
+      truncate.fold(displayName.getOrElse(username))(displayName.getOrElse(username).take)
     )
 
   def userLink(

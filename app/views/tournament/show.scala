@@ -19,7 +19,8 @@ object show {
     data: play.api.libs.json.JsObject,
     chatOption: Option[lidraughts.chat.UserChat.Mine],
     streamers: List[lidraughts.user.User.ID],
-    shieldOwner: Option[lidraughts.tournament.TournamentShield.OwnerId]
+    shieldOwner: Option[lidraughts.tournament.TournamentShield.OwnerId],
+    pimpChat: Option[String => Option[String]]
   )(implicit ctx: Context) = views.html.base.layout(
     title = s"${tour.fullName} #${tour.id}",
     moreJs = frag(
@@ -31,7 +32,7 @@ object show {
           "userId" -> ctx.userId,
           "chat" -> chatOption.map { c =>
             chat.json(
-              c.chat,
+              c.chat.pimp(pimpChat),
               name = trans.chatRoom.txt(),
               timeout = c.timeout,
               public = true,

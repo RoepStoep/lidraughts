@@ -108,11 +108,14 @@ object Tournament extends LidraughtsController {
             chat <- canHaveChat(tour, json.some) ?? Env.chat.api.userChat.cached
               .findMine(Chat.Id(tour.id), ctx.me)
               .dmap(some)
-            _ <- chat ?? { c => Env.user.lightUserApi.preloadMany(c.chat.userIds) }
+            _ <- chat ?? { c =>
+              Env.user.lightUserApi.preloadMany(c.chat.userIds) >>-
+                tour.isWfd ?? Env.user.lightWfdUserApi.preloadMany(c.chat.userIds)
+            }
             _ <- tour.teamBattle ?? { b => Env.team.cached.preloadSet(b.teams) }
             streamers <- streamerCache get tour.id
             shieldOwner <- env.shieldApi currentOwner tour
-          } yield Ok(html.tournament.show(tour, verdicts, json, chat, streamers, shieldOwner))).mon(_.http.response.tournament.show.website)
+          } yield Ok(html.tournament.show(tour, verdicts, json, chat, streamers, shieldOwner, tour.isWfd option Env.user.wfdUsername))).mon(_.http.response.tournament.show.website)
         }, api = _ => tourOption.fold(notFoundJson("No such tournament")) { tour =>
           get("playerInfo").?? { env.api.playerInfo(tour, _) } zip
             getBool("socketVersion").??(env version tour.id map some) flatMap {

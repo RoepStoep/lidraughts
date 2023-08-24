@@ -28,7 +28,27 @@ case class UserLine(
   def delete = copy(deleted = true)
 
   def isVisible = !troll && !deleted
+
+  def pimp(pimpUser: String => Option[String]) =
+    PimpedUserLine(username, pimpUser(userId).getOrElse(username), title, text, troll, deleted)
 }
+
+case class PimpedUserLine(
+    username: String,
+    displayName: String,
+    title: Option[String],
+    text: String,
+    troll: Boolean,
+    deleted: Boolean
+) extends Line {
+
+  def author = username
+
+  def userId = User normalize username
+
+  def toUserLine = UserLine(username, title, text, troll, deleted)
+}
+
 case class PlayerLine(
     color: Color,
     text: String
@@ -82,6 +102,7 @@ object Line {
   }
   def lineToStr(x: Line) = x match {
     case u: UserLine => userLineToStr(u)
+    case l: PimpedUserLine => userLineToStr(l.toUserLine)
     case p: PlayerLine => s"${p.color.letter} ${p.text}"
   }
 }

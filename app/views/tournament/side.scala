@@ -86,7 +86,7 @@ object side {
       },
       tour.noBerserk option div(cls := "text", dataIcon := "`")(trans.noBerserkAllowed()),
       tour.noStreak option div(cls := "text", dataIcon := "Q")("No arena streaks"),
-      !tour.isScheduled option frag(trans.by(userIdLink(tour.createdBy.some)), br),
+      !tour.isScheduled option frag(trans.by(userIdLink(tour.createdBy.some, isWfd = tour.isWfd)), br),
       (!tour.isStarted || (tour.isScheduled && tour.isThematic)) option absClientDateTime(tour.startsAt),
       tour.isThematic option p(cls := "opening")(
         tour.openingTable.fold(openingLink(tour)) { table =>

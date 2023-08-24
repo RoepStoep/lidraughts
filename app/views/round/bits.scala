@@ -38,9 +38,9 @@ object bits {
       csp = defaultCsp.withPeer.some
     )(body)
 
-  def crosstable(cross: Option[lidraughts.game.Crosstable.WithMatchup], game: Game)(implicit ctx: Context) =
+  def crosstable(cross: Option[lidraughts.game.Crosstable.WithMatchup], game: Game, isWfd: Boolean = false)(implicit ctx: Context) =
     cross map { c =>
-      views.html.game.crosstable(ctx.userId.fold(c)(c.fromPov), game.id.some)
+      views.html.game.crosstable(ctx.userId.fold(c)(c.fromPov), game.id.some, isWfd = isWfd)
     }
 
   def underchat(game: Game)(implicit ctx: Context) = frag(

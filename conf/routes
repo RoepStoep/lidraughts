@@ -341,6 +341,9 @@ GET   /team/:id/pm-all                        controllers.Team.pmAll(id: String)
 POST  /team/:id/pm-all                        controllers.Team.pmAllSubmit(id: String)
 GET   /team/:id/tournaments                   controllers.Team.tournaments(id: String)
 POST  /team/:id/subscribe                     controllers.Team.subscribe(id: String)
+GET   /team/:id/wfd                           controllers.Team.wfd(id: String)
+GET   /team/:id/wfd/:userId/profile           controllers.Team.wfdProfileForm(id: String, userId: String)
+POST  /team/:id/wfd/:userId/profile           controllers.Team.wfdProfileApply(id: String, userId: String)
 
 # Analyse
 POST  /$gameId<\w{8}>/request-analysis        controllers.Analyse.requestAnalysis(gameId: String)

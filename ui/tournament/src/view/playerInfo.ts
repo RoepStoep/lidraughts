@@ -81,7 +81,7 @@ export default function(ctrl: TournamentController): VNode {
       }, data.pairings.map(function(p, i) {
         return h('tr.glpt.' + (p.win === true ? ' win' : (p.win === false ? ' loss' : '')), {
           key: p.id,
-          attrs: { 'data-href': '/' + p.id + '/' + p.color },
+          attrs: { 'data-href': '/' + p.id + '/' + p.color, 'data-wfd': !!ctrl.data.isWfd },
           hook: {
             destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
           }

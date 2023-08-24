@@ -16,6 +16,7 @@ final class PlanApi(
     chargeColl: Coll,
     notifier: PlanNotifier,
     lightUserApi: lidraughts.user.LightUserApi,
+    uncacheLightUser: User.ID => Unit,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     payPalIpnKey: PayPalIpnKey,
     monthlyGoalApi: MonthlyGoalApi
@@ -248,7 +249,7 @@ final class PlanApi(
       "free" -> Patron.Free(DateTime.now)
     ),
     upsert = true
-  ).void >>- lightUserApi.invalidate(user.id)
+  ).void >>- uncacheLightUser(user.id)
 
   def giveMonth(user: User): Funit = UserRepo.setPlan(user, lidraughts.user.Plan(
     months = user.plan.months | 1,
@@ -263,7 +264,7 @@ final class PlanApi(
       "expiresAt" -> DateTime.now.plusMonths(1).plusDays(1)
     ),
     upsert = true
-  ).void >>- lightUserApi.invalidate(user.id)
+  ).void >>- uncacheLightUser(user.id)
 
   private val recentChargeUserIdsNb = 100
   private val recentChargeUserIdsCache = asyncCache.single[List[User.ID]](
@@ -365,7 +366,7 @@ final class PlanApi(
   }
 
   private def setDbUserPlan(user: User, plan: lidraughts.user.Plan): Funit =
-    UserRepo.setPlan(user, plan) >>- lightUserApi.invalidate(user.id)
+    UserRepo.setPlan(user, plan) >>- uncacheLightUser(user.id)
 
   private def createCustomer(user: User, data: Checkout, plan: StripePlan): Fu[StripeCustomer] =
     stripeClient.createCustomer(user, data, plan) flatMap { customer =>

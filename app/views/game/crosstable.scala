@@ -9,10 +9,10 @@ import controllers.routes
 
 object crosstable {
 
-  def apply(ct: Crosstable.WithMatchup, currentId: Option[String])(implicit ctx: Context): Frag =
-    apply(ct.crosstable, ct.matchup, currentId)(ctx)
+  def apply(ct: Crosstable.WithMatchup, currentId: Option[String], isWfd: Boolean = false)(implicit ctx: Context): Frag =
+    apply(ct.crosstable, ct.matchup, currentId, isWfd)(ctx)
 
-  def apply(ct: Crosstable, trueMatchup: Option[Crosstable.Matchup], currentId: Option[String])(implicit ctx: Context): Frag = {
+  def apply(ct: Crosstable, trueMatchup: Option[Crosstable.Matchup], currentId: Option[String], isWfd: Boolean)(implicit ctx: Context): Frag = {
     val matchup = trueMatchup.filter(_.users != ct.users)
     val matchupSepAt: Option[Int] = matchup map { m =>
       (ct.nbGames min Crosstable.maxGames) - m.users.nbGames
@@ -30,7 +30,7 @@ object crosstable {
               case None => "glpt" -> "½"
               case _ => "glpt loss" -> "0"
             }
-            a(href := s"""${routes.Round.watcher(r.gameId, "white")}?pov=${u.id}""", cls := linkClass)(text)
+            a(href := s"""${routes.Round.watcher(r.gameId, "white")}?pov=${u.id}""", cls := linkClass, isWfd option dataWfd)(text)
           })
       },
       matchup map { m =>
@@ -39,7 +39,7 @@ object crosstable {
         })
       },
       div(cls := "crosstable__users")(ct.users.toList.map { u =>
-        userIdLink(u.id.some, withOnline = false)
+        userIdLink(u.id.some, withOnline = false, isWfd = isWfd)
       }),
       div(cls := "crosstable__score", title := trans.lifetimeScore.txt())(ct.users.toList.map { u =>
         span(cls := ct.users.winnerId.map(w => if (w == u.id) "win" else "loss"))(ct.showScore(u.id))

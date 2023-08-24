@@ -12,7 +12,7 @@ import lidraughts.common.{ HTTPRequest, MaxPerSecond }
 import lidraughts.hub.lightTeam._
 import lidraughts.security.Granter
 import lidraughts.team.{ Joined, Motivate, Team => TeamModel, TeamRepo, MemberRepo }
-import lidraughts.user.{ User => UserModel }
+import lidraughts.user.{ User => UserModel, UserRepo }
 import views._
 
 object Team extends LidraughtsController {
@@ -48,12 +48,12 @@ object Team extends LidraughtsController {
       hasChat = canHaveChat(team, info)
       chat <- hasChat ?? Env.chat.api.userChat.cached
         .findMine(lidraughts.chat.Chat.Id(team.id), ctx.me)
-        .map(some)
-      _ <- Env.user.lightUserApi preloadMany {
-        info.userIds ::: chat.??(_.chat.userIds)
-      }
+        .dmap(some)
+      userIds = info.userIds ::: chat.??(_.chat.userIds)
+      _ <- Env.user.lightUserApi preloadMany userIds
+      _ <- team.isWfd ?? Env.user.lightWfdUserApi.preloadMany(userIds)
       version <- hasChat ?? Env.team.version(team.id).dmap(some)
-    } yield html.team.show(team, members, info, chat, version)
+    } yield html.team.show(team, members, info, chat, version, team.isWfd option Env.user.wfdUsername)
 
   private def canHaveChat(team: TeamModel, info: lidraughts.app.mashup.TeamInfo)(implicit ctx: Context): Boolean =
     team.chat && {
@@ -94,6 +94,40 @@ object Team extends LidraughtsController {
   def edit(id: String) = Auth { implicit ctx => me =>
     WithOwnedTeam(id) { team =>
       fuccess(html.team.form.edit(team, forms edit team))
+    }
+  }
+
+  def wfd(id: String) = Auth { implicit ctx => me =>
+    WithWfdTeam(id) { team =>
+      MemberRepo userIdsByTeam team.id flatMap UserRepo.byIds map { users =>
+        html.team.wfd.profiles(team, users)
+      }
+    }
+  }
+
+  def wfdProfileForm(id: String, userId: String) = Auth { implicit ctx => me =>
+    WithWfdTeam(id) { team =>
+      OptionFuOk(UserRepo byId userId) { user =>
+        fuccess(html.team.wfd.profileForm(team, user, Env.user.forms profileWfdOrProfileOf user))
+      }
+    }
+  }
+
+  def wfdProfileApply(id: String, userId: String) = AuthBody { implicit ctx => me =>
+    WithWfdTeam(id) { _ =>
+      implicit val req: Request[_] = ctx.body
+      Env.user.forms.profileWfd.bindFromRequest.fold(
+        jsonFormError,
+        profile => {
+          UserRepo.setProfileWfd(userId, profile) >>-
+            Env.user.lightWfdUserApi.invalidate(userId) inject Ok(
+              Json.obj(
+                "ok" -> true,
+                "fullName" -> ~profile.nonEmptyRealName
+              )
+            )
+        }
+      )
     }
   }
 
@@ -324,6 +358,14 @@ You received this because you are subscribed to messages of the team $url."""
       else renderTeam(team) map { Forbidden(_) }
     }
 
+  private def WithWfdTeam(teamId: String)(f: TeamModel => Fu[Result])(implicit ctx: Context): Fu[Result] =
+    OptionFuResult(api team teamId) { team =>
+      if (team.isWfd && (ctx.userId.exists(team.isCreator) || isGranted(_.ManageWfd))) f(team)
+      else renderTeam(team) map {
+        Forbidden(_)
+      }
+    }
+
   private[controllers] def teamsIBelongTo(me: lidraughts.user.User): Fu[List[LightTeam]] =
-    api mine me map { _.map(_.light) }
+    api mine me map { _.filter(t => !t.isWfd || t.isCreator(me.id)).map(_.light) }
 }

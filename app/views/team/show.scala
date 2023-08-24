@@ -18,10 +18,11 @@ object show {
 
   def apply(
     t: Team,
-    members: Paginator[lidraughts.common.LightUser],
+    members: Paginator[Either[lidraughts.common.LightUser, lidraughts.common.LightWfdUser]],
     info: TeamInfo,
     chatOption: Option[lidraughts.chat.UserChat.Mine],
-    socketVersion: Option[lidraughts.socket.Socket.SocketVersion]
+    socketVersion: Option[lidraughts.socket.Socket.SocketVersion],
+    pimpChat: Option[String => Option[String]]
   )(implicit ctx: Context) =
     bits.layout(
       title = t.name,
@@ -42,7 +43,7 @@ object show {
                 "id" -> t.id,
                 "socketVersion" -> v.value,
                 "chat" -> views.html.chat.json(
-                  chat.chat,
+                  chat.chat.pimp(pimpChat),
                   name = trans.chatRoom.txt(),
                   timeout = chat.timeout,
                   public = true,
@@ -58,7 +59,10 @@ object show {
           data("socket-version") := v.value
         })(
           div(cls := "box__top")(
-            h1(cls := "text", dataIcon := "f")(t.name),
+            h1(cls := "text", dataIcon := "f")(
+              t.name,
+              t.isWfd option a(cls := "official-wfd", title := "Official WFD team")("E")
+            ),
             div(
               if (t.disabled) span(cls := "staff")("CLOSED")
               else nbMembers.plural(t.nbMembers, strong(t.nbMembers.localize))
@@ -67,7 +71,7 @@ object show {
           (info.mine || t.enabled) option div(cls := "team-show__content")(
             div(cls := "team-show__content__col1")(
               st.section(cls := "team-show__meta")(
-                p(teamLeader(), ": ", userIdLink(t.createdBy.some))
+                p(teamLeader(), ": ", userIdLink(t.createdBy.some, isWfd = t.isWfd))
               ),
               chatOption.isDefined option frag(
                 views.html.chat.frag,
@@ -133,15 +137,18 @@ object show {
                   )
                 ),
                 (info.createdByMe || isGranted(_.Admin)) option
-                  a(href := routes.Team.edit(t.id), cls := "button button-empty text", dataIcon := "%")(trans.settings())
+                  a(href := routes.Team.edit(t.id), cls := "button button-empty text", dataIcon := "%")(trans.settings()),
+                (t.isWfd && (info.createdByMe || isGranted(_.ManageWfd))) option
+                  a(href := routes.Team.wfd(t.id), cls := "button button-empty text", dataIcon := "%")(s"WFD profiles")
               ),
               div(cls := "team-show__members")(
                 st.section(cls := "recent-members")(
                   h2(teamRecentMembers()),
                   div(cls := "userlist infinitescroll")(
                     pagerNext(members, np => routes.Team.show(t.id, np).url),
-                    members.currentPageResults.map { member =>
-                      div(cls := "paginated")(lightUserLink(member))
+                    members.currentPageResults.map {
+                      case Left(member) => div(cls := "paginated")(lightUserLink(member))
+                      case Right(wfdMember) => div(cls := "paginated")(lightWfdUserLink(wfdMember))
                     }
                   )
                 )

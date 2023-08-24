@@ -5,7 +5,7 @@ import play.api.libs.json._
 import draughts.{ Centis, PromotableRole, Pos, Color, Situation, Move => DraughtsMove, Clock => DraughtsClock, Status }
 import draughts.format.Forsyth.{ exportBoard, exportKingMoves }
 import JsonView._
-import lidraughts.chat.{ UserLine, PlayerLine }
+import lidraughts.chat.{ PimpedUserLine, UserLine, PlayerLine }
 import lidraughts.common.ApiVersion
 
 sealed trait Event {
@@ -146,6 +146,14 @@ object Event {
   }
 
   case class UserMessage(line: UserLine, w: Boolean) extends Event {
+    def typ = "message"
+    def data = lidraughts.chat.JsonView(line)
+    override def troll = line.troll
+    override def watcher = w
+    override def owner = !w
+  }
+
+  case class PimpedUserMessage(line: PimpedUserLine, w: Boolean) extends Event {
     def typ = "message"
     def data = lidraughts.chat.JsonView(line)
     override def troll = line.troll

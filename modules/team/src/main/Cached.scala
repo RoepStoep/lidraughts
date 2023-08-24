@@ -20,6 +20,17 @@ private[team] final class Cached(
 
   def preloadSet = nameCache preloadSet _
 
+  val wfdCache = new Syncache[String, Boolean](
+    name = "team.wfd",
+    compute = TeamRepo.isWfd,
+    default = _ => false,
+    strategy = Syncache.WaitAfterUptime(10 millis),
+    expireAfter = Syncache.ExpireAfterAccess(1 hour),
+    logger = logger
+  )
+
+  def isWfd(id: String) = wfdCache sync id
+
   // ~ 30k entries as of 04/02/17
   private val teamIdsCache = new Syncache[lidraughts.user.User.ID, Team.IdsStr](
     name = "team.ids",

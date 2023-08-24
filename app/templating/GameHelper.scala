@@ -99,10 +99,16 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
     case Mode.Rated => trans.rated.literalTxtTo(enLang)
   }
 
-  def playerUsername(player: Player, withRating: Boolean = true, withTitle: Boolean = true): Frag =
+  def playerUsername(player: Player, withRating: Boolean = true, withTitle: Boolean = true, isWfd: Boolean = false): Frag =
     player.aiLevel.fold[Frag](
-      player.userId.flatMap(lightUser).fold[Frag](lidraughts.user.User.anonymous) { user =>
-        val title = user.title ifTrue withTitle map { t =>
+      isWfd.?? {
+        player.userId.flatMap(lightWfdUser)
+      }.fold(player.userId.flatMap(lightUser) map { light =>
+        light.name -> light.title
+      }) { lightWfd =>
+        Some(lightWfd.name -> lightWfd.title)
+      }.fold[Frag](lidraughts.user.User.anonymous) { user =>
+        val title = user._2 ifTrue withTitle map { t =>
           val title64 = t.endsWith("-64")
           frag(
             span(
@@ -116,8 +122,8 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
         }
         frag(
           title,
-          if (withRating) s"${user.name} (${lidraughts.game.Namer ratingString player})"
-          else user.name
+          if (withRating) s"${user._1} (${lidraughts.game.Namer ratingString player})"
+          else user._1
         )
       }
     ) { level => raw(s"A.I. level $level") }
@@ -141,7 +147,8 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
     withStatus: Boolean = false,
     withBerserk: Boolean = false,
     mod: Boolean = false,
-    link: Boolean = true
+    link: Boolean = true,
+    isWfd: Boolean = false
   )(implicit ctx: UserContext): Frag = {
     val statusIcon =
       if (withStatus) statusIconSpan.some
@@ -164,7 +171,7 @@ trait GameHelper { self: I18nHelper with UserHelper with AiHelper with StringHel
           href := s"${routes.User show user.name}${if (mod) "?mod" else ""}"
         )(
           withOnline option frag(lineIcon(user), " "),
-          playerUsername(player, withRating),
+          playerUsername(player, withRating, isWfd = isWfd),
           (player.ratingDiff ifTrue withDiff) map { d => frag(" ", showRatingDiff(d)) },
           engine option span(cls := "engine_mark", title := trans.thisPlayerUsesDraughtsComputerAssistance.txt())
         ),

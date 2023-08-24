@@ -42,7 +42,10 @@ object bits {
       a(dataIcon := "f", cls := List(
         "team-name text" -> true,
         "mine" -> myTeam(t.id)
-      ), href := routes.Team.show(t.id))(t.name),
+      ), href := routes.Team.show(t.id))(
+        t.name,
+        t.isWfd option span(cls := "official-wfd", title := "Official WFD team")("E")
+      ),
       shorten(t.description, 200)
     ),
     td(cls := "info")(
@@ -53,13 +56,14 @@ object bits {
   private[team] def layout(
     title: String,
     openGraph: Option[lidraughts.app.ui.OpenGraph] = None,
+    css: String = "team",
     moreJs: Frag = emptyFrag
   )(
     body: Frag
   )(implicit ctx: Context) =
     views.html.base.layout(
       title = title,
-      moreCss = cssTag("team"),
+      moreCss = cssTag(css),
       moreJs = frag(infiniteScrollTag, moreJs),
       openGraph = openGraph
     )(body)

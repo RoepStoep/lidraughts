@@ -19,6 +19,9 @@ private[tournament] final class TournamentSocket(
     protected val history: History[Messadata],
     jsonView: JsonView,
     lightUser: lidraughts.common.LightUser.Getter,
+    lightWfdUser: lidraughts.common.LightWfdUser.Getter,
+    toWfdName: String => Option[String],
+    isWfdTournament: String => Boolean,
     uidTtl: Duration,
     keepMeAlive: () => Unit
 ) extends SocketTrouper[Member](system, uidTtl) with Historical[Member, Messadata] {
@@ -77,7 +80,7 @@ private[tournament] final class TournamentSocket(
 
     case NotifyCrowd =>
       delayedCrowdNotification = false
-      showSpectators(lightUser)(members.values) foreach {
+      showSpectators(lightUser, isWfdTournament(tournamentId) option lightWfdUser)(members.values) foreach {
         notifyAll("crowd", _)
       }
 
@@ -86,7 +89,8 @@ private[tournament] final class TournamentSocket(
       notifyAll("reload")
 
   }: Trouper.Receive) orElse lidraughts.chat.Socket.out(
-    send = (t, d, trollish) => notifyVersion(t, d, Messadata(trollish))
+    send = (t, d, trollish) => notifyVersion(t, d, Messadata(trollish)),
+    pimpUser = Some(() => isWfdTournament(tournamentId) option toWfdName)
   )
 
   override protected def broom: Unit = {

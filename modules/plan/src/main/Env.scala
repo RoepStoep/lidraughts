@@ -11,7 +11,7 @@ final class Env(
     notifyApi: lidraughts.notify.NotifyApi,
     system: akka.actor.ActorSystem,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
-    lightUserApi: lidraughts.user.LightUserApi,
+    userEnv: lidraughts.user.Env,
     settingStore: lidraughts.memo.SettingStore.Builder,
     scheduler: lidraughts.common.Scheduler
 ) {
@@ -52,7 +52,8 @@ final class Env(
     patronColl = patronColl,
     chargeColl = chargeColl,
     notifier = notifier,
-    lightUserApi = lightUserApi,
+    lightUserApi = userEnv.lightUserApi,
+    uncacheLightUser = userEnv.uncacheLightUser,
     asyncCache = asyncCache,
     payPalIpnKey = PayPalIpnKey(config getString "paypal.ipn_key"),
     monthlyGoalApi = monthlyGoalApi
@@ -88,7 +89,7 @@ object Env {
     db = lidraughts.db.Env.current,
     hub = lidraughts.hub.Env.current,
     notifyApi = lidraughts.notify.Env.current.api,
-    lightUserApi = lidraughts.user.Env.current.lightUserApi,
+    userEnv = lidraughts.user.Env.current,
     system = lidraughts.common.PlayApp.system,
     asyncCache = lidraughts.memo.Env.current.asyncCache,
     settingStore = lidraughts.memo.Env.current.settingStore,

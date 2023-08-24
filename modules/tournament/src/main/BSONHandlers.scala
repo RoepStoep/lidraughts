@@ -88,7 +88,8 @@ object BSONHandlers {
         featuredId = r strO "featured",
         spotlight = r.getO[Spotlight]("spotlight"),
         description = r strO "description",
-        hasChat = r boolO "chat" getOrElse true
+        hasChat = r boolO "chat" getOrElse true,
+        isWfd = r boolO "wfd" getOrElse false
       )
     }
     def writes(w: BSON.Writer, o: Tournament) = $doc(
@@ -121,7 +122,8 @@ object BSONHandlers {
       "featured" -> o.featuredId,
       "spotlight" -> o.spotlight,
       "description" -> o.description,
-      "chat" -> (!o.hasChat).option(false)
+      "chat" -> (!o.hasChat).option(false),
+      "wfd" -> o.isWfd.option(true)
     )
   }
 

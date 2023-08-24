@@ -64,8 +64,8 @@ announce 10 minutes Lidraughts will restart!
 announce cancel
 change asset version
 puzzle disable {variant} 150
-team disable foobar
-team enable foobar
+team [disable|enable] foobar
+team wfd foobar
 draughtsnet client create {username} [analysis|move|commentary|all]
 gdpr erase {username} forever
 patron [month|lifetime] {username}

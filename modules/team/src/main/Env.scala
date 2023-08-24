@@ -4,7 +4,7 @@ import akka.actor._
 import com.typesafe.config.Config
 import scala.concurrent.duration._
 
-import lidraughts.common.MaxPerPage
+import lidraughts.common.{ LightWfdUser, MaxPerPage }
 import lidraughts.mod.ModlogApi
 import lidraughts.notify.NotifyApi
 import lidraughts.socket.History
@@ -19,7 +19,7 @@ final class Env(
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     db: lidraughts.db.Env,
     flood: lidraughts.security.Flood,
-    lightUserApi: lidraughts.user.LightUserApi
+    userEnv: lidraughts.user.Env
 ) {
 
   private val settings = new {
@@ -58,7 +58,8 @@ final class Env(
     coll = colls,
     maxPerPage = MaxPerPage(PaginatorMaxPerPage),
     maxUserPerPage = MaxPerPage(PaginatorMaxUserPerPage),
-    lightUserApi = lightUserApi
+    lightUserApi = userEnv.lightUserApi,
+    lightWfdUserApi = userEnv.lightWfdUserApi
   )
 
   private val socketMap: SocketMap = lidraughts.socket.SocketMap[TeamSocket](
@@ -67,7 +68,10 @@ final class Env(
       system = system,
       teamId = teamId,
       history = new History(ttl = HistoryMessageTtl),
-      lightUser = lightUserApi.async,
+      lightUser = userEnv.lightUser,
+      lightWfdUser = userEnv.lightWfdUser,
+      toWfdName = userEnv.wfdUsername,
+      isWfdTeam = cached.isWfd,
       uidTtl = UidTimeout,
       keepMeAlive = () => socketMap touch teamId
     ),
@@ -110,6 +114,6 @@ object Env {
     asyncCache = lidraughts.memo.Env.current.asyncCache,
     db = lidraughts.db.Env.current,
     flood = lidraughts.security.Env.current.flood,
-    lightUserApi = lidraughts.user.Env.current.lightUserApi
+    userEnv = lidraughts.user.Env.current
   )
 }

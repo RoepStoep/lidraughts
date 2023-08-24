@@ -48,10 +48,38 @@ case class UserChat(
   def userIds = lines.map(_.userId)
 
   def truncate(max: Int) = copy(lines = lines.drop((lines.size - max) atLeast 0))
+
+  def pimp(maybePimp: Option[String => Option[String]]): AnyChat =
+    maybePimp.fold[AnyChat](this) { pimpUser =>
+      PimpedUserChat(id, lines.map(_.pimp(pimpUser)))
+    }
 }
 
 object UserChat {
   case class Mine(chat: UserChat, timeout: Boolean) {
+
+    def truncate(max: Int) = copy(chat = chat truncate max)
+  }
+}
+
+case class PimpedUserChat(
+    id: Chat.Id,
+    lines: List[PimpedUserLine]
+) extends Chat[PimpedUserLine] {
+
+  val loginRequired = true
+
+  def forUser(u: Option[User]): PimpedUserChat =
+    if (u.??(_.troll)) this
+    else copy(lines = lines filterNot (_.troll))
+
+  def userIds = lines.map(_.userId)
+
+  def truncate(max: Int) = copy(lines = lines.drop((lines.size - max) atLeast 0))
+}
+
+object PimpedUserChat {
+  case class Mine(chat: PimpedUserChat, timeout: Boolean) {
     def truncate(max: Int) = copy(chat = chat truncate max)
   }
 }
@@ -67,6 +95,7 @@ case class MixedChat(
     if (u.??(_.troll)) this
     else copy(lines = lines filter {
       case l: UserLine => !l.troll
+      case l: PimpedUserLine => !l.troll
       case l: PlayerLine => true
     })
 

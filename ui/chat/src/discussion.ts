@@ -199,7 +199,8 @@ function renderLine(ctrl: Ctrl, line: Line) {
     textNode
   ]);
 
-  const userNode = thunk('a', line.u, userLink, [line.u, line.title]);
+  const displayName = line.n || line.u
+  const userNode = thunk('a', displayName, userLink, [displayName, line.title, line.u]);
 
   return h('li', {
   }, ctrl.moderation() ? [

@@ -27,7 +27,7 @@ final class TeamApi(
 
   def team(id: Team.ID) = coll.team.byId[Team](id)
 
-  def light(id: Team.ID) = coll.team.byId[LightTeam](id, $doc("name" -> true))
+  def light(id: Team.ID) = coll.team.byId[LightTeam](id, $doc("name" -> true, "wfd" -> true))
 
   def request(id: Team.ID) = coll.request.byId[Request](id)
 
@@ -193,6 +193,9 @@ final class TeamApi(
 
   def disable(team: Team): Funit =
     TeamRepo.disable(team).void >>- (indexer ! RemoveTeam(team.id))
+
+  def setWfd(team: Team): Funit =
+    TeamRepo.setWfd(team).void >>- cached.wfdCache.invalidate(team.id)
 
   // delete for ever, with members but not forums
   def delete(team: Team): Funit =

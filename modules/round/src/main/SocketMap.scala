@@ -13,7 +13,8 @@ private object SocketMap {
     makeHistory: Game.ID => History,
     dependencies: RoundSocket.Dependencies,
     socketTimeout: FiniteDuration,
-    playban: lidraughts.playban.PlaybanApi
+    playban: lidraughts.playban.PlaybanApi,
+    toWfdName: String => Option[String]
   ): SocketMap = {
 
     import dependencies._
@@ -31,7 +32,8 @@ private object SocketMap {
         gameId = id,
         history = makeHistory(id),
         keepMeAlive = () => socketMap touch id,
-        getGoneWeights = goneWeights
+        getGoneWeights = goneWeights,
+        toWfdName = toWfdName
       ),
       accessTimeout = socketTimeout,
       monitoringName = "round.socketMap",

@@ -13,6 +13,8 @@ private[team] final class Cli(api: TeamApi, coll: Colls) extends lidraughts.comm
 
     case "team" :: "disable" :: team :: Nil => perform(team)(api.disable)
 
+    case "team" :: "wfd" :: team :: Nil => perform(team)(api.setWfd)
+
     case "team" :: "recompute" :: "nbMembers" :: "all" :: Nil =>
       api.recomputeNbMembers
       fuccess("In progress... it will take a while")

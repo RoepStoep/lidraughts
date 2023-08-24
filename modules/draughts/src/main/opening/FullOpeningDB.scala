@@ -6,12 +6,12 @@ import format.FEN
 object FullOpeningDB {
 
   private def all: Vector[FullOpening] = Vector()
-  /*private def all: Vector[FullOpening] = OpeningTable.tableFMJD.positions.map { p =>
+  /*private def all: Vector[FullOpening] = OpeningTable.tableFmjd.positions.map { p =>
     new FullOpening(
       code = p.code,
       name = p.name.getOrElse("?"),
       fen = p.fen.split(':').take(3).mkString(":"),
-      source = OpeningTable.tableFMJD.name.some
+      source = OpeningTable.tableFmjd.name.some
     )
   } toVector*/
 

@@ -20,12 +20,13 @@ export function userHtml(ctrl: RoundController, player: Player, position: Positi
 
   if (user) {
     const connecting = !player.onGame && ctrl.firstSeconds && user.online,
-      title64 = user.title && user.title.endsWith('-64');
+      title64 = user.title && user.title.endsWith('-64'),
+      displayName = user.displayName || user.username;
     return h(`div.ruser-${position}.ruser.user-link`, {
       class: {
         online: player.onGame,
         offline: !player.onGame,
-        long: user.username.length > 16,
+        long: displayName.length > 16,
         connecting
       }
     }, [
@@ -45,8 +46,8 @@ export function userHtml(ctrl: RoundController, player: Player, position: Positi
           'span.title',
           title64 ? { attrs: {'data-title64': true } } : (user.title == 'BOT' ? { attrs: {'data-bot': true } } : {}),
           title64 ? user.title.slice(0, user.title.length - 3) : user.title
-        ), ' ', user.username
-      ] : [user.username]),
+        ), ' ', displayName
+      ] : [displayName]),
       rating ? h('rating', rating + (player.provisional ? '?' : '')) : null,
       ratingDiff,
       player.engine ? h('span', {

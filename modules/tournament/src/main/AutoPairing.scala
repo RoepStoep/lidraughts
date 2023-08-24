@@ -44,6 +44,7 @@ final class AutoPairing(
       drawLimit = tour.spotlight.flatMap(_.drawLimit)
     ).withId(pairing.gameId)
       .withTournamentId(tour.id, if (opening._1 == -1) none else opening._1.some)
+      .withWfd(tour.isWfd)
       .start
     (GameRepo insertDenormalized game) >>- {
       onStart(game.id)

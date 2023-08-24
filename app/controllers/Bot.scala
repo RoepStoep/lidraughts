@@ -30,7 +30,7 @@ object Bot extends LidraughtsController {
       case Array("account", "upgrade") =>
         lidraughts.user.UserRepo.setBot(me) >>
           Env.pref.api.setBot(me) >>-
-          Env.user.lightUserApi.invalidate(me.id) inject jsonOkResult recover {
+          Env.user.uncacheLightUser(me.id) inject jsonOkResult recover {
             case e: lidraughts.base.LidraughtsException => BadRequest(jsonError(e.getMessage))
           }
       case Array("game", id, "chat") => WithBot(me) {

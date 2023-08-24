@@ -25,7 +25,7 @@ object OpeningTable {
 
   import StartingPosition.Category
 
-  private val categoriesFMJD = List(
+  private val categoriesFmjd = List(
     Category("1", List(
       StartingPosition("1-I", "W:W17,21,22,23,24,25,26,27,28,30,31,32:B1,2,3,4,6,7,8,9,11,12,13,14", "1. ab4 ba5 2. ba3 ab6 3. ab2 dc5", "ab4 ba5 ba3 ab6 ab2 dc5".some),
       StartingPosition("1-II", "W:W17,21,22,23,24,25,26,27,28,29,31,32:B1,2,3,4,5,7,8,9,11,12,13,15", "1. ab4 ba5 2. ba3 cb6 3. cb2 de5", "ab4 ba5 ba3 cb6 cb2 de5".some),
@@ -856,7 +856,7 @@ object OpeningTable {
     ))
   )
 
-  private val categoriesFMJDBrazilian = categoriesFMJD.map {
+  private val categoriesFmjdBrazilian = categoriesFmjd.map {
     case cat if cat.name == "1" =>
       cat.copy(positions = cat.positions.filterNot(_.code == "1-IX"))
     case cat if cat.name == "4" =>
@@ -1063,18 +1063,18 @@ object OpeningTable {
     ))
   )
 
-  val tableFMJD = OpeningTable(
+  val tableFmjd = OpeningTable(
     key = "fmjd",
     name = "FMJD Drawing Table 64",
     url = "https://results.fmjd.org/viewpage.php?page_id=2",
-    categories = categoriesFMJD
+    categories = categoriesFmjd
   )
 
-  val tableFMJDBrazilian = OpeningTable(
+  val tableFmjdBrazilian = OpeningTable(
     key = "fmjdBrazilian",
     name = "FMJD Drawing Table 64 - Brazilian",
     url = "https://results.fmjd.org/viewpage.php?page_id=2",
-    categories = categoriesFMJDBrazilian
+    categories = categoriesFmjdBrazilian
   )
 
   val tableIDFBasic = OpeningTable(
@@ -1084,7 +1084,7 @@ object OpeningTable {
     categories = categoriesIDFBasic
   )
 
-  private val allTables = List(tableFMJD, tableFMJDBrazilian, tableIDFBasic)
+  private val allTables = List(tableFmjd, tableFmjdBrazilian, tableIDFBasic)
   private val key2table: Map[String, OpeningTable] = allTables.map { p =>
     p.key -> p
   }(scala.collection.breakOut)

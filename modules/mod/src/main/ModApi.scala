@@ -4,7 +4,7 @@ import lidraughts.common.{ IpAddress, EmailAddress }
 import lidraughts.report.{ Mod, ModId, Suspect, SuspectId, Room }
 import lidraughts.security.{ Permission, Granter }
 import lidraughts.security.{ Firewall, UserSpy, Store => SecurityStore }
-import lidraughts.user.{ User, UserRepo, Title, LightUserApi }
+import lidraughts.user.{ User, UserRepo, Title }
 
 final class ModApi(
     logApi: ModlogApi,
@@ -13,7 +13,7 @@ final class ModApi(
     reporter: akka.actor.ActorSelection,
     reportApi: lidraughts.report.ReportApi,
     notifier: ModNotifier,
-    lightUserApi: LightUserApi,
+    uncacheLightUser: User.ID => Unit,
     refunder: RatingRefund,
     lidraughtsBus: lidraughts.common.Bus
 ) {
@@ -111,12 +111,12 @@ final class ModApi(
       case None => {
         UserRepo.removeTitle(user.id) >>-
           logApi.removeTitle(mod, user.id) >>-
-          lightUserApi.invalidate(user.id)
+          uncacheLightUser(user.id)
       }
       case Some(t) => Title.names.get(t) ?? { tFull =>
         UserRepo.addTitle(user.id, t) >>-
           logApi.addTitle(mod, user.id, s"$t ($tFull)") >>-
-          lightUserApi.invalidate(user.id)
+          uncacheLightUser(user.id)
       }
     }
   }

@@ -36,10 +36,10 @@ final class JsonView(
   private def kingMoves(game: Game, color: Color) =
     (game.variant.frisianVariant) option game.history.kingMoves(color)
 
-  private def commonPlayerJson(g: Game, p: GamePlayer, user: Option[User], withFlags: WithFlags): JsObject =
+  private def commonPlayerJson(g: Game, p: GamePlayer, user: Option[User], withFlags: WithFlags, isWfd: Boolean): JsObject =
     Json.obj(
       "color" -> p.color.name
-    ).add("user" -> user.map { userJsonView.minimal(_, g.perfType) })
+    ).add("user" -> user.map { userJsonView.minimal(_, g.perfType, isWfd) })
       .add("rating" -> p.rating)
       .add("ratingDiff" -> p.ratingDiff)
       .add("provisional" -> p.provisional)
@@ -57,7 +57,8 @@ final class JsonView(
     playerUser: Option[User],
     initialFen: Option[FEN],
     withFlags: WithFlags,
-    nvui: Boolean
+    nvui: Boolean,
+    isWfd: Boolean = false
   ): Fu[JsObject] =
     getSocketStatus(pov.gameId) zip
       (pov.opponent.userId ?? UserRepo.byId) zip
@@ -68,13 +69,13 @@ final class JsonView(
           Json.obj(
             "game" -> gameJsonView(game, initialFen),
             "player" -> {
-              commonPlayerJson(game, player, playerUser, withFlags) ++ Json.obj(
+              commonPlayerJson(game, player, playerUser, withFlags, isWfd) ++ Json.obj(
                 "id" -> playerId,
                 "version" -> socket.version.value
               )
             }.add("onGame" -> (player.isAi || socket.onGame(player.color))),
             "opponent" -> {
-              commonPlayerJson(game, opponent, opponentUser, withFlags) ++ Json.obj(
+              commonPlayerJson(game, opponent, opponentUser, withFlags, isWfd) ++ Json.obj(
                 "color" -> opponent.color.name,
                 "ai" -> opponent.aiLevel
               )
@@ -128,11 +129,11 @@ final class JsonView(
             })
       }
 
-  private def commonWatcherJson(g: Game, p: GamePlayer, user: Option[User], withFlags: WithFlags): JsObject =
+  private def commonWatcherJson(g: Game, p: GamePlayer, user: Option[User], withFlags: WithFlags, isWfd: Boolean): JsObject =
     Json.obj(
       "color" -> p.color.name,
       "name" -> p.name
-    ).add("user" -> user.map { userJsonView.minimal(_, g.perfType) })
+    ).add("user" -> user.map { userJsonView.minimal(_, g.perfType, isWfd) })
       .add("ai" -> p.aiLevel)
       .add("rating" -> p.rating)
       .add("ratingDiff" -> p.ratingDiff)
@@ -148,7 +149,8 @@ final class JsonView(
     me: Option[User],
     tv: Option[OnTv],
     initialFen: Option[FEN] = None,
-    withFlags: WithFlags
+    withFlags: WithFlags,
+    isWfd: Boolean = false
   ) =
     getSocketStatus(pov.gameId) zip
       UserRepo.pair(pov.player.userId, pov.opponent.userId) map {
@@ -163,12 +165,12 @@ final class JsonView(
             "clock" -> game.clock.map(clockJson),
             "correspondence" -> game.correspondenceClock,
             "player" -> {
-              commonWatcherJson(game, player, playerUser, withFlags) ++ Json.obj(
+              commonWatcherJson(game, player, playerUser, withFlags, isWfd) ++ Json.obj(
                 "version" -> socket.version.value,
                 "spectator" -> true
               )
             }.add("onGame" -> (player.isAi || socket.onGame(player.color))),
-            "opponent" -> commonWatcherJson(game, opponent, opponentUser, withFlags).add("onGame" -> (opponent.isAi || socket.onGame(opponent.color))),
+            "opponent" -> commonWatcherJson(game, opponent, opponentUser, withFlags, isWfd).add("onGame" -> (opponent.isAi || socket.onGame(opponent.color))),
             "captureLength" -> captureLength(pov),
             "orientation" -> pov.color.name,
             "url" -> Json.obj(

@@ -15,7 +15,8 @@ case class Team(
     open: Boolean,
     createdAt: DateTime,
     createdBy: User.ID,
-    chat: Boolean
+    chat: Boolean,
+    wfd: Option[Boolean] = None
 ) {
 
   def id = _id
@@ -26,7 +27,9 @@ case class Team(
 
   def isCreator(user: String) = user == createdBy
 
-  def light = lidraughts.hub.lightTeam.LightTeam(_id, name)
+  def light = lidraughts.hub.lightTeam.LightTeam(_id, name, wfd)
+
+  def isWfd = ~wfd
 }
 
 object Team {

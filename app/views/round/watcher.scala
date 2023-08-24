@@ -22,12 +22,13 @@ object watcher {
     cross: Option[lidraughts.game.Crosstable.WithMatchup],
     userTv: Option[lidraughts.user.User] = None,
     chatOption: Option[lidraughts.chat.UserChat.Mine],
+    pimpChat: Option[String => Option[String]],
     bookmarked: Boolean
   )(implicit ctx: Context) = {
 
     val chatJson = chatOption map { c =>
       chat.json(
-        c.chat,
+        c.chat.pimp(pimpChat),
         name = trans.spectatorRoom.txt(),
         timeout = c.timeout,
         withNote = ctx.isAuth,
@@ -62,7 +63,7 @@ LidraughtsRound.boot(${
           ),
           bits.roundAppPreload(pov, false),
           div(cls := "round__underboard")(
-            bits.crosstable(cross, pov.game),
+            bits.crosstable(cross, pov.game, isWfd = pov.game.isWfd || ~tour.map(_.tour.isWfd)),
             simul.map { s =>
               div(cls := List(
                 "round__now-playing" -> true,

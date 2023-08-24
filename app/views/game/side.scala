@@ -78,7 +78,7 @@ object side {
           game.players.map { p =>
             frag(
               div(cls := s"player color-icon is ${p.color.name} text")(
-                playerLink(p, withOnline = false, withDiff = true, withBerserk = true)
+                playerLink(p, withOnline = false, withDiff = true, withBerserk = true, isWfd = game.isWfd || ~tour.map(_.tour.isWfd))
               ),
               tour.flatMap(_.teamVs).map(_.teams(p.color)) map { teamLink(_, false)(cls := "team") }
             )

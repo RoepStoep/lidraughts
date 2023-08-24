@@ -32,7 +32,8 @@ private[api] final class RoundApi(
       jsonView.playerJson(pov, ctx.pref, apiVersion, ctx.me,
         withFlags = WithFlags(blurs = ctx.me ?? Granter(_.ViewBlurs)),
         initialFen = initialFen,
-        nvui = ctx.blind) zip
+        nvui = ctx.blind,
+        isWfd = pov.game.isWfd || ~tour.map(_.tour.isWfd)) zip
         (pov.game.simulId ?? getSimul) zip
         swissApi.gameView(pov) zip
         (ctx.me.ifTrue(ctx.isMobileApi) ?? (me => noteApi.get(pov.gameId, me.id))) zip
@@ -55,7 +56,8 @@ private[api] final class RoundApi(
     initialFenO.fold(GameRepo initialFen pov.game)(fuccess).flatMap { initialFen =>
       jsonView.watcherJson(pov, ctx.pref, apiVersion, ctx.me, tv,
         initialFen = initialFen,
-        withFlags = WithFlags(blurs = ctx.me ?? Granter(_.ViewBlurs))) zip
+        withFlags = WithFlags(blurs = ctx.me ?? Granter(_.ViewBlurs)),
+        isWfd = pov.game.isWfd || ~tour.map(_.tour.isWfd)) zip
         (pov.game.simulId ?? getSimul) zip
         swissApi.gameView(pov) zip
         (ctx.me.ifTrue(ctx.isMobileApi) ?? (me => noteApi.get(pov.gameId, me.id))) zip

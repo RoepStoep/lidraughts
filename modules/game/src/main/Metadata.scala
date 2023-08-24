@@ -14,6 +14,7 @@ private[game] case class Metadata(
     timeOutUntil: Option[DateTime],
     drawLimit: Option[Int],
     microMatch: Option[String],
+    isWfd: Boolean,
     analysed: Boolean
 ) {
 
@@ -39,7 +40,7 @@ private[game] case class Metadata(
 
 private[game] object Metadata {
 
-  val empty = Metadata(None, None, None, None, None, None, None, None, None, false)
+  val empty = Metadata(None, None, None, None, None, None, None, None, None, false, false)
 }
 
 case class PdnImport(

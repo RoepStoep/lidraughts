@@ -90,9 +90,11 @@ lidraughts.powertip = (() => {
   function onPowertipPreRender(id, preload) {
     return function() {
       let url = ($(this).data('href') || $(this).attr('href')).replace(/\?.+$/, '');
+      let wfd = $(this).data('wfd') !== undefined || $(this).attr('wfd') !== undefined;
       if (preload) preload(url);
       $.ajax({
         url: url + '/mini',
+        data: wfd ? 'wfd=1' : undefined,
         success: function(html) {
           $('#' + id).html(html);
           lidraughts.pubsub.emit('content_loaded');

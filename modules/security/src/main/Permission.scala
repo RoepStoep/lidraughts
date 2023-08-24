@@ -39,6 +39,7 @@ object Permission {
   case object ManageTournament extends Permission("ROLE_MANAGE_TOURNAMENT")
   case object ManageEvent extends Permission("ROLE_MANAGE_EVENT")
   case object ManageSimul extends Permission("ROLE_MANAGE_SIMUL")
+  case object ManageWfd extends Permission("ROLE_MANAGE_WFD")
   case object ChangePermission extends Permission("ROLE_CHANGE_PERMISSION")
   case object PublicMod extends Permission("ROLE_PUBLIC_MOD")
   case object Developer extends Permission("ROLE_DEVELOPER")
@@ -71,7 +72,7 @@ object Permission {
   case object Admin extends Permission("ROLE_ADMIN", List(
     Hunter, ModerateForum, IpBan, PrintBan, CloseAccount, ReopenAccount, ViewPrivateComms,
     ChatTimeout, Shadowban, SetTitle, SetEmail,
-    MessageAnyone, ManageTeam, ManageTournament, ManageEvent, ManageSimul,
+    MessageAnyone, ManageTeam, ManageTournament, ManageEvent, ManageSimul, ManageWfd,
     PracticeConfig, RemoveRanking, ReportBan, DisapproveCoachReview,
     Relay, Streamers, CreatePuzzles, DisableTwoFactor, ChangePermission
   ))

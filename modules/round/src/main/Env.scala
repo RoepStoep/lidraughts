@@ -24,7 +24,7 @@ final class Env(
     aiPerfApi: lidraughts.draughtsnet.AiPerfApi,
     crosstableApi: lidraughts.game.CrosstableApi,
     playban: lidraughts.playban.PlaybanApi,
-    lightUser: lidraughts.common.LightUser.Getter,
+    userEnv: lidraughts.user.Env,
     userJsonView: lidraughts.user.JsonView,
     gameJsonView: lidraughts.game.JsonView,
     rankingApi: lidraughts.user.RankingApi,
@@ -192,13 +192,15 @@ final class Env(
     socketTimeout = SocketTimeout,
     dependencies = RoundSocket.Dependencies(
       system = system,
-      lightUser = lightUser,
+      lightUser = userEnv.lightUser,
+      lightWfdUser = userEnv.lightWfdUser,
       uidTtl = SocketUidTimeout,
       disconnectTimeout = PlayerDisconnectTimeout,
       ragequitTimeout = PlayerRagequitTimeout,
       getGame = proxy.game _
     ),
-    playban = playban
+    playban = playban,
+    toWfdName = userEnv.wfdUsername
   )
 
   lazy val selfReport = new SelfReport(roundMap, proxy.pov)
@@ -354,7 +356,7 @@ object Env {
     aiPerfApi = lidraughts.draughtsnet.Env.current.aiPerfApi,
     crosstableApi = lidraughts.game.Env.current.crosstableApi,
     playban = lidraughts.playban.Env.current.api,
-    lightUser = lidraughts.user.Env.current.lightUser,
+    userEnv = lidraughts.user.Env.current,
     userJsonView = lidraughts.user.Env.current.jsonView,
     gameJsonView = lidraughts.game.Env.current.jsonView,
     rankingApi = lidraughts.user.Env.current.rankingApi,

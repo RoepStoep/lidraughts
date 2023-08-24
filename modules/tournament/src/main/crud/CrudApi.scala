@@ -11,7 +11,7 @@ import lidraughts.db.paginator.Adapter
 import lidraughts.hub.lightTeam._
 import lidraughts.user.User
 
-final class CrudApi {
+final class CrudApi(cached: Cached) {
 
   def list = TournamentRepo uniques 50
 
@@ -85,7 +85,7 @@ final class CrudApi {
   private def updateTour(tour: Tournament, data: CrudForm.Data, teams: List[LightTeam]) = {
     import data._
     val clock = draughts.Clock.Config((clockTime * 60).toInt, clockIncrement)
-    tour.copy(
+    val newTour = tour.copy(
       name = name,
       clock = clock,
       minutes = minutes,
@@ -117,6 +117,13 @@ final class CrudApi {
         tour.perfType.fold(tour) { perfType =>
           tour.copy(conditions = data.conditions.convert(perfType, teams.map(_.pair)(collection.breakOut)))
         }
+      } |> { tour =>
+        tour.copy(isWfd = !tour.isTeamBattle && tour.conditions.teamMember.exists { team =>
+          teams.exists(t => t.isWfd && t.id == team.teamId)
+        })
       }
+    if (tour.isWfd != newTour.isWfd)
+      cached.wfdCache.invalidate(tour.id)
+    newTour
   }
 }

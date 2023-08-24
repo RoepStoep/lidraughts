@@ -128,12 +128,15 @@ object TournamentRepo {
   def clockById(id: Tournament.ID): Fu[Option[draughts.Clock.Config]] =
     coll.primitiveOne[draughts.Clock.Config]($id(id), "clock")
 
+  def isWfd(id: Tournament.ID): Fu[Boolean] =
+    byId(id).dmap(t => ~t.map(_.isWfd))
+
   // all team-only tournament
   // and team battles
   // this query is carefully crafted so that it hits both indexes
-  def byTeam(teamId: String, nb: Int): Fu[List[Tournament]] =
+  def byTeam(teamId: String, nb: Int, withTeamBattle: Boolean): Fu[List[Tournament]] =
     coll
-      .find(byTeamSelect(teamId))
+      .find(if (withTeamBattle) byTeamSelect(teamId) else byTeamSelectArena(teamId))
       .sort($sort desc "startsAt")
       .list[Tournament](nb)
 
@@ -152,10 +155,13 @@ object TournamentRepo {
         "teamBattle.teams" -> teamId,
         "teamBattle" $exists true
       ),
-      $doc(
-        "conditions.teamMember.teamId" -> teamId,
-        "conditions.teamMember" $exists true
-      )
+      byTeamSelectArena(teamId)
+    )
+
+  private def byTeamSelectArena(teamId: String) =
+    $doc(
+      "conditions.teamMember.teamId" -> teamId,
+      "conditions.teamMember" $exists true
     )
 
   def setStatus(tourId: Tournament.ID, status: Status) =

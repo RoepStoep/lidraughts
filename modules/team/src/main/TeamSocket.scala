@@ -18,6 +18,9 @@ private[team] final class TeamSocket(
     teamId: String,
     protected val history: History[Messadata],
     lightUser: lidraughts.common.LightUser.Getter,
+    lightWfdUser: lidraughts.common.LightWfdUser.Getter,
+    toWfdName: String => Option[String],
+    isWfdTeam: String => Boolean,
     uidTtl: Duration,
     keepMeAlive: () => Unit
 ) extends SocketTrouper[SocketMember](system, uidTtl) with Historical[SocketMember, Messadata] {
@@ -49,12 +52,13 @@ private[team] final class TeamSocket(
 
     case NotifyCrowd =>
       delayedCrowdNotification = false
-      showSpectators(lightUser)(members.values) foreach {
+      showSpectators(lightUser, isWfdTeam(teamId) option lightWfdUser)(members.values) foreach {
         notifyAll("crowd", _)
       }
 
   }: Trouper.Receive) orElse lidraughts.chat.Socket.out(
-    send = (t, d, trollish) => notifyVersion(t, d, Messadata(trollish))
+    send = (t, d, trollish) => notifyVersion(t, d, Messadata(trollish)),
+    pimpUser = Some(() => isWfdTeam(teamId) option toWfdName)
   )
 
   override protected def broom: Unit = {

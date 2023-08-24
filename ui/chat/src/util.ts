@@ -1,9 +1,16 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode'
 
-export function userLink(u: string, title?: string) {
-  const trunc = u.substring(0, 14),
-    title64 = title && title.endsWith('-64');
+export function userLink(u: string, title?: string, id?: string) {
+  let trunc = u;
+  if (trunc.length > 14) {
+    const space = trunc.indexOf(' ');
+    if (space > 2) {
+      trunc = trunc.slice(0, 1) + '.' + trunc.slice(space)
+    }
+    trunc = trunc.slice(0, 14)
+  }
+  const title64 = title && title.endsWith('-64');
   return h('a', {
     // can't be inlined because of thunks
     class: {
@@ -11,7 +18,7 @@ export function userLink(u: string, title?: string) {
       ulpt: true
     },
     attrs: {
-      href: '/@/' + u
+      href: '/@/' + (id || u)
     }
   }, title ? [
     h(

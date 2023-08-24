@@ -26,7 +26,7 @@ export function input(ctrl: TournamentController): VNode {
               tour: ctrl.data.id,
               focus: true,
               onSelect(v: any) {
-                ctrl.jumpToPageOf(v.id || v);
+                ctrl.jumpToPageOf(v);
                 $(el).typeahead('close');
                 el.value = '';
                 ctrl.redraw();

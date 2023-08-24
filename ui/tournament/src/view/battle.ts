@@ -86,17 +86,18 @@ export function teamName(battle: TeamBattle, teamId: string): VNode {
 function teamTr(ctrl: TournamentController, battle: TeamBattle, team: RankedTeam) {
   const players = [] as (string | VNode)[];
   team.players.forEach((p, i) => {
+    const userId = p.user.id || p.user.name
     if (i > 0) players.push('+');
     players.push(h('score.ulpt.user-link', {
-      key: p.user.name,
+      key: userId,
       class: { top: i === 0 },
       attrs: {
-        'data-href': '/@/' + p.user.name,
+        'data-href': '/@/' + userId,
         'data-name': p.user.name
       },
       hook: {
         destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement),
-        ...bind('click', _ => ctrl.jumpToPageOf(p.user.name), ctrl.redraw)
+        ...bind('click', _ => ctrl.jumpToPageOf(p.user), ctrl.redraw)
       }
     }, [
       ...(i === 0 ? [h('username', playerName(p.user)), ' '] : []),

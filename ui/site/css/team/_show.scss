@@ -186,3 +186,17 @@ $section-margin-more: 5vh;
     border: 1px solid $c-brag;
   }
 }
+
+.official-wfd {
+  display: inline-flex;
+  margin-left: 1.2rem;
+  font-family: 'lidraughts';
+
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  color: $c-link-dim;
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(-4px);
+    color: $c-link;
+  }
+}

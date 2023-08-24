@@ -32,12 +32,12 @@
       }
     };
   });
-  $.userLink = function(u) {
-    return $.userLinkLimit(u, false);
+  $.userLink = function(u, id) {
+    return $.userLinkLimit(u, false, '', id);
   };
-  $.userLinkLimit = function(u, limit, klass) {
+  $.userLinkLimit = function(u, limit, klass, uid) {
     var split = u.split(' ');
-    var id = split.length == 1 ? split[0] : split[1];
+    var id = uid || (split.length == 1 ? split[0] : split[1]);
     return u ? '<a class="user-link ulpt ' + (klass || '') + '" href="/@/' + id + '">' + (limit ? u.substring(0, limit) : u) + '</a>' : 'Anonymous';
   };
 
@@ -648,11 +648,14 @@
       lidraughts.watchersData = data;
       if (!data || !data.nb) return this.element.addClass('none');
       if (this.number.length) this.number.text(data.nb);
-      if (data.users) {
-        var tags = data.users.map(u => {
-          const split = u.split(' '), title64 = split.length > 1 && split[0].endsWith('-64');
-          return $.userLink(title64 ? split[0].slice(0, split[0].length - 3) + ' ' + split[1] : u);
-        });
+      if (data.users || data.namedUsers) {
+        var tags = data.namedUsers ? data.namedUsers.map(u => {
+            const split = u.n.split(' '), title64 = split.length > 1 && split[0].endsWith('-64');
+            return $.userLink(title64 ? split[0].slice(0, split[0].length - 3) + ' ' + split[1] : u.n, u.i);
+          }) : data.users.map(u => {
+            const split = u.split(' '), title64 = split.length > 1 && split[0].endsWith('-64');
+            return $.userLink(title64 ? split[0].slice(0, split[0].length - 3) + ' ' + split[1] : u);
+          });
         if (data.anons === 1) tags.push('Anonymous');
         else if (data.anons) tags.push('Anonymous (' + data.anons + ')');
         this.list.html(tags.join(', '));

@@ -104,13 +104,13 @@ export default class TournamentController {
     xhr.loadPage(this, page);
   };
 
-  jumpToPageOf = (name: string) => {
-    const userId = name.toLowerCase();
+  jumpToPageOf = (player: any) => {
+    const userId = player.id || (player.name ? player.name.toLowerCase() : player);
     xhr.loadPageOf(this, userId).then(data => {
       this.loadPage(data);
       this.page = data.page;
       this.searching = false;
-      this.pages[this.page].filter(p => p.name.toLowerCase() == userId).forEach(this.showPlayerInfo);
+      this.pages[this.page].filter(p => (p.id || p.name.toLowerCase()) == userId).forEach(this.showPlayerInfo);
       this.redraw();
     });
   }
@@ -157,7 +157,7 @@ export default class TournamentController {
 
   showPlayerInfo = (player) => {
     if (this.data.secondsToStart) return;
-    const userId = player.name.toLowerCase();
+    const userId = player.id || player.name.toLowerCase();
     this.teamInfo.requested = undefined;
     this.playerInfo = {
       id: this.playerInfo.id === userId ? null : userId,

@@ -63,13 +63,13 @@ function duelPlayerMeta(p: DuelPlayer) {
   ];
 }
 
-function renderDuel(battle?: TeamBattle, duelTeams?: DuelTeams) {
+function renderDuel(battle?: TeamBattle, duelTeams?: DuelTeams, wfd?: boolean) {
   return (d: Duel) => h('a.glpt', {
     key: d.id,
-    attrs: { href: '/' + d.id }
+    attrs: { href: '/' + d.id, wfd: !!wfd }
   }, [
     battle && duelTeams ? h('line.t', [0, 1].map(i =>
-      teamName(battle, duelTeams[d.p[i].n.toLowerCase()])
+      teamName(battle, duelTeams[d.p[i].i || d.p[i].n.toLowerCase()])
     )) : undefined,
     h('line.a', [
       h('strong', d.p[0].n),
@@ -96,6 +96,6 @@ export default function(ctrl: TournamentController): VNode {
       hook: bind('click', _ => !ctrl.disableClicks)
     }, [
       h('h2', 'Top games')
-    ].concat(ctrl.data.duels.map(renderDuel(ctrl.data.teamBattle, ctrl.data.duelTeams)))) : null
+    ].concat(ctrl.data.duels.map(renderDuel(ctrl.data.teamBattle, ctrl.data.duelTeams, ctrl.data.isWfd)))) : null
   ]);
 };

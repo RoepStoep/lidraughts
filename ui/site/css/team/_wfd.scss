@@ -1,0 +1,27 @@
+.slist {
+  @extend %break-word-hard;
+  td {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+}
+
+.wfd-modal {
+  display: block;
+  text-align: center;
+  #modal-wrap {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  h2 {
+    margin: 1.5rem 0;
+  }
+  form > div {
+    padding: .5em 1em;
+    .form-group {
+      text-align: left;
+      padding: 0 0 .8rem .8rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

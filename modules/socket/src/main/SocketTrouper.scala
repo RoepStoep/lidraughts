@@ -7,7 +7,7 @@ import scala.concurrent.Promise
 
 import actorApi._
 import draughts.Centis
-import lidraughts.common.LightUser
+import lidraughts.common.{ LightUser, LightWfdUser }
 import lidraughts.hub.actorApi.{ Deploy, Announce }
 import lidraughts.hub.actorApi.socket.HasUserId
 import lidraughts.hub.Trouper
@@ -153,7 +153,10 @@ abstract class SocketTrouper[M <: SocketMember](
 
   protected val maxSpectatorUsers = 15
 
-  protected def showSpectators(lightUser: LightUser.Getter)(watchers: Iterable[SocketMember]): Fu[Option[JsValue]] = watchers.size match {
+  protected def showSpectators(
+    lightUser: LightUser.Getter,
+    lightWfdUser: Option[LightWfdUser.Getter] = None
+  )(watchers: Iterable[SocketMember]): Fu[Option[JsValue]] = watchers.size match {
     case 0 => fuccess(none)
     case s if s > maxSpectatorUsers => fuccess(Json.obj("nb" -> s).some)
     case s => {
@@ -163,12 +166,24 @@ abstract class SocketTrouper[M <: SocketMember](
 
       val total = anons + userIds.size
 
-      userIds.map(lightUser).sequenceFu.map { users =>
-        Json.obj(
+      val usersJson = lightWfdUser.fold(userIds.map(lightUser).sequenceFu.map { users =>
+        Json.obj("users" -> users.flatten.map(_.titleName))
+      }) { lightWfd =>
+        userIds.map(lightWfd).sequenceFu.map { users =>
+          Json.obj("namedUsers" -> users.flatten.map { user =>
+            Json.obj(
+              "n" -> user.titleName,
+              "i" -> user.id
+            )
+          })
+        }
+      }
+
+      usersJson.map { users =>
+        Some(users ++ Json.obj(
           "nb" -> total,
-          "users" -> users.flatten.map(_.titleName),
           "anons" -> anons
-        ).some
+        ))
       }
     }
   }

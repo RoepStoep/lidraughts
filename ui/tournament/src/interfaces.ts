@@ -41,6 +41,7 @@ export interface FeaturedGame {
 interface FeaturedPlayer {
   rank: number;
   name: string;
+  id?: string;
   rating: number;
   title?: string;
   berserk?: boolean;
@@ -63,7 +64,8 @@ export interface RankedTeam {
 
 export interface TeamPlayer {
   user: {
-    name: string
+    name: string,
+    id?: string
   };
   score: number
 }
@@ -91,6 +93,7 @@ export interface TeamInfo {
 
 export interface TeamPlayer {
   name: string;
+  id?: string;
   rating: number;
   score: number;
   fire: boolean;
@@ -104,6 +107,7 @@ export interface Duel {
 
 export interface DuelPlayer {
   n: string; // name
+  i?: string; // id
   r: number // rating
   k: number // rank
   t?: string // title

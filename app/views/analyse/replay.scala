@@ -28,6 +28,7 @@ object replay {
     cross: Option[lidraughts.game.Crosstable.WithMatchup],
     userTv: Option[lidraughts.user.User],
     chatOption: Option[lidraughts.chat.UserChat.Mine],
+    pimpChat: Option[String => Option[String]],
     bookmarked: Boolean,
     onCheatList: Option[Boolean]
   )(implicit ctx: Context) = {
@@ -35,7 +36,7 @@ object replay {
     import pov._
     val chatJson = chatOption map { c =>
       views.html.chat.json(
-        c.chat,
+        c.chat.pimp(pimpChat),
         name = trans.spectatorRoom.txt(),
         timeout = c.timeout,
         withNote = ctx.isAuth,

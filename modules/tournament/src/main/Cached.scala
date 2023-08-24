@@ -23,6 +23,17 @@ private[tournament] final class Cached(
 
   def name(id: Tournament.ID): Option[String] = nameCache sync id
 
+  val wfdCache = new Syncache[Tournament.ID, Boolean](
+    name = "tournament.wfd",
+    compute = TournamentRepo.isWfd,
+    default = _ => false,
+    strategy = Syncache.WaitAfterUptime(10 millis),
+    expireAfter = Syncache.ExpireAfterAccess(1 hour),
+    logger = logger
+  )
+
+  def isWfd(id: Tournament.ID) = wfdCache sync id
+
   val promotable = asyncCache.single(
     name = "tournament.promotable",
     TournamentRepo.promotable,
