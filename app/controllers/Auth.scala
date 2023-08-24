@@ -150,6 +150,7 @@ object Auth extends LidraughtsController {
 
   def signupDfs = Open { implicit ctx =>
     NoTor {
+      lidraughts.mon.dfs.interland.pageHit()
       Ok(html.auth.signupDfs(forms.signup.websiteDfs, env.recaptchaPublicConfig)).fuccess
     }
   }
@@ -301,6 +302,8 @@ object Auth extends LidraughtsController {
               authLog(data.username, data.email, "Signup recaptcha fail")
               BadRequest(html.auth.signupDfs(forms.signup.websiteDfs fill data, env.recaptchaPublicConfig)).fuccess
             case true => HasherRateLimit(data.username, ctx.req) { _ =>
+              lidraughts.mon.dfs.interland.register()
+              lidraughts.mon.user.register.website()
               val email = env.emailAddressValidator.validate(data.realEmail) err s"Invalid email ${data.email}"
               authLog(data.username, data.email, s"DFS: ${email.acceptable.value} fp: ${data.fingerPrint} req:${ctx.req}")
               val passwordHash = Env.user.authenticator passEnc ClearPassword(data.password)

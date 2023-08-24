@@ -678,6 +678,12 @@ object mon {
     val classifiers = rec("bus.classifiers")
     val subscribers = rec("bus.subscribers")
   }
+  object dfs {
+    object interland {
+      val pageHit = inc("dfs.interland.page_hit")
+      val register = inc("dfs.interland.register")
+    }
+  }
 
   def measure[A](path: RecPath)(op: => A): A = measureRec(path(this))(op)
   def measureRec[A](rec: Rec)(op: => A): A = {

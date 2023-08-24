@@ -85,8 +85,8 @@ final class DataForm(
       "firstName" -> LidraughtsForm.cleanText(minLength = 2, maxLength = 20),
       "lastName" -> LidraughtsForm.cleanText(minLength = 2, maxLength = 20),
       "woonplaats" -> optional(nonEmptyText),
-      "telefoonnummer" -> optional(nonEmptyText),
       "school" -> optional(nonEmptyText),
+      "telefoonnummer" -> optional(nonEmptyText),
       "bankrekening" -> optional(nonEmptyText),
       "fp" -> optional(nonEmptyText),
       "g-recaptcha-response" -> optional(nonEmptyText)
@@ -200,8 +200,8 @@ object DataForm {
       lastName: String,
       woonplaats: Option[String],
       school: Option[String],
-      bankrekening: Option[String],
       telefoonnummer: Option[String],
+      bankrekening: Option[String],
       fp: Option[String],
       `g-recaptcha-response`: Option[String]
   ) {
