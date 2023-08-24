@@ -127,6 +127,7 @@
   <string name="newToLidraughts">Nuovo su Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Devi avere un account per farlo</string>
   <string name="signUp">Registrati</string>
+  <string name="signupEmailHint">Lo useremo solamente per reimpostare la tua password.</string>
   <string name="computersAreNotAllowedToPlay">Non è permesso giocare a computer e a giocatori che si fanno aiutare dai computer. Mentre giochi, non farti aiutare da programmi, da database o da altre persone. Inoltre si sconsiglia vivamente di creare account multipli e un uso eccessivo di account porterà alla cancellazione dal sito.</string>
   <string name="games">Partite</string>
   <string name="xPostedInForumY">%1$s ha postato nel forum %2$s</string>

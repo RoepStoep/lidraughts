@@ -162,6 +162,7 @@
   <string name="newToLidraughts">Vai tu esi iekš  «Lidraughts» pirmoreiz?</string>
   <string name="youNeedAnAccountToDoThat">Lai veiktu šo darbību, nepieciešams konts</string>
   <string name="signUp">Reģistrēties</string>
+  <string name="signupEmailHint">Mēs to izmantosim tikai paroles atiestatīšanai.</string>
   <string name="computersAreNotAllowedToPlay">Pie mums nav  atļauts spēlēt dambretes datorprogrammām un to palīdzības izmantotājiem. Lūdzam spēles laikā neizmantot palīdzību no dambretes programmu dzinējiem, datubāzēm vai no citiem spēlētājiem! Netaisiet vairākus spēlētāju kontus: viltus spēlētāju kontu turētājiem tiks piespriests sods (bans), liedzot piekļuvi.</string>
   <string name="games">Spēles</string>
   <string name="forum">Forums</string>

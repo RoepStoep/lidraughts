@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="learnDraughts">Учиться шашкам</string>
   <string name="byPlaying">играя!</string>
   <string name="menu">Меню</string>
   <string name="progressX">Пройдено: %s</string>
   <string name="resetMyProgress">Начать всё сначала</string>
   <string name="youWillLoseAllYourProgress">Все ваши успехи обнулятся!</string>
   <string name="play">играть!</string>
+  <string name="draughtsPieces">Шашечные фигуры</string>
+  <string name="theMen">Шашки</string>
   <string name="theKing">Король</string>
   <string name="fundamentals">Базовый уровень</string>
   <string name="capture">Взятие</string>
@@ -13,6 +16,7 @@
   <string name="takeTheBlackPieces">Съешьте чёрные фигуры!</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">Съешьте все чёрные фигуры!
 И не потеряйте свои.</string>
+  <string name="captureComplete">Поздравляем! Теперь вы знаете, как захватывать шашечными фигурами!</string>
   <string name="protection">Защита</string>
   <string name="keepYourPiecesSafe">Защищайте ваши фигуры</string>
   <string name="protectionIntro">Определите, какие ваши фигуры атакует противник, и защитите их!</string>
@@ -26,18 +30,35 @@
   <string name="combat">Сражение</string>
   <string name="captureAndDefendPieces">Бейте и защищайте фигуры</string>
   <string name="combatIntro">Хороший воин знает как атаку, так и защиту!</string>
+  <string name="combatComplete">Поздравляем! Теперь вы знаете, как сражаться шашечными фигурами!</string>
   <string name="intermediate">Средний уровень</string>
   <string name="boardSetup">Расстановка фигур</string>
+  <string name="howTheGameStarts">Начало шахматной партии</string>
   <string name="boardSetupIntro">Две армии, готовые к бою, встретились лицом к лицу.</string>
+  <string name="thisIsTheInitialPosition">Это начальная позиция
+любой игры в шашки!
+Сделайте любой ход,
+чтобы продолжить.</string>
+  <string name="boardSetupComplete">Поздравляем! Теперь вы знаете, как расставить фигуры на доске.</string>
   <string name="theGameIsADraw">Игра заканчивается вничью</string>
   <string name="advanced">Продвинутый уровень</string>
   <string name="whatNext">Что дальше?</string>
+  <string name="youKnowHowToPlayDraughts">Вы узнали, как играть в шашки, поздравляем! Хотите ли вы стать более сильным игроком?</string>
   <string name="register">Регистрация</string>
   <string name="getAFreeLidraughtsAccount">Зарегистрируйтесь бесплатно</string>
   <string name="practice">Упражнения</string>
+  <string name="makesYourDraughtsPerfect">сделает ваши шашки идеальными</string>
+  <string name="learnCommonDraughtsPositions">Изучайте основные позиции</string>
+  <string name="signUpToSaveYourProgress">Зарегистрируйтесь, чтобы сохранить прогресс</string>
+  <string name="goToNextExercise">Перейти к следящему упражнению</string>
+  <string name="loadNextExerciseImmediately">Загрузить следующее упражнение немедленно</string>
+  <string name="practiceList">Список практики</string>
+  <string name="backToPracticeMenu">Вернуться в меню практики</string>
   <string name="exerciseYourTacticalSkills">Тренируйте свои тактические навыки</string>
   <string name="videos">Видео</string>
+  <string name="watchInstructiveDraughtsVideos">Просмотрите обучающие видео</string>
   <string name="playPeople">Игроки</string>
+  <string name="opponentsFromAroundTheWorld">Оппоненты со всего мира</string>
   <string name="playMachine">Компьютер</string>
   <string name="testYourSkillsWithTheComputer">Проверьте свои навыки на искусственном интеллекте</string>
   <string name="letsGo">Поехали!</string>
@@ -59,4 +80,36 @@
   <string name="backToMenu">Вернуться в меню</string>
   <string name="puzzleFailed">Задание провалено!</string>
   <string name="retry">Ещё раз</string>
+  <string name="clickToRetry">Нажмите, чтобы повторить</string>
+  <string name="winTheGame">Выиграйте игру</string>
+  <plurals name="winTheGameInX">
+    <item quantity="one">Выиграйте игру в %s ход</item>
+    <item quantity="few">Выиграйте игру в %s хода</item>
+    <item quantity="many">Выиграйте игру в %s ходов</item>
+    <item quantity="other">Выиграйте игру в %s ходов</item>
+  </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="one">Удерживайте ничью еще %s ход</item>
+    <item quantity="few">Удерживайте ничью еще %s хода</item>
+    <item quantity="many">Удерживайте ничью еще %s ходов</item>
+    <item quantity="other">Удерживайте ничью еще %s ходов</item>
+  </plurals>
+  <plurals name="equalizeInX">
+    <item quantity="one">Сровняйтесь в %s ход</item>
+    <item quantity="few">Сровняйтесь в %s хода</item>
+    <item quantity="many">Сровняйтесь в %s ходов</item>
+    <item quantity="other">Сровняйтесь в %s ходов</item>
+  </plurals>
+  <plurals name="defendForX">
+    <item quantity="one">Защищайтесь еще %s ход</item>
+    <item quantity="few">Защищайтесь еще %s хода</item>
+    <item quantity="many">Защищайтесь еще %s ходов</item>
+    <item quantity="other">Защищайтесь еще %s ходов</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="one">Получите выигрышную позицию в %s ход</item>
+    <item quantity="few">Получите выигрышную позицию в %s хода</item>
+    <item quantity="many">Получите выигрышную позицию в %s ходов</item>
+    <item quantity="other">Получите выигрышную позицию в %s ходов</item>
+  </plurals>
 </resources>

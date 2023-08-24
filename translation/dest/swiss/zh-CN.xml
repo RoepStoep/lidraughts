@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">瑞士锦标赛</string>
-  <string name="bye">轮空</string>
-  <string name="byes">轮空</string>
   <string name="absent">缺席</string>
   <string name="absences">缺席情况</string>
   <string name="late">迟到</string>

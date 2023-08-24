@@ -18,10 +18,16 @@
   <string name="white">Brancas</string>
   <string name="black">Pretas</string>
   <string name="randomColor">Cor aleatória</string>
+  <string name="microMatch">Micro-Partida</string>
+  <string name="microMatchChallenge">Esse desafio é uma micro-partida!</string>
   <string name="microMatchExplanation">Uma revanche com as cores invertidas será jogada imediatamente após este jogo.</string>
+  <string name="microMatchRematchStarted">Segundo jogo de micro-partida começado</string>
+  <string name="microMatchRematchAwaiting">Aguardando o segundo jogo de micro-partida</string>
+  <string name="microMatchGameX">Jogo de micro-partida %s</string>
   <string name="createAGame">Criar uma partida</string>
   <string name="whiteIsVictorious">Brancas vencem</string>
   <string name="blackIsVictorious">Pretas vencem</string>
+  <string name="promotion">Promoção</string>
   <string name="variantEnding">Fim da variante</string>
   <string name="important">Importante</string>
   <string name="yourQuestionMayHaveBeenAnswered">A sua pergunta pode já ter sido respondida %1$s</string>
@@ -137,6 +143,7 @@
   </plurals>
   <string name="ongoingGames">Jogos em andamento</string>
   <string name="currentGames">Partidas atuais</string>
+  <string name="gamesInTimeout">Jogos no limite de tempo</string>
   <string name="yourTurnInX">Sua vez em %s</string>
   <string name="gameNumberX">Partida %s</string>
   <plurals name="nbGames">
@@ -158,10 +165,12 @@
   <string name="newToLidraughts">Novo no Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Você precisa de uma conta para fazer isso</string>
   <string name="signUp">Registrar</string>
+  <string name="signupEmailHint">Vamos usar apenas para redefinir a sua senha.</string>
   <string name="computersAreNotAllowedToPlay">O uso de engine não é permitido. Por favor, não utilize programas, bancos de dados ou o auxílio de outros jogadores durante a partida. Além disso, a criação de múltiplas contas é fortemente desaconselhada e sua prática excessiva acarretará banimento.</string>
   <string name="gameByUsername">Partida por nome de usuário</string>
   <string name="gameByUrlOrId">Partida por URL ou ID</string>
   <string name="games">Partidas</string>
+  <string name="userTv">TV do usuário</string>
   <string name="forum">Fórum</string>
   <string name="xPostedInForumY">%1$s postou em %2$s</string>
   <string name="latestForumPosts">Últimas postagens do fórum</string>
@@ -227,10 +236,12 @@
   <string name="yourOpponentOffersADraw">Seu adversário propõe empate</string>
   <string name="accept">Aceitar</string>
   <string name="decline">Recusar</string>
+  <string name="startingIn">Começando</string>
   <string name="startingSoon"> - Começando em breve - </string>
   <string name="playingRightNow">Jogando agora</string>
   <string name="eventInProgress">Jogando agora</string>
   <string name="finished">Terminado</string>
+  <string name="finishesX">terminados %s</string>
   <string name="abortGame">Cancelar partida</string>
   <string name="gameAborted">Partida cancelada</string>
   <string name="standard">Padrão</string>
@@ -289,11 +300,16 @@
     <item quantity="one">%s empates</item>
     <item quantity="other">%s empates</item>
   </plurals>
+  <plurals name="nbVictories">
+    <item quantity="one">%s vitória</item>
+    <item quantity="other">%s vitórias</item>
+  </plurals>
   <plurals name="nbPlaying">
     <item quantity="one">%s jogando</item>
     <item quantity="other">%s jogando</item>
   </plurals>
   <string name="exportGames">Exportar partidas</string>
+  <string name="exportSimulGames">Exportar jogos simultâneos</string>
   <string name="ratingRange">Classificação entre</string>
   <plurals name="giveNbSeconds">
     <item quantity="one">Dar %s segundos</item>
@@ -382,6 +398,7 @@
   <string name="fromPosition">A partir da posição</string>
   <string name="continueFromHere">Continuar daqui</string>
   <string name="toStudy">Estudo</string>
+  <string name="pdnImportBy">Importe PND de %s</string>
   <string name="importGame">Importar partida</string>
   <string name="importGameExplanation">Após colar uma partida em PDN você poderá revisá-la interativamente,
 consultar uma análise de computador, utilizar o chat e compartilhar um link.</string>
@@ -518,8 +535,14 @@ Uma URL por linha</string>
   <string name="watchLidraughtsTV">Assistir Lidraughts TV</string>
   <string name="previouslyOnLidraughtsTV">Anteriormente em Lidraughts TV</string>
   <string name="collection">Coleção</string>
+  <string name="customGamesCollection">Coleção de jogos personalizados</string>
   <string name="editCollection">Editar coleção</string>
   <string name="copyCollectionUrl">Copiar url da coleção</string>
+  <string name="reloadBoards">Recarregar tabuleiros</string>
+  <string name="reloadBoardsExplanation">Recarregue todos os tabuleiros finalizados com o jogo em andamento do mesmo jogador (se houver).</string>
+  <string name="reloadWithCurrentGameOfX">Recarregar atual jogo de %s</string>
+  <string name="addOngoingOrRecentGame">Adicione o último jogo que alguém jogou (o jogo atual ou o mais recente).</string>
+  <string name="addGameByUrlOrId">Adicione um jogo por URL ou ID.</string>
   <string name="removeGame">Remover jogo</string>
   <string name="onlinePlayers">Jogadores online</string>
   <string name="activeToday">Ativos hoje</string>
@@ -627,6 +650,7 @@ Uma URL por linha</string>
   <string name="fieldnumbers8x8">Números das casas (1-32)</string>
   <string name="algebraic8x8">Algébrica (a-h, 1-8)</string>
   <string name="moveListWhilePlaying">Lista de movimentos durante a partida</string>
+  <string name="notationGameResult">Notação de resultado do jogo (brancas vencem • empate • pretas vencem)</string>
   <string name="draughtsClock">Relógio de damas</string>
   <string name="clockInitialTime">Tempo de relógio</string>
   <string name="clockIncrement">Incremento do relógio</string>
@@ -782,6 +806,8 @@ Uma URL por linha</string>
   <string name="currentWinningPercentage">Porcentagem de vitória atual: %s</string>
   <string name="succeeded">sucesso!</string>
   <string name="failed">insucesso</string>
+  <string name="simulTimeOut">Tempo acabado simultaneamente</string>
+  <string name="simulTimeOutExplanation">Esse jogo não será mostrado nas simultâneas até que o tempo selecionado tenha passado.</string>
   <string name="noSimulFound">Simultânea não encontrada</string>
   <string name="deleteThisSimul">Excluir esta simultânea?</string>
   <string name="noSimulExplanation">Esta exibição simultânea não existe.</string>
@@ -806,6 +832,7 @@ Uma URL por linha</string>
   <string name="everyone">Todos</string>
   <string name="spectatorsOnly">Somente espectadores</string>
   <string name="participantsOnly">Apenas participantes</string>
+  <string name="atLeastOneVariant">Selecione ao menos uma variante!</string>
   <string name="invalidTargetPercentage">Digite um valor entre 50 e 100, ou deixe em branco</string>
   <string name="lidraughtsTournaments">Torneios do Lidraughts</string>
   <string name="tournamentFAQ">Perguntas Frequentes sobre torneios no estilo Arena</string>
@@ -863,6 +890,7 @@ Uma URL por linha</string>
   <string name="enableKidMode">Habilitar o modo infantil</string>
   <string name="disableKidMode">Desabilitar o modo infantil</string>
   <string name="security">Segurança</string>
+  <string name="entirely">Inteiramente</string>
   <string name="thisIsAListOfDevicesThatHaveLoggedIntoYourAccount">Esta é uma lista de dispositivos com os quais você logou em sua conta. Revogue qualquer sessão que você não reconheça.</string>
   <string name="alternativelyYouCanX">Como alternativa, você pode %s.</string>
   <string name="revokeAllSessions">revogar todas as sessões</string>
@@ -932,6 +960,8 @@ Uma URL por linha</string>
   <string name="challenges">Desafios</string>
   <string name="noChallenges">Sem desafios</string>
   <string name="challengeSomeone">Desafie alguém</string>
+  <string name="openChallenge">Desafio aberto</string>
+  <string name="startsAtX">Começa em %s</string>
   <string name="challengeDeclined">Desafio recusado</string>
   <string name="challengeAccepted">Desafio aceito!</string>
   <string name="challengeCanceled">Desafio cancelado</string>
@@ -1002,6 +1032,10 @@ Uma URL por linha</string>
   <plurals name="nbMinutes">
     <item quantity="one">%s minuto</item>
     <item quantity="other">%s minutos</item>
+  </plurals>
+  <plurals name="nbTurns">
+    <item quantity="one">Turno das %s</item>
+    <item quantity="other">Turno das %s</item>
   </plurals>
   <string name="opening">Abertura</string>
   <string name="middlegame">Meio-jogo</string>

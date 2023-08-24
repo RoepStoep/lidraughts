@@ -6,8 +6,8 @@
   <string name="averageScoreAsBlackX">Moyenne noir : %s</string>
   <string name="knowingTheDraughtsBoard">Connaître les coordonnées du plateau de dames est très important :</string>
   <string name="mostDraughtsCourses">La plupart des cours et des exercices de dames utilisent largement la notation algébrique.</string>
-  <string name="talkToYourDraughtsFriends">Il vous est plus facile de parler avec vos amis jouers de dames si vous connaissez tous deux la \"langue du damier\".</string>
-  <string name="youCanAnalyseAGameMoreEffectively">L\'analyse des parties est facilitée si vous visualisez l\'emplacement des cases.</string>
+  <string name="talkToYourDraughtsFriends">Il est plus facile de parler avec vos amis joueurs de dames si vous connaissez tous les deux la « langue du damier ».</string>
+  <string name="youCanAnalyseAGameMoreEffectively">Vous pouvez analyser une partie plus efficacement si vous n\'avez pas besoin de chercher où se trouvent l\'emplacement des cases.</string>
   <string name="aSquareNameAppears">Les coordonnées d\'une case apparaissent sur l\'échiquier, à vous de cliquer sur son emplacement correct. Vous avez 30 secondes pour trouver un maximum de cases possibles !</string>
   <string name="startTraining">Démarrer l\'entrainement</string>
 </resources>

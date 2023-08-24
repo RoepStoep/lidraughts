@@ -28,6 +28,9 @@
   <string name="teamRecentMembers">Новые члены клуба</string>
   <string name="kickSomeone">Исключить кого-то из клуба</string>
   <string name="whoToKick">Кого вы хотите исключить из клуба?</string>
+  <string name="deleteTeamWarning">Удаляет команду и ее членство. Нельзя отменить!</string>
+  <string name="appointOwner">Назначить другого руководителя клуба</string>
+  <string name="changeOwner">Кого вы хотите назначить руководителем клуба?</string>
   <plurals name="xJoinRequests">
     <item quantity="one">%s запрос на вступление</item>
     <item quantity="few">%s запроса на вступление</item>
@@ -40,6 +43,9 @@
   <string name="teamBattleOverview">Сражение нескольких клубов, каждый игрок набирает очки за свой клуб</string>
   <string name="teamTournament">Клубный турнир</string>
   <string name="teamTournamentOverview">Арена, в которой могут участвовать только члены вашего клуба</string>
+  <string name="swissTournament">Турнир по швейцарской системе</string>
+  <string name="swissTournamentOverview">Швейцарские турниры, в которых могут участвовать только члены клуба</string>
+  <string name="subscribeToTeamMessages">Получать командные сообщения</string>
   <string name="messageAllMembers">Сообщение всем участникам</string>
   <string name="messageAllMembersOverview">Отправить личное сообщение каждому участнику клуба</string>
   <string name="messageAllMembersLongDescription">Отправить личное сообщение всем членам клуба.
@@ -49,4 +55,5 @@
   <string name="youMayWantToLinkOneOfTheseTournaments">Не хотите ли присоединить один из предстоящих турниров?</string>
   <string name="usersWhoCanManageThisTeam">Пользователи, которые могут управлять этим клубом</string>
   <string name="leadersChat">Чат руководителей</string>
+  <string name="enableMembersChat">Включить чат (только для участников)</string>
 </resources>

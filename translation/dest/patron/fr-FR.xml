@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="donate">Faire un don</string>
-  <string name="lidraughtsPatron">Mécène Lidraughts</string>
+  <string name="lidraughtsPatron">Mécène de Lidraughts</string>
   <string name="freeAccount">Compte gratuit</string>
-  <string name="becomePatron">Devenir un mécène de Lidraughts</string>
-  <string name="xBecamePatron">%s est devenu un mécène de Lidraughts</string>
-  <string name="newPatrons">Nouveaux mécènes</string>
+  <string name="becomePatron">Devenir un Mécène de Lidraughts</string>
+  <string name="xBecamePatron">%s est devenu un Mécène de Lidraughts</string>
+  <string name="newPatrons">Nouveaux Mécènes</string>
   <string name="freeDraughts">Le jeu de dames gratuit pour tous, pour toujours !</string>
-  <string name="noAdsNoSubs">Pas de publicité, pas d\'abonnement, mais du code source ouvert et de la passion.</string>
+  <string name="noAdsNoSubs">Pas de publicité, pas d\'abonnement ; uniquement du code source ouvert et de la passion.</string>
   <string name="thankYou">Merci pour votre don !</string>
-  <string name="youHaveLifetime">Vous avez un compte mécène à vie ! C\'est génial !</string>
-  <string name="patronUntil">Vous avez un compte mécène jusqu\'au %s.</string>
-  <string name="ifNotRenewed">Si non renouvelé, votre compte ne sera plus un mécène.</string>
-  <string name="weRelyOnSupport">Nous comptons sur le soutien de personnes comme vous pour rendre cela possible. Si vous aimez utiliser Lidraughts, pensez à nous soutenir en faisant un don et en devenant un mécène !</string>
+  <string name="youHaveLifetime">Vous avez un compte Mécène à vie ! C\'est génial !</string>
+  <string name="patronUntil">Vous avez un compte Mécène jusqu\'au %s.</string>
+  <string name="ifNotRenewed">Si non renouvelé, votre compte ne sera plus un compte Mécène.</string>
+  <string name="weAreVolunteers">Nous sommes une petite équipe de bénévoles qui pensent que tout le monde devrait avoir accès à une plateforme de jeu de dames gratuite et de classe mondiale.</string>
+  <string name="weRelyOnSupport">Nous comptons sur le soutien de personnes comme vous pour rendre cela possible. Si vous aimez utiliser Lidraughts, pensez à nous soutenir en faisant un don et en devenant un Mécène !</string>
   <string name="lifetime">À vie</string>
-  <string name="payLifetimeOnce">Payez %s une fois. Devenez un mécène de Lidraughts pour toujours !</string>
+  <string name="payLifetimeOnce">Payez %s une fois. Devenez un Mécène de Lidraughts pour toujours !</string>
   <string name="lifetimePatron">Mécène de Lidraughts à vie</string>
   <string name="makeExtraDonation">Faire un don supplémentaire?</string>
   <string name="monthly">Mensuel</string>
-  <string name="recurringBilling">Facturation récurrente, renouvellement de vos ailes de mécène tous les mois.</string>
+  <string name="recurringBilling">Facturation récurrente, renouvellement de vos ailes de Mécène tous les mois.</string>
   <string name="onetime">Unique</string>
-  <string name="singleDonation">Un don unique qui vous accorde les ailes de mécène pendant un mois.</string>
+  <string name="singleDonation">Un don unique qui vous accorde les ailes de Mécène pendant un mois.</string>
   <string name="otherAmount">Autres</string>
   <string name="pleaseEnterAmount">Veuillez saisir un montant en EUR</string>
   <string name="withCreditCard">Carte de crédit</string>
+  <string name="withPaypal">Faire un don avec PayPal</string>
+  <string name="donatingPubliclyAs">Donation publique en tant que %s</string>
   <string name="weAreSmallTeam">Nous sommes une petite équipe, ainsi votre soutien fait une énorme différence !</string>
-  <string name="celebratedPatrons">Les mécènes illustres qui rendent Lidraughts possible</string>
+  <string name="celebratedPatrons">Les généreux Mécènes qui rendent Lidraughts possible</string>
   <string name="whereMoneyGoes">Où va l\'argent ?</string>
+  <string name="serversAndExpenses">Les serveurs qui exécutent Lidraughts et l\'analyse du moteur de balayage.
+Les autres frais d\'exploitation tels que le Mailgun et l\'hébergement des serveurs.</string>
   <string name="changeMonthlySupport">Puis-je changer/annuler mon soutien mensuel ?</string>
+  <string name="changeOrContact">Oui, à tout moment. Connectez-vous à votre compte PayPal et accédez aux paiements automatiques.
+Ou vous pouvez %s.</string>
+  <string name="contactSupport">contacter le support Lidraughts</string>
   <string name="otherMethods">Y a-t-il d\'autres moyens pour donner ?</string>
+  <string name="bankTransfers">Nous acceptons également les virements bancaires. Veuillez envoyer un courriel à %s pour plus de détails.</string>
   <string name="bitcoin">Et voici notre adresse bitcoin : %s</string>
-  <string name="patronFeatures">Certaines fonctionnalités sont-elles réservées aux mécènes ?</string>
+  <string name="patronFeatures">Certaines fonctionnalités sont-elles réservées aux Mécènes ?</string>
   <string name="noPatronFeatures">Non, parce que Lidraughts est entièrement gratuit, pour toujours et pour tout le monde. C\'est une promesse.
-Cependant, les mécènes sont distingués au moyen d\'une nouvelle icône de profil très sympa.</string>
+Cependant, les Mécènes sont distingués au moyen d\'une nouvelle icône de profil très sympa.</string>
   <string name="featuresComparison">Voir la comparaison détaillée des fonctionnalités</string>
   <plurals name="patronForMonths">
     <item quantity="one">Mécène de Lidraughts depuis %s mois</item>
@@ -48,18 +57,20 @@ Cependant, les mécènes sont distingués au moyen d\'une nouvelle icône de pro
   <string name="changeMonthlyAmount">Changer le montant mensuel (%s)</string>
   <string name="cancelSupport">annuler votre soutien</string>
   <string name="xOrY">%1$s ou %2$s</string>
-  <string name="decideHowMuch">Décidez de ce que vaut Lidraughts pour vous :</string>
+  <string name="decideHowMuch">Décidez ce que vaut Lidraughts pour vous :</string>
   <string name="stopPayments">Retirer votre carte de crédit et arrêter les paiements :</string>
   <string name="noLongerSupport">Ne plus soutenir Lidraughts</string>
   <string name="paymentHistory">Historique des paiements</string>
   <string name="paid">Payé</string>
-  <string name="viewOthers">Voir les autres mécènes de Lidraughts</string>
+  <string name="viewOthers">Voir les autres Mécènes de Lidraughts</string>
   <string name="date">Date</string>
   <string name="amount">Montant</string>
-  <string name="transactionCompleted">Votre transaction a été complétée et un reçu de votre don vous a été envoyé.</string>
-  <string name="permanentPatron">Vous avez maintenant un compte Patron permanent.</string>
+  <string name="transactionCompleted">Votre transaction a été complétée et un reçu de votre don vous a été envoyé par courriel.</string>
+  <string name="permanentPatron">Vous avez maintenant un compte Mécène permanent.</string>
+  <string name="paypalRenew">Dans un mois, PayPal renouvellera automatiquement votre paiement.
+Pour annuler votre soutien mensuel, connectez-vous à votre compte PayPal et accédez aux paiements automatiques.</string>
   <string name="checkOutProfile">Consultez votre page de profil !</string>
-  <string name="nowLifetime">Vous êtes maintenant un mécène de Lidraughts à vie !</string>
-  <string name="nowOneMonth">Vous êtes maintenant un mécène de Lidraughts pour un mois !</string>
+  <string name="nowLifetime">Vous êtes maintenant un Mécène de Lidraughts à vie !</string>
+  <string name="nowOneMonth">Vous êtes maintenant un Mécène de Lidraughts pour un mois !</string>
   <string name="downgradeNextMonth">Dans un mois, vous NE serez PAS à nouveau débité, et votre compte Lidraughts redeviendra un compte ordinaire.</string>
 </resources>

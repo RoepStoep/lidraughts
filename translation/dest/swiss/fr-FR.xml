@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Tournois au système suisse</string>
+  <string name="absent">Absent</string>
+  <string name="absences">Absences</string>
+  <string name="late">En retard</string>
+  <string name="tieBreak">Rupture d\'égalité</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s tour</item>
+    <item quantity="other">%s tours</item>
+  </plurals>
+  <string name="nextRound">Tour suivant</string>
+  <string name="numberOfRounds">Nombre de tours</string>
+  <string name="scheduleTheNextRound">Planifiez le tour suivant</string>
 </resources>

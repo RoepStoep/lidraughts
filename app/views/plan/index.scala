@@ -23,7 +23,7 @@ object index {
       title = becomePatron.txt(),
       moreCss = cssTag("plan"),
       moreJs = frag(
-        script(src := "https://checkout.stripe.com/checkout.js"),
+        // script(src := "https://checkout.stripe.com/checkout.js"),
         jsTag("checkout.js"),
         embedJsUnsafe(s"""lidraughts.checkout("$stripePublicKey");""")
       ),

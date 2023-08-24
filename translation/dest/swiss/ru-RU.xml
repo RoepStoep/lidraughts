@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Турниры по швейцарской системе</string>
+  <string name="absent">Отсутствует</string>
+  <string name="absences">Отлучки</string>
+  <string name="late">Позже</string>
+  <string name="tieBreak">Перерыв</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s тур</item>
+    <item quantity="few">%s тура</item>
+    <item quantity="many">%s туров</item>
+    <item quantity="other">%s туров</item>
+  </plurals>
+  <string name="nextRound">Следующий тур</string>
+  <string name="numberOfRounds">Количество туров</string>
+  <string name="scheduleTheNextRound">Запланировать следующий тур</string>
 </resources>

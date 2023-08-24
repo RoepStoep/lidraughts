@@ -7,7 +7,7 @@
   <string name="resetMyProgress">Réinitialiser ma progression</string>
   <string name="youWillLoseAllYourProgress">Vous perdrez toute votre progression !</string>
   <string name="play">jouer!</string>
-  <string name="draughtsPieces">Les pièces des dames</string>
+  <string name="draughtsPieces">Les pièces du jeu de dames</string>
   <string name="theMen">Les pions</string>
   <string name="theKing">Le Roi</string>
   <string name="fundamentals">Les fondamentaux</string>
@@ -15,7 +15,7 @@
   <string name="takeTheEnemyPieces">Prenez les pièces adverses</string>
   <string name="takeTheBlackPieces">Prenez les pièces noires !</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">Prenez les pièces noires ! Et ne perdez pas les vôtres.</string>
-  <string name="captureComplete">Félicitations ! Vous savez maintenant comment capturer avec les pièces des dames !</string>
+  <string name="captureComplete">Félicitations ! Vous savez maintenant comment capturer avec les pièces du jeu de dames !</string>
   <string name="protection">Protéger</string>
   <string name="keepYourPiecesSafe">Assurez la sécurité de vos pièces</string>
   <string name="protectionIntro">Identifiez vos pièces attaquées par l\'adversaire, et défendez-les !</string>
@@ -38,17 +38,17 @@ Faites un déplacement pour continuer.</string>
   <string name="theGameIsADraw">La partie est nulle</string>
   <string name="advanced">Avancé</string>
   <string name="whatNext">Que faire ensuite?</string>
-  <string name="youKnowHowToPlayDraughts">Vous savez jouer aux dames, félicitations ! Voulez-vous devenir un joueur plus fort ?</string>
+  <string name="youKnowHowToPlayDraughts">Vous savez jouer aux dames, félicitations ! Voulez-vous devenir un meilleur joueur ?</string>
   <string name="register">S\'inscrire</string>
   <string name="getAFreeLidraughtsAccount">Créer un compte Lidraughts gratuit</string>
   <string name="practice">Pratique</string>
-  <string name="makesYourDraughtsPerfect">rends votre jeu parfait</string>
-  <string name="learnCommonDraughtsPositions">Apprenez des positions courantes aux dames</string>
+  <string name="makesYourDraughtsPerfect">rendez votre jeu parfait</string>
+  <string name="learnCommonDraughtsPositions">Apprenez les positions courantes aux dames</string>
   <string name="signUpToSaveYourProgress">Inscrivez-vous pour sauvegarder votre progression</string>
-  <string name="goToNextExercise">Aller à l\'exercice suivant</string>
+  <string name="goToNextExercise">Allez à l\'exercice suivant</string>
   <string name="loadNextExerciseImmediately">Charger l\'exercice suivant immédiatement</string>
-  <string name="practiceList">Entraînements</string>
-  <string name="backToPracticeMenu">Retourner au menu de l\'entraînement</string>
+  <string name="practiceList">Liste d\'entraînements</string>
+  <string name="backToPracticeMenu">Retour au menu de l\'entraînement</string>
   <string name="exerciseYourTacticalSkills">Exercer vos compétences tactiques</string>
   <string name="videos">Vidéos</string>
   <string name="watchInstructiveDraughtsVideos">Regardez des vidéos instructives sur les dames</string>
@@ -81,6 +81,10 @@ Faites un déplacement pour continuer.</string>
     <item quantity="one">Gagnez la partie en %s coup</item>
     <item quantity="other">Gagnez la partie en %s coups</item>
   </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="one">Maintenir la nulle pour %s coup de plus</item>
+    <item quantity="other">Maintenir la nulle pour %s coups de plus</item>
+  </plurals>
   <plurals name="equalizeInX">
     <item quantity="one">Égalisez en %s coup</item>
     <item quantity="other">Égalisez en %s coups</item>
@@ -88,5 +92,9 @@ Faites un déplacement pour continuer.</string>
   <plurals name="defendForX">
     <item quantity="one">Défendez pendant %s coup</item>
     <item quantity="other">Défendez pendant %s coups</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="one">Obtenir une position gagnante en %s coup</item>
+    <item quantity="other">Obtenir une position gagnante en %s coups</item>
   </plurals>
 </resources>

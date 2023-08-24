@@ -11,9 +11,9 @@
   <string name="fullDescription">Description complète de l\'événement</string>
   <string name="fullDescriptionHelp">Description détaillée et optionnelle de la diffusion. %1$s est disponible. La longueur doit être inférieure à %2$s caractères.</string>
   <string name="sourceUrlOrGameIds">Lien source ou ID de la partie</string>
-  <string name="sourceUrlHelp">URL que Lidraughts interrogera pour obtenir les mises à jour du PDN. Elle doit être accessible publiquement depuis Internet.</string>
+  <string name="sourceUrlHelp">URL que Lidraughts vérifiera pour obtenir les mises à jour du PDN. Elle doit être accessible au public depuis l\'internet.</string>
   <string name="gameIdsHelp">Vous pouvez également entrer jusqu\'à 64 ID de partie Lidraughts séparés par un espace.</string>
-  <string name="roundNumber">Numéro de la ronde</string>
+  <string name="roundNumber">Numéro de la manche</string>
   <string name="startDate">Date de début dans votre fuseau horaire</string>
   <string name="startDateHelp">Facultatif, si vous savez quand l\'événement commence</string>
   <string name="credits">Créditer la source</string>

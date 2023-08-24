@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Turniere nach Schweizer System</string>
-  <string name="bye">Bye</string>
-  <string name="byes">Byes</string>
+  <string name="bye" comment="A player gets a &#34;bye&#34; when they don't play in a round of the tournament because there is an odd number of players.">Bye</string>
+  <string name="byes" comment="Refers to the amount of &#34;byes&#34; in this tournament (the amount of players that didn't play a round because there was an odd number of players).">Byes</string>
   <string name="absent">Absent</string>
   <string name="absences">Absences</string>
   <string name="late">Late</string>

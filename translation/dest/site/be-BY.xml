@@ -131,6 +131,7 @@
   <string name="signIn">Увайсці</string>
   <string name="youNeedAnAccountToDoThat">Вам патрэбны ўліковы запіс, каб зрабіць гэта</string>
   <string name="signUp">Зарэгістравацца</string>
+  <string name="signupEmailHint">Мы будзем выкарыстоўваць яго толькі для скіду пароля.</string>
   <string name="games">Гульні</string>
   <string name="forum">Форум</string>
   <string name="xPostedInForumY">%1$s размясціў допіс у тэме %2$s</string>

@@ -158,6 +158,7 @@
   <string name="newToLidraughts">新访客？</string>
   <string name="youNeedAnAccountToDoThat">请注册以完成该操作</string>
   <string name="signUp">注册</string>
+  <string name="signupEmailHint">仅用于将来重置密码</string>
   <string name="computersAreNotAllowedToPlay">电脑与电脑辅助棋手不允许参加对弈。在下棋时，请不要从国际跳棋引擎、数据库或其他棋手那里得到帮助。另外，强烈建议您不要创建多个账号。过度使用多个帐号会导致帐户被封禁。</string>
   <string name="gameByUsername">按用户名索引棋局</string>
   <string name="gameByUrlOrId">按URL或ID索引棋局</string>

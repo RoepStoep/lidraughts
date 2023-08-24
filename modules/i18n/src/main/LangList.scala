@@ -34,6 +34,7 @@ object LangList {
     Lang("ru", "RU") -> "русский язык",
     Lang("tr", "TR") -> "Türkçe",
     Lang("uk", "UA") -> "українська",
+    Lang("vi", "VN") -> "Tiếng Việt",
     Lang("zh", "CN") -> "中文"
   )
 }

@@ -165,6 +165,7 @@
   <string name="newToLidraughts">Neu bei Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Dazu brauchst du ein Benutzerkonto</string>
   <string name="signUp">Registrieren</string>
+  <string name="signupEmailHint">Wir werden sie nur zum Zurücksetzen deines Passworts verwenden.</string>
   <string name="computersAreNotAllowedToPlay">Unterstützung von programmen, Datenbanken oder anderen Spielern ist während einer Partie nicht erlaubt. Bitte beachte auch, dass die Erstellung mehrerer Benutzerkonten ungern gesehen ist und die Missachtung dieser Regel, bis auf Kulanz von Seiten des Teams, zum Ausschluss aller betroffenen Konten führt.</string>
   <string name="gameByUsername">Partien nach Benutzername</string>
   <string name="gameByUrlOrId">Partien nach URL oder ID</string>

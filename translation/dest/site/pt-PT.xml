@@ -147,6 +147,7 @@
   <string name="newToLidraughts">Novo no Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Você precisa de uma conta para fazer isso</string>
   <string name="signUp">Registrar</string>
+  <string name="signupEmailHint">Só o usaremos para redefinir a palavra-passe.</string>
   <string name="computersAreNotAllowedToPlay">O uso de motores de cálculo não é permitido. Por favor, não utilize programas, bancos de dados ou outros jogadores durante a partida. Além disso, a criação de contas múltiplas é fortemente desencorajada e sua prática excessiva acarretará banimento.</string>
   <string name="gameByUsername">Jogo por nome de utilizador</string>
   <string name="games">Partidas</string>

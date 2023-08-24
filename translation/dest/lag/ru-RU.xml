@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="isLidraughtsLagging">Есть ли задержки на Lidraughts?</string>
-  <string name="measurementInProgressThreeDot">Измерение выполняется...</string>
+  <string name="measurementInProgressThreeDot">Выполняются измерения...</string>
   <string name="noAndYourNetworkIsGood">Нет, и у вас хорошее соединение.</string>
   <string name="noAndYourNetworkIsBad">Нет, и у вас плохое соединение.</string>
   <string name="yesItWillBeFixedSoon">Да. Но мы это уже чиним!</string>

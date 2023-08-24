@@ -131,6 +131,7 @@
   <string name="newToLidraughts">Уперше на Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Для цього вам потрібен обліковий запис</string>
   <string name="signUp">Зареєструватися</string>
+  <string name="signupEmailHint">Ми використаємо її лише для скидання пароля.</string>
   <string name="games">Партії</string>
   <string name="forum">Форум</string>
   <string name="xPostedInForumY">%1$s відповів в темі %2$s</string>

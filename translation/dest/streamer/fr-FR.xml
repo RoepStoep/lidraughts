@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="lidraughtsStreamers">Streamers sur Lidraughts</string>
+  <string name="lidraughtsStreamers">Streamers de Lidraughts</string>
   <string name="lidraughtsStreamer">Lidraughts streamer</string>
   <string name="live">EN DIRECT !</string>
   <string name="offline">HORS LIGNE</string>
-  <string name="currentlyStreaming">En cours de streaming %s</string>
+  <string name="currentlyStreaming">En cours de diffusion : %s</string>
   <string name="lastStream">Dernière diffusion %s</string>
   <string name="becomeStreamer">Devenir un streamer sur Lidraughts</string>
   <string name="doYouHaveStream">Avez-vous une chaîne Twitch ou YouTube ?</string>
@@ -13,47 +13,46 @@
   <string name="editPage">Modifier votre page de streamer</string>
   <string name="yourPage">Votre page de streamer</string>
   <string name="downloadKit">Téléchargez le kit streamer</string>
-  <string name="xIsStreaming">%s est en train de streamer</string>
-  <string name="rules">Règles de streaming</string>
-  <string name="rule1">Incluez \"lidraughts.org\" dans votre titre de streaming lorsque vous streamez sur Lidraughts.</string>
-  <string name="rule2">Retirez le mot-clé lorsque vous ne streamez pas à propos de Lidraughts.</string>
-  <string name="rule3">Lidraughts détectera automatiquement votre stream et activera les avantages suivants :</string>
-  <string name="perks">Avantages du streaming avec le mot-clé</string>
+  <string name="xIsStreaming">%s est en train de diffuser en direct</string>
+  <string name="rules">Règles de diffusion en direct</string>
+  <string name="rule1">Incluez \"lidraughts.org\" dans le titre de votre diffusion lorsque vous diffusez en direct sur Lidraughts.</string>
+  <string name="rule2">Retirez le mot-clé lorsque vous ne diffusez pas à propos de Lidraughts.</string>
+  <string name="rule3">Lidraughts détectera automatiquement votre diffusion en direct et activera les avantages suivants :</string>
+  <string name="perks">Avantages de la diffusion en direct avec le mot-clé</string>
   <string name="perk1">Obtenez une flamboyante icône de streamer sur votre profil Lidraughts.</string>
-  <string name="perk2">Soyez remonté en haut de la liste des streamers.</string>
-  <string name="perk3">Notifier vos suiveurs sur Lidraughts.</string>
-  <string name="perk4">Montrez votre stream dans vos parties, tournois et études.</string>
-  <string name="approved">Votre stream est approuvé.</string>
-  <string name="pendingReview">Votre stream est en cours de révision par les modérateurs.</string>
-  <string name="pleaseFillIn">Veuillez remplir vos informations de streamer et envoyer une photo.</string>
+  <string name="perk2">Soyez propulsé en haut de la liste des streamers.</string>
+  <string name="perk3">Notifiez vos abonnés Lidraughts.</string>
+  <string name="perk4">Montrez votre diffusion en direct dans vos parties, vos tournois et vos études.</string>
+  <string name="approved">Votre diffusion en direct est approuvée.</string>
+  <string name="pendingReview">Votre diffusion en direct est en cours de révision par les modérateurs.</string>
+  <string name="pleaseFillIn">Veuillez remplir les informations de streamer et télécharger une photo.</string>
   <string name="whenReady">Lorsque vous êtes prêt à être listé en tant que streamer Lidraughts, %s</string>
   <string name="requestReview">demander une revue par un modérateur</string>
-  <string name="anotherLanguage">Si votre stream est dans une autre langue que l\'anglais, incluez la bonne balise de langue (%s), entourée de crochets, au début de votre titre de flux.
+  <string name="anotherLanguage">Si votre stream est dans une autre langue que l\'anglais, incluez la bonne balise de langue (%s), entourée de crochets, au début du titre de votre diffusion.
 Par exemple, inclure \"[FR]\" pour le français, \"[DE]\" pour le allemand, \"[RU]\" pour le russe, etc.
-Mettez-le dans le titre du stream sur la page Twitch ou YouTube, pas dans les paramètres du stream Lidraughts.
-Si votre stream est en anglais, il n\'est pas nécessaire d\'inclure un tag de langue.</string>
+Mettez-le dans le titre sur la page Twitch ou YouTube, pas dans les paramètres de la diffusion en continu de Lidraughts.
+Si votre diffusion en continu est en anglais, il n\'est pas nécessaire d\'inclure un tag de langue.</string>
   <string name="twitchUsername">Votre nom d\'utilisateur Twitch ou votre URL</string>
   <string name="optionalOrEmpty">Optionnel. Laisser vide si aucun</string>
   <string name="youtubeChannel">Votre ID de chaîne YouTube ou votre URL</string>
   <string name="streamerName">Votre nom de streamer sur Lidraughts</string>
   <plurals name="keepItShort">
     <item quantity="one">Restez brief %s caractère max</item>
-    <item quantity="other">Restez brief %s caractères max</item>
+    <item quantity="other">Restez bref %s caractères max</item>
   </plurals>
   <string name="visibility">Visible sur la page des streamers</string>
   <string name="whenApproved">Lorsque approuvé par les modérateurs</string>
   <string name="headline">Titre</string>
-  <string name="tellUsAboutTheStream">Décrivez votre stream en une phrase</string>
+  <string name="tellUsAboutTheStream">Décrivez votre diffusion en direct en une phrase</string>
   <string name="longDescription">Description détaillée</string>
   <string name="xStreamerPicture">%s photo de streamer</string>
   <string name="changePicture">Modifier/supprimer votre photo</string>
   <string name="uploadPicture">Téléverser une image</string>
   <string name="deletePicture">Supprimer l\'image</string>
   <string name="maxSize">Taille max : %s</string>
-  <string name="installBlocker">Installer un antivirus !</string>
-  <string name="beSafe">Pour rester bien abrité
-des traqueurs et autres publicités
-dont Youtube et Twitch sont infestés,
-uBlock Origin est recommandé
-car open-source et gratuit, il est.</string>
+  <string name="installBlocker">Installez un antivirus!</string>
+  <string name="beSafe">Soyez à l\'abri des publicités et des traqueurs
+qui infestent Twitch et YouTube.
+Lidraughts recommande uBlock Origin
+qui est gratuit et open-source.</string>
 </resources>

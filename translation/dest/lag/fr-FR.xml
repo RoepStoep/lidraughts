@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="isLidraughtsLagging">Lidraughts lague-t-il ?</string>
+  <string name="isLidraughtsLagging">Lidraughts laggue-t-il ?</string>
   <string name="measurementInProgressThreeDot">Mesures en cours...</string>
   <string name="noAndYourNetworkIsGood">Non. Et votre connexion est bonne.</string>
   <string name="noAndYourNetworkIsBad">Non. Et votre connexion est mauvaise.</string>
-  <string name="yesItWillBeFixedSoon">Oui. Ce sera bientôt rectifié !</string>
-  <string name="andNowTheLongAnswerLagComposedOfTwoValues">Et maintenant, la réponse développée ! Le lag d\'une partie est composé de deux valeurs indépendantes (une valeur plus petite indique une meilleure connexion) :</string>
-  <string name="lidraughtsServerLatency">Latence de Lidraughts coté serveur</string>
+  <string name="yesItWillBeFixedSoon">Oui. Ce sera bientôt corrigé !</string>
+  <string name="andNowTheLongAnswerLagComposedOfTwoValues">Et maintenant, la réponse développée ! La latence d\'une partie est composé de deux valeurs indépendantes (une valeur plus petite indique une meilleure connexion) :</string>
+  <string name="lidraughtsServerLatency">Latence du serveur Lidraughts</string>
   <string name="lidraughtsServerLatencyExplanation">Le temps nécessaire pour traiter un coup sur le serveur. C\'est le même pour tout le monde, et il dépend uniquement de la charge du serveur. Plus le nombre de joueurs est important, plus il augmente , mais les développeurs de Lidraughts font de leur mieux pour le maintenir au plus bas.</string>
   <string name="networkBetweenLidraughtsAndYou">Réseau entre Lidraughts et vous</string>
   <string name="networkBetweenLidraughtsAndYouExplanation">Le temps nécessaire pour envoyer un coup de ordinateur vers le serveur Lidraughts et recevoir la réponse. Il est spécifique à votre distance avec Lidraughts (France) et à la qualité de votre connexion Internet. Les développeurs de Lidraughts ne peuvent pas améliorer votre wifi ou augmenter la vitesse de la lumière.</string>
-  <string name="youCanFindTheseValuesAtAnyTimeByClickingOnYourUsername">Vous pouvez trouver ces deux valeurs à tout moment, en cliquant sur votre nom d\'utilisateur dans la barre en haut de page.</string>
-  <string name="lagCompensation">Compensation du lag</string>
-  <string name="lagCompensationExplanation">Lidraughts compense la latence du réseau. Cela inclut la latence continue et les pics de latence occasionnels. Il y a des limites et des analyses basées sur la cadence et sur la latence compensée à un moment donné, afin que le résultat semble raisonnable pour les deux joueurs. Autrement dit, avoir une latence plus importante que votre adversaire n\'est pas un handicap !</string>
+  <string name="youCanFindTheseValuesAtAnyTimeByClickingOnYourUsername">Vous pouvez trouver ces deux valeurs à tout moment, en cliquant sur votre nom d\'utilisateur dans la barre de menu supérieure.</string>
+  <string name="lagCompensation">Compensation de la latence</string>
+  <string name="lagCompensationExplanation">Lidraughts compense la latence du réseau. Cela inclut la latence continue et les pics de latence occasionnels. Il y a des limites et des analyses basées sur la cadence et sur la latence compensée jusqu\'à présent, afin que le résultat soit raisonnable pour les deux joueurs. Autrement dit, avoir une latence plus importante que votre adversaire n\'est pas un handicap !</string>
 </resources>

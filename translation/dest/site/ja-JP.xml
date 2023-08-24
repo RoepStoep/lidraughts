@@ -129,6 +129,7 @@
   <string name="signIn">ログイン</string>
   <string name="youNeedAnAccountToDoThat">アカウントが必要です</string>
   <string name="signUp">登録</string>
+  <string name="signupEmailHint">この情報はパスワードのリセットにのみ使用します。</string>
   <string name="games">ゲーム</string>
   <string name="forum">フォーラム</string>
   <string name="xPostedInForumY">%1$s が %2$s に投稿しました</string>

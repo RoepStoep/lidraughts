@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Torneios em sistema suíço</string>
-  <string name="bye">Adeus</string>
-  <string name="byes">Adeus</string>
   <string name="absent">Ausente</string>
   <string name="absences">Ausências</string>
   <string name="late">Atraso</string>

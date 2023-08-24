@@ -6,11 +6,13 @@
   <string name="becomePatron">Стать спонсором Lidraughts</string>
   <string name="xBecamePatron">%s стал спонсором Lidraughts</string>
   <string name="newPatrons">Новые спонсоры</string>
+  <string name="freeDraughts">Бесплатные шашки для всех, навсегда!</string>
   <string name="noAdsNoSubs">Без рекламы, без подписок, но с открытым исходным кодом и преданностью делу.</string>
   <string name="thankYou">Благодарим вас за пожертвование!</string>
   <string name="youHaveLifetime">У вас есть пожизненная учётная запись спонсора. Это очень круто!</string>
   <string name="patronUntil">Ваш аккаунт покровителя действует до %s.</string>
   <string name="ifNotRenewed">Если не будет продлено, то вы будете переведены на бесплатный план.</string>
+  <string name="weAreVolunteers">Мы – небольшая команда добровольцев, которые считают, что каждый должен иметь доступ к бесплатной платформе шашек мирового класса.</string>
   <string name="weRelyOnSupport">Мы полагаемся на поддержку таких людей как вы. Если вам нравится Lidraughts, пожалуйста, поддержите нас, сделав пожертвование и став его спонсором!</string>
   <string name="lifetime">Пожизненная</string>
   <string name="payLifetimeOnce">Заплатите %s один раз. Станьте спонсором навсегда!</string>
@@ -21,12 +23,21 @@
   <string name="onetime">Однократно</string>
   <string name="singleDonation">Одно пожертвование, которое даст вам \"крыло спонсора\"на один месяц.</string>
   <string name="otherAmount">Другое</string>
+  <string name="pleaseEnterAmount">Пожалуйста, укажите сумму в EUR</string>
   <string name="withCreditCard">Кредитная карта</string>
+  <string name="withPaypal">Пожертвовать через PayPal</string>
+  <string name="donatingPubliclyAs">Пожертвовать публично как %s</string>
   <string name="weAreSmallTeam">Мы небольшая команда, поэтому ваша поддержка имеет огромное значение!</string>
   <string name="celebratedPatrons">Выдающиеся спонсоры, благодаря которым существует Lidraughts</string>
   <string name="whereMoneyGoes">Куда пойдут деньги от поддержки?</string>
+  <string name="serversAndExpenses">Серверы, на которых работают lidraughts и анализ движка сканирования.
+Другие операционные расходы, такие как мэйлган и хостинг.</string>
   <string name="changeMonthlySupport">Могу ли я изменить или отменить мою ежемесячную поддержку?</string>
+  <string name="changeOrContact">Да, в любое время. Войдите в свой аккаунт PayPal и перейдите к автоплатежам.
+Или вы можете %s.</string>
+  <string name="contactSupport">связаться со службой поддержки Lidraughts</string>
   <string name="otherMethods">Есть ли другие способы сделать пожертвование?</string>
+  <string name="bankTransfers">Мы также принимаем банковские переводы. Пожалуйста, отправьте письмо на %s для дополнительных сведений.</string>
   <string name="bitcoin">И вот наш биткойн-кошелёк: %s</string>
   <string name="patronFeatures">Есть ли возможности только для спонсоров?</string>
   <string name="noPatronFeatures">Нет, потому что Lidraughts абсолютно бесплатен, навсегда и для всех. Обещаем.
@@ -58,6 +69,8 @@
   <string name="amount">Сумма</string>
   <string name="transactionCompleted">Ваша транзакция завершена, и вам на почту отправлена квитанция о пожертвовании.</string>
   <string name="permanentPatron">Теперь у вас учётная запись пожизненного покровителя.</string>
+  <string name="paypalRenew">В течение одного месяца PayPal автоматически возобновит ваш платеж.
+Чтобы отменить вашу ежемесячную поддержку, войдите в свой аккаунт PayPal и перейдите к автоплатежам.</string>
   <string name="checkOutProfile">Посмотрите свою страницу профиля!</string>
   <string name="nowLifetime">Теперь вы пожизненный покровитель Lidraughts!</string>
   <string name="nowOneMonth">Теперь вы покровитель Lidraughts на один месяц!</string>

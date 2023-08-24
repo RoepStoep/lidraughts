@@ -165,6 +165,7 @@
   <string name="newToLidraughts">Nieuw op Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Je hebt een account nodig om dat te doen</string>
   <string name="signUp">Registreren</string>
+  <string name="signupEmailHint">We gebruiken het alleen om het wachtwoord opnieuw in te stellen.</string>
   <string name="computersAreNotAllowedToPlay">Computers en spelers met ondersteuning van damcomputers mogen hier niet spelen. Maak a.u.b. geen gebruik van damcomputers, databases of de hulp van andere spelers terwijl je je partijen speelt. Ook wordt het aanmaken van meerdere accounts sterk afgeraden. Excessief nieuwe accounts maken kan leiden tot een ban.</string>
   <string name="gameByUsername">Partij van gebruiker</string>
   <string name="gameByUrlOrId">Partij URL of ID</string>

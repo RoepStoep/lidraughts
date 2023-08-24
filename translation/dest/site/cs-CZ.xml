@@ -137,6 +137,7 @@
   <string name="newToLidraughts">Jste na Lidraughts nový?</string>
   <string name="youNeedAnAccountToDoThat">Pro následující akci je vyžadován účet</string>
   <string name="signUp">Registrace</string>
+  <string name="signupEmailHint">Bude použit pouze pro obnovení hesla.</string>
   <string name="games">Partie</string>
   <string name="forum">Fórum</string>
   <string name="xPostedInForumY">%1$s napsal do fóra %2$s</string>

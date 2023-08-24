@@ -131,6 +131,7 @@
   <string name="signIn">Giriş</string>
   <string name="youNeedAnAccountToDoThat">Bunu yapmanız için bir hesaba ihtiyacınız var</string>
   <string name="signUp">Kayıt Ol</string>
+  <string name="signupEmailHint">Bunu yalnızca şifre sıfırlaması için kullanacağız.</string>
   <string name="games">Oyunlar</string>
   <string name="forum">Forum</string>
   <string name="xPostedInForumY">%1$s, %2$s konusu altına bir mesaj yazdı</string>

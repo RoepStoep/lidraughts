@@ -137,6 +137,7 @@
   <string name="signIn">Prisijungti</string>
   <string name="youNeedAnAccountToDoThat">Norėdami tai atlikti, turite turėti paskyrą</string>
   <string name="signUp">Registruotis</string>
+  <string name="signupEmailHint">Jį naudosime tik atkurti slaptažodžiui.</string>
   <string name="games">Partijos</string>
   <string name="forum">Diskusijos</string>
   <string name="xPostedInForumY">%1$s parašė į „%2$s“ temą</string>

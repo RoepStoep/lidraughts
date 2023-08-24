@@ -179,6 +179,7 @@
   <string name="newToLidraughts">Nowy na Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Musisz mieć konto, aby to zrobić</string>
   <string name="signUp">Zarejestruj się</string>
+  <string name="signupEmailHint">Użyjemy go tylko do resetowania hasła.</string>
   <string name="computersAreNotAllowedToPlay">Podczas gry niedozwolone jest korzystanie z pomocy programów, baz danych oraz pomocy innych graczy. Zakładanie wielu kont jest zabronione i prowadzi do zablokowania użytkownika.</string>
   <string name="gameByUsername">Gra po nazwie użytkownika</string>
   <string name="gameByUrlOrId">Gra po adresie URL lub po ID</string>

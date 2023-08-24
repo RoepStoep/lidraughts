@@ -21,7 +21,7 @@ object bits {
     },
     form3.passwordModified(password, trans.password())(autocomplete := (if (register) "new-password" else "current-password")),
     emailOption.map { email =>
-      form3.group(email, trans.email(), help = frag("We will only use it for password reset.").some)(form3.input(_, typ = "email")(required))
+      form3.group(email, trans.email(), help = trans.signupEmailHint().some)(form3.input(_, typ = "email")(required))
     }
   )
 

@@ -57,6 +57,7 @@
   <string name="allSyncMembersRemainOnTheSamePosition">Все синхронизированные участники остаются на той же позиции</string>
   <string name="shareChanges">Поделиться изменениями со зрителями и сохранить их на сервере</string>
   <string name="playing">Активные</string>
+  <string name="onlyOngoingGames">Только активные партии</string>
   <string name="first">Первая</string>
   <string name="previous">Предыдущая</string>
   <string name="next">Следующая</string>
@@ -100,6 +101,12 @@
   <string name="loadAPositionFromFen">Загрузить позицию из FEN</string>
   <string name="loadAGameFromPdn">Загрузить игру из PDN</string>
   <string name="automatic">Автоматически</string>
+  <plurals name="pasteYourPdnTextHereUpToNbGames">
+    <item quantity="one">Вставьте текст PDN здесь, до %s игры, каждая из которых должна быть разделена пустой строкой</item>
+    <item quantity="few">Вставьте текст PDN здесь, до %s игр, каждая из которых должна быть разделена пустой строкой</item>
+    <item quantity="many">Вставьте текст PDN здесь, до %s игр, каждая из которых должна быть разделена пустой строкой</item>
+    <item quantity="other">Вставьте текст PDN здесь, до %s игры, каждая из которых должна быть разделена пустой строкой</item>
+  </plurals>
   <string name="urlOfTheGame">URL игры</string>
   <string name="loadAGameFromXOrY">Загрузить игру из %1$s или %2$s</string>
   <string name="createChapter">Создать главу</string>
