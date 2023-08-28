@@ -69,7 +69,7 @@ team wfd foobar
 draughtsnet client create {username} [analysis|move|commentary|all]
 gdpr erase {username} forever
 patron [month|lifetime] {username}
-eval-cache drop W:W31,32,33,34,50:B1,2,3,4,5,6,7,8,16,17,18,19,20""")
+eval-cache drop {variant} W:W31,32,33,34,50:B1,2,3,4,5,6,7,8,16,17,18,19,20""")
           )
         )
       }

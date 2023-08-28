@@ -29,7 +29,7 @@ object Analyse extends LidraughtsController {
   }
 
   def replay(pov: Pov, userTv: Option[lidraughts.user.User], userTvGameId: Option[String] = None)(implicit ctx: Context) =
-    if (HTTPRequest isBot ctx.req) replayBot(pov)
+    if (HTTPRequest isCrawler ctx.req) replayBot(pov)
     else GameRepo initialFen pov.gameId flatMap { initialFen =>
       val pdnFlags = PdnDump.WithFlags(clocks = false, draughtsResult = ctx.pref.draughtsResult, algebraic = ctx.pref.isAlgebraic(pov.game.variant))
       Game.preloadUsers(pov.game) >> RedirectAtFen(pov, initialFen) {

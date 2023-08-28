@@ -65,7 +65,8 @@ object topic {
     posts: Paginator[lidraughts.forum.Post],
     formWithCaptcha: Option[FormWithCaptcha],
     unsub: Option[Boolean],
-    canModCateg: Boolean
+    canModCateg: Boolean,
+    isWfd: Boolean
   )(implicit ctx: Context) = views.html.base.layout(
     title = s"${topic.name} • page ${posts.currentPage}/${posts.nbPages} • ${categ.name}",
     moreJs = frag(
@@ -100,7 +101,8 @@ object topic {
               p,
               s"${routes.ForumTopic.show(categ.slug, topic.slug, posts.currentPage)}#${p.number}",
               canModCateg = canModCateg,
-              canReact = teamOnly.isEmpty
+              canReact = teamOnly.isEmpty,
+              isWfd = isWfd
             )
           }
         ),

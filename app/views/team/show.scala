@@ -180,7 +180,7 @@ object show {
                         div(cls := "meta")(
                           strong(post.topicName),
                           em(
-                            post.userId map usernameOrId,
+                            post.userId map { id => if (t.isWfd) wfdUsernameOrId(id) else usernameOrId(id) },
                             " • ",
                             momentFromNow(post.createdAt)
                           )

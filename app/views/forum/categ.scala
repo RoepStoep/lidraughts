@@ -25,7 +25,7 @@ object categ {
           bits.searchForm()
         ),
         showCategs(categs.filterNot(_.categ.isTeam)),
-        if (categs.exists(_.categ.isTeam)) frag(
+        categs.exists(_.categ.isTeam) option frag(
           h1("Your teams boards"),
           showCategs(categs.filter(_.categ.isTeam))
         )
@@ -36,7 +36,8 @@ object categ {
     categ: lidraughts.forum.Categ,
     topics: Paginator[lidraughts.forum.TopicView],
     canWrite: Boolean,
-    stickyPosts: List[lidraughts.forum.TopicView]
+    stickyPosts: List[lidraughts.forum.TopicView],
+    isWfd: Boolean
   )(implicit ctx: Context) = {
 
     val newTopicButton = canWrite option
@@ -56,7 +57,7 @@ object categ {
               momentFromNow(post.createdAt)
             ),
             br,
-            authorLink(post)
+            authorLink(post, isWfd = isWfd)
           )
         }
       )

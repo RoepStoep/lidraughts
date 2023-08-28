@@ -4,7 +4,7 @@ import play.api.mvc._
 import scala.concurrent.duration._
 
 import lidraughts.app._
-import lidraughts.common.HTTPRequest.isApiOrLocalApp
+import lidraughts.common.HTTPRequest.isApiOrApp
 import lidraughts.common.ResponseHeaders.allowMethods
 
 object Options extends LidraughtsController {
@@ -12,7 +12,7 @@ object Options extends LidraughtsController {
   val root = all("")
 
   def all(url: String) = Action { req =>
-    if (isApiOrLocalApp(req)) NoContent.withHeaders(
+    if (isApiOrApp(req)) NoContent.withHeaders(
       "Allow" -> allowMethods,
       "Access-Control-Max-Age" -> "1728000"
     )

@@ -35,8 +35,10 @@ final class Env(
 
   def cli = new lidraughts.common.Cli {
     def process = {
-      case "eval-cache" :: "drop" :: fenParts =>
-        api.drop(draughts.variant.Standard, draughts.format.FEN(fenParts mkString " ")) inject "done!"
+      case "eval-cache" :: "drop" :: variant :: fenParts =>
+        draughts.variant.Variant.byKey.get(variant) ?? { v =>
+          api.drop(v, draughts.format.FEN(fenParts mkString " ")) inject "done!"
+        }
     }
   }
 }

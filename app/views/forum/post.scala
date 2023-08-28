@@ -31,12 +31,13 @@ object post {
     post: lidraughts.forum.Post,
     url: String,
     canModCateg: Boolean,
-    canReact: Boolean
+    canReact: Boolean,
+    isWfd: Boolean
   )(implicit ctx: Context) = {
     st.article(cls := List("forum-post" -> true, "erased" -> post.erased), id := post.number)(
       div(cls := "forum-post__metas")(
         div(
-          authorLink(post = post, cssClass = "author".some, modIcon = post.displayModIcon),
+          authorLink(post = post, cssClass = "author".some, modIcon = post.displayModIcon, isWfd = isWfd),
           a(href := url)(
             post.updatedAt.map { updatedAt =>
               frag(

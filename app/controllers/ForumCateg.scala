@@ -18,13 +18,16 @@ object ForumCateg extends LidraughtsController with ForumController {
   def show(slug: String, page: Int) = Open { implicit ctx =>
     NotForKids {
       Reasonable(page, 50, errorPage = notFound) {
-        CategGrantRead(slug) {
+        CategGrantRead(slug) { isWfd =>
           OptionFuOk(categApi.show(slug, page, ctx.troll)) {
             case (categ, topics) => for {
               canWrite <- isGrantedWrite(categ.slug)
               stickyPosts <- (page == 1) ?? lidraughts.forum.Env.current.topicApi.getSticky(categ, ctx.troll)
-              _ <- Env.user.lightUserApi preloadMany topics.currentPageResults.flatMap(_.lastPostUserId)
-            } yield html.forum.categ.show(categ, topics, canWrite, stickyPosts)
+              _ <- {
+                if (!isWfd) Env.user.lightUserApi preloadMany topics.currentPageResults.flatMap(_.lastPostUserId)
+                else Env.user.lightWfdUserApi preloadMany topics.currentPageResults.flatMap(_.lastPostUserId)
+              }
+            } yield html.forum.categ.show(categ, topics, canWrite, stickyPosts, isWfd)
           }
         }
       }

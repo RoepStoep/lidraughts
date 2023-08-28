@@ -42,15 +42,18 @@ object ForumTopic extends LidraughtsController with ForumController {
 
   def show(categSlug: String, slug: String, page: Int) = Open { implicit ctx =>
     NotForKids {
-      CategGrantRead(categSlug) {
+      CategGrantRead(categSlug) { isWfd =>
         OptionFuOk(topicApi.show(categSlug, slug, page, ctx.troll)) {
           case (categ, topic, posts) => for {
             unsub <- ctx.userId ?? Env.timeline.status(s"forum:${topic.id}")
             canWrite <- isGrantedWrite(categSlug)
             form <- (!posts.hasNextPage && canWrite && topic.open && !topic.isOld) ?? forms.postWithCaptcha.map(_.some)
             canModCateg <- isGrantedMod(categ.slug)
-            _ <- Env.user.lightUserApi preloadMany posts.currentPageResults.flatMap(_.userId)
-          } yield html.forum.topic.show(categ, topic, posts, form, unsub, canModCateg = canModCateg)
+            _ <- {
+              if (!isWfd) Env.user.lightUserApi preloadMany posts.currentPageResults.flatMap(_.userId)
+              else Env.user.lightWfdUserApi preloadMany posts.currentPageResults.flatMap(_.userId)
+            }
+          } yield html.forum.topic.show(categ, topic, posts, form, unsub, canModCateg = canModCateg, isWfd = isWfd)
         }
       }
     }

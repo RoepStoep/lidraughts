@@ -30,23 +30,25 @@ object ForumPost extends LidraughtsController with ForumController {
 
   def create(categSlug: String, slug: String, page: Int) = OpenBody { implicit ctx =>
     CategGrantWrite(categSlug) {
-      implicit val req = ctx.body
-      OptionFuResult(topicApi.show(categSlug, slug, page, ctx.troll)) {
-        case (categ, topic, posts) =>
-          if (topic.closed) fuccess(BadRequest("This topic is closed"))
-          else if (topic.isOld) fuccess(BadRequest("This topic is archived"))
-          else forms.post.bindFromRequest.fold(
-            err => for {
-              captcha <- forms.anyCaptcha
-              unsub <- ctx.userId ?? Env.timeline.status(s"forum:${topic.id}")
-              canModCateg <- isGrantedMod(categ.slug)
-            } yield BadRequest(html.forum.topic.show(categ, topic, posts, Some(err -> captcha), unsub, canModCateg = canModCateg)),
-            data => CreateRateLimit(HTTPRequest lastRemoteAddress ctx.req) {
-              postApi.makePost(categ, topic, data) map { post =>
-                Redirect(routes.ForumPost.redirect(post.id))
+      isWfdForum(categSlug) flatMap { isWfd =>
+        implicit val req = ctx.body
+        OptionFuResult(topicApi.show(categSlug, slug, page, ctx.troll)) {
+          case (categ, topic, posts) =>
+            if (topic.closed) fuccess(BadRequest("This topic is closed"))
+            else if (topic.isOld) fuccess(BadRequest("This topic is archived"))
+            else forms.post.bindFromRequest.fold(
+              err => for {
+                captcha <- forms.anyCaptcha
+                unsub <- ctx.userId ?? Env.timeline.status(s"forum:${topic.id}")
+                canModCateg <- isGrantedMod(categ.slug)
+              } yield BadRequest(html.forum.topic.show(categ, topic, posts, Some(err -> captcha), unsub, canModCateg = canModCateg, isWfd = isWfd)),
+              data => CreateRateLimit(HTTPRequest lastRemoteAddress ctx.req) {
+                postApi.makePost(categ, topic, data) map { post =>
+                  Redirect(routes.ForumPost.redirect(post.id))
+                }
               }
-            }
-          )
+            )
+        }
       }
     }
   }

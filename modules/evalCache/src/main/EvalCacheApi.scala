@@ -45,7 +45,7 @@ final class EvalCacheApi(
   )
 
   private[evalCache] def drop(variant: Variant, fen: FEN): Funit = {
-    val id = Id(draughts.variant.Standard, SmallFen.make(variant, fen))
+    val id = Id(variant, SmallFen.make(variant, fen))
     coll.remove($id(id)).void >>- cache.put(id, none)
   }
 

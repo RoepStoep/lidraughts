@@ -477,15 +477,15 @@ private[controllers] trait LidraughtsController
     if (ctx.kid) notFound else f
 
   protected def NotForBots(res: => Fu[Result])(implicit ctx: Context) =
-    if (HTTPRequest.isBot(ctx.req)) notFound else res
+    if (HTTPRequest.isCrawler(ctx.req)) notFound else res
 
   protected def OnlyHumans(result: => Fu[Result])(implicit ctx: lidraughts.api.Context) =
-    if (HTTPRequest isBot ctx.req) fuccess(NotFound)
+    if (HTTPRequest isCrawler ctx.req) fuccess(NotFound)
     else result
 
   protected def OnlyHumansAndFacebookOrTwitter(result: => Fu[Result])(implicit ctx: lidraughts.api.Context) =
     if (HTTPRequest isFacebookOrTwitterBot ctx.req) result
-    else if (HTTPRequest isBot ctx.req) fuccess(NotFound)
+    else if (HTTPRequest isCrawler ctx.req) fuccess(NotFound)
     else result
 
   private val jsonGlobalErrorRenamer = {

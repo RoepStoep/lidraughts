@@ -1,4 +1,5 @@
 import { WorkerOpts, Work } from './types';
+import { readKingMoves } from 'draughtsground/fen';
 
 const EVAL_REGEX = new RegExp(''
   + /^info depth=(\d+) mean-depth=\S+ /.source
@@ -297,13 +298,36 @@ export default class Protocol {
       }
     }
     //this.send('setoption name MultiPV value ' + this.work.multiPv);
+
+    let command = `pos pos=${scanFen(this.work.initialFen)}`;
+
+    if (this.frisianVariant) {
+      const kingMoves = readKingMoves(this.work.initialFen)
+      if ((kingMoves?.black.key && kingMoves?.black.count) || (kingMoves?.white.key && kingMoves?.white.count)) {
+        let wolf = ''
+        if (kingMoves.white.key && kingMoves.white.count) {
+          wolf += `W${kingMoves.white.key}=${kingMoves.white.count}`
+        }
+        if (kingMoves.black.key && kingMoves.black.count) {
+          if (wolf) wolf += ' '
+          wolf += `B${kingMoves.black.key}=${kingMoves.black.count}`
+        }
+        command += ` wolf="${wolf}"`
+      }
+    }
+
     const moves = this.work.moves.map(m => {
       if (m.length > 4)
         return m.slice(0, 2) + 'x' + m.slice(2);
       else
         return m.slice(0, 2) + '-' + m.slice(2);
     });
-    this.send('pos pos=' + scanFen(this.work.initialFen) + (moves.length != 0 ? (' moves="' + moves.join(' ') + '"') : ''));
+    if (moves.length) {
+      command += ` moves="${moves.join(' ')}"`
+    }
+
+    this.send(command);
+
     if (this.work.maxDepth >= 99)
       this.send('level infinite');
     else {

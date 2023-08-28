@@ -16,16 +16,21 @@ object wfd {
 
   def profiles(t: Team, members: Iterable[User])(implicit ctx: Context) = {
     val (unnamed, named) = members.toList.sortBy(_.id).partition(_.profileWfd.flatMap(_.nonEmptyRealName).isEmpty)
-    val pageTitle = s"Edit ${t.name} profiles"
     bits.layout(
-      title = pageTitle,
+      title = s"Edit ${t.name} WFD profiles",
       css = "team.wfd",
       moreJs = jsTag("wfd-profile.js")
     ) {
         main(cls := "page-menu page-small")(
           bits.menu(none),
           div(cls := "page-menu__content box box-pad")(
-            h1(pageTitle),
+            h1(
+              a(
+                href := routes.Team.show(t.id),
+                dataIcon := "I",
+                cls := "text"
+              ), "Edit WFD profiles"
+            ),
             table(cls := "slist slist-pad")(
               thead(
                 tr(

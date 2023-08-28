@@ -81,6 +81,8 @@ object EmailAddress {
     matches(str) option EmailAddress(str)
 
   private val hotmailRegex = """@(live|hotmail|outlook)\.""".r
+
+  val maxLength = 320
 }
 
 case class Domain(value: String) extends AnyVal with StringValue {

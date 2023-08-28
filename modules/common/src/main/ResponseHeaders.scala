@@ -3,25 +3,23 @@ package lidraughts.common
 import play.api.http.HeaderNames
 import play.api.mvc.RequestHeader
 
-import lidraughts.common.HTTPRequest.{ isLocalApp, localAppOrigin }
-
 object ResponseHeaders {
 
-  def headersForApiOrLocalApp(req: RequestHeader) = {
-    val isApp = isLocalApp(req)
+  def headersForApiOrApp(req: RequestHeader) = {
+    val appOrigin = HTTPRequest.appOrigin(req)
     List(
-      "Access-Control-Allow-Origin" -> { if (isApp) localAppOrigin else "*" },
+      "Access-Control-Allow-Origin" -> appOrigin.getOrElse("*"),
       "Access-Control-Allow-Methods" -> allowMethods,
       "Access-Control-Allow-Headers" -> {
         List(
-          "Origin", "Authorization", "If-Modified-Since", "Cache-Control"
-        ) ::: isLocalApp(req).??(List("X-Requested-With", "sessionId", "Content-Type"))
+          "Origin", "Authorization", "If-Modified-Since", "Cache-Control", "Content-Type"
+        ) ::: appOrigin.isDefined.??(List("X-Requested-With", "sessionId"))
       }.mkString(", "),
       "Vary" -> "Origin"
-    ) ::: isApp.??(List(
+    ) ::: appOrigin.isDefined.??(List(
         "Access-Control-Allow-Credentials" -> "true"
       ))
   }
 
-  val allowMethods = List("OPTIONS", "GET", "POST") mkString ", "
+  val allowMethods = List("OPTIONS", "GET", "POST", "PUT", "DELETE") mkString ", "
 }
