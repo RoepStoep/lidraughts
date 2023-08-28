@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Các giải đấu hệ Thụy Sĩ</string>
+  <string name="bye" comment="A player gets a &#34;bye&#34; when they don't play in a round of the tournament because there is an odd number of players.">Muộn</string>
+  <string name="byes" comment="Refers to the amount of &#34;byes&#34; in this tournament (the amount of players that didn't play a round because there was an odd number of players).">Muộn</string>
+  <string name="absent">Vắng mặt</string>
+  <string name="absences">Vắng mặt</string>
+  <string name="late">Trễ</string>
+  <string name="tieBreak">Tie break</string>
+  <plurals name="nbRounds">
+    <item quantity="other">%s vòng</item>
+  </plurals>
   <string name="nextRound">Vòng đấu tiếp theo</string>
   <string name="numberOfRounds">Số vòng đấu</string>
+  <string name="scheduleTheNextRound">Lên lịch cho vòng tiếp theo</string>
 </resources>

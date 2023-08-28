@@ -14,6 +14,13 @@ Nghĩa là, một ván thắng được 4 điểm, hòa: 2 điểm, thua: 0 đi�
 
 Ví dụ, thắng 2 ván rồi hòa 1 ván sẽ được 6 điểm: 2 + 2 + (2 x 1)</string>
   <string name="berserk">Berserk trong đấu trường</string>
+  <string name="berserkAnswer">Khi người chơi nhấn nút Berserk lúc bắt đầu ván cờ, họ sẽ mất nửa thời gian của họ, nhưng nếu thắng sẽ được thêm một điểm giải đấu.
+
+Dùng Berserk trong ván tính giờ với gia số sẽ hủy bỏ gia số. (1+2 là ngoại lệ, nó sẽ là 1+0)
+
+Berserk không áp dụng cho ván đấu không có thời gian bắt đầu (0+1, 0+2).
+
+Berserk chỉ thêm điểm nếu bạn chơi ít nhất 7 nước trong một ván.</string>
   <string name="howIsTheWinnerDecided">Cách xác định người thắng?</string>
   <string name="howIsTheWinnerDecidedAnswer">(Các) kỳ thủ có điểm cao nhất khi kết thúc giải đấu sẽ là (những) người thắng cuộc.
 
@@ -24,6 +31,10 @@ Chơi nhanh và trở lại phòng chờ để chơi được nhiều ván và g
   <string name="howDoesItEnd">Giải kết thúc ra sao?</string>
   <string name="howDoesItEndAnswer">Giải đấu có đồng hồ đếm ngược. Khi hết giờ, thứ hạng trong giải đấu sẽ giữ nguyên và người thắng cuộc sẽ được công bố. Các ván đang chơi phải được hoàn thành, nhưng chúng không được tính cho giải đấu nữa.</string>
   <string name="otherRules">Các quy định quan trọng khác</string>
+  <string name="thereIsACountdown">Sẽ có thời gian đếm ngược cho nước cờ đầu tiên của bạn. Không hoàn thành nước cờ trong thời gian này sẽ tính là bỏ cuộc và đối thủ sẽ được xử thắng.</string>
+  <plurals name="drawingWithinNbMoves">
+    <item quantity="other">Hòa cờ trong vòng %s nước cờ đầu tiên sẽ không cho cả hai người chơi bất kì điểm nào.</item>
+  </plurals>
   <string name="thisIsPrivate">Đây là giải đấu riêng tư</string>
   <string name="shareUrl">Chia sẻ URL này để cho phép mọi người tham dự: %s</string>
 </resources>

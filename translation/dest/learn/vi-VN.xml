@@ -1,2 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+  <string name="learnDraughts">Học cờ đam</string>
+  <string name="byPlaying">bằng cách chơi!</string>
+  <string name="menu">Menu</string>
+  <string name="progressX">Tiến trình: %s</string>
+  <string name="resetMyProgress">Đặt lại tiến trình của tôi</string>
+  <string name="youWillLoseAllYourProgress">Bạn sẽ mất tất cả các thành tích của bạn!</string>
+  <string name="play">chơi!</string>
+  <string name="draughtsPieces">Quân cờ đam</string>
+  <string name="theMen">The men</string>
+  <string name="theKing">Quân vua</string>
+  <string name="fundamentals">Nguyên tắc cơ bản</string>
+  <string name="capture">Chụp</string>
+  <string name="takeTheEnemyPieces">Ăn quân của đối thủ</string>
+  <string name="takeTheBlackPieces">Hãy bắt lấy quân đen!</string>
+  <string name="takeTheBlackPiecesAndDontLoseYours">Bắt lấy quân đen!
+Nhưng đừng để mất quân của bạn.</string>
+  <string name="captureComplete">Chúc mừng! Bạn đã biết cách chụp bằng những quân cờ đam!</string>
+  <string name="protection">Phòng thủ</string>
+  <string name="keepYourPiecesSafe">Giữ an toàn cho quân của bạn</string>
+  <string name="protectionIntro">Xác định các quân đang bị đối thủ tấn công và phòng thủ cho chúng!</string>
+  <string name="protectionComplete">Chúc mừng! Giờ thì từng con quân sẽ không bị mất đi một cách vô nghĩa nữa!</string>
+  <string name="escape">Bạn đang bị tấn công! 
+Hãy thoát khỏi mối đe dọa đó!</string>
+  <string name="noEscape">Không có nước để chạy thoát, 
+nhưng bạn có thể phòng thủ!</string>
+  <string name="dontLetThemTakeAnyUndefendedPiece">Đừng để chúng bắt 
+bất kỳ quân không được bảo vệ nào!</string>
+  <string name="combat">Giao chiến</string>
+  <string name="captureAndDefendPieces">Bắt và bảo vệ quân</string>
+  <string name="combatIntro">Một chiến binh giỏi phải biết cả tấn công lẫn phòng thủ!</string>
+  <string name="combatComplete">Xin chúc mừng! Bạn đã nắm được cách đánh với các quân cờ!</string>
+  <string name="intermediate">Trung cấp</string>
+  <string name="boardSetup">Thiết lập bàn cờ</string>
+  <string name="howTheGameStarts">Ván đấu bắt đầu như thế nào</string>
+  <string name="boardSetupIntro">Hai bên quân đối mặt với nhau, sẵn sàng cho cuộc chiến.</string>
+  <string name="thisIsTheInitialPosition">Đây là vị trí ban đầu của mọi ván cờ. Hãy đi nước bất kỳ để tiếp tục.</string>
+  <string name="boardSetupComplete">Chúc mừng! Bạn đã biết cách thiết lập bàn cờ.</string>
+  <string name="theGameIsADraw">Ván cờ kết thúc hòa</string>
+  <string name="advanced">Nâng cao</string>
+  <string name="whatNext">Tiếp theo là gì?</string>
+  <string name="youKnowHowToPlayDraughts">Bạn biết cách chơi cờ rồi đấy, xin chúc mừng! Bạn có muốn trở thành một người chơi giỏi hơn?</string>
+  <string name="register">Đăng kí</string>
+  <string name="getAFreeLidraughtsAccount">Nhận tài khoản Lidraughts miễn phí</string>
+  <string name="practice">Luyện tập</string>
+  <string name="makesYourDraughtsPerfect">làm cho kĩ năng cờ đam của bạn trở nên hoàn hảo</string>
+  <string name="signUpToSaveYourProgress">Đăng ký tài khoản để lưu tiến trình của bạn</string>
+  <string name="goToNextExercise">Đến bài học tiếp theo</string>
+  <string name="loadNextExerciseImmediately">Tải bài học tiếp theo ngay lập tức</string>
+  <string name="practiceList">Danh sách bài học</string>
+  <string name="backToPracticeMenu">Quay lại menu luyện tập</string>
+  <string name="exerciseYourTacticalSkills">Luyện tập các kĩ năng chiến thuật của bạn</string>
+  <string name="videos">Các video</string>
+  <string name="watchInstructiveDraughtsVideos">Xem video hướng dẫn cờ đam</string>
+  <string name="playPeople">Đấu với người</string>
+  <string name="opponentsFromAroundTheWorld">Các đối thủ từ khắp nơi trên thế giới</string>
+  <string name="playMachine">Đấu với máy</string>
+  <string name="testYourSkillsWithTheComputer">Kiểm tra các kĩ năng của bạn với máy</string>
+  <string name="letsGo">Bắt đầu nào!</string>
+  <string name="stageX">Giai đoạn %s</string>
+  <string name="awesome">Tuyệt vời!</string>
+  <string name="excellent">Xuất sắc!</string>
+  <string name="greatJob">Làm tốt lắm!</string>
+  <string name="perfect">Hoàn hảo!</string>
+  <string name="outstanding">Nổi bật!</string>
+  <string name="wayToGo">Làm rất tốt!</string>
+  <string name="yesYesYes">Đúng, đúng, rất đúng!</string>
+  <string name="youreGoodAtThis">Bạn giỏi quá!</string>
+  <string name="nailedIt">Luyện tập tốt.</string>
+  <string name="rightOn">Đúng rồi!</string>
+  <string name="success">Thành công!</string>
+  <string name="stageXComplete">Hoàn thành chặng %s</string>
+  <string name="yourScore">Điểm của bạn</string>
+  <string name="next">Tiếp</string>
+  <string name="backToMenu">Quay lại menu</string>
+  <string name="puzzleFailed">Giải sai!</string>
+  <string name="retry">Thử lại</string>
+  <string name="clickToRetry">Nhấn để thử lại</string>
+  <string name="playALegalCapture">Chơi một nước chụp</string>
+  <plurals name="playAllLegalCapturesXRemaining">
+    <item quantity="other">Chơi tất cả các nước chụp hợp lệ. Còn %s nữa!</item>
+  </plurals>
+  <string name="winTheGame">Thắng cuộc</string>
+  <plurals name="winTheGameInX">
+    <item quantity="other">Chiến thắng sau %s nước đi</item>
+  </plurals>
+  <string name="promoteAKing">Phong thành quân vua</string>
+  <plurals name="promoteAKingInX">
+    <item quantity="other">Phong vua sau %s nước đi</item>
+  </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="other">Giữ ván hòa thêm %s nước đi nữa</item>
+  </plurals>
+  <plurals name="equalizeInX">
+    <item quantity="other">Cân bằng trong %s nước đi</item>
+  </plurals>
+  <plurals name="defendForX">
+    <item quantity="other">Phòng thủ trong %s nước đi</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="other">Giành chiến thắng sau %s nước đi</item>
+  </plurals>
+</resources>

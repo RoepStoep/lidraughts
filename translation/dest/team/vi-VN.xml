@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="team">Đội</string>
-  <string name="teams">Đội</string>
+  <string name="teams">Các đội</string>
   <plurals name="nbMembers">
     <item quantity="other">%s thành viên</item>
   </plurals>
@@ -11,12 +11,20 @@
   <string name="noTeamFound">không tìm thấy đội</string>
   <string name="joinTeam">Tham gia đội</string>
   <string name="quitTeam">Rời đội</string>
+  <string name="anyoneCanJoin">Mở cho tất cả</string>
+  <string name="aConfirmationIsRequiredToJoin">Xác nhận để tham gia</string>
+  <string name="joiningPolicy">Luật tham gia</string>
+  <string name="teamLeader">Đội trưởng</string>
   <plurals name="teamLeaders">
     <item quantity="other">Đội trưởng</item>
   </plurals>
-  <string name="teamRecentMembers">Thành viên Đội gần đây</string>
+  <string name="teamBestPlayers">Người chơi giỏi nhất</string>
+  <string name="teamRecentMembers">Thành viên của đội gần đây</string>
   <string name="kickSomeone">Loại ai đó ra khỏi đội</string>
   <string name="whoToKick">Ai là người bạn muốn loại khỏi đội?</string>
+  <string name="deleteTeamWarning">Xóa nhóm và các thành viên của nhóm. Không thể hoàn nguyên!</string>
+  <string name="appointOwner">Chỉ định người sở hữu đội khác</string>
+  <string name="changeOwner">Ai là người bạn muốn làm người sở hữu đội này?</string>
   <plurals name="xJoinRequests">
     <item quantity="other">%s yêu cầu tham gia</item>
   </plurals>
@@ -26,6 +34,7 @@
   <string name="teamBattleOverview">Một trận đấu giữa nhiều đội, mỗi người chơi ghi điểm cho đội của họ</string>
   <string name="teamTournament">Giải đấu trong đội</string>
   <string name="teamTournamentOverview">Một giải đấu Đấu trường mà chỉ thành viên của đội bạn có thể tham gia</string>
+  <string name="swissTournament">Giải đấu hệ Thụy Sĩ</string>
   <string name="swissTournamentOverview">Một giải đấu hệ Thụy Sĩ mà chỉ thành viên của đội bạn có thể tham gia</string>
   <string name="subscribeToTeamMessages">Đăng kí nhận tin nhắn của đội</string>
   <string name="messageAllMembers">Nhắn tin tất cả thành viên</string>
@@ -37,4 +46,5 @@ Những người chơi không muốn nhận tin nhắn của bạn có thể s�
   <string name="youMayWantToLinkOneOfTheseTournaments">Có thể bạn muốn dẫn tới một trong những giải đấu sắp tới?</string>
   <string name="usersWhoCanManageThisTeam">Những người dùng có thể quản lý đội này</string>
   <string name="leadersChat">Trò chuyện của những đội trưởng</string>
+  <string name="enableMembersChat">Bật phòng trò chuyện (chỉ dành cho thành viên)</string>
 </resources>

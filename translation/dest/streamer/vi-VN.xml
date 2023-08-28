@@ -4,8 +4,8 @@
   <string name="lidraughtsStreamer">Những streamer của Lidraughts</string>
   <string name="live">TRỰC TIẾP!</string>
   <string name="offline">NGOẠI TUYẾN</string>
-  <string name="currentlyStreaming">Đang livestream: %s</string>
-  <string name="lastStream">Lần stream cuối %s</string>
+  <string name="currentlyStreaming">Đang phát trực tiếp: %s</string>
+  <string name="lastStream">Lần phát trực tiếp cuối %s</string>
   <string name="becomeStreamer">Trở thành một Streamer của Lidraughts</string>
   <string name="doYouHaveStream">Bạn có kênh YouTube hoặc Twitch không?</string>
   <string name="hereWeGo">Bắt đầu nào!</string>
@@ -14,12 +14,27 @@
   <string name="yourPage">Trang streamer của bạn</string>
   <string name="downloadKit">Tải bộ công cụ cho streamer</string>
   <string name="xIsStreaming">%s đang livestream</string>
+  <string name="rules">Luật phát trực tiếp</string>
+  <string name="rule1">Bao gồm từ khóa \"lidraughts.org\" trong tiêu đề luồng của bạn khi bạn phát trực tiếp trên Lidraughts.</string>
+  <string name="rule2">Loại bỏ từ khóa khi bạn phát trực tiếp những thứ không liên quan đến Lidraughts.</string>
+  <string name="rule3">Lidraughts sẽ tự động phát hiện luồng trực tiếp của bạn và kích hoạt những quyền lợi sau:</string>
+  <string name="perks">Những quyền lợi khi Stream với từ khóa</string>
+  <string name="perk1">Nhận được biểu tượng streamer bốc lửa trong trang cá nhân Lidraughts của bạn.</string>
+  <string name="perk2">Được đẩy lên đầu trong danh sách các streamer.</string>
+  <string name="perk3">Thông báo cho những người theo dõi Lidraughts của bạn.</string>
+  <string name="perk4">Hiển thị luồng trực tiếp trong các ván đấu, giải đấu và nghiên cứu của bạn.</string>
   <string name="approved">Stream của bạn đã được phê duyệt.</string>
   <string name="pendingReview">Stream của bạn đang được quản trị viên đánh giá.</string>
   <string name="pleaseFillIn">Hãy điền thông tin của bạn và tải lên một hình ảnh.</string>
   <string name="whenReady">Khi bạn sẵn sàng trờ thành streamer Lidraughts, %s</string>
   <string name="requestReview">yêu cầu đánh giá của quản trị viên</string>
+  <string name="anotherLanguage">Nếu stream của bạn sử dụng ngôn ngữ khác tiếng Anh, thêm thẻ ngôn ngữ (%s), để trong ngoặc vuông, vào phần đầu của tên luồng của bạn.
+Ví dụ, bạn có thể thêm \"[RU]\" cho tiếng Nga, \"[TR]\" cho tiếng Thổ Nhĩ Kỳ, \"[FR]\" cho tiếng Pháp, \"[VI]\" cho tiếng Việt, v.v. 
+Để phần này vào tựa đề stream trong trang Twitch hoặc YouTube chứ không phải ở cài đặt stream Lidraughts.
+Nếu stream của bạn dùng tiếng Anh, bạn không cần thêm thẻ ngôn ngữ.</string>
+  <string name="twitchUsername">Tên người dùng hoặc đường dẫn đến trang Twitch của bạn</string>
   <string name="optionalOrEmpty">Tùy chọn. Bỏ trống nếu không có</string>
+  <string name="youtubeChannel">Đường dẫn hoặc ID kênh YouTube của bạn</string>
   <string name="streamerName">Tên streamer của bạn trên Lidraughts</string>
   <plurals name="keepItShort">
     <item quantity="other">Để tên ngắn gọn: tối đa %s ký tự</item>
@@ -32,5 +47,9 @@
   <string name="xStreamerPicture">Ảnh streamer của %s</string>
   <string name="changePicture">Thay đổi/xóa ảnh của bạn</string>
   <string name="uploadPicture">Tải lên hình ảnh</string>
+  <string name="deletePicture">Xóa ảnh</string>
   <string name="maxSize">Kích cỡ tối đa: %s</string>
+  <string name="installBlocker">Cài phần mềm chặn mã độc!</string>
+  <string name="beSafe">An toàn trước quảng cáo và trình theo dõi tấn công Twitch và YouTube.
+Lidraughts đề xuất uBlock Origin miễn phí và mã nguồn mở.</string>
 </resources>

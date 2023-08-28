@@ -16,7 +16,7 @@
   <string name="takeTheBlackPieces">Съешьте чёрные фигуры!</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">Съешьте все чёрные фигуры!
 И не потеряйте свои.</string>
-  <string name="captureComplete">Поздравляем! Теперь вы знаете, как захватывать шашечными фигурами!</string>
+  <string name="captureComplete">Поздравляем! Теперь вы знаете, как захватывать шашками!</string>
   <string name="protection">Защита</string>
   <string name="keepYourPiecesSafe">Защищайте ваши фигуры</string>
   <string name="protectionIntro">Определите, какие ваши фигуры атакует противник, и защитите их!</string>
@@ -30,10 +30,10 @@
   <string name="combat">Сражение</string>
   <string name="captureAndDefendPieces">Бейте и защищайте фигуры</string>
   <string name="combatIntro">Хороший воин знает как атаку, так и защиту!</string>
-  <string name="combatComplete">Поздравляем! Теперь вы знаете, как сражаться шашечными фигурами!</string>
+  <string name="combatComplete">Поздравляем! Теперь вы знаете, как сражаться шашками!</string>
   <string name="intermediate">Средний уровень</string>
   <string name="boardSetup">Расстановка фигур</string>
-  <string name="howTheGameStarts">Начало шахматной партии</string>
+  <string name="howTheGameStarts">Начало шашечной партии</string>
   <string name="boardSetupIntro">Две армии, готовые к бою, встретились лицом к лицу.</string>
   <string name="thisIsTheInitialPosition">Это начальная позиция
 любой игры в шашки!
@@ -47,11 +47,11 @@
   <string name="register">Регистрация</string>
   <string name="getAFreeLidraughtsAccount">Зарегистрируйтесь бесплатно</string>
   <string name="practice">Упражнения</string>
-  <string name="makesYourDraughtsPerfect">сделает ваши шашки идеальными</string>
+  <string name="makesYourDraughtsPerfect">сделает ваши умения в шашках идеальными</string>
   <string name="learnCommonDraughtsPositions">Изучайте основные позиции</string>
   <string name="signUpToSaveYourProgress">Зарегистрируйтесь, чтобы сохранить прогресс</string>
-  <string name="goToNextExercise">Перейти к следящему упражнению</string>
-  <string name="loadNextExerciseImmediately">Загрузить следующее упражнение немедленно</string>
+  <string name="goToNextExercise">Перейти к следующему упражнению</string>
+  <string name="loadNextExerciseImmediately">Загрузить следующее упражнение сразу</string>
   <string name="practiceList">Список практики</string>
   <string name="backToPracticeMenu">Вернуться в меню практики</string>
   <string name="exerciseYourTacticalSkills">Тренируйте свои тактические навыки</string>
@@ -81,12 +81,20 @@
   <string name="puzzleFailed">Задание провалено!</string>
   <string name="retry">Ещё раз</string>
   <string name="clickToRetry">Нажмите, чтобы повторить</string>
+  <string name="playALegalCapture">Сыграйте возможное взятие</string>
   <string name="winTheGame">Выиграйте игру</string>
   <plurals name="winTheGameInX">
     <item quantity="one">Выиграйте игру в %s ход</item>
     <item quantity="few">Выиграйте игру в %s хода</item>
     <item quantity="many">Выиграйте игру в %s ходов</item>
     <item quantity="other">Выиграйте игру в %s ходов</item>
+  </plurals>
+  <string name="promoteAKing">Пройдите в дамки</string>
+  <plurals name="promoteAKingInX">
+    <item quantity="one">Пройдите в дамки в %s ход</item>
+    <item quantity="few">Пройдите в дамки за %s хода</item>
+    <item quantity="many">Пройдите в дамки за %s ходов</item>
+    <item quantity="other">Пройдите в дамки за %s ходов</item>
   </plurals>
   <plurals name="holdTheDrawForX">
     <item quantity="one">Удерживайте ничью еще %s ход</item>
