@@ -11,8 +11,8 @@
     <item quantity="other">A pratiqué %1$s positions de %2$s</item>
   </plurals>
   <plurals name="solvedNbPuzzles">
-    <item quantity="one">A résolu %s puzzle tactique</item>
-    <item quantity="other">%s puzzles tactiques résolus</item>
+    <item quantity="one">A résolu %s problème tactique</item>
+    <item quantity="other">A résolu %s problèmes tactiques</item>
   </plurals>
   <plurals name="solvedNbVariantPuzzles">
     <item quantity="one">A résolu %1$s problème tactique %2$s</item>
@@ -23,7 +23,7 @@
     <item quantity="other">A joué %1$s parties de %2$s</item>
   </plurals>
   <plurals name="postedNbMessages">
-    <item quantity="one">A posté %1$s message dans %2$s</item>
+    <item quantity="one">A publié %1$s message dans %2$s</item>
     <item quantity="other">A posté %1$s messages dans %2$s</item>
   </plurals>
   <plurals name="playedNbMoves">
@@ -43,12 +43,12 @@
     <item quantity="other">Commence à suivre %s joueurs</item>
   </plurals>
   <plurals name="gainedNbFollowers">
-    <item quantity="one">Obtenu %s nouveau follower</item>
-    <item quantity="other">Gagne %s nouveaux suiveurs</item>
+    <item quantity="one">Obtenu %s nouvel abonné</item>
+    <item quantity="other">Gagne %s nouveaux abonnés</item>
   </plurals>
   <plurals name="hostedNbSimuls">
-    <item quantity="one">A hébergé %s simultanée</item>
-    <item quantity="other">A hébergé %s simultanées</item>
+    <item quantity="one">A hébergé %s partie simultanée</item>
+    <item quantity="other">A hébergé %s parties simultanées</item>
   </plurals>
   <plurals name="joinedNbSimuls">
     <item quantity="one">A participé à %s simultanée</item>

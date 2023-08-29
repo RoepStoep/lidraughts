@@ -74,7 +74,7 @@
   <string name="toggleLocalEvaluation">Toggle local evaluation</string>
   <string name="promoteVariation">Promote variation</string>
   <string name="makeMainLine">Make mainline</string>
-  <string name="deleteFromHere">Delete from here</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Delete from here</string>
   <string name="move">Move</string>
   <string name="variantLoss">Variant loss</string>
   <string name="variantWin">Variant win</string>
@@ -591,6 +591,7 @@ One URL per line</string>
   <string name="sequentialSwitch">Fixed order</string>
   <string name="puzzles">Puzzles</string>
   <string name="variantPuzzles">%s puzzles</string>
+  <string name="variantPractice">%s practice</string>
   <string name="latestUpdates">Latest updates</string>
   <string name="tournamentWinners">Tournament winners</string>
   <string name="name">Name</string>
@@ -702,7 +703,7 @@ One URL per line</string>
   <string name="victoryVsYInZ">%1$s vs %2$s in %3$s</string>
   <string name="defeatVsYInZ">%1$s vs %2$s in %3$s</string>
   <string name="drawVsYInZ">%1$s vs %2$s in %3$s</string>
-  <string name="timeline">Timeline</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Timeline</string>
   <string name="seeAllTournaments">See all tournaments</string>
   <string name="start">Start</string>
   <string name="starting">Starting:</string>

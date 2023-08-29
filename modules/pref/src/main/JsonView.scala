@@ -38,7 +38,8 @@ object JsonView {
       "fullCapture" -> p.fullCapture,
       "zen" -> p.zen,
       "moveEvent" -> p.moveEvent,
-      "puzzleVariant" -> p.puzzleVariant.key
+      "puzzleVariant" -> p.puzzleVariant.key,
+      "practiceVariant" -> p.practiceVariant.key
     )
   }
 }

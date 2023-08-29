@@ -74,7 +74,7 @@
   <string name="toggleLocalEvaluation">Lokale evaluatie aan-/uitzetten</string>
   <string name="promoteVariation">Promoveer variant</string>
   <string name="makeMainLine">Maak hoofdlijn</string>
-  <string name="deleteFromHere">Verwijder vanaf hier</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Verwijder vanaf hier</string>
   <string name="move">Zet</string>
   <string name="variantLoss">Variant verlies</string>
   <string name="variantWin">Variant overwinning</string>
@@ -702,7 +702,7 @@ Een URL per regel</string>
   <string name="victoryVsYInZ">%1$s vs %2$s in %3$s</string>
   <string name="defeatVsYInZ">%1$s vs %2$s in %3$s</string>
   <string name="drawVsYInZ">%1$s vs %2$s in %3$s</string>
-  <string name="timeline">Tijdslijn</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Tijdslijn</string>
   <string name="seeAllTournaments">Zie alle toernooien</string>
   <string name="start">Beginnen</string>
   <string name="starting">Startend:</string>

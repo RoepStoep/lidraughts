@@ -65,7 +65,7 @@
   <string name="toggleLocalEvaluation">ローカル評価値のオン/オフ</string>
   <string name="promoteVariation">変化を主手順にする</string>
   <string name="makeMainLine">主手順にする</string>
-  <string name="deleteFromHere">ここから削除</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">ここから削除</string>
   <string name="move">手</string>
   <string name="variantLoss">バリアント負け</string>
   <string name="variantWin">バリアント勝ち</string>
@@ -538,7 +538,7 @@
   <string name="victoryVsYInZ">%1$s 対 %2$s、%3$s</string>
   <string name="defeatVsYInZ">%1$s 対 %2$s、%3$s で</string>
   <string name="drawVsYInZ">%1$s 対 %2$s、%3$s で</string>
-  <string name="timeline">タイムライン</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">タイムライン</string>
   <string name="start">開始</string>
   <string name="starting">開始時刻：</string>
   <string name="allInformationIsPublicAndOptional">情報の記入はすべて任意で、すべて公開されます。</string>

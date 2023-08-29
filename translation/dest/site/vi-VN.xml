@@ -68,7 +68,7 @@
   <string name="toggleLocalEvaluation">Kích hoạt đánh giá địa phương</string>
   <string name="promoteVariation">Thay đổi biến</string>
   <string name="makeMainLine">Biến chính</string>
-  <string name="deleteFromHere">Xoá từ đây</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Xoá từ đây</string>
   <string name="move">Các nước đi</string>
   <string name="variantLoss">Nước đi sai lầm dẫn đến chiếu hết</string>
   <string name="variantWin">Nước đi chiếu hết</string>
@@ -353,6 +353,7 @@
   <string name="pickYourTeam">Chọn đội của bạn</string>
   <string name="whichTeamWillYouRepresent">Bạn sẽ đại diện cho đội nào trong trận chiến này?</string>
   <string name="location">Vị trí</string>
+  <string name="settings">Cài đặt</string>
   <string name="filterGames">Lọc game</string>
   <string name="reset">Đặt lại từ đầu</string>
   <string name="apply">Áp dụng</string>
@@ -613,7 +614,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="victoryVsYInZ">%1$s vs %2$s trong %3$s</string>
   <string name="defeatVsYInZ">%1$s vs %2$s trong %3$s</string>
   <string name="drawVsYInZ">%1$s vs %2$s trong %3$s</string>
-  <string name="timeline">Dòng thời gian</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Dòng thời gian</string>
   <string name="seeAllTournaments">Xem tất cả giải đấu</string>
   <string name="start">Bắt đầu</string>
   <string name="starting">Bắt đầu đấu:</string>
@@ -694,10 +695,17 @@ Một đường dẫn mỗi dòng</string>
   <string name="hostColorX">Màu quân của người chủ trì: %s</string>
   <string name="createdSimuls">Cờ đồng loạt mới tạo</string>
   <string name="hostANewSimul">Chủ trì một sự kiện cờ đồng loạt mới</string>
+  <string name="acceptedPlayers"> người chơi được chấp nhận</string>
+  <string name="xComplete">%s hoàn thành!</string>
+  <string name="succeeded">đã thành công!</string>
+  <string name="failed">đã thất bại</string>
+  <string name="aboutSimulSettings">Cờ đồng loạt luôn không tính elo. Việc tái đấu, đi lại và thêm thời gian sẽ bị vô hiệu hoá.</string>
   <string name="create">Tạo</string>
   <string name="simulVariantsHint">Nếu bạn chọn nhiều thể loại, mỗi người tham gia sẽ được lựa chọn chơi thể loại nào.</string>
   <string name="simulClockHint">Thiết lập Đồng hồ Fischer. Bạn càng chơi với nhiều người thì càng có thể cần nhiều thời gian.</string>
   <string name="simulHostExtraTime">Thời gian thêm cho người chủ trì</string>
+  <string name="everyone">Mọi người</string>
+  <string name="spectatorsOnly">Chỉ người xem</string>
   <string name="lidraughtsTournaments">Những giải đấu của Lidraughts</string>
   <string name="tournamentFAQ">Các câu hỏi thường gặp về giải đấu đấu trường (FAQ)</string>
   <string name="tournamentOfficial">Chính thức</string>
@@ -806,6 +814,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="bestWasX">Nước đi tốt nhất là %s</string>
   <string name="youBrowsedAway">Bạn thử biến quá khác</string>
   <string name="resumePractice">Tiếp tục luyện</string>
+  <string name="theGameIsADraw">Ván cờ kết thúc hòa.</string>
   <string name="computerThinking">Máy đang nghĩ...</string>
   <string name="seeBestMove">Xem nước đi tốt nhất</string>
   <string name="hideBestMove">Ẩn nước đi tốt nhất</string>
@@ -817,6 +826,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="learnFromThisMistake">Học từ sai lầm này</string>
   <string name="skipThisMove">Bỏ qua nước này</string>
   <string name="next">Tiếp</string>
+  <string name="back">Trở lại</string>
   <string name="xWasPlayed">Đã chơi %s</string>
   <string name="findBetterMoveForWhite">Tìm nước đi tốt hơn cho trắng</string>
   <string name="findBetterMoveForBlack">Tìm nước đi tốt hơn cho đen</string>
@@ -833,6 +843,11 @@ Một đường dẫn mỗi dòng</string>
   <string name="doItAgain">Thử lại một lần nữa</string>
   <string name="reviewWhiteMistakes">Đánh giá lỗi bên trắng</string>
   <string name="reviewBlackMistakes">Đánh giá lỗi bên đen</string>
+  <string name="helpPlayerInitialMove">Giúp người chơi tìm nước đi ban đầu, với một bình luận.</string>
+  <string name="nextChapter">Chương tiếp theo</string>
+  <string name="playAgain">Chơi lại</string>
+  <string name="analyse">Phân tích</string>
+  <string name="preview">Xem chi tiết</string>
   <string name="advantage">Lợi thế</string>
   <plurals name="nbSeconds">
     <item quantity="other">%s giây</item>
@@ -840,9 +855,13 @@ Một đường dẫn mỗi dòng</string>
   <plurals name="nbMinutes">
     <item quantity="other">%s phút</item>
   </plurals>
+  <plurals name="nbTurns">
+    <item quantity="other">%s lượt</item>
+  </plurals>
   <string name="opening">Khai cuộc</string>
   <string name="middlegame">Trung cuộc</string>
   <string name="endgame">Tàn cuộc</string>
+  <string name="randomOpeningFromX">Khai cuộc ngẫu nhiên từ %s</string>
   <string name="registerToSendChallenges">Xin vui lòng đăng ký để gửi những lời thách đấu.</string>
   <string name="youCannotChallengeX">Bạn không thể thách đấu %s.</string>
   <string name="xDoesNotAcceptChallenges">%s không chấp nhận những lời thách đấu.</string>
@@ -861,6 +880,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="weHadToTimeYouOutForAWhile">Chúng tôi phải ngừng bạn lại một thời gian.</string>
   <string name="timeoutExpires">Hết hiệu lực trong %s.</string>
   <string name="why">Vì sao?</string>
+  <string name="pleasantDraughtsExperience">Mục tiêu của chúng tôi là cung cấp trải nghiệm chơi cờ vui vẻ cho mọi người.</string>
   <string name="goodPractice">Để đạt được mục đích, chúng tôi phải chắc chắn rằng mọi người phải tuân thủ tốt.</string>
   <string name="potentialProblem">Khi có vấn đề phát sinh, chúng tôi sẽ hiển thị thông báo này.</string>
   <string name="howToAvoidThis">Làm thế nào để tránh điều này?</string>

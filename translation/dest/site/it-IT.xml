@@ -63,7 +63,7 @@
   <string name="toggleLocalEvaluation">Attiva/disattiva analisi locale</string>
   <string name="promoteVariation">Promuovi la variante</string>
   <string name="makeMainLine">Rendi questa linea principale</string>
-  <string name="deleteFromHere">Elimina da qui</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Elimina da qui</string>
   <string name="move">Mossa</string>
   <string name="variantLoss">Variante perdente</string>
   <string name="variantWin">Variante vincente</string>
@@ -537,7 +537,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="xCommentedY">%1$s ha commentato %2$s</string>
   <string name="victory">Vittoria</string>
   <string name="defeat">Sconfitta</string>
-  <string name="timeline">Resoconto attività</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Resoconto attività</string>
   <string name="seeAllTournaments">Vedi tutti i tornei</string>
   <string name="start">Inizia</string>
   <string name="starting">Inizio:</string>

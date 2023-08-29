@@ -74,7 +74,7 @@
   <string name="toggleLocalEvaluation">Lokale Auswertung an-/ausschalten</string>
   <string name="promoteVariation">Variante aufwerten</string>
   <string name="makeMainLine">Zur Hauptvariante machen</string>
-  <string name="deleteFromHere">Ab hier löschen</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Ab hier löschen</string>
   <string name="move">Zug</string>
   <string name="variantLoss">Variante verloren</string>
   <string name="variantWin">Variante gewonnen</string>
@@ -429,10 +429,6 @@ eine Computeranalyse, einen Spielchat und eine teilbare URL.</string>
   <string name="unblock">Nicht mehr blockieren</string>
   <string name="followsYou">Folgt dir</string>
   <string name="xStartedFollowingY">%1$s folgt jetzt %2$s</string>
-  <plurals name="nbFollowers">
-    <item quantity="one">%s Follower</item>
-    <item quantity="other">%s Follower</item>
-  </plurals>
   <plurals name="nbFollowing">
     <item quantity="one">%s folgend</item>
     <item quantity="other">%s folgend</item>
@@ -702,7 +698,7 @@ Eine URL pro Zeile</string>
   <string name="victoryVsYInZ">%1$s gegen %2$s in %3$s</string>
   <string name="defeatVsYInZ">%1$s gegen %2$s in %3$s</string>
   <string name="drawVsYInZ">%1$s gegen %2$s in %3$s</string>
-  <string name="timeline">Verlauf</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Verlauf</string>
   <string name="seeAllTournaments">Alle Turniere anzeigen</string>
   <string name="start">Beginn</string>
   <string name="starting">Beginnt:</string>

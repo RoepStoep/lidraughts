@@ -1,5 +1,6 @@
 package lidraughts.practice
 
+import draughts.variant.Variant
 import lidraughts.study.{ Study, Chapter }
 
 case class UserPractice(
@@ -17,7 +18,7 @@ case class UserPractice(
 
   lazy val nbDoneChapters = structure.chapterIds count progress.chapters.contains
 
-  lazy val progressPercent = nbDoneChapters * 100 / structure.nbChapters
+  lazy val progressPercent = if (structure.nbChapters != 0) nbDoneChapters * 100 / structure.nbChapters else 0
 }
 
 case class UserStudy(

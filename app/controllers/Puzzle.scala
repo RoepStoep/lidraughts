@@ -3,6 +3,7 @@ package controllers
 import play.api.libs.json._
 import play.api.mvc._
 
+import draughts.variant.{ Variant, Standard }
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.common.{ HTTPRequest, IpAddress, MaxPerSecond }
@@ -10,7 +11,6 @@ import lidraughts.game.PdnDump
 import lidraughts.pref.Pref.puzzleVariants
 import lidraughts.puzzle.{ PuzzleId, Result, Puzzle => PuzzleModel, UserInfos }
 import lidraughts.user.UserRepo
-import draughts.variant.{ Variant, Standard }
 import views._
 
 object Puzzle extends LidraughtsController {

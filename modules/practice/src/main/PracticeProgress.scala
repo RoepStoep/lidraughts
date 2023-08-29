@@ -42,6 +42,10 @@ case class PracticeProgress(
     }
   )
 
+  def clearChapters(c: List[Chapter.Id]) = copy(
+    chapters = chapters.filterNot(chapter => c contains chapter._1),
+    updatedAt = DateTime.now
+  )
 }
 
 object PracticeProgress {

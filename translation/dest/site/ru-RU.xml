@@ -74,11 +74,11 @@
   <string name="toggleLocalEvaluation">Включить локальный анализ</string>
   <string name="promoteVariation">Повысить приоритет варианта</string>
   <string name="makeMainLine">Сделать этот вариант главным</string>
-  <string name="deleteFromHere">Удалить с этого места</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Удалить с этого места</string>
   <string name="move">Ход</string>
   <string name="variantLoss">Проигрышный ход</string>
   <string name="variantWin">Победный ход</string>
-  <string name="insufficientMaterial">Недостаточно материала для мата</string>
+  <string name="insufficientMaterial">Недостаточно материала для победы</string>
   <string name="capture">Взятие</string>
   <string name="close">Закрыть</string>
   <string name="winning">Выигрывают</string>
@@ -90,16 +90,16 @@
   <string name="averageRatingX">Средний рейтинг: %s</string>
   <string name="recentGames">Недавние игры</string>
   <string name="topGames">Лучшие игры</string>
-  <string name="masterDbExplanation">Игры из реальной жизни %1$s+ мастер игроков с %2$s по %3$s</string>
+  <string name="masterDbExplanation">Игры из реальной жизни %1$s+ сильных игроков с %2$s по %3$s</string>
   <plurals name="winInXHalfMoves">
     <item quantity="one">Победа в %s полуход</item>
-    <item quantity="few">Победа в %s полуходов</item>
+    <item quantity="few">Победа в %s полухода</item>
     <item quantity="many">Победа в %s полуходов</item>
     <item quantity="other">Победа в %s полуходов</item>
   </plurals>
   <plurals name="drawInXHalfMoves">
     <item quantity="one">Ничья в %s полуход</item>
-    <item quantity="few">Ничья в %s полуходов</item>
+    <item quantity="few">Ничья в %s полухода</item>
     <item quantity="many">Ничья в %s полуходов</item>
     <item quantity="other">Ничья в %s полуходов</item>
   </plurals>
@@ -138,16 +138,16 @@
   <string name="drawOffersNotAllowed">Предложение ничьей отклонено</string>
   <string name="draw">Ничья</string>
   <plurals name="nbPlayers">
-    <item quantity="one">Игроков в сети: %s</item>
-    <item quantity="few">Игроков в сети: %s</item>
-    <item quantity="many">Игроков в сети: %s</item>
-    <item quantity="other">Игроков в сети: %s</item>
+    <item quantity="one">%s игрок в сети</item>
+    <item quantity="few">%s игрока в сети</item>
+    <item quantity="many">%s игроков в сети</item>
+    <item quantity="other">%s игроков в сети</item>
   </plurals>
   <plurals name="nbOpponents">
     <item quantity="one">%s соперник</item>
     <item quantity="few">%s соперника</item>
     <item quantity="many">%s соперников</item>
-    <item quantity="other">%s соперника</item>
+    <item quantity="other">%s соперников</item>
   </plurals>
   <string name="ongoingGames">Текущие партии</string>
   <string name="currentGames">Текущие партии</string>
@@ -224,7 +224,7 @@
   <string name="email">Электронная почта</string>
   <string name="passwordReset">Сброс пароля</string>
   <string name="forgotPassword">Забыли пароль?</string>
-  <string name="rank">Ранг</string>
+  <string name="rank">Место</string>
   <string name="rankX">Место: %s</string>
   <plurals name="rankIsUpdatedEveryNbMinutes">
     <item quantity="one">Рейтинг обновляется ежеминутно</item>
@@ -247,8 +247,8 @@
   </plurals>
   <string name="cancel">Отменить</string>
   <string name="timeOut">Время истекло</string>
-  <string name="arbiterDraw">Ничья по решению СОИ арбитра.</string>
-  <string name="arbiterResign">Выигрыш по решению СОИ арбитра.</string>
+  <string name="arbiterDraw">Ничья по решению арбитра сеанса</string>
+  <string name="arbiterResign">Выигрыш по решению арбитра сеанса</string>
   <string name="drawOfferSent">Предложение ничьей отправлено</string>
   <string name="drawOfferDeclined">Предложение ничьей отклонено</string>
   <string name="drawOfferAccepted">Предложение ничьей принято</string>
@@ -271,11 +271,11 @@
   <string name="standard">Классические шашки</string>
   <string name="variantTitleStandard">Стандартные правила международных шашек (FMJD).</string>
   <string name="variantTitleFrisian">Шашки также могут захватывать горизонтально и вертикально.</string>
-  <string name="variantTitleFrysk">Фрисландские шашки - у каждого игрока по 5 фигур.</string>
+  <string name="variantTitleFrysk">Фрисландские шашки, но у каждого игрока по 5 фигур.</string>
   <string name="variantTitleAntidraughts">Потеряйте все ваши шашки (или станьте заперты), чтобы выиграть игру.</string>
-  <string name="variantTitleBreakthrough">Побеждает первый игрок, который получит дамку.</string>
-  <string name="variantTitleRussian">Выбор боя, продвижение во время нескольких захватов.</string>
-  <string name="variantTitleBrazilian">Те же правила, что и в международных шашках на доске 8 x 8.</string>
+  <string name="variantTitleBreakthrough">Побеждает первый игрок, чья шашка прошла в дамки.</string>
+  <string name="variantTitleRussian">Свободный выбор взятия, продвижение во время цепи взятий.</string>
+  <string name="variantTitleBrazilian">Те же правила, что и в международных шашках, на доске 8 x 8.</string>
   <string name="customStartingPosition">Пользовательская начальная позиция</string>
   <string name="unlimited">Отсутствует</string>
   <string name="mode">Режим</string>
@@ -306,7 +306,7 @@
   <string name="recipient">Получатель</string>
   <string name="send">Отправить</string>
   <string name="incrementInSeconds">Добавление секунд на ход</string>
-  <string name="freeOnlineDraughts">Бесплатные онлайн шашки</string>
+  <string name="freeOnlineDraughts">Бесплатные онлайн-шашки</string>
   <string name="spectators">Зрители:</string>
   <plurals name="nbRated">
     <item quantity="one">%s рейтинговая</item>
@@ -345,7 +345,7 @@
     <item quantity="other">%s играются</item>
   </plurals>
   <string name="exportGames">Экспорт игр</string>
-  <string name="exportSimulGames">Экспорт СОИ игр</string>
+  <string name="exportSimulGames">Экспорт игр из сеансов</string>
   <string name="ratingRange">Рейтинг соперника</string>
   <plurals name="giveNbSeconds">
     <item quantity="one">Дать %s секунду</item>
@@ -369,12 +369,12 @@
   <string name="advancedSearch">Расширенный поиск</string>
   <string name="searchPlayersHelp">Имя(мена) игрока(ов), которого вы хотите найти</string>
   <string name="searchRatingsHelp">Средний рейтинг обоих игроков</string>
-  <string name="searchOpponentHelp">Не зависимо от того, был ли оппонент игрока человеком или компьютером</string>
+  <string name="searchOpponentHelp">Независимо от того, был ли оппонент игрока человеком или компьютером</string>
   <string name="searchNumberOfTurnsHelp">Количество сыгранных ходов (от обоих игроков)</string>
   <string name="searchAnalysisHelp">Включить игры только с компьютерным анализом</string>
   <string name="tournament">Турнир</string>
   <string name="tournaments">Турниры</string>
-  <string name="xTournaments">%s турниры</string>
+  <string name="xTournaments">Турниров: %s</string>
   <string name="myTournaments">Мои турниры</string>
   <string name="createdTournaments">Создано</string>
   <string name="recentlyPlayed">Недавние</string>
@@ -388,7 +388,7 @@
   </plurals>
   <string name="viewTournament">Перейти в турнир</string>
   <string name="backToTournament">Вернуться к турниру</string>
-  <string name="backToSimul">Назад к СОИ</string>
+  <string name="backToSimul">Назад к сеансу</string>
   <string name="thematic">Тематический</string>
   <plurals name="moreThanNbRatedGames">
     <item quantity="one">Рейтинговых игр ≥ %s</item>
@@ -414,7 +414,7 @@
     <item quantity="many">Вы должны сыграть ещё %s рейтинговых игр</item>
     <item quantity="other">Вы должны сыграть ещё %s рейтинговых игр</item>
   </plurals>
-  <string name="yourPerfRatingIsProvisional">Ваш рейтинг в %s ещё недостоверный</string>
+  <string name="yourPerfRatingIsProvisional">Ваш рейтинг в %s ещё не определён</string>
   <string name="yourPerfRatingIsTooHigh">Ваш рейтинг в %1$s (%2$s) слишком высок для участия</string>
   <string name="yourTopWeeklyPerfRatingIsTooHigh">Ваш еженедельный рейтинг в %1$s (%2$s) слишком высок</string>
   <string name="yourPerfRatingIsTooLow">Ваш рейтинг в %1$s (%2$s) недостаточен для участия</string>
@@ -460,12 +460,12 @@
   <string name="thisIsADraughtsCaptcha">Это шашечная CAPTCHA.</string>
   <string name="clickOnTheBoardToMakeYourMove">Кликните по доске и сделайте ход, чтобы доказать, что вы человек, а не компьютер.</string>
   <string name="captcha.fail">Пожалуйста, решите капчу.</string>
-  <string name="notTheBestCapture">Не самый лучший захват</string>
-  <string name="colorPlaysCapture">%s для перемещения; сыграйте самую длинную последовательность захвата</string>
+  <string name="notTheBestCapture">Не самый лучший ход</string>
+  <string name="colorPlaysCapture">%s ходят; сыграйте самую длинную последовательность взятий</string>
   <string name="retry">Повторить</string>
   <string name="reconnecting">Переподключение</string>
   <plurals name="nbFriendsOnline">
-    <item quantity="one">%s друзей онлайн</item>
+    <item quantity="one">%s друг онлайн</item>
     <item quantity="few">%s друга онлайн</item>
     <item quantity="many">%s друзей онлайн</item>
     <item quantity="other">%s друзей онлайн</item>
@@ -489,7 +489,7 @@
   </plurals>
   <plurals name="nbFollowing">
     <item quantity="one">подписан на %s игрока</item>
-    <item quantity="few">подписаны %s</item>
+    <item quantity="few">подписан на %s игроков</item>
     <item quantity="many">подписан на %s игроков</item>
     <item quantity="other">подписан на %s игроков</item>
   </plurals>
@@ -528,10 +528,10 @@
   <string name="conditionOfEntry">Условия участия:</string>
   <string name="advancedSettings">Дополнительные настройки</string>
   <string name="safeTournamentName">Выберите для турнира как можно более безопасное название.</string>
-  <string name="safeSimulName">Выберите как можно более безопасное имя для СОИ.</string>
+  <string name="safeSimulName">Выберите как можно более безопасное имя для сеанса.</string>
   <string name="inappropriateNameWarning">Если название хотя бы немного покажется неуместным, вас могут заблокировать.</string>
   <string name="emptyTournamentName">Оставьте пустым, чтобы назвать турнир в честь случайного гроссмейстера.</string>
-  <string name="emptySimulName">Оставьте пустым, чтобы называть СОИ в честь случайного химического элемента.</string>
+  <string name="emptySimulName">Оставьте пустым, чтобы назвать сеанс в честь случайного химического элемента.</string>
   <string name="recommendNotTouching">Мы не рекомендуем задавать эти условия.</string>
   <string name="fewerPlayers">Если вы зададите условия участия, то в вашем турнире сможет принять участие меньше игроков.</string>
   <string name="showAdvancedSettings">Показать дополнительные настройки</string>
@@ -563,13 +563,13 @@
   <string name="popularOpenings">Популярные дебюты</string>
   <string name="startPosition">Начальная позиция</string>
   <string name="clearBoard">Пустая доска</string>
-  <string name="edit">Редактировать</string>
+  <string name="edit">Править</string>
   <string name="save">Сохранить</string>
   <string name="savePosition">Сохранить позицию</string>
   <string name="loadPosition">Загрузить позицию</string>
   <string name="isPrivate">Закрытый</string>
   <string name="noBerserkAllowed">Берсерк не разрешён</string>
-  <string name="editTournament">Редактировать турнир</string>
+  <string name="editTournament">Править турнир</string>
   <string name="tournamentDescription">Описание турнира</string>
   <string name="tournamentDescriptionHelp">Вы хотели бы сказать участникам что-нибудь особенное? Постарайтесь сделать это кратко. Доступны ссылки [text](https://url)</string>
   <string name="cancelTheTournament">Отменить турнир</string>
@@ -600,14 +600,14 @@
   <string name="reloadBoardsExplanation">Перезагрузите все прошлые доски текущей игрой того же игрока (если она есть).</string>
   <string name="reloadWithCurrentGameOfX">Перезагрузить с текущей игрой %s</string>
   <string name="addOngoingOrRecentGame">Добавьте последнюю игру игрока (текущую, или последнюю законченную).</string>
-  <string name="addGameByUrlOrId">Добавьте игру по URL или ID игры.</string>
+  <string name="addGameByUrlOrId">Добавьте игру по URL или её ID.</string>
   <string name="removeGame">Удалить игру</string>
   <string name="onlinePlayers">Игроки в сети</string>
   <string name="activeToday">Активные сегодня</string>
   <string name="activePlayers">Активные игроки</string>
   <string name="bewareTheGameIsRatedButHasNoClock">Внимание, это рейтинговая игра, хотя и без ограничения по времени!</string>
   <string name="standardFmjdRegulationsWithDrawingRules">Стандартные игры на lidraughts следуют правилам международных шашек, установленных FMJD. Это включает в себя правила автоматической ничьей, применяемые по остатку всего нескольких шашек на доске.</string>
-  <string name="exploreDraughtsVariants">Вариативные шашки используют вариации этих правил или могут вводить новую игровую механику. Мыслите нестандартно и исследуйте варианты, которые lidraughts предоставляют!</string>
+  <string name="exploreDraughtsVariants">Варианты шашек используют вариации этих правил или могут вводить новую игровую механику. Мыслите нестандартно и исследуйте варианты, предоставляемые lidraughts!</string>
   <string name="rulesAndVariants">Правила &amp; Варианты</string>
   <string name="training">Задачи</string>
   <string name="yourPuzzleRatingX">Ваш рейтинг в решении задач: %s</string>
@@ -642,10 +642,10 @@
   <string name="thisPuzzleIsCorrect">Задача правильная и интересная</string>
   <string name="thisPuzzleIsWrong">Задача неправильная или неинтересная</string>
   <plurals name="nbGamesInPlay">
-    <item quantity="one">Партий онлайн: %s</item>
-    <item quantity="few">Партий онлайн: %s</item>
-    <item quantity="many">Партий онлайн: %s</item>
-    <item quantity="other">Партий онлайн: %s</item>
+    <item quantity="one">%s идущая партия</item>
+    <item quantity="few">%s идущие партии</item>
+    <item quantity="many">%s идущих партий</item>
+    <item quantity="other">%s идущих партий</item>
   </plurals>
   <string name="automaticallyProceedToNextGameAfterMoving">После хода автоматически переходить к следующей игре</string>
   <string name="switchGamesInSameOrder">Пройдите игры в фиксированном порядке</string>
@@ -679,7 +679,7 @@
   <string name="troll">Троллинг</string>
   <string name="other">Другое</string>
   <string name="reportDescriptionHelp">Поделитесь с нами ссылками на игры, где, как вам кажется, были нарушены правила, и опишите, в чём дело. Недостаточно просто написать «он мухлюет», пожалуйста, опишите, как вы пришли к такому выводу. Мы сработаем оперативнее, если вы напишете на английском языке.</string>
-  <string name="error.provideOneCheatedGameLink">Пожалуйста, добавьте ссылку хотя бы на одну игру, где по вашему мнению были нарушены правила.</string>
+  <string name="error.provideOneCheatedGameLink">Пожалуйста, добавьте ссылку хотя бы на одну игру, где, по вашему мнению, были нарушены правила.</string>
   <string name="by">%s</string>
   <string name="thisTopicIsNowClosed">Эта тема закрыта.</string>
   <string name="theming">Настройка темы</string>
@@ -696,7 +696,7 @@
   <string name="closeAccountExplanation">Вы действительно желаете удалить свою учётную запись? Её удаление невозможно будет отменить. Вы больше не сможете зайти в эту учётную запись, и ваша страница станет недоступна.</string>
   <string name="cantOpenSimilarAccount">Вы не сможете создать новый аккаунт с таким же именем, даже если регистр символов отличается.</string>
   <string name="closingIsDefinitive">Закрытие невозможно будет отменить. Вы уверены?</string>
-  <string name="thisAccountIsClosed">Профиль этого игрока удалён.</string>
+  <string name="thisAccountIsClosed">Этот аккаунт закрыт.</string>
   <string name="invalidUsernameOrPassword">Неверное имя пользователя или пароль</string>
   <string name="incorrectPassword">Неверный пароль</string>
   <string name="invalidAuthenticationCode">Неверный код аутентификации</string>
@@ -709,7 +709,7 @@
   <string name="pieceDestinations">Показывать допустимые ходы</string>
   <string name="boardCoordinates">Координаты доски (1-50, a1-h8)</string>
   <string name="coordinateSystem8x8">Нотация на досках 8x8</string>
-  <string name="fieldnumbers8x8">Цифровая (1-32)</string>
+  <string name="fieldnumbers8x8">Числовая (1-32)</string>
   <string name="algebraic8x8">Алгебраическая (a-h, 1-8)</string>
   <string name="moveListWhilePlaying">Показывать список ходов</string>
   <string name="notationGameResult">Запись результата игры (победа белых • ничья • победа черных)</string>
@@ -728,12 +728,12 @@
   <string name="soundWhenTimeGetsCritical">Звук, когда время подходит к концу</string>
   <string name="gameBehavior">Управление в игре</string>
   <string name="howDoYouMovePieces">Как вы передвигаете фигуры?</string>
-  <string name="clickTwoSquares">Нажатием на клетки откуда и куда</string>
+  <string name="clickTwoSquares">Нажатием на клетки: откуда и куда</string>
   <string name="dragPiece">Перетаскиванием фигуры</string>
   <string name="bothClicksAndDrag">Обоими способами</string>
   <string name="premovesPlayingDuringOpponentTurn">Предварительный ход (пока ходит противник)</string>
   <string name="takebacksWithOpponentApproval">Возвраты (с согласия противника)</string>
-  <string name="claimDrawOnThreefoldRepetitionAutomatically">Автоматически запрашивать ничью при трёхкратном повторении хода</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Автоматически запрашивать ничью при троекратном повторении позиции</string>
   <string name="privacy">Приватность</string>
   <string name="letOtherPlayersFollowYou">Разрешить другим игрокам подписываться на вас</string>
   <string name="letOtherPlayersChallengeYou">Разрешить другим игрокам вызывать вас на игру</string>
@@ -764,7 +764,7 @@
   <string name="victoryVsYInZ">%1$s в %3$s с %2$s</string>
   <string name="defeatVsYInZ">%1$s в %3$s с %2$s</string>
   <string name="drawVsYInZ">%1$s в %3$s с %2$s</string>
-  <string name="timeline">Хронология</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Хронология</string>
   <string name="seeAllTournaments">Посмотреть все турниры</string>
   <string name="start">Начать</string>
   <string name="starting">Начинается:</string>
@@ -815,7 +815,7 @@
   <string name="error.email_acceptable">Неприемлемый адрес электронной почты</string>
   <string name="error.email_unique">Этот адрес электронной почты уже занят</string>
   <string name="error.email_different">Это уже и так ваш адрес электронной почты</string>
-  <string name="blindfoldDraughts">Шашки вслепую (шашки не видны)</string>
+  <string name="blindfoldDraughts">Шашки вслепую (фигуры не видны)</string>
   <string name="zenMode">Режим «Дзен» (только доска и часы)</string>
   <string name="moveConfirmation">Подтвердить ход</string>
   <string name="inCorrespondenceGames">В дневной игре</string>
@@ -846,24 +846,24 @@
   <string name="contact">Контакты</string>
   <string name="termsOfService">Пользовательское соглашение</string>
   <string name="sourceCode">Исходный код</string>
-  <string name="simulShortName">СОИ</string>
+  <string name="simulShortName">Сеанс одновременной игры</string>
   <string name="simultaneousExhibitions">Сеанс одновременной игры</string>
-  <string name="simulDescription">Описание СОИ</string>
+  <string name="simulDescription">Описание сеанса</string>
   <string name="simulDescriptionHelp">Хотите что-нибудь сказать участникам?</string>
-  <string name="yourPendingSimuls">Ваши незаконченные СОИ</string>
+  <string name="yourPendingSimuls">Ваши незаконченные сеансы</string>
   <string name="host">Сеансёр</string>
   <string name="hostColorX">Цвет сеансёра: %s</string>
   <string name="arbiter">Арбитр</string>
   <string name="createdSimuls">Недавно созданные сеансы</string>
   <string name="hostANewSimul">Создать новый сеанс</string>
-  <string name="followSimulHostTv">Смотреть от лица СОИ хоста</string>
+  <string name="followSimulHostTv">Смотреть от лица сеансёра</string>
   <string name="shareSimulUrl">Поделитесь URL этой страницы, чтобы позволить людям войти в сеанс одновременной игры!</string>
-  <string name="candidatePlayers"> кандидатов</string>
+  <string name="candidatePlayers"> кандидаты</string>
   <string name="allowedPlayers">Участие ограниченно следующими ситуациями </string>
   <string name="acceptedPlayers"> принятые игроки</string>
-  <string name="acceptSomePlayers">Теперь вам нужно принять нескольких игроков, а затем начать СОИ</string>
+  <string name="acceptSomePlayers">Теперь вам нужно принять нескольких игроков, а затем начать сеанс</string>
   <string name="acceptRandomCandidate">Принять случайного кандидата</string>
-  <string name="youHaveBeenSelected">Вы были выбраны! Подождите, СОИ скоро начнётся.</string>
+  <string name="youHaveBeenSelected">Вы были выбраны! Подождите, сеанс скоро начнётся.</string>
   <string name="xComplete">%s завершено!</string>
   <string name="ongoing">%s в процессе</string>
   <string name="winningPercentage">Процент побед</string>
@@ -874,26 +874,26 @@
   <string name="currentWinningPercentage">Текущий процент побед: %s</string>
   <string name="succeeded">успешно!</string>
   <string name="failed">не удалось</string>
-  <string name="simulTimeOut">Таймаут СОИ</string>
+  <string name="simulTimeOut">Таймаут сеанса</string>
   <string name="simulTimeOutExplanation">Эта игра не будет отображаться в сеансе одновременной игры до тех пор, пока выбранный таймаут не истечет.</string>
   <string name="noSimulFound">Сеанс не найден</string>
-  <string name="deleteThisSimul">Удалить этот СОИ?</string>
+  <string name="deleteThisSimul">Удалить этот сеанс?</string>
   <string name="noSimulExplanation">Этот сеанс одновременной игры не существует.</string>
   <string name="returnToSimulHomepage">Вернуться на страницу сеансов</string>
   <string name="aboutSimul">Сеансы подразумевают сражение одного игрока с несколькими противниками одновременно.</string>
   <string name="aboutSimulImage">Из 169 игр Сейбрандс выиграл 115, сыграл вничью 43 и проиграл 11.</string>
   <string name="aboutSimulRealLife">Идея повторяет принятую в живых шашках концепцию, когда дающий сеанс одновременной игры перемещается от стола к столу, чтобы совершить один ход.</string>
   <string name="aboutSimulRules">Когда начинается сеанс одновременной игры, каждый игрок начинает игру с сеансёром, который играет белыми. Сеанс закончится, когда все партии будут сыграны.</string>
-  <string name="aboutSimulSettings">Сеансы одновременной игры не предполагают партий на рейтинг. Переигровки, отмены ходов и «добавки времени» запрещены.</string>
+  <string name="aboutSimulSettings">Сеансы одновременной игры не предполагают партий на рейтинг. Переигровки, отмены ходов и добавки времени запрещены.</string>
   <string name="create">Создать</string>
   <string name="whenCreateSimul">Если вы создадите сеанс одновременной игры, вам придётся сыграть против нескольких игроков одновременно.</string>
-  <string name="simulVariantsHint">Если вы выберете несколько вариантов игры, тогда каждый игрок веберет тот из них, в который он хочет сыграть с вами.</string>
+  <string name="simulVariantsHint">Если вы выберете несколько вариантов игры, тогда каждый игрок выберет тот из них, в который он хочет сыграть с вами.</string>
   <string name="simulClockHint">Настройка часов Фишера. Чем больше игроков играет против вас, тем больше времени вам может понадобится.</string>
   <string name="simulAddExtraTime">Вы можете взять себе дополнительное время на обдумывание партий.</string>
   <string name="simulHostExtraTime">Дополнительное время сеансёра</string>
-  <string name="simulHostColor">Цвет хоста для каждой игры</string>
+  <string name="simulHostColor">Цвет сеансёра в каждой партии</string>
   <string name="simulChatRestrictionsHint">Ограничения чата применяются только во время сеансов одновременной игры.</string>
-  <string name="simulTargetPercentageHint">При желании можно установить целевой процент выигрыша, который хост должен набрать, рассчитанный как (победы + 0.5*ничьи) / (количество игр). Введите процент от 50 до 100, или оставьте пустым, чтобы не установить цель.</string>
+  <string name="simulTargetPercentageHint">При желании можно установить целевой процент выигрыша, который сеансёр должен набрать, рассчитанный как (победы + 0.5 * ничьи) / (количество игр). Введите процент от 50 до 100, или оставьте пустым, чтобы не установить цель.</string>
   <string name="simulParticipationLimited">Участие ограничено до %s предвыборных игроков.</string>
   <string name="chatAvailableFor">Чат доступен для</string>
   <string name="chatAvailableForX">Ограничения чата во время игры: %s</string>
@@ -913,7 +913,7 @@
   <string name="keyShowOrHideComments">показать/скрыть комментарии</string>
   <string name="keyEnterOrExitVariation">ввести/закрыть вариант</string>
   <string name="newTournament">Новый турнир</string>
-  <string name="tournamentHomeTitle">Шашечный турнир с различными режимами и контролем времени</string>
+  <string name="tournamentHomeTitle">Шашечные турниры с различными режимами и контролем времени</string>
   <string name="tournamentHomeDescription">Играйте в быстрые шашки на турнире! Вступите в любой из официальных турниров или создайте свой собственный. Пуля, блиц, классика, фрисландские, поддавки и другие варианты игры обеспечат вам бесконечное удовольствие!</string>
   <string name="tournamentNotFound">Турнир не найден</string>
   <string name="tournamentDoesNotExist">Такого турнира не существует.</string>
@@ -921,10 +921,10 @@
   <string name="returnToTournamentsHomepage">Главная страница турниров</string>
   <string name="monthlyPerfTypeRatingDistribution">Ежемесячное распределение рейтингов в %s</string>
   <plurals name="nbPerfTypePlayersThisMonth">
-    <item quantity="one">%1$s игрок в %2$s на этой месяце.</item>
-    <item quantity="few">%1$s игрока в %2$s на этой месяце.</item>
-    <item quantity="many">%1$s игроков в %2$s на этой месяце.</item>
-    <item quantity="other">%1$s игроков в %2$s на этой месяце.</item>
+    <item quantity="one">%1$s игрок в %2$s в этом месяце.</item>
+    <item quantity="few">%1$s игрока в %2$s в этом месяце.</item>
+    <item quantity="many">%1$s игроков в %2$s в этом месяце.</item>
+    <item quantity="other">%1$s игроков в %2$s в этом месяце.</item>
   </plurals>
   <string name="yourPerfTypeRatingIsRating">Ваш рейтинг в %1$s — %2$s.</string>
   <string name="youAreBetterThanPercentOfPerfTypePlayers">Вы сильнее %1$s игроков в %2$s.</string>
@@ -961,14 +961,14 @@
   <string name="disableKidMode">Отключить детский режим</string>
   <string name="security">Безопасность</string>
   <string name="entirely">Полностью</string>
-  <string name="thisIsAListOfDevicesThatHaveLoggedIntoYourAccount">Это список устройств, с которых входили в ваш аккаунт. Закройте все подозрительные сеансы.</string>
+  <string name="thisIsAListOfDevicesThatHaveLoggedIntoYourAccount">Это список устройств, с которых входили в ваш аккаунт. Закройте все подозрительные сессии.</string>
   <string name="alternativelyYouCanX">Также вы можете %s.</string>
   <string name="revokeAllSessions">закрыть все сессии</string>
   <string name="speedUpYourAnalysis">Ускорьте анализ!</string>
   <string name="enableFullCaptureAtXPreferences">Играйте несколько захватов одновременно на досках анализа. Режим захвата можно изменить в настройках %s.</string>
   <string name="playDraughtsEverywhere">Играйте в шашки везде</string>
   <string name="asFreeAsLidraughts">Бесплатен, как Lidraughts</string>
-  <string name="builtForTheLoveOfDraughtsNotMoney">С любовью к шашкам, не деньгам</string>
+  <string name="builtForTheLoveOfDraughtsNotMoney">С любовью к шашкам, а не деньгам</string>
   <string name="everybodyGetsAllFeaturesForFree">Все возможности для всех бесплатно</string>
   <string name="zeroAdvertisement">Никакой рекламы</string>
   <string name="fullFeatured">Максимальная функциональность</string>
@@ -1037,8 +1037,8 @@
   <string name="challengeDeclined">Вызов отклонён</string>
   <string name="challengeAccepted">Вызов принят!</string>
   <string name="challengeCanceled">Вызов отменён</string>
-  <string name="challengeAcceptedAndWaiting">Испытание принято! Ожидание соперника...</string>
-  <string name="youWillBeRedirectedToTheGame">Вы будете перенаправлены на игру, когда оба игрока примут испытание.</string>
+  <string name="challengeAcceptedAndWaiting">Вызов принят! Ожидание соперника...</string>
+  <string name="youWillBeRedirectedToTheGame">Вы будете перенаправлены на игру, когда оба игрока примут вызов.</string>
   <string name="perfRatingX">Рейтинг: %s</string>
   <plurals name="nbSecondsToPlayTheFirstMove">
     <item quantity="one">%s секунда на первый ход</item>
@@ -1085,11 +1085,11 @@
   <string name="putOpponentsFirstMove">Сделайте первый ход противника на доске.</string>
   <string name="explainOpponentMove">Объясните ход оппонента, и помогите игроку найти следующий ход комментарием.</string>
   <string name="reflectOnCorrectMove">Вы можете обсудить правильный ход игрока в комментарии; или оставить пустым, чтобы сразу же перейти к следующему ходу.</string>
-  <string name="addVariationsWrongMoves">Добавьте вариант движений, чтобы объяснить, почему некоторые движения неправильны.</string>
-  <string name="explainWhyThisMoveIsWrong">Объясните, почему этот ход неправильный в комментарии.</string>
+  <string name="addVariationsWrongMoves">Добавьте вариант ходов, чтобы объяснить, почему некоторые ходы неправильны.</string>
+  <string name="explainWhyThisMoveIsWrong">Объясните, почему этот ход неверный, в комментарии.</string>
   <string name="orPromoteItToMainline">Или продвиньте его в качестве основной линии, если это правильный ход.</string>
   <string name="anyOtherWrongMove">Когда любой другой неверный ход сыгран:</string>
-  <string name="explainWhyOtherMovesWrong">Объясните, почему все остальные движения неверны</string>
+  <string name="explainWhyOtherMovesWrong">Объясните, почему все остальные ходы неверны</string>
   <string name="optionalHint">Необязательно, подсказка для игрока по просьбе:</string>
   <string name="giveThePlayerAHint">Дайте игроку подсказку, чтобы он мог найти правильный ход</string>
   <string name="whatWouldYouPlay">Как бы вы сходили в этой позиции?</string>

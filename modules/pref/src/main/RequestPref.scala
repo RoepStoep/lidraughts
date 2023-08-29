@@ -28,7 +28,8 @@ object RequestPref {
       pieceSet = req.session.data.getOrElse("pieceSet", default.pieceSet),
       soundSet = req.session.data.getOrElse("soundSet", default.soundSet),
       bgImg = req.session.data.get("bgImg"),
-      puzzleVariant = draughts.variant.Variant(~req.session.data.get("puzzleVariant")).getOrElse(draughts.variant.Standard)
+      puzzleVariant = draughts.variant.Variant(~req.session.data.get("puzzleVariant")).getOrElse(Pref.defaultPuzzleVariant),
+      practiceVariant = draughts.variant.Variant(~req.session.data.get("practiceVariant")).getOrElse(Pref.defaultPracticeVariant)
     )
   }
 

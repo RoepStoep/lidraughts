@@ -33,7 +33,7 @@ object topnav {
         ctx.noBot option frag(
           //a(href := routes.Learn.index)(trans.draughtsBasics()),
           a(href := routes.Puzzle.home)(trans.training()),
-          isGranted(_.Beta) option a(href := routes.Practice.index)(trans.learn.practice.txt() + " [BETA]"),
+          a(href := routes.Practice.index)(trans.practice.txt()),
           a(href := routes.Coordinate.home)(trans.coordinates.coordinates())
         ),
         a(href := routes.Study.allDefault(1))(trans.studyMenu()),

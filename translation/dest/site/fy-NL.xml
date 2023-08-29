@@ -50,7 +50,7 @@
   <string name="toggleLocalEvaluation">Lokale evaluaasje oan- as útsette</string>
   <string name="promoteVariation">Fariaasje omheech sette</string>
   <string name="makeMainLine">Ta haadline meitsje</string>
-  <string name="deleteFromHere">Fuortsmite fanôf hjirre</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Fuortsmite fanôf hjirre</string>
   <string name="move">Set</string>
   <string name="variantLoss">Ferlies fariant</string>
   <string name="variantWin">Winst fariant</string>
@@ -382,7 +382,7 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="victoryVsYInZ">%1$s fersus %2$s yn %3$s</string>
   <string name="defeatVsYInZ">%1$s fersus %2$s yn %3$s</string>
   <string name="drawVsYInZ">%1$s fersus %2$s yn %3$s</string>
-  <string name="timeline">Tiidsline</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Tiidsline</string>
   <string name="starting">Oanfang:</string>
   <string name="allInformationIsPublicAndOptional">Alle ynformaasje is iepenbier en opsjoneel.</string>
   <string name="yourCityRegionOrDepartment">Dym stêd, regio of provinsje.</string>

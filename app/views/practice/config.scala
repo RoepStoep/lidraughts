@@ -28,7 +28,7 @@ object config {
               div(cls := "preview")(
                 ol(
                   structure.sections.map { section =>
-                    val lang = section.lang ?? { l => s" $l" }
+                    val lang = (section.lang != lidraughts.practice.PracticeStructure.defaultLang) ?? { s" ${section.lang}" }
                     li(
                       h2(s"${section.name} (#${section.id}$lang)"),
                       ol(

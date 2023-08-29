@@ -74,7 +74,8 @@ object Pref extends LidraughtsController {
     "bg" -> (forms.bg -> save("bg") _),
     "bgImg" -> (forms.bgImg -> save("bgImg") _),
     "zen" -> (forms.zen -> save("zen") _),
-    "puzzleVariant" -> (forms.puzzleVariant -> save("puzzleVariant") _)
+    "puzzleVariant" -> (forms.puzzleVariant -> save("puzzleVariant") _),
+    "practiceVariant" -> (forms.practiceVariant -> save("practiceVariant") _)
   )
 
   def save(name: String)(value: String, ctx: Context): Fu[Cookie] =

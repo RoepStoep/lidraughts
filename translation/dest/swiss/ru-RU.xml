@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Турниры по швейцарской системе</string>
+  <string name="bye" comment="A player gets a &#34;bye&#34; when they don't play in a round of the tournament because there is an odd number of players.">Очко автопобеды</string>
+  <string name="byes" comment="Refers to the amount of &#34;byes&#34; in this tournament (the amount of players that didn't play a round because there was an odd number of players).">Очки автопобеды</string>
   <string name="absent">Отсутствует</string>
   <string name="absences">Отлучки</string>
   <string name="late">Позже</string>

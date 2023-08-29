@@ -74,7 +74,7 @@
   <string name="toggleLocalEvaluation">Εναλλαγή τοπικής αξιολόγησης</string>
   <string name="promoteVariation">Προώθηση παραλλαγής</string>
   <string name="makeMainLine">Δημιουργήστε κύρια γραμμή</string>
-  <string name="deleteFromHere">Διαγραφή από εδώ</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Διαγραφή από εδώ</string>
   <string name="move">Κίνηση</string>
   <string name="variantLoss">Ήττα εκδοχής</string>
   <string name="variantWin">Νίκη εκδοχής</string>
@@ -702,7 +702,7 @@
   <string name="victoryVsYInZ">%1$s εναντίον %2$s στο %3$s</string>
   <string name="defeatVsYInZ">%1$s εναντίον %2$s στο %3$s</string>
   <string name="drawVsYInZ">%1$s εναντίον %2$s στο %3$s</string>
-  <string name="timeline">Χρονολόγιο</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Χρονολόγιο</string>
   <string name="seeAllTournaments">Προβολή όλων των πρωταθλημάτων</string>
   <string name="start">Δημιουργία</string>
   <string name="starting">Αρχίζει:</string>
@@ -779,7 +779,7 @@
   <string name="termsOfService">Όροι χρήσης</string>
   <string name="sourceCode">Πηγαίος κώδικας</string>
   <string name="simulShortName">Σιμουλτανέ</string>
-  <string name="simultaneousExhibitions">Ταυτόχρονες εκθέσεις</string>
+  <string name="simultaneousExhibitions">Σιμουλτανέ</string>
   <string name="simulDescription">Περιγραφή σιμουλτανέ</string>
   <string name="simulDescriptionHelp">Θέλετε να πείτε κάτι στους συμμετέχοντες;</string>
   <string name="yourPendingSimuls">Τα εκκρεμείς σας σιμουλτανέ</string>
@@ -810,15 +810,15 @@
   <string name="simulTimeOutExplanation">Αυτό το παιχνίδι δεν θα εμφανιστεί στο σιμουλτανέ μέχρι να περάσει το επιλεγμένο χρονικό όριο.</string>
   <string name="noSimulFound">Έκθεση δεν ευρέθη</string>
   <string name="deleteThisSimul">Διαγραφή αυτού του σιμουλτανέ;</string>
-  <string name="noSimulExplanation">Αυτή η ταυτόχρονη έκθεση δεν υπάρχει.</string>
-  <string name="returnToSimulHomepage">Επιστροφή στην αρχική σελίδα ταυτοχρόνων εκθέσεων</string>
-  <string name="aboutSimul">Οι ταυτόχρονες εκθέσεις αφορούν ένα μεμονωμένο παίκτη που αντιμετωπίζει αρκετούς παίκτες ταυτόχρονα.</string>
+  <string name="noSimulExplanation">Αυτό το σιμουλτανέ δεν υπάρχει.</string>
+  <string name="returnToSimulHomepage">Επιστροφή στην αρχική σελίδα των σιμουλτανέ</string>
+  <string name="aboutSimul">Τα σιμουλτανέ αφορούν ένα μεμονωμένο παίκτη που αντιμετωπίζει αρκετούς παίκτες ταυτόχρονα.</string>
   <string name="aboutSimulImage">Από τους 169 αντιπάλους, ο Sijbrands κέρδισε 115 παιχνίδια, κατάφερε 43 ισοπαλίες και έχασε 11.</string>
   <string name="aboutSimulRealLife">Η έννοια προέρχεται από πραγματικά γεγονότα. Σε πραγματικούς χώρους, ο διοργανωτής της έκθεσης μετακινείται από τραπέζι σε τραπέζι για να παίξει μία και μόνο κίνηση.</string>
   <string name="aboutSimulRules">Όταν ξεκινήσει η έκθεση, κάθε παίκτης ξεκινά το παιχνίδι με τον διοργανωτή, ο οποίος έχει τα λευκά κομμάτια. Η διοργάνωση τελειώνει όταν όλα τα παιχνίδια ολοκληρωθούν.</string>
   <string name="aboutSimulSettings">Τα σιμουλτανέ είναι πάντα αβαθμολόγητα. Οι επαναλήψεις, ανακλήσεις κινήσεων και προσθήκες επιπλέον χρόνου έχουν απενεργοποιηθεί.</string>
   <string name="create">Δημιουργήστε</string>
-  <string name="whenCreateSimul">Όταν δημιουργείτε μία έκθεση, θα έχετε να παίξετε με αρκετούς παίκτες ταυτόχρονα.</string>
+  <string name="whenCreateSimul">Όταν δημιουργείτε ένα σιμουλτανέ, πρέπει να παίξετε με αρκετούς παίκτες ταυτόχρονα.</string>
   <string name="simulVariantsHint">Εάν επιλέξετε διάφορες εκδοχές, κάθε παίκτης μπορεί να επιλέξει ποια θα παίξει.</string>
   <string name="simulClockHint">Ρολόι Φίσερ. Όσους περισσότερους παίκτες παίξετε, τόσο περισσότερο χρόνο ίσως χρειαστείτε.</string>
   <string name="simulAddExtraTime">Μπορείτε να προσθέσετε επιπλέον χρόνο στο ρολόι σας για να σας βοηθήσει στην έκθεση.</string>
@@ -834,7 +834,7 @@
   <string name="participantsOnly">Συμμετέχοντες μόνο</string>
   <string name="atLeastOneVariant">Επιλέξτε τουλάχιστον μια εκδοχή!</string>
   <string name="invalidTargetPercentage">Εισάγετε μια τιμή μεταξύ 50 και 100, ή αφήστε κενό</string>
-  <string name="lidraughtsTournaments">Πρωταθλήματα lidraughts</string>
+  <string name="lidraughtsTournaments">Πρωταθλήματα Lidraughts</string>
   <string name="tournamentFAQ">Τεκμηρίωση πρωταθλημάτων τύπου αρένας</string>
   <string name="tournamentOfficial">Επίσημο</string>
   <string name="timeBeforeTournamentStarts">Χρόνος προτού ξεκινήσει το πρωτάθλημα</string>

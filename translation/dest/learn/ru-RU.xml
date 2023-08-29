@@ -9,7 +9,7 @@
   <string name="play">играть!</string>
   <string name="draughtsPieces">Шашечные фигуры</string>
   <string name="theMen">Шашки</string>
-  <string name="theKing">Король</string>
+  <string name="theKing">Дамка</string>
   <string name="fundamentals">Базовый уровень</string>
   <string name="capture">Взятие</string>
   <string name="takeTheEnemyPieces">Съешьте фигуры противника</string>
@@ -82,6 +82,12 @@
   <string name="retry">Ещё раз</string>
   <string name="clickToRetry">Нажмите, чтобы повторить</string>
   <string name="playALegalCapture">Сыграйте возможное взятие</string>
+  <plurals name="playAllLegalCapturesXRemaining">
+    <item quantity="one">Сыграйте все возможные взятия. Ещё %s ход!</item>
+    <item quantity="few">Сыграйте все возможные взятия. Ещё %s хода!</item>
+    <item quantity="many">Сыграйте все возможные взятия. Ещё %s ходов!</item>
+    <item quantity="other">Сыграйте все возможные взятия. Ещё %s ходов!</item>
+  </plurals>
   <string name="winTheGame">Выиграйте игру</string>
   <plurals name="winTheGameInX">
     <item quantity="one">Выиграйте игру в %s ход</item>

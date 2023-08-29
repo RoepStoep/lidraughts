@@ -4,6 +4,7 @@ package practice
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
+import lidraughts.rating.PerfType.iconByVariant
 
 import controllers.routes
 
@@ -21,18 +22,34 @@ if (confirm('${trans.learn.youWillLoseAllYourProgress.txt()}')) this.parentNode.
       url = s"$netBaseUrl${routes.Practice.index}"
     ).some
   ) {
+      val variant = data.structure.variant | draughts.variant.Standard
       main(cls := "page-menu")(
         st.aside(cls := "page-menu__menu practice-side")(
-          i(cls := "fat"),
-          h1(trans.learn.practice()),
-          h2(trans.learn.makesYourDraughtsPerfect()),
-          div(cls := "progress")(
-            div(cls := "text")(trans.learn.progressX(s"${data.progressPercent}%")),
-            div(cls := "bar", style := s"width: ${data.progressPercent}%")
+          div(cls := "practice-side__variant")(
+            views.html.base.bits.mselect(
+              "practice-variant",
+              span(cls := "text", dataIcon := iconByVariant(variant))(trans.variantPractice(variant.name)),
+              lidraughts.pref.Pref.practiceVariants.map { v =>
+                a(
+                  dataIcon := iconByVariant(v),
+                  cls := (variant == v).option("current"),
+                  href := routes.Practice.showSectionOrVariant(v.key)
+                )(trans.variantPractice(v.name))
+              }
+            )
           ),
-          postForm(action := routes.Practice.reset)(
-            if (ctx.isAuth) (data.nbDoneChapters > 0) option a(cls := "do-reset")(trans.learn.resetMyProgress())
-            else a(href := routes.Auth.signup)(trans.learn.signUpToSaveYourProgress())
+          div(cls := "practice-side__main")(
+            i(cls := "fat"),
+            h1(trans.practice()),
+            h2(trans.learn.makesYourDraughtsPerfect()),
+            div(cls := "progress")(
+              div(cls := "text")(trans.learn.progressX(s"${data.progressPercent}%")),
+              div(cls := "bar", style := s"width: ${data.progressPercent}%")
+            ),
+            postForm(action := s"${routes.Practice.reset}?v=${variant.key}")(
+              if (ctx.isAuth) (data.nbDoneChapters > 0) option a(cls := "do-reset")(trans.learn.resetMyProgress())
+              else a(href := routes.Auth.signup)(trans.learn.signUpToSaveYourProgress())
+            )
           )
         ),
         div(cls := "page-menu__content practice-app")(

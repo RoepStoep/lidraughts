@@ -40,6 +40,7 @@ case class Pref(
     zen: Int,
     moveEvent: Int,
     puzzleVariant: Variant,
+    practiceVariant: Variant,
     resizeHandle: Int,
     tags: Map[String, String] = Map.empty
 ) {
@@ -68,7 +69,8 @@ case class Pref(
     case "pieceSet" => PieceSet.allByName get value map { p => copy(pieceSet = p.name) }
     case "soundSet" => SoundSet.allByKey get value map { s => copy(soundSet = s.name) }
     case "zen" => copy(zen = if (value == "1") 1 else 0).some
-    case "puzzleVariant" => copy(puzzleVariant = Variant(value).getOrElse(Standard)).some
+    case "puzzleVariant" => copy(puzzleVariant = validPuzzleVariant(Variant(value))).some
+    case "practiceVariant" => copy(practiceVariant = validPracticeVariant(Variant(value))).some
     case _ => none
   }
 
@@ -348,7 +350,17 @@ object Pref {
   object Zen extends BooleanPref {
   }
 
+  val defaultPuzzleVariant: Variant = Standard
   val puzzleVariants: List[Variant] = List(Standard, Frisian, Russian)
+
+  def validPuzzleVariant(variant: Option[Variant]): Variant =
+    variant flatMap { v => puzzleVariants.contains(v) ?? v.some } getOrElse defaultPuzzleVariant
+
+  val defaultPracticeVariant: Variant = Frisian
+  val practiceVariants: List[Variant] = List(Frisian)
+
+  def validPracticeVariant(variant: Option[Variant]): Variant =
+    variant flatMap { v => practiceVariants.contains(v) ?? v.some } getOrElse defaultPracticeVariant
 
   def create(id: String) = default.copy(_id = id)
 
@@ -389,7 +401,8 @@ object Pref {
     keyboardMove = KeyboardMove.NO,
     zen = Zen.NO,
     moveEvent = MoveEvent.BOTH,
-    puzzleVariant = Standard,
+    puzzleVariant = defaultPuzzleVariant,
+    practiceVariant = defaultPracticeVariant,
     resizeHandle = ResizeHandle.INITIAL,
     tags = Map.empty
   )

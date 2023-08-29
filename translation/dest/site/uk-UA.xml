@@ -64,7 +64,7 @@
   <string name="toggleLocalEvaluation">Включити аналіз на комп\'ютері</string>
   <string name="promoteVariation">Зробити варіант головним</string>
   <string name="makeMainLine">Зробити цей варіант основним</string>
-  <string name="deleteFromHere">Видалити з цього місця</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Видалити з цього місця</string>
   <string name="move">Хід</string>
   <string name="variantLoss">Шанс програшу</string>
   <string name="variantWin">Шанс виграшу</string>
@@ -596,7 +596,7 @@
   <string name="victoryVsYInZ">%1$s проти %2$s в %3$s</string>
   <string name="defeatVsYInZ">%1$s проти %2$s в %3$s</string>
   <string name="drawVsYInZ">%1$s проти %2$s в %3$s</string>
-  <string name="timeline">Смуга подій</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Смуга подій</string>
   <string name="seeAllTournaments">Дивитися усі турніри</string>
   <string name="start">Почати</string>
   <string name="starting">Початок:</string>

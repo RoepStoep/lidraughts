@@ -1,11 +1,14 @@
 package controllers
 
 import play.api.libs.json._
+import play.api.mvc._
 
+import draughts.variant.Variant
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.practice.JsonView._
 import lidraughts.practice.{ UserStudy, PracticeSection, PracticeStudy }
+import lidraughts.pref.Pref.practiceVariants
 import lidraughts.study.Study.WithChapter
 import lidraughts.study.{ Chapter, Study => StudyModel }
 import lidraughts.tree.Node.partitionTreeJsonWriter
@@ -16,21 +19,41 @@ object Practice extends LidraughtsController {
   private def env = Env.practice
   private def studyEnv = Env.study
 
-  def index = Secure(_.Beta) { implicit ctx => _ =>
+  def index = Open { implicit ctx =>
     pageHit
-    env.api.get(ctx.me) flatMap { up =>
-      NoCache(Ok(html.practice.index(up))).fuccess
+    renderIndex(ctx.pref.practiceVariant, none)
+  }
+
+  def indexVariant(key: String) = Open { implicit ctx =>
+    Variant(key) match {
+      case Some(variant) if practiceVariants.contains(variant) =>
+        if (ctx.pref.practiceVariant != variant)
+          controllers.Pref.save("practiceVariant")(variant.key, ctx) flatMap {
+            cookie => renderIndex(variant, cookie.some)
+          }
+        else renderIndex(variant, none)
+      case _ => notFound
     }
   }
 
-  def show(sectionId: String, studySlug: String, studyId: String) = Secure(_.Beta) { implicit ctx => _ =>
+  def renderIndex(variant: Variant, cookie: Option[Cookie])(implicit ctx: Context) =
+    env.api.get(ctx.me, variant.some) map { html.practice.index(_) } map { h =>
+      cookie.fold(Ok(h))(c => Ok(h).withCookies(c))
+    } map NoCache
+
+  def show(sectionId: String, studySlug: String, studyId: String) = Open { implicit ctx =>
     pageHit
     OptionFuResult(env.api.getStudyWithFirstOngoingChapter(ctx.me, studyId))(showUserPractice)
   }
 
-  def showChapter(sectionId: String, studySlug: String, studyId: String, chapterId: String) = Secure(_.Beta) { implicit ctx => _ =>
+  def showChapter(sectionId: String, studySlug: String, studyId: String, chapterId: String) = Open { implicit ctx =>
     pageHit
     OptionFuResult(env.api.getStudyWithChapter(ctx.me, studyId, chapterId))(showUserPractice)
+  }
+
+  def showSectionOrVariant(something: String) = Variant(something) match {
+    case Some(variant) => indexVariant(variant.key)
+    case _ => showSection(something)
   }
 
   def showSection(sectionId: String) =
@@ -39,7 +62,7 @@ object Practice extends LidraughtsController {
   def showStudySlug(sectionId: String, studySlug: String) =
     redirectTo(sectionId, studySlug.some)(_.studies.find(_.slug == studySlug))
 
-  private def redirectTo(sectionId: String, withSlug: Option[String])(select: PracticeSection => Option[PracticeStudy]) = Secure(_.Beta) { implicit ctx => _ =>
+  private def redirectTo(sectionId: String, withSlug: Option[String])(select: PracticeSection => Option[PracticeStudy]) = Open { implicit ctx =>
     env.api.structure.getAll.flatMap { struct =>
       struct.sections.find(sec => sec.id == sectionId && withSlug.fold(true)(sec.hasSlug)).fold(notFound) { section =>
         select(section) ?? { study =>
@@ -59,7 +82,7 @@ object Practice extends LidraughtsController {
     ))
   }
 
-  def chapter(studyId: String, chapterId: String) = Secure(_.Beta) { implicit ctx => _ =>
+  def chapter(studyId: String, chapterId: String) = Open { implicit ctx =>
     OptionFuResult(env.api.getStudyWithChapter(ctx.me, studyId, chapterId)) { us =>
       analysisJson(us) map {
         case (analysisJson, studyJson) => Ok(Json.obj(
@@ -86,15 +109,19 @@ object Practice extends LidraughtsController {
       }
   }
 
-  def complete(chapterId: String, nbMoves: Int) = Secure(_.Beta) { implicit ctx => me =>
+  def complete(chapterId: String, nbMoves: Int) = Auth { implicit ctx => me =>
     env.api.progress.setNbMoves(me, chapterId, lidraughts.practice.PracticeProgress.NbMoves(nbMoves))
   }
 
-  def reset = SecureBody(_.Beta) { implicit ctx => me =>
-    env.api.progress.reset(me) inject Redirect(routes.Practice.index)
+  def reset = AuthBody { implicit ctx => me =>
+    Variant(~get("v")) match {
+      case Some(v) if practiceVariants.contains(v) =>
+        env.api.progress.reset(me, v.some) inject Redirect(routes.Practice.index)
+      case _ => notFound
+    }
   }
 
-  def config = Secure(_.Beta) { implicit ctx => me =>
+  def config = Secure(_.PracticeConfig) { implicit ctx => me =>
     for {
       struct <- env.api.structure.getAll
       form <- env.api.config.form

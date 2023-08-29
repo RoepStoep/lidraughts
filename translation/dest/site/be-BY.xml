@@ -60,7 +60,7 @@
   <string name="toggleLocalEvaluation">Уключыць аналіз на камп’ютары</string>
   <string name="promoteVariation">Узвысіць прыярытэт</string>
   <string name="makeMainLine">Зрабіць асноўным</string>
-  <string name="deleteFromHere">Выдаліць адсюль</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Выдаліць адсюль</string>
   <string name="move">Ход</string>
   <string name="variantLoss">Пройгрышны варыянт</string>
   <string name="variantWin">Пераможны варыянт</string>
@@ -590,7 +590,7 @@
   <string name="xCommentedY">%1$s пракаментаваў %2$s</string>
   <string name="victory">Перамога!</string>
   <string name="defeat">Параза</string>
-  <string name="timeline">Храналогія</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Храналогія</string>
   <string name="starting">Пачатак:</string>
   <string name="allInformationIsPublicAndOptional">Уся гэтая інфармацыя будзе даступна публічна. Вы можаце не пазначаць тут нічога.</string>
   <string name="yourCityRegionOrDepartment">Ваш горад, вобласць ці акруга</string>

@@ -16,7 +16,7 @@
   <string name="joiningPolicy">团队加入政策</string>
   <string name="teamLeader">队长</string>
   <plurals name="teamLeaders">
-    <item quantity="other">领队</item>
+    <item quantity="other">队长</item>
   </plurals>
   <string name="teamBestPlayers">本队最佳棋手</string>
   <string name="teamRecentMembers">本队新成员</string>

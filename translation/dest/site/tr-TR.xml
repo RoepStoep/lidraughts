@@ -64,7 +64,7 @@
   <string name="toggleLocalEvaluation">Yerel analizi aç/kapat</string>
   <string name="promoteVariation">Bu varyanttan devam et</string>
   <string name="makeMainLine">Ana devam yolu yap</string>
-  <string name="deleteFromHere">Bu hamleden sonrasını sil</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Bu hamleden sonrasını sil</string>
   <string name="move">Hamle</string>
   <string name="variantLoss">Kayıp devam yolu</string>
   <string name="variantWin">Kazanç devam yolu</string>
@@ -562,7 +562,7 @@
   <string name="victoryVsYInZ">%2$s adlı oyuncuya karşı %3$s maçında %1$s</string>
   <string name="defeatVsYInZ">%2$s adlı oyuncuya karşı %3$s maçında %1$s</string>
   <string name="drawVsYInZ">%2$s adlı oyuncuya karşı %3$s maçında %1$s</string>
-  <string name="timeline">Zaman tüneli</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Zaman tüneli</string>
   <string name="start">Başlat</string>
   <string name="starting">Başlangıç:</string>
   <string name="allInformationIsPublicAndOptional">Tüm bilgiler herkese açık ve seçime bağlıdır.</string>

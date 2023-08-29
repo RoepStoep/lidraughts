@@ -64,7 +64,7 @@
   <string name="toggleLocalEvaluation">Evaluación local</string>
   <string name="promoteVariation">Promocionar variante</string>
   <string name="makeMainLine">Convertir en línea principal</string>
-  <string name="deleteFromHere">Borrar a partir de aquí</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Borrar a partir de aquí</string>
   <string name="move">Movimiento</string>
   <string name="variantLoss">Variante perdedora</string>
   <string name="variantWin">Variante ganadora</string>
@@ -548,7 +548,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="victoryVsYInZ">%1$s contra %2$s en %3$s</string>
   <string name="defeatVsYInZ">%1$s contra %2$s en %3$s</string>
   <string name="drawVsYInZ">%1$s contra %2$s en %3$s</string>
-  <string name="timeline">Cronología</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Cronología</string>
   <string name="seeAllTournaments">Ver todos los torneos</string>
   <string name="start">Comenzar</string>
   <string name="starting">Comienzo:</string>

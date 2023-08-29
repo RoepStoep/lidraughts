@@ -65,7 +65,7 @@
   <string name="toggleLocalEvaluation">Lokální analýza</string>
   <string name="promoteVariation">Povýšit variantu</string>
   <string name="makeMainLine">Povýšit na hlavní variantu</string>
-  <string name="deleteFromHere">Smazat odsud</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Smazat odsud</string>
   <string name="move">Tah</string>
   <string name="variantLoss">Prohra</string>
   <string name="variantWin">Výhra</string>
@@ -495,7 +495,7 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="victoryVsYInZ">%1$s proti %2$s v %3$s</string>
   <string name="defeatVsYInZ">%1$s proti %2$s v %3$s</string>
   <string name="drawVsYInZ">%1$s proti %2$s v %3$s</string>
-  <string name="timeline">Timeline</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Timeline</string>
   <string name="seeAllTournaments">Zobrazit všechny turnaje</string>
   <string name="start">Začít</string>
   <string name="starting">Začíná:</string>

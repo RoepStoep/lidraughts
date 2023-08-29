@@ -67,7 +67,7 @@
   <string name="toggleLocalEvaluation">Ieslēgt/izslēgt vērtēšanu pārlūkprogrammā</string>
   <string name="promoteVariation">Izvēlēties variantu</string>
   <string name="makeMainLine">Pārvērst par pamatvariantu</string>
-  <string name="deleteFromHere">Dzēst šo un turpmākos gājienus</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Dzēst šo un turpmākos gājienus</string>
   <string name="move">Gājiens</string>
   <string name="variantLoss">Zaudēts variants</string>
   <string name="variantWin">Uzvarēts variants</string>
@@ -663,7 +663,7 @@ Vienā līnijā  - tikai vienu norādi.</string>
   <string name="victoryVsYInZ">%1$s pret %2$s %3$s</string>
   <string name="defeatVsYInZ">%1$s pret %2$s %3$s</string>
   <string name="drawVsYInZ">%1$s pret %2$s %3$s</string>
-  <string name="timeline">Laika grafiks</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Laika grafiks</string>
   <string name="seeAllTournaments">Skatīt visus turnīrus</string>
   <string name="start">Sākt</string>
   <string name="starting">Sāksies:</string>

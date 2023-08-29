@@ -49,7 +49,7 @@ final class Env(
       case lidraughts.game.actorApi.FinishGame(game, _, _) if !game.aborted => write game game
       case lidraughts.forum.actorApi.CreatePost(post, topic) if !topic.isStaff => write.forumPost(post, topic)
       case res: lidraughts.puzzle.Puzzle.UserResult => write puzzle res
-      //case prog: lidraughts.practice.PracticeProgress.OnComplete => write practice prog
+      case prog: lidraughts.practice.PracticeProgress.OnComplete => write practice prog
       case lidraughts.simul.Simul.OnStart(simul) => write simul simul
       case CorresMoveEvent(move, Some(userId), _, _, false) => write.corresMove(move.gameId, userId)
       case lidraughts.hub.actorApi.plan.MonthInc(userId, months) => write.plan(userId, months)

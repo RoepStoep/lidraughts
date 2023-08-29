@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="arenaTournaments">Tournois d\'arène</string>
-  <string name="isItRated">Est il évalué ?</string>
+  <string name="isItRated">Est-ce évalué?</string>
   <string name="willBeNotified">Vous serez notifié lorsque le tournoi commencera, vous pouvez donc jouer dans un autre onglet en attendant.</string>
-  <string name="isRated">Ce tournoi est évalué et aura une incidence sur votre élo.</string>
+  <string name="isRated">Ce tournoi est évalué et aura une incidence sur votre Elo.</string>
   <string name="isNotRated">Ce tournoi n\'est *pas* évalué et n\'aura *pas* d\'incidence sur votre Elo.</string>
   <string name="someRated">Certains tournois sont cotés et auront une incidence sur votre Elo.</string>
   <string name="howAreScoresCalculated">Comment les scores sont-ils calculés ?</string>
@@ -25,7 +25,7 @@ L\'option berserk n\'accorde qu\'un point supplémentaire si vous jouez au moins
 Quand deux joueurs ont le même nombre de points, le vainqueur sera déterminé par un jeu décisif.</string>
   <string name="howDoesPairingWork">Comment sont déterminés les appariements ?</string>
   <string name="howDoesPairingWorkAnswer">Au début du tournoi, les joueurs sont appariés en fonction de leur cote.
-Dès que vous avez terminé votre partie, retournez à la page d\'accueil du tournoi : vous serez alors apparié avec un joueur qui possède un classement proche du vôtre. Cela garantit un temps d\'attente minimum entre les parties, toutefois il est possible que vous n\'affrontiez pas tous les autres joueurs du tournoi.
+Dès que vous avez terminé votre partie, retournez à la page d\'accueil du tournoi : vous serez alors apparié avec un joueur qui possède un classement proche du vôtre. Cela garantit un temps d\'attente minimum entre les parties. Toutefois il est possible que vous n\'affrontiez pas tous les autres joueurs du tournoi.
 Jouez vite et retournez à la page d\'accueil du tournoi pour jouer plus de parties et gagner plus de points.</string>
   <string name="howDoesItEnd">Quand le tournoi finit-il ?</string>
   <string name="howDoesItEndAnswer">Le tournoi possède un compte à rebours. Lorsque celui-ci atteint zéro, le classement du tournoi est figé et le vainqueur du tournoi est annoncé. Les parties en cours doivent quand même être terminées, mais ne comptent plus pour le tournoi.</string>
@@ -36,5 +36,5 @@ Jouez vite et retournez à la page d\'accueil du tournoi pour jouer plus de part
     <item quantity="other">Annuler la partie au cours des %s premiers coups ne rapportera aucun point aux deux joueurs.</item>
   </plurals>
   <string name="thisIsPrivate">Ceci est un tournoi privé</string>
-  <string name="shareUrl">Partagez cet URL pour permettre aux personnes de se joindre: %s</string>
+  <string name="shareUrl">Partagez cette URL pour permettre à d\'autres personnes de se joindre au tournoi : %s</string>
 </resources>

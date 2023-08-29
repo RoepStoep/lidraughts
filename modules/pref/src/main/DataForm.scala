@@ -199,4 +199,7 @@ object DataForm {
     "puzzleVariant" -> text.verifying(key => draughts.variant.Variant(key).fold(false)(Pref.puzzleVariants contains _))
   ))
 
+  val practiceVariant = Form(single(
+    "practiceVariant" -> text.verifying(key => draughts.variant.Variant(key).fold(false)(Pref.practiceVariants contains _))
+  ))
 }

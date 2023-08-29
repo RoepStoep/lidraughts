@@ -20,7 +20,7 @@ Going Berserk in time controls with an increment also cancels the increment. (1+
 
 Berserk is not available for games with zero initial time (0+1, 0+2).
 
-Berserk only grants an extra point if you play at least 7 moves in the game.</string>
+Berserk only grants an extra point if both players made at least 7 moves in the game.</string>
 <string name="howIsTheWinnerDecided">How is the winner decided?</string>
 <string name="howIsTheWinnerDecidedAnswer">The player(s) with the most points at the conclusion of the tournament's set time limit will be announced winner(s).
 

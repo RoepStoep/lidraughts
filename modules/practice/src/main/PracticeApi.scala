@@ -1,8 +1,8 @@
 package lidraughts.practice
 
-import scala.collection.breakOut
 import scala.concurrent.duration._
 
+import draughts.variant.Variant
 import lidraughts.db.dsl._
 import lidraughts.study.{ Chapter, Study }
 import lidraughts.user.User
@@ -17,13 +17,19 @@ final class PracticeApi(
 
   import BSONHandlers._
 
-  def get(user: Option[User]): Fu[UserPractice] = for {
-    struct <- structure.getLang(user.flatMap(_.lang))
+  def get(user: Option[User], variant: Option[Variant]): Fu[UserPractice] = for {
+    struct <- structure.getLang(user.flatMap(_.lang)).map(s => variant.fold(s)(s.withVariant))
     prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated)
   } yield UserPractice(struct, prog)
 
-  def getStudyWithFirstOngoingChapter(user: Option[User], studyId: Study.Id): Fu[Option[UserStudy]] = for {
-    up <- get(user)
+  private def getAll(user: Option[User]): Fu[UserPractice] = for {
+    struct <- structure.getAll
+    prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated)
+  } yield UserPractice(struct, prog)
+
+  def getStudyWithFirstOngoingChapter(user: Option[User], tryStudyId: Study.Id): Fu[Option[UserStudy]] = for {
+    up <- getAll(user)
+    studyId = up.structure.translatedStudy(tryStudyId, user.flatMap(_.lang)).fold(tryStudyId)(_.id)
     chapters <- studyApi.chapterMetadatas(studyId)
     chapter = up.progress firstOngoingIn chapters
     studyOption <- chapter.fold(studyApi byIdWithFirstChapter studyId) { chapter =>
@@ -31,9 +37,13 @@ final class PracticeApi(
     }
   } yield makeUserStudy(studyOption, up, chapters)
 
-  def getStudyWithChapter(user: Option[User], studyId: Study.Id, chapterId: Chapter.Id): Fu[Option[UserStudy]] = for {
-    up <- get(user)
+  def getStudyWithChapter(user: Option[User], tryStudyId: Study.Id, tryChapterId: Chapter.Id): Fu[Option[UserStudy]] = for {
+    up <- getAll(user)
+    lang = user.flatMap(_.lang)
+    studyId = up.structure.translatedStudy(tryStudyId, lang).fold(tryStudyId)(_.id)
     chapters <- studyApi.chapterMetadatas(studyId)
+    baseChapterId <- structure.getChaptersFromLangs.map(_.getOrElse(tryChapterId, tryChapterId))
+    chapterId <- structure.getChaptersToLang(lang).map(_.fold(baseChapterId)(_.getOrElse(baseChapterId, baseChapterId)))
     studyOption <- studyApi.byIdWithChapter(studyId, chapterId)
   } yield makeUserStudy(studyOption, up, chapters)
 
@@ -147,7 +157,14 @@ final class PracticeApi(
         }
       }
 
-    def reset(user: User) =
-      coll.remove($id(user.id)).void
+    def reset(user: User, variant: Option[Variant]) =
+      variant match {
+        case Some(v) => for {
+          prog <- getRaw(user)
+          struct <- structure.getAll
+          studies = struct.sections.filter(s => s.variant == v && s.lang == PracticeStructure.defaultLang).flatMap(_.studies)
+        } yield save(prog.clearChapters(studies.flatMap(_.chapterIds)))
+        case _ => coll.remove($id(user.id)).void
+      }
   }
 }

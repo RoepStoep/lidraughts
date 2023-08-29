@@ -65,7 +65,7 @@
   <string name="toggleLocalEvaluation">Perjungti vietinį įvertinimą</string>
   <string name="promoteVariation">Paaukštinti variaciją</string>
   <string name="makeMainLine">Padaryti pagrindine linija</string>
-  <string name="deleteFromHere">Ištrinti nuo čia</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Ištrinti nuo čia</string>
   <string name="move">Ėjimas</string>
   <string name="variantLoss">Variantinis pralaimėjimas</string>
   <string name="variantWin">Variantinė pergalė</string>
@@ -616,7 +616,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="victoryVsYInZ">%1$s prieš %2$s žaidžiant %3$s</string>
   <string name="defeatVsYInZ">%1$s prieš %2$s žaidžiant %3$s</string>
   <string name="drawVsYInZ">%1$s su %2$s žaidžiant %3$s</string>
-  <string name="timeline">Veikla</string>
+  <string name="timeline" comment="The timeline is a list of activities by users.">Veikla</string>
   <string name="starting">Prasideda:</string>
   <string name="allInformationIsPublicAndOptional">Visa informacija yra vieša ir neprivaloma.</string>
   <string name="yourCityRegionOrDepartment">Jūsų miestas, regionas ar provincija.</string>

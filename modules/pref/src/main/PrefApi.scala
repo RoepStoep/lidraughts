@@ -65,7 +65,8 @@ final class PrefApi(
       zen = r.getD("zen", Pref.default.zen),
       resizeHandle = r.getD("resizeHandle", Pref.default.resizeHandle),
       moveEvent = r.getD("moveEvent", Pref.default.moveEvent),
-      puzzleVariant = r strO "puzzleVariant" flatMap draughts.variant.Variant.apply getOrElse draughts.variant.Standard,
+      puzzleVariant = r strO "puzzleVariant" flatMap draughts.variant.Variant.apply getOrElse Pref.defaultPuzzleVariant,
+      practiceVariant = r strO "practiceVariant" flatMap draughts.variant.Variant.apply getOrElse Pref.defaultPracticeVariant,
       tags = r.getD("tags", Pref.default.tags)
     )
 
@@ -107,6 +108,7 @@ final class PrefApi(
       "zen" -> o.zen,
       "moveEvent" -> o.moveEvent,
       "puzzleVariant" -> o.puzzleVariant.key,
+      "practiceVariant" -> o.practiceVariant.key,
       "resizeHandle" -> o.resizeHandle,
       "tags" -> o.tags
     )

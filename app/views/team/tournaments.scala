@@ -10,7 +10,7 @@ import controllers.routes
 object tournaments {
 
   def page(t: lidraughts.team.Team, tours: List[TeamInfo.AnyTour])(implicit ctx: Context) = {
-    bits.layout(title = s"${t.name} • ${trans.tournaments()}") {
+    bits.layout(title = s"${t.name} • ${trans.tournaments.txt()}") {
       main(cls := "page-small")(
         div(cls := "box box-pad")(
           h1(
