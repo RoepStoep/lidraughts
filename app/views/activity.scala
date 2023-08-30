@@ -53,13 +53,13 @@ object activity {
     )
 
   private def renderPractice(p: Map[lidraughts.practice.PracticeStudy, Int])(implicit ctx: Context) = {
-    val ps = p.toSeq.sortBy(-_._2)
+    val ps = p.toList.sortBy(-_._2)
     entryTag(
       iconTag(""),
       div(
         ps.headOption map onePractice,
         ps match {
-          case first :: rest if rest.nonEmpty => subTag(rest map onePractice)
+          case _ :: rest if rest.nonEmpty => subTag(rest map onePractice)
           case _ => emptyFrag
         }
       )

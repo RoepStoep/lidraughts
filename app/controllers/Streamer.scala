@@ -36,7 +36,7 @@ object Streamer extends LidraughtsController {
       WithVisibleStreamer(s) {
         for {
           sws <- Env.streamer.liveStreamApi of s
-          activity <- Env.activity.read.recent(sws.user, 10)
+          activity <- Env.activity.read.recent(sws.user, 10, ctx.lang.some)
           following <- ctx.userId.??(Env.relation.api.fetchFollows(_, sws.user.id))
         } yield Ok(html.streamer.show(sws, activity, following))
       }

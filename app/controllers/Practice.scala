@@ -37,18 +37,18 @@ object Practice extends LidraughtsController {
   }
 
   def renderIndex(variant: Variant, cookie: Option[Cookie])(implicit ctx: Context) =
-    env.api.get(ctx.me, variant.some) map { html.practice.index(_) } map { h =>
+    env.api.get(ctx.me, variant.some, ctx.lang) map { html.practice.index(_) } map { h =>
       cookie.fold(Ok(h))(c => Ok(h).withCookies(c))
     } map NoCache
 
   def show(sectionId: String, studySlug: String, studyId: String) = Open { implicit ctx =>
     pageHit
-    OptionFuResult(env.api.getStudyWithFirstOngoingChapter(ctx.me, studyId))(showUserPractice)
+    OptionFuResult(env.api.getStudyWithFirstOngoingChapter(ctx.me, ctx.lang, studyId))(showUserPractice)
   }
 
   def showChapter(sectionId: String, studySlug: String, studyId: String, chapterId: String) = Open { implicit ctx =>
     pageHit
-    OptionFuResult(env.api.getStudyWithChapter(ctx.me, studyId, chapterId))(showUserPractice)
+    OptionFuResult(env.api.getStudyWithChapter(ctx.me, ctx.lang, studyId, chapterId))(showUserPractice)
   }
 
   def showSectionOrVariant(something: String) = Variant(something) match {
@@ -83,7 +83,7 @@ object Practice extends LidraughtsController {
   }
 
   def chapter(studyId: String, chapterId: String) = Open { implicit ctx =>
-    OptionFuResult(env.api.getStudyWithChapter(ctx.me, studyId, chapterId)) { us =>
+    OptionFuResult(env.api.getStudyWithChapter(ctx.me, ctx.lang, studyId, chapterId)) { us =>
       analysisJson(us) map {
         case (analysisJson, studyJson) => Ok(Json.obj(
           "study" -> studyJson,

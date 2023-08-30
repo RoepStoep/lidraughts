@@ -715,8 +715,8 @@ export default class AnalyseCtrl {
         if (this.practice || this.studyPractice) {
           if (this.practice) this.practice.onCeval();
           if (this.studyPractice) this.studyPractice.onCeval();
-          this.redraw();
         }
+        this.redraw();
       }
     }
     if (this.data.puzzleEditor && node && node.alternatives && node.alternatives.length > 1 && node.children.length > 0) {

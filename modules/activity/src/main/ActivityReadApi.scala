@@ -22,7 +22,7 @@ final class ActivityReadApi(
 
   private val recentNb = 7
 
-  def recent(u: User, nb: Int = recentNb): Fu[Vector[ActivityView]] = for {
+  def recent(u: User, nb: Int = recentNb, lang: Option[lidraughts.common.Lang] = None): Fu[Vector[ActivityView]] = for {
     allActivities <- coll.find(regexId(u.id))
       .sort($sort desc "_id")
       .gather[Activity, Vector](nb)
@@ -30,19 +30,19 @@ final class ActivityReadApi(
     practiceStructure <- activities.exists(_.practice.isDefined) ?? {
       practiceApi.structure.getAll map some
     }
-    views <- activities.map { one(u, practiceStructure) _ }.sequenceFu
+    views <- activities.map { one(u, practiceStructure, lang.map(_.code)) _ }.sequenceFu
   } yield addSignup(u.createdAt, views)
 
-  private def one(u: User, practiceStructure: Option[PracticeStructure])(a: Activity): Fu[ActivityView] = for {
+  private def one(u: User, practiceStructure: Option[PracticeStructure], lang: Option[String])(a: Activity): Fu[ActivityView] = for {
     posts <- a.posts ?? { p =>
       postApi.liteViewsByIds(p.value.map(_.value)) dmap some
     }
-    practice = (for {
+    practice = for {
       p <- a.practice
       struct <- practiceStructure
     } yield p.value flatMap {
-      case (studyId, nb) => struct.translatedStudy(studyId, u.lang) map (_ -> nb)
-    } toMap)
+      case (studyId, nb) => struct.translatedStudy(studyId, lang) map (_ -> nb)
+    }
     postView = posts.map { p =>
       p.groupBy(_.topic).mapValues { posts =>
         posts.map(_.post).sortBy(_.createdAt)

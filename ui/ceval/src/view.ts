@@ -215,7 +215,7 @@ function checkHover(el: HTMLElement, instance: CevalCtrl): void {
 
 export function renderPvs(ctrl: ParentCtrl) {
   const instance = ctrl.getCeval();
-  if (!instance.allowed() || !instance.possible || !instance.enabled()) return;
+  if (!instance.allowed() || !instance.possible || !instance.enabled() || ctrl.gameOver() === 'checkmate') return;
   const multiPv = parseInt(instance.multiPv()),
     node = ctrl.getCevalNode();
   let pvs : Tree.PvData[], threat = false;

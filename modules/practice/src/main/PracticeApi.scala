@@ -3,6 +3,7 @@ package lidraughts.practice
 import scala.concurrent.duration._
 
 import draughts.variant.Variant
+import lidraughts.common.Lang
 import lidraughts.db.dsl._
 import lidraughts.study.{ Chapter, Study }
 import lidraughts.user.User
@@ -17,35 +18,35 @@ final class PracticeApi(
 
   import BSONHandlers._
 
-  def get(user: Option[User], variant: Option[Variant]): Fu[UserPractice] = for {
-    struct <- structure.getLang(user.flatMap(_.lang)).map(s => variant.fold(s)(s.withVariant))
-    prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated)
+  def get(user: Option[User], variant: Option[Variant], lang: Lang): Fu[UserPractice] = for {
+    struct <- structure.getLang(lang.code.some).map(s => variant.fold(s)(s.withVariant))
+    prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated(_, lang.code))
   } yield UserPractice(struct, prog)
 
-  private def getAll(user: Option[User]): Fu[UserPractice] = for {
-    struct <- structure.getAll
-    prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated)
-  } yield UserPractice(struct, prog)
-
-  def getStudyWithFirstOngoingChapter(user: Option[User], tryStudyId: Study.Id): Fu[Option[UserStudy]] = for {
-    up <- getAll(user)
-    studyId = up.structure.translatedStudy(tryStudyId, user.flatMap(_.lang)).fold(tryStudyId)(_.id)
+  def getStudyWithFirstOngoingChapter(user: Option[User], lang: Lang, tryStudyId: Study.Id): Fu[Option[UserStudy]] = for {
+    structAll <- structure.getAll
+    prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated(_, lang.code))
+    langCode = lang.code.some
+    studyId = structAll.translatedStudy(tryStudyId, langCode).fold(tryStudyId)(_.id)
     chapters <- studyApi.chapterMetadatas(studyId)
-    chapter = up.progress firstOngoingIn chapters
+    chapter = prog firstOngoingIn chapters
     studyOption <- chapter.fold(studyApi byIdWithFirstChapter studyId) { chapter =>
       studyApi.byIdWithChapter(studyId, chapter.id)
     }
-  } yield makeUserStudy(studyOption, up, chapters)
+    structLang <- structure.getLang(langCode) // TODO: filter same variant
+  } yield makeUserStudy(studyOption, UserPractice(structLang, prog), chapters)
 
-  def getStudyWithChapter(user: Option[User], tryStudyId: Study.Id, tryChapterId: Chapter.Id): Fu[Option[UserStudy]] = for {
-    up <- getAll(user)
-    lang = user.flatMap(_.lang)
-    studyId = up.structure.translatedStudy(tryStudyId, lang).fold(tryStudyId)(_.id)
+  def getStudyWithChapter(user: Option[User], lang: Lang, tryStudyId: Study.Id, tryChapterId: Chapter.Id): Fu[Option[UserStudy]] = for {
+    structAll <- structure.getAll
+    prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated(_, lang.code))
+    langCode = lang.code.some
+    studyId = structAll.translatedStudy(tryStudyId, langCode).fold(tryStudyId)(_.id)
     chapters <- studyApi.chapterMetadatas(studyId)
     baseChapterId <- structure.getChaptersFromLangs.map(_.getOrElse(tryChapterId, tryChapterId))
-    chapterId <- structure.getChaptersToLang(lang).map(_.fold(baseChapterId)(_.getOrElse(baseChapterId, baseChapterId)))
+    chapterId <- structure.getChaptersToLang(langCode).map(_.fold(baseChapterId)(_.getOrElse(baseChapterId, baseChapterId)))
     studyOption <- studyApi.byIdWithChapter(studyId, chapterId)
-  } yield makeUserStudy(studyOption, up, chapters)
+    structLang <- structure.getLang(langCode) // TODO: filter same variant
+  } yield makeUserStudy(studyOption, UserPractice(structLang, prog), chapters)
 
   private def makeUserStudy(studyOption: Option[Study.WithChapter], up: UserPractice, chapters: List[Chapter.Metadata]) = for {
     rawSc <- studyOption
@@ -127,9 +128,9 @@ final class PracticeApi(
 
     import PracticeProgress.NbMoves
 
-    def getTranslated(user: User): Fu[PracticeProgress] =
+    def getTranslated(user: User, lang: String): Fu[PracticeProgress] =
       getRaw(user) flatMap { prog =>
-        structure.getChaptersToLang(user.lang).map {
+        structure.getChaptersToLang(lang.some).map {
           _.fold(prog) { chaptersToLang =>
             prog.mapChapters(chaptersToLang.get)
           }

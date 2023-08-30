@@ -73,13 +73,13 @@ object User extends LidraughtsController {
   private def renderShow(u: UserModel, status: Results.Status = Results.Ok)(implicit ctx: Context) =
     if (HTTPRequest.isSynchronousHttp(ctx.req)) {
       for {
-        as ← Env.activity.read.recent(u)
+        as ← Env.activity.read.recent(u, lang = ctx.lang.some)
         nbs ← Env.current.userNbGames(u, ctx)
         info ← Env.current.userInfo(u, nbs, ctx)
         social ← Env.current.socialInfo(u, ctx)
       } yield status(html.user.show.page.activity(u, as, info, social))
     }.mon(_.http.response.user.show.website)
-    else Env.activity.read.recent(u) map { as =>
+    else Env.activity.read.recent(u, lang = ctx.lang.some) map { as =>
       status(html.activity(u, as))
     }
 
