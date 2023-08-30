@@ -316,14 +316,13 @@ object Auth extends LidraughtsController {
                       firstName = data.firstName.some,
                       lastName = data.lastName.some
                     )
-                    val teamRequest = lidraughts.team.RequestSetup(
+                    val teamRequest =
                       s"Aanmelding voor DFS Interland Aosta 2023: ${profile.nonEmptyRealName | "(naam onbekend)"}"
-                    )
                     welcome(user, email) >>
                       env.automaticEmail.registerDfs(user, email, data) >>
                       UserRepo.setProfile(user.id, profile) >>
                       lidraughts.team.TeamRepo.enabled("dfs-interland-aosta-2023").flatMap {
-                        _.fold(funit) { Env.team.api.createRequest(_, teamRequest, user) }
+                        _.fold(funit) { Env.team.api.createRequest(_, user, teamRequest) }
                       } >>
                       redirectNewUser(user)
                 }
