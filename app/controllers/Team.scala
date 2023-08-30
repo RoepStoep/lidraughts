@@ -9,6 +9,7 @@ import scala.concurrent.duration._
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.common.{ HTTPRequest, MaxPerSecond }
+import lidraughts.common.paginator.PaginatorJson
 import lidraughts.hub.lightTeam._
 import lidraughts.security.Granter
 import lidraughts.team.{ Joined, Motivate, Team => TeamModel, TeamRepo, MemberRepo }
@@ -19,6 +20,7 @@ object Team extends LidraughtsController {
 
   private def forms = Env.team.forms
   private def api = Env.team.api
+  private def jsonView = Env.team.jsonView
   private def paginator = Env.team.paginator
 
   def all(page: Int) = Open { implicit ctx =>
@@ -64,6 +66,10 @@ object Team extends LidraughtsController {
     getSocketUid("sri") ?? { uid =>
       Env.team.socketHandler.join(id, uid, ctx.me, getSocketVersion, apiVersion)
     }
+  }
+
+  def legacyUsers(teamId: String) = Action {
+    MovedPermanently(routes.Team.users(teamId).url)
   }
 
   def users(teamId: String) = Action.async { req =>
@@ -217,18 +223,47 @@ object Team extends LidraughtsController {
     api mine me map { html.team.list.mine(_) }
   }
 
-  def join(id: String) = AuthOrScoped(_.Team.Write)(
-    auth = ctx => me => api.join(id, me) flatMap {
-      case Some(Joined(team)) => Redirect(routes.Team.show(team.id)).fuccess
-      case Some(Motivate(team)) => Redirect(routes.Team.requestForm(team.id)).fuccess
-      case _ => notFound(ctx)
-    },
-    scoped = req => me => Env.oAuth.server.fetchAppAuthor(req) flatMap {
-      _ ?? { api.joinApi(id, me, _) }
-    } map {
-      case Some(Joined(_)) => jsonOkResult
-      case Some(Motivate(_)) => Forbidden(jsonError("This team requires confirmation, and is not owned by the oAuth app owner."))
-      case _ => NotFound(jsonError("Team not found"))
+  def join(id: String) = AuthOrScopedBody(_.Team.Write)(
+    auth = implicit ctx => me => negotiate(
+      html = api.join(id, me, none) flatMap {
+        case Some(Joined(team)) => Redirect(routes.Team.show(team.id)).fuccess
+        case Some(Motivate(team)) => Redirect(routes.Team.requestForm(team.id)).fuccess
+        case _ => notFound(ctx)
+      },
+      api = _ => {
+        implicit val body = ctx.body
+        forms.apiRequest.bindFromRequest
+          .fold(
+            newJsonFormError,
+            msg =>
+              api.join(id, me, msg) flatMap {
+                case Some(Joined(_)) => jsonOkResult.fuccess
+                case Some(Motivate(_)) =>
+                  BadRequest(
+                    jsonError("This team requires confirmation.")
+                  ).fuccess
+                case _ => notFoundJson("Team not found")
+              }
+          )
+      }
+    ),
+    scoped = implicit req => me => {
+      implicit val lang = reqLang
+      forms.apiRequest.bindFromRequest
+        .fold(
+          newJsonFormError,
+          msg =>
+            Env.oAuth.server.fetchAppAuthor(req) flatMap {
+              api.joinApi(id, me, _, msg)
+            } flatMap {
+              case Some(Joined(_)) => jsonOkResult.fuccess
+              case Some(Motivate(_)) =>
+                Forbidden(
+                  jsonError("This team requires confirmation, and is not owned by the oAuth app owner.")
+                ).fuccess
+              case _ => notFoundJson("Team not found")
+            }
+        )
     }
   )
 
@@ -259,7 +294,7 @@ object Team extends LidraughtsController {
       implicit val req = ctx.body
       forms.request.bindFromRequest.fold(
         err => BadRequest(html.team.request.requestForm(team, err)).fuccess,
-        setup => api.createRequest(team, setup, me) inject Redirect(routes.Team.show(team.id))
+        setup => api.createRequest(team, me, setup.message) inject Redirect(routes.Team.show(team.id))
       )
     }
   }
@@ -281,9 +316,13 @@ object Team extends LidraughtsController {
   }
 
   def quit(id: String) = AuthOrScoped(_.Team.Write)(
-    auth = ctx => me => OptionResult(api.quit(id, me)) { team =>
-      Redirect(routes.Team.show(team.id))
-    }(ctx),
+    auth = implicit ctx => me =>
+      OptionFuResult(api.cancelRequest(id, me) orElse api.quit(id, me)) { team =>
+        negotiate(
+          html = Redirect(routes.Team.show(team.id)).fuccess,
+          api = _ => jsonOkResult.fuccess
+        )
+      }(ctx),
     scoped = req => me => api.quit(id, me) flatMap {
       _.fold(notFoundJson())(_ => jsonOkResult.fuccess)
     }
@@ -336,6 +375,59 @@ You received this because you are subscribed to messages of the team $url."""
             } inject Redirect(routes.Team.show(team.id))
           }
       )
+    }
+  }
+
+  // API
+
+  def apiAll(page: Int) = Action.async {
+    JsonFuOk {
+      paginator popularTeams page flatMap { pag =>
+        Env.user.lightUserApi.preloadMany(pag.currentPageResults.map(_.createdBy)) inject {
+          PaginatorJson(pag mapResults jsonView.teamWrites.writes)
+        }
+      }
+    }
+  }
+
+  def apiShow(id: String) =
+    Open { ctx =>
+      JsonOptionOk {
+        api team id flatMap {
+          _ ?? { team =>
+            for {
+              joined <- ctx.userId.?? { api.belongsTo(id, _) }
+              requested <- ctx.userId.ifFalse(joined).?? { lidraughts.team.RequestRepo.exists(id, _) }
+            } yield {
+              jsonView.teamWrites.writes(team) ++ Json
+                .obj(
+                  "joined" -> joined,
+                  "requested" -> requested
+                )
+            }.some
+          }
+        }
+      }
+    }
+
+  def apiSearch(text: String, page: Int) = Action.async {
+    JsonFuOk {
+      val paginatorFu =
+        if (text.trim.isEmpty) paginator popularTeams page
+        else Env.teamSearch(text, page)
+      paginatorFu map { pag =>
+        PaginatorJson(pag mapResults jsonView.teamWrites.writes)
+      }
+    }
+  }
+
+  def apiTeamsOf(username: String) = Action.async {
+    JsonFuOk {
+      api teamsOf username flatMap { teams =>
+        Env.user.lightUserApi.preloadMany(teams.map(_.createdBy)) inject teams.map {
+          jsonView.teamWrites.writes
+        }
+      }
     }
   }
 

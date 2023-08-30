@@ -1,6 +1,7 @@
 package lidraughts.team
 
 import lidraughts.db.dsl._
+import lidraughts.user.User
 
 object RequestRepo {
 
@@ -33,8 +34,11 @@ object RequestRepo {
   def teamQuery(teamId: ID) = $doc("team" -> teamId)
   def teamsQuery(teamIds: List[ID]) = $doc("team" $in teamIds)
 
-  def getByUserId(userId: lidraughts.user.User.ID) =
+  def getByUserId(userId: User.ID) =
     coll.find($doc("user" -> userId)).list[Request]()
 
   def remove(id: ID) = coll.remove($id(id))
+
+  def cancel(teamId: ID, user: User): Fu[Boolean] =
+    coll.remove(selectId(teamId, user.id)).map(_.n == 1)
 }

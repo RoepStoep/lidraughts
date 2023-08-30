@@ -51,6 +51,8 @@ private[team] final class DataForm(
     message = "Hello, I would like to join the team!"
   )
 
+  val apiRequest = Form(single("message" -> optional(text(minLength = 30, maxLength = 2000))))
+
   val processRequest = Form(tuple(
     "process" -> nonEmptyText,
     "url" -> nonEmptyText

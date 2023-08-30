@@ -93,19 +93,30 @@ final class TeamApi(
     case (request, user) => RequestWithUser(request, user)
   }
 
-  def join(teamId: Team.ID, me: User): Fu[Option[Requesting]] =
+  def join(teamId: Team.ID, me: User, msg: Option[String]): Fu[Option[Requesting]] =
     coll.team.byId[Team](teamId) flatMap {
       _ ?? { team =>
         if (team.open) doJoin(team, me) inject Joined(team).some
-        else fuccess(Motivate(team).some)
+        else
+          msg.fold(fuccess[Option[Requesting]](Motivate(team).some)) { txt =>
+            createRequest(team, me, txt) inject Joined(team).some
+          }
       }
     }
 
-  def joinApi(teamId: Team.ID, me: User, oAuthAppOwner: User.ID): Fu[Option[Requesting]] =
+  def joinApi(
+    teamId: Team.ID,
+    me: User,
+    oAuthAppOwner: Option[User.ID],
+    msg: Option[String]
+  ): Fu[Option[Requesting]] =
     coll.team.byId[Team](teamId) flatMap {
       _ ?? { team =>
-        if (team.open || team.createdBy == oAuthAppOwner) doJoin(team, me) inject Joined(team).some
-        else fuccess(Motivate(team).some)
+        if (team.open || oAuthAppOwner.contains(team.createdBy)) doJoin(team, me) inject Joined(team).some
+        else
+          msg.fold(fuccess[Option[Requesting]](Motivate(team).some)) { txt =>
+            createRequest(team, me, txt) inject Joined(team).some
+          }
       }
     }
 
@@ -119,11 +130,18 @@ final class TeamApi(
     requested <- RequestRepo.exists(team.id, user.id)
   } yield !belongs && !requested
 
-  def createRequest(team: Team, setup: RequestSetup, user: User): Funit =
+  def createRequest(team: Team, user: User, msg: String): Funit =
     requestable(team, user) flatMap {
       _ ?? {
-        val request = Request.make(team = team.id, user = user.id, message = setup.message)
+        val request = Request.make(team = team.id, user = user.id, message = msg)
         coll.request.insert(request).void >>- (cached.nbRequests invalidate team.createdBy)
+      }
+    }
+
+  def cancelRequest(teamId: Team.ID, user: User): Fu[Option[Team]] =
+    coll.team.byId[Team](teamId) flatMap {
+      _ ?? { team =>
+        RequestRepo.cancel(team.id, user) map (_ option team)
       }
     }
 
@@ -159,6 +177,11 @@ final class TeamApi(
       _ ?? { team =>
         doQuit(team, me.id) inject team.some
       }
+    }
+
+  def teamsOf(username: String) =
+    cached.teamIdsList(User normalize username) flatMap {
+      coll.team.byIds[Team](_, ReadPreference.secondaryPreferred)
     }
 
   private def doQuit(team: Team, userId: User.ID): Funit = belongsTo(team.id, userId) flatMap {

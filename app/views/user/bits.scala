@@ -15,7 +15,8 @@ object bits {
       a(cls := active.active("leaderboard"), href := routes.User.list)(trans.leaderboard()),
       a(cls := active.active("ratings"), href := routes.Stat.ratingDistribution("blitz"))(trans.ratingStats()),
       a(cls := active.active("tournament"), href := routes.Tournament.leaderboard)(trans.tournamentWinners()),
-      a(cls := active.active("shield"), href := routes.Tournament.shields)("Shields")
+      a(cls := active.active("shield"), href := routes.Tournament.shields)("Shields"),
+      isGranted(_.Beta) option a(cls := active.active("bots"), href := routes.Bot.online)("Online bots [BETA]")
     )
 
   def miniClosed(u: User)(implicit ctx: Context) = frag(

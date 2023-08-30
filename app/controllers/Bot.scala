@@ -73,4 +73,11 @@ object Bot extends LidraughtsController {
   private def WithBot(me: lidraughts.user.User)(f: => Fu[Result]) =
     if (!me.isBot) BadRequest(jsonError("This endpoint only works for bot accounts.")).fuccess
     else f
+
+  def online = Secure(_.Beta) { implicit ctx => _ =>
+    // env.user.botIds().map(_ take 20) flatMap env.user.repo.byIds map { users =>
+    lidraughts.user.UserRepo.byIds(Env.bot.onlineBots.get) map { users =>
+      Ok(views.html.user.bots(users))
+    }
+  }
 }

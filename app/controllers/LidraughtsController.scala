@@ -48,6 +48,7 @@ private[controllers] trait LidraughtsController
   implicit def ctxLang(implicit ctx: Context) = ctx.lang
   implicit def ctxReq(implicit ctx: Context) = ctx.req
   implicit def reqConfig(implicit req: RequestHeader) = ui.EmbedConfig(req)
+  def reqLang(implicit req: RequestHeader) = lidraughts.i18n.I18nLangPicker(req, none)
 
   protected def NoCache(res: Result): Result = res.withHeaders(
     CACHE_CONTROL -> "no-cache, no-store, must-revalidate", EXPIRES -> "0"
@@ -284,9 +285,10 @@ private[controllers] trait LidraughtsController
   }
   protected def JsonOk[A: Writes](a: A) = Ok(Json toJson a) as JSON
   protected def JsonOk(body: JsValue): Result = Ok(body) as JSON
+  protected def JsonFuOk[A: Writes](fua: Fu[A]): Fu[Result] = fua map { JsonOk(_) }
 
-  protected def JsonOptionOk[A: Writes](fua: Fu[Option[A]])(implicit ctx: Context) = fua flatMap {
-    _.fold(notFound(ctx))(a => fuccess(Ok(Json toJson a) as JSON))
+  protected def JsonOptionOk[A: Writes](fua: Fu[Option[A]]) = fua flatMap {
+    _.fold(notFoundJson())(a => fuccess(Ok(Json toJson a) as JSON))
   }
 
   protected def JsonOptionFuOk[A, B: Writes](fua: Fu[Option[A]])(op: A => Fu[B])(implicit ctx: Context) =
@@ -513,6 +515,9 @@ private[controllers] trait LidraughtsController
 
   protected def jsonFormErrorDefaultLang(err: Form[_]) =
     jsonFormError(err)(lidraughts.i18n.defaultLang)
+
+  protected def newJsonFormError(err: Form[_])(implicit lang: Lang) =
+    fuccess(BadRequest(errorsAsJson(err)))
 
   protected def pageHit(implicit ctx: lidraughts.api.Context) =
     if (HTTPRequest isHuman ctx.req) lidraughts.mon.http.request.path(ctx.req.path)()

@@ -84,6 +84,8 @@ final class Env(
 
   lazy val cached = new Cached(asyncCache)(system)
 
+  lazy val jsonView = new JsonView(userEnv.lightUserApi)
+
   def version(teamId: Team.ID): Fu[SocketVersion] =
     socketMap.askIfPresentOrZero[SocketVersion](teamId)(GetVersion)
 

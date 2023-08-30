@@ -339,6 +339,9 @@ object UserRepo {
   def filterEngine(ids: Seq[ID]): Fu[Set[ID]] =
     coll.distinct[ID, Set]("_id", Some($inIds(ids) ++ engineSelect(true)))
 
+  def filterBot(ids: Iterable[ID]): Fu[Set[ID]] =
+    coll.distinct[ID, Set]("_id", Some($inIds(ids) ++ botSelect(true)))
+
   def isTroll(id: ID): Fu[Boolean] = coll.exists($id(id) ++ trollSelect(true))
 
   def setRoles(id: ID, roles: List[String]) = coll.updateField($id(id), "roles", roles)

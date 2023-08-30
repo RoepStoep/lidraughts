@@ -19,6 +19,8 @@ final class Env(
 
   lazy val player = new BotPlayer(hub.chat, isOfferingRematch)(system)
 
+  lazy val onlineBots = new OnlineBots(onlineUserIds)(system)
+
   val form = BotForm
 }
 

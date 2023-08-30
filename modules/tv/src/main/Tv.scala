@@ -151,15 +151,14 @@ object Tv {
       secondsSinceLastMove = freshBlitz,
       filters = Seq(computerFromInitialPosition)
     )
-    val visible = List(
+    val all = List(
       Best,
       Bullet, Blitz, Rapid, Classical,
       Frisian, Frysk, Antidraughts, Breakthrough,
       Russian, Brazilian,
       UltraBullet,
-      Computer
+      Bot, Computer
     )
-    val all = visible :+ Bot
     val byKey = all.map { c => c.key -> c }.toMap
   }
 

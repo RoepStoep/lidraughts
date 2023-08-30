@@ -16,7 +16,7 @@ Bijvoorbeeld, twee overwinningen gevolgd door een gelijkspel zullen 6 punten waa
   <string name="berserk">Arena Berserk</string>
   <string name="berserkAnswer">Wanneer een speler op de Berserk-knop klikt aan het begin van het spel, verliest hij/zij de helft van de tijd op de klok, maar de overwinning is één extra toernooipunt waard.
 
-Berserk gaan in partijen met een klok met extra seconden per zet, zorgt ervoor dat je ook die extra seconden kwijt bent. Bijvoorbeeld 2+1 wordt 1+0. (1+2 is een uitzondering, dat geeft 1+0)
+Berserk gaan in partijen met een klok met extra seconden per zet zorgt ervoor dat je ook die extra seconden kwijt bent. Bijvoorbeeld 2+1 wordt 1+0. (1+2 is een uitzondering, dat geeft 1+0)
 
 Berserk is niet beschikbaar voor partijen met nul begintijd (0+1, 0+2).
 
