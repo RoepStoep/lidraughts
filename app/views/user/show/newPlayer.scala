@@ -31,7 +31,7 @@ object newPlayer {
       ),
       p(trans.whatNowSuggestions()),
       ul(
-        if (lidraughts.common.DfsInterlandCookie.hasCookie(ctx.req)) {
+        if (lidraughts.common.DfsInterlandCookie.hasRegisteredCookie(ctx.req)) {
           frag(
             li(a(href := routes.Practice.showSectionOrVariant("frisian"))("Leer Fries dammen in 9 stappen")),
             li(a(href := routes.Puzzle.showOrVariant("frisian"))("Oefen met tactische puzzels Fries dammen"))

@@ -154,7 +154,7 @@ object Auth extends LidraughtsController {
       Ok(
         html.auth.signupDfs(forms.signup.websiteDfs, env.recaptchaPublicConfig)
       ).withCookies(
-          lidraughts.common.DfsInterlandCookie.cookie
+          lidraughts.common.DfsInterlandCookie.cookie()
         ).fuccess
     }
   }
@@ -328,7 +328,11 @@ object Auth extends LidraughtsController {
                       lidraughts.team.TeamRepo.enabled("dfs-interland-aosta-2023").flatMap {
                         _.fold(funit) { Env.team.api.createRequest(_, user, teamRequest) }
                       } >>
-                      redirectNewUser(user)
+                      redirectNewUser(user).map {
+                        _.withCookies(
+                          lidraughts.common.DfsInterlandCookie.cookie(registered = true)
+                        )
+                      }
                 }
             }
           }

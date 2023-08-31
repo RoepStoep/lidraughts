@@ -23,7 +23,7 @@ if (confirm('${trans.learn.youWillLoseAllYourProgress.txt()}')) this.parentNode.
     ).some
   ) {
       val variant = data.structure.variant | lidraughts.pref.Pref.defaultPracticeVariant
-      val signupDfs = !ctx.isAuth && lidraughts.common.DfsInterlandCookie.hasCookie(ctx.req)
+      val signupDfs = !ctx.isAuth && lidraughts.common.DfsInterlandCookie.hasLandingCookie(ctx.req)
       main(cls := "page-menu")(
         st.aside(cls := "page-menu__menu practice-side")(
           div(cls := "practice-side__variant")(

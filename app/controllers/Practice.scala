@@ -29,7 +29,7 @@ object Practice extends LidraughtsController {
     Redirect(
       routes.Practice.showSectionOrVariant(draughts.variant.Frisian.key)
     ).withCookies(
-        lidraughts.common.DfsInterlandCookie.cookie
+        lidraughts.common.DfsInterlandCookie.cookie()
       ).fuccess
   }
 
