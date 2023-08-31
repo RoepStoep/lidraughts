@@ -32,7 +32,7 @@ export function compute(ctrl: AnalyseCtrl): DrawShape[] {
     if (hint) {
       if (hint.mode === 'move') return makeShapesFromUci(hint.uci, 'paleBlue');
       else return [{
-        orig: hint.uci[1] === '@' ? hint.uci.slice(2, 4) : hint.uci.slice(0, 2),
+        orig: decomposeUci(hint.uci)[0],
         brush: 'paleBlue'
       }];
     }

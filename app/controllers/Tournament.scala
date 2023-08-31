@@ -88,6 +88,14 @@ object Tournament extends LidraughtsController {
   def show(id: String) = Open { implicit ctx =>
     val page = getInt("page")
     repo byId id flatMap { tourOption =>
+      def loadChat(tour: Tour, json: JsObject) =
+        canHaveChat(tour, json.some) ?? Env.chat.api.userChat.cached
+          .findMine(Chat.Id(tour.id), ctx.me)
+          .flatMap { c =>
+            Env.user.lightUserApi.preloadMany(c.chat.userIds) >>- {
+              tour.isWfd ?? Env.user.lightWfdUserApi.preloadMany(c.chat.userIds)
+            } inject c.some
+          }
       negotiate(
         html = tourOption.fold(tournamentNotFound.fuccess) { tour =>
           (for {
@@ -105,38 +113,35 @@ object Tournament extends LidraughtsController {
               lang = ctx.lang,
               pref = ctx.pref.some
             )
-            chat <- canHaveChat(tour, json.some) ?? Env.chat.api.userChat.cached
-              .findMine(Chat.Id(tour.id), ctx.me)
-              .dmap(some)
-            _ <- chat ?? { c =>
-              Env.user.lightUserApi.preloadMany(c.chat.userIds) >>-
-                tour.isWfd ?? Env.user.lightWfdUserApi.preloadMany(c.chat.userIds)
-            }
+            chat <- loadChat(tour, json)
             _ <- tour.teamBattle ?? { b => Env.team.cached.preloadSet(b.teams) }
             streamers <- streamerCache get tour.id
             shieldOwner <- env.shieldApi currentOwner tour
           } yield Ok(html.tournament.show(tour, verdicts, json, chat, streamers, shieldOwner, tour.isWfd option Env.user.wfdUsername))).mon(_.http.response.tournament.show.website)
         }, api = _ => tourOption.fold(notFoundJson("No such tournament")) { tour =>
-          get("playerInfo").?? { env.api.playerInfo(tour, _) } zip
-            getBool("socketVersion").??(env version tour.id map some) flatMap {
-              case (playerInfoExt, socketVersion) =>
-                val partial = getBool("partial")
-                lidraughts.mon.tournament.apiShowPartial(partial)()
-                env.jsonView(
-                  tour = tour,
-                  page = page,
-                  me = ctx.me,
-                  getUserTeamIds = getUserTeamIds,
-                  getTeamName = Env.team.cached.name,
-                  playerInfoExt = playerInfoExt,
-                  socketVersion = socketVersion,
-                  partial = partial,
-                  lang = ctx.lang,
-                  pref = ctx.pref.some
-                )
-            } map { Ok(_) }
+          for {
+            playerInfoExt <- get("playerInfo").?? { env.api.playerInfo(tour, _) }
+            socketVersion <- getBool("socketVersion").??(env version tour.id map some)
+            partial = getBool("partial")
+            _ = lidraughts.mon.tournament.apiShowPartial(partial)()
+            json <- env.jsonView(
+              tour = tour,
+              page = page,
+              me = ctx.me,
+              getUserTeamIds = getUserTeamIds,
+              getTeamName = Env.team.cached.name,
+              playerInfoExt = playerInfoExt,
+              socketVersion = socketVersion,
+              partial = partial,
+              lang = ctx.lang,
+              pref = ctx.pref.some
+            )
+            chat <- loadChat(tour, json)
+          } yield Ok(json.add("chat" -> chat.map { c =>
+            lidraughts.chat.JsonView.mobile(chat = c.chat)
+          }))
         }.mon(_.http.response.tournament.show.mobile)
-      ) map NoCache
+      ) map { NoCache(_) }
     }
   }
 
