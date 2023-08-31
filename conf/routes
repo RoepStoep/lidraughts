@@ -429,8 +429,9 @@ GET   /auth/token/:token               controllers.Auth.loginWithToken(token: St
 POST  /mod/signup                      controllers.Auth.adminSignup
 
 # Temporary DFS Interland
-GET   /dfs-interland                   controllers.Auth.signupDfs
-POST  /dfs-interland                   controllers.Auth.signupDfsPost
+GET   /italie                          controllers.Auth.signupDfs
+POST  /italie                          controllers.Auth.signupDfsPost
+GET   /fd                              controllers.Practice.indexDfs
 
 # Mod
 POST  /mod/:username/engine/:v         controllers.Mod.engine(username: String, v: Boolean)

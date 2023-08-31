@@ -23,6 +23,7 @@ if (confirm('${trans.learn.youWillLoseAllYourProgress.txt()}')) this.parentNode.
     ).some
   ) {
       val variant = data.structure.variant | draughts.variant.Standard
+      val signupDfs = !ctx.isAuth && lidraughts.common.DfsInterlandCookie.hasCookie(ctx.req)
       main(cls := "page-menu")(
         st.aside(cls := "page-menu__menu practice-side")(
           div(cls := "practice-side__variant")(
@@ -48,7 +49,14 @@ if (confirm('${trans.learn.youWillLoseAllYourProgress.txt()}')) this.parentNode.
             ),
             postForm(action := s"${routes.Practice.reset}?v=${variant.key}")(
               if (ctx.isAuth) (data.nbDoneChapters > 0) option a(cls := "do-reset")(trans.learn.resetMyProgress())
+              else if (signupDfs) a(href := routes.Auth.signupDfs)(trans.learn.signUpToSaveYourProgress())
               else a(href := routes.Auth.signup)(trans.learn.signUpToSaveYourProgress())
+            )
+          ),
+          signupDfs option div(cls := "practice-side__interland")(
+            a(cls := "button", href := routes.Auth.signupDfs)(
+              img(src := assetUrl("images/flags/IT.png")),
+              "Registreren voor DFS Interland Aosta"
             )
           )
         ),

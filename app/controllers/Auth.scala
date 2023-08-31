@@ -150,8 +150,12 @@ object Auth extends LidraughtsController {
 
   def signupDfs = Open { implicit ctx =>
     NoTor {
-      lidraughts.mon.dfs.interland.pageHit()
-      Ok(html.auth.signupDfs(forms.signup.websiteDfs, env.recaptchaPublicConfig)).fuccess
+      lidraughts.mon.dfs.interland.pageRegister()
+      Ok(
+        html.auth.signupDfs(forms.signup.websiteDfs, env.recaptchaPublicConfig)
+      ).withCookies(
+          lidraughts.common.DfsInterlandCookie.cookie
+        ).fuccess
     }
   }
 

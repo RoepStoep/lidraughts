@@ -24,6 +24,15 @@ object Practice extends LidraughtsController {
     renderIndex(ctx.pref.practiceVariant, none)
   }
 
+  def indexDfs = Open { implicit ctx =>
+    lidraughts.mon.dfs.interland.pagePractice()
+    Redirect(
+      routes.Practice.showSectionOrVariant(draughts.variant.Frisian.key)
+    ).withCookies(
+        lidraughts.common.DfsInterlandCookie.cookie
+      ).fuccess
+  }
+
   def indexVariant(key: String) = Open { implicit ctx =>
     Variant(key) match {
       case Some(variant) if practiceVariants.contains(variant) =>

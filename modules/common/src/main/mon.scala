@@ -680,7 +680,8 @@ object mon {
   }
   object dfs {
     object interland {
-      val pageHit = inc("dfs.interland.page_hit")
+      val pageRegister = inc("dfs.interland.page_register")
+      val pagePractice = inc("dfs.interland.page_practice")
       val register = inc("dfs.interland.register")
     }
   }

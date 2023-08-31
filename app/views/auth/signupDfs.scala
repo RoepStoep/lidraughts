@@ -37,7 +37,7 @@ object signupDfs {
             h2("Gegevens voor DFS"),
             hr,
             div(cls := "form-group text", dataIcon := "")(
-              "Onderstaande gegevens zijn optioneel. Alles wat je hier invult wordt direct doorgestuurd naar DFS en wordt niet opgeslagen door Lidraughts."
+              "Onderstaande gegevens zijn optioneel. Alles wat je hier invult wordt direct doorgestuurd naar DFS (Dambûn Frysk Spul) en wordt niet opgeslagen door Lidraughts."
             ),
             form3.split(
               form3.group(form("woonplaats"), "Woonplaats")(form3.input(_)),
@@ -49,7 +49,7 @@ object signupDfs {
             div(cls := "form-group text", dataIcon := "")(
               "Na registratie wordt je account automatisch aangemeld bij het Team ",
               a(href := routes.Team.show("dfs-interland-aosta-2023"))("DFS Interland Aosta 2023"),
-              ". Je lidmaatschap van dit team wordt zo spoedig mogelijk handmatig beoordeeld.", br,
+              ". Je lidmaatschap van het team wordt handmatig beoordeeld.", br, br,
               small(trans.byRegisteringYouAgreeToBeBoundByOur(a(href := routes.Page.tos)(trans.termsOfService())))
             ),
             if (recaptcha.enabled)

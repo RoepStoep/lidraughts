@@ -78,4 +78,18 @@
       opacity: 1;
     }
   }
+
+  &__interland {
+    margin-top: 2em;
+    text-align: center;
+    a {
+      font-size: 1.2rem;
+      text-transform: none;
+      img {
+        vertical-align: middle;
+        margin-right: 0.6em;
+        padding-bottom: 3px;
+      }
+    }
+  }
 }
