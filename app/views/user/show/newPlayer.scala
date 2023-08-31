@@ -31,7 +31,14 @@ object newPlayer {
       ),
       p(trans.whatNowSuggestions()),
       ul(
-        li(a(href := routes.Puzzle.home)(trans.improveWithDraughtsTacticsPuzzles())),
+        if (lidraughts.common.DfsInterlandCookie.hasCookie(ctx.req)) {
+          frag(
+            li(a(href := routes.Practice.showSectionOrVariant("frisian"))("Leer Fries dammen in 9 stappen")),
+            li(a(href := routes.Puzzle.showOrVariant("frisian"))("Oefen met tactische puzzels Fries dammen"))
+          )
+        } else {
+          li(a(href := routes.Puzzle.home)(trans.improveWithDraughtsTacticsPuzzles()))
+        },
         li(a(href := s"${routes.Lobby.home}#ai")(trans.playTheAI())),
         li(a(href := s"${routes.Lobby.home}#hook")(trans.playOpponentsWorldwide())),
         li(a(href := routes.User.list)(trans.followFriends())),
