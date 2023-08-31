@@ -886,6 +886,7 @@ Een URL per regel</string>
   <string name="withEverybody">Met iedereen</string>
   <string name="youHaveAlreadyRegisteredTheEmail">Je hebt je al geregistreerd via deze email: %s</string>
   <string name="kidMode">Kindvriendelijke modus</string>
+  <string name="kidModeIsEnabled">Kindvriendelijke modus is ingeschakeld.</string>
   <string name="kidModeExplanation">Dit gaat over veiligheid. In kindvriendelijke modus worden alle communicatiemogelijkheden op de website uitgeschakeld. Activeer dit voor kinderen om hen te beschermen tegen andere internetgebruikers.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">In kindvriendelijke modus krijgt het lidraughts logo een %s icoontje, zodat je weet dat je kinderen veilig zijn.</string>
   <string name="enableKidMode">Activeer Kindermodus</string>
@@ -1073,4 +1074,18 @@ Een URL per regel</string>
   <string name="thankYouForReading">Bedankt voor het lezen!</string>
   <string name="lifetimeScore">Levenslange score</string>
   <string name="currentMatchScore">Huidige wedstrijd score</string>
+  <string name="welcomeToLidraughts">Welkom op lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">Dit is je profiel pagina.</string>
+  <string name="wouldYouLikeToX">Wil je deze misschien %s?</string>
+  <string name="improveIt">verbeteren</string>
+  <string name="enabledKidModeSuggestion">Gebruikt een kind dit account? Misschien wil je %s inschakelen.</string>
+  <string name="whatNowSuggestions">Wat nu? Hier zijn een paar suggesties:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Leer beter dammen met tactische puzzels</string>
+  <string name="playTheAI">Speel tegen de damcomputer</string>
+  <string name="playOpponentsWorldwide">Vind tegenstanders van over de hele wereld</string>
+  <string name="followFriends">Volg je vrienden op lidraughts</string>
+  <string name="playInTournaments">Speel in toernooien</string>
+  <string name="learnFromStudies">Leer van studies</string>
+  <string name="configureLidraughts">Configureer lidraughts naar eigen wens</string>
+  <string name="exploreTheSiteAndHaveFun">Verken de website en heb het naar je zin :)</string>
 </resources>

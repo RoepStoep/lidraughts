@@ -13,35 +13,32 @@ object newPlayer {
 
   def apply(u: User)(implicit ctx: Context) =
     div(cls := "new-player")(
-      h2("Welcome to lidraughts.org!"),
+      h2(trans.welcomeToLidraughts()),
       p(
-        "This is your profile page.",
+        trans.thisIsYourProfilePage(),
         u.profile.isEmpty option frag(
           br,
-          "Would you like to ",
-          a(href := routes.Account.profile)("improve it"), "?"
+          trans.wouldYouLikeToX(
+            a(href := routes.Account.profile)(trans.improveIt())
+          )
         )
       ),
       p(
-        if (u.kid) "Kid mode is enabled."
-        else frag(
-          "Will a child use this account? You might want to enable ", a(href := routes.Account.kid)("Kid mode"), "."
+        if (u.kid) trans.kidModeIsEnabled()
+        else trans.enabledKidModeSuggestion(
+          a(href := routes.Account.kid)(trans.kidMode())
         )
       ),
-      p(
-        "What now? Here are a few suggestions:"
-      ),
+      p(trans.whatNowSuggestions()),
       ul(
-        // li(a(href := routes.Learn.index)("Learn draughts rules")),
-        li(a(href := routes.Puzzle.home)("Improve with draughts tactics puzzles")),
-        li(a(href := s"${routes.Lobby.home}#ai")("Play the artificial intelligence")),
-        li(a(href := s"${routes.Lobby.home}#hook")("Play opponents from around the world")),
-        li(a(href := routes.User.list)("Follow your friends on lidraughts")),
-        li(a(href := routes.Tournament.home(1))("Play in tournaments")),
-        li("Learn from ", a(href := routes.Study.allDefault(1))("studies")),
-        // " and ", a(href := routes.Video.index)("videos")),
-        li(a(href := routes.Pref.form("game-display"))("Configure lidraughts to your liking")),
-        li("Explore the site and have fun :)")
+        li(a(href := routes.Puzzle.home)(trans.improveWithDraughtsTacticsPuzzles())),
+        li(a(href := s"${routes.Lobby.home}#ai")(trans.playTheAI())),
+        li(a(href := s"${routes.Lobby.home}#hook")(trans.playOpponentsWorldwide())),
+        li(a(href := routes.User.list)(trans.followFriends())),
+        li(a(href := routes.Tournament.home(1))(trans.playInTournaments())),
+        li(a(href := routes.Study.allDefault(1))(trans.learnFromStudies())),
+        li(a(href := routes.Pref.form("game-display"))(trans.configureLidraughts())),
+        li(trans.exploreTheSiteAndHaveFun())
       )
     )
 }

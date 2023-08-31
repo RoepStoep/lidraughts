@@ -886,6 +886,7 @@ One URL per line</string>
   <string name="withEverybody">With everybody</string>
   <string name="youHaveAlreadyRegisteredTheEmail">You have already registered the email: %s</string>
   <string name="kidMode">Kid mode</string>
+  <string name="kidModeIsEnabled">Kid mode is enabled.</string>
   <string name="kidModeExplanation">This is about safety. In kid mode, all site communications are disabled. Enable this for your children and school students, to protect them from other internet users.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">In kid mode, the lidraughts logo gets a %s icon, so you know your kids are safe.</string>
   <string name="enableKidMode">Enable Kid mode</string>
@@ -1073,4 +1074,18 @@ One URL per line</string>
   <string name="thankYouForReading">Thank you for reading!</string>
   <string name="lifetimeScore">Lifetime score</string>
   <string name="currentMatchScore">Current match score</string>
+  <string name="welcomeToLidraughts">Welcome to lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">This is your profile page.</string>
+  <string name="wouldYouLikeToX">Would you like to %s?</string>
+  <string name="improveIt">improve it</string>
+  <string name="enabledKidModeSuggestion">Will a child use this account? You might want to enable %s.</string>
+  <string name="whatNowSuggestions">What now? Here are a few suggestions:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Improve with draughts tactics puzzles</string>
+  <string name="playTheAI">Play the artificial intelligence</string>
+  <string name="playOpponentsWorldwide">Play opponents from around the world</string>
+  <string name="followFriends">Follow your friends on lidraughts</string>
+  <string name="playInTournaments">Play in tournaments</string>
+  <string name="learnFromStudies">Learn from studies</string>
+  <string name="configureLidraughts">Configure lidraughts to your liking</string>
+  <string name="exploreTheSiteAndHaveFun">Explore the site and have fun :)</string>
 </resources>
