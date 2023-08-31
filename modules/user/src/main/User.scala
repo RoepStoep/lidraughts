@@ -104,6 +104,8 @@ case class User(
 
   def best6Perfs: List[PerfType] = bestOf(User.firstRow ::: User.secondRow, 6)
 
+  def bestAny3Perfs: List[PerfType] = bestOf(User.firstRow ::: User.secondRow, 3)
+
   def hasEstablishedRating(pt: PerfType) = perfs(pt).established
 
   def isPatron = plan.active

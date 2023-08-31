@@ -1077,7 +1077,7 @@ Een URL per regel</string>
   <string name="welcomeToLidraughts">Welkom op lidraughts.org!</string>
   <string name="thisIsYourProfilePage">Dit is je profiel pagina.</string>
   <string name="wouldYouLikeToX">Wil je deze misschien %s?</string>
-  <string name="improveIt">verbeteren</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">verbeteren</string>
   <string name="enabledKidModeSuggestion">Gebruikt een kind dit account? Misschien wil je %s inschakelen.</string>
   <string name="whatNowSuggestions">Wat nu? Hier zijn een paar suggesties:</string>
   <string name="improveWithDraughtsTacticsPuzzles">Leer beter dammen met tactische puzzels</string>

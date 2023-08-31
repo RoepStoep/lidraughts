@@ -33,7 +33,7 @@ object Practice extends LidraughtsController {
       ).fuccess
   }
 
-  def indexVariant(key: String) = Open { implicit ctx =>
+  private def indexVariant(key: String) = Open { implicit ctx =>
     Variant(key) match {
       case Some(variant) if practiceVariants.contains(variant) =>
         if (ctx.pref.practiceVariant != variant)

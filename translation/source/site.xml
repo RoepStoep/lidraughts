@@ -1077,7 +1077,7 @@ One URL per line</string>
   <string name="welcomeToLidraughts">Welcome to lidraughts.org!</string>
   <string name="thisIsYourProfilePage">This is your profile page.</string>
   <string name="wouldYouLikeToX">Would you like to %s?</string>
-  <string name="improveIt">improve it</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">improve it</string>
   <string name="enabledKidModeSuggestion">Will a child use this account? You might want to enable %s.</string>
   <string name="whatNowSuggestions">What now? Here are a few suggestions:</string>
   <string name="improveWithDraughtsTacticsPuzzles">Improve with draughts tactics puzzles</string>

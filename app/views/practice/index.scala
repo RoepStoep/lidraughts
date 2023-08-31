@@ -22,7 +22,7 @@ if (confirm('${trans.learn.youWillLoseAllYourProgress.txt()}')) this.parentNode.
       url = s"$netBaseUrl${routes.Practice.index}"
     ).some
   ) {
-      val variant = data.structure.variant | draughts.variant.Standard
+      val variant = data.structure.variant | lidraughts.pref.Pref.defaultPracticeVariant
       val signupDfs = !ctx.isAuth && lidraughts.common.DfsInterlandCookie.hasCookie(ctx.req)
       main(cls := "page-menu")(
         st.aside(cls := "page-menu__menu practice-side")(
