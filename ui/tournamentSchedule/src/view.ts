@@ -104,6 +104,7 @@ function tournamentClass(tour) {
       'tsht-major': tour.major,
       'tsht-thematic': (!!tour.position || !!tour.openingTable),
       'tsht-battle': !!tour.battle,
+      'tsht-promoted': !!tour.promoted,
       'tsht-draughts64': draughts64 && hourly,
       'tsht-short': tour.minutes <= 30,
       'tsht-max-rating': !userCreated && tour.hasMaxRating
@@ -202,7 +203,8 @@ export default function(ctrl) {
   const systemTours: any[] = [],
     majorTours: any[] = [],
     teamBattles: any[] = [],
-    userTours: any[] = [];
+    promotedUserTours: any[] = [],
+    regularUserTours: any[] = [];
 
   data.finished
     .concat(data.started)
@@ -212,7 +214,8 @@ export default function(ctrl) {
       if (isSystemTournament(t)) systemTours.push(t);
       else if (t.major) majorTours.push(t);
       else if (t.battle) teamBattles.push(t);
-      else userTours.push(t);
+      else if (t.promoted) promotedUserTours.push(t);
+      else regularUserTours.push(t);
     });
 
   // group system tournaments into dedicated lanes for PerfType
@@ -220,7 +223,8 @@ export default function(ctrl) {
     group(systemTours, laneGrouper)
     .concat([majorTours])
     .concat([teamBattles])
-    .concat([userTours])
+    .concat([promotedUserTours])
+    .concat([regularUserTours])
   ).filter(lane => lane.length > 0);
 
   return h('div.tour-chart', [
@@ -249,7 +253,7 @@ export default function(ctrl) {
     }, [
       renderTimeline(),
       ...tourLanes.map(lane => {
-        const large = lane.find(t => isSystemTournament(t) || t.major || t.battle);
+        const large = lane.find(t => isSystemTournament(t) || t.major || t.battle || t.promoted);
         return h('div.tournamentline' + (large ? '.large' : ''), lane.map(tour =>
           renderTournament(ctrl, tour, large)))
       })

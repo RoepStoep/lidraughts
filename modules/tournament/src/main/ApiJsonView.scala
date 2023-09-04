@@ -59,6 +59,7 @@ final class ApiJsonView(lightUser: LightUser.Getter) {
     .add("openingTable" -> tour.openingTable.map(openingTableJson))
     .add("schedule", tour.schedule map scheduleJson)
     .add("battle", tour.teamBattle map teamBattleJson)
+    .add("promoted", tour.isPromoted.option(true))
 
   def fullJson(tour: Tournament): Fu[JsObject] = for {
     owner <- tour.nonLidraughtsCreatedBy ?? lightUser

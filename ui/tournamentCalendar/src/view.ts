@@ -35,6 +35,7 @@ function tournamentClass(tour: Tournament, day: Date) {
     yesterday: tour.bounds.start < day
   };
   if (tour.schedule) classes[tour.schedule.freq] = true;
+  else if (tour.promoted) classes['promoted'] = true;
   return classes;
 }
 

@@ -343,7 +343,7 @@
   <string name="blackWins">Хараар авсан ялалт</string>
   <string name="draws">Тэнцээ</string>
   <string name="nextXTournament">Дараагийн %s тэмцээн:</string>
-  <string name="averageOpponent">Өрсөлдөгчдийн дундаж чансаа</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Өрсөлдөгчдийн дундаж чансаа</string>
   <string name="membersOnly">Зөвхөн гишүүд</string>
   <string name="boardEditor">Өргийн байрлал өөрчлөгч</string>
   <string name="setTheBoard">Өргийн байрлалыг тохируулах</string>
@@ -389,7 +389,6 @@
   <string name="butYouCanKeepTrying">Гэхдээ та үргэлжлүүлэн бодох боломжтой.</string>
   <string name="success">Зөв</string>
   <string name="wasThisPuzzleAnyGood">Энэ бодлого хэр байв?</string>
-  <string name="pleaseVotePuzzle">Бодлогын чанарыг үнэлэх</string>
   <string name="thankYou">Баярлалаа!</string>
   <string name="ratingX">Чансаа:%s</string>
   <plurals name="playedXTimes">

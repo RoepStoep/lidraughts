@@ -388,7 +388,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="blackWins">Victorias negras</string>
   <string name="draws">Tablas</string>
   <string name="nextXTournament">Siguiente torneo %s:</string>
-  <string name="averageOpponent">Oponente promedio</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Oponente promedio</string>
   <string name="membersOnly">Sólo para miembros</string>
   <string name="boardEditor">Editor de tablero</string>
   <string name="setTheBoard">Configurar tablero</string>
@@ -436,7 +436,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="butYouCanKeepTrying">Pero puedes seguir intentándolo.</string>
   <string name="success">Éxito</string>
   <string name="wasThisPuzzleAnyGood">¿Crees que este ejercicio es bueno?</string>
-  <string name="pleaseVotePuzzle">Ayuda a lidraughts a mejorar. Vota usando las flechas arriba o abajo:</string>
+  <string name="pleaseVotePuzzle">Ayuda a Lidraughts a mejorar. Vota usando las flechas arriba o abajo:</string>
   <string name="thankYou">¡Gracias!</string>
   <string name="ratingX">Puntuacion: %s</string>
   <plurals name="playedXTimes">

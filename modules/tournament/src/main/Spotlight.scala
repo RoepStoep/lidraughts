@@ -24,7 +24,7 @@ object Spotlight {
     sort(tours.filter { select(_, user) }) take max
 
   private def sort(tours: List[Tournament]) = tours.sortBy { t =>
-    -(t.schedule.??(_.freq.importance))
+    -(t.schedule.fold(if (t.isPromoted) userPromotedImportance else 0)(_.freq.importance))
   }
 
   private def select(tour: Tournament, user: User): Boolean = tour.isEnterable &&
@@ -36,7 +36,8 @@ object Spotlight {
     }
 
   private def automatically(tour: Tournament, user: User): Boolean = tour.perfType ?? { pt =>
-    tour.schedule ?? { sched =>
+    if (tour.isPromoted) true
+    else tour.schedule ?? { sched =>
       def playedSinceWeeks(weeks: Int) = user.perfs(pt).latest ?? { l =>
         l.plusWeeks(weeks) isAfter DateTime.now
       }

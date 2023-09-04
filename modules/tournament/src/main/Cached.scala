@@ -40,6 +40,18 @@ private[tournament] final class Cached(
     expireAfter = _.ExpireAfterWrite(createdTtl)
   )
 
+  val calendar = asyncCache.single[List[Tournament]](
+    name = "tournament.calendar",
+    {
+      val from = org.joda.time.DateTime.now.minusDays(1)
+      for {
+        tours <- TournamentRepo.calendar(from = from, to = from plusYears 1)
+        promoted <- TournamentRepo.userPromoted(from = from, to = from plusMonths 6)
+      } yield (tours ::: promoted).sortBy(_.startsAt)
+    },
+    expireAfter = _.ExpireAfterWrite(60 seconds)
+  )
+
   def ranking(tour: Tournament): Fu[Ranking] =
     if (tour.isFinished) finishedRanking get tour.id
     else ongoingRanking get tour.id

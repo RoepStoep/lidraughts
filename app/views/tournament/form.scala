@@ -91,6 +91,7 @@ object form {
               else form3.group(form("minutes"), trans.duration(), half = true)(form3.input(_)(tpe := "number"))
             ),
             fields.description,
+            (isGranted(_.ManageTournament) && tour.nonLidraughtsCreatedBy.nonEmpty) option fields.promoted,
             form3.globalError(form),
             fieldset(cls := "conditions")(
               fields.advancedSettings,
@@ -221,6 +222,14 @@ final private class TourFields(me: User, form: Form[_])(implicit ctx: Context) {
       help = trans.gamesWillImpactThePlayersRating().some
     ),
     st.input(tpe := "hidden", st.name := form("rated").name, value := "false") // hack allow disabling rated
+  )
+  def promoted = frag(
+    form3.checkbox(
+      form("promoted"),
+      "Promote tournament",
+      help = raw("Ask first!").some
+    ),
+    st.input(tpe := "hidden", st.name := form("promoted").name, value := "false") // hack allow disabling promoted
   )
   def variant =
     form3.group(form("variant"), trans.variant(), half = true)(

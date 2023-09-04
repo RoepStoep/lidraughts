@@ -469,7 +469,7 @@
   <string name="blackWins">黑方获胜</string>
   <string name="draws">双方和棋</string>
   <string name="nextXTournament">下场%s锦标赛</string>
-  <string name="averageOpponent">对手的平均积分</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">对手的平均积分</string>
   <string name="membersOnly">仅限注册用户</string>
   <string name="boardEditor">编辑棋盘</string>
   <string name="setTheBoard">摆棋</string>

@@ -498,7 +498,7 @@
   <string name="blackWins">Τα μαύρα νικούν</string>
   <string name="draws">Ισοπαλίες</string>
   <string name="nextXTournament">Επόμενο %s πρωτάθλημα:</string>
-  <string name="averageOpponent">Μέση βαθμολογία αντιπάλων</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Μέση βαθμολογία αντιπάλων</string>
   <string name="membersOnly">Μόνο για μέλη</string>
   <string name="boardEditor">Προετοιμαστής σκακιέρας</string>
   <string name="setTheBoard">Στήστε την σκακιέρα</string>
@@ -568,7 +568,7 @@
   <string name="butYouCanKeepTrying">Αλλά μπορείτε να συνεχίσετε τη προσπάθεια.</string>
   <string name="success">Επιτυχία</string>
   <string name="wasThisPuzzleAnyGood">Πώς σας φάνηκε ο γρίφος;</string>
-  <string name="pleaseVotePuzzle">Βελτιώστε το lidraughts με την ψήφο σας, πατώντας το πάνω ή κάτω βελάκι:</string>
+  <string name="pleaseVotePuzzle">Βελτιώστε το Lidraughts με την ψήφο σας, πατώντας το πάνω ή κάτω βελάκι:</string>
   <string name="thankYou">Ευχαριστούμε!</string>
   <string name="ratingX">Βαθμολογία: %s</string>
   <string name="hidden">κρυμμένο</string>

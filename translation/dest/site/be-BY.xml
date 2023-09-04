@@ -428,7 +428,7 @@
   <string name="blackWins">Перамог чорных</string>
   <string name="draws">Нічыіх</string>
   <string name="nextXTournament">Наступны турнір %s:</string>
-  <string name="averageOpponent">Сярэдні рэйтынг суперніка</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Сярэдні рэйтынг суперніка</string>
   <string name="membersOnly">Патрабуецца рэгістрацыя</string>
   <string name="boardEditor">Рэдактар дошкі</string>
   <string name="setTheBoard">Абраць пазіцыю</string>
@@ -475,7 +475,7 @@
   <string name="butYouCanKeepTrying">Паспрабуйце яшчэ раз.</string>
   <string name="success">Поспех</string>
   <string name="wasThisPuzzleAnyGood">Ці спадабалася вам гэтая галаваломка?</string>
-  <string name="pleaseVotePuzzle">Пакіньце свой голас, каб дапамагчы Lidraughts прапаноўваць гульцам найлепшыя галаваломкі!</string>
+  <string name="pleaseVotePuzzle">Пакіньце свой голас, каб дапамагчы Lidraughts прапаноўваць гульцам найлепшыя галаваломкі:</string>
   <string name="thankYou">Дзякуй!</string>
   <string name="ratingX">Рэйтынг: %s</string>
   <plurals name="playedXTimes">

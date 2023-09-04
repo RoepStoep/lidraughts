@@ -410,7 +410,7 @@ object Tournament extends LidraughtsController {
   }
 
   def calendar = Open { implicit ctx =>
-    env.api.calendar map { tours =>
+    env.cached.calendar.get map { tours =>
       Ok(html.tournament.calendar(env.apiJsonView calendar tours))
     }
   }

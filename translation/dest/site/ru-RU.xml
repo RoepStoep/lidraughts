@@ -556,7 +556,7 @@
   <string name="blackWins">Побед чёрными</string>
   <string name="draws">Ничьих</string>
   <string name="nextXTournament">Следующий турнир по %s:</string>
-  <string name="averageOpponent">Средний рейтинг соперников</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Средний рейтинг соперников</string>
   <string name="membersOnly">Только для зарегистрированных</string>
   <string name="boardEditor">Редактор доски</string>
   <string name="setTheBoard">Установить позицию</string>
@@ -626,7 +626,7 @@
   <string name="butYouCanKeepTrying">Но вы можете попробовать ещё раз.</string>
   <string name="success">Задача решена</string>
   <string name="wasThisPuzzleAnyGood">Была ли задача интересной?</string>
-  <string name="pleaseVotePuzzle">Голосуйте стрелками «вверх» и «вниз», сделайте lidraughts лучше!</string>
+  <string name="pleaseVotePuzzle">Голосуйте стрелками «вверх» и «вниз», сделайте Lidraughts лучше:</string>
   <string name="thankYou">Спасибо!</string>
   <string name="ratingX">Рейтинг: %s</string>
   <string name="hidden">скрыто</string>

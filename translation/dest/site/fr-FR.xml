@@ -498,7 +498,7 @@ consulter l\'analyse de l\'ordinateur, utiliser le tchat et partager le lien.</s
   <string name="blackWins">Victoire des Noirs</string>
   <string name="draws">Nulles</string>
   <string name="nextXTournament">Prochain tournoi de %s :</string>
-  <string name="averageOpponent">Opposition moyenne</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Classement moyen des adversaires</string>
   <string name="membersOnly">Membres seulement</string>
   <string name="boardEditor">Éditeur de partie</string>
   <string name="setTheBoard">Mettre en place le damier</string>

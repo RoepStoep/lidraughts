@@ -386,7 +386,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="blackWins">Il Nero vince</string>
   <string name="draws">Patte</string>
   <string name="nextXTournament">Prossimo torneo %s:</string>
-  <string name="averageOpponent">Punteggio medio degli avversari</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Punteggio medio degli avversari</string>
   <string name="membersOnly">Solo per iscritti</string>
   <string name="popularOpenings">Aperture popolari</string>
   <string name="startPosition">Posizione iniziale</string>
@@ -431,7 +431,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="butYouCanKeepTrying">Ma puoi continuare a provarci.</string>
   <string name="success">Completato</string>
   <string name="wasThisPuzzleAnyGood">Questo puzzle era interessante?</string>
-  <string name="pleaseVotePuzzle">Aiuta lidraughts a migliorare, utilizza la freccia su o giù per dare un giudizio:</string>
+  <string name="pleaseVotePuzzle">Aiuta Lidraughts a migliorare, utilizza la freccia su o giù per dare un giudizio:</string>
   <string name="thankYou">Grazie!</string>
   <string name="ratingX">Punteggio: %s</string>
   <plurals name="playedXTimes">

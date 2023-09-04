@@ -396,7 +396,7 @@
   <string name="blackWins">Siyah zaferleri</string>
   <string name="draws">Beraberlikler</string>
   <string name="nextXTournament">Sıradaki %s Turnuvası:</string>
-  <string name="averageOpponent">Ortalama rakip</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Ortalama rakip</string>
   <string name="membersOnly">Sadece üyeler</string>
   <string name="boardEditor">Tahta yapıcı</string>
   <string name="setTheBoard">Tahtayı ayarla</string>
@@ -444,7 +444,7 @@
   <string name="butYouCanKeepTrying">ama denemeye devam edebilirsin.</string>
   <string name="success">Başarılı</string>
   <string name="wasThisPuzzleAnyGood">Bu bulmacayı nasıl buldun?</string>
-  <string name="pleaseVotePuzzle">Okları kullanarak oylayın, lidraughts\'in gelişmesine yardımcı olun.</string>
+  <string name="pleaseVotePuzzle">Okları kullanarak oylayın, Lidraughts\'in gelişmesine yardımcı olun:</string>
   <string name="thankYou">Teşekkürler!</string>
   <string name="ratingX">Puan: %s</string>
   <string name="hidden">gizli</string>

@@ -486,7 +486,7 @@ spēles tērzētavu un URL saiti, kas dos pieeju citiem.</string>
   <string name="blackWins">Melno uzvaras</string>
   <string name="draws">Neizšķirti</string>
   <string name="nextXTournament">Nākamais %s turnīrs:</string>
-  <string name="averageOpponent">Vidējais pretinieks</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Vidējais pretinieks</string>
   <string name="membersOnly">Tikai dalībniekiem</string>
   <string name="boardEditor">Galdiņa redaktors</string>
   <string name="setTheBoard">Uzstādīt galdiņu</string>
@@ -539,7 +539,7 @@ Vienā līnijā  - tikai vienu norādi.</string>
   <string name="butYouCanKeepTrying">Taču tu var mēģināt kamēr izdosies.</string>
   <string name="success">Veiksmīgi</string>
   <string name="wasThisPuzzleAnyGood">Vai šis vingrinājums bija labs?</string>
-  <string name="pleaseVotePuzzle">Palīdzi uzlabot «lidraughts», balsojot ar bultiņām uz augšu vai uz leju:</string>
+  <string name="pleaseVotePuzzle">Palīdzi uzlabot «Lidraughts», balsojot ar bultiņām uz augšu vai uz leju:</string>
   <string name="thankYou">Paldies!</string>
   <string name="ratingX">Reitings: %s</string>
   <plurals name="playedXTimes">

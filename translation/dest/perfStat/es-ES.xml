@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="perfStats" comment="Statistics for a specific draughts variant or game speed %s.">Estadísticas de %s</string>
+  <string name="viewTheGames">Ver las partidas</string>
+  <string name="notEnoughRatedGames">No se han jugado suficientes partidas para establecer una puntuación fiable.</string>
+  <string name="progressOverLastXGames">Progresión en las últimas %s partidas:</string>
+  <string name="ratingDeviation">Desviación de la puntuación: %s.</string>
+  <string name="totalGames">Partidas totales</string>
+  <string name="ratedGames">Partidas por puntos</string>
+  <string name="tournamentGames">Partidas de torneo</string>
+  <string name="berserkedGames">Partidas agilizadas (berserk)</string>
+  <string name="timeSpentPlaying">Tiempo dedicado a jugar</string>
+  <string name="victories">Victorias</string>
+  <string name="defeats">Derrotas</string>
+  <string name="disconnections">Desconexiones</string>
+  <string name="notEnoughGames">No hay suficientes partidas jugadas</string>
+  <string name="highestRating">Puntuación más alta: %s</string>
+  <string name="lowestRating">Puntuación más baja: %s</string>
+  <string name="fromXToY">desde %1$s hasta %2$s</string>
+  <string name="winningStreak">Racha de victorias</string>
+  <string name="losingStreak">Racha de derrotas</string>
+  <string name="longestStreak">Racha más larga: %s</string>
+  <string name="currentStreak">Racha actual: %s</string>
+  <string name="bestRated">Mejores victorias por puntos</string>
+  <string name="worstRated">Peores derrotas por puntos</string>
+  <string name="gamesInARow" comment="Refers to a streak where the user kept playing new games in a row (defined as less than one hour between games).">Partidas jugadas seguidas</string>
+  <string name="lessThanOneHour">Menos de una hora entre partidas</string>
+  <string name="maxTimePlaying" comment="Refers to the duration in time of the longest streak where the user kept playing new games in a row (defined as less than one hour between games).">Tiempo máximo jugando</string>
+  <string name="now">ahora</string>
+</resources>

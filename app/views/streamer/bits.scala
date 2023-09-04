@@ -1,11 +1,10 @@
 package views.html.streamer
 
-import play.api.i18n.Lang
-
 import controllers.routes
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.app.ui.ScalatagsTemplate._
+import lidraughts.common.Lang
 import lidraughts.user.User
 
 object bits {

@@ -376,7 +376,7 @@
   <string name="blackWins">黒勝ち</string>
   <string name="draws">ドロー</string>
   <string name="nextXTournament">次の %s トーナメント:</string>
-  <string name="averageOpponent">対戦相手の平均</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">対戦相手の平均</string>
   <string name="membersOnly">会員限定</string>
   <string name="boardEditor">盤面入力</string>
   <string name="setTheBoard">盤面を指定</string>

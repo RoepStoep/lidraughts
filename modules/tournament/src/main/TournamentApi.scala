@@ -104,7 +104,8 @@ final class TournamentApi(
       noBerserk = !(~berserkable),
       noStreak = !(~streakable),
       description = description,
-      hasChat = data.hasChat | true
+      hasChat = data.hasChat | true,
+      isPromoted = ~data.promoted && lidraughts.security.Granter(_.ManageTournament)(me) && old.nonLidraughtsCreatedBy.nonEmpty
     ) |> { tour =>
       tour.perfType.fold(tour) { perfType =>
         tour.copy(conditions = conditions.convert(perfType, myTeams.map(_.pair)(collection.breakOut)))
@@ -609,11 +610,6 @@ final class TournamentApi(
         tournamentTop(tour.id) map (tour -> _)
       }.sequenceFu.map(_.toMap)
     }
-
-  def calendar: Fu[List[Tournament]] = {
-    val from = DateTime.now.minusDays(1)
-    TournamentRepo.calendar(from = from, to = from plusYears 1)
-  }
 
   def resultStream(tour: Tournament, perSecond: MaxPerSecond, nb: Int): Enumerator[Player.Result] = {
     import reactivemongo.play.iteratees.cursorProducer

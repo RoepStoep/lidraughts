@@ -276,7 +276,7 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="blackWins">Wûn mei swart</string>
   <string name="draws">Lyk spul</string>
   <string name="nextXTournament">Folgjende %s-toernoai:</string>
-  <string name="averageOpponent">Gemiddelde tsjinstanner</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Gemiddelde tsjinstanner</string>
   <string name="membersOnly">Allinnich foar leden</string>
   <string name="boardEditor">Boerd-bewurker</string>
   <string name="setTheBoard">Boerd opsette</string>

@@ -23,6 +23,7 @@ object TournamentRepo {
   private[tournament] val finishedSelect = $doc("status" -> Status.Finished.id)
   private val unfinishedSelect = $doc("status" -> $doc("$ne" -> Status.Finished.id))
   private[tournament] val scheduledSelect = $doc("schedule" -> $doc("$exists" -> true))
+  private[tournament] val userSelect = $doc("schedule" -> $doc("$exists" -> false))
   private def sinceSelect(date: DateTime) = $doc("startsAt" -> $doc("$gt" -> date))
   private def variantSelect(variant: Variant) =
     if (variant.standard) $doc("variant" -> $doc("$exists" -> false))
@@ -194,6 +195,12 @@ object TournamentRepo {
         _.filterNot(_.isHidden)
       }
 
+  def userPromoted(from: DateTime, to: DateTime): Fu[List[Tournament]] =
+    coll.find($doc("startsAt" $gte from $lte to) ++ userSelect)
+      .list[Tournament](none) map {
+        _.filter(_.isPromoted)
+      }
+
   private[tournament] def shouldStartCursor =
     coll.find($doc("startsAt" $lt DateTime.now) ++ createdSelect)
       .cursor[Tournament]().gather[List]()
@@ -208,28 +215,31 @@ object TournamentRepo {
     allCreatedSelect(aheadMinutes) ++ scheduledSelect
   ).sort($doc("startsAt" -> 1)).list[Tournament]()
 
-  private def isPromotable(tour: Tournament): Boolean = tour.schedule ?? { schedule =>
-    tour.startsAt isBefore DateTime.now.plusMinutes {
-      import Schedule.Freq._
-      schedule.freq match {
-        case Unique => tour.spotlight.flatMap(_.homepageHours).fold(24 * 60)(60*)
-        case Unique | Yearly | Marathon => 24 * 60
-        case Monthly | Shield => 6 * 60
-        case Weekly | Weekend => 3 * 60
-        case Daily => 1 * 60
-        case _ => 30
+  private def isPromotable(tour: Tournament): Boolean =
+    if (tour.isPromoted) tour.startsAt.isBefore(DateTime.now.plusMinutes(3 * 60))
+    else tour.schedule ?? { schedule =>
+      tour.startsAt isBefore DateTime.now.plusMinutes {
+        import Schedule.Freq._
+        schedule.freq match {
+          case Unique => tour.spotlight.flatMap(_.homepageHours).fold(24 * 60)(60*)
+          case Unique | Yearly | Marathon => 24 * 60
+          case Monthly | Shield => 6 * 60
+          case Weekly | Weekend => 3 * 60
+          case Daily => 1 * 60
+          case _ => 30
+        }
       }
     }
-  }
 
   private[tournament] def promotable: Fu[List[Tournament]] =
-    scheduledStillWorthEntering zip scheduledCreatedSorted(crud.CrudForm.maxHomepageHours * 60) map {
-      case (started, created) => (started ::: created).foldLeft(List.empty[Tournament]) {
-        case (acc, tour) if !isPromotable(tour) => acc
-        case (acc, tour) if !tour.isUnique && acc.exists(_ similarTo tour) => acc
-        case (acc, tour) => tour :: acc
-      }.reverse
-    }
+    scheduledStillWorthEntering zip scheduledCreatedSorted(crud.CrudForm.maxHomepageHours * 60) zip
+      userPromoted(DateTime.now.minusHours(1), DateTime.now.plusHours(3)).map(_.filter(_.isStillWorthEntering)) map {
+        case ((started, created), promoted) => (started ::: created ::: promoted).foldLeft(List.empty[Tournament]) {
+          case (acc, tour) if !isPromotable(tour) => acc
+          case (acc, tour) if !tour.isUnique && acc.exists(_ similarTo tour) => acc
+          case (acc, tour) => tour :: acc
+        }.reverse.sortBy(_.startsAt)
+      }
 
   def uniques(max: Int): Fu[List[Tournament]] =
     coll.find(selectUnique)

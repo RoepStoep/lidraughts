@@ -1,7 +1,7 @@
 // Generated with bin/trans-dump.js
 package lidraughts.i18n
 
-import I18nDb.{ Site, Arena, Emails, Learn, Activity, Coordinates, Study, Tfa, Team, Swiss, Broadcast, Streamer, Lag, Patron }
+import I18nDb.{ Site, Arena, Emails, Learn, Activity, Coordinates, Study, Tfa, Team, Swiss, Broadcast, Streamer, Lag, Patron, PerfStat }
 
 // format: OFF
 object I18nKeys {
@@ -1478,6 +1478,38 @@ val `nowLifetime` = new Translated("nowLifetime", Patron)
 val `nowOneMonth` = new Translated("nowOneMonth", Patron)
 val `downgradeNextMonth` = new Translated("downgradeNextMonth", Patron)
 val `patronForMonths` = new Translated("patronForMonths", Patron)
+}
+
+object perfStat {
+val `perfStats` = new Translated("perfStats", PerfStat)
+val `viewTheGames` = new Translated("viewTheGames", PerfStat)
+val `provisional` = new Translated("provisional", PerfStat)
+val `notEnoughRatedGames` = new Translated("notEnoughRatedGames", PerfStat)
+val `progressOverLastXGames` = new Translated("progressOverLastXGames", PerfStat)
+val `ratingDeviation` = new Translated("ratingDeviation", PerfStat)
+val `ratingDeviationHelp` = new Translated("ratingDeviationHelp", PerfStat)
+val `totalGames` = new Translated("totalGames", PerfStat)
+val `ratedGames` = new Translated("ratedGames", PerfStat)
+val `tournamentGames` = new Translated("tournamentGames", PerfStat)
+val `berserkedGames` = new Translated("berserkedGames", PerfStat)
+val `timeSpentPlaying` = new Translated("timeSpentPlaying", PerfStat)
+val `victories` = new Translated("victories", PerfStat)
+val `defeats` = new Translated("defeats", PerfStat)
+val `disconnections` = new Translated("disconnections", PerfStat)
+val `notEnoughGames` = new Translated("notEnoughGames", PerfStat)
+val `highestRating` = new Translated("highestRating", PerfStat)
+val `lowestRating` = new Translated("lowestRating", PerfStat)
+val `fromXToY` = new Translated("fromXToY", PerfStat)
+val `winningStreak` = new Translated("winningStreak", PerfStat)
+val `losingStreak` = new Translated("losingStreak", PerfStat)
+val `longestStreak` = new Translated("longestStreak", PerfStat)
+val `currentStreak` = new Translated("currentStreak", PerfStat)
+val `bestRated` = new Translated("bestRated", PerfStat)
+val `worstRated` = new Translated("worstRated", PerfStat)
+val `gamesInARow` = new Translated("gamesInARow", PerfStat)
+val `lessThanOneHour` = new Translated("lessThanOneHour", PerfStat)
+val `maxTimePlaying` = new Translated("maxTimePlaying", PerfStat)
+val `now` = new Translated("now", PerfStat)
 }
 
 }

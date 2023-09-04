@@ -447,7 +447,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="blackWins">Juodųjų pergalės</string>
   <string name="draws">Lygiosios</string>
   <string name="nextXTournament">Kitas %s turnyras:</string>
-  <string name="averageOpponent">Vidutinis varžovas</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Vidutinis priešininkas</string>
   <string name="membersOnly">Tik nariai</string>
   <string name="boardEditor">Lentos rengyklė</string>
   <string name="setTheBoard">Paruošti lentą</string>
@@ -495,7 +495,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="butYouCanKeepTrying">Tačiau galite bandyti vėl.</string>
   <string name="success">Pavyko</string>
   <string name="wasThisPuzzleAnyGood">Ar užduotis buvo gera?</string>
-  <string name="pleaseVotePuzzle">Padėkite „lidraughts“ tobulėti įvertindami užduotį (spustelėkite rodyklę į viršų ar apačią):</string>
+  <string name="pleaseVotePuzzle">Padėkite „Lidraughts“ tobulėti įvertindami užduotį (spustelėkite rodyklę į viršų ar apačią):</string>
   <string name="thankYou">Ačiū!</string>
   <string name="ratingX">Reitingas: %s</string>
   <string name="hidden">paslėptas</string>

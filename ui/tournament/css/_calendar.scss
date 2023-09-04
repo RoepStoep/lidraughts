@@ -82,6 +82,9 @@
     &.unique {
       background-color: $c-brag;
     }
+    &.promoted {
+      background-color: #5a3a61;
+    }
     &.max-rating {
       background-color: #8572ff;
     }

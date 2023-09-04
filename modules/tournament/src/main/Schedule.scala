@@ -81,6 +81,7 @@ object Schedule {
     def isShield = this == Schedule.Freq.Shield
   }
   object Freq {
+    val userPromotedImportance = 21
     case object Hourly extends Freq(10, 10)
     case object Daily extends Freq(20, 20)
     case object Eastern extends Freq(30, 15)

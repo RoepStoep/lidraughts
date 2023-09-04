@@ -498,7 +498,7 @@ een computeranalyse, een chatbox bij de partij en een deelbare URL.</string>
   <string name="blackWins">Overwinningen door zwart</string>
   <string name="draws">Remises</string>
   <string name="nextXTournament">Volgend %s-toernooi:</string>
-  <string name="averageOpponent">Gemiddelde tegenstander</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Gemiddelde tegenstander</string>
   <string name="membersOnly">Alleen voor leden</string>
   <string name="boardEditor">Bordbewerker</string>
   <string name="setTheBoard">Zet het bord op</string>
@@ -568,7 +568,7 @@ Een URL per regel</string>
   <string name="butYouCanKeepTrying">Maar je kan het blijven proberen.</string>
   <string name="success">Succes</string>
   <string name="wasThisPuzzleAnyGood">Was dit een goede puzzel?</string>
-  <string name="pleaseVotePuzzle">Verbeter lidraughts door te stemmen met de pijl naar boven of beneden.</string>
+  <string name="pleaseVotePuzzle">Verbeter Lidraughts door te stemmen met de pijl naar boven of beneden:</string>
   <string name="thankYou">Bedankt!</string>
   <string name="ratingX">Rating: %s</string>
   <string name="hidden">verborgen</string>

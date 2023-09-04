@@ -494,7 +494,7 @@ eine Computeranalyse, einen Spielchat und eine teilbare URL.</string>
   <string name="blackWins">Schwarze Siege</string>
   <string name="draws">Remis</string>
   <string name="nextXTournament">Nächstes %s Turnier:</string>
-  <string name="averageOpponent">Durchschnittlicher Gegner</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Durchschnittlicher Gegner</string>
   <string name="membersOnly">Nur für Mitglieder</string>
   <string name="boardEditor">Stellung aufbauen</string>
   <string name="setTheBoard">Brett aufbauen</string>

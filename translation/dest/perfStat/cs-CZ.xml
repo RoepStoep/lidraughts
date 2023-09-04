@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="perfStats" comment="Statistics for a specific draughts variant or game speed %s.">%s statistiky</string>
+  <string name="viewTheGames">Zobrazit hry</string>
+  <string name="provisional">prozatímní</string>
+  <string name="notEnoughRatedGames">Nebyl odebrán dostatečný počet hodnocených her pro odhad spolehlivého ratingu.</string>
+  <string name="progressOverLastXGames">Pokrok v posledních %s hrách:</string>
+  <string name="ratingDeviation">Odchylka hodnocení: %s.</string>
+  <string name="totalGames">Celkový počet her</string>
+  <string name="ratedGames">Hodnocených her</string>
+  <string name="tournamentGames">Turnajové partie</string>
+  <string name="berserkedGames">Beskerské hry</string>
+  <string name="timeSpentPlaying">Čas strávený hraním</string>
+  <string name="victories">Vítězství</string>
+  <string name="defeats">Prohry</string>
+  <string name="disconnections">Odpojení</string>
+  <string name="notEnoughGames">Nedostatek odehraných her</string>
+  <string name="highestRating">Nejvyšší rating: %s</string>
+  <string name="lowestRating">Nejnižší rating: %s</string>
+  <string name="fromXToY">od %1$s do %2$s</string>
+  <string name="winningStreak">Série výher</string>
+  <string name="losingStreak">Série proher</string>
+  <string name="longestStreak">Nejdelší série: %s</string>
+  <string name="currentStreak">Aktuální série: %s</string>
+  <string name="bestRated">Nejlépe hodnocená vítězství</string>
+  <string name="worstRated">Nejhůře hodnocené prohry</string>
+  <string name="gamesInARow" comment="Refers to a streak where the user kept playing new games in a row (defined as less than one hour between games).">Hry odehrané v řadě</string>
+  <string name="lessThanOneHour">Méně než jedna hodina mezi hrami</string>
+  <string name="maxTimePlaying" comment="Refers to the duration in time of the longest streak where the user kept playing new games in a row (defined as less than one hour between games).">Maximální čas strávený hraním</string>
+  <string name="now">nyní</string>
+</resources>

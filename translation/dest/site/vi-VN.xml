@@ -457,7 +457,7 @@ phân tích bằng máy tính, trò chuyện tong ván đấu và URL có thể 
   <string name="blackWins">Đen thắng</string>
   <string name="draws">Hoà</string>
   <string name="nextXTournament">Giải đấu %s tiếp theo:</string>
-  <string name="averageOpponent">Xếp hạng trung bình của đối thủ</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Xếp hạng trung bình của đối thủ</string>
   <string name="membersOnly">Chỉ có thành viên</string>
   <string name="boardEditor">Chỉnh sửa bàn cờ</string>
   <string name="setTheBoard">Thiết lập bàn cờ</string>
@@ -492,6 +492,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="preferences">Tùy chọn</string>
   <string name="inlineNotation">Ký hiệu bên trong bàn cờ</string>
   <string name="watchLidraughtsTV">Xem Lidraughts TV</string>
+  <string name="previouslyOnLidraughtsTV">Các ván trước đó được lên Lidraughts TV</string>
   <string name="collection">Danh mục</string>
   <string name="reloadBoards">Tải lại thế trận ban đầu</string>
   <string name="addOngoingOrRecentGame">Thêm ván đấu gần đây nhất mà ai đó đã chơi (ván cờ hiện tại của họ hoặc trò chơi đã hoàn thành gần đây nhất).</string>
@@ -509,7 +510,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="findTheBestMoveForWhite">Tìm nước tối ưu cho Trắng.</string>
   <string name="findTheBestMoveForBlack">Tìm nước tối ưu cho Đen.</string>
   <string name="toTrackYourProgress">Theo dõi tiến trình của bạn:</string>
-  <string name="trainingSignupExplanation">Lichess sẽ cung cấp những câu đố phù hợp với kỹ năng của bạn, tạo nên hiệu quả đào tạo tốt hơn.</string>
+  <string name="trainingSignupExplanation">Lidraughts sẽ cung cấp những câu đố phù hợp với kỹ năng của bạn, tạo nên hiệu quả đào tạo tốt hơn.</string>
   <string name="puzzleId">Câu đố %s</string>
   <string name="puzzleOfTheDay">Thế cờ của ngày</string>
   <string name="clickToSolve">Nhấn để giải</string>
@@ -521,7 +522,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="butYouCanKeepTrying">Nhưng bạn có thể thử lại.</string>
   <string name="success">Thành công</string>
   <string name="wasThisPuzzleAnyGood">Câu đố này có thú vị không?</string>
-  <string name="pleaseVotePuzzle">Giúp lichess cải thiện bằng cách bình chọn, dùng mũi tên lên hoặc xuống:</string>
+  <string name="pleaseVotePuzzle">Giúp Lidraughts cải thiện bằng cách bình chọn, dùng mũi tên lên hoặc xuống:</string>
   <string name="thankYou">Cảm ơn!</string>
   <string name="ratingX">Hệ số: %s</string>
   <string name="hidden">ẩn</string>
@@ -731,8 +732,17 @@ Một đường dẫn mỗi dòng</string>
   <string name="hostANewSimul">Chủ trì một sự kiện cờ đồng loạt mới</string>
   <string name="acceptedPlayers"> người chơi được chấp nhận</string>
   <string name="xComplete">%s hoàn thành!</string>
+  <string name="ongoing">%s đang diễn ra</string>
   <string name="succeeded">đã thành công!</string>
   <string name="failed">đã thất bại</string>
+  <string name="noSimulFound">Không tìm thấy sự kiện cờ đồng loạt nào</string>
+  <string name="deleteThisSimul">Xoá sự kiện cờ đồng loạt này?</string>
+  <string name="noSimulExplanation">Sự kiện cờ đồng loạt này không tồn tại.</string>
+  <string name="returnToSimulHomepage">Trở về trang chủ cờ đồng loạt</string>
+  <string name="aboutSimul">Cờ đồng loạt gồm một người chơi duy nhất chơi cùng lúc với nhiều người khác.</string>
+  <string name="aboutSimulImage">Trong số 169 đối thủ, Sijbrands thắng 115 ván, hòa 43 và thua 11.</string>
+  <string name="aboutSimulRealLife">Ý tưởng được lấy từ các sự kiện có thật. Trong đời thực, một người chủ trì cờ đồng loạt sẽ di chuyển từ bàn này qua bàn khác và đánh một nước mỗi bàn.</string>
+  <string name="aboutSimulRules">Khi cờ đồng loạt bắt đầu, mỗi người chơi bắt đầu một ván cờ với người chủ trì, người sẽ chơi quân trắng. Cờ đồng loạt kết thúc khi tất cả các ván cờ hoàn tất.</string>
   <string name="aboutSimulSettings">Cờ đồng loạt luôn không tính elo. Việc tái đấu, đi lại và thêm thời gian sẽ bị vô hiệu hoá.</string>
   <string name="create">Tạo</string>
   <string name="whenCreateSimul">Khi bạn tạo một sự kiện đồng loạt, bạn sẽ chơi với nhiều người cùng một lúc.</string>
@@ -744,6 +754,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="simulChatRestrictionsHint">Hạn chế trò chuyện chỉ áp dụng trong khi sự kiện cờ đồng loạt đang diễn ra.</string>
   <string name="everyone">Mọi người</string>
   <string name="spectatorsOnly">Chỉ người xem</string>
+  <string name="participantsOnly">Chỉ người tham gia</string>
   <string name="lidraughtsTournaments">Những giải đấu của Lidraughts</string>
   <string name="tournamentFAQ">Các câu hỏi thường gặp về giải đấu đấu trường (FAQ)</string>
   <string name="tournamentOfficial">Chính thức</string>
@@ -779,16 +790,28 @@ Một đường dẫn mỗi dòng</string>
   <string name="downloadRaw">Tải bản thô</string>
   <string name="downloadImported">Tải tệp đã được nhập</string>
   <string name="crosstable">Bảng tổng điểm</string>
+  <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Bạn cũng có thể cuộn chuột trên bàn cờ để xem các nước đi của ván.</string>
+  <string name="analysisShapesHowTo">Nhấn Shift+click hoặc nhấp chuột phải để vẽ vòng tròn, mũi tên trên bàn cờ.</string>
+  <string name="confirmResignationAndDrawOffers">Xác nhận đầu hàng và đề nghị hòa</string>
+  <string name="inputMovesWithTheKeyboard">Nhập các nước đi với bàn phím</string>
   <string name="letOtherPlayersMessageYou">Cho phép người chơi khác gửi tin nhắn cho bạn</string>
   <string name="withNobody">Không chia sẻ</string>
   <string name="withFriends">Với bạn bè</string>
   <string name="withEverybody">Với mọi người</string>
+  <string name="youHaveAlreadyRegisteredTheEmail">Bạn đã đăng ký với email: %s</string>
   <string name="kidMode">Chế độ trẻ em</string>
+  <string name="kidModeIsEnabled">Chế độ trẻ em đã được bật.</string>
   <string name="kidModeExplanation">Điều này là để an toàn. Trong chế độ trẻ em, tất cả mọi giao tiếp trên trang web đều bị vô hiệu. Kích hoạt điều này cho con của bạn và học sinh trong lớp để bảo vệ chúng khỏi những người dùng khác trên internet.</string>
+  <string name="inKidModeTheLidraughtsLogoGetsIconX">Trong chế độ trẻ em, biểu tượng lidraughts được một biểu tượng %s để bạn biết con bạn được an toàn.</string>
   <string name="enableKidMode">Kích hoạt chế độ Trẻ Em</string>
   <string name="disableKidMode">Tắt chế độ Trẻ Em</string>
   <string name="security">Bảo mật</string>
+  <string name="entirely">Toàn bộ</string>
+  <string name="thisIsAListOfDevicesThatHaveLoggedIntoYourAccount">Đây là danh sách các thiết bị đã đăng nhập bằng tài khoản của bạn. Hãy xóa những phiên đăng nhập mà bạn không nhận ra.</string>
+  <string name="alternativelyYouCanX">Ngoài ra, bạn có thể %s.</string>
   <string name="revokeAllSessions">xóa toàn bộ phiên đăng nhập</string>
+  <string name="speedUpYourAnalysis">Tăng tốc độ phân tích của bạn!</string>
+  <string name="enableFullCaptureAtXPreferences">Chơi chụp nhiều quân một nước trên bảng phân tích. Chế độ chụp có thể được định cấu hình theo tùy chọn %s.</string>
   <string name="playDraughtsEverywhere">Chơi cờ đam miễn phí ở mọi nơi</string>
   <string name="asFreeAsLidraughts">Miễn phí như cờ đam</string>
   <string name="builtForTheLoveOfDraughtsNotMoney">Xây dựng trên nền tảng tình yêu dành cho cờ đam, không phải vì tiền bạc</string>
@@ -830,10 +853,11 @@ Một đường dẫn mỗi dòng</string>
   <string name="usernameSuffixInvalid">Tên người dùng phải kết thúc với một chữ cái hoặc một số.</string>
   <string name="usernameCharsInvalid">Tên người dùng chỉ được chứa chữ cái, số, dấu gạch dưới và dấu gạch nối. Dấu gạch dưới và dấu gạch nối không được liên tiếp nhau.</string>
   <string name="usernameUnacceptable">Tên người dùng này không được chấp nhận.</string>
+  <string name="directlySupportLidraughts">Hỗ trợ trực tiếp Lidraughts</string>
   <string name="playDraughtsInStyle">Chơi cờ đam theo phong cách</string>
   <string name="draughtsBasics">Khái niệm cơ bản về cờ đam</string>
   <string name="coaches">Huấn luyện viên</string>
-  <string name="invalidPdn">PDN không hợp lệ</string>
+  <string name="invalidPdn">FDN không hợp lệ</string>
   <string name="invalidFen">FEN không hợp lệ</string>
   <string name="invalidPosition">Thế cờ không hợp lệ</string>
   <string name="tooManyKings">Bạn không thể đấu với Scan với hơn 30 quân vua trên bàn cờ.</string>
@@ -903,6 +927,12 @@ Một đường dẫn mỗi dòng</string>
   <string name="reflectOnCorrectMove">Bạn có thể phản ánh về nước đi chính xác của người chơi, với một nhận xét; hoặc bỏ trống để nhảy ngay sang nước đi tiếp theo.</string>
   <string name="explainWhyThisMoveIsWrong">Giải thích lý do tại sao nước cờ này là sai trong một bình luận.</string>
   <string name="orPromoteItToMainline">Hoặc khuyến khích nó như là dòng chính nếu đó là nước đi đúng đắn.</string>
+  <string name="anyOtherWrongMove">Khi thực hiện bất kỳ nước đi sai nào khác:</string>
+  <string name="explainWhyOtherMovesWrong">Giải thích tại sao tất cả các nước đi khác đều sai</string>
+  <string name="optionalHint">Gợi ý tùy chọn, theo yêu cầu cho người chơi:</string>
+  <string name="giveThePlayerAHint">Cho người chơi một gợi ý để họ có thể tìm ra nước đi phù hợp</string>
+  <string name="whatWouldYouPlay">Bạn sẽ làm gì ở thế cờ này?</string>
+  <string name="lessonCompleted">Chúc mừng! Bạn đã hoàn thành bài học này.</string>
   <string name="nextChapter">Chương tiếp theo</string>
   <string name="playAgain">Chơi lại</string>
   <string name="analyse">Phân tích</string>
@@ -951,4 +981,16 @@ Một đường dẫn mỗi dòng</string>
   <string name="thankYouForReading">Cảm ơn bạn vì đã đọc!</string>
   <string name="lifetimeScore">Tổng điểm đối đầu</string>
   <string name="currentMatchScore">Tỷ số của lần đối đầu hiện tại</string>
+  <string name="welcomeToLidraughts">Chào mừng đến với lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">Đây là trang hồ sơ của bạn.</string>
+  <string name="wouldYouLikeToX">Bạn có muốn %s?</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">cải thiện nó</string>
+  <string name="enabledKidModeSuggestion">Một đứa trẻ sẽ sử dụng tài khoản này? Bạn có thể muốn kích hoạt %s.</string>
+  <string name="whatNowSuggestions">Gì bây giờ? Dưới đây là một vài gợi ý:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Cải thiện với các câu đố cờ đam chiến thuật</string>
+  <string name="playOpponentsWorldwide">Chơi với các đối thủ từ khắp nơi trên thế giới</string>
+  <string name="followFriends">Theo dõi bạn bè của bạn trên Lidraughts</string>
+  <string name="playInTournaments">Chơi trong các giải đấu</string>
+  <string name="learnFromStudies">Học từ nghiên cứu</string>
+  <string name="exploreTheSiteAndHaveFun">Khám phá trang web và vui chơi :)</string>
 </resources>

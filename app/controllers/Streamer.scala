@@ -1,5 +1,6 @@
 package controllers
 
+import play.api.libs.json._
 import play.api.mvc._
 
 import lidraughts.api.Context
@@ -18,6 +19,27 @@ object Streamer extends LidraughtsController {
       live <- api withUsers liveStreams
       pager <- Env.streamer.pager.notLive(page, liveStreams, requests)
     } yield Ok(html.streamer.index(live, pager, requests))
+  }
+
+  def featured = Action.async { implicit req =>
+    Env.streamer.liveStreamApi.all
+      .map { streams =>
+        val featured = streams.autoFeatured withTitles Env.user.lightUserApi
+        JsonOk {
+          featured.live.streams.map { s =>
+            Json.obj(
+              "url" -> routes.Streamer.show(s.streamer.userId).absoluteURL(),
+              "status" -> s.status,
+              "user" -> Json
+                .obj(
+                  "id" -> s.streamer.userId,
+                  "name" -> s.streamer.name.value
+                )
+                .add("title" -> featured.titles.get(s.streamer.userId))
+            )
+          }
+        }
+      }
   }
 
   def live = Api.ApiRequest { implicit ctx =>

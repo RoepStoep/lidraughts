@@ -10,6 +10,7 @@ $c-tour-marathon: #66558C;
 $c-tour-unique: $c-brag;
 $c-tour-max-rating: #8572ff;
 $c-tour-battle: hsl(49, 74%, 37%);
+$c-tour-promoted: #5a3a61;
 $c-tour-draughts64: #3f6265;
 
 .tour-chart {
@@ -81,6 +82,9 @@ $c-tour-draughts64: #3f6265;
   }
   &-user-created {
     background-color: $c-tour-user;
+  }
+  &-promoted {
+    background-color: $c-tour-promoted;
   }
   &-hourly {
     background-color: $c-tour-hourly;

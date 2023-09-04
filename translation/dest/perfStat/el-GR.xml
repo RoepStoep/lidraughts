@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="perfStats" comment="Statistics for a specific draughts variant or game speed %s.">Στατιστικά %s</string>
+  <string name="viewTheGames">Προβολή παρτίδων</string>
+  <string name="provisional">προσωρινή</string>
+  <string name="notEnoughRatedGames">Δεν έχουν παιχτεί αρκετές βαθμολογημένες παρτίδες ώστε να υπάρξει έμπιστη βαθμολογία.</string>
+  <string name="progressOverLastXGames">Εξέλιξη βάσει των τελευταίων %s παρτίδων:</string>
+  <string name="ratingDeviation">Απόκλιση βαθμολογίας: %s.</string>
+  <string name="totalGames">Σύνολο παρτίδων</string>
+  <string name="ratedGames">Βαθμολογημένες παρτίδες</string>
+  <string name="tournamentGames">Παρτίδες σε τουρνουά</string>
+  <string name="berserkedGames">Παρτίδες με berserk</string>
+  <string name="timeSpentPlaying">Χρόνος που διατέθηκε παίζοντας</string>
+  <string name="victories">Νίκες</string>
+  <string name="defeats">Ήττες</string>
+  <string name="disconnections">Αποσυνδέσεις</string>
+  <string name="notEnoughGames">Δεν έχουν παιχτεί αρκετές παρτίδες</string>
+  <string name="highestRating">Υψηλότερη βαθμολογία: %s</string>
+  <string name="lowestRating">Χαμηλότερη βαθμολογία: %s</string>
+  <string name="fromXToY">από %1$s έως %2$s</string>
+  <string name="winningStreak">Συνεχόμενες νίκες</string>
+  <string name="losingStreak">Συνεχόμενες ήττες</string>
+  <string name="longestStreak">Μεγαλύτερο Σερί: %s</string>
+  <string name="currentStreak">Τρέχον σερί: %s</string>
+  <string name="bestRated">Καλύτερες αξιολογήσιμες νίκες</string>
+  <string name="worstRated">Χειρότερες αξιολογήσιμες ήττες</string>
+  <string name="gamesInARow" comment="Refers to a streak where the user kept playing new games in a row (defined as less than one hour between games).">Συνεχόμενες παρτίδες</string>
+  <string name="lessThanOneHour">Διάστημα λιγότερο από μία ώρα μεταξύ των παρτίδων</string>
+  <string name="maxTimePlaying" comment="Refers to the duration in time of the longest streak where the user kept playing new games in a row (defined as less than one hour between games).">Μέγιστος χρόνος που διατέθηκε παίζοντας</string>
+  <string name="now">τώρα</string>
+</resources>

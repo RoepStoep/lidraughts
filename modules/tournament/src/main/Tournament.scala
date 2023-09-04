@@ -36,7 +36,8 @@ case class Tournament(
     spotlight: Option[Spotlight] = None,
     description: Option[String] = None,
     hasChat: Boolean = true,
-    isWfd: Boolean = false
+    isWfd: Boolean = false,
+    isPromoted: Boolean = false
 ) {
 
   def isCreated = status == Status.Created
@@ -47,7 +48,7 @@ case class Tournament(
 
   def isPrivate = password.isDefined
   def isHidden = isPrivate && !isUnique
-  def isWipable = !isPrivate && !isScheduled
+  def isWipable = !isPrivate && !isScheduled && !isPromoted
 
   def isTeamBattle = teamBattle.isDefined
 

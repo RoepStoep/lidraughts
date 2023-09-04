@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="perfStats" comment="Statistics for a specific draughts variant or game speed %s.">Thống kê %s</string>
+  <string name="viewTheGames">Xem các ván cờ</string>
+  <string name="provisional">tạm thời</string>
+  <string name="notEnoughRatedGames">Không có đủ trò chơi được xếp hạng đã được chơi để thiết lập một xếp hạng đáng tin cậy.</string>
+  <string name="progressOverLastXGames">Sự tiến bộ qua %s ván cờ trước đây:</string>
+  <string name="ratingDeviation">Độ lệch xếp hạng:%s.</string>
+  <string name="totalGames">Tổng số các ván cờ</string>
+  <string name="ratedGames">Các ván cờ xếp hạng</string>
+  <string name="tournamentGames">Trò chơi kiểu giải đấu</string>
+  <string name="berserkedGames">Trò chơi đã được berserk</string>
+  <string name="timeSpentPlaying">Thời gian đã chơi</string>
+  <string name="victories">Thắng</string>
+  <string name="defeats">Thua</string>
+  <string name="disconnections">Ngắt kết nối</string>
+  <string name="notEnoughGames">Chơi chưa đủ ván</string>
+  <string name="highestRating">Xếp hạng cao nhất: %s</string>
+  <string name="lowestRating">Xếp hạng thấp nhất: %s</string>
+  <string name="fromXToY">từ %1$s đến %2$s</string>
+  <string name="winningStreak">Chuỗi thắng</string>
+  <string name="losingStreak">Chuỗi thua</string>
+  <string name="longestStreak">Chuỗi dài nhất: %s</string>
+  <string name="currentStreak">Chuỗi hiện tại: %s</string>
+  <string name="bestRated">Chiến thắng tính elo tốt nhất</string>
+  <string name="worstRated">Trận thua tính elo tệ nhất</string>
+  <string name="gamesInARow" comment="Refers to a streak where the user kept playing new games in a row (defined as less than one hour between games).">Số ván cờ được chơi liên tục</string>
+  <string name="lessThanOneHour">Ít hơn một giờ giữa các ván cờ</string>
+  <string name="maxTimePlaying" comment="Refers to the duration in time of the longest streak where the user kept playing new games in a row (defined as less than one hour between games).">Thời gian dài nhất đã chơi</string>
+  <string name="now">bây giờ</string>
+</resources>

@@ -498,7 +498,7 @@ consultar uma análise de computador, utilizar o chat e compartilhar um link.</s
   <string name="blackWins">Pretas venceram</string>
   <string name="draws">Empates</string>
   <string name="nextXTournament">Próximo torneio %s:</string>
-  <string name="averageOpponent">Pontuação média adversários</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Pontuação média do adversário</string>
   <string name="membersOnly">Somente para membros</string>
   <string name="boardEditor">Editor de tabuleiro</string>
   <string name="setTheBoard">Arranje o tabuleiro</string>

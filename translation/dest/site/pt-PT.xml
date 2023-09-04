@@ -436,7 +436,7 @@ análise de computador, sala de conversação e link de partilha.</string>
   <string name="blackWins">Vitórias com negras</string>
   <string name="draws">Empates</string>
   <string name="nextXTournament">Próximo torneio %s:</string>
-  <string name="averageOpponent">Pontuação média oponentes</string>
+  <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Pontuação média dos adversários</string>
   <string name="membersOnly">Somente para membros</string>
   <string name="boardEditor">Editor de tabuleiro</string>
   <string name="setTheBoard">Partilha o tabuleiro</string>
