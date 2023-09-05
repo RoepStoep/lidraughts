@@ -257,7 +257,6 @@ declare namespace Tree {
     dests?: string;
     destsUci?: Uci[];
     captLen?: number;
-    drops: string | undefined | null;
     alternatives?: Alternative[];
     missingAlts?: Alternative[]; // only used internally
     destreq?: number; // used internally

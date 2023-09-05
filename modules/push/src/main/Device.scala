@@ -3,8 +3,8 @@ package lidraughts.push
 import org.joda.time.DateTime
 
 private final case class Device(
-    _id: String, // google device ID or Apple token or OneSignal playerId
-    platform: String, // cordova platform (android, ios)
+    _id: String, // Firebase token or OneSignal playerId
+    platform: String, // cordova platform (android, ios, firebase)
     userId: String,
     seenAt: DateTime
 ) {

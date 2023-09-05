@@ -34,8 +34,8 @@ function makeAutoShapesFromUci(uci: Uci, brush: string, modifiers?: any, brushFi
 
 export default function(opts: Opts): DrawShape[] {
   const n = opts.vm.node,
-  hovering = opts.ceval.hovering(),
-  color = opts.ground.state.movable.color;
+    hovering = opts.ceval.hovering(),
+    color = opts.ground.state.movable.color;
   let shapes: DrawShape[] = [];
   if (hovering && hovering.fen === n.fen) shapes = shapes.concat(makeAutoShapesFromUci(hovering.uci, 'paleBlue'));
   if (opts.vm.showAutoShapes() && opts.vm.showComputer()) {
@@ -71,17 +71,18 @@ export default function(opts: Opts): DrawShape[] {
     }
   }
   if (opts.ceval.enabled() && opts.threatMode && n.threat) {
-    if (n.threat.pvs[1]) {
-      shapes = shapes.concat(makeAutoShapesFromUci(n.threat.pvs[0].moves[0], 'paleRed'));
-      n.threat.pvs.slice(1).forEach(function(pv) {
-        const shift = winningChances.povDiff(opposite(color as Color), pv, n.threat!.pvs[0]);
-        if (shift > 0.2 || isNaN(shift) || shift < 0) return;
-        shapes = shapes.concat(makeAutoShapesFromUci(pv.moves[0], 'paleRed', {
-          lineWidth: Math.round(11 - shift * 45) // 11 to 2
-        }));
-      });
-    } else
-    shapes = shapes.concat(makeAutoShapesFromUci(n.threat.pvs[0].moves[0], 'red'));
+    const [pv0, ...pv1s] = n.threat.pvs;
+
+    const capts = pv0.moves[0].split('x').length;
+    shapes = shapes.concat(makeAutoShapesFromUci(pv0.moves[0], capts > 1 ? 'paleRed' : 'paleRed3'));
+
+    pv1s.forEach(function(pv) {
+      const shift = winningChances.povDiff(opposite(color as Color), pv, pv0);
+      if (shift > 0.2 || isNaN(shift) || shift < 0) return;
+      shapes = shapes.concat(makeAutoShapesFromUci(pv.moves[0], 'paleRed', {
+        lineWidth: Math.round(11 - shift * 45) // 11 to 2
+      }));
+    });
   }
   return shapes;
 }

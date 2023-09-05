@@ -158,18 +158,21 @@ final class Env(
     def povIfPresent(playerRef: PlayerRef): Fu[Option[Pov]] =
       gameIfPresent(playerRef.gameId) map { _ flatMap { _ playerIdPov playerRef.playerId } }
 
-    private def unsortedPovs(user: User) = GameRepo urgentPovsUnsorted user flatMap {
+    private def unsortedPovs(userId: User.ID) = GameRepo urgentPovsUnsorted userId flatMap {
       _.map { pov =>
         gameIfPresent(pov.gameId) map { _.fold(pov)(pov.withGame) }
       }.sequenceFu
     }
 
-    def urgentGames(user: User): Fu[List[Pov]] = unsortedPovs(user) map { povs =>
+    def urgentGames(user: User): Fu[List[Pov]] =
+      urgentGames(user.id)
+
+    def urgentGames(userId: User.ID): Fu[List[Pov]] = unsortedPovs(userId) map { povs =>
       try { povs sortWith Pov.priority }
       catch { case e: IllegalArgumentException => povs sortBy (-_.game.movedAt.getSeconds) }
     }
 
-    def urgentGamesSeq(user: User): Fu[List[Pov]] = unsortedPovs(user) map { povs =>
+    def urgentGamesSeq(user: User): Fu[List[Pov]] = unsortedPovs(user.id) map { povs =>
       try { povs.sortBy(_.game.metadata.simulPairing.getOrElse(Int.MaxValue)) }
       catch { case e: IllegalArgumentException => povs sortBy (-_.game.movedAt.getSeconds) }
     }

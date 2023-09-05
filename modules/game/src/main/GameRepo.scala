@@ -159,8 +159,11 @@ object GameRepo {
 
   // Use Env.round.proxy.urgentGames to get in-heap states!
   def urgentPovsUnsorted(user: User): Fu[List[Pov]] =
-    coll.list[Game](Query nowPlaying user.id, Game.maxPlayingRealtime) map {
-      _ flatMap { Pov(_, user) }
+    urgentPovsUnsorted(user.id)
+
+  def urgentPovsUnsorted(userId: User.ID): Fu[List[Pov]] =
+    coll.list[Game](Query nowPlaying userId, Game.maxPlayingRealtime) map {
+      _ flatMap { Pov.ofUserId(_, userId) }
     }
 
   def playingRealtimeNoAi(user: User, nb: Int): Fu[List[Game.ID]] =

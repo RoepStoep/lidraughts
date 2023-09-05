@@ -1,4 +1,5 @@
 import throttle from 'common/throttle';
+import * as xhr from 'common/xhr';
 import TournamentController from './ctrl';
 
 const headers = {
@@ -12,16 +13,16 @@ function onFail(_1, _2, errorMessage) {
 }
 
 function join(ctrl: TournamentController, password?: string, team?: string) {
-  return $.ajax({
+  return xhr.textRaw('/tournament/' + ctrl.data.id + '/join', {
     method: 'POST',
-    url: '/tournament/' + ctrl.data.id + '/join',
-    data: JSON.stringify({
+    body: JSON.stringify({
       p: password || null,
       team: team || null
     }),
-    contentType: 'application/json; charset=utf-8',
-    headers
-  }).fail(onFail);
+    headers: { 'Content-Type': 'application/json' },
+  }).then(res => {
+    if (!res.ok) res.text().then(alert);
+  })
 }
 
 function withdraw(ctrl: TournamentController) {

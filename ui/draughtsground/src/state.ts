@@ -171,10 +171,13 @@ export function defaults(): Partial<State> {
         blue: { key: 'b', color: '#003088', opacity: 1, lineWidth: 10 },
         yellow: { key: 'y', color: '#e68f00', opacity: 1, lineWidth: 10 },
         paleBlue: { key: 'pb', color: '#003088', opacity: 0.4, lineWidth: 15 },
-        paleBlue2: { key: 'pb2', color: '#003088', opacity: 0.65, lineWidth: 15 },
+        paleBlue2: { key: 'pb2', color: '#003088', opacity: 0.6, lineWidth: 15 },
         paleBlue3: { key: 'pb3', color: '#003088', opacity: 0.3, lineWidth: 15 },
+        paleBlue4: { key: 'pb4', color: '#003088', opacity: 0.8, lineWidth: 15 },
         paleGreen: { key: 'pg', color: '#15781B', opacity: 0.4, lineWidth: 15 },
-        paleRed: { key: 'pr', color: '#882020', opacity: 0.4, lineWidth: 15 },
+        paleRed: { key: 'pr', color: '#882020', opacity: 0.65, lineWidth: 15 },
+        paleRed2: { key: 'pr2', color: '#882020', opacity: 0.4, lineWidth: 8 },
+        paleRed3: { key: 'pr3', color: '#882020', opacity: 0.8, lineWidth: 15 },
         paleGrey: { key: 'pgr', color: '#4a4a4a', opacity: 0.35, lineWidth: 15 }
       },
       pieces: {

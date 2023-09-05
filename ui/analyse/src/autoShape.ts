@@ -25,7 +25,6 @@ export function makeShapesFromUci(uci: Uci, brush: string, modifiers?: any, brus
 
 export function compute(ctrl: AnalyseCtrl): DrawShape[] {
   const color: Color = ctrl.draughtsground.state.movable.color as Color;
-  const rcolor: Color = opposite(color);
   if (ctrl.practice) {
     if (ctrl.practice.hovering()) return makeShapesFromUci(ctrl.practice.hovering().uci, 'green');
     const hint = ctrl.practice.hinting();
@@ -33,7 +32,7 @@ export function compute(ctrl: AnalyseCtrl): DrawShape[] {
       if (hint.mode === 'move') return makeShapesFromUci(hint.uci, 'paleBlue');
       else return [{
         orig: decomposeUci(hint.uci)[0],
-        brush: 'paleBlue'
+        brush: 'paleBlue4'
       }];
     }
     if (ctrl.studyPractice) {
@@ -58,9 +57,7 @@ export function compute(ctrl: AnalyseCtrl): DrawShape[] {
 
   let shapes: DrawShape[] = [];
   if (ctrl.retro && ctrl.retro.showBadNode()) {
-    return makeShapesFromUci(ctrl.retro.showBadNode().uci, 'paleRed', {
-      lineWidth: 8
-    });
+    return makeShapesFromUci(ctrl.retro.showBadNode().uci, 'paleRed2');
   }
   if (hovering && hovering.fen === nFen) shapes = shapes.concat(makeShapesFromUci(hovering.uci, 'paleBlue'));
   if (ctrl.showAutoShapes() && ctrl.showComputer()) {
@@ -99,11 +96,11 @@ export function compute(ctrl: AnalyseCtrl): DrawShape[] {
   if (instance.enabled() && ctrl.threatMode() && nThreat) {
     const [pv0, ...pv1s] = nThreat.pvs;
 
-    shapes = shapes.concat(makeShapesFromUci(pv0.moves[0],
-      pv1s.length > 0 ? 'paleRed' : 'red'));
+    const capts = pv0.moves[0].split('x').length;
+    shapes = shapes.concat(makeShapesFromUci(pv0.moves[0], capts > 1 ? 'paleRed' : 'paleRed3'));
 
     pv1s.forEach(function (pv) {
-      const shift = winningChances.povDiff(rcolor, pv, pv0);
+      const shift = winningChances.povDiff(opposite(color), pv, pv0);
       if (shift >= 0 && shift < 0.2) {
         shapes = shapes.concat(makeShapesFromUci(pv.moves[0], 'paleRed', {
           lineWidth: Math.round(11 - shift * 45) // 11 to 2

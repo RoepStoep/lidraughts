@@ -36,4 +36,7 @@ private final class DeviceApi(coll: Coll) {
     lidraughts.mon.push.register.out()
     coll.remove($doc("userId" -> user.id)).void
   }
+
+  def delete(device: Device) =
+    coll.remove($id(device._id)).void
 }

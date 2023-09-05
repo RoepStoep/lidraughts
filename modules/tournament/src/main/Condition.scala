@@ -282,6 +282,14 @@ object Condition {
         ~titled option Titled,
         teamMember.flatMap(_ convert teams)
       )
+
+      def convertApi(perf: PerfType, teams: Map[String, String], old: All) = AllSetup(
+        nbRatedGame = if (nbRatedGame.isDefined) nbRatedGame else old.nbRatedGame.map { r => NbRatedGameSetup(none, r.nb) },
+        maxRating = if (maxRating.rating.isDefined) maxRating else RatingSetup(none, old.maxRating.map(_.rating)),
+        minRating = if (minRating.rating.isDefined) minRating else RatingSetup(none, old.minRating.map(_.rating)),
+        titled = if (titled.isDefined) titled else old.titled has Titled option true,
+        teamMember = if (teamMember.isDefined) teamMember else old.teamMember.map(TeamMemberSetup.apply)
+      ).convert(perf, teams)
     }
     object AllSetup {
       val default = AllSetup(

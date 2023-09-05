@@ -99,7 +99,7 @@ object Tournament extends LidraughtsController {
       negotiate(
         html = tourOption.fold(tournamentNotFound.fuccess) { tour =>
           (for {
-            verdicts <- env.api.verdicts(tour, ctx.me, getUserTeamIds)
+            verdicts <- env.api.getVerdicts(tour, ctx.me, getUserTeamIds)
             version <- env.version(tour.id)
             json <- env.jsonView(
               tour = tour,
@@ -203,10 +203,17 @@ object Tournament extends LidraughtsController {
         val teamId = ctx.body.body.\("team").asOpt[String]
         env.api.joinWithResult(id, me, password, teamId, getUserTeamIds) flatMap { result =>
           negotiate(
-            html = Redirect(routes.Tournament.show(id)).fuccess,
+            html = fuccess {
+              result.error match {
+                case None => Redirect(routes.Tournament.show(id))
+                case Some(error) => BadRequest(error)
+              }
+            },
             api = _ => fuccess {
-              if (result) jsonOkResult
-              else BadRequest(Json.obj("joined" -> false))
+              result.error match {
+                case None => jsonOkResult
+                case Some(error) => BadRequest(Json.obj("joined" -> false, "error" -> error))
+              }
             }
           )
         }
@@ -307,11 +314,41 @@ object Tournament extends LidraughtsController {
       jsonFormErrorDefaultLang,
       setup => rateLimitCreation(me, setup.password.isDefined, req) {
         env.api.createTournament(setup, me, teams, getUserTeamIds, andJoin = false) flatMap { tour =>
-          val lang = lidraughts.i18n.I18nLangPicker(req, me.some)
-          env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, lang, none)
+          env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, reqLang, none)
         } map { Ok(_) }
       }
     )
+
+  def apiUpdate(id: String) =
+    ScopedBody(_.Tournament.Write) { implicit req => me =>
+      implicit def lang = reqLang
+      repo byId id flatMap {
+        _.filter(canEditTournament(_, me)) ?? { tour =>
+          teamsIBelongTo(me) flatMap { teams =>
+            env.forms.edit(me, tour).bindFromRequest()
+              .fold(
+                newJsonFormError,
+                data =>
+                  env.api.update(tour, data, me, teams, api = true) flatMap { tour =>
+                    env.jsonView(tour, none, none, getUserTeamIds, Env.team.cached.name, none, none, partial = false, reqLang, none) map { Ok(_) }
+                  }
+              )
+          }
+        }
+      }
+    }
+
+  def apiTerminate(id: String) =
+    ScopedBody(_.Tournament.Write) { implicit req => me =>
+      repo byId id map {
+        _ ?? {
+          case tour if tour.createdBy == me.id || isGranted(_.ManageTournament, me) =>
+            env.api.kill(tour)
+            jsonOkResult
+          case _ => BadRequest(jsonError("Can't terminate that tournament: Permission denied"))
+        }
+      }
+    }
 
   def teamBattleEdit(id: String) = Auth { implicit ctx => me =>
     repo byId id flatMap {
@@ -430,7 +467,7 @@ object Tournament extends LidraughtsController {
         env.forms.edit(me, tour).bindFromRequest
           .fold(
             err => BadRequest(html.tournament.form.edit(tour, err, env.forms, me, teams)).fuccess,
-            data => env.api.update(tour, data, me, teams) inject Redirect(routes.Tournament.show(id))
+            data => env.api.update(tour, data, me, teams, api = false) inject Redirect(routes.Tournament.show(id))
           )
       }
     }
@@ -457,11 +494,14 @@ object Tournament extends LidraughtsController {
       }
     }
 
+  private def canEditTournament(t: Tour, me: UserModel) =
+    (t.createdBy == me.id && t.isCreated) || isGranted(_.ManageTournament, me)
+
   private def WithEditableTournament(id: String, me: UserModel)(
     f: Tour => Fu[Result]
   )(implicit ctx: Context): Fu[Result] =
     repo byId id flatMap {
-      case Some(t) if (t.createdBy == me.id && t.isCreated) || isGranted(_.ManageTournament) =>
+      case Some(t) if canEditTournament(t, me) =>
         f(t)
       case Some(t) => Redirect(routes.Tournament.show(t.id)).fuccess
       case _ => notFound

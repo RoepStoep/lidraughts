@@ -12,25 +12,26 @@ export class Autoplay {
   private mergedCentis: number[];
 
   constructor(ctrl: AnalyseCtrl) {
-    this.ctrl = ctrl;
-    this.mergedCentis = [];
-    const data = ctrl.getChartData();
-    if (data.game.moveCentis && data.treeParts.length) {
-      const centis = data.game.moveCentis;
+    this.ctrl = ctrl
+    this.mergedCentis = []
+    const data = ctrl.getChartData()
+    const centis = data.game.moveCentis
+    const treeParts = data.treeParts
+    if (centis && treeParts.length) {
       let c = 0;
-      for (const node of data.treeParts.slice(1)) {
-        if (node && node.mergedNodes && node.mergedNodes.length > 1) {
-          let merged = 0;
+      for (const node of treeParts.slice(1)) {
+        if (node?.mergedNodes && node.mergedNodes.length > 1) {
+          let merged = 0
           for (let r = 0; r < node.mergedNodes.length && c < centis.length; r++) {
-            merged += centis[c];
-            c++;
+            merged += centis[c]
+            c++
           }
-          this.mergedCentis.push(merged);
+          this.mergedCentis.push(merged)
         } else {
-          this.mergedCentis.push(centis[c]);
-          c++;
+          this.mergedCentis.push(centis[c])
+          c++
         }
-        if (c >= centis.length) break;
+        if (c >= centis.length) break
       }
     }
   }
@@ -47,9 +48,9 @@ export class Autoplay {
   }
 
   private evalToCp(node: Tree.Node): number {
-      if (!node.eval) return (node.displayPly ? node.displayPly : node.ply) % 2 ? 990 : -990; // game over
-      if (node.eval.win) return (node.eval.win > 0) ? 990 : -990;
-      return node.eval.cp!;
+      if (!node.eval) return (node.displayPly || node.ply) % 2 ? 990 : -990 // game over
+      if (node.eval.win) return (node.eval.win > 0) ? 990 : -990
+      return node.eval.cp!
   }
 
   private nextDelay(): number {

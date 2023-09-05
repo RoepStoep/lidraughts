@@ -8,6 +8,7 @@ import scala.concurrent.Promise
 import draughts.format.Forsyth
 import lidraughts.challenge.Challenge
 import lidraughts.common.LightUser
+import lidraughts.common.String.shorten
 import lidraughts.game.{ Game, Pov, Namer }
 import lidraughts.hub.actorApi.map.Tell
 import lidraughts.hub.actorApi.round.{ MoveEvent, IsOnGame }
@@ -15,10 +16,12 @@ import lidraughts.message.{ Thread, Post }
 import lidraughts.user.User
 
 private final class PushApi(
+    firebasePush: FirebasePush,
     oneSignalPush: OneSignalPush,
     webPush: WebPush,
     implicit val lightUser: LightUser.GetterSync,
     gameProxy: Game.ID => Fu[Option[Game]],
+    urgentGames: User.ID => Fu[List[Pov]],
     bus: lidraughts.common.Bus,
     scheduler: lidraughts.common.Scheduler
 ) {
@@ -28,27 +31,26 @@ private final class PushApi(
     else game.userIds.map { userId =>
       Pov.ofUserId(game, userId) ?? { pov =>
         IfAway(pov) {
-          pushToAll(userId, _.finish, PushApi.Data(
-            title = pov.win match {
-              case Some(true) => "You won!"
-              case Some(false) => "You lost."
-              case _ => "It's a draw."
-            },
-            body = s"Your game with ${opponentName(pov)} is over.",
-            stacking = Stacking.GameFinish,
-            payload = Json.obj(
-              "userId" -> userId,
-              "userData" -> Json.obj(
-                "type" -> "gameFinish",
-                "gameId" -> game.id,
-                "fullId" -> pov.fullId,
-                "color" -> pov.color.name,
-                "fen" -> Forsyth.exportBoard(game.board),
-                "lastMove" -> game.lastMoveKeys,
-                "win" -> pov.win
-              )
-            )
-          ))
+          urgentGames(userId) flatMap { urgent =>
+            pushToAll(userId, _.finish, PushApi.Data(
+              title = pov.win match {
+                case Some(true) => "You won!"
+                case Some(false) => "You lost."
+                case _ => "It's a draw."
+              },
+              body = s"Your game with ${opponentName(pov)} is over.",
+              stacking = Stacking.GameFinish,
+              payload = Json.obj(
+                "userId" -> userId,
+                "userData" -> Json.obj(
+                  "type" -> "gameFinish",
+                  "gameId" -> game.id,
+                  "fullId" -> pov.fullId
+                )
+              ),
+              iosBadge = Option(urgent.filter(_.isMyTurn).length)
+            ))
+          }
         }
       }
     }.sequenceFu.void
@@ -59,16 +61,19 @@ private final class PushApi(
         val pov = Pov(game, game.player.color)
         game.player.userId ?? { userId =>
           IfAway(pov) {
-            game.pdnMoves.lastOption ?? { sanMove =>
-              pushToAll(userId, _.move, PushApi.Data(
-                title = "It's your turn!",
-                body = s"${opponentName(pov)} played $sanMove",
-                stacking = Stacking.GameMove,
-                payload = Json.obj(
-                  "userId" -> userId,
-                  "userData" -> corresGameJson(pov, "gameMove")
-                )
-              ))
+            urgentGames(userId) flatMap { urgent =>
+              game.pdnMoves.lastOption ?? { sanMove =>
+                pushToAll(userId, _.move, PushApi.Data(
+                  title = "It's your turn!",
+                  body = s"${opponentName(pov)} played $sanMove",
+                  stacking = Stacking.GameMove,
+                  payload = Json.obj(
+                    "userId" -> userId,
+                    "userData" -> corresGameJson(pov, "gameMove")
+                  ),
+                  iosBadge = Option(urgent.filter(_.isMyTurn).length)
+                ))
+              }
             }
           }
         }
@@ -140,11 +145,7 @@ private final class PushApi(
   private def corresGameJson(pov: Pov, typ: String) = Json.obj(
     "type" -> typ,
     "gameId" -> pov.gameId,
-    "fullId" -> pov.fullId,
-    "color" -> pov.color.name,
-    "fen" -> Forsyth.exportBoard(pov.game.board),
-    "lastMove" -> pov.game.lastMoveKeys,
-    "secondsLeft" -> pov.remainingSeconds
+    "fullId" -> pov.fullId
   )
 
   def newMessage(t: Thread, p: Post): Funit =
@@ -153,14 +154,13 @@ private final class PushApi(
         case true => funit
         case _ => pushToAll(t receiverOf p, _.message, PushApi.Data(
           title = s"${sender.titleName}: ${t.name}",
-          body = p.text take 140,
+          body = shorten(p.text, 57 - 3, "..."),
           stacking = Stacking.NewMessage,
           payload = Json.obj(
             "userId" -> t.receiverOf(p),
             "userData" -> Json.obj(
               "type" -> "newMessage",
-              "threadId" -> t.id,
-              "sender" -> sender
+              "threadId" -> t.id
             )
           )
         ))
@@ -197,8 +197,7 @@ private final class PushApi(
           "userId" -> challenger.id,
           "userData" -> Json.obj(
             "type" -> "challengeAccept",
-            "challengeId" -> c.id,
-            "joiner" -> lightJoiner
+            "challengeId" -> c.id
           )
         )
       ))
@@ -207,10 +206,13 @@ private final class PushApi(
   private type MonitorType = lidraughts.mon.push.send.type => (String => Unit)
 
   private def pushToAll(userId: User.ID, monitor: MonitorType, data: PushApi.Data): Funit =
-    webPush(userId)(data) >> oneSignalPush(userId) {
+    webPush(userId)(data) zip oneSignalPush(userId) {
       monitor(lidraughts.mon.push.send)("onesignal")
       data
-    }
+    } zip firebasePush(userId) {
+      monitor(lidraughts.mon.push.send)("firebase")
+      data
+    } void
 
   private def describeChallenge(c: Challenge) = {
     import lidraughts.challenge.Challenge.TimeControl._
@@ -250,6 +252,7 @@ private object PushApi {
       title: String,
       body: String,
       stacking: Stacking,
-      payload: JsObject
+      payload: JsObject,
+      iosBadge: Option[Int] = None
   )
 }

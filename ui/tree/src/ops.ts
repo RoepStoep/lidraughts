@@ -97,7 +97,7 @@ export function copyNode(node: Tree.Node, copyChildren: boolean = false, coordSy
     displayPly: node.displayPly,
     uci: node.uci,
     fen: node.fen,
-    children: copyChildren ? node.children : new Array(),
+    children: copyChildren ? node.children : [],
     comments: node.comments,
     gamebook: node.gamebook,
     dests: node.dests,

@@ -1,15 +1,21 @@
 package lidraughts.push
 
 import akka.actor._
+import collection.JavaConverters._
+import com.google.auth.oauth2.{ GoogleCredentials, ServiceAccountCredentials }
 import com.typesafe.config.Config
+import play.api.Play
+import Play.current
 
-import lidraughts.game.Game
+import lidraughts.game.{ Game, Pov }
+import lidraughts.user.User
 
 final class Env(
     config: Config,
     db: lidraughts.db.Env,
     getLightUser: lidraughts.common.LightUser.GetterSync,
     gameProxy: Game.ID => Fu[Option[Game]],
+    urgentGames: User.ID => Fu[List[Pov]],
     scheduler: lidraughts.common.Scheduler,
     system: ActorSystem
 ) {
@@ -20,6 +26,8 @@ final class Env(
   private val OneSignalUrl = config getString "onesignal.url"
   private val OneSignalAppId = config getString "onesignal.app_id"
   private val OneSignalKey = config getString "onesignal.key"
+
+  private val FirebaseUrl = config getString "firebase.url"
 
   private val WebUrl = config getString "web.url"
   val WebVapidPublicKey = config getString "web.vapid_public_key"
@@ -37,6 +45,25 @@ final class Env(
     key = OneSignalKey
   )
 
+  val googleCredentials: Option[GoogleCredentials] = try {
+    config.getString("firebase.json").some.filter(_.nonEmpty).map { json =>
+      ServiceAccountCredentials
+        .fromStream(new java.io.ByteArrayInputStream(json.getBytes()))
+        .createScoped(Set("https://www.googleapis.com/auth/firebase.messaging").asJava)
+    }
+  } catch {
+    case e: Exception =>
+      logger.warn("Failed to create google credentials", e)
+      none
+  }
+  if (googleCredentials.isDefined) logger.info("Firebase push notifications are enabled.")
+
+  private lazy val firebasePush = new FirebasePush(
+    googleCredentials,
+    deviceApi,
+    url = FirebaseUrl
+  )(system)
+
   private lazy val webPush = new WebPush(
     webSubscriptionApi.getSubscriptions(5) _,
     url = WebUrl,
@@ -44,10 +71,12 @@ final class Env(
   )
 
   private lazy val pushApi = new PushApi(
+    firebasePush,
     oneSignalPush,
     webPush,
     getLightUser,
     gameProxy,
+    urgentGames,
     bus = system.lidraughtsBus,
     scheduler = scheduler
   )
@@ -71,6 +100,7 @@ object Env {
     system = lidraughts.common.PlayApp.system,
     getLightUser = lidraughts.user.Env.current.lightUserSync,
     gameProxy = lidraughts.round.Env.current.proxy.game _,
+    urgentGames = lidraughts.round.Env.current.proxy.urgentGames _,
     scheduler = lidraughts.common.PlayApp.scheduler,
     config = lidraughts.common.PlayApp loadConfig "push"
   )

@@ -183,23 +183,27 @@ private[tournament] case class TournamentSetup(
     (60 * clockTime + 30 * clockIncrement) * 2 * 0.8
   } + 15
 
-  private def positionKey = realVariant match {
+  def positionKey(v: Variant) = v match {
     case draughts.variant.Standard => positionStandard
     case draughts.variant.Russian => positionRussian
     case draughts.variant.Brazilian => positionBrazilian
     case _ => none
   }
 
-  def startingPosition =
-    positionKey.flatMap { key =>
+  def startingPositionFor(v: Variant) =
+    positionKey(v).flatMap { key =>
       val parts = key.split('|')
       parts.headOption.flatMap(draughts.OpeningTable.byKey).flatMap { table =>
         parts.lastOption.flatMap(table.openingByFen)
       }
-    } | realVariant.startingPosition
+    } | v.startingPosition
 
-  def openingTable =
-    positionKey.flatMap { key =>
+  def startingPosition = startingPositionFor(realVariant)
+
+  def openingTableFor(v: Variant) =
+    positionKey(v).flatMap { key =>
       key.split('|').headOption.flatMap(draughts.OpeningTable.byKey)
-    } filter realVariant.openingTables.contains
+    } filter v.openingTables.contains
+
+  def openingTable = openingTableFor(realVariant)
 }

@@ -48,7 +48,6 @@ export default function (opts, redraw: () => void): Controller {
       id: "",
       ply: data.history.ply - 1,
       fen: data.puzzle.fen,
-      drops: undefined,
       children: [
         {
           id: data.history.id,
@@ -57,7 +56,6 @@ export default function (opts, redraw: () => void): Controller {
           san: data.history.san,
           alg: isAlgebraic() ? san2alg(data.history.san) : undefined,
           uci: data.history.uci,
-          drops: undefined,
           tbhit: undefined,
           children: []
         } as Tree.Node

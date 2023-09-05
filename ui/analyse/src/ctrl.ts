@@ -364,13 +364,11 @@ export default class AnalyseCtrl {
   makeCgOpts(): DraughtsgroundConfig {
     const node = this.node,
       dests = draughtsUtil.readDests(this.node.dests),
-      drops = draughtsUtil.readDrops(this.node.drops),
       captLen = draughtsUtil.readCaptureLength(this.node.dests) || this.node.captLen,
       color = this.turnColor(),
       movableColor = (this.practice || this.gamebookPlay()) ? this.bottomColor() : (
         !this.embed && (
-          (dests && Object.keys(dests).length > 0) ||
-          drops === null || drops.length
+          (dests && Object.keys(dests).length > 0)
         ) ? color : undefined),
       config: DraughtsgroundConfig = {
         fen: node.fen,
@@ -894,7 +892,7 @@ export default class AnalyseCtrl {
 
   gameOver(node?: Tree.Node): 'draw' | 'checkmate' | false {
     const n = node || this.node;
-    if (n.dests !== '' || n.drops) return false;
+    if (n.dests !== '') return false;
     return n.draw ? 'draw' : 'checkmate';
   }
 

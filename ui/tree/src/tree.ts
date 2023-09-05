@@ -170,7 +170,6 @@ export function build(root: Tree.Node): TreeWrapper {
     if (existing) {
       if (defined(newNode.dests) && !defined(existing.dests)) existing.dests = newNode.dests;
       if (defined(newNode.destsUci) && !defined(existing.destsUci)) existing.destsUci = newNode.destsUci;
-      if (defined(newNode.drops) && !defined(existing.drops)) existing.drops = newNode.drops;
       if (defined(newNode.clock) && !defined(existing.clock)) existing.clock = newNode.clock;
       return newPath;
     }
@@ -227,7 +226,6 @@ export function build(root: Tree.Node): TreeWrapper {
         if (existing) {
           if (defined(newNode.dests) && !defined(existing.dests)) existing.dests = newNode.dests;
           if (defined(newNode.destsUci) && !defined(existing.destsUci)) existing.destsUci = newNode.destsUci;
-          if (defined(newNode.drops) && !defined(existing.drops)) existing.drops = newNode.drops;
           if (defined(newNode.clock) && !defined(existing.clock)) existing.clock = newNode.clock;
           return path.substr(0, path.length - 2) + existing.id;
         }
