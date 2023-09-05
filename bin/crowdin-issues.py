@@ -6,7 +6,7 @@ import requests
 CROWDIN_USER = os.environ["CROWDIN_USER"]
 CROWDIN_KEY = os.environ["CROWDIN_KEY"]
 
-r = requests.get("https://api.crowdin.com/api/project/lishogi/issues", params={
+r = requests.get("https://api.crowdin.com/api/project/lidraughts/issues", params={
     "login": CROWDIN_USER,
     "account-key": CROWDIN_KEY,
     "status": "unresolved",
