@@ -25,7 +25,7 @@
   <string name="variantEnding">Hết cờ theo luật</string>
   <string name="important">Quan trọng</string>
   <string name="yourQuestionMayHaveBeenAnswered">Vấn đề của bạn có thể được giải đáp %1$s</string>
-  <string name="inTheFAQ">tại FAQ</string>
+  <string name="inTheFAQ">tại các câu hỏi thường gặp.</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Để báo cáo một người dùng vì gian lận hoặc hành vi xấu, %1$s</string>
   <string name="useTheReportForm">dùng biểu mẫu tố cáo</string>
   <string name="toRequestSupport">Để yêu cầu trợ giúp, %1$s</string>
@@ -319,6 +319,7 @@
   </plurals>
   <string name="viewTournament">Xem giải đấu</string>
   <string name="backToTournament">Quay lại giải đấu</string>
+  <string name="backToSimul">Trở lại sự kiện đồng loạt</string>
   <string name="thematic">Theo chủ đề</string>
   <plurals name="moreThanNbRatedGames">
     <item quantity="other">≥ %s ván xếp hạng</item>
@@ -489,7 +490,7 @@ phân tích bằng máy tính, trò chuyện tong ván đấu và URL có thể 
   <string name="socialMediaLinks">Liên kết mạng xã hội</string>
   <string name="linkSuggestions">Chẳng hạn như Twitter, Facebook, GitHub, Lichess,...
 Một đường dẫn mỗi dòng</string>
-  <string name="preferences">Tùy chọn</string>
+  <string name="preferences">Cài đặt</string>
   <string name="inlineNotation">Ký hiệu bên trong bàn cờ</string>
   <string name="watchLidraughtsTV">Xem Lidraughts TV</string>
   <string name="previouslyOnLidraughtsTV">Các ván trước đó được lên Lidraughts TV</string>
@@ -527,7 +528,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="ratingX">Hệ số: %s</string>
   <string name="hidden">ẩn</string>
   <plurals name="playedXTimes">
-    <item quantity="other">Đã chơi %s lần</item>
+    <item quantity="other">Đã được giải %s lần</item>
   </plurals>
   <string name="fromGameLink">Từ ván cờ %s</string>
   <string name="continueTraining">Tiếp tục tập luyện</string>
@@ -542,7 +543,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="autoSwitch">Tự động chuyển</string>
   <string name="sequentialSwitch">Thứ tự nhất định</string>
   <string name="puzzles">Câu đố</string>
-  <string name="variantPuzzles">%s câu đố</string>
+  <string name="variantPuzzles">Câu đố %s</string>
   <string name="variantPractice">%s luyện tập</string>
   <string name="latestUpdates">Cập nhật mới nhất</string>
   <string name="tournamentWinners">Các nhà vô địch giải đấu</string>
@@ -643,12 +644,14 @@ Một đường dẫn mỗi dòng</string>
   <string name="difficultyHard">Khó</string>
   <string name="xLeftANoteOnY">%1$s chú thích về %2$s</string>
   <string name="xCompetesInY">%1$s đã tham gia %2$s</string>
+  <string name="xAskedY">%1$s đã yêu cầu %2$s</string>
+  <string name="xAnsweredY">%1$s đã trả lời %2$s</string>
   <string name="xCommentedY">%1$s đã bình luận %2$s</string>
   <string name="victory">Chiến thắng</string>
-  <string name="defeat">Thất bại</string>
-  <string name="victoryVsYInZ">%1$s vs %2$s trong %3$s</string>
-  <string name="defeatVsYInZ">%1$s vs %2$s trong %3$s</string>
-  <string name="drawVsYInZ">%1$s vs %2$s trong %3$s</string>
+  <string name="defeat">Thua</string>
+  <string name="victoryVsYInZ">%1$s %2$s trong %3$s</string>
+  <string name="defeatVsYInZ">%1$s %2$s trong %3$s</string>
+  <string name="drawVsYInZ">%1$s %2$s trong %3$s</string>
   <string name="timeline" comment="The timeline is a list of activities by users.">Dòng thời gian</string>
   <string name="seeAllTournaments">Xem tất cả giải đấu</string>
   <string name="start">Bắt đầu</string>
@@ -734,7 +737,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="xComplete">%s hoàn thành!</string>
   <string name="ongoing">%s đang diễn ra</string>
   <string name="succeeded">đã thành công!</string>
-  <string name="failed">đã thất bại</string>
+  <string name="failed">thất bại</string>
   <string name="noSimulFound">Không tìm thấy sự kiện cờ đồng loạt nào</string>
   <string name="deleteThisSimul">Xoá sự kiện cờ đồng loạt này?</string>
   <string name="noSimulExplanation">Sự kiện cờ đồng loạt này không tồn tại.</string>
@@ -756,7 +759,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="spectatorsOnly">Chỉ người xem</string>
   <string name="participantsOnly">Chỉ người tham gia</string>
   <string name="lidraughtsTournaments">Những giải đấu của Lidraughts</string>
-  <string name="tournamentFAQ">Các câu hỏi thường gặp về giải đấu đấu trường (FAQ)</string>
+  <string name="tournamentFAQ">Các câu hỏi thường gặp về giải đấu đấu trường</string>
   <string name="tournamentOfficial">Chính thức</string>
   <string name="timeBeforeTournamentStarts">Thời gian trước khi giải đấu bắt đầu</string>
   <string name="keyboardShortcuts">Phím tắt bàn phím</string>
@@ -832,7 +835,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="xHostsY">%1$s tạo %2$s</string>
   <string name="xJoinsY">%1$s gia nhập %2$s</string>
   <string name="xLikesY">%1$s thích %2$s</string>
-  <string name="xCreatesStudyY">%1$s tạo bài học %2$s</string>
+  <string name="xCreatesStudyY">%1$s tạo nghiên cứu %2$s</string>
   <string name="quickPairing">Xếp cặp nhanh</string>
   <string name="lobby">Phòng chờ</string>
   <string name="anonymous">Ẩn danh</string>
@@ -988,6 +991,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="enabledKidModeSuggestion">Một đứa trẻ sẽ sử dụng tài khoản này? Bạn có thể muốn kích hoạt %s.</string>
   <string name="whatNowSuggestions">Gì bây giờ? Dưới đây là một vài gợi ý:</string>
   <string name="improveWithDraughtsTacticsPuzzles">Cải thiện với các câu đố cờ đam chiến thuật</string>
+  <string name="playTheAI">Chơi với trí tuệ nhân tạo</string>
   <string name="playOpponentsWorldwide">Chơi với các đối thủ từ khắp nơi trên thế giới</string>
   <string name="followFriends">Theo dõi bạn bè của bạn trên Lidraughts</string>
   <string name="playInTournaments">Chơi trong các giải đấu</string>
