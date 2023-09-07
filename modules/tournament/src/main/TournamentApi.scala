@@ -91,6 +91,10 @@ final class TournamentApi(
 
   def update(old: Tournament, data: TournamentSetup, me: User, myTeams: List[LightTeam], api: Boolean): Fu[Tournament] = {
     import data._
+    val isAdmin = lidraughts.security.Granter(_.ManageTournament)(me)
+    val newPromoted =
+      if (old.userTournament && isAdmin) ~promoted
+      else old.isPromoted
     val tour = {
       if (!api) {
         // update all fields and use default values for missing fields (HTML form updates)
@@ -108,7 +112,7 @@ final class TournamentApi(
           noStreak = !(~streakable),
           description = description,
           hasChat = hasChat | true,
-          isPromoted = ~promoted && lidraughts.security.Granter(_.ManageTournament)(me) && old.nonLidraughtsCreatedBy.nonEmpty
+          isPromoted = newPromoted
         )
       } else {
         // update only fields that are specified (API updates)
@@ -127,7 +131,7 @@ final class TournamentApi(
           noStreak = streakable.fold(old.noStreak)(!_),
           description = description.fold(old.description)(_.some.filter(_.nonEmpty)),
           hasChat = hasChat | old.hasChat,
-          isPromoted = promoted.fold(old.isPromoted)(_ && lidraughts.security.Granter(_.ManageTournament)(me) && old.nonLidraughtsCreatedBy.nonEmpty)
+          isPromoted = if (promoted.isDefined && isAdmin) newPromoted else old.isPromoted
         )
       }
     } |> { tour =>

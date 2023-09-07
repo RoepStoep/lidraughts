@@ -458,6 +458,6 @@ You received this because you are subscribed to messages of the team $url."""
       }
     }
 
-  private[controllers] def teamsIBelongTo(me: lidraughts.user.User): Fu[List[LightTeam]] =
+  private[controllers] def teamsIBelongTo(me: UserModel): Fu[List[LightTeam]] =
     api mine me map { _.filter(t => !t.isWfd || t.isCreator(me.id)).map(_.light) }
 }

@@ -4,7 +4,7 @@ import { readKingMoves } from 'draughtsground/fen';
 const EVAL_REGEX = new RegExp(''
   + /^info depth=(\d+) mean-depth=\S+ /.source
   + /score=(\S+) nodes=(\d+) /.source
-  + /time=(\S+) (?:nps=\S+ )?/.source
+  + /(?:time=(\S+) )?(?:nps=\S+ )?/.source
   + /pv=\"?([0-9\-xX\s]+)\"?/.source);
 
 const fieldXMap = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
@@ -123,7 +123,7 @@ export default class Protocol {
     let depth = parseInt(matches[1]),
         ev = Math.round(parseFloat(matches[2]) * 100),
         nodes = parseInt(matches[3]),
-        elapsedMs: number = parseFloat(matches[4]) * 1000,
+        elapsedMs: number = parseFloat(matches[4]) * 1000 || 0,
         multiPv = 1,
         win: number | undefined = undefined;
 
@@ -266,7 +266,7 @@ export default class Protocol {
         fen: this.work.currentFen,
         maxDepth: this.work.maxDepth,
         depth,
-        knps: nodes / elapsedMs,
+        knps: elapsedMs ? nodes / elapsedMs : 0,
         nodes,
         cp: win ? undefined : ev,
         win: win ? win : undefined,

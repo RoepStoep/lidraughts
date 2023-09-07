@@ -324,7 +324,7 @@ object Tournament extends LidraughtsController {
       implicit def lang = reqLang
       repo byId id flatMap {
         _.filter(canEditTournament(_, me)) ?? { tour =>
-          teamsIBelongTo(me) flatMap { teams =>
+          editAsCreator(tour, me) flatMap teamsIBelongTo flatMap { teams =>
             env.forms.edit(me, tour).bindFromRequest()
               .fold(
                 newJsonFormError,
@@ -454,7 +454,7 @@ object Tournament extends LidraughtsController {
 
   def edit(id: String) = Auth { implicit ctx => me =>
     WithEditableTournament(id, me) { tour =>
-      teamsIBelongTo(me) map { teams =>
+      editAsCreator(tour, me) flatMap teamsIBelongTo map { teams =>
         Ok(html.tournament.form.edit(tour, env.forms.edit(me, tour), env.forms, me, teams))
       }
     }
@@ -463,7 +463,7 @@ object Tournament extends LidraughtsController {
   def update(id: String) = AuthBody { implicit ctx => me =>
     WithEditableTournament(id, me) { tour =>
       implicit val req = ctx.body
-      teamsIBelongTo(me) flatMap { teams =>
+      editAsCreator(tour, me) flatMap teamsIBelongTo flatMap { teams =>
         env.forms.edit(me, tour).bindFromRequest
           .fold(
             err => BadRequest(html.tournament.form.edit(tour, err, env.forms, me, teams)).fuccess,
@@ -517,6 +517,10 @@ object Tournament extends LidraughtsController {
     expireAfter = _.ExpireAfterWrite(15.seconds)
   )
 
-  private def getUserTeamIds(user: lidraughts.user.User): Fu[List[TeamId]] =
+  private def getUserTeamIds(user: UserModel): Fu[List[TeamId]] =
     Env.team.cached.teamIdsList(user.id)
+
+  private def editAsCreator(tour: Tour, me: UserModel) =
+    if (tour.userTournament && tour.createdBy != me.id) lidraughts.user.UserRepo.byId(tour.createdBy).dmap(_ | me)
+    else fuccess(me)
 }

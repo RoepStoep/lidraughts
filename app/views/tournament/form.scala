@@ -91,7 +91,7 @@ object form {
               else form3.group(form("minutes"), trans.duration(), half = true)(form3.input(_)(tpe := "number"))
             ),
             fields.description,
-            (isGranted(_.ManageTournament) && tour.nonLidraughtsCreatedBy.nonEmpty) option fields.promoted,
+            (tour.userTournament && isGranted(_.ManageTournament)) option fields.promoted,
             form3.globalError(form),
             fieldset(cls := "conditions")(
               fields.advancedSettings,

@@ -140,6 +140,8 @@ case class Tournament(
 
   def nonLidraughtsCreatedBy = (createdBy != User.lidraughtsId) option createdBy
 
+  def userTournament = createdBy != User.lidraughtsId
+
   def ratingVariant = if (variant.fromPosition) draughts.variant.Standard else variant
 
   override def toString = s"$id $startsAt $fullName $minutes minutes, $clock"

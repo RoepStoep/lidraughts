@@ -1105,7 +1105,7 @@ export default class AnalyseCtrl {
     this.explorer.toggle();
   }
 
-  private practiceDepth = () => this.data.game.variant.key === 'antidraughts' ? 10 : 20;
+  private practiceDepth = () => this.data.game.variant.key === 'antidraughts' ? 10 : 22;
 
   togglePractice = () => {
     if (this.practice || !this.ceval.possible) this.practice = undefined;
