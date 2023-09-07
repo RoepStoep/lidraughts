@@ -91,7 +91,7 @@ final class Env(
 
   lazy val jsonView = new JsonView(
     studyRepo,
-    lightUserApi.sync
+    lightUserApi
   )
 
   private lazy val chapterMaker = new ChapterMaker(

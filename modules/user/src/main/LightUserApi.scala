@@ -15,7 +15,13 @@ final class LightUserApi(coll: Coll)(implicit system: akka.actor.ActorSystem) {
   def sync(id: User.ID): Option[LightUser] = cache sync id
   def async(id: User.ID): Fu[Option[LightUser]] = cache async id
 
+  def syncFallback(id: User.ID) = sync(id) | LightUser.fallback(id)
+  def asyncFallback(id: User.ID) = async(id) dmap (_ | LightUser.fallback(id))
+
   def asyncMany = cache.asyncMany _
+
+  def asyncManyFallback(ids: Seq[User.ID]): Fu[Seq[LightUser]] =
+    ids.map(asyncFallback).sequenceFu
 
   def invalidate = cache invalidate _
 

@@ -12,7 +12,7 @@ import lidraughts.user.User
 
 final class JsonView(
     studyRepo: StudyRepo,
-    lightUser: LightUser.GetterSync
+    lightUserApi: lidraughts.user.LightUserApi
 ) {
 
   import JsonView._
@@ -65,7 +65,7 @@ final class JsonView(
     "liked" -> s.liked,
     "likes" -> s.study.likes.value,
     "updatedAt" -> s.study.updatedAt,
-    "owner" -> lightUser(s.study.ownerId),
+    "owner" -> lightUserApi.sync(s.study.ownerId),
     "chapters" -> s.chapters.take(4),
     "members" -> s.study.members.members.values.take(4)
   )
@@ -79,7 +79,7 @@ final class JsonView(
     JsString(r.id)
   }
   private[study] implicit val memberWrites: Writes[StudyMember] = Writes[StudyMember] { m =>
-    Json.obj("user" -> lightUser(m.id), "role" -> m.role)
+    Json.obj("user" -> lightUserApi.syncFallback(m.id), "role" -> m.role)
   }
 
   private[study] implicit val membersWrites: Writes[StudyMembers] = Writes[StudyMembers] { m =>

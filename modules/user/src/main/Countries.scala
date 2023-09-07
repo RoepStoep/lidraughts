@@ -22,6 +22,7 @@ object Countries {
     C("AI", "Anguilla"),
     C("AL", "Albania"),
     C("AM", "Armenia"),
+    C("AM-RA", "Artsakh"),
     C("AO", "Angola"),
     C("AQ", "Antarctica"),
     C("AR", "Argentina"),
@@ -53,6 +54,7 @@ object Countries {
     C("BY", "Belarus"),
     C("BZ", "Belize"),
     C("CA", "Canada"),
+    C("CA-QC", "Quebec"),
     C("CC", "Cocos (Keeling) Islands"),
     C("CD", "Congo (Democratic Rep.)"),
     C("CF", "Central African Republic"),
@@ -83,6 +85,10 @@ object Countries {
     C("EH", "Western Sahara"),
     C("ER", "Eritrea"),
     C("ES", "Spain"),
+    C("ES-AN", "Andalusia"),
+    C("ES-CT", "Catalonia"),
+    C("ES-EU", "Basque Country"),
+    C("ES-GA", "Galicia"),
     C("ET", "Ethiopia"),
     C("FI", "Finland"),
     C("FJ", "Fiji"),
@@ -210,6 +216,7 @@ object Countries {
     C("RO", "Romania"),
     C("RS", "Serbia"),
     C("RU", "Russia"),
+    C("RU-TAT", "Tatarstan"),
     C("RW", "Rwanda"),
     C("SA", "Saudi Arabia"),
     C("SB", "Solomon Islands"),
@@ -271,13 +278,17 @@ object Countries {
     C("ZW", "Zimbabwe")
   ).sortBy(_.name) ::: List(
       // whatever
+      C("EU", "European Union"),
       C("_adygea", "Adygea"),
       C("_belarus-wrw", "Belarus White-red-white"),
+      C("_earth", "Earth"),
       C("_east-turkestan", "East Turkestan"),
-      C("EU", "European Union"),
-      C("_united-nations", "United Nations"),
+      C("_lidraughts", "Lidraughts"),
+      C("_pirate", "Pirate"),
       C("_rainbow", "Rainbow"),
-      C("_pirate", "Pirate")
+      C("_russia-wbw", "Russia White-blue-white"),
+      C("_transgender", "Transgender"),
+      C("_united-nations", "United Nations")
     )
 
   val allPairs = all map { c => c.code -> c.name }

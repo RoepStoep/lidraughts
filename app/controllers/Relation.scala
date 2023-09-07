@@ -112,6 +112,7 @@ object Relation extends LidraughtsController {
           lidraughts.user.JsonView.perfs(r.user, best.some)
         }
       ).add("online" -> Env.user.isOnline(r.user.id))
+        .add("title" -> r.user.title.map(_.value))
     }))
   }
 

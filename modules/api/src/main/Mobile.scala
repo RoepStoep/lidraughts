@@ -16,6 +16,7 @@ object Mobile {
     private val mustUpgradeFromVersions = Set(
       "1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4", /* no support for 64-variants */
       "1.1.0", "1.1.1" /* no support for brazilian draughts */
+    // "1.2.0", "1.3.0" /* cordova versions */
     )
 
   }
@@ -37,7 +38,7 @@ object Mobile {
     val oldVersions: List[Old] = List( // Old( // old ping API
     //   version = ApiVersion(2),
     //   deprecatedAt = new DateTime("2019-11-25"),
-    //   unsupportedAt = new DateTime("2020-11-25")
+    //   unsupportedAt = new DateTime("2023-11-12")
     // )
     )
 

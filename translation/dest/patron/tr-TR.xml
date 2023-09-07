@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="donate">Bağış yap</string>
+  <string name="donate">Bağış Yap</string>
   <string name="lidraughtsPatron">Lidraughts Destekçisi</string>
   <string name="freeAccount">Ücretsiz Hesap</string>
   <string name="becomePatron">Lidraughts Destekçisi olun</string>
   <string name="xBecamePatron">%s Lidraughts Destekçisi oldu</string>
   <string name="newPatrons">Yeni Destekçiler</string>
+  <string name="freeDraughts">Herkes için ücretsiz dama, sonsuza kadar!</string>
   <string name="noAdsNoSubs">Ne reklam var ne abonelik; kodumuz açık kaynaklı, tutkumuz epik.</string>
   <string name="thankYou">Yardımınız için teşekkür ederiz!</string>
   <string name="youHaveLifetime">Artık Ömür Boyu Destekçi hesabınız var. Bu müthiş bir şey!</string>
   <string name="patronUntil">Destekçi hesabınızın süresi %s tarihinde sona erecek.</string>
   <string name="ifNotRenewed">Yeniden bağış yapmadığınız takdirde hesabınız ücretsiz hesaba çevrilecektir.</string>
+  <string name="weAreVolunteers">Herkesin ücretsiz ve kaliteli bir dama platformuna kolayca ulaşabilmesi gerektiğine gönülden inandığımız için hiçbir kâr amacı gütmüyoruz.</string>
   <string name="weRelyOnSupport">Lidraughts sizler gibi insanların desteği sayesinde ayakta duruyor. Bu çorbada sizin de tuzunuz olsun istiyorsanız lütfen bizden desteğinizi esirgemeyin.</string>
   <string name="lifetime">Ömür Boyu</string>
   <string name="payLifetimeOnce">Tek seferde %s ödeyin ve sonsuza değin Lidraughts destekçisi olun!</string>
