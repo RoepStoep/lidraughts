@@ -99,7 +99,8 @@ final class DataForm {
     .verifying("Invalid clock", _.validClock)
     .verifying("15s variant games cannot be rated", _.validRatedUltraBulletVariant)
     .verifying("Increase tournament duration, or decrease game clock", _.sufficientDuration)
-    .verifying("Reduce tournament duration, or increase game clock", _.excessiveDuration))
+    .verifying("Reduce tournament duration, or increase game clock", _.excessiveDuration)
+    .verifying("Start date is too far in the future", _.validStartDate))
 }
 
 object DataForm {
@@ -174,6 +175,10 @@ private[tournament] case class TournamentSetup(
 
   def sufficientDuration = estimateNumberOfGamesOneCanPlay >= 3
   def excessiveDuration = estimateNumberOfGamesOneCanPlay <= 70
+
+  def maxFutureDays = if (conditions.teamMember.flatMap(_.teamId).exists(_.nonEmpty)) 180 else 31
+
+  def validStartDate = startDate.fold(~waitMinutes > 0)(DateTime.now.plusDays(maxFutureDays).isAfter(_))
 
   private def estimateNumberOfGamesOneCanPlay: Double = (minutes * 60) / estimatedGameSeconds
 
