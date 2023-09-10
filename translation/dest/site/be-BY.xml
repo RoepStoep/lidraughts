@@ -9,8 +9,8 @@
   <string name="yourTurn">Ваша чарга</string>
   <string name="aiNameLevelAiLevel">%1$s узровень %2$s</string>
   <string name="level">Узровень</string>
-  <string name="toggleTheChat">Укл./адкл. чат</string>
-  <string name="toggleSound">Укл./адкл. гук</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Укл./адкл. чат</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Укл./адкл. гук</string>
   <string name="chat">Чат</string>
   <string name="resign">Здацца</string>
   <string name="white">Белыя</string>
@@ -619,8 +619,6 @@
   <string name="connectedToLidraughts">Ты цяпер падлучаны да lidraughts.org</string>
   <string name="signedOut">Ты выйшаў з свайго акаўту</string>
   <string name="loginSuccessful">Ты ўвайшоў у свой акаўнт</string>
-  <string name="playOnTheBoardOffline">Ля дошкі</string>
-  <string name="playOfflineComputer">Камп\'ютар</string>
   <string name="opponent">Апанэнт</string>
   <string name="learnMenu">Вучыцца</string>
   <string name="studyMenu">Студыя</string>
@@ -629,8 +627,6 @@
   <string name="tools">Інструменты</string>
   <string name="increment">Прырост</string>
   <string name="sharePDN">Падзяліцца PDN</string>
-  <string name="playOnline">Гуляць анлайн</string>
-  <string name="playOffline">Гуляць афлайн</string>
   <string name="allowAnalytics">Дазволіць збор ананімнай статыстыкі</string>
   <string name="shareGameURL">Падзяліцца спасылкай на гульню</string>
   <string name="error.required">Абавязковае поле</string>

@@ -11,8 +11,8 @@
   <string name="yourTurn">Du bist am Zug</string>
   <string name="aiNameLevelAiLevel">%1$s Stufe %2$s</string>
   <string name="level">Stufe</string>
-  <string name="toggleTheChat">Chat ein-/ausblenden</string>
-  <string name="toggleSound">Ton ein-/ausschalten</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Chat ein-/ausblenden</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Ton ein-/ausschalten</string>
   <string name="chat">Chat</string>
   <string name="resign">Aufgeben</string>
   <string name="white">Weiß</string>
@@ -726,8 +726,6 @@ Eine URL pro Zeile</string>
   <string name="connectedToLidraughts">Verbindung hergestellt</string>
   <string name="signedOut">Erfolgreich ausgeloggt</string>
   <string name="loginSuccessful">Du bist jetzt eingeloggt</string>
-  <string name="playOnTheBoardOffline">Spiele offline gegen Mensch</string>
-  <string name="playOfflineComputer">Spiele offline gegen Computer</string>
   <string name="opponent">Gegner</string>
   <string name="learnMenu">Lernen</string>
   <string name="studyMenu">Studien</string>
@@ -736,8 +734,6 @@ Eine URL pro Zeile</string>
   <string name="tools">Werkzeuge</string>
   <string name="increment">Inkrement</string>
   <string name="sharePDN">PDN teilen</string>
-  <string name="playOnline">Spiele online</string>
-  <string name="playOffline">Spiele offline</string>
   <string name="allowAnalytics">Anonyme Statistiken senden</string>
   <string name="shareGameURL">Partie-URL teilen</string>
   <string name="error.required">Dieses Feld muss ausgefüllt werden</string>

@@ -9,8 +9,8 @@
   <string name="yourTurn">Tu turno</string>
   <string name="aiNameLevelAiLevel">%1$s nivel %2$s</string>
   <string name="level">Nivel</string>
-  <string name="toggleTheChat">Mostrar/Ocultar chat</string>
-  <string name="toggleSound">Activar/Desactivar sonido</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Mostrar/Ocultar chat</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Activar/Desactivar sonido</string>
   <string name="resign">Abandonar</string>
   <string name="white">Blancas</string>
   <string name="black">Negras</string>
@@ -575,8 +575,6 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="connectedToLidraughts">Estás conectado a lidraughts.org</string>
   <string name="signedOut">Has cerrado la sesión</string>
   <string name="loginSuccessful">Conectado</string>
-  <string name="playOnTheBoardOffline">Jugar sin conexión</string>
-  <string name="playOfflineComputer">Jugar vs CPU sin conexión</string>
   <string name="opponent">Oponente</string>
   <string name="learnMenu">Aprender</string>
   <string name="studyMenu">Estudiar</string>
@@ -584,8 +582,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="community">Comunidad</string>
   <string name="tools">Herramientas</string>
   <string name="increment">Incremento</string>
-  <string name="playOnline">Jugar en línea</string>
-  <string name="playOffline">Jugar sin conexión</string>
+  <string name="sharePDN">Compartir PDN</string>
   <string name="allowAnalytics">Permitir estadísticas anónimas</string>
   <string name="shareGameURL">Compartir el enlace del juego</string>
   <string name="error.required">Este campo es obligatorio</string>

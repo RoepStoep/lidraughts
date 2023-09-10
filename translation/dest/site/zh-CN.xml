@@ -11,8 +11,8 @@
   <string name="yourTurn">该你走</string>
   <string name="aiNameLevelAiLevel">%1$s级别%2$s</string>
   <string name="level">级别</string>
-  <string name="toggleTheChat">聊天开关</string>
-  <string name="toggleSound">声音开关</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">聊天开关</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">声音开关</string>
   <string name="chat">聊天</string>
   <string name="resign">认输</string>
   <string name="white">白方</string>
@@ -697,8 +697,6 @@
   <string name="connectedToLidraughts">您已接入lidraughts.org</string>
   <string name="signedOut">您已登出</string>
   <string name="loginSuccessful">您已登录</string>
-  <string name="playOnTheBoardOffline">面对面</string>
-  <string name="playOfflineComputer">电脑</string>
   <string name="opponent">对手</string>
   <string name="learnMenu">学习</string>
   <string name="studyMenu">专题课程</string>
@@ -707,8 +705,6 @@
   <string name="tools">工具</string>
   <string name="increment">加秒</string>
   <string name="sharePDN">分享PDN棋谱</string>
-  <string name="playOnline">在线下棋</string>
-  <string name="playOffline">离线下棋</string>
   <string name="allowAnalytics">允许匿名统计数据</string>
   <string name="shareGameURL">分享棋局链接</string>
   <string name="error.required">本项必填</string>

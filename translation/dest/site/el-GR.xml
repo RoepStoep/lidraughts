@@ -11,8 +11,8 @@
   <string name="yourTurn">Η σειρά σας</string>
   <string name="aiNameLevelAiLevel">%1$s επιπέδου %2$s</string>
   <string name="level">Επίπεδο</string>
-  <string name="toggleTheChat">Εναλλαγή προβολής της συνομιλίας</string>
-  <string name="toggleSound">Εναλλαγή ήχου</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Εναλλαγή προβολής της συνομιλίας</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Εναλλαγή ήχου</string>
   <string name="chat">Συνομιλία</string>
   <string name="resign">Παραίτηση</string>
   <string name="white">Λευκά</string>
@@ -730,8 +730,6 @@
   <string name="connectedToLidraughts">Έχετε συνδεθεί στο lidraughts.org</string>
   <string name="signedOut">Έχετε αποσυνδεθεί επιτυχώς</string>
   <string name="loginSuccessful">Είσοδος επιτυχής</string>
-  <string name="playOnTheBoardOffline">Τοπικά</string>
-  <string name="playOfflineComputer">Εναντίον Υπολογιστή</string>
   <string name="opponent">Αντίπαλος</string>
   <string name="learnMenu">Εκμάθηση</string>
   <string name="studyMenu">Μελέτη</string>
@@ -740,8 +738,6 @@
   <string name="tools">Εργαλεία</string>
   <string name="increment">Προσαύξηση</string>
   <string name="sharePDN">Κοινοποίηση PDN</string>
-  <string name="playOnline">Παίξτε σε διαδικτυακώς</string>
-  <string name="playOffline">Παίξτε χωρίς σύνδεση</string>
   <string name="allowAnalytics">Επιτρέψτε την αποστολή ανώνυμων στατιστικών</string>
   <string name="shareGameURL">Κοινοποιήστε URL παιχνιδιού</string>
   <string name="error.required">Αυτό το πεδίο είναι υποχρεωτικό</string>

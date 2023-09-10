@@ -35,11 +35,13 @@ trait SetupHelper { self: I18nHelper with GameHelper =>
       (d.toString, s"${d} days", none)
     }
 
-  def translatedTimeModeChoices(implicit ctx: Context) = List(
-    (TimeMode.RealTime.id.toString, trans.realTime.txt(), none),
-    (TimeMode.Correspondence.id.toString, trans.correspondence.txt(), none),
-    (TimeMode.Unlimited.id.toString, trans.unlimited.txt(), none)
-  )
+  def translatedTimeModeChoices(implicit ctx: Context) =
+    if (ctx.isAuth) List(
+      (TimeMode.RealTime.id.toString, trans.realTime.txt(), none),
+      (TimeMode.Correspondence.id.toString, trans.correspondence.txt(), none),
+      (TimeMode.Unlimited.id.toString, trans.unlimited.txt(), none)
+    )
+    else List((TimeMode.RealTime.id.toString, trans.realTime.txt(), none))
 
   def translatedReasonChoices(implicit ctx: Context) = List(
     (Reason.Cheat.key, trans.cheat.txt()),

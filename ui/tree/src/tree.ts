@@ -72,15 +72,15 @@ export function build(root: Tree.Node): TreeWrapper {
   }
 
   function getCurrentNodesAfterPly(nodeList: Tree.Node[], mainline: Tree.Node[], ply: number): Tree.Node[] {
-    var node, nodes = [];
-    for (var i in nodeList) {
-      node = nodeList[i];
-      const nodePly = node.displayPly ? node.displayPly : node.ply;
-      if (nodePly <= ply && mainline[i].id !== node.id) break;
-      if (nodePly > ply) nodes.push(node);
+    const nodes = []
+    for (const i in nodeList) {
+      const node = nodeList[i]
+      const nodePly = node.displayPly || node.ply
+      if (nodePly <= ply && mainline[i].id !== node.id) break
+      if (nodePly > ply) nodes.push(node)
     }
-    return nodes;
-  };
+    return nodes
+  }
 
   function pathIsMainline(path: Tree.Path): boolean {
     return pathIsMainlineFrom(root, path);

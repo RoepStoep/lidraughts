@@ -108,6 +108,16 @@ $c-slider: $c-setup;
       font-weight: bold;
     }
   }
+  .rating-range {
+    @extend %flex-center-nowrap;
+    justify-content: center;
+    .rating-min, .rating-max {
+      flex: 0 0 7ch;
+    }
+    div {
+      width: 30%;
+    }
+  }
   .ratings {
     padding: 1em;
     width: 100%;

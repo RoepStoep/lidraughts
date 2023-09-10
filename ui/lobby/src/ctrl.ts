@@ -66,8 +66,8 @@ export default class LobbyController {
     }
     else {
       setInterval(() => {
-        if (this.poolMember) this.poolIn();
-        else if (this.tab === 'real_time' && !this.data.hooks.length) this.socket.realTimeIn();
+        // if (this.poolMember) this.poolIn();
+        if (this.tab === 'real_time' && !this.data.hooks.length) this.socket.realTimeIn();
       }, 10 * 1000);
       this.onNewOpponent();
     }
@@ -76,7 +76,7 @@ export default class LobbyController {
       if (this.tab === 'real_time') {
         this.data.hooks = [];
         this.socket.realTimeIn();
-      } //else if (this.tab === 'pools' && this.poolMember) this.poolIn();
+      } else if (this.tab === 'pools' && this.poolMember) this.poolIn();
     });
 
     window.addEventListener('beforeunload', () => {
@@ -161,21 +161,20 @@ export default class LobbyController {
   };
 
   clickPool = (id: string) => {
-    if (!this.data.me) {
-      xhr.anonPoolSeek(this.pools.find(function(p) {
-        return p.id === id;
-      }));
-      this.setTab('real_time');
-    } else if (this.poolMember && this.poolMember.id === id) this.leavePool();
-    else {
-      this.enterPool({ id });
-      this.redraw();
-    }
+    xhr.poolToHook(this.pools.find(function(p) {
+      return p.id === id;
+    }), !!this.data.me);
+    this.setTab('real_time');
+    // } else if (this.poolMember && this.poolMember.id === id) this.leavePool();
+    // else {
+    //  this.enterPool({ id });
+    //  this.redraw();
+    // }
   };
 
   enterPool = (member: PoolMember) => {
     poolRangeStorage.set(member.id, member.range);
-    //this.setTab('pools');
+    this.setTab('pools');
     this.poolMember = member;
     this.poolIn();
   };
@@ -190,7 +189,13 @@ export default class LobbyController {
   poolIn = () => {
     if (!this.poolMember) return;
     this.poolInStorage.set(li.StrongSocket.sri);
-    this.socket.poolIn(this.poolMember);
+    // this.socket.poolIn(this.poolMember);
+    const poolId = this.poolMember.id
+    this.poolMember = undefined
+    xhr.poolToHook(this.pools.find(function(p) {
+      return p.id === poolId;
+    }), !!this.data.me);
+    this.setTab('real_time');
   };
 
   gameActivity = gameId => {
@@ -242,7 +247,7 @@ export default class LobbyController {
         range = poolRangeStorage.get(member.id);
       if (range) member.range = range;
       if (match) {
-        //this.setTab('pools');
+        this.setTab('pools');
         this.enterPool(member);
         history.replaceState(null, '', '/');
       }

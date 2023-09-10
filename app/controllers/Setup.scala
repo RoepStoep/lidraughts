@@ -163,7 +163,7 @@ object Setup extends LidraughtsController with TheftPrevention {
               //else
               (ctx.userId ?? Env.relation.api.fetchBlocking) flatMap {
                 blocking =>
-                  env.processor.hook(config, Uid(uid), HTTPRequest sid req, blocking) map hookResponse
+                  env.processor.hook(config, Uid(uid), HTTPRequest sid req, blocking, save = !getBool("pool")) map hookResponse
               }
             }
           )
@@ -182,7 +182,7 @@ object Setup extends LidraughtsController with TheftPrevention {
             blocking <- ctx.userId ?? Env.relation.api.fetchBlocking
             hookConfig = game.fold(config)(config.updateFrom)
             sameOpponents = game.??(_.userIds)
-            hookResult <- env.processor.hook(hookConfig, Uid(uid), HTTPRequest sid ctx.req, blocking ++ sameOpponents)
+            hookResult <- env.processor.hook(hookConfig, Uid(uid), HTTPRequest sid ctx.req, blocking ++ sameOpponents, save = true)
           } yield hookResponse(hookResult)
         }
       }

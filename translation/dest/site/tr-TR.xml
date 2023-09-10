@@ -9,8 +9,8 @@
   <string name="yourTurn">Sıra sizde</string>
   <string name="aiNameLevelAiLevel">%1$s seviye %2$s</string>
   <string name="level">Seviye</string>
-  <string name="toggleTheChat">Sohbeti aç/kapat</string>
-  <string name="toggleSound">Sesi aç/kapat</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Sohbeti aç/kapat</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Sesi aç/kapat</string>
   <string name="chat">Sohbet</string>
   <string name="resign">Oyundan Çekil</string>
   <string name="white">Beyaz</string>
@@ -588,8 +588,6 @@
   <string name="connectedToLidraughts">Şimdi lidraughts.org\'a bağlandınız</string>
   <string name="signedOut">Zaten başarıyla çıkış yapmışsınız.</string>
   <string name="loginSuccessful">Giriş başarılı</string>
-  <string name="playOnTheBoardOffline">Tahta üzerinde çevrimdışı oyna</string>
-  <string name="playOfflineComputer">Bilgisayara Karşı</string>
   <string name="opponent">Rakip</string>
   <string name="learnMenu">Öğren</string>
   <string name="studyMenu">Çalışmalar</string>
@@ -598,8 +596,6 @@
   <string name="tools">Araçlar</string>
   <string name="increment">Artış</string>
   <string name="sharePDN">PDN \'yi paylaş</string>
-  <string name="playOnline">Çevrimiçi Oyna</string>
-  <string name="playOffline">Çevrimdışı Oyna</string>
   <string name="allowAnalytics">İstatistikleri paylaşmaya izin ver</string>
   <string name="shareGameURL">Oyun linkini paylaş</string>
   <string name="error.required">Bu alan gerekli</string>

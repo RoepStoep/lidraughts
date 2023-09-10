@@ -11,8 +11,8 @@
   <string name="yourTurn">À votre tour</string>
   <string name="aiNameLevelAiLevel">%1$s niveau %2$s</string>
   <string name="level">Niveau</string>
-  <string name="toggleTheChat">Activer/désactiver la discussion</string>
-  <string name="toggleSound">Activer/désactiver le son</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Activer/désactiver la discussion</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Activer/désactiver le son</string>
   <string name="chat">Discussion</string>
   <string name="resign">Abandonner</string>
   <string name="white">Blancs</string>
@@ -730,8 +730,6 @@ Une URL par ligne</string>
   <string name="connectedToLidraughts">Vous êtes maintenant connecté à lidraughts.org</string>
   <string name="signedOut">Vous vous êtes déconnecté</string>
   <string name="loginSuccessful">Vous êtes connecté</string>
-  <string name="playOnTheBoardOffline">Jouer hors ligne, avec un ami</string>
-  <string name="playOfflineComputer">Jouer hors ligne, avec l\'ordinateur</string>
   <string name="opponent">Adversaire</string>
   <string name="learnMenu">Apprendre</string>
   <string name="studyMenu">Étudier</string>
@@ -740,8 +738,6 @@ Une URL par ligne</string>
   <string name="tools">Outils</string>
   <string name="increment">Incrément</string>
   <string name="sharePDN">Partager le PDN</string>
-  <string name="playOnline">Jouer en ligne</string>
-  <string name="playOffline">Jouer hors ligne</string>
   <string name="allowAnalytics">Autoriser l\'envoi de statistiques anonymes</string>
   <string name="shareGameURL">Partager l\'URL de la partie</string>
   <string name="error.required">Ce champ est requis</string>

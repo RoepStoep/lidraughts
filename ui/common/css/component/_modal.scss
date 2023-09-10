@@ -12,7 +12,8 @@
     max-width: 100vw;
     max-height: 96vh;
     > div {
-      overflow: auto;
+      overflow: hidden;
+      overflow-y: auto;
     }
     .close {
       color: $c-font;

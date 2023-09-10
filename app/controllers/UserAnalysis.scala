@@ -98,10 +98,13 @@ object UserAnalysis extends LidraughtsController with TheftPrevention {
         negotiate(
           html =
             if (game.replayable) Redirect(routes.Round.watcher(game.id, color)).fuccess
-            else for {
-              initialFen <- GameRepo initialFen game.id
-              data <- Env.api.roundApi.userAnalysisJson(pov, ctx.pref, initialFen, pov.color, owner = isMyPov(pov), me = ctx.me)
-            } yield NoCache(Ok(html.board.userAnalysis(data, pov))),
+            else {
+              val owner = isMyPov(pov)
+              for {
+                initialFen <- GameRepo initialFen game.id
+                data <- Env.api.roundApi.userAnalysisJson(pov, ctx.pref, initialFen, pov.color, owner = owner, me = ctx.me)
+              } yield NoCache(Ok(html.board.userAnalysis(data, pov, withForecast = owner && !pov.game.synthetic && pov.game.playable)))
+            },
           api = apiVersion => mobileAnalysis(pov, apiVersion)
         )
       }
@@ -110,6 +113,7 @@ object UserAnalysis extends LidraughtsController with TheftPrevention {
 
   private def mobileAnalysis(pov: Pov, apiVersion: lidraughts.common.ApiVersion)(implicit ctx: Context): Fu[Result] =
     GameRepo initialFen pov.gameId flatMap { initialFen =>
+      val owner = isMyPov(pov)
       Game.preloadUsers(pov.game) zip
         (Env.analyse.analyser get pov.game) zip
         Env.game.crosstableApi(pov.game) zip
@@ -120,7 +124,8 @@ object UserAnalysis extends LidraughtsController with TheftPrevention {
               tv = none,
               analysis,
               initialFenO = initialFen.some,
-              withFlags = WithFlags(division = true, opening = true, clocks = true, movetimes = true)) map { data =>
+              withFlags = WithFlags(division = true, opening = true, clocks = true, movetimes = true),
+              owner = owner) map { data =>
                 Ok(data.add("crosstable", crosstable))
               }
         }

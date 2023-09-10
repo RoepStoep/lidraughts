@@ -202,6 +202,7 @@ module.exports = function(cfg, element) {
     var $timeInput = $form.find('.time_choice [name=time]');
     var $incrementInput = $form.find('.increment_choice [name=increment]');
     var $daysInput = $form.find('.days_choice [name=days]');
+    var $ratingRangeInput = $form.find('.rating-range [name=ratingRange]');
     var typ = $form.data('type');
     var isHook = typ === 'hook';
     var $ratings = $modal.find('.ratings > div');
@@ -264,6 +265,7 @@ module.exports = function(cfg, element) {
         key = variantKey(realVariant);
       }
       $ratings.hide().filter('.' + key).show();
+      $modal.find('.ratings input').val($ratings.find('.' + key + ' strong').text());
     };
     if (isHook) {
       if ($form.data('anon')) {
@@ -273,7 +275,17 @@ module.exports = function(cfg, element) {
           .attr('title', cfg.trans('youNeedAnAccountToDoThat'));
       }
       var ajaxSubmit = function(color) {
-        var poolMember = false; // hookToPoolMember(color, $form.serializeArray());
+        const poolMember = false; // hookToPoolMember(color, $form.serializeArray());
+        const rating = parseInt($modal.find('.ratings input').val()) || 1500;
+        const form = $form[0];
+        if (form.ratingRange !== undefined) {
+          const min = $ratingRangeInput.data("min") || 600;
+          const max = $ratingRangeInput.data("max") || 2900;
+          form.ratingRange.value = [
+            Math.max(min, rating + parseInt(form.ratingRange_range_min.value)), 
+            Math.min(max, rating + parseInt(form.ratingRange_range_max.value))
+          ].join('-');
+        }
         $.modal.close();
         var call = {
           url: $form.attr('action').replace(/uid-placeholder/, lidraughts.StrongSocket.sri),
@@ -339,26 +351,48 @@ module.exports = function(cfg, element) {
           }
         }));
       });
-      $form.find('.rating-range').each(function() {
-        var $this = $(this);
-        var $input = $this.find("input");
-        var $span = $this.siblings("span.range");
-        var min = $input.data("min");
-        var max = $input.data("max");
-        var values = $input.val() ? $input.val().split("-") : [min, max];
-
-        $span.text(values.join('–'));
-        $this.slider({
-          range: true,
-          min: min,
-          max: max,
-          values: values,
+      
+      const $ratingRange = $form.find('.rating-range'),
+        $minSlider = $ratingRange.find('.rating-slider-min'),
+        $maxSlider = $ratingRange.find('.rating-slider-max'),
+        $minInput = $minSlider.find('.rating-range__min'),
+        $maxInput = $maxSlider.find('.rating-range__max'),
+        minStorage = window.lidraughts.storage.make('lobby.ratingRange.min'),
+        maxStorage = window.lidraughts.storage.make('lobby.ratingRange.max');
+      const update = function() {
+        const min = minStorage.get() || '-500'
+        $ratingRange.find('.rating-min').text(`-${min.replace('-', '')}`)
+        $minInput.val(min)
+        const max = maxStorage.get() || '500'
+        $ratingRange.find('.rating-max').text(`+${max}`);
+        $maxInput.val(max)
+      }
+      update()
+      $minSlider.each(function() {
+        $(this).slider({
+          value: $minInput.val(),
+          min: -500,
+          max: 0,
           step: 50,
+          range: 'max',
           slide: function(event, ui) {
-            $input.val(ui.values[0] + "-" + ui.values[1]);
-            $span.text(ui.values[0] + "–" + ui.values[1]);
+            minStorage.set('' + ui.value)
+            update()
           }
-        });
+        })
+      });
+      $maxSlider.each(function() {
+        $(this).slider({
+          value: $maxInput.val(),
+          min: 0,
+          max: 500,
+          step: 50,
+          range: 'min',
+          slide: function(event, ui) {
+            maxStorage.set('' + ui.value)
+            update()
+          }
+        })
       });
     });
     $timeModeSelect.on('change', function() {

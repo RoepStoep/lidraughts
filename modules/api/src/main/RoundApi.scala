@@ -73,11 +73,15 @@ private[api] final class RoundApi(
         }
     }.mon(_.round.api.watcher)
 
-  def review(pov: Pov, apiVersion: ApiVersion,
+  def review(
+    pov: Pov,
+    apiVersion: ApiVersion,
     tv: Option[lidraughts.round.OnTv] = None,
     analysis: Option[Analysis] = None,
     initialFenO: Option[Option[FEN]] = None,
-    withFlags: WithFlags)(implicit ctx: Context): Fu[JsObject] =
+    withFlags: WithFlags,
+    owner: Boolean = false
+  )(implicit ctx: Context): Fu[JsObject] =
     initialFenO.fold(GameRepo initialFen pov.game)(fuccess).flatMap { initialFen =>
       jsonView.watcherJson(pov, ctx.pref, apiVersion, ctx.me, tv,
         initialFen = initialFen,
@@ -86,15 +90,17 @@ private[api] final class RoundApi(
         (pov.game.simulId ?? getSimul) zip
         swissApi.gameView(pov) zip
         ctx.userId.ifTrue(ctx.isMobileApi).?? { noteApi.get(pov.gameId, _) } zip
+        (owner.??(forecastApi loadForDisplay pov)) zip
         bookmarkApi.exists(pov.game, ctx.me) map {
-          case json ~ tour ~ simulOption ~ swissOption ~ note ~ bookmarked => (
+          case json ~ tour ~ simulOption ~ swissOption ~ note ~ fco ~ bookmarked => (
             withTournament(pov, tour) _ compose
             withSimul(pov, simulOption, false) _ compose
             withSwiss(swissOption) _ compose
             withNote(note) _ compose
             withBookmark(bookmarked) _ compose
             withTree(pov, analysis, initialFen, withFlags, pov.game.metadata.pdnImport.isDefined) _ compose
-            withAnalysis(pov.game, analysis, ctx.me ?? Granter(_.Hunter)) _
+            withAnalysis(pov.game, analysis, ctx.me ?? Granter(_.Hunter)) _ compose
+            withForecast(pov, owner, fco) _
           )(json)
         }
     }.mon(_.round.api.watcher)

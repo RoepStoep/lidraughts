@@ -11,8 +11,8 @@
   <string name="yourTurn">Je bent aan zet</string>
   <string name="aiNameLevelAiLevel">%1$s niveau %2$s</string>
   <string name="level">Niveau</string>
-  <string name="toggleTheChat">Chat aan-/uitzetten</string>
-  <string name="toggleSound">Geluid aan-/uitzetten</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Chat aan/uit</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Geluid aan/uit</string>
   <string name="chat">Chat</string>
   <string name="resign">Geef op</string>
   <string name="white">Wit</string>
@@ -731,8 +731,6 @@ Een URL per regel</string>
   <string name="connectedToLidraughts">Je bent nu verbonden met lidraughts.org</string>
   <string name="signedOut">Je bent uitgelogd</string>
   <string name="loginSuccessful">Inloggen succesvol</string>
-  <string name="playOnTheBoardOffline">Speel offline</string>
-  <string name="playOfflineComputer">Computer</string>
   <string name="opponent">Tegenstander</string>
   <string name="learnMenu">Leren</string>
   <string name="studyMenu">Studie</string>
@@ -741,8 +739,6 @@ Een URL per regel</string>
   <string name="tools">Gereedschap</string>
   <string name="increment">Extra tijd</string>
   <string name="sharePDN">Deel PDN</string>
-  <string name="playOnline">Speel online</string>
-  <string name="playOffline">Speel offline</string>
   <string name="allowAnalytics">Sta anonieme statistieken toe</string>
   <string name="shareGameURL">Deel partij URL</string>
   <string name="error.required">Dit invullen is verplicht</string>

@@ -30,16 +30,34 @@ object forms {
             renderRadios(form("mode"), translatedModeChoices)
           ),
           ctx.noBlind option div(cls := "optional_config")(
-            div(cls := "rating-range-config slider")(
+            div(cls := "rating-range-config")(
               trans.ratingRange(),
-              ": ",
-              span(cls := "range")("? - ?"),
-              div(cls := "rating-range")(
-                renderInput(form("ratingRange"))(
-                  dataMin := RatingRange.min,
-                  dataMax := RatingRange.max
+              div(cls := "rating-range") {
+                val field = form("ratingRange")
+                frag(
+                  renderInput(field)(
+                    dataMin := RatingRange.min,
+                    dataMax := RatingRange.max
+                  ),
+                  div(cls := "rating-slider-min slider")(
+                    input(
+                      name := s"${field.name}_range_min",
+                      tpe := "hidden",
+                      cls := "rating-range__min"
+                    )
+                  ),
+                  span(cls := "rating-min"),
+                  "/",
+                  span(cls := "rating-max"),
+                  div(cls := "rating-slider-max slider")(
+                    input(
+                      name := s"${field.name}_range_max",
+                      tpe := "hidden",
+                      cls := "rating-range__max"
+                    )
+                  )
                 )
-              )
+              }
             )
           )
         )
@@ -143,6 +161,7 @@ object forms {
       },
       ctx.me.ifFalse(ctx.blind).map { me =>
         div(cls := "ratings")(
+          form3.hidden("rating", "?"),
           lidraughts.rating.PerfType.nonPuzzle.map { perfType =>
             div(cls := perfType.key)(
               trans.perfRatingX(

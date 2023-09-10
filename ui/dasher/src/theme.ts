@@ -60,6 +60,7 @@ export function view(ctrl: ThemeCtrl): VNode {
 
 function themeView(current: Theme, set: (t: Theme) => void) {
   return (t: Theme) => h('a', {
+    attrs: { title: t.replace('_', ' ') },
     hook: bind('click', () => set(t)),
     class: { active: current === t }
   }, [

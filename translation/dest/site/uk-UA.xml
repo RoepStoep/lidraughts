@@ -9,8 +9,8 @@
   <string name="yourTurn">Ваш хід</string>
   <string name="aiNameLevelAiLevel">%1$s рівень %2$s</string>
   <string name="level">Рівень</string>
-  <string name="toggleTheChat">Вимк./увімк. чат</string>
-  <string name="toggleSound">Вимк./увімк. звук</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Вимк./увімк. чат</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Вимк./увімк. звук</string>
   <string name="chat">Чат</string>
   <string name="resign">Здатися</string>
   <string name="white">Білі</string>
@@ -628,8 +628,6 @@
   <string name="connectedToLidraughts">Ви з\'єднані з lidraughts.org</string>
   <string name="signedOut">Ви вийшли.</string>
   <string name="loginSuccessful">Вхід у систему успішно здійснений</string>
-  <string name="playOnTheBoardOffline">Грайте оффлайн на ґаджеті</string>
-  <string name="playOfflineComputer">Грати оффлайн з програмою</string>
   <string name="opponent">Суперник</string>
   <string name="learnMenu">Навчатися</string>
   <string name="studyMenu">Дослідження</string>
@@ -637,11 +635,9 @@
   <string name="community">Спільнота</string>
   <string name="tools">Інструменти</string>
   <string name="increment">Додати</string>
-  <string name="sharePDN">PDN</string>
-  <string name="playOnline">Гра онлайн</string>
-  <string name="playOffline">Гра оффлайн</string>
+  <string name="sharePDN">Поділитись PDN</string>
   <string name="allowAnalytics">Дозволити анонімну статистику</string>
-  <string name="shareGameURL">Відправити URL</string>
+  <string name="shareGameURL">Поділитись посиланням на гру</string>
   <string name="error.required">Це поле обов\'язкове</string>
   <string name="error.email">Ця адреса email помилкова</string>
   <string name="error.email_acceptable">Ця адреса email неприйнятна</string>

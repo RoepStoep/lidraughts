@@ -2,7 +2,7 @@
 <resources>
   <string name="learnDraughts">Học cờ đam</string>
   <string name="byPlaying">bằng cách chơi!</string>
-  <string name="menu">Menu</string>
+  <string name="menu">Mục lục</string>
   <string name="progressX">Tiến trình: %s</string>
   <string name="resetMyProgress">Đặt lại tiến trình của tôi</string>
   <string name="youWillLoseAllYourProgress">Bạn sẽ mất tất cả các thành tích của bạn!</string>
@@ -50,7 +50,7 @@ bất kỳ quân không được bảo vệ nào!</string>
   <string name="goToNextExercise">Đến bài học tiếp theo</string>
   <string name="loadNextExerciseImmediately">Tải bài học tiếp theo ngay lập tức</string>
   <string name="practiceList">Danh sách bài học</string>
-  <string name="backToPracticeMenu">Quay lại menu luyện tập</string>
+  <string name="backToPracticeMenu">Quay lại mục lục luyện tập</string>
   <string name="exerciseYourTacticalSkills">Luyện tập các kĩ năng chiến thuật của bạn</string>
   <string name="videos">Các video</string>
   <string name="watchInstructiveDraughtsVideos">Xem video hướng dẫn cờ đam</string>
@@ -59,7 +59,7 @@ bất kỳ quân không được bảo vệ nào!</string>
   <string name="playMachine">Đấu với máy</string>
   <string name="testYourSkillsWithTheComputer">Kiểm tra các kĩ năng của bạn với máy</string>
   <string name="letsGo">Bắt đầu nào!</string>
-  <string name="stageX">Giai đoạn %s</string>
+  <string name="stageX">Chặng %s</string>
   <string name="awesome">Tuyệt vời!</string>
   <string name="excellent">Xuất sắc!</string>
   <string name="greatJob">Làm tốt lắm!</string>
@@ -74,7 +74,7 @@ bất kỳ quân không được bảo vệ nào!</string>
   <string name="stageXComplete">Hoàn thành chặng %s</string>
   <string name="yourScore">Điểm của bạn</string>
   <string name="next">Tiếp</string>
-  <string name="backToMenu">Quay lại menu</string>
+  <string name="backToMenu">Quay lại mục lục</string>
   <string name="puzzleFailed">Giải sai!</string>
   <string name="retry">Thử lại</string>
   <string name="clickToRetry">Nhấn để thử lại</string>

@@ -11,24 +11,24 @@
   <string name="thankYou">Cảm ơn sự đóng góp của bạn!</string>
   <string name="youHaveLifetime">Bạn có một tài khoản Patron trọn đời. Khá là tuyệt vời đấy!</string>
   <string name="patronUntil">Bạn có tài khoản Patron cho đến %s.</string>
-  <string name="ifNotRenewed">Nếu không được gia hạn, bạn sẽ hạ cấp xuống tài khoản miễn phí.</string>
+  <string name="ifNotRenewed">Nếu không được gia hạn, bạn sẽ bị hạ cấp xuống tài khoản miễn phí.</string>
   <string name="weAreVolunteers">Chúng tôi là một hiệp hội phi lợi nhuận bởi vì chúng tôi tin rằng tất cả mọi người đều có thể có truy cập tới một nền tảng cờ đam đẳng cấp thế giới và miễn phí.</string>
   <string name="weRelyOnSupport">Chúng tôi dựa vào sự đóng góp từ những người như bạn. Nếu bạn thích sử dụng Lidraughts, hãy cân nhắc giúp đỡ chúng tôi thông qua việc quyên góp và trờ thành một Patron!</string>
   <string name="lifetime">Vĩnh viễn</string>
-  <string name="payLifetimeOnce">Đóng góp %s một lần. Trở thành Lidraughts Patron vĩnh viễn!</string>
+  <string name="payLifetimeOnce">Đóng góp %s một lần. Trở thành Lidraughts Patron trọn đời!</string>
   <string name="lifetimePatron">Lidraughts Patron Vĩnh Viễn</string>
   <string name="makeExtraDonation">Ủng hộ thêm nữa?</string>
   <string name="monthly">Hàng tháng</string>
-  <string name="recurringBilling">Trả tiền định kỳ, gia hạn đôi cánh Patron của bạn mỗi tháng.</string>
+  <string name="recurringBilling">Trả tiền định kỳ, gia hạn cánh Patron của bạn mỗi tháng.</string>
   <string name="onetime">Một lần</string>
   <string name="singleDonation">Đóng góp một lần cho bạn đôi cánh Patron trong vòng một tháng.</string>
   <string name="otherAmount">Khác</string>
   <string name="pleaseEnterAmount">Vui lòng nhập số tiền bằng EUR</string>
   <string name="withCreditCard">Thẻ Tín Dụng</string>
   <string name="withPaypal">Ủng hộ bằng PayPal</string>
-  <string name="donatingPubliclyAs">Đóng góp công khai dưới dạng %s</string>
+  <string name="donatingPubliclyAs">Đóng góp công khai với tài khoản %s</string>
   <string name="weAreSmallTeam">Chúng tôi là một đội nhỏ, vì vậy sự giúp đỡ của bạn tạo nên khác biệt rất lớn!</string>
-  <string name="celebratedPatrons">Những Patron nổi tiếng khiến cho Lidraughts thành hiện thực</string>
+  <string name="celebratedPatrons">Những Patron nổi tiếng biến cho Lidraughts thành hiện thực</string>
   <string name="whereMoneyGoes">Tiền được dùng để làm gi?</string>
   <string name="serversAndExpenses">Các máy chủ chạy lidraughts và phân tích động cơ Scan.
 Các chi phí hoạt động khác như mailgun và lưu trữ.</string>
@@ -63,9 +63,9 @@ Tuy nhiên, Patron được quyền khoe khoang với một huy hiệu mới.</s
   <string name="paid">Đã thanh toán</string>
   <string name="viewOthers">Xem các Lidraughts Patron khác</string>
   <string name="date">Ngày</string>
-  <string name="amount">Số lượng</string>
-  <string name="transactionCompleted">Giao dịch của bạn đã thành công, một hóa đơn cho quyên góp của bạn đã được email tới bạn.</string>
-  <string name="permanentPatron">Giờ bạn đã có một tài khoản Patron vĩnh viễn.</string>
+  <string name="amount">Số tiền</string>
+  <string name="transactionCompleted">Giao dịch của bạn đã hoàn thành và một hóa đơn cho quyên góp của bạn đã được gửi qua email tới bạn.</string>
+  <string name="permanentPatron">Giờ bạn đã có một tài khoản Patron trọn đời.</string>
   <string name="paypalRenew">Sau một tháng, PayPal sẽ tự động gia hạn khoản thanh toán của bạn.
 Để hủy hỗ trợ hàng tháng, hãy đăng nhập vào tài khoản PayPal của bạn và chuyển đến thanh toán tự động.</string>
   <string name="checkOutProfile">Hãy xem trang cá nhân của bạn!</string>

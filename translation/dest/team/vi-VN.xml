@@ -8,7 +8,7 @@
   <string name="allTeams">Tất cả đội</string>
   <string name="newTeam">Đội mới</string>
   <string name="myTeams">Đội của tôi</string>
-  <string name="noTeamFound">không tìm thấy đội</string>
+  <string name="noTeamFound">Không tìm thấy đội</string>
   <string name="joinTeam">Tham gia đội</string>
   <string name="quitTeam">Rời đội</string>
   <string name="anyoneCanJoin">Mở cho tất cả</string>
@@ -19,8 +19,8 @@
     <item quantity="other">Đội trưởng</item>
   </plurals>
   <string name="teamBestPlayers">Người chơi giỏi nhất</string>
-  <string name="teamRecentMembers">Thành viên của đội gần đây</string>
-  <string name="kickSomeone">Loại ai đó ra khỏi đội</string>
+  <string name="teamRecentMembers">Thành viên Đội gần đây</string>
+  <string name="kickSomeone">Đuổi ai đó ra khỏi đội</string>
   <string name="whoToKick">Ai là người bạn muốn loại khỏi đội?</string>
   <string name="deleteTeamWarning">Xóa nhóm và các thành viên của nhóm. Không thể hoàn nguyên!</string>
   <string name="appointOwner">Chỉ định người sở hữu đội khác</string>
@@ -45,6 +45,6 @@ Những người chơi không muốn nhận tin nhắn của bạn có thể s�
   <string name="teamsIlead">Những đội mà tôi làm đội trưởng</string>
   <string name="youMayWantToLinkOneOfTheseTournaments">Có thể bạn muốn đường dẫn tới một trong những giải đấu sắp tới?</string>
   <string name="usersWhoCanManageThisTeam">Những người dùng có thể quản lý đội này</string>
-  <string name="leadersChat">Trò chuyện của những đội trưởng</string>
+  <string name="leadersChat">Trò chuyện của đội trưởng</string>
   <string name="enableMembersChat">Bật phòng trò chuyện (chỉ dành cho thành viên)</string>
 </resources>

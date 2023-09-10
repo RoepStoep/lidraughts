@@ -167,7 +167,8 @@ final class JsonView(
             "player" -> {
               commonWatcherJson(game, player, playerUser, withFlags, isWfd) ++ Json.obj(
                 "version" -> socket.version.value,
-                "spectator" -> true
+                "spectator" -> true,
+                "id" -> me.flatMap(game.player).map(_.id)
               )
             }.add("onGame" -> (player.isAi || socket.onGame(player.color))),
             "opponent" -> commonWatcherJson(game, opponent, opponentUser, withFlags, isWfd).add("onGame" -> (opponent.isAi || socket.onGame(opponent.color))),

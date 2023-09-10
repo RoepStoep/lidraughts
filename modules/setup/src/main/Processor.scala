@@ -30,11 +30,12 @@ private[setup] final class Processor(
     configBase: HookConfig,
     uid: lidraughts.socket.Socket.Uid,
     sid: Option[String],
-    blocking: Set[String]
+    blocking: Set[String],
+    save: Boolean
   )(implicit ctx: UserContext): Fu[Processor.HookResult] = {
     import Processor.HookResult._
     val config = configBase.fixColor
-    saveConfig(_ withHook config) >> {
+    (if (save) saveConfig(_ withHook config) else funit) >> {
       config.hook(uid, ctx.me, sid, blocking) match {
         case Left(hook) => fuccess {
           bus.publish(AddHook(hook), 'lobbyTrouper)

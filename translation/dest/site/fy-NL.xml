@@ -9,8 +9,8 @@
   <string name="yourTurn">Dyn bar</string>
   <string name="aiNameLevelAiLevel">%1$s nivo %2$s</string>
   <string name="level">Nivo</string>
-  <string name="toggleTheChat">Skeakelje fan de chat</string>
-  <string name="toggleSound">Skeakelje fan it lûd</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Skeakelje fan de chat</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Skeakelje fan it lûd</string>
   <string name="resign">Opjaan</string>
   <string name="white">Wyt</string>
   <string name="black">Swart</string>

@@ -11,8 +11,8 @@
   <string name="yourTurn">Twój ruch</string>
   <string name="aiNameLevelAiLevel">%1$s poziom %2$s</string>
   <string name="level">Poziom</string>
-  <string name="toggleTheChat">Włącz/wyłącz czat</string>
-  <string name="toggleSound">Włącz/wyłącz dźwięk</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Włącz/wyłącz czat</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Włącz/wyłącz dźwięk</string>
   <string name="chat">Czat</string>
   <string name="resign">Poddaj się</string>
   <string name="white">Białe</string>
@@ -796,8 +796,6 @@ jeden adres URL na linię</string>
   <string name="connectedToLidraughts">Zostałeś połączony z lidraughts.org</string>
   <string name="signedOut">Wylogowałeś się</string>
   <string name="loginSuccessful">Jesteś zalogowany</string>
-  <string name="playOnTheBoardOffline">Graj offline</string>
-  <string name="playOfflineComputer">Zagraj z komputerem</string>
   <string name="opponent">Przeciwnik</string>
   <string name="learnMenu">Nauka</string>
   <string name="studyMenu">Opracowania</string>
@@ -805,9 +803,7 @@ jeden adres URL na linię</string>
   <string name="community">Społeczność</string>
   <string name="tools">Narzędzia</string>
   <string name="increment">Dodawany czas</string>
-  <string name="sharePDN">Udostępnij plik PDN</string>
-  <string name="playOnline">Graj online</string>
-  <string name="playOffline">Graj offline</string>
+  <string name="sharePDN">Udostępnij PDN</string>
   <string name="allowAnalytics">Wysyłaj anonimowe statystyki</string>
   <string name="shareGameURL">Udostępnij link do partii</string>
   <string name="error.required">To pole jest wymagane</string>

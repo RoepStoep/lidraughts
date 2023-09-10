@@ -11,8 +11,8 @@
   <string name="yourTurn">Ваш ход</string>
   <string name="aiNameLevelAiLevel">%1$s уровня %2$s</string>
   <string name="level">Уровень</string>
-  <string name="toggleTheChat">Показывать окно чата</string>
-  <string name="toggleSound">Вкл/выкл звук</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Показывать окно чата</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Вкл/выкл звук</string>
   <string name="chat">Отправить сообщение</string>
   <string name="resign">Сдаться</string>
   <string name="white">Белые</string>
@@ -653,6 +653,7 @@
   <string name="sequentialSwitch">Фиксированный порядок</string>
   <string name="puzzles">Задачи</string>
   <string name="variantPuzzles">%s задач</string>
+  <string name="variantPractice">%s упражнения</string>
   <string name="latestUpdates">Последние обновления</string>
   <string name="tournamentWinners">Победители турниров</string>
   <string name="name">Имя</string>
@@ -796,8 +797,6 @@
   <string name="connectedToLidraughts">Сейчас вы подключены к lidraughts.org</string>
   <string name="signedOut">Вы вышли</string>
   <string name="loginSuccessful">Вы вошли</string>
-  <string name="playOnTheBoardOffline">Вдвоём за доской</string>
-  <string name="playOfflineComputer">С компьютером</string>
   <string name="opponent">Соперник</string>
   <string name="learnMenu">Обучение</string>
   <string name="studyMenu">Студия</string>
@@ -806,8 +805,6 @@
   <string name="tools">Инструменты</string>
   <string name="increment">Добавка</string>
   <string name="sharePDN">Поделиться PDN</string>
-  <string name="playOnline">Играть онлайн</string>
-  <string name="playOffline">Играть офлайн</string>
   <string name="allowAnalytics">Разрешить анонимный сбор статистики</string>
   <string name="shareGameURL">Поделиться ссылкой на игру</string>
   <string name="error.required">Это обязательное поле</string>
@@ -955,6 +952,7 @@
   <string name="withEverybody">Со всеми</string>
   <string name="youHaveAlreadyRegisteredTheEmail">Вы уже зарегистрировали этот адрес: %s</string>
   <string name="kidMode">Детский режим</string>
+  <string name="kidModeIsEnabled">Детский режим включен.</string>
   <string name="kidModeExplanation">Это для безопасности. В детском режиме отключены все коммуникации на сайте. Включите его для ваших детей и учеников, чтобы защитить их от других пользователей интернета.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">В детском режиме к логотипу lidraughts добавляется значок в виде %s, чтобы вы знали, что ваши дети находятся в безопасности.</string>
   <string name="enableKidMode">Включить детский режим</string>
@@ -1154,4 +1152,18 @@
   <string name="thankYouForReading">Спасибо за внимание!</string>
   <string name="lifetimeScore">Счёт за всё время</string>
   <string name="currentMatchScore">Счёт в текущем матче</string>
+  <string name="welcomeToLidraughts">Добро пожаловать на lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">Это ваша страница профиля.</string>
+  <string name="wouldYouLikeToX">Хотите попробовать %s?</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">улучшить</string>
+  <string name="enabledKidModeSuggestion">Этой учетной записью будет пользоваться ребёнок? Возможно, вы захотите включить %s.</string>
+  <string name="whatNowSuggestions">Что теперь? Вот несколько предложений:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Улучшить с шашечными тактическими головоломками</string>
+  <string name="playTheAI">Сыграть с искусственным интеллектом</string>
+  <string name="playOpponentsWorldwide">Играть с соперниками со всего мира</string>
+  <string name="followFriends">Следите за друзьями в lidraughts</string>
+  <string name="playInTournaments">Играть в турнирах</string>
+  <string name="learnFromStudies">Учиться в классах</string>
+  <string name="configureLidraughts">Настроить lidraughts по вашему вкусу</string>
+  <string name="exploreTheSiteAndHaveFun">Исследуйте сайт и веселитесь :)</string>
 </resources>

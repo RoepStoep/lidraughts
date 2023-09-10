@@ -9,8 +9,8 @@
   <string name="yourTurn">Jste na tahu</string>
   <string name="aiNameLevelAiLevel">%1$s - úroveň %2$s</string>
   <string name="level">Úroveň</string>
-  <string name="toggleTheChat">Zapnout/vypnout chat</string>
-  <string name="toggleSound">Zapnout/vypnout zvuk</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Zapnout/vypnout chat</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Zapnout/vypnout zvuk</string>
   <string name="chat">Chat</string>
   <string name="resign">Vzdát se</string>
   <string name="white">Bílý</string>
@@ -514,7 +514,6 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="connectedToLidraughts">Nyní jste připojeni do lidraughts.org</string>
   <string name="signedOut">Byli jste odhlášeni.</string>
   <string name="loginSuccessful">Přihlášení úspěšné</string>
-  <string name="playOfflineComputer">Hraj proti počítači</string>
   <string name="opponent">Protihráč</string>
   <string name="learnMenu">Učit se</string>
   <string name="studyMenu">Studie</string>
@@ -523,8 +522,6 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="tools">Nástroje</string>
   <string name="increment">Navýšení</string>
   <string name="sharePDN">Sdílet PDN</string>
-  <string name="playOnline">Hrát online</string>
-  <string name="playOffline">Hrát offline</string>
   <string name="allowAnalytics">Povolit anonymní statistiky</string>
   <string name="shareGameURL">Sdílet URL hry</string>
   <string name="error.required">Toto pole je povinné</string>

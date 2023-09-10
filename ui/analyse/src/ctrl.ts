@@ -142,15 +142,15 @@ export default class AnalyseCtrl {
 
     if (this.forecast && this.data.game.turns) {
       if (!this.initialPath) {
-        this.initialPath = treeOps.takePathWhile(this.mainline, n => n.ply <= this.data.game.turns);
+        this.initialPath = treeOps.takePathWhile(this.mainline, n => n.ply <= this.data.game.turns)
       }
-      const gameNodeList = this.tree.getNodeList(this.initialPath),
-        skipNodes = this.tree.getCurrentNodesAfterPly(gameNodeList, this.mainline, this.data.game.turns);
-      let skipSteps = 0;
-      for (let skipNode of skipNodes) {
-        skipSteps += skipNode.uci ? (skipNode.uci.length - 2) / 2 : 1;
+      const gameNodeList = this.tree.getNodeList(this.initialPath)
+      const skipNodes = this.tree.getCurrentNodesAfterPly(gameNodeList, this.mainline, this.data.game.turns)
+      let skipSteps = 0
+      for (const skipNode of skipNodes) {
+        skipSteps += skipNode.uci ? (skipNode.uci.length - 2) / 2 : 1
       }
-      this.forecast.skipSteps = skipSteps;
+      this.forecast.skipSteps = skipSteps
     }
 
     this.study = opts.study ? makeStudy(opts.study, this, (opts.tagTypes || '').split(','), opts.practice, opts.relay) : undefined;

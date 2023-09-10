@@ -24,11 +24,12 @@ export function fenFromTag(tag: string) {
   return tag.slice(fenStart + 1, fenEnd);
 }
 
-export function san2alg(san?: string): string | undefined {
-  if (!san) return undefined
-  const capture = san.indexOf('x'),
-    split = capture === -1 ? san.indexOf('-') : capture;
-  return san2algMap[san.slice(0, split)] + (capture === -1 ? '-' : ':') + san2algMap[san.slice(split + 1)];
+export function san2alg(san?: string): string {
+  if (!san) return ''
+  const capture = san.includes('x'),
+    fields = san.split(capture ? 'x' : '-'),
+    algs = fields.map(f => san2algMap[f])
+  return algs.join(capture ? ':' : '-')
 }
 
 export function renderEval(e: number): string {

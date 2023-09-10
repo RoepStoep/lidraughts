@@ -9,8 +9,8 @@
   <string name="yourTurn">あなたの手番です</string>
   <string name="aiNameLevelAiLevel">%1$s レべル %2$s</string>
   <string name="level">レベル</string>
-  <string name="toggleTheChat">チャットのオン・オフ</string>
-  <string name="toggleSound">音声のオン・オフ</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">チャットのオン・オフ</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">音声のオン・オフ</string>
   <string name="chat">チャット</string>
   <string name="resign">投了</string>
   <string name="white">白</string>
@@ -562,8 +562,6 @@
   <string name="connectedToLidraughts">lidraughts.org に接続しています。</string>
   <string name="signedOut">サインアウトしました。</string>
   <string name="loginSuccessful">ログインしました</string>
-  <string name="playOnTheBoardOffline">オフライン（2人対戦）</string>
-  <string name="playOfflineComputer">オフラインでＣＰＵと対戦する</string>
   <string name="opponent">対戦相手</string>
   <string name="learnMenu">学ぶ</string>
   <string name="studyMenu">研究</string>
@@ -572,8 +570,6 @@
   <string name="tools">ツール</string>
   <string name="increment">追加時間</string>
   <string name="sharePDN">PDNを表示</string>
-  <string name="playOnline">オンラインでプレイする</string>
-  <string name="playOffline">オフラインでプレイする</string>
   <string name="allowAnalytics">無名な統計情報を許す？</string>
   <string name="shareGameURL">ゲームのURLを共有</string>
   <string name="error.required">この欄は入力必須です</string>

@@ -4,15 +4,21 @@ import { initialFen } from 'draughts';
 import { MaybeVNodes } from './interfaces';
 import { ops as treeOps } from 'tree';
 import { toggleCoordinates } from 'draughtsground/fen';
+import { san2alg } from 'draughts';
 
 interface PdnNode {
   ply: Ply;
   displayPly?: Ply;
   san?: San;
-  alg?: string;
 }
 
-function renderNodesTxt(nodes: PdnNode[]): string {
+type Move = {
+  index: number;
+  white: San | null;
+  black: San | null;
+}
+
+function renderNodesTxt(nodes: PdnNode[], algebraic: boolean): string {
   if (!nodes[0]) return '';
   if (!nodes[0].san) nodes = nodes.slice(1);
   if (!nodes[0]) return '';
@@ -20,15 +26,14 @@ function renderNodesTxt(nodes: PdnNode[]): string {
   nodes.forEach(function (node, i) {
     if (node.ply === 0) return;
     if (node.ply % 2 === 1) s += ((node.ply + 1) / 2) + '. '
-    else s += '';
-    s += (node.alg ? node.alg.replace(':', 'x') : node.san!) + ((i + 9) % 8 === 0 ? '\n' : ' ');
+    s += (algebraic ? san2alg(node.san) : node.san) + ((i + 9) % 8 === 0 ? '\n' : ' ');
   });
   return s.trim();
 }
 
 export function renderFullTxt(ctrl: AnalyseCtrl, fromNode?: boolean): string {
   var g = ctrl.data.game;
-  var txt = renderNodesTxt(fromNode ? treeOps.mainlineNodeList(ctrl.node) : ctrl.tree.getNodeList(ctrl.path));
+  var txt = renderNodesTxt(fromNode ? treeOps.mainlineNodeList(ctrl.node) : ctrl.tree.getNodeList(ctrl.path), ctrl.isAlgebraic());
   var tags: Array<[string, string]> = [];
   if (g.variant.key !== 'standard' && g.variant.key !== 'fromPosition') {
     tags.push(g.variant.gameType ? ['GameType', g.variant.gameType] : ['Variant', g.variant.name]);
@@ -45,35 +50,67 @@ export function renderFullTxt(ctrl: AnalyseCtrl, fromNode?: boolean): string {
   return txt;
 }
 
-export function renderNodesHtml(nodes: PdnNode[]): MaybeVNodes {
+function groupMoves(nodes: PdnNode[]): Move[] {
+  const moves: Move[] = []
+  const startPly = nodes[0].displayPly || nodes[0].ply
 
-  if (!nodes[0]) return [];
-  if (!nodes[0].san) nodes = nodes.slice(1);
-  if (!nodes[0]) return [];
-
-  var lastIndex = -1;
-
-  const tags: MaybeVNodes = [], startply = (nodes[0].displayPly ? nodes[0].displayPly : nodes[0].ply);
-  if (startply && startply % 2 === 0) {
-    lastIndex = Math.floor((startply + 1) / 2);
-    tags.push(h('index', lastIndex + '...'));
+  let lastIndex = -1
+  if (startPly % 2 === 0) {
+    // black is the first move
+    lastIndex = Math.floor((startPly + 1) / 2)
+    moves.push({
+      index: lastIndex,
+      black: nodes[0].san!,
+      white: null,
+    })
+    nodes = nodes.slice(1)
   }
 
   nodes.forEach(node => {
+    const dply = node.displayPly || node.ply
+    if (dply === 0 || !node.san) return
 
-    const dply = node.displayPly ? node.displayPly : node.ply;
-    if (dply === 0) return;
-
-    const cindex = (dply + 1) / 2;
+    const cindex = (dply + 1) / 2
     if (cindex !== lastIndex && dply % 2 === 1) {
-      tags.push(h('index', cindex + '.'));
-      lastIndex = cindex;
+      moves.push({
+        index: cindex,
+        white: node.san,
+        black: null,
+      })
+      lastIndex = cindex
+    } else {
+      const curMove = moves[moves.length - 1]
+      if (dply % 2 === 1) {
+        if (node.san.includes('x')) {
+          curMove.white += node.san.slice(node.san.indexOf('x'))
+        } else {
+          curMove.white += ` ${node.san}`
+        }
+      } else {
+        if (!curMove.black) {
+          curMove.black = node.san  
+        } else if (node.san.includes('x')) {
+          curMove.black += node.san.slice(node.san.indexOf('x'))
+        } else {
+          curMove.black += ` ${node.san}`
+        }
+      }
     }
+  })
 
-    tags.push(h('san', node.san!));
+  return moves
+}
 
-  });
+export function renderNodesHtml(nodes: PdnNode[], algebraic: boolean): MaybeVNodes {
+  if (!nodes[0]) return []
+  if (!nodes[0].san) nodes = nodes.slice(1)
+  if (!nodes[0]) return []
 
-  return tags;
-
+  const tags: MaybeVNodes = []
+  groupMoves(nodes).forEach(({ black, white, index }) => {
+    tags.push(h('index', index + (white ? '.' : '...')))
+    if (white) tags.push(h('san', algebraic ? san2alg(white) : white))
+    if (black) tags.push(h('san', algebraic ? san2alg(black) : black))
+  })
+  return tags
 }

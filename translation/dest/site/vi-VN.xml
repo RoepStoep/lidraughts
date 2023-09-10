@@ -11,8 +11,8 @@
   <string name="yourTurn">Đến lượt bạn</string>
   <string name="aiNameLevelAiLevel">%1$s cấp độ %2$s</string>
   <string name="level">Cấp độ</string>
-  <string name="toggleTheChat">Bật/tắt chat</string>
-  <string name="toggleSound">Bật/Tắt âm thanh</string>
+  <string name="toggleTheChat" comment="Setting to enable/disable the chat">Bật/tắt chat</string>
+  <string name="toggleSound" comment="Setting to enable/disable sound">Bật/Tắt âm thanh</string>
   <string name="chat">Trò chuyện</string>
   <string name="resign">Bỏ cuộc</string>
   <string name="white">Trắng</string>
@@ -262,7 +262,7 @@
   <string name="recipient">Người nhận</string>
   <string name="send">Gửi</string>
   <string name="incrementInSeconds">Thêm giây</string>
-  <string name="freeOnlineDraughts">Chơi Cờ Đam Miễn Phí</string>
+  <string name="freeOnlineDraughts">Chơi Cờ Đam Trực Tuyến Miễn Phí</string>
   <string name="spectators">Người xem:</string>
   <plurals name="nbRated">
     <item quantity="other">%s tính elo</item>
@@ -342,7 +342,7 @@
   <string name="mustBeInTeam">Phải ở trong đội %s</string>
   <string name="youAreNotInTeam">Bạn không ở trong đội %s</string>
   <string name="backToGame">Quay lại ván đấu</string>
-  <string name="siteDescription">Máy chủ cờ đam trực tuyến miễn phí. Chơi cờ đam trong một giao diện rõ ràng. Không đăng ký, không quảng cáo, không cần plugin. Chơi cờ đam trong các giải đấu, với bạn bè hoặc với các đối thủ ngẫu nhiên.</string>
+  <string name="siteDescription">Máy chủ cờ đam trực tuyến miễn phí. Chơi cờ đam với giao diện đẹp. Không cần đăng ký, không quảng cáo, không yêu cầu plugin. Chơi cờ đam trong các giải đấu, với bạn bè hoặc với các đối thủ ngẫu nhiên.</string>
   <string name="xJoinedTeamY">%1$s tham gia đội %2$s</string>
   <string name="xCreatedTeamY">%1$s tạo đội %2$s</string>
   <string name="xStartedStreaming">%s đã bắt đầu phát trực tuyến</string>
@@ -674,12 +674,10 @@ Một đường dẫn mỗi dòng</string>
   <string name="youPlayTheBlackPieces">Bạn chơi quân đen</string>
   <string name="itsYourTurn">Đến lượt bạn!</string>
   <string name="unauthorizedError">Không có quyền truy cập.</string>
-  <string name="noInternetConnection">Không có kết nối mạng. Bạn vẫn có thể chơi ngoại tuyến từ menu.</string>
+  <string name="noInternetConnection">Không có kết nối mạng. Bạn vẫn có thể chơi ngoại tuyến từ mục lục.</string>
   <string name="connectedToLidraughts">Bây giờ bạn đã kết nối với lidraughts.org</string>
   <string name="signedOut">Bạn đã đăng xuất</string>
   <string name="loginSuccessful">Bây giờ bạn đã đăng nhập thành công</string>
-  <string name="playOnTheBoardOffline">Chơi ngoại tuyến trên bàn cờ</string>
-  <string name="playOfflineComputer">Máy tính</string>
   <string name="opponent">Đối thủ</string>
   <string name="learnMenu">Học</string>
   <string name="studyMenu">Nghiên cứu</string>
@@ -688,8 +686,6 @@ Một đường dẫn mỗi dòng</string>
   <string name="tools">Công cụ</string>
   <string name="increment">Tăng thêm</string>
   <string name="sharePDN">Chia sẻ PDN</string>
-  <string name="playOnline">Chơi trực tuyến</string>
-  <string name="playOffline">Chơi ngoại tuyến</string>
   <string name="allowAnalytics">Cho phép thống kê ẩn danh</string>
   <string name="shareGameURL">Chia sẻ link ván cờ</string>
   <string name="error.required">Mục bắt buộc</string>
@@ -714,7 +710,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="tpTimeSpentOnTV">Thời gian được lên Lidraughts TV: %s</string>
   <string name="watch">Xem</string>
   <string name="videoLibrary">Thư viện video</string>
-  <string name="streamersMenu">Các streamer</string>
+  <string name="streamersMenu">Các Streamer</string>
   <string name="mobileApp">Ứng dụng Điện thoại</string>
   <string name="webmasters">Các quản trị viên</string>
   <string name="about">Giới thiệu</string>

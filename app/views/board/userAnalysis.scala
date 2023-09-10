@@ -12,11 +12,11 @@ import controllers.routes
 
 object userAnalysis {
 
-  def apply(data: JsObject, pov: lidraughts.game.Pov)(implicit ctx: Context) = views.html.base.layout(
+  def apply(data: JsObject, pov: lidraughts.game.Pov, withForecast: Boolean = false)(implicit ctx: Context) = views.html.base.layout(
     title = trans.analysis.txt(),
     moreCss = frag(
       cssTag("analyse.free"),
-      !pov.game.synthetic && pov.game.playable && ctx.me.flatMap(pov.game.player).isDefined option cssTag("analyse.forecast"),
+      withForecast option cssTag("analyse.forecast"),
       ctx.blind option cssTag("round.nvui")
     ),
     moreJs = frag(
@@ -25,9 +25,7 @@ object userAnalysis {
       embedJsUnsafe(s"""lidraughts=lidraughts||{};lidraughts.user_analysis=${
         safeJsonValue(Json.obj(
           "data" -> data,
-          "i18n" -> userAnalysisI18n(
-            withForecast = !pov.game.synthetic && pov.game.playable && ctx.me.flatMap(pov.game.player).isDefined
-          ),
+          "i18n" -> userAnalysisI18n(withForecast = withForecast),
           "explorer" -> Json.obj(
             "endpoint" -> explorerEndpoint,
             "tablebaseEndpoint" -> tablebaseEndpoint
