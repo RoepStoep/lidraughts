@@ -55,10 +55,10 @@ final class CSRFRequestHandler(domain: String, enabled: Boolean) {
            */
         if (isSocket(req)) {
           lidraughts.mon.http.csrf.websocket()
-          logger.info(s"WS ${print(req)}")
+          logger.info(s"WS ${origin(req)}: ${print(req)}")
         } else {
           lidraughts.mon.http.csrf.forbidden()
-          logger.info(print(req))
+          logger.info(s"${origin(req)}: ${print(req)}")
         }
         !enabled
     }
