@@ -627,6 +627,7 @@
   <string name="tools">Інструменты</string>
   <string name="increment">Прырост</string>
   <string name="sharePDN">Падзяліцца PDN</string>
+  <string name="shareFEN">Падзяліцца FEN</string>
   <string name="allowAnalytics">Дазволіць збор ананімнай статыстыкі</string>
   <string name="shareGameURL">Падзяліцца спасылкай на гульню</string>
   <string name="error.required">Абавязковае поле</string>

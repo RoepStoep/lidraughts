@@ -738,6 +738,7 @@
   <string name="tools">Εργαλεία</string>
   <string name="increment">Προσαύξηση</string>
   <string name="sharePDN">Κοινοποίηση PDN</string>
+  <string name="shareFEN">Κοινοποίηση FEN</string>
   <string name="allowAnalytics">Επιτρέψτε την αποστολή ανώνυμων στατιστικών</string>
   <string name="shareGameURL">Κοινοποιήστε URL παιχνιδιού</string>
   <string name="error.required">Αυτό το πεδίο είναι υποχρεωτικό</string>

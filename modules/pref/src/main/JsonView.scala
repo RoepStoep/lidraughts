@@ -28,6 +28,8 @@ object JsonView {
       "destination" -> p.destination,
       "coords" -> p.coords,
       "replay" -> p.replay,
+      "gameResult" -> p.gameResult,
+      "coordSystem" -> p.coordSystem,
       "challenge" -> p.challenge,
       "message" -> p.message,
       "coordColor" -> p.coordColor,

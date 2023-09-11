@@ -404,6 +404,8 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="studyMenu">Stúdzje</string>
   <string name="practice">Oefenje</string>
   <string name="increment">Tafoeging per set</string>
+  <string name="sharePDN">Diel PDN</string>
+  <string name="shareFEN">Diel FEN</string>
   <string name="everyone">Elkenien</string>
   <string name="tournamentNotFound">Toernoai net fûn</string>
   <string name="tournamentDoesNotExist">Dizze toernoai bestiet net.</string>

@@ -583,6 +583,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="tools">Herramientas</string>
   <string name="increment">Incremento</string>
   <string name="sharePDN">Compartir PDN</string>
+  <string name="shareFEN">Compartir FEN</string>
   <string name="allowAnalytics">Permitir estadísticas anónimas</string>
   <string name="shareGameURL">Compartir el enlace del juego</string>
   <string name="error.required">Este campo es obligatorio</string>

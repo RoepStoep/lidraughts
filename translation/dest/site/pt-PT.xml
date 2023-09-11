@@ -661,6 +661,7 @@ Um URL por linha</string>
   <string name="tools">Ferramentas</string>
   <string name="increment">Incremento</string>
   <string name="sharePDN">Compartilhar PDN</string>
+  <string name="shareFEN">Compartilhar FEN</string>
   <string name="allowAnalytics">Permitir estatísticas anónimas</string>
   <string name="shareGameURL">Compartilhar URL do Jogo</string>
   <string name="error.required">Este campo deve ser preenchido</string>

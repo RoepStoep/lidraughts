@@ -83,26 +83,28 @@ private[api] final class RoundApi(
     owner: Boolean = false
   )(implicit ctx: Context): Fu[JsObject] =
     initialFenO.fold(GameRepo initialFen pov.game)(fuccess).flatMap { initialFen =>
-      jsonView.watcherJson(pov, ctx.pref, apiVersion, ctx.me, tv,
-        initialFen = initialFen,
-        withFlags = withFlags.copy(blurs = ctx.me ?? Granter(_.ViewBlurs))) zip
-        tourApi.gameView.analysis(pov.game) zip
-        (pov.game.simulId ?? getSimul) zip
-        swissApi.gameView(pov) zip
-        ctx.userId.ifTrue(ctx.isMobileApi).?? { noteApi.get(pov.gameId, _) } zip
-        (owner.??(forecastApi loadForDisplay pov)) zip
-        bookmarkApi.exists(pov.game, ctx.me) map {
-          case json ~ tour ~ simulOption ~ swissOption ~ note ~ fco ~ bookmarked => (
-            withTournament(pov, tour) _ compose
-            withSimul(pov, simulOption, false) _ compose
-            withSwiss(swissOption) _ compose
-            withNote(note) _ compose
-            withBookmark(bookmarked) _ compose
-            withTree(pov, analysis, initialFen, withFlags, pov.game.metadata.pdnImport.isDefined) _ compose
-            withAnalysis(pov.game, analysis, ctx.me ?? Granter(_.Hunter)) _ compose
-            withForecast(pov, owner, fco) _
-          )(json)
-        }
+      tourApi.gameView.analysis(pov.game) flatMap { tour =>
+        jsonView.watcherJson(pov, ctx.pref, apiVersion, ctx.me, tv,
+          initialFen = initialFen,
+          withFlags = withFlags.copy(blurs = ctx.me ?? Granter(_.ViewBlurs)),
+          isWfd = pov.game.isWfd || ~tour.map(_.tour.isWfd)) zip
+          (pov.game.simulId ?? getSimul) zip
+          swissApi.gameView(pov) zip
+          ctx.userId.ifTrue(ctx.isMobileApi).?? { noteApi.get(pov.gameId, _) } zip
+          (owner.??(forecastApi loadForDisplay pov)) zip
+          bookmarkApi.exists(pov.game, ctx.me) map {
+            case json ~ simulOption ~ swissOption ~ note ~ fco ~ bookmarked => (
+              withTournament(pov, tour) _ compose
+              withSimul(pov, simulOption, false) _ compose
+              withSwiss(swissOption) _ compose
+              withNote(note) _ compose
+              withBookmark(bookmarked) _ compose
+              withTree(pov, analysis, initialFen, withFlags, pov.game.metadata.pdnImport.isDefined) _ compose
+              withAnalysis(pov.game, analysis, ctx.me ?? Granter(_.Hunter)) _ compose
+              withForecast(pov, owner, fco) _
+            )(json)
+          }
+      }
     }.mon(_.round.api.watcher)
 
   def embed(pov: Pov, apiVersion: ApiVersion,
@@ -213,6 +215,7 @@ private[api] final class RoundApi(
         .add("team", v.teamVs.map(_.teams(pov.color)) map { id =>
           Json.obj("name" -> getTeamName(id))
         })
+        .add("isWfd" -> v.tour.isWfd.option(true))
     })
 
   def withSwiss(sv: Option[SwissView])(json: JsObject) =

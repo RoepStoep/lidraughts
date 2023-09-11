@@ -138,7 +138,7 @@ object Tournament extends LidraughtsController {
             )
             chat <- loadChat(tour, json)
           } yield Ok(json.add("chat" -> chat.map { c =>
-            lidraughts.chat.JsonView.mobile(chat = c.chat)
+            lidraughts.chat.JsonView.mobile(chat = c.chat.pimp(tour.isWfd option Env.user.wfdUsername))
           }))
         }.mon(_.http.response.tournament.show.mobile)
       ) map { NoCache(_) }

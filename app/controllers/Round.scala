@@ -240,8 +240,9 @@ object Round extends LidraughtsController with TheftPrevention {
           analysis <- analyser get pov.game
           chat <- getWatcherChat(pov.game)
         } yield Ok {
+          val pimpChat: Option[String => Option[String]] = pov.game.isWfd option Env.user.wfdUsername
           data
-            .add("chat" -> chat.map(c => lidraughts.chat.JsonView(c.chat)))
+            .add("chat" -> chat.map(c => lidraughts.chat.JsonView(c.chat.pimp(pimpChat))))
             .add("analysis" -> analysis.map(a => lidraughts.analyse.JsonView.mobile(pov.game, a)))
         }
       ) map NoCache

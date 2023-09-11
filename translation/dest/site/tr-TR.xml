@@ -596,6 +596,7 @@
   <string name="tools">Araçlar</string>
   <string name="increment">Artış</string>
   <string name="sharePDN">PDN \'yi paylaş</string>
+  <string name="shareFEN">FEN \'yi paylaş</string>
   <string name="allowAnalytics">İstatistikleri paylaşmaya izin ver</string>
   <string name="shareGameURL">Oyun linkini paylaş</string>
   <string name="error.required">Bu alan gerekli</string>

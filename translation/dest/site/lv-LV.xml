@@ -701,6 +701,7 @@ Vienā līnijā  - tikai vienu norādi.</string>
   <string name="tools">Rīki</string>
   <string name="increment">Inkrements</string>
   <string name="sharePDN">Dalīties ar PDN</string>
+  <string name="shareFEN">Dalīties ar FEN</string>
   <string name="allowAnalytics">Atļaut anonīmu datu nosūtīšanu</string>
   <string name="shareGameURL">Dalīties ar spēles URL</string>
   <string name="error.required">Šis lauks ir obligāts</string>

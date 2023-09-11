@@ -18,6 +18,12 @@
   <string name="white">Trắng</string>
   <string name="black">Đen</string>
   <string name="randomColor">Chọn màu quân ngẫu nhiên</string>
+  <string name="microMatch">Trận đấu vi mô</string>
+  <string name="microMatchChallenge">Thử thách này là một trận đấu vi mô!</string>
+  <string name="microMatchExplanation">Một trận tái đấu có màu đảo ngược sẽ được diễn ra ngay sau trận đấu này.</string>
+  <string name="microMatchRematchStarted">Bắt đầu trận đấu vi mô thứ hai</string>
+  <string name="microMatchRematchAwaiting">Đang chờ trận đấu vi mô thứ hai</string>
+  <string name="microMatchGameX">Trận đấu vi mô %s</string>
   <string name="createAGame">Khởi tạo ván cờ</string>
   <string name="whiteIsVictorious">Bên Trắng thắng</string>
   <string name="blackIsVictorious">Bên Đen thắng</string>
@@ -205,6 +211,8 @@
   </plurals>
   <string name="cancel">Hủy bỏ</string>
   <string name="timeOut">Hết giờ</string>
+  <string name="arbiterDraw">Được giải quyết bằng một trận hòa bởi trọng tài simul</string>
+  <string name="arbiterResign">Được giải quyết bằng một trận thắng bởi trọng tài simul</string>
   <string name="drawOfferSent">Đã gửi đề nghị hòa</string>
   <string name="drawOfferDeclined">Từ chối hoà</string>
   <string name="drawOfferAccepted">Đồng ý hoà</string>
@@ -283,6 +291,7 @@
     <item quantity="other">%s đang chơi</item>
   </plurals>
   <string name="exportGames">Xuất biên bản</string>
+  <string name="exportSimulGames">Xuất các ván cờ đồng loạt</string>
   <string name="ratingRange">Phạm vi Elo</string>
   <plurals name="giveNbSeconds">
     <item quantity="other">Cho thêm %s giây</item>
@@ -432,8 +441,10 @@ phân tích bằng máy tính, trò chuyện tong ván đấu và URL có thể 
   <string name="conditionOfEntry">Điều kiện tham gia:</string>
   <string name="advancedSettings">Thiết lập cao cấp</string>
   <string name="safeTournamentName">Hãy chọn tên chuẩn mực cho giải đấu.</string>
+  <string name="safeSimulName">Hãy chọn tên chuẩn mực cho sự kiện.</string>
   <string name="inappropriateNameWarning">Một hành động dù chỉ một chút không thích hợp, tài khoản của bạn có thể bị khoá.</string>
   <string name="emptyTournamentName">Hãy để trống để lấy tên theo tên một người chơi đáng chú ý.</string>
+  <string name="emptySimulName">Để trống để đặt tên sự kiện theo tên một nguyên tố hóa học ngẫu nhiên.</string>
   <string name="recommendNotTouching">Chúng tôi khuyến nghị không nên thay đổi.</string>
   <string name="fewerPlayers">Nếu bạn thiết lập điều kiện tham gia, giải của bạn sẽ có ít người chơi hơn.</string>
   <string name="showAdvancedSettings">Hiện thiết lập mở rộng</string>
@@ -495,7 +506,12 @@ Một đường dẫn mỗi dòng</string>
   <string name="watchLidraughtsTV">Xem Lidraughts TV</string>
   <string name="previouslyOnLidraughtsTV">Các ván trước đó được lên Lidraughts TV</string>
   <string name="collection">Danh mục</string>
+  <string name="customGamesCollection">Bộ sưu tập ván cờ tùy chỉnh</string>
+  <string name="editCollection">Chỉnh sửa bộ sưu tập</string>
+  <string name="copyCollectionUrl">Sao chép URL bộ sưu tập</string>
   <string name="reloadBoards">Tải lại thế trận ban đầu</string>
+  <string name="reloadBoardsExplanation">Tải lại tất cả các bàn cờ đã hoàn thành với ván đấu hiện đang diễn ra của cùng một người chơi (nếu có).</string>
+  <string name="reloadWithCurrentGameOfX">Tải lại ván cờ hiện tại của %s</string>
   <string name="addOngoingOrRecentGame">Thêm ván đấu gần đây nhất mà ai đó đã chơi (ván cờ hiện tại của họ hoặc trò chơi đã hoàn thành gần đây nhất).</string>
   <string name="addGameByUrlOrId">Thêm ván cờ theo URL hoặc ID ván cờ.</string>
   <string name="removeGame">Xóa ván cờ</string>
@@ -597,9 +613,12 @@ Một đường dẫn mỗi dòng</string>
   <string name="newPassword">Nhập mật khẩu mới</string>
   <string name="newPasswordAgain">Nhập (lại) mật khẩu mới</string>
   <string name="newPasswordsDontMatch">Mật khẩu mới không khớp nhau</string>
+  <string name="boardHighlights">Đánh dấu trên bàn cờ (nước đi mới nhất)</string>
   <string name="pieceDestinations">Các điểm đến của quân cờ (các nước đi hợp lý và nước đi trước)</string>
   <string name="boardCoordinates">Tọa độ bàn cờ (1-50, a1-h8)</string>
   <string name="coordinateSystem8x8">Tọa độ trên bàn cờ 8x8</string>
+  <string name="fieldnumbers8x8">Kí hiệu số (1-32)</string>
+  <string name="algebraic8x8">Kí hiệu đại số (a-h, 1-8)</string>
   <string name="moveListWhilePlaying">Biên bản ván đấu khi chơi</string>
   <string name="notationGameResult">Kí hiệu kết quả ván đấu (trắng thắng • hòa • đen thắng)</string>
   <string name="draughtsClock">Đồng hồ cờ đam</string>
@@ -610,6 +629,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="tenthsOfSeconds">Một phần mười giây</string>
   <string name="never">Không bao giờ</string>
   <string name="whenTimeRemainingLessThanTenSeconds">Khi thời gian còn lại &lt; 10 giây</string>
+  <string name="howDoYouPlayMultiCaptures">Làm cách nào để bạn chơi tính năng chụp nhiều quân trên bảng phân tích?</string>
   <string name="stepByStep">Từng bước một</string>
   <string name="allAtOnce">Tất cả cùng một lúc</string>
   <string name="horizontalGreenProgressBars">Thanh tiến trình ngang màu xanh</string>
@@ -686,6 +706,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="tools">Công cụ</string>
   <string name="increment">Tăng thêm</string>
   <string name="sharePDN">Chia sẻ PDN</string>
+  <string name="shareFEN">Chia sẻ FEN</string>
   <string name="allowAnalytics">Cho phép thống kê ẩn danh</string>
   <string name="shareGameURL">Chia sẻ link ván cờ</string>
   <string name="error.required">Mục bắt buộc</string>
@@ -725,10 +746,12 @@ Một đường dẫn mỗi dòng</string>
   <string name="simultaneousExhibitions">Sự kiện cờ đồng loạt</string>
   <string name="simulDescription">Mô tả sự kiện cờ đồng loạt</string>
   <string name="simulDescriptionHelp">Bạn có muốn nói điều gì với những người tham gia không?</string>
+  <string name="yourPendingSimuls">Sự kiện đồng loạt đang chờ xử lý của bạn</string>
   <string name="host">Người chủ trì</string>
   <string name="hostColorX">Màu quân của người chủ trì: %s</string>
   <string name="createdSimuls">Cờ đồng loạt mới tạo</string>
   <string name="hostANewSimul">Chủ trì một sự kiện cờ đồng loạt mới</string>
+  <string name="candidatePlayers"> kì thủ ứng cử viên</string>
   <string name="acceptedPlayers"> người chơi được chấp nhận</string>
   <string name="xComplete">%s hoàn thành!</string>
   <string name="ongoing">%s đang diễn ra</string>
@@ -754,6 +777,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="everyone">Mọi người</string>
   <string name="spectatorsOnly">Chỉ người xem</string>
   <string name="participantsOnly">Chỉ người tham gia</string>
+  <string name="atLeastOneVariant">Chọn ít nhất một biến thể!</string>
   <string name="lidraughtsTournaments">Những giải đấu của Lidraughts</string>
   <string name="tournamentFAQ">Các câu hỏi thường gặp về giải đấu đấu trường</string>
   <string name="tournamentOfficial">Chính thức</string>
@@ -794,6 +818,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="confirmResignationAndDrawOffers">Xác nhận đầu hàng và đề nghị hòa</string>
   <string name="inputMovesWithTheKeyboard">Nhập các nước đi với bàn phím</string>
   <string name="letOtherPlayersMessageYou">Cho phép người chơi khác gửi tin nhắn cho bạn</string>
+  <string name="shareYourInsightsData">Chia sẻ dữ liệu thông tin chi tiết về cờ đam của bạn</string>
   <string name="withNobody">Không chia sẻ</string>
   <string name="withFriends">Với bạn bè</string>
   <string name="withEverybody">Với mọi người</string>
@@ -992,5 +1017,6 @@ Một đường dẫn mỗi dòng</string>
   <string name="followFriends">Theo dõi bạn bè của bạn trên Lidraughts</string>
   <string name="playInTournaments">Chơi trong các giải đấu</string>
   <string name="learnFromStudies">Học từ nghiên cứu</string>
+  <string name="configureLidraughts">Định cấu hình lidraught theo ý thích của bạn</string>
   <string name="exploreTheSiteAndHaveFun">Khám phá trang web và vui chơi :)</string>
 </resources>

@@ -570,6 +570,7 @@
   <string name="tools">ツール</string>
   <string name="increment">追加時間</string>
   <string name="sharePDN">PDNを表示</string>
+  <string name="shareFEN">FENを表示</string>
   <string name="allowAnalytics">無名な統計情報を許す？</string>
   <string name="shareGameURL">ゲームのURLを共有</string>
   <string name="error.required">この欄は入力必須です</string>

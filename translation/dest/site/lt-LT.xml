@@ -653,6 +653,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="tools">Įrankiai</string>
   <string name="increment">Prieaugis</string>
   <string name="sharePDN">Dalintis PDN</string>
+  <string name="shareFEN">Dalintis FEN</string>
   <string name="allowAnalytics">Siųsti anoniminę statistiką</string>
   <string name="shareGameURL">Dalintis partijos adresu</string>
   <string name="error.required">Šį laukelį būtina užpildyti</string>

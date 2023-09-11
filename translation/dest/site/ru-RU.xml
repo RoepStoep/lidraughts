@@ -805,6 +805,7 @@
   <string name="tools">Инструменты</string>
   <string name="increment">Добавка</string>
   <string name="sharePDN">Поделиться PDN</string>
+  <string name="shareFEN">Поделиться FEN</string>
   <string name="allowAnalytics">Разрешить анонимный сбор статистики</string>
   <string name="shareGameURL">Поделиться ссылкой на игру</string>
   <string name="error.required">Это обязательное поле</string>

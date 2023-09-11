@@ -636,6 +636,7 @@
   <string name="tools">Інструменти</string>
   <string name="increment">Додати</string>
   <string name="sharePDN">Поділитись PDN</string>
+  <string name="shareFEN">Поділитись FEN</string>
   <string name="allowAnalytics">Дозволити анонімну статистику</string>
   <string name="shareGameURL">Поділитись посиланням на гру</string>
   <string name="error.required">Це поле обов\'язкове</string>

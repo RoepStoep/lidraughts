@@ -734,6 +734,7 @@ Eine URL pro Zeile</string>
   <string name="tools">Werkzeuge</string>
   <string name="increment">Inkrement</string>
   <string name="sharePDN">PDN teilen</string>
+  <string name="shareFEN">FEN teilen</string>
   <string name="allowAnalytics">Anonyme Statistiken senden</string>
   <string name="shareGameURL">Partie-URL teilen</string>
   <string name="error.required">Dieses Feld muss ausgefüllt werden</string>

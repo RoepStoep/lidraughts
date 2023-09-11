@@ -705,6 +705,7 @@
   <string name="tools">工具</string>
   <string name="increment">加秒</string>
   <string name="sharePDN">分享PDN棋谱</string>
+  <string name="shareFEN">分享FEN棋谱</string>
   <string name="allowAnalytics">允许匿名统计数据</string>
   <string name="shareGameURL">分享棋局链接</string>
   <string name="error.required">本项必填</string>

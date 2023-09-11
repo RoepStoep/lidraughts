@@ -571,6 +571,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="tools">Strumenti</string>
   <string name="increment">Incremento</string>
   <string name="sharePDN">Condividi PDN</string>
+  <string name="shareFEN">Condividi FEN</string>
   <string name="allowAnalytics">Permetti statistiche anonime</string>
   <string name="shareGameURL">Condividi URL della partita</string>
   <string name="error.required">Questo campo è obbligatorio</string>

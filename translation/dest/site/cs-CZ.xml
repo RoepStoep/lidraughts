@@ -522,6 +522,7 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="tools">Nástroje</string>
   <string name="increment">Navýšení</string>
   <string name="sharePDN">Sdílet PDN</string>
+  <string name="shareFEN">Sdílet FEN</string>
   <string name="allowAnalytics">Povolit anonymní statistiky</string>
   <string name="shareGameURL">Sdílet URL hry</string>
   <string name="error.required">Toto pole je povinné</string>
