@@ -28,8 +28,7 @@ object HTTPRequest {
     "capacitor://localhost", // ios
     "ionic://localhost", // ios
     "http://localhost", // android/dev/flutter
-    "http://127.0.0.1", // old app (remove me!)
-    "file://" // old app (remove me!)
+    "file://" // old app
   )
 
   def appOrigin(req: RequestHeader): Option[String] =
