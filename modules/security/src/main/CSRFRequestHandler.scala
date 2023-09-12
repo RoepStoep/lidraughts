@@ -34,8 +34,8 @@ final class CSRFRequestHandler(domain: String, enabled: Boolean) {
         /* The origin header is not set.
          * This can only happen with very old browsers,
          * which support was dropped a long time ago, and that are full of other vulnerabilities.
-         * These old browsers cannot load Lichess because Lichess only support modern TLS.
-         * All the browsers that can run Lichess nowadays set the origin header properly.
+         * These old browsers cannot load Lidraughts because Lidraughts only support modern TLS.
+         * All the browsers that can run Lidraughts nowadays set the origin header properly.
          * The absence of the origin header usually indicates a programmatic call (API or scrapping),
          * so we let these requests through.
          */
@@ -43,8 +43,8 @@ final class CSRFRequestHandler(domain: String, enabled: Boolean) {
         logger.debug(print(req))
         true
       case Some(o) if isSubdomain(o) =>
-        /* The origin header is set to the lichess domain, or a subdomain of it.
-         * Since the request comes from Lichess, we accept it.
+        /* The origin header is set to the lidraughts domain, or a subdomain of it.
+         * Since the request comes from Lidraughts, we accept it.
          */
         true
       case Some("null") if isSocket(req) =>
