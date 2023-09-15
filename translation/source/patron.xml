@@ -73,4 +73,5 @@ To cancel your monthly support, login to your PayPal account and go to automatic
   <string name="nowLifetime">You are now a lifetime Lidraughts Patron!</string>
   <string name="nowOneMonth">You are now a Lidraughts Patron for one month!</string>
   <string name="downgradeNextMonth">In one month, you will NOT be charged again, and your Lidraughts account will revert to a regular account.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Unlimited</string>
 </resources>

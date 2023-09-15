@@ -73,4 +73,5 @@ Om je maandelijkse betaling stop te zetten, log in op je Paypal account en ga na
   <string name="nowLifetime">Je bent nu een levenslange Lidraughts Patroon!</string>
   <string name="nowOneMonth">Je bent nu een Lidraughts Patroon voor een maand!</string>
   <string name="downgradeNextMonth">Over een maand worden er GEEN extra kosten in rekening gebracht, en wordt je Lidraughts account weer omgezet naar een normale account.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Onbeperkt</string>
 </resources>

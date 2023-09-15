@@ -850,7 +850,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="viewTheSolution">Xem lời giải</string>
   <string name="followAndChallengeFriends">Theo dõi và thách đấu bạn bè</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="other">Hỗ trợ %s ngôn ngữ!</item>
+    <item quantity="other">Hỗ trợ %s ngôn ngữ</item>
   </plurals>
   <string name="gameAnalysis">Phân tích ván đấu</string>
   <string name="xHostsY">%1$s tạo %2$s</string>

@@ -872,7 +872,7 @@
   <string name="viewTheSolution">查看解答</string>
   <string name="followAndChallengeFriends">添加和挑战朋友</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="other">支持%s种语言！</item>
+    <item quantity="other">支持%s种语言</item>
   </plurals>
   <string name="gameAnalysis">棋局分析</string>
   <string name="xHostsY">%1$s摆擂%2$s</string>

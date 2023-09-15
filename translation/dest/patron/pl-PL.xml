@@ -75,4 +75,5 @@ Aby anulować miesięczne wsparcie, zaloguj się na swoje konto PayPal i przejd�
   <string name="nowLifetime">Jesteś teraz dożywotnim patronem Lidraughts!</string>
   <string name="nowOneMonth">Jesteś teraz patronem Lidraughts na jeden miesiąc!</string>
   <string name="downgradeNextMonth">W tym miesiącu NIE zostaniesz ponownie obciążony, a Twoje konto Lidraughts pozostanie darmowe.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Bez limitu</string>
 </resources>

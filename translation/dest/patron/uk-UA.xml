@@ -63,4 +63,5 @@
   <string name="nowLifetime">Тепер Ви - пожиттєвий Покровитель Lidraughts!</string>
   <string name="nowOneMonth">Тепер Ви Покровитель Lidraughts на один місяць!</string>
   <string name="downgradeNextMonth">Через один місяць з Вас НЕ буде списано кошти знову, а Ваш обліковий запис Lidraughts буде повернено до звичайного.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Необмежено</string>
 </resources>

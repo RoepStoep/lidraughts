@@ -903,8 +903,8 @@ Eine URL pro Zeile</string>
   <string name="viewTheSolution">Lösung ansehen</string>
   <string name="followAndChallengeFriends">Folge deinen Freunden und fordere sie heraus</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Verfügbar in einer Sprache!</item>
-    <item quantity="other">Verfügbar in %s Sprachen!</item>
+    <item quantity="one">Verfügbar in einer Sprache</item>
+    <item quantity="other">Verfügbar in %s Sprachen</item>
   </plurals>
   <string name="gameAnalysis">Spielanalyse</string>
   <string name="xHostsY">%1$s hat %2$s erstellt</string>

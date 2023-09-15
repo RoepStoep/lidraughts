@@ -906,8 +906,8 @@ Une URL par ligne</string>
   <string name="viewTheSolution">Regarder la solution</string>
   <string name="followAndChallengeFriends">Suivez et défiez vos amis !</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Disponible en %s langue !</item>
-    <item quantity="other">Disponible en %s langues !</item>
+    <item quantity="one">Disponible en %s langue</item>
+    <item quantity="other">Disponible en %s langues</item>
   </plurals>
   <string name="gameAnalysis">Analyse d\'une partie</string>
   <string name="xHostsY">%1$s héberge %2$s</string>

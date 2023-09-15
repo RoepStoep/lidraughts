@@ -73,4 +73,5 @@ Para cancelar o seu apoio mensal, acesse a sua conta do PayPal e vá para pagame
   <string name="nowLifetime">Você agora é um Patrono Lidraughts vitalício!</string>
   <string name="nowOneMonth">Você agora é Patrono do Lidraughts por um mês!</string>
   <string name="downgradeNextMonth">Em um mês, você NÃO será cobrado novamente, e sua conta Lidraughts será rebaixada para a versão gratuita.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Ilimitado</string>
 </resources>

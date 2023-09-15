@@ -5,7 +5,7 @@ export const initialFen: Fen = 'W:W31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,
 
 export function decomposeUci(uci: Uci): Key[] {
   const ucis: Key[] = [];
-  if (uci.length > 1) {
+  if (uci && uci.length > 1) {
       for (let i = 0; i < uci.length; i += 2) {
         ucis.push(uci.substr(i, 2) as Key);
       }

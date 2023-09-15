@@ -633,10 +633,10 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="viewTheSolution">Zobrazit řešení</string>
   <string name="followAndChallengeFriends">Hraj s přáteli</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Dostupné v %s jazyku!</item>
-    <item quantity="few">Dostupné v %s jazycích!</item>
-    <item quantity="many">Dostupné v %s jazycích!</item>
-    <item quantity="other">Dostupné v %s jazycích!</item>
+    <item quantity="one">Dostupné v %s jazyku</item>
+    <item quantity="few">Dostupné v %s jazycích</item>
+    <item quantity="many">Dostupné v %s jazycích</item>
+    <item quantity="other">Dostupné v %s jazycích</item>
   </plurals>
   <string name="gameAnalysis">Analýza hry</string>
   <string name="xHostsY">%1$s založil %2$s</string>

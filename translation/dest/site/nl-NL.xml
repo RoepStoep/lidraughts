@@ -909,8 +909,8 @@ Een URL per regel</string>
   <string name="viewTheSolution">Bekijk de oplossing</string>
   <string name="followAndChallengeFriends">Volg vrienden en daag ze uit</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Beschikbaar in %s taal!</item>
-    <item quantity="other">Beschikbaar in %s talen!</item>
+    <item quantity="one">Beschikbaar in %s taal</item>
+    <item quantity="other">Beschikbaar in %s talen</item>
   </plurals>
   <string name="gameAnalysis">Partijanalyse</string>
   <string name="xHostsY">%1$s organiseert %2$s</string>

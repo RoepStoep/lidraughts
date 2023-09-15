@@ -23,8 +23,8 @@ export function make(root: AnalyseCtrl): RetroCtrl {
   let solvedPlies: number[] = [];
   const current = prop<any>(null);
   const feedback = prop<Feedback>('find');
-  const maxDepth = game.variant.key === 'antidraughts' ? 10 : 19;
-  const minDepth = game.variant.key === 'antidraughts' ? 7 : 15;
+  const maxDepth = game.variant.key === 'antidraughts' ? 10 : 20;
+  const minDepth = game.variant.key === 'antidraughts' ? 6 : 15;
 
   const redraw = root.redraw;
 

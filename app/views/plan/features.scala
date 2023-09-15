@@ -51,7 +51,8 @@ object features {
               "Learn from your mistakes"
             ),
             tr(unlimited)(
-              "Studies (shared and persistent analysis)"
+              a(href := routes.Study.allDefault(1))("Studies"),
+              " (shared and persistent analysis)"
             ),
             /*tr(unlimited)(
               "Draughts insights (detailed analysis of your play)"
@@ -83,7 +84,7 @@ object features {
               "Forum, teams, messaging, friends, challenges"
             ),
             tr(check)(
-              "Available in 21 languages"
+              trans.availableInNbLanguages.pluralSame(22)
             ),
             tr(check)(
               "Light/dark theme, custom boards, pieces and background"
@@ -107,7 +108,7 @@ object features {
               "Bullet, Blitz, Rapid, Classical and Correspondence draughts"
             ),
             tr(unlimited)(
-              a(href := routes.Tournament.home(1))("Arena tournaments")
+              a(href := routes.Tournament.home(1))(trans.arena.arenaTournaments())
             ),
             tr(check)(
               s"Board editor and analysis board with $engineName"
@@ -116,7 +117,7 @@ object features {
               a(href := routes.Puzzle.home)("Tactics puzzles")
             ),
             tr(check)(
-              "Available in 20 languages"
+              trans.availableInNbLanguages.pluralSame(22)
             ),
             tr(check)(
               "Light and dark theme, custom boards and pieces"
@@ -140,7 +141,7 @@ object features {
                 "get a cool looking Patron icon"
               ),
               td("-"),
-              td(span(dataIcon := patronIconChar, cls := "is is-green text check")("Yes"))
+              td(span(dataIcon := patronIconChar, cls := "is is-green text check")(trans.yes()))
             ),
             st.tr(cls := "price")(
               th,
@@ -168,9 +169,9 @@ object features {
     st.tr(th(name), th(trans.patron.freeAccount()), th(trans.patron.lidraughtsPatron()))
   )
 
-  private val unlimited = span(dataIcon := "E", cls := "is is-green text unlimited")("Unlimited")
+  private def unlimited(implicit lang: Lang) = span(dataIcon := "E", cls := "is is-green text unlimited")(trans.patron.unlimited())
 
-  private val check = span(dataIcon := "E", cls := "is is-green text check")("Yes")
+  private def check(implicit lang: Lang) = span(dataIcon := "E", cls := "is is-green text check")(trans.yes())
 
   private def custom(str: String) = span(dataIcon := "E", cls := "is is-green text check")(str)
 

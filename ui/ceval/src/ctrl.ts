@@ -24,7 +24,7 @@ export default function(opts: CevalOpts): CevalCtrl {
   const pnaclSupported: boolean = false; // Disabled until stability issues are resolved !opts.failsafe && 'application/x-pnacl' in navigator.mimeTypes;
   const wasmSupported = typeof WebAssembly === 'object' && WebAssembly.validate(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
   const minDepth = 6;
-  const maxDepth = storedProp<number>(storageKey('ceval.max-depth'), 16);
+  const maxDepth = opts.variant.key === 'antidraughts'? storedProp<number>(storageKey('ceval.max-depth-ant'), 5) : storedProp<number>(storageKey('ceval.max-depth'), 16);
   const multiPv = prop('1'); //storedProp(storageKey('ceval.multipv'), opts.multiPvDefault || 1);
   const threads = storedProp(storageKey('ceval.threads'), Math.ceil((navigator.hardwareConcurrency || 1) / 2));
   const hashSize = storedProp(storageKey('ceval.hash-size'), 128);
@@ -54,27 +54,41 @@ export default function(opts: CevalOpts): CevalCtrl {
 
   // adjusts maxDepth based on nodes per second
   const npsRecorder = (function() {
-    const values: number[] = [];
-    const applies = function(ev: Tree.ClientEval) {
-      return ev.knps && ev.depth >= 12 &&
+    const valuesNormal: number[] = [];
+    const valuesAnti: number[] = [];
+    const applies = function(ev: Tree.ClientEval, minDepth: number) {
+      return ev.knps && ev.depth >= minDepth &&
         typeof ev.cp !== 'undefined' && Math.abs(ev.cp) < 500 &&
         (ev.fen.split(',').length - 1) >= 10;
     }
-    return function (ev: Tree.ClientEval) {
-      if (!applies(ev)) return;
+    return function (ev: Tree.ClientEval, v: VariantKey) {
+      if (!applies(ev, v === 'antidraughts' ? 3 : 12)) return;
+      const values = v === 'antidraughts' ? valuesAnti : valuesNormal
       values.push(ev.knps);
       if (values.length > 9) {
-        let depth = 16,
-          knps = median(values) || 0;
-        if (knps > 150) depth = 17;
-        if (knps > 250) depth = 18;
-        if (knps > 500) depth = 19;
-        if (knps > 1000) depth = 20;
-        if (knps > 2000) depth = 21;
-        if (knps > 3000) depth = 22;
-        if (knps > 5000) depth = 23;
-        if (knps > 8000) depth = 24;
-        if (knps > 11000) depth = 25;
+        const knps = median(values) || 0
+        let depth: number
+        if (v === 'antidraughts') {
+          depth = 5
+          if (knps > 500) depth = 6;
+          if (knps > 1000) depth = 7;
+          if (knps > 2000) depth = 8;
+          if (knps > 3000) depth = 9;
+          if (knps > 5000) depth = 10;
+          if (knps > 8000) depth = 11;
+          if (knps > 11000) depth = 12;
+        } else {
+          depth = 16
+          if (knps > 150) depth = 17;
+          if (knps > 250) depth = 18;
+          if (knps > 500) depth = 19;
+          if (knps > 1000) depth = 20;
+          if (knps > 2000) depth = 21;
+          if (knps > 3000) depth = 22;
+          if (knps > 5000) depth = 23;
+          if (knps > 8000) depth = 24;
+          if (knps > 11000) depth = 25;
+        }
         maxDepth(depth);
         if (values.length > 40) values.shift();
       }
@@ -85,7 +99,7 @@ export default function(opts: CevalOpts): CevalCtrl {
 
   const onEmit = throttle(200, (ev: Tree.ClientEval, work: Work) => {
     sortPvsInPlace(ev.pvs, (work.ply % 2 === (work.threatMode ? 1 : 0)) ? 'white' : 'black');
-    npsRecorder(ev);
+    npsRecorder(ev, opts.variant.key);
     curEval = ev;
     opts.emit(ev, work);
     if (ev.fen !== lastEmitFen) {

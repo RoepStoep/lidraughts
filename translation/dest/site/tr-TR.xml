@@ -705,8 +705,8 @@
   <string name="viewTheSolution">Çözümü göster</string>
   <string name="followAndChallengeFriends">Takip edin ve arkadaşlarınıza meydan okuyun</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Artık %s dilinde kullanabilirsiniz.</item>
-    <item quantity="other">Artık %s dillerinde kullanabilirsiniz.</item>
+    <item quantity="one">Artık %s dilinde kullanabilirsiniz</item>
+    <item quantity="other">Artık %s dillerinde kullanabilirsiniz</item>
   </plurals>
   <string name="gameAnalysis">Oyun analizi</string>
   <string name="xHostsY">%1$s ev sahipliği yaptı: %2$s</string>

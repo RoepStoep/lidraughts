@@ -1,5 +1,11 @@
 function decomposeUci(uci) {
-  return [uci.slice(0, 2), uci.slice(2, 4)];
+  const ucis = [];
+  if (uci && uci.length > 1) {
+      for (let i = 0; i < uci.length; i += 2) {
+        ucis.push(uci.substr(i, 2));
+      }
+  }
+  return ucis;
 }
 
 function readFen(fen) {
@@ -32,11 +38,12 @@ function shorten(uci) {
 }
 
 function sanOf(board, uci, capture) {
-  var move = decomposeUci(uci);
+  const move = decomposeUci(uci)
+  const from = shorten(move[0]), to = shorten(move.slice(-1))
   if (capture)
-      return shorten(move[0]) + 'x' + shorten(move[1]);
+      return from + 'x' + to;
   else
-      return shorten(move[0]) + '-' + shorten(move[1]);
+      return from + '-' + to;
 }
 
 export default function sanWriter(fen, ucis, captLen) {

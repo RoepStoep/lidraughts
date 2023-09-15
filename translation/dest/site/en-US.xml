@@ -738,8 +738,8 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="viewTheSolution">View the solution</string>
   <string name="followAndChallengeFriends">Follow and challenge friends</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Available in %s language!</item>
-    <item quantity="other">Available in %s languages!</item>
+    <item quantity="one">Available in %s language</item>
+    <item quantity="other">Available in %s languages</item>
   </plurals>
   <string name="gameAnalysis">Game analysis</string>
   <string name="xHostsY">%1$s hosts %2$s</string>

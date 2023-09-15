@@ -860,9 +860,9 @@ Vienā līnijā  - tikai vienu norādi.</string>
   <string name="viewTheSolution">Skatīt atrisinājumu</string>
   <string name="followAndChallengeFriends">Seko un izaicini draugus</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="zero">Pieejama %s valodās!</item>
-    <item quantity="one">Pieejama %s valodā!</item>
-    <item quantity="other">Pieejama %s valodās!</item>
+    <item quantity="zero">Pieejama %s valodās</item>
+    <item quantity="one">Pieejama %s valodā</item>
+    <item quantity="other">Pieejama %s valodās</item>
   </plurals>
   <string name="gameAnalysis">Spēles analīze</string>
   <string name="xHostsY">%1$s saimnieko %2$s</string>

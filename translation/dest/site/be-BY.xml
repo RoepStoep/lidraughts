@@ -741,10 +741,10 @@
   <string name="viewTheSolution">Паказаць рашэнне</string>
   <string name="followAndChallengeFriends">Падпісацца і выклікаць на гульню сяброў</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Даступна на %s мове!</item>
-    <item quantity="few">Даступна на %s мовах!</item>
-    <item quantity="many">Даступна на %s мовах!</item>
-    <item quantity="other">Даступна на %s мовах!</item>
+    <item quantity="one">Даступна на %s мове</item>
+    <item quantity="few">Даступна на %s мовах</item>
+    <item quantity="many">Даступна на %s мовах</item>
+    <item quantity="other">Даступна на %s мовах</item>
   </plurals>
   <string name="gameAnalysis">Аналіз гульні</string>
   <string name="xHostsY">%1$s стварыў %2$s</string>

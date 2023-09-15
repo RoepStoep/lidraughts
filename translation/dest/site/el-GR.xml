@@ -907,8 +907,8 @@
   <string name="viewTheSolution">Δείτε τη λύση</string>
   <string name="followAndChallengeFriends">Ακολουθήστε και προκαλέστε φίλους</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Διαθέσιμο σε %s γλώσσες!</item>
-    <item quantity="other">Διαθέσιμο σε %s γλώσσες!</item>
+    <item quantity="one">Διαθέσιμο σε %s γλώσσες</item>
+    <item quantity="other">Διαθέσιμο σε %s γλώσσες</item>
   </plurals>
   <string name="gameAnalysis">Ανάλυση παιχνιδιού</string>
   <string name="xHostsY">%1$s φιλοξενεί τη %2$s</string>

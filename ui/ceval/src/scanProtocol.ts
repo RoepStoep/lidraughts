@@ -1,5 +1,6 @@
 import { WorkerOpts, Work } from './types';
 import { readKingMoves } from 'draughtsground/fen';
+import { decomposeUci } from 'draughtsground/util';
 
 const EVAL_REGEX = new RegExp(''
   + /^info depth=(\d+) mean-depth=\S+ /.source
@@ -317,10 +318,9 @@ export default class Protocol {
     }
 
     const moves = this.work.moves.map(m => {
-      if (m.length > 4)
-        return m.slice(0, 2) + 'x' + m.slice(2);
-      else
-        return m.slice(0, 2) + '-' + m.slice(2);
+      const parts = decomposeUci(m)
+      if (parts.length > 2) return parts.join('x')
+      return parts[0] + '-' + parts.slice(-1)
     });
     if (moves.length) {
       command += ` moves="${moves.join(' ')}"`

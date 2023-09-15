@@ -61,4 +61,5 @@ Taču Sponsoriem ir tiesības lielīties ar jaunu stilīgu profila ikonu.</strin
   <string name="nowLifetime">Tagad esat mūžīgs Lidraughts Sponsors!</string>
   <string name="nowOneMonth">Tagad būsiet Lidraughts sponsors vienu mēnesi!</string>
   <string name="downgradeNextMonth">Pēc mēneša NETIKS veikts vēl viens maksājums, un jūsu Lidraughts konts tiks pazemināts uz bezmaksas kontu.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Bezgalīgs</string>
 </resources>

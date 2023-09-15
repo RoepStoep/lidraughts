@@ -684,8 +684,8 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="viewTheSolution">Guarda la soluzione</string>
   <string name="followAndChallengeFriends">Segui e sfida gli amici</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Disponibile in %s lingue!</item>
-    <item quantity="other">Disponibile in %s lingue!</item>
+    <item quantity="one">Disponibile in %s lingue</item>
+    <item quantity="other">Disponibile in %s lingue</item>
   </plurals>
   <string name="gameAnalysis">Analisi partita</string>
   <string name="xHostsY">%1$s ospita %2$s</string>

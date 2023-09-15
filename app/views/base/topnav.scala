@@ -57,7 +57,9 @@ object topnav {
         a(href := routes.User.list)(trans.players()),
         a(href := routes.Team.home())(trans.team.teams()),
         NotForKids(a(href := routes.ForumCateg.index)(trans.forum())),
-        a(href := routes.Main.faq)("FAQ")
+        a(href := routes.Main.faq)("FAQ"),
+        ctx.me.exists(!_.kid) option
+          a(cls := "community-patron", href := routes.Plan.index)(trans.patron.donate())
       )
     ),
     st.section(

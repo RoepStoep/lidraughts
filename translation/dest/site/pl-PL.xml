@@ -977,10 +977,10 @@ jeden adres URL na linię</string>
   <string name="viewTheSolution">Zobacz rozwiązanie</string>
   <string name="followAndChallengeFriends">Obserwuj i rzucaj wyzwania znajomym</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Dostępna w %s języku!</item>
-    <item quantity="few">Dostępna w %s językach!</item>
-    <item quantity="many">Dostępna w %s językach!</item>
-    <item quantity="other">Dostępna w %s językach!</item>
+    <item quantity="one">Dostępna w %s języku</item>
+    <item quantity="few">Dostępna w %s językach</item>
+    <item quantity="many">Dostępna w %s językach</item>
+    <item quantity="other">Dostępna w %s językach</item>
   </plurals>
   <string name="gameAnalysis">Analizowanie partii</string>
   <string name="xHostsY">%1$s utworzył %2$s</string>

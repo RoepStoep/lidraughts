@@ -15,8 +15,8 @@ object Mobile {
     // only call if a more recent version is available in both stores!
     private val mustUpgradeFromVersions = Set(
       "1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4", /* no support for 64-variants */
-      "1.1.0", "1.1.1" /* no support for brazilian draughts */
-    // "1.2.0", "1.3.0" /* cordova versions */
+      "1.1.0", "1.1.1", /* no support for brazilian draughts */
+      "1.2.0", "1.3.0" /* cordova versions */
     )
 
   }

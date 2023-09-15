@@ -73,4 +73,5 @@ Pour annuler votre soutien mensuel, connectez-vous à votre compte PayPal et acc
   <string name="nowLifetime">Vous êtes maintenant un Mécène de Lidraughts à vie !</string>
   <string name="nowOneMonth">Vous êtes maintenant un Mécène de Lidraughts pour un mois !</string>
   <string name="downgradeNextMonth">Dans un mois, vous NE serez PAS à nouveau débité, et votre compte Lidraughts redeviendra un compte ordinaire.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Illimité</string>
 </resources>

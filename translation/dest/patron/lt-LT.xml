@@ -63,4 +63,5 @@ Tačiau Rėmėjai gauna pagyrų teises ir šaunią naują profilio piktogramą.<
   <string name="nowLifetime">Jūs esate Lidraughts rėmėjas visam gyvenimui!</string>
   <string name="nowOneMonth">Jūs esate Lidraughts rėmėjas vienam mėnesiui!</string>
   <string name="downgradeNextMonth">Po mėnesio pinigai nebus nuskaityti dar kartą ir jūsų Lidraughts paskyra atsistatys į įprastą.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Neriboti</string>
 </resources>

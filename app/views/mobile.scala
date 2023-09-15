@@ -43,7 +43,7 @@ object mobile {
                 li(trans.boardEditor()),
                 li("Lidraughts TV"),
                 li(trans.followAndChallengeFriends()),
-                li(trans.availableInNbLanguages.pluralSame(20))
+                li(trans.availableInNbLanguages.pluralSame(22))
               )
             ),
             div(cls := "right-side")(

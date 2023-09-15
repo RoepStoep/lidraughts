@@ -59,4 +59,5 @@
   <string name="nowLifetime">あなたは Lidraughts の永久パトロンです！</string>
   <string name="nowOneMonth">あなたはこれから 1 か月の間 Lidraughts パトロンです！</string>
   <string name="downgradeNextMonth">1 か月後にまた請求されることはなく、無料アカウントに戻ります。</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">無制限</string>
 </resources>

@@ -979,10 +979,10 @@
   <string name="viewTheSolution">Посмотреть решение</string>
   <string name="followAndChallengeFriends">Подписки и игра с друзьями</string>
   <plurals name="availableInNbLanguages">
-    <item quantity="one">Доступно на %s языке!</item>
-    <item quantity="few">Доступно на %s языках!</item>
-    <item quantity="many">Доступно на %s языках!</item>
-    <item quantity="other">Доступно на %s языках!</item>
+    <item quantity="one">Доступно на %s языке</item>
+    <item quantity="few">Доступно на %s языках</item>
+    <item quantity="many">Доступно на %s языках</item>
+    <item quantity="other">Доступно на %s языках</item>
   </plurals>
   <string name="gameAnalysis">Анализ игры</string>
   <string name="xHostsY">%1$s создал %2$s</string>

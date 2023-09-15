@@ -58,12 +58,13 @@ case class Seek(
     ),
     "mode" -> realMode.id,
     "days" -> daysPerTurn,
-    "color" -> draughts.Color(color).??(_.name),
-    "perf" -> Json.obj(
-      "icon" -> perfType.map(_.iconChar.toString),
-      "name" -> perfType.map(_.name)
-    )
+    "color" -> draughts.Color(color).??(_.name)
   ).add("provisional" -> perf.map(_.provisional).filter(identity))
+    .add("perf" -> perfType.map(p => Json.obj(
+      "key" -> p.key,
+      "icon" -> p.iconChar.toString,
+      "name" -> p.name
+    )))
 
   lazy val perfType = PerfPicker.perfType(Speed.Correspondence, realVariant, daysPerTurn)
 }

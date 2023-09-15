@@ -73,4 +73,5 @@ Um deinen monatlichen Support zu kündigen, melden dich bei deinem PayPal-Konto 
   <string name="nowLifetime">Du bist jetzt lebenslanger Lidraughts-Patron!</string>
   <string name="nowOneMonth">Du bist jetzt für einen Monat Lidraughts Patron!</string>
   <string name="downgradeNextMonth">Dir wird in einem Monat NICHTS erneut berechnet und dein Lidraughts-Konto wird in ein reguläres Konto umgewandelt.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Unbegrenzt</string>
 </resources>
