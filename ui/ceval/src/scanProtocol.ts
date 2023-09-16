@@ -320,7 +320,7 @@ export default class Protocol {
     const moves = this.work.moves.map(m => {
       const parts = decomposeUci(m)
       if (parts.length > 2) return parts.join('x')
-      return parts[0] + '-' + parts.slice(-1)
+      return parts[0] + '-' + parts[parts.length - 1]
     });
     if (moves.length) {
       command += ` moves="${moves.join(' ')}"`

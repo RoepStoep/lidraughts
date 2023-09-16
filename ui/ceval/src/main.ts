@@ -27,7 +27,7 @@ export function scan2san(san: string): string {
   const sep = san.includes('x') ? 'x' : '-',
     parts = san.split(sep);
   if (parts.length < 2) return san;
-  return parts[0] + sep + parts.slice(-1);
+  return parts[0] + sep + parts[parts.length - 1];
 }
 
 // stop when another tab starts. Listen only once here,

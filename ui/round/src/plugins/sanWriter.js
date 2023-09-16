@@ -39,7 +39,7 @@ function shorten(uci) {
 
 function sanOf(board, uci, capture) {
   const move = decomposeUci(uci)
-  const from = shorten(move[0]), to = shorten(move.slice(-1))
+  const from = shorten(move[0]), to = shorten(move[move.length - 1])
   if (capture)
       return from + 'x' + to;
   else
