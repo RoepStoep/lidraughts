@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">Ustawienia</string>
+  <string name="gameDisplay">Widok partii</string>
+  <string name="pieceAnimation">Animacja ruchu figur</string>
+  <string name="materialDifference">Pokaż przewagę materialną</string>
+  <string name="showKingMoves">Pokaż ile razy wykonano ruch damką (warcaby fryzyjskie)</string>
+  <string name="boardHighlights">Podświetlenie ostatniego posunięcia</string>
+  <string name="pieceDestinations">Podświetlaj możliwe pola docelowe (ruchy zwykłe i planowane)</string>
+  <string name="boardCoordinates">Współrzędne pól (1-50, a1-h8)</string>
+  <string name="insideTheBoard">Wszystkie (wewnątrz warcabnicy)</string>
+  <string name="outsideTheBoard">Tylko skrajne (na zewnątrz warcabnicy)</string>
+  <string name="coordinateSystem8x8">System oznaczania pól na warcabnicy 8x8</string>
+  <string name="fieldnumbers8x8">Numerowanie pól (1-32)</string>
+  <string name="algebraic8x8">Notacja szachowa (a-h, 1-8)</string>
+  <string name="moveListWhilePlaying">Lista ruchów podczas partii</string>
+  <string name="onSlowGames">W wolniejszych grach</string>
+  <string name="notationGameResult">System zapisu wyniku gry (wygrana białych • remis • wygrana czarnych)</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Tryb Zen (ukryj zbędne elementy interface\'u)</string>
+  <string name="displayBoardResizeHandle">Pokaż znacznik skalowania warcabnicy</string>
+  <string name="onlyOnInitialPosition">Tylko w pozycji początkowej</string>
+  <string name="blindfoldDraughts">Warcaby na ślepo (niewidoczne bierki)</string>
+  <string name="draughtsClock">Zegar warcabowy</string>
+  <string name="tenthsOfSeconds">Dziesiąte części sekundy</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">Kiedy pozostało &lt; 10 sekund czasu</string>
+  <string name="horizontalGreenProgressBars">Poziomy zielony pasek czasu</string>
+  <string name="soundWhenTimeGetsCritical">Powiadom dźwiękiem przy niedoczasie</string>
+  <string name="giveMoreTime">Dodaj więcej czasu</string>
+  <string name="gameBehavior">Zachowanie gry</string>
+  <string name="howDoYouMovePieces">W jaki sposób przesuwasz bierki?</string>
+  <string name="clickTwoSquares">Wskazuję dwa pola</string>
+  <string name="dragPiece">Przeciągam bierkę</string>
+  <string name="bothClicksAndDrag">Na oba sposoby</string>
+  <string name="howDoYouPlayMultiCaptures">Jak wykonać bicie kilku bierek na warcabnicy z analizą gry?</string>
+  <string name="stepByStep">Krok po kroku</string>
+  <string name="allAtOnce">Wszystko od razu</string>
+  <string name="premovesPlayingDuringOpponentTurn">Ruch planowany (podczas ruchu przeciwnika)</string>
+  <string name="takebacksWithOpponentApproval">Cofnięcie ruchu (za zgodą przeciwnika)</string>
+  <string name="inCasualGamesOnly">Tylko w grach towarzyskich</string>
+  <string name="whenPremoving">W czasie ruchu planowanego</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Automatyczny remis po trzykrotnym powtórzeniu pozycji</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">Kiedy pozostało &lt; 30 sekund czasu</string>
+  <string name="moveConfirmation">Potwierdzenie ruchu</string>
+  <string name="inCorrespondenceGames">W grze korespondencyjnej</string>
+  <string name="correspondenceAndUnlimited">Korespondencyjne i bez limitu czasu</string>
+  <string name="confirmResignationAndDrawOffers">Potwierdzaj poddanie się i wysłanie propozycji remisu</string>
+  <string name="inputMovesWithTheKeyboard">Wprowadzaj ruchy za pomocą klawiatury</string>
+  <string name="yourPreferencesHaveBeenSaved">Twoje ustawienia zostały zapisane.</string>
+</resources>

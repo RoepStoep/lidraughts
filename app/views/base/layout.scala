@@ -47,7 +47,7 @@ object layout {
 
   private def allNotifications(implicit ctx: Context) = spaceless(s"""<div>
   <a id="challenge-toggle" class="toggle link">
-    <span title="${trans.challenges().render}" class="data-count" data-count="${ctx.nbChallenges}" data-icon="U"></span>
+    <span title="${trans.challenge.challenges().render}" class="data-count" data-count="${ctx.nbChallenges}" data-icon="U"></span>
   </a>
   <div id="challenge-app" class="dropdown"></div>
 </div>
@@ -60,7 +60,7 @@ object layout {
 
   private def anonDasher(playing: Boolean)(implicit ctx: Context) = spaceless(s"""<div class="dasher">
   <a class="toggle link anon">
-    <span title="${trans.preferences().render}" data-icon="%"></span>
+    <span title="${trans.preferences.preferences().render}" data-icon="%"></span>
   </a>
   <div id="dasher_app" class="dropdown" data-playing="$playing"></div>
 </div>

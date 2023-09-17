@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">Foarkarren</string>
+  <string name="insideTheBoard">Binnen it boerd</string>
+  <string name="outsideTheBoard">Bûten it boerd</string>
+  <string name="onSlowGames">Allinnich by stadige partijen</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="settings">Тохиргоо</string>
+  <string name="closeAccount">Гишүүний данс хаах</string>
+  <string name="changedMindDoNotCloseAccount">Би бодлоо өөрчиллөө. Миний гишүүнчлэлийн дансыг битгий хаа.</string>
+  <string name="closeAccountExplanation">Та гишүүний дансаа үнэхээх хаамаар байна уу? Хаагдсан дансыг буцаан сэргээх боломжгүй байхгүй. Та энэ дансаар дахин нэвтрэх боломжгүй болох ба таны танилцуулга хуудас идэвхгүй болох болно.</string>
+  <string name="thisAccountIsClosed">Энэ гишүүний данс хаагдсан байна.</string>
+</resources>

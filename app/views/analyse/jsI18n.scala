@@ -32,7 +32,7 @@ private object jsI18n {
     trans.speedUpYourAnalysis,
     trans.enableFullCaptureAtXPreferences,
     trans.youNeedAnAccountToDoThat,
-    trans.gameBehavior,
+    trans.preferences.gameBehavior,
     // ceval (also uses gameOver)
     trans.depthX,
     trans.usingServerAnalysis,

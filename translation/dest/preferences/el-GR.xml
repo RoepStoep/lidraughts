@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">Προτιμήσεις</string>
+  <string name="gameDisplay">Εμφάνιση παιχνιδιών</string>
+  <string name="pieceAnimation">Κίνηση πιονιών</string>
+  <string name="materialDifference">Διαφορά υλικού</string>
+  <string name="showKingMoves">Εμφάνιση του πόσες φορές ένας βασιλιάς έχει μετακινηθεί (Frisian ντάμα)</string>
+  <string name="boardHighlights">Φωτισμός σκακιέρας (τελευταία κίνηση)</string>
+  <string name="pieceDestinations">Προορισμοί κομματιών (έγκυρες κινήσεις και προκινήσεις)</string>
+  <string name="boardCoordinates">Συντεταγμένες σκακιέρας (1-50, a1-h8)</string>
+  <string name="insideTheBoard">Μέσα στη σκακιέρα</string>
+  <string name="outsideTheBoard">Εκτός της σκακιέρας</string>
+  <string name="coordinateSystem8x8">Σύστημα συντεταγμένων σε σκακιέρα 8x8</string>
+  <string name="fieldnumbers8x8">Αριθμοί Τετραγώνων (1-32)</string>
+  <string name="algebraic8x8">Αλγεβρικό (a-h, 1-8)</string>
+  <string name="moveListWhilePlaying">Λίστα κινήσεων κατά τη διάρκεια της παρτίδας</string>
+  <string name="onSlowGames">Σε αργά παιχνίδια</string>
+  <string name="notationGameResult">Συμβολισμός αποτελέσματος παιχνιδιού (νίκη λευκών • ισοπαλία • νίκη μαύρων)</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Λειτουργία Zεν</string>
+  <string name="displayBoardResizeHandle">Εμφάνιση χειριστηρίου αλλαγής μεγέθους σκακιέρας</string>
+  <string name="onlyOnInitialPosition">Μόνο στην αρχική διάταξη</string>
+  <string name="blindfoldDraughts">Τυφλή ντάμα (αόρατα κομμάτια)</string>
+  <string name="draughtsClock">Ρολόι ντάμας</string>
+  <string name="tenthsOfSeconds">Δέκατα του δευτερολέπτου</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">Όταν απομένουν &lt; 10 δευτερόλεπτα</string>
+  <string name="horizontalGreenProgressBars">Οριζόντιες πράσινες γραμμές προόδου</string>
+  <string name="soundWhenTimeGetsCritical">Ηχητική ειδοποίηση όταν ο χρόνος γίνεται κρίσιμος</string>
+  <string name="giveMoreTime">Προσθέστε περισσότερο χρόνο</string>
+  <string name="gameBehavior">Συμπεριφορά παιχνιδιού</string>
+  <string name="howDoYouMovePieces">Πώς θέλετε να μετακινείτε τα κομμάτια;</string>
+  <string name="clickTwoSquares">Κάνοντας κλικ στα δύο τετράγωνα</string>
+  <string name="dragPiece">Σέρνοντας ένα πιόνι</string>
+  <string name="bothClicksAndDrag">Και τα δύο</string>
+  <string name="howDoYouPlayMultiCaptures">Πώς παίζετε πολλαπλές αιχμαλωτίσεις σε πίνακες ανάλυσης;</string>
+  <string name="stepByStep">Βήμα βήμα</string>
+  <string name="allAtOnce">Όλα με μιας</string>
+  <string name="premovesPlayingDuringOpponentTurn">Προκινήσεις (παιγμένες κατά τον χρόνο σκέψης του αντιπάλου)</string>
+  <string name="takebacksWithOpponentApproval">Ανακλήσεις (με έγκριση του αντιπάλου)</string>
+  <string name="inCasualGamesOnly">Μόνο σε φιλικά παιχνίδια</string>
+  <string name="whenPremoving">Κατά προεπιλογή κίνησης</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Διεκδικήστε ισοπαλία αυτόματα σε τριπλή επανάληψη</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">Όταν απομένουν &lt; 30 δευτερόλεπτα</string>
+  <string name="moveConfirmation">Επιβεβαίωση κίνησης</string>
+  <string name="inCorrespondenceGames">Στις παρτίδες δι\' αλληλογραφίας</string>
+  <string name="correspondenceAndUnlimited">Δι\' αλληλογραφίας και απεριορίστου χρόνου</string>
+  <string name="confirmResignationAndDrawOffers">Επιβεβαίωση παραίτησης και προσφοράς ισοπαλίας</string>
+  <string name="inputMovesWithTheKeyboard">Κάντε κινήσεις με το πληκτρολόγιο</string>
+  <string name="yourPreferencesHaveBeenSaved">Οι προτιμήσεις σας αποθηκεύτηκαν.</string>
+</resources>

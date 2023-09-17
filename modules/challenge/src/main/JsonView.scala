@@ -79,9 +79,9 @@ final class JsonView(
   }
 
   private def translations(lang: Lang) = lidraughts.i18n.JsDump.keysToObject(List(
-    trans.noChallenges,
-    trans.challengeSomeone,
-    trans.openChallenge,
+    trans.challenge.noChallenges,
+    trans.challenge.challengeSomeone,
+    trans.challenge.openChallenge,
     trans.rated,
     trans.casual,
     trans.waiting,

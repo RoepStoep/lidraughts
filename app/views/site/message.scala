@@ -50,7 +50,7 @@ object message {
   }
 
   def challengeDenied(msg: String)(implicit ctx: Context) = apply(
-    title = trans.challengeToPlay.txt(),
+    title = trans.challenge.challengeToPlay.txt(),
     icon = "j".some
   )(msg)
 

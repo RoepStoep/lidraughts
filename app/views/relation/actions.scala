@@ -21,7 +21,7 @@ object actions {
       ctx.userId map { myId =>
         (myId != userId) ?? frag(
           !blocked option a(
-            titleOrText(trans.challengeToPlay.txt()),
+            titleOrText(trans.challenge.challengeToPlay.txt()),
             href := s"${routes.Lobby.home()}?user=$userId#friend",
             cls := "btn-rack__btn",
             dataIcon := "U"

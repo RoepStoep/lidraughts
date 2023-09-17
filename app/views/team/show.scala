@@ -143,7 +143,7 @@ object show {
                   )
                 ),
                 (info.createdByMe || isGranted(_.Admin)) option
-                  a(href := routes.Team.edit(t.id), cls := "button button-empty text", dataIcon := "%")(trans.settings()),
+                  a(href := routes.Team.edit(t.id), cls := "button button-empty text", dataIcon := "%")(trans.settings.settings()),
                 (t.isWfd && (info.createdByMe || isGranted(_.ManageWfd))) option
                   a(href := routes.Team.wfd(t.id), cls := "button button-empty text", dataIcon := "%")(s"WFD profiles")
               ),

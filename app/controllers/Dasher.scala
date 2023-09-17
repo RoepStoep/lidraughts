@@ -5,36 +5,36 @@ import play.api.libs.json._
 import lidraughts.api.Context
 import lidraughts.app._
 import lidraughts.common.LightUser.lightUserWrites
-import lidraughts.i18n.{ I18nKeys, I18nLangPicker, enLang }
+import lidraughts.i18n.{ I18nKeys => trans, I18nLangPicker, enLang }
 
 object Dasher extends LidraughtsController {
 
   private val translationsBase = List(
-    I18nKeys.networkLagBetweenYouAndLidraughts,
-    I18nKeys.timeToProcessAMoveOnLidraughtsServer,
-    I18nKeys.sound,
-    I18nKeys.background,
-    I18nKeys.light,
-    I18nKeys.dark,
-    I18nKeys.transparent,
-    I18nKeys.backgroundImageUrl,
-    I18nKeys.boardGeometry,
-    I18nKeys.boardTheme,
-    I18nKeys.boardSize,
-    I18nKeys.pieceSet,
-    I18nKeys.zenMode
+    trans.networkLagBetweenYouAndLidraughts,
+    trans.timeToProcessAMoveOnLidraughtsServer,
+    trans.sound,
+    trans.background,
+    trans.light,
+    trans.dark,
+    trans.transparent,
+    trans.backgroundImageUrl,
+    trans.boardGeometry,
+    trans.boardTheme,
+    trans.boardSize,
+    trans.pieceSet,
+    trans.preferences.zenMode
   )
 
   private val translationsAnon = List(
-    I18nKeys.signIn,
-    I18nKeys.signUp
+    trans.signIn,
+    trans.signUp
   ) ::: translationsBase
 
   private val translationsAuth = List(
-    I18nKeys.profile,
-    I18nKeys.inbox,
-    I18nKeys.preferences,
-    I18nKeys.logOut
+    trans.profile,
+    trans.inbox,
+    trans.preferences.preferences,
+    trans.logOut
   ) ::: translationsBase
 
   private def translations(implicit ctx: Context) = lidraughts.i18n.JsDump.keysToObject(
@@ -43,7 +43,7 @@ object Dasher extends LidraughtsController {
     ctx.lang
   ) ++ lidraughts.i18n.JsDump.keysToObject(
       // the language settings should never be in a totally foreign language
-      List(I18nKeys.language),
+      List(trans.language),
       lidraughts.i18n.I18nDb.Site,
       if (I18nLangPicker.allFromRequestHeaders(ctx.req).has(ctx.lang)) ctx.lang
       else I18nLangPicker.bestFromRequestHeaders(ctx.req) | enLang

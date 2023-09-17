@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Swiss tournaments</string>
+  <string name="bye" comment="A player gets a &#34;bye&#34; when they don't play in a round of the tournament because there is an odd number of players.">Bye</string>
+  <string name="byes" comment="Refers to the amount of &#34;byes&#34; in this tournament (the amount of players that didn't play a round because there was an odd number of players).">Byes</string>
+  <string name="absent">Absent</string>
+  <string name="absences">Absences</string>
+  <string name="late">Late</string>
+  <string name="tieBreak">Tie break</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s round</item>
+    <item quantity="other">%s rounds</item>
+  </plurals>
+  <string name="nextRound">Next round</string>
+  <string name="numberOfRounds">Number of rounds</string>
+  <string name="scheduleTheNextRound">Schedule the next round</string>
 </resources>

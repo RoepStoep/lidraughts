@@ -46,9 +46,11 @@ Make any move to continue.</string>
   <string name="register">Register</string>
   <string name="getAFreeLidraughtsAccount">Get a free Lidraughts account</string>
   <string name="practice">Practice</string>
+  <string name="makesYourDraughtsPerfect">makes your draughts perfect</string>
   <string name="learnCommonDraughtsPositions">Learn common draughts positions</string>
   <string name="signUpToSaveYourProgress">Sign up to save your progress</string>
   <string name="goToNextExercise">Go to next exercise</string>
+  <string name="loadNextExerciseImmediately">Load next exercise immediately</string>
   <string name="practiceList">Practice list</string>
   <string name="backToPracticeMenu">Back to practice menu</string>
   <string name="exerciseYourTacticalSkills">Exercise your tactical skills</string>
@@ -78,5 +80,35 @@ Make any move to continue.</string>
   <string name="puzzleFailed">Puzzle failed!</string>
   <string name="retry">Retry</string>
   <string name="clickToRetry">Click to retry</string>
+  <string name="playALegalCapture">Play a legal capture</string>
+  <plurals name="playAllLegalCapturesXRemaining">
+    <item quantity="one">Play all legal captures. One more to go!</item>
+    <item quantity="other">Play all legal captures. %s more to go!</item>
+  </plurals>
   <string name="winTheGame">Win the game</string>
+  <plurals name="winTheGameInX">
+    <item quantity="one">Win the game in %s move</item>
+    <item quantity="other">Win the game in %s moves</item>
+  </plurals>
+  <string name="promoteAKing">Promote to a king</string>
+  <plurals name="promoteAKingInX">
+    <item quantity="one">Promote to a king in %s move</item>
+    <item quantity="other">Promote to a king in %s moves</item>
+  </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="one">Hold the draw for %s more move</item>
+    <item quantity="other">Hold the draw for %s more moves</item>
+  </plurals>
+  <plurals name="equalizeInX">
+    <item quantity="one">Equalize in %s move</item>
+    <item quantity="other">Equalize in %s moves</item>
+  </plurals>
+  <plurals name="defendForX">
+    <item quantity="one">Defend for %s move</item>
+    <item quantity="other">Defend for %s moves</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="one">Get a winning position in %s move</item>
+    <item quantity="other">Get a winning position in %s moves</item>
+  </plurals>
 </resources>

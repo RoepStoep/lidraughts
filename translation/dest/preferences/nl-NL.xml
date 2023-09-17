@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">Voorkeuren</string>
+  <string name="gameDisplay">Speluiterlijk</string>
+  <string name="pieceAnimation">Stukanimatie</string>
+  <string name="materialDifference">Materiaalverschil</string>
+  <string name="showKingMoves">Toon het aantal keer dat een dam is gezet (Fries dammen)</string>
+  <string name="boardHighlights">Bord markeringen (laatste zet)</string>
+  <string name="pieceDestinations">Toon geldige zetten en sta vooraf-zetten toe</string>
+  <string name="boardCoordinates">Bordcoördinaten (1-50, a1-h8)</string>
+  <string name="insideTheBoard">Binnen het bord</string>
+  <string name="outsideTheBoard">Buiten het bord</string>
+  <string name="coordinateSystem8x8">Coördinaten systeem op 8x8 borden</string>
+  <string name="fieldnumbers8x8">Veldnummers (1-32)</string>
+  <string name="algebraic8x8">Algebraïsch (a-h, 1-8)</string>
+  <string name="moveListWhilePlaying">Zetnotatie zichtbaar tijdens partij</string>
+  <string name="onSlowGames">Alleen bij langzame partijen</string>
+  <string name="notationGameResult">Notatie resultaat partij (winst wit • remise • winst zwart)</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Zen modus</string>
+  <string name="displayBoardResizeHandle">Toon wijzig bordformaat knop</string>
+  <string name="onlyOnInitialPosition">Alleen bij de beginstand</string>
+  <string name="blindfoldDraughts">Blinddammen (onzichtbare stukken)</string>
+  <string name="draughtsClock">Damklok</string>
+  <string name="tenthsOfSeconds">Tienden van seconden</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">Als resterende tijd &lt; 10 seconden</string>
+  <string name="horizontalGreenProgressBars">Horizontale groene voortgangsbalk</string>
+  <string name="soundWhenTimeGetsCritical">Geluidssignaal als tijd opraakt</string>
+  <string name="giveMoreTime">Meer tijd geven</string>
+  <string name="gameBehavior">Spelgedrag</string>
+  <string name="howDoYouMovePieces">Hoe zet je stukken?</string>
+  <string name="clickTwoSquares">Klik twee vakjes</string>
+  <string name="dragPiece">Sleep een stuk</string>
+  <string name="bothClicksAndDrag">Zowel klikken als slepen</string>
+  <string name="howDoYouPlayMultiCaptures">Hoe voer je meerslagen uit op analyse borden?</string>
+  <string name="stepByStep">Stap voor stap</string>
+  <string name="allAtOnce">Hele slag in een keer</string>
+  <string name="premovesPlayingDuringOpponentTurn">Vooraf-zetten (spelen tijdens beurt tegenstander)</string>
+  <string name="takebacksWithOpponentApproval">Terugnames (met goedkeuring van tegenstander)</string>
+  <string name="inCasualGamesOnly">Alleen bij partijen zonder rating</string>
+  <string name="whenPremoving">Bij vooraf-zetten</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Eis automatisch remise op bij driemaal dezelfde stand</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">Als resterende tijd &lt; 30 seconden</string>
+  <string name="moveConfirmation">Zetbevestiging</string>
+  <string name="inCorrespondenceGames">Bij correspondentiepartijen</string>
+  <string name="correspondenceAndUnlimited">Correspondentiepartij en zonder klok</string>
+  <string name="confirmResignationAndDrawOffers">Opgave en remise-aanbod bevestigen</string>
+  <string name="inputMovesWithTheKeyboard">Zetten invoeren met het toetsenbord</string>
+  <string name="yourPreferencesHaveBeenSaved">Je voorkeuren zijn opgeslagen.</string>
+</resources>

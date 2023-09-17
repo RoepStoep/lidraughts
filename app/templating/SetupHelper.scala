@@ -212,18 +212,18 @@ trait SetupHelper { self: I18nHelper with GameHelper =>
 
   def translatedBoardCoordinateChoices(implicit ctx: Context) = List(
     (Pref.Coords.NONE, trans.no.txt()),
-    (Pref.Coords.INSIDE, trans.insideTheBoard.txt()),
-    (Pref.Coords.OUTSIDE, trans.outsideTheBoard.txt())
+    (Pref.Coords.INSIDE, trans.preferences.insideTheBoard.txt()),
+    (Pref.Coords.OUTSIDE, trans.preferences.outsideTheBoard.txt())
   )
 
   def translatedCoordinateSystemChoices(implicit ctx: Context) = List(
-    (Pref.CoordSystem.FIELDNUMBERS, trans.fieldnumbers8x8.txt()),
-    (Pref.CoordSystem.ALGEBRAIC, trans.algebraic8x8.txt())
+    (Pref.CoordSystem.FIELDNUMBERS, trans.preferences.fieldnumbers8x8.txt()),
+    (Pref.CoordSystem.ALGEBRAIC, trans.preferences.algebraic8x8.txt())
   )
 
   def translatedMoveListWhilePlayingChoices(implicit ctx: Context) = List(
     (Pref.Replay.NEVER, trans.never.txt()),
-    (Pref.Replay.SLOW, trans.onSlowGames.txt()),
+    (Pref.Replay.SLOW, trans.preferences.onSlowGames.txt()),
     (Pref.Replay.ALWAYS, trans.always.txt())
   )
 
@@ -232,43 +232,43 @@ trait SetupHelper { self: I18nHelper with GameHelper =>
 
   def translatedClockTenthsChoices(implicit ctx: Context) = List(
     (Pref.ClockTenths.NEVER, trans.never.txt()),
-    (Pref.ClockTenths.LOWTIME, trans.whenTimeRemainingLessThanTenSeconds.txt()),
+    (Pref.ClockTenths.LOWTIME, trans.preferences.whenTimeRemainingLessThanTenSeconds.txt()),
     (Pref.ClockTenths.ALWAYS, trans.always.txt())
   )
 
   def translatedFullCaptureChoices(implicit ctx: Context) = List(
-    (Pref.FullCapture.NO, trans.stepByStep.txt()),
-    (Pref.FullCapture.YES, trans.allAtOnce.txt())
+    (Pref.FullCapture.NO, trans.preferences.stepByStep.txt()),
+    (Pref.FullCapture.YES, trans.preferences.allAtOnce.txt())
   )
 
   def translatedMoveEventChoices(implicit ctx: Context) = List(
-    (Pref.MoveEvent.CLICK, trans.clickTwoSquares.txt()),
-    (Pref.MoveEvent.DRAG, trans.dragPiece.txt()),
-    (Pref.MoveEvent.BOTH, trans.bothClicksAndDrag.txt())
+    (Pref.MoveEvent.CLICK, trans.preferences.clickTwoSquares.txt()),
+    (Pref.MoveEvent.DRAG, trans.preferences.dragPiece.txt()),
+    (Pref.MoveEvent.BOTH, trans.preferences.bothClicksAndDrag.txt())
   )
 
   def translatedTakebackChoices(implicit ctx: Context) = List(
     (Pref.Takeback.NEVER, trans.never.txt()),
     (Pref.Takeback.ALWAYS, trans.always.txt()),
-    (Pref.Takeback.CASUAL, trans.inCasualGamesOnly.txt())
+    (Pref.Takeback.CASUAL, trans.preferences.inCasualGamesOnly.txt())
   )
 
   def translatedMoretimeChoices(implicit ctx: Context) = List(
     (Pref.Moretime.NEVER, trans.never.txt()),
     (Pref.Moretime.ALWAYS, trans.always.txt()),
-    (Pref.Moretime.CASUAL, trans.inCasualGamesOnly.txt())
+    (Pref.Moretime.CASUAL, trans.preferences.inCasualGamesOnly.txt())
   )
 
   def translatedAutoThreefoldChoices(implicit ctx: Context) = List(
     (Pref.AutoThreefold.NEVER, trans.never.txt()),
     (Pref.AutoThreefold.ALWAYS, trans.always.txt()),
-    (Pref.AutoThreefold.TIME, trans.whenTimeRemainingLessThanThirtySeconds.txt())
+    (Pref.AutoThreefold.TIME, trans.preferences.whenTimeRemainingLessThanThirtySeconds.txt())
   )
 
   def submitMoveChoices(implicit ctx: Context) = List(
     (Pref.SubmitMove.NEVER, trans.never.txt()),
-    (Pref.SubmitMove.CORRESPONDENCE_ONLY, trans.inCorrespondenceGames.txt()),
-    (Pref.SubmitMove.CORRESPONDENCE_UNLIMITED, trans.correspondenceAndUnlimited.txt()),
+    (Pref.SubmitMove.CORRESPONDENCE_ONLY, trans.preferences.inCorrespondenceGames.txt()),
+    (Pref.SubmitMove.CORRESPONDENCE_UNLIMITED, trans.preferences.correspondenceAndUnlimited.txt()),
     (Pref.SubmitMove.ALWAYS, trans.always.txt())
   )
 
@@ -302,7 +302,7 @@ trait SetupHelper { self: I18nHelper with GameHelper =>
 
   def translatedBoardResizeHandleChoices(implicit ctx: Context) = List(
     (Pref.ResizeHandle.NEVER, trans.never.txt()),
-    (Pref.ResizeHandle.INITIAL, trans.onlyOnInitialPosition.txt()),
+    (Pref.ResizeHandle.INITIAL, trans.preferences.onlyOnInitialPosition.txt()),
     (Pref.ResizeHandle.ALWAYS, trans.always.txt())
   )
 

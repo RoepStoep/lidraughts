@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">Preferências</string>
+  <string name="gameDisplay">Exibição do jogo</string>
+  <string name="pieceAnimation">Animação das peças</string>
+  <string name="materialDifference">Diferença material</string>
+  <string name="showKingMoves">Mostre a quantidade de vezes que um rei se moveu (damas frísias)</string>
+  <string name="boardHighlights">Destacar casas do tabuleiro (último movimento)</string>
+  <string name="pieceDestinations">Destino das peças (movimentos válidos e pré-movimentos)</string>
+  <string name="boardCoordinates">Coordenadas do tabuleiro (1-50, a1-h8)</string>
+  <string name="insideTheBoard">Dentro do tabuleiro</string>
+  <string name="outsideTheBoard">Fora do tabuleiro</string>
+  <string name="coordinateSystem8x8">Sistema de coordenadas em tabuleiros 8x8</string>
+  <string name="fieldnumbers8x8">Números das casas (1-32)</string>
+  <string name="algebraic8x8">Algébrica (a-h, 1-8)</string>
+  <string name="moveListWhilePlaying">Lista de movimentos durante a partida</string>
+  <string name="onSlowGames">Em jogos lentos</string>
+  <string name="notationGameResult">Notação de resultado do jogo (brancas vencem • empate • pretas vencem)</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Modo Zen</string>
+  <string name="displayBoardResizeHandle">Mostrar cursor de redimensionamento do tabuleiro</string>
+  <string name="onlyOnInitialPosition">Apenas na posição inicial</string>
+  <string name="blindfoldDraughts">Damas às cegas (peças invisíveis)</string>
+  <string name="draughtsClock">Relógio de damas</string>
+  <string name="tenthsOfSeconds">Décimos de segundo</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">Quando o tempo remanescente for menor do que 10 segundos</string>
+  <string name="horizontalGreenProgressBars">Barras de progresso verdes horizontais</string>
+  <string name="soundWhenTimeGetsCritical">Som ao atingir tempo crítico</string>
+  <string name="giveMoreTime">Dar mais tempo</string>
+  <string name="gameBehavior">Funcionamento do jogo</string>
+  <string name="howDoYouMovePieces">Como você move as peças?</string>
+  <string name="clickTwoSquares">Clicar em duas casas</string>
+  <string name="dragPiece">Arrastar a peça</string>
+  <string name="bothClicksAndDrag">Ambas</string>
+  <string name="howDoYouPlayMultiCaptures">Como realizar capturas múltiplas na análise?</string>
+  <string name="stepByStep">Passo-a-passo</string>
+  <string name="allAtOnce">Tudo de uma vez</string>
+  <string name="premovesPlayingDuringOpponentTurn">Pré-movimentos (jogadas durante o turno do oponente)</string>
+  <string name="takebacksWithOpponentApproval">Voltar jogada (com aprovação do oponente)</string>
+  <string name="inCasualGamesOnly">Somente em jogos casuais</string>
+  <string name="whenPremoving">Quando mover previamente</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Solicitar empate automaticamente quando ocorrerem 3 repetições do mesmo lance</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">Quando o tempo restante for menor do que 30 segundos</string>
+  <string name="moveConfirmation">Confirmação de movimento</string>
+  <string name="inCorrespondenceGames">Jogos por correspondência</string>
+  <string name="correspondenceAndUnlimited">Por correspondência e sem limites</string>
+  <string name="confirmResignationAndDrawOffers">Confirmar abandono e oferta de empate</string>
+  <string name="inputMovesWithTheKeyboard">Inclua os lances com o teclado</string>
+  <string name="yourPreferencesHaveBeenSaved">Suas preferências foram salvas.</string>
+</resources>

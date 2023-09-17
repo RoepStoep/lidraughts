@@ -41,7 +41,7 @@ object external {
                 },
                 if (startsAt.isDefined) startsAt.map { dt =>
                   div(cls := "starts-at")(
-                    trans.startsAtX(absClientDateTime(dt)),
+                    trans.challenge.startsAtX(absClientDateTime(dt)),
                     ul(cls := "countdown")(
                       List("Days", "Hours", "Minutes", "Seconds") map { t =>
                         li(cls := t.toLowerCase)(span, t)
@@ -53,15 +53,15 @@ object external {
                   (c.mode.rated && c.unlimited) option
                     badTag(trans.bewareTheGameIsRatedButHasNoClock()),
                   if (c.hasAcceptedExternal(ctx.me)) frag(
-                    p(cls := "player-accepted")(trans.challengeAcceptedAndWaiting()),
-                    p(cls := "accepting-message")(trans.youWillBeRedirectedToTheGame())
+                    p(cls := "player-accepted")(trans.challenge.challengeAcceptedAndWaiting()),
+                    p(cls := "accepting-message")(trans.challenge.youWillBeRedirectedToTheGame())
                   )
                   else postForm(cls := "accept", action := routes.Challenge.accept(c.id))(
                     submitButton(cls := "text button button-fat", dataIcon := "G")(trans.joinTheGame())
                   )
                 )
                 else c.external map { e =>
-                  val accepted = div(cls := "status")(span(dataIcon := "E"), trans.challengeAccepted())
+                  val accepted = div(cls := "status")(span(dataIcon := "E"), trans.challenge.challengeAccepted())
                   val waiting = div(cls := "status")(trans.waitingForPlayer())
                   frag(
                     div(cls := "accepting")(
@@ -79,17 +79,17 @@ object external {
                       )
                     ),
                     p(cls := "accepting-message")(
-                      trans.youWillBeRedirectedToTheGame()
+                      trans.challenge.youWillBeRedirectedToTheGame()
                     )
                   )
                 }
               )
             case Status.Declined => div(cls := "follow-up")(
-              h1(trans.challengeDeclined()),
+              h1(trans.challenge.challengeDeclined()),
               bits.details(c)
             )
             case Status.Accepted => div(cls := "follow-up")(
-              h1(trans.challengeAccepted()),
+              h1(trans.challenge.challengeAccepted()),
               bits.details(c),
               a(id := "challenge-redirect", href := routes.Round.watcher(c.id, "white"), cls := "button button-fat")(
                 if (player) trans.joinTheGame()
@@ -97,7 +97,7 @@ object external {
               )
             )
             case Status.Canceled => div(cls := "follow-up")(
-              h1(trans.challengeCanceled()),
+              h1(trans.challenge.challengeCanceled()),
               bits.details(c)
             )
           }

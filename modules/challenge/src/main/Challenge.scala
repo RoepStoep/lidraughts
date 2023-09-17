@@ -6,6 +6,7 @@ import draughts.{ Mode, Speed }
 import org.joda.time.DateTime
 
 import lidraughts.game.PerfPicker
+import lidraughts.i18n.{ I18nKey, I18nKeys }
 import lidraughts.rating.PerfType
 import lidraughts.user.User
 import draughts.format.Forsyth
@@ -114,6 +115,13 @@ object Challenge {
     case object External extends Status(50)
     val all = List(Created, Offline, Canceled, Declined, Accepted, External)
     def apply(id: Int): Option[Status] = all.find(_.id == id)
+  }
+
+  sealed abstract class DeclineReason(key: I18nKey)
+
+  object DeclineReason {
+    case object Generic extends DeclineReason(I18nKeys.challenge.declineGeneric)
+    case object Later extends DeclineReason(I18nKeys.challenge.declineLater)
   }
 
   case class Rating(int: Int, provisional: Boolean) {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="challenges">Challenges</string>
+  <string name="noChallenges">No challenges</string>
+  <string name="challengeSomeone">Challenge someone</string>
+  <string name="openChallenge">Open challenge</string>
+  <string name="startsAtX">Starts at %s</string>
+  <string name="challengeToPlay">Challenge to a game</string>
+  <string name="challengeDeclined">Challenge declined</string>
+  <string name="challengeAccepted">Challenge accepted!</string>
+  <string name="challengeCanceled">Challenge cancelled</string>
+  <string name="challengeAcceptedAndWaiting">Challenge accepted! Waiting for your opponent...</string>
+  <string name="youWillBeRedirectedToTheGame">You will be redirected to the game when both players have accepted the challenge.</string>
+  <string name="registerToSendChallenges">Please register to send challenges to this user.</string>
+  <string name="youCannotChallengeX">You cannot challenge %s.</string>
+  <string name="xDoesNotAcceptChallenges">%s does not accept challenges.</string>
+  <string name="yourXRatingIsTooFarFromY">Your %1$s rating is too far from %2$s.</string>
+  <string name="cannotChallengeDueToProvisionalXRating">Cannot challenge due to provisional %s rating.</string>
+  <string name="xOnlyAcceptsChallengesFromFriends">%s only accepts challenges from friends.</string>
+  <string name="declineGeneric">I'm not accepting challenges at the moment.</string>
+  <string name="declineLater">This is not the right time for me, please ask again later.</string>
+  <string name="declineTooFast">This time control is too fast for me, please challenge again with a slower game.</string>
+  <string name="declineTooSlow">This time control is too slow for me, please challenge again with a faster game.</string>
+  <string name="declineTimeControl">I'm not accepting challenges with this time control.</string>
+  <string name="declineRated">Please send me a rated challenge instead.</string>
+  <string name="declineCasual">Please send me a casual challenge instead.</string>
+  <string name="declineStandard">I'm not accepting variant challenges right now.</string>
+  <string name="declineVariant">I'm not willing to play this variant right now.</string>
+  <string name="declineNoBot">I'm not accepting challenges from bots.</string>
+  <string name="declineOnlyBot">I'm only accepting challenges from bots.</string>
+  <string name="inviteLidraughtsUser">Or invite a Lidraughts user:</string>
+</resources>

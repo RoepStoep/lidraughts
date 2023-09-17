@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="challenges">Utdagingen</string>
+  <string name="noChallenges">Gjin utdagingen</string>
+  <string name="challengeToPlay">Utdaagje foar in potsje</string>
+</resources>

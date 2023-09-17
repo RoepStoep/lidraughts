@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">Uzstādījumi</string>
+  <string name="gameDisplay">Spēļu ekrāns</string>
+  <string name="pieceAnimation">Kauliņu animācija</string>
+  <string name="materialDifference">Materiāla starpība</string>
+  <string name="showKingMoves">Uzrādīt, cik reižu gājusi dāma (frīzu dambretē)</string>
+  <string name="boardHighlights">Izgaismojumi uz dēlīša (pēdējais gājiens)</string>
+  <string name="pieceDestinations">Kauliņu galamērķi (atļauti gājieni vai priekšgājieni)</string>
+  <string name="boardCoordinates">Galdiņa koordinātas (1-50, a1-h8)</string>
+  <string name="insideTheBoard">Galdiņa iekšpusē</string>
+  <string name="outsideTheBoard">Galdiņa ārpusē</string>
+  <string name="moveListWhilePlaying">Gājienu saraksts spēles laikā</string>
+  <string name="onSlowGames">Lēnajās spēlēs</string>
+  <string name="notationGameResult">Spēles rezultāts pēc notācijas (balto uzvara • neizšķirts • melno uzvara)</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Zen režīms</string>
+  <string name="onlyOnInitialPosition">Tikai sākotnējajā pozīcijā</string>
+  <string name="blindfoldDraughts">Aklā spēle (neredzamie kauliņi)</string>
+  <string name="draughtsClock">Dambretes pulkstenis</string>
+  <string name="tenthsOfSeconds">Sekunžu desmitdaļas</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">Ja atlicis &lt; 10 sekunžu</string>
+  <string name="horizontalGreenProgressBars">Zaļā horizontālā izpildes josla</string>
+  <string name="soundWhenTimeGetsCritical">Signalizēt, kad laika pavisam maz</string>
+  <string name="giveMoreTime">Piešķirt vairāk laika</string>
+  <string name="gameBehavior">Spēles uzvedība</string>
+  <string name="howDoYouMovePieces">Kā pārvietosi figūras?</string>
+  <string name="clickTwoSquares">Klikšķini uz diviem lauciņiem</string>
+  <string name="dragPiece">Velc figūru</string>
+  <string name="bothClicksAndDrag">Abi</string>
+  <string name="premovesPlayingDuringOpponentTurn">Priekšgājieni (izdarīt gājienu kamēr pretinieks domā)</string>
+  <string name="takebacksWithOpponentApproval">Atsaukt gājienu (ar pretinieka piekrišanu)</string>
+  <string name="inCasualGamesOnly">Tikai parastajās spēlēs</string>
+  <string name="whenPremoving">Ja priekšgājiens</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Automātiski pieprasīt trīskāršās atkārtošanās neizšķirtu</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">Ja atlicis &lt; 30 sekundēm</string>
+  <string name="moveConfirmation">Gājiena apstiprināšana</string>
+  <string name="inCorrespondenceGames">Korespondences spēlēs</string>
+  <string name="correspondenceAndUnlimited">Korespondencē un neierobežoti</string>
+  <string name="confirmResignationAndDrawOffers">Apstiprināt padošanos un neizšķirta piedāvājumus</string>
+  <string name="inputMovesWithTheKeyboard">Ievadīt gājienus ar klaviatūru</string>
+  <string name="yourPreferencesHaveBeenSaved">Tavi uzstādījumi saglabāti.</string>
+</resources>

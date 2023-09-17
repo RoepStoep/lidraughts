@@ -1,6 +1,6 @@
 package lidraughts.challenge
 
-import lidraughts.i18n.I18nKeys
+import lidraughts.i18n.I18nKeys.{ challenge => trans }
 import lidraughts.pref.Pref
 import lidraughts.rating.PerfType
 import lidraughts.relation.{ Relation, Block, Follow }
@@ -22,12 +22,12 @@ object ChallengeDenied {
   }
 
   def translated(d: ChallengeDenied)(implicit lang: lidraughts.common.Lang): String = d.reason match {
-    case Reason.YouAreAnon => I18nKeys.registerToSendChallenges.txt()
-    case Reason.YouAreBlocked => I18nKeys.youCannotChallengeX.txt(d.dest.titleUsername)
-    case Reason.TheyDontAcceptChallenges => I18nKeys.xDoesNotAcceptChallenges.txt(d.dest.titleUsername)
-    case Reason.RatingOutsideRange(perf) => I18nKeys.yourXRatingIsTooFarFromY.txt(perf.name, d.dest.titleUsername)
-    case Reason.RatingIsProvisional(perf) => I18nKeys.cannotChallengeDueToProvisionalXRating.txt(perf.name)
-    case Reason.FriendsOnly => I18nKeys.xOnlyAcceptsChallengesFromFriends.txt(d.dest.titleUsername)
+    case Reason.YouAreAnon => trans.registerToSendChallenges.txt()
+    case Reason.YouAreBlocked => trans.youCannotChallengeX.txt(d.dest.titleUsername)
+    case Reason.TheyDontAcceptChallenges => trans.xDoesNotAcceptChallenges.txt(d.dest.titleUsername)
+    case Reason.RatingOutsideRange(perf) => trans.yourXRatingIsTooFarFromY.txt(perf.name, d.dest.titleUsername)
+    case Reason.RatingIsProvisional(perf) => trans.cannotChallengeDueToProvisionalXRating.txt(perf.name)
+    case Reason.FriendsOnly => trans.xOnlyAcceptsChallengesFromFriends.txt(d.dest.titleUsername)
   }
 }
 

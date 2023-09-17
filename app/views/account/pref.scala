@@ -10,6 +10,8 @@ import controllers.routes
 
 object pref {
 
+  import trans.preferences._
+
   private def categFieldset(categ: lidraughts.pref.PrefCateg, active: lidraughts.pref.PrefCateg) =
     div(cls := List("none" -> (categ != active)))
 
@@ -35,7 +37,7 @@ object pref {
     )
 
   def apply(u: lidraughts.user.User, form: play.api.data.Form[_], categ: lidraughts.pref.PrefCateg)(implicit ctx: Context) = account.layout(
-    title = s"${bits.categName(categ)} - ${u.username} - ${trans.preferences.txt()}",
+    title = s"${bits.categName(categ)} - ${u.username} - ${preferences.txt()}",
     active = categ.slug
   ) {
     val booleanChoices = Seq(0 -> trans.no.txt(), 1 -> trans.yes.txt())
@@ -44,103 +46,103 @@ object pref {
       postForm(cls := "autosubmit", action := routes.Pref.formApply)(
         categFieldset(PrefCateg.GameDisplay, categ)(
           setting(
-            trans.pieceAnimation(),
+            pieceAnimation(),
             radios(form("display.animation"), translatedAnimationChoices)
           ),
           setting(
-            trans.materialDifference(),
+            materialDifference(),
             radios(form("display.captured"), booleanChoices)
           ),
           setting(
-            trans.showKingMoves(),
+            showKingMoves(),
             radios(form("display.kingMoves"), booleanChoices)
           ),
           setting(
-            trans.boardHighlights(),
+            boardHighlights(),
             radios(form("display.highlight"), booleanChoices)
           ),
           setting(
-            trans.pieceDestinations(),
+            pieceDestinations(),
             radios(form("display.destination"), booleanChoices)
           ),
           setting(
-            trans.moveListWhilePlaying(),
+            moveListWhilePlaying(),
             radios(form("display.replay"), translatedMoveListWhilePlayingChoices)
           ),
           setting(
-            trans.boardCoordinates(),
+            boardCoordinates(),
             radios(form("display.coords"), translatedBoardCoordinateChoices)
           ),
           setting(
-            trans.coordinateSystem8x8(),
+            coordinateSystem8x8(),
             radios(form("display.coordSystem"), translatedCoordinateSystemChoices)
           ),
           setting(
-            trans.notationGameResult(),
+            notationGameResult(),
             radios(form("display.gameResult"), translatedGameResultNotationChoices)
           ),
           setting(
-            trans.zenMode(),
+            zenMode(),
             radios(form("display.zen"), booleanChoices)
           ),
           setting(
-            trans.displayBoardResizeHandle(),
+            displayBoardResizeHandle(),
             radios(form("display.resizeHandle"), translatedBoardResizeHandleChoices)
           ),
           setting(
-            trans.blindfoldDraughts(),
+            blindfoldDraughts(),
             radios(form("display.blindfold"), translatedBlindfoldChoices)
           )
         ),
         categFieldset(PrefCateg.DraughtsClock, categ)(
           setting(
-            trans.tenthsOfSeconds(),
+            tenthsOfSeconds(),
             radios(form("clock.tenths"), translatedClockTenthsChoices)
           ),
           setting(
-            trans.horizontalGreenProgressBars(),
+            horizontalGreenProgressBars(),
             radios(form("clock.bar"), booleanChoices)
           ),
           setting(
-            trans.soundWhenTimeGetsCritical(),
+            soundWhenTimeGetsCritical(),
             radios(form("clock.sound"), booleanChoices)
           ),
           setting(
-            trans.giveMoreTime(),
+            giveMoreTime(),
             radios(form("clock.moretime"), translatedMoretimeChoices)
           )
         ),
         categFieldset(PrefCateg.GameBehavior, categ)(
           setting(
-            trans.howDoYouMovePieces(),
+            howDoYouMovePieces(),
             radios(form("behavior.moveEvent"), translatedMoveEventChoices)
           ),
           setting(
-            trans.howDoYouPlayMultiCaptures(),
+            howDoYouPlayMultiCaptures(),
             radios(form("behavior.fullCapture"), translatedFullCaptureChoices)
           ),
           setting(
-            trans.premovesPlayingDuringOpponentTurn(),
+            premovesPlayingDuringOpponentTurn(),
             radios(form("behavior.premove"), booleanChoices)
           ),
           setting(
-            trans.takebacksWithOpponentApproval(),
+            takebacksWithOpponentApproval(),
             radios(form("behavior.takeback"), translatedTakebackChoices)
           ),
           setting(
-            trans.claimDrawOnThreefoldRepetitionAutomatically(),
+            claimDrawOnThreefoldRepetitionAutomatically(),
             radios(form("behavior.autoThreefold"), translatedAutoThreefoldChoices)
           ),
           setting(
-            trans.moveConfirmation(),
+            moveConfirmation(),
             radios(form("behavior.submitMove"), submitMoveChoices)
           ),
           setting(
-            trans.confirmResignationAndDrawOffers(),
+            confirmResignationAndDrawOffers(),
             radios(form("behavior.confirmResign"), confirmResignChoices)
           ),
           setting(
-            trans.inputMovesWithTheKeyboard(),
+            inputMovesWithTheKeyboard(),
             radios(form("behavior.keyboardMove"), booleanChoices)
           )
         ),
@@ -166,7 +168,7 @@ object pref {
             radios(form("insightShare"), translatedInsightShareChoices)
           )
         ),
-        p(cls := "saved text none", dataIcon := "E")(trans.yourPreferencesHaveBeenSaved())
+        p(cls := "saved text none", dataIcon := "E")(yourPreferencesHaveBeenSaved())
       )
     )
   }

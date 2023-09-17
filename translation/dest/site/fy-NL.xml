@@ -237,7 +237,6 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="more">Mear</string>
   <string name="memberSince">Lid sûnt</string>
   <string name="lastSeenActive">%s Foar it lêst sjoen</string>
-  <string name="challengeToPlay">Utdaagje foar in potsje</string>
   <string name="player">Spiler</string>
   <string name="list">List</string>
   <string name="from">Fan</string>
@@ -360,7 +359,6 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="newPasswordsDontMatch">De nije wachtwurden komme net oerien</string>
   <string name="clockInitialTime">Klok begjintiid</string>
   <string name="clockIncrement">Tafoeging per set</string>
-  <string name="never">Nea</string>
   <string name="privacy">Privacy</string>
   <string name="letOtherPlayersFollowYou">Oare spilers meie dy folje</string>
   <string name="letOtherPlayersChallengeYou">Oare spilers meie dy útdaagje</string>
@@ -370,10 +368,8 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="fast">Fluch</string>
   <string name="normal">Normaal</string>
   <string name="slow">Stadich</string>
-  <string name="insideTheBoard">Binnen it boerd</string>
-  <string name="outsideTheBoard">Bûten it boerd</string>
-  <string name="onSlowGames">Allinnich by stadige partijen</string>
   <string name="always">Altyd</string>
+  <string name="never">Nea</string>
   <string name="difficultyEasy">Maklik</string>
   <string name="difficultyNormal">Normaal</string>
   <string name="difficultyHard">Dreech</string>
@@ -452,7 +448,6 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="error.unknown">Fout</string>
   <string name="custom">Oanpast</string>
   <string name="notifications">Meldingen</string>
-  <string name="challenges">Utdagingen</string>
   <string name="doItAgain">Noch in kear dwaan</string>
   <string name="why">Wêrom?</string>
 </resources>

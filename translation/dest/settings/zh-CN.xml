@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="settings">设置</string>
+  <string name="closeAccount">关闭账户</string>
+  <string name="closingIsDefinitive">确定要关闭账户吗？此操作将不可恢复！</string>
+  <string name="cantOpenSimilarAccount">不允许同名账户，包括大小写不同。</string>
+  <string name="changedMindDoNotCloseAccount">我改主意了，不要关闭帐号</string>
+  <string name="closeAccountExplanation">您确定要关闭帐号吗？此操作不可逆。您将无法再登录，而您的个人资料也将不再可见。</string>
+  <string name="thisAccountIsClosed">此帐户已被关闭。</string>
+</resources>

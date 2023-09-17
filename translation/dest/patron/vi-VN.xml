@@ -72,4 +72,5 @@ Tuy nhiên, Patron được quyền khoe khoang với một huy hiệu mới.</s
   <string name="nowLifetime">Giờ bạn đã trở thành Lidraughts Patron trọn đời!</string>
   <string name="nowOneMonth">Giờ bạn đã trở thành Lidraughts Patron trong một tháng!</string>
   <string name="downgradeNextMonth">Sau một tháng, bạn sẽ không phải trả tiền lại nữa, và tài khoản Lidraughts của bạn sẽ quay trở lại tài khoản thường.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Không giới hạn</string>
 </resources>

@@ -28,4 +28,50 @@
   <string name="withPaypal">Donate with PayPal</string>
   <string name="donatingPubliclyAs">Donating publicly as %s</string>
   <string name="weAreSmallTeam">We are a small team, so your support makes a huge difference!</string>
+  <string name="celebratedPatrons">The celebrated Patrons who make Lidraughts possible</string>
+  <string name="whereMoneyGoes">Where does the money go?</string>
+  <string name="serversAndExpenses">The servers that run Lidraughts and the Scan engine analysis.
+Other operating expenses such as mailgun and hosting.</string>
+  <string name="changeMonthlySupport">Can I change/cancel my monthly support?</string>
+  <string name="changeOrContact">Yes, at any time. Login to your PayPal account and go to automatic payments.
+Or you can %s.</string>
+  <string name="contactSupport">contact Lidraughts support</string>
+  <string name="otherMethods">Other methods of donation?</string>
+  <string name="bankTransfers">We also accept bank transfers. Please send an email to %s for details.</string>
+  <string name="bitcoin">And here\'s our bitcoin address: %s</string>
+  <string name="patronFeatures">Are some features reserved to Patrons?</string>
+  <string name="noPatronFeatures">No, because Lidraughts is entirely free, forever, and for everyone. That\'s a promise.
+However, Patrons get bragging rights with a cool new profile icon.</string>
+  <string name="featuresComparison">See the detailed features comparison</string>
+  <plurals name="patronForMonths">
+    <item quantity="one">Lidraughts Patron for one month</item>
+    <item quantity="other">Lidraughts Patron for %s months</item>
+  </plurals>
+  <string name="youSupportWith">You support lidraughts.org with %s per month.</string>
+  <string name="tyvm">Thank you very much for your help. You rock!</string>
+  <string name="currentStatus">Current status</string>
+  <string name="nextPayment">Next payment</string>
+  <string name="youWillBeChargedXOnY">You will be charged %1$s on %2$s.</string>
+  <string name="makeAdditionalDonation">Make an additional donation now</string>
+  <string name="update">Update</string>
+  <string name="changeMonthlyAmount">Change the monthly amount (%s)</string>
+  <string name="cancelSupport">cancel your support</string>
+  <string name="xOrY">%1$s or %2$s</string>
+  <string name="decideHowMuch">Decide what Lidraughts is worth to you:</string>
+  <string name="stopPayments">Withdraw your credit card and stop payments:</string>
+  <string name="noLongerSupport">No longer support Lidraughts</string>
+  <string name="paymentHistory">Payment history</string>
+  <string name="paid">Paid</string>
+  <string name="viewOthers">View other Lidraughts Patrons</string>
+  <string name="date">Date</string>
+  <string name="amount">Amount</string>
+  <string name="transactionCompleted">Your transaction has been completed, and a receipt for your donation has been emailed to you.</string>
+  <string name="permanentPatron">You now have a permanent Patron account.</string>
+  <string name="paypalRenew">In one month, PayPal will automatically renew your payment.
+To cancel your monthly support, login to your PayPal account and go to automatic payments.</string>
+  <string name="checkOutProfile">Check out your profile page!</string>
+  <string name="nowLifetime">You are now a lifetime Lidraughts Patron!</string>
+  <string name="nowOneMonth">You are now a Lidraughts Patron for one month!</string>
+  <string name="downgradeNextMonth">In one month, you will NOT be charged again, and your Lidraughts account will revert to a regular account.</string>
+  <string name="unlimited" comment="To describe features without limitation (an unlimited amount, unlimited amount of times, etc)">Unlimited</string>
 </resources>
