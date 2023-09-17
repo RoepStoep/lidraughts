@@ -39,12 +39,10 @@ object Dasher extends LidraughtsController {
 
   private def translations(implicit ctx: Context) = lidraughts.i18n.JsDump.keysToObject(
     if (ctx.isAnon) translationsAnon else translationsAuth,
-    lidraughts.i18n.I18nDb.Site,
     ctx.lang
   ) ++ lidraughts.i18n.JsDump.keysToObject(
       // the language settings should never be in a totally foreign language
       List(trans.language),
-      lidraughts.i18n.I18nDb.Site,
       if (I18nLangPicker.allFromRequestHeaders(ctx.req).has(ctx.lang)) ctx.lang
       else I18nLangPicker.bestFromRequestHeaders(ctx.req) | enLang
     )

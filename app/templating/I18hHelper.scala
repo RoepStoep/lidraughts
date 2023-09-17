@@ -5,7 +5,7 @@ import play.api.libs.json.JsObject
 
 import lidraughts.common.Lang
 import lidraughts.app.ui.ScalatagsTemplate._
-import lidraughts.i18n.{ LangList, I18nKey, Translator, JsQuantity, I18nDb, JsDump, TimeagoLocales }
+import lidraughts.i18n.{ I18nDb, JsDump, JsQuantity, LangList, TimeagoLocales, Translated, Translator }
 import lidraughts.user.UserContext
 
 trait I18nHelper extends UserContext.ToLang {
@@ -13,11 +13,11 @@ trait I18nHelper extends UserContext.ToLang {
   def transKey(key: String, db: I18nDb.Ref, args: Seq[Any] = Nil)(implicit lang: Lang): Frag =
     Translator.frag.literal(key, db, args, lang)
 
-  def i18nJsObject(keys: Seq[I18nKey])(implicit lang: Lang): JsObject =
-    JsDump.keysToObject(keys, I18nDb.Site, lang)
+  def i18nJsObject(keys: Seq[Translated])(implicit lang: Lang): JsObject =
+    JsDump.keysToObject(keys, lang)
 
-  def i18nOptionJsObject(keys: Option[I18nKey]*)(implicit lang: Lang): JsObject =
-    JsDump.keysToObject(keys.flatten, I18nDb.Site, lang)
+  def i18nOptionJsObject(keys: Option[Translated]*)(implicit lang: Lang): JsObject =
+    JsDump.keysToObject(keys.flatten, lang)
 
   def i18nFullDbJsObject(db: I18nDb.Ref)(implicit lang: Lang): JsObject =
     JsDump.dbToObject(db, lang)

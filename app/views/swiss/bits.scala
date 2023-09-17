@@ -83,9 +83,7 @@ object bits {
         )
     }
 
-  def jsI18n(implicit ctx: Context) = i18nJsObject(i18nKeys) ++
-    JsDump.keysToObject(i18nSwissKeys, I18nDb.Swiss, ctx.lang) ++
-    JsDump.keysToObject(i18nTeamKeys, I18nDb.Team, ctx.lang)
+  def jsI18n(implicit ctx: Context) = i18nJsObject(i18nKeys)
 
   private val i18nKeys = List(
     trans.join,
@@ -106,10 +104,7 @@ object bits {
     trans.averageOpponent,
     trans.startingIn,
     trans.tournament,
-    trans.tournamentComplete
-  )
-
-  private val i18nSwissKeys = List(
+    trans.tournamentComplete,
     trans.swiss.bye,
     trans.swiss.byes,
     trans.swiss.absent,
@@ -117,10 +112,7 @@ object bits {
     trans.swiss.late,
     trans.swiss.tieBreak,
     trans.swiss.nextRound,
-    trans.swiss.scheduleTheNextRound
-  )
-
-  private val i18nTeamKeys = List(
+    trans.swiss.scheduleTheNextRound,
     trans.team.joinTeam
   )
 }

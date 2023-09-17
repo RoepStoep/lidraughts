@@ -40,7 +40,7 @@ object show {
       main(cls := "analyse")
     }
 
-  private def translations()(implicit lang: lidraughts.common.Lang) = lidraughts.i18n.JsDump.keysToObject(List(
+  private def translations(implicit lang: lidraughts.common.Lang) = i18nJsObject(List(
     trans.learn.goToNextExercise,
     trans.learn.loadNextExerciseImmediately,
     trans.learn.practiceList,
@@ -57,5 +57,5 @@ object show {
     trans.learn.equalizeInX,
     trans.learn.getAWinningPositionInX,
     trans.learn.defendForX
-  ), lidraughts.i18n.I18nDb.Learn, lang)
+  ))
 }

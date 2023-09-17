@@ -3,7 +3,7 @@ package views.html.board
 import lidraughts.api.Context
 import lidraughts.app.templating.Environment._
 import lidraughts.common.Lang
-import lidraughts.i18n.{ I18nKey, I18nKeys => trans }
+import lidraughts.i18n.{ Translated, I18nKeys => trans }
 
 object userAnalysisI18n {
 
@@ -24,7 +24,7 @@ object userAnalysisI18n {
     }
   )
 
-  private val baseTranslations: Vector[I18nKey] = Vector(
+  private val baseTranslations: Vector[Translated] = Vector(
     trans.backToGame,
     trans.whitePlays,
     trans.blackPlays,

@@ -93,5 +93,5 @@ final class JsonView(
     trans.nbDays,
     trans.oneDay,
     trans.unlimited
-  ), lidraughts.i18n.I18nDb.Site, lang)
+  ), lang)
 }
