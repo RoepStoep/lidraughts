@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="arenaTournaments">Турніры Арэны</string>
   <string name="isItRated">Гэта рэйтынгавыя гульні?</string>
   <string name="willBeNotified">Вас апавясцяць, калі пачнецца турнір, так што пакуль што можаце пагуляць, адкрыўшы іншую ўкладку.</string>
   <string name="isRated">Гэты турнір рэйтынгавы і паўплывае на ваш рэйтынг.</string>
@@ -35,4 +36,23 @@
   </plurals>
   <string name="thisIsPrivate">Гэта прыватны турнір</string>
   <string name="shareUrl">Падзяліцеся гэтай спасылкай, каб запрасіць гульцоў: %s</string>
+  <string name="drawStreakStandard">Серыя нічыіх: Калі гулец мае некалькі паслядоўных нічыіх на Арэне, то толькі першая з іх прынясе ачко, або нічыя, якая працягнецца болей чым %s хадоў. Серыю нічыіх можна спыніць толькі перамогай, але не пройгрышам або яшчэ адной нічыёй.</string>
+  <string name="drawStreakVariants">Мінімальны лік хадоў для нічыіх для налічэння ачкоў адрозніваецца ў залежнасці ад варыянту. У табліцы ніжэй пералічаны парогавыя значэнні для кожнага варыянту.</string>
+  <string name="variant">Варыянт</string>
+  <string name="minimumGameLength">Мінімальны лік хадоў</string>
+  <string name="history">Гісторыя Арэны</string>
+  <plurals name="viewAllXTeams" comment="viewAllXTeams [one] [other]&#10;&#10;%s is the number of teams that can be viewed">
+    <item quantity="one">Паглядзець каманду</item>
+    <item quantity="few">Паглядзець усе %s каманды</item>
+    <item quantity="many">Паглядзець усе %s камандаў</item>
+    <item quantity="other">Паглядзець усе %s камандаў</item>
+  </plurals>
+  <string name="newTeamBattle">Новая камандная бітва</string>
+  <string name="customStartDate">Уласная дата пачатку</string>
+  <string name="customStartDateHelp">У вашым часавым поясе. Гэта перазапіша наладку \"Час да пачатку турніра\"</string>
+  <string name="allowBerserk">Дазволіць Шалёны рэжым</string>
+  <string name="allowBerserkHelp">Дазволіць гульцам паловіць іх час, каб атрымаць дадатковы бал</string>
+  <string name="allowChatHelp">Дазволіць гульцам абмеркаванне ў чаце</string>
+  <string name="arenaStreaks">Серыі Арэны</string>
+  <string name="arenaStreaksHelp">Пасля 2 перамог запар, наступныя перамогі прынясуць 4 ачкі, замест 2.</string>
 </resources>

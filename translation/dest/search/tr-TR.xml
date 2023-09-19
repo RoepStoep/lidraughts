@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="search">Ara</string>
+  <string name="advancedSearch">Gelişmiş Arama</string>
+  <string name="opponentName">Rakibin ismi</string>
+  <string name="loser">Kaybeden</string>
+  <string name="from">Bu değerden</string>
+  <string name="to">Bu değere kadar</string>
+  <string name="humanOrComputer">Oyuncunun rakibi insan mı yoksa bilgisayar mı</string>
+  <string name="aiLevel">Yapay Zeka seviyesi</string>
+  <string name="source">Kaynak</string>
+  <string name="numberOfTurns">Hamle sayısı</string>
+  <string name="result">Sonuç</string>
+  <string name="winnerColor">Kazanının rengi</string>
+  <string name="date">Tarih</string>
+  <string name="sortBy">Sıralama ölçütü</string>
+  <string name="analysis" comment="Short for computer analysis">Analiz</string>
+  <string name="onlyAnalysed">Sadece bilgisayar analizi yapılmış oyunları göster</string>
+  <string name="color">Renk</string>
+  <string name="evaluation">Değerlendirme</string>
+  <string name="maxNumber">En çok sayı</string>
+  <string name="maxNumberExplanation">Getirilecek en çok oyun sayısı</string>
+  <string name="include">Dahil et</string>
+  <string name="descending">Azalan</string>
+  <string name="ascending">Artan</string>
+  <string name="ratingExplanation">Her iki oyuncunun ortalama puanı</string>
+</resources>

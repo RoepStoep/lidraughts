@@ -52,10 +52,10 @@ However, Patrons get bragging rights with a cool new profile icon.</string>
   <string name="currentStatus">Current status</string>
   <string name="nextPayment">Next payment</string>
   <string name="youWillBeChargedXOnY">You will be charged %1$s on %2$s.</string>
-  <string name="makeAdditionalDonation">Make an additional donation now</string>
+  <string name="makeAdditionalDonation">Make an additional donation</string>
   <string name="update">Update</string>
   <string name="changeMonthlyAmount">Change the monthly amount (%s)</string>
-  <string name="cancelSupport">cancel your support</string>
+  <string name="cancelSupport">Cancel your support</string>
   <string name="xOrY">%1$s or %2$s</string>
   <string name="decideHowMuch">Decide what Lidraughts is worth to you:</string>
   <string name="stopPayments">Withdraw your credit card and stop payments:</string>

@@ -12,7 +12,7 @@ object list {
   import trans.team._
 
   def search(text: String, teams: Paginator[lidraughts.team.Team])(implicit ctx: Context) = list(
-    name = trans.search.txt() + " \"" + text + "\"",
+    name = trans.search.search.txt() + " \"" + text + "\"",
     teams = teams,
     nextPageUrl = n => routes.Team.search(text, n).url,
     tab = "all",
@@ -64,7 +64,7 @@ object list {
             h1(name),
             div(cls := "box__top__actions")(
               st.form(cls := "search", action := routes.Team.search())(
-                input(st.name := "text", value := search, placeholder := trans.search.txt())
+                input(st.name := "text", value := search, placeholder := trans.search.search.txt())
               )
             )
           ),

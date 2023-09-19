@@ -2,7 +2,7 @@
 <resources>
   <string name="twoFactorAuth">两步认证</string>
   <string name="twoFactorHelp">双重认证能增加您的账号的安全性。</string>
-  <string name="twoFactorApp">下载一个双重认证 app，例如谷歌身份验证器 (%1$s 或 %2$s)。</string>
+  <string name="twoFactorApp">下载一个双重认证 app，例如 %1$s 端的 andOPT 或者 %2$s 端的 Google Authenticator。</string>
   <string name="scanTheCode">用 app 扫描 QR 码。</string>
   <string name="enterPassword">请输入您的账号密码和由 app 生成的验证码而完成设置。您将在每次登录时都需要新的验证码。</string>
   <string name="authenticationCode">授权码</string>

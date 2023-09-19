@@ -11,6 +11,8 @@ import lidraughts.gameSearch.{ Query, Sorting }
 
 private object bits {
 
+  import trans.search._
+
   private val dateFormatter = DateTimeFormat.forPattern("YYYY-MM-dd");
   private val dateMin = "2018-08-13"
   private def dateMinMax: List[Modifier] = List(min := dateMin, max := dateFormatter.print(DateTime.now))
@@ -33,47 +35,51 @@ private object bits {
         )
       }
 
-    def winner(hide: Boolean) = tr(cls := List("winner user-row" -> true, "none" -> hide))(
-      th(label(`for` := form3.id(form("players")("winner")))(trans.winner())),
-      td(cls := "single")(
-        st.select(id := form3.id(form("players")("winner")), name := form("players")("winner").name)(
-          option(cls := "blank", value := "")
+    def winner(hide: Boolean) = form("players")("winner") |> { field =>
+      tr(cls := List("winner user-row" -> true, "none" -> hide))(
+        th(label(`for` := form3.id(field))(trans.winner())),
+        td(cls := "single")(
+          st.select(id := form3.id(field), name := field.name)(
+            option(cls := "blank", value := "")
+          )
         )
       )
-    )
+    }
 
-    def loser(hide: Boolean) = tr(cls := List("loser user-row" -> true, "none" -> hide))(
-      th(label(`for` := form3.id(form("players")("loser")))(trans.loser())),
-      td(cls := "single")(
-        st.select(id := form3.id(form("players")("loser")), name := form("players")("loser").name)(
-          option(cls := "blank", value := "")
+    def loser(hide: Boolean) = form("players")("loser") |> { field =>
+      tr(cls := List("loser user-row" -> true, "none" -> hide))(
+        th(label(`for` := form3.id(field))(trans.search.loser())),
+        td(cls := "single")(
+          st.select(id := form3.id(field), name := field.name)(
+            option(cls := "blank", value := "")
+          )
         )
       )
-    )
+    }
 
     def rating = tr(
-      th(label(trans.rating(), " ", span(cls := "help", title := trans.searchRatingsHelp.txt())("(?)"))),
+      th(label(trans.rating(), " ", span(cls := "help", title := ratingExplanation.txt())("(?)"))),
       td(
-        div(cls := "half")(trans.from(), " ", form3.select(form("ratingMin"), translatedAverageRatingChoices, "".some)),
-        div(cls := "half")(trans.to(), " ", form3.select(form("ratingMax"), translatedAverageRatingChoices, "".some))
+        div(cls := "half")(from(), " ", form3.select(form("ratingMin"), translatedAverageRatingChoices, "".some)),
+        div(cls := "half")(to(), " ", form3.select(form("ratingMax"), translatedAverageRatingChoices, "".some))
       )
     )
 
     def hasAi = tr(
-      th(label(`for` := form3.id(form("hasAi")))(trans.opponent(), " ", span(cls := "help", title := trans.searchOpponentHelp.txt())("(?)"))),
+      th(label(`for` := form3.id(form("hasAi")))(trans.opponent(), " ", span(cls := "help", title := humanOrComputer.txt())("(?)"))),
       td(cls := "single opponent")(form3.select(form("hasAi"), translatedHasAiChoices, "".some))
     )
 
     def aiLevel = tr(cls := "aiLevel none")(
-      th(label("A.I. level")),
+      th(label(trans.search.aiLevel())),
       td(
-        div(cls := "half")(trans.from(), " ", form3.select(form("aiLevelMin"), Query.aiLevels, "".some)),
-        div(cls := "half")(trans.to(), " ", form3.select(form("aiLevelMax"), Query.aiLevels, "".some))
+        div(cls := "half")(from(), " ", form3.select(form("aiLevelMin"), Query.aiLevels, "".some)),
+        div(cls := "half")(to(), " ", form3.select(form("aiLevelMax"), Query.aiLevels, "".some))
       )
     )
 
     def source = tr(
-      th(label(`for` := form3.id(form("source")))(trans.source())),
+      th(label(`for` := form3.id(form("source")))(trans.search.source())),
       td(cls := "single")(form3.select(form("source"), Query.sources, "".some))
     )
 
@@ -88,10 +94,10 @@ private object bits {
     )
 
     def turns = tr(
-      th(trans.numberOfTurns()),
+      th(label(numberOfTurns(), " ", span(cls := "help", title := numberOfTurnsExplanation.txt())("(?)"))),
       td(
-        div(cls := "half")(trans.from(), " ", form3.select(form("turnsMin"), translatedTurnsChoices, "".some)),
-        div(cls := "half")(trans.to(), " ", form3.select(form("turnsMax"), translatedTurnsChoices, "".some))
+        div(cls := "half")(from(), " ", form3.select(form("turnsMin"), translatedTurnsChoices, "".some)),
+        div(cls := "half")(to(), " ", form3.select(form("turnsMax"), translatedTurnsChoices, "".some))
       )
     )
 
@@ -99,8 +105,8 @@ private object bits {
       tr(
         th(label(trans.duration())),
         td(
-          div(cls := "half")(trans.from(), " ", form3.select(form("durationMin"), translatedDurationChoices, "".some)),
-          div(cls := "half")(trans.to(), " ", form3.select(form("durationMax"), translatedDurationChoices, "".some))
+          div(cls := "half")(from(), " ", form3.select(form("durationMin"), translatedDurationChoices, "".some)),
+          div(cls := "half")(to(), " ", form3.select(form("durationMax"), translatedDurationChoices, "".some))
         )
       )
     )
@@ -108,41 +114,41 @@ private object bits {
     def clockTime = tr(
       th(label(trans.clockInitialTime())),
       td(
-        div(cls := "half")(trans.from(), " ", form3.select(form("clock")("initMin"), translatedClockInitChoices, "".some)),
-        div(cls := "half")(trans.to(), " ", form3.select(form("clock")("initMax"), translatedClockInitChoices, "".some))
+        div(cls := "half")(from(), " ", form3.select(form("clock")("initMin"), translatedClockInitChoices, "".some)),
+        div(cls := "half")(to(), " ", form3.select(form("clock")("initMax"), translatedClockInitChoices, "".some))
       )
     )
 
     def clockIncrement = tr(
       th(label(trans.clockIncrement())),
       td(
-        div(cls := "half")(trans.from(), " ", form3.select(form("clock")("incMin"), translatedClockIncChoices, "".some)),
-        div(cls := "half")(trans.to(), " ", form3.select(form("clock")("incMax"), translatedClockIncChoices, "".some))
+        div(cls := "half")(from(), " ", form3.select(form("clock")("incMin"), translatedClockIncChoices, "".some)),
+        div(cls := "half")(to(), " ", form3.select(form("clock")("incMax"), translatedClockIncChoices, "".some))
       )
     )
 
     def status = tr(
-      th(label(`for` := form3.id(form("status")))(trans.result())),
+      th(label(`for` := form3.id(form("status")))(result())),
       td(cls := "single")(form3.select(form("status"), Query.statuses, "".some))
     )
 
     def winnerColor = tr(
-      th(label(`for` := form3.id(form("winnerColor")))(trans.winnerColor())),
+      th(label(`for` := form3.id(form("winnerColor")))(trans.search.winnerColor())),
       td(cls := "single")(form3.select(form("winnerColor"), translatedWinnerColorChoices, "".some))
     )
 
     def date = tr(cls := "date")(
-      th(label(trans.date())),
+      th(label(trans.search.date())),
       td(
-        div(cls := "half")(trans.from(), " ", form3.input(form("dateMin"), "date")(dateMinMax: _*)),
-        div(cls := "half")(trans.to(), " ", form3.input(form("dateMax"), "date")(dateMinMax: _*))
+        div(cls := "half")(from(), " ", form3.input(form("dateMin"), "date")(dateMinMax: _*)),
+        div(cls := "half")(to(), " ", form3.input(form("dateMax"), "date")(dateMinMax: _*))
       )
     )
 
     def sort = tr(
-      th(label(trans.sort())),
+      th(label(trans.search.sortBy())),
       td(
-        div(cls := "half")(trans.sortBy(), " ", form3.select(form("sort")("field"), translatedSortFieldChoices)),
+        div(cls := "half wide")(form3.select(form("sort")("field"), translatedSortFieldChoices)),
         div(cls := "half wide")(form3.select(form("sort")("order"), translatedSortOrderChoices))
       )
     )
@@ -150,7 +156,7 @@ private object bits {
     def analysed = {
       val field = form("analysed")
       tr(
-        th(label(`for` := form3.id(field))(trans.computerAnalysis(), " ", span(cls := "help", title := trans.searchAnalysisHelp.txt())("(?)"))),
+        th(label(`for` := form3.id(field))(trans.search.analysis(), " ", span(cls := "help", title := onlyAnalysed.txt())("(?)"))),
         td(cls := "single")(
           st.input(
             tpe := "checkbox",

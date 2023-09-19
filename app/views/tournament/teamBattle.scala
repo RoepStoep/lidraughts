@@ -86,8 +86,8 @@ object teamBattle {
             tbody(
               tr(th(trans.players()), td(info.nbPlayers)),
               tr(th(trans.averageElo()), td(info.avgRating)),
-              tr(th(trans.averagePerformance()), td(info.avgPerf)),
-              tr(th(trans.averageScore()), td(info.avgScore))
+              tr(th(trans.arena.averagePerformance()), td(info.avgPerf)),
+              tr(th(trans.arena.averageScore()), td(info.avgScore))
             )
           ),
           table(cls := "slist slist-pad tour__team-info")(

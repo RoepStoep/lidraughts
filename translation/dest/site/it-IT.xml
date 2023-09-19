@@ -21,7 +21,7 @@
   <string name="variantEnding">Fine variante</string>
   <string name="important">Importante</string>
   <string name="yourQuestionMayHaveBeenAnswered">La tua domanda potrebbe già avere una risposta %1$s</string>
-  <string name="inTheFAQ">nelle F.A.Q.</string>
+  <string name="inTheFAQ">nelle FAQ</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Per segnalare un utente per imbrogli o comportamenti errati, %1$s</string>
   <string name="useTheReportForm">usa il modulo di rapporto</string>
   <string name="toRequestSupport">Per richiedere supporto, %1$s</string>
@@ -257,8 +257,6 @@
   <string name="takebackPropositionCanceled">Proposta di ritiro mossa annullata</string>
   <string name="yourOpponentProposesATakeback">Il tuo avversario chiede di ritirare la mossa</string>
   <string name="bookmarkThisGame">Aggiungi questa partita ai preferiti</string>
-  <string name="search">Cerca</string>
-  <string name="advancedSearch">Ricerca avanzata</string>
   <string name="tournament">Torneo</string>
   <string name="tournaments">Tornei</string>
   <string name="tournamentPoints">Punti di torneo</string>
@@ -577,7 +575,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="aboutSimul">Nelle simultanee un giocatore sfida diversi avversari contemporaneamente.</string>
   <string name="aboutSimulImage">Su 136 avversari, Sijbrands vinse 115 partite, ne pareggiò 43 e ne perse 11.</string>
   <string name="aboutSimulRealLife">Questo concetto è preso da eventi reali. Nella vita reale, questo implica che il simultaneista si muova da un tavolo all\'altro per giocare le singole mosse.</string>
-  <string name="aboutSimulRules">Quando la simultanea comincia, ogni giocatore comincia una partita con il simultaneista, il quale gioca con i pezzi bianchi. La simultanea finisce quando sono finite tutte le partite.</string>
+  <string name="aboutSimulRules">Quando la simultanea comincia, ogni giocatore comincia una partita con il simultaneista. La simultanea finisce quando sono finite tutte le partite.</string>
   <string name="aboutSimulSettings">Le simultanee sono sempre amichevoli. Rivincite, ritiri di mossa e aggiunte di tempo sono disabilitate.</string>
   <string name="create">Crea</string>
   <string name="whenCreateSimul">Quando crei una simultanea, giochi contro diversi avversari contemporaneamente.</string>

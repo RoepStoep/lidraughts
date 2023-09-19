@@ -31,6 +31,7 @@
   <string name="teamBattleOverview">複数チームの団体戦で、所属プレイヤーのポイント合計を争う</string>
   <string name="teamTournament">チーム内トーナメント</string>
   <string name="teamTournamentOverview">チーム所属メンバーだけが参加できるアリーナトーナメント</string>
+  <string name="swissTournamentOverview">チーム所属メンバーだけが参加できるスイス式トーナメント</string>
   <string name="messageAllMembers">全メンバーにメッセージ</string>
   <string name="messageAllMembersOverview">チームの全メンバーにプライベートメッセージを送る</string>
   <string name="messageAllMembersLongDescription">チームの全員にメッセージを送ります。

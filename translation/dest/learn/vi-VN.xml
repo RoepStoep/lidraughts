@@ -11,12 +11,12 @@
   <string name="theMen">The men</string>
   <string name="theKing">Quân vua</string>
   <string name="fundamentals">Nguyên tắc cơ bản</string>
-  <string name="capture">Chụp</string>
+  <string name="capture">Ăn quân</string>
   <string name="takeTheEnemyPieces">Ăn quân của đối thủ</string>
   <string name="takeTheBlackPieces">Hãy bắt lấy quân đen!</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">Bắt lấy quân đen!
 Nhưng đừng để mất quân của bạn.</string>
-  <string name="captureComplete">Chúc mừng! Bạn đã biết cách chụp bằng những quân cờ đam!</string>
+  <string name="captureComplete">Chúc mừng! Bạn đã biết cách ăn quân bằng những quân cờ đam!</string>
   <string name="protection">Phòng thủ</string>
   <string name="keepYourPiecesSafe">Giữ an toàn cho quân của bạn</string>
   <string name="protectionIntro">Xác định các quân đang bị đối thủ tấn công và phòng thủ cho chúng!</string>
@@ -78,9 +78,9 @@ bất kỳ quân không được bảo vệ nào!</string>
   <string name="puzzleFailed">Giải sai!</string>
   <string name="retry">Thử lại</string>
   <string name="clickToRetry">Nhấn để thử lại</string>
-  <string name="playALegalCapture">Chơi một nước chụp</string>
+  <string name="playALegalCapture">Chơi một nước ăn quân lợp lệ</string>
   <plurals name="playAllLegalCapturesXRemaining">
-    <item quantity="other">Chơi tất cả các nước chụp hợp lệ. Còn %s nữa!</item>
+    <item quantity="other">Chơi tất cả các nước ăn quân hợp lệ. Còn %s nữa!</item>
   </plurals>
   <string name="winTheGame">Thắng cuộc</string>
   <plurals name="winTheGameInX">

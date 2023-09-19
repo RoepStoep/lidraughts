@@ -2,6 +2,7 @@
 <resources>
   <string name="perfStats" comment="Statistics for a specific draughts variant or game speed %s.">Estadísticas de %s</string>
   <string name="viewTheGames">Ver las partidas</string>
+  <string name="provisional">provisional</string>
   <string name="notEnoughRatedGames">No se han jugado suficientes partidas para establecer una puntuación fiable.</string>
   <string name="progressOverLastXGames">Progresión en las últimas %s partidas:</string>
   <string name="ratingDeviation">Desviación de la puntuación: %s.</string>

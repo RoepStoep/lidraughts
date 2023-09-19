@@ -90,10 +90,10 @@ En verlies je eigen niet.</string>
     <item quantity="one">Win de partij in %s zet</item>
     <item quantity="other">Win de partij in %s zetten</item>
   </plurals>
-  <string name="promoteAKing">Promoveer een dam</string>
+  <string name="promoteAKing">Promoveer naar een dam</string>
   <plurals name="promoteAKingInX">
-    <item quantity="one">Promoveer een dam in %s zet</item>
-    <item quantity="other">Promoveer een dam in %s zetten</item>
+    <item quantity="one">Promoveer naar een dam in %s zet</item>
+    <item quantity="other">Promoveer naar een dam in %s zetten</item>
   </plurals>
   <plurals name="holdTheDrawForX">
     <item quantity="one">Houd nog %s zet de remise</item>

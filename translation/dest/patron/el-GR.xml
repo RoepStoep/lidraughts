@@ -55,7 +55,7 @@
   <string name="makeAdditionalDonation">Κάντε μια πρόσθετη δωρεά τώρα</string>
   <string name="update">Ενημέρωση</string>
   <string name="changeMonthlyAmount">Αλλαγή του μηνιαίου ποσού (%s)</string>
-  <string name="cancelSupport">διακοπή της υποστήριξής σας</string>
+  <string name="cancelSupport">Διακοπή της υποστήριξής σας</string>
   <string name="xOrY">%1$s ή %2$s</string>
   <string name="decideHowMuch">Αποφασίστε πόσο αξίζει το Lidraughts για εσάς:</string>
   <string name="stopPayments">Αφαίρεση της πιστωτικής κάρτας και παύση πληρωμών:</string>

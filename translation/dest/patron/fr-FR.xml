@@ -55,7 +55,7 @@ Cependant, les Mécènes sont distingués au moyen d\'une nouvelle icône de pro
   <string name="makeAdditionalDonation">Faire un don supplémentaire maintenant</string>
   <string name="update">Modifier</string>
   <string name="changeMonthlyAmount">Changer le montant mensuel (%s)</string>
-  <string name="cancelSupport">annuler votre soutien</string>
+  <string name="cancelSupport">Annuler votre soutien</string>
   <string name="xOrY">%1$s ou %2$s</string>
   <string name="decideHowMuch">Décidez ce que vaut Lidraughts pour vous :</string>
   <string name="stopPayments">Retirer votre carte de crédit et arrêter les paiements :</string>

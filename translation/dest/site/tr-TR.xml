@@ -266,8 +266,6 @@
   <string name="takebackPropositionCanceled">Hamleyi geri alma teklifi iptal edildi.</string>
   <string name="yourOpponentProposesATakeback">Rakibiniz hamleyi geri alma teklifi gönderdi</string>
   <string name="bookmarkThisGame">Bu oyunu işaretle</string>
-  <string name="search">Ara</string>
-  <string name="advancedSearch">Detaylı Arama</string>
   <string name="tournament">Turnuva</string>
   <string name="tournaments">Turnuvalar</string>
   <string name="tournamentPoints">Turnuvada alınan puanlar</string>
@@ -469,7 +467,7 @@
   <string name="description">Açıklama</string>
   <string name="no">Hayır</string>
   <string name="yes">Evet</string>
-  <string name="help">Yardım:</string>
+  <string name="help">Yardım</string>
   <string name="createANewTopic">Yeni bir bildiri oluştur.</string>
   <string name="topics">Konular</string>
   <string name="posts">Gönderiler</string>
@@ -605,7 +603,6 @@
   <string name="aboutSimul">Eş zamanlı gösterilerde, bir oyuncu aynı anda birçok oyuncuya karşı mücadele verir.</string>
   <string name="aboutSimulImage">Sijbrands 169 rakibe karşı, 115 oyun kazandı, 43 beraberlik ve 11 yenilgi aldı.</string>
   <string name="aboutSimulRealLife">Bu kavram gerçek etkinliklerden alınmıştır. Gerçek hayatta, eş zamanlı gösterinin ev sahibi masadan masaya dolaşarak birer hamle yapar.</string>
-  <string name="aboutSimulRules">Eş zamanlı gösteriye katılan her oyuncu, beyaz taşlarla oynayan ev sahibi ilk hamleyi yaptıktan sonra maça başlar. Bütün oyunlar bittiğinde eş zamanlı gösteri sona erer.</string>
   <string name="aboutSimulSettings">Eş zamanlı gösteriler daima puansızdır. Yeniden maç teklifi göndermek, hamleyi geri almak ve ek süre talep etmek devre dışıdır.</string>
   <string name="create">Oluştur</string>
   <string name="whenCreateSimul">Eş zamanlı gösterilerde, birkaç oyuncuyla aynı anda oynarsınız.</string>
@@ -655,7 +652,7 @@
   <string name="youHaveAlreadyRegisteredTheEmail">Zaten kaydedilmiş e-posta adresiniz var: %s</string>
   <string name="kidMode">Çocuk modu</string>
   <string name="kidModeExplanation">Bu mod çocuğunuzun güvenliği ile ilgilidir. Tüm site bağlantıları devre dışı bırakılır. Eğer çocuklarınızı veya okul öğrencilerinizi diğer internet kullanıcılarına karşı korumak istiyorsanız, bu modu etkinleştirin.</string>
-  <string name="inKidModeTheLidraughtsLogoGetsIconX">Çocuk modunda, lidraughts.org logosu yerine %s belirir, bilin ki çocuğunuz güvendedir :)</string>
+  <string name="inKidModeTheLidraughtsLogoGetsIconX">Çocuk modunda, Lidraughts logosu yerine %s belirir, bilin ki çocuğunuz güvendedir.</string>
   <string name="enableKidMode">Çocuk modunu aktifleştir</string>
   <string name="disableKidMode">Çocuk modunu devre dışı bırak</string>
   <string name="security">Güvenlik</string>
@@ -690,7 +687,6 @@
   <string name="dark">Koyu</string>
   <string name="transparent">Şeffaf</string>
   <string name="backgroundImageUrl">Arka plan resim linki:</string>
-  <string name="boardGeometry">Tahta geometrisi</string>
   <string name="boardTheme">Tahta teması</string>
   <string name="boardSize">Tahta boyutu</string>
   <string name="pieceSet">Taş seti</string>

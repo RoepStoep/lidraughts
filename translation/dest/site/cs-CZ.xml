@@ -22,7 +22,7 @@
   <string name="variantEnding">Jiné ukončení</string>
   <string name="important">Důležité</string>
   <string name="yourQuestionMayHaveBeenAnswered">Vaše otázka již možná má odpověď %1$s</string>
-  <string name="inTheFAQ">v Často kladených dotazech (F.A.Q.).</string>
+  <string name="inTheFAQ">v Často kladených dotazech (F.A.Q.)</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Chcete-li nahlásit uživatele z důvodu podvádění nebo za špatné chování, %1$s</string>
   <string name="useTheReportForm">použijte nahlašovací formulář</string>
   <string name="toRequestSupport">Chcete-li požádat o podporu, %1$s</string>
@@ -57,7 +57,7 @@
   <string name="analysis">Analýza</string>
   <string name="depthX">Hloubka %s</string>
   <string name="usingServerAnalysis">Používání analýzy serveru</string>
-  <string name="loadingEngine">Načítání motoru ...</string>
+  <string name="loadingEngine">Načítání motoru...</string>
   <string name="cloudAnalysis">Cloudová analýza</string>
   <string name="goDeeper">Hlouběji</string>
   <string name="showThreat">Zobrazit hrozbu</string>
@@ -242,8 +242,6 @@
   <string name="takebackPropositionCanceled">Návrh na vrácení tahu byl zrušen</string>
   <string name="yourOpponentProposesATakeback">Soupeř navrhuje vrácení tahu</string>
   <string name="bookmarkThisGame">Přidat tuto partii do záložek</string>
-  <string name="search">Hledat</string>
-  <string name="advancedSearch">Pokročilé vyhledávání</string>
   <string name="tournament">Turnaj</string>
   <string name="tournaments">Turnaje</string>
   <string name="tournamentPoints">Turnajové body</string>
@@ -532,7 +530,7 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="aboutSimul">Simultánka je boj jednoho hráče proti několika ostatním.</string>
   <string name="aboutSimulImage">Z 169 soupeřů, Sijbrands vyhrál 115, remízoval 43 a prohrál 11.</string>
   <string name="aboutSimulRealLife">Koncept je převzat z realných v akcí, kde se host pohybuje po kruhu a vždy odehraje jeden tah.</string>
-  <string name="aboutSimulRules">Když simultánka začne, každý hráč začne hrát s hostem, který dostane bílé figurky. Simultánka končí, když jsou všechny hry ukončeny.</string>
+  <string name="aboutSimulRules">Když simultánka začne, každý hráč začne hrát s hostem. Simultánka končí, když jsou všechny hry ukončeny.</string>
   <string name="aboutSimulSettings">Simultánka je vždy neformální. Je nemožné nabízet odvety, vracení tahu a přidávat čas.</string>
   <string name="create">Vytvořte</string>
   <string name="whenCreateSimul">Když vytvoříte simultánku, budete hrát proti více hráčům najednou.</string>

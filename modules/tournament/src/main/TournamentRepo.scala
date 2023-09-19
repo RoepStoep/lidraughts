@@ -144,9 +144,9 @@ object TournamentRepo {
   // all team-only tournament
   // and team battles
   // this query is carefully crafted so that it hits both indexes
-  def byTeamUpcoming(teamId: String, nb: Int): Fu[List[Tournament]] =
+  def byTeamUpcoming(teamId: String, nb: Int, withTeamBattle: Boolean): Fu[List[Tournament]] =
     coll
-      .find(byTeamSelect(teamId) ++ enterableSelect)
+      .find((if (withTeamBattle) byTeamSelect(teamId) else byTeamSelectArena(teamId)) ++ enterableSelect)
       .sort($sort asc "startsAt")
       .list[Tournament](nb)
 

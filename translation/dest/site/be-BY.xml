@@ -22,7 +22,7 @@
   <string name="variantEnding">Канчатковы варыянт</string>
   <string name="important">Важна</string>
   <string name="yourQuestionMayHaveBeenAnswered">Ваш запыт можа ужо мець адказ %1$s</string>
-  <string name="inTheFAQ">у FAQ</string>
+  <string name="inTheFAQ">у частых пытаннях</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Каб паведаміць аб падмане ці дрэнных паводзінах карыстальніка, %1$s</string>
   <string name="useTheReportForm">скарыстайцеся формай справаздачы</string>
   <string name="youCannotPostYetPlaySomeGames">Вы яшчэ не можаце публікаваць на формах. Згуляйце некалькі партый!</string>
@@ -288,8 +288,6 @@
   <string name="takebackPropositionCanceled">Прапанова скасаваная</string>
   <string name="yourOpponentProposesATakeback">Супернік прапануе скасаваць ход</string>
   <string name="bookmarkThisGame">Дадаць гэтую гульню ў закладкі</string>
-  <string name="search">Пошук</string>
-  <string name="advancedSearch">Пашыраны пошук</string>
   <string name="tournament">Турнір</string>
   <string name="tournaments">Турніры</string>
   <string name="tournamentPoints">Турнірныя балы</string>
@@ -637,7 +635,7 @@
   <string name="returnToSimulHomepage">Да асноўнай старонкі</string>
   <string name="aboutSimul">Паралельныя гульні – гэта такі рэжым, дзе адзін гулец супрацьстаіць некалькім супернікам у адначассе.</string>
   <string name="aboutSimulRealLife">Такія гульні праводзяцца і «ужывую»: арганізатар ходзіць ад стала да стала, робячы хады.</string>
-  <string name="aboutSimulRules">Калі пачынаецца сеанс паралельнай гульні, кожны гулец гуляе асобную партыю з арганізатарам, які заўсёды гуляе за белых. Сеанс лічыцца скончаным, калі ўсе гульні завершаны.</string>
+  <string name="aboutSimulRules">Калі пачынаецца сеанс адначасовай гульні, кожны ўдзельнік гуляе асобную партыю з сеансёрам. Сеанс лічыцца скончаным, калі ўсе гульні завершаны.</string>
   <string name="aboutSimulSettings">Паралельныя гульні заўсёды вядуцца ў бязрэйтынгавым рэжыме. Нельга скасоўваць хады ці дадаваць час, а таксама немагчыма запытаць рэванш.</string>
   <string name="create">Стварыць</string>
   <string name="whenCreateSimul">Калі вы створыце сеанс паралельнай гульні, вам прыйдзецца гуляць супраць некалькіх супернікаў у адначассе.</string>
@@ -685,7 +683,7 @@
   <string name="youHaveAlreadyRegisteredTheEmail">Вы ўжо рэгістравалі гэты адрас: %s</string>
   <string name="kidMode">Дзіцячы рэжым</string>
   <string name="kidModeExplanation">Гэта для бяспекі. У дзіцячым рэжыме адключаны ўсе камунікацыі на сайце. Уключыце гэта для вашых дзяцей і школьнікаў, каб абараніць іх ад іншых карыстачоў Інтэрнэту.</string>
-  <string name="inKidModeTheLidraughtsLogoGetsIconX">У дзіцячым рэжыме лагатып lidraughts атрымвае значок у выглядзе %s, так што вы ведаеце, што вашы дзеці знаходзяцца ў бяспецы.</string>
+  <string name="inKidModeTheLidraughtsLogoGetsIconX">У дзіцячым рэжыме лагатып Lidraughts атрымвае значок у выглядзе %s, так што вы ведаеце, што вашы дзеці знаходзяцца ў бяспецы.</string>
   <string name="enableKidMode">Уключыць дзіцячы рэжым</string>
   <string name="disableKidMode">Адключыць дзіцячы рэжым</string>
   <string name="security">Бяспека</string>
@@ -723,7 +721,6 @@
   <string name="dark">Цёмны</string>
   <string name="transparent">Празрысты</string>
   <string name="backgroundImageUrl">Спасылка на фон:</string>
-  <string name="boardGeometry">Адмалёўка дошкі</string>
   <string name="boardTheme">Афармленне дошкі</string>
   <string name="boardSize">Памер дошкі</string>
   <string name="pieceSet">Набор фігур</string>

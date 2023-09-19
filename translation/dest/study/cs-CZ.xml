@@ -84,6 +84,7 @@
   <string name="deleteThisChapter">Opravdu chcete odstranit tuto kapitolu? Kapitola bude navždy ztracena!</string>
   <string name="clearAllCommentsInThisChapter">Vymazat všechny komentáře a výtvory v této kapitole?</string>
   <string name="rightUnderTheBoard">Přímo pod šachovnicí</string>
+  <string name="noPinnedComment">Žádný</string>
   <string name="normalAnalysis">Normální rozbor</string>
   <string name="hideNextMoves">Skrýt následující tahy</string>
   <string name="interactiveLesson">Interaktivní lekce</string>
@@ -96,6 +97,8 @@
   <string name="loadAPositionFromFen">Načíst polohu z FEN</string>
   <string name="loadAGameFromPdn">Načíst hru z PDN</string>
   <string name="automatic">Automatický</string>
+  <string name="urlOfTheGame">URL hry</string>
+  <string name="loadAGameFromXOrY">Načíst hru z %1$s nebo %2$s</string>
   <string name="createChapter">Vytvořit kapitolu</string>
   <string name="configureLiveBroadcast">Konfigurace živého vysílání</string>
   <string name="createStudy">Vytvořit studii</string>

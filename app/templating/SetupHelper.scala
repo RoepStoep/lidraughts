@@ -93,14 +93,14 @@ trait SetupHelper { self: I18nHelper with GameHelper =>
   )
 
   def translatedSortFieldChoices(implicit ctx: Context) = List(
-    lidraughts.gameSearch.Sorting.fields(0)._1 -> trans.date.txt(),
-    lidraughts.gameSearch.Sorting.fields(1)._1 -> trans.numberOfTurns.txt(),
+    lidraughts.gameSearch.Sorting.fields(0)._1 -> trans.search.date.txt(),
+    lidraughts.gameSearch.Sorting.fields(1)._1 -> trans.search.numberOfTurns.txt(),
     lidraughts.gameSearch.Sorting.fields(2)._1 -> trans.averageElo.txt()
   )
 
   def translatedSortOrderChoices(implicit ctx: Context) = List(
-    "desc" -> trans.descending.txt(),
-    "asc" -> trans.ascending.txt()
+    "desc" -> trans.search.descending.txt(),
+    "asc" -> trans.search.ascending.txt()
   )
 
   def translatedAverageRatingChoices(implicit ctx: Context) =

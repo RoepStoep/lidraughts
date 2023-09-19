@@ -42,7 +42,7 @@ object Dimension {
 
   case object Perf extends Dimension[PerfType](
     "variant", "Variant", F.perf, Game,
-    raw("The rating category of the game, like Bullet, Blitz, or Chess960.")
+    raw("The rating category of the game, like Bullet, Blitz, or Frisian.")
   )
 
   case object Phase extends Dimension[Phase](

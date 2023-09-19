@@ -16,6 +16,7 @@ object LangList {
     Lang("en", "GB") -> "English",
     Lang("be", "BY") -> "Беларуская",
     Lang("cs", "CZ") -> "čeština",
+    Lang("cy", "GB") -> "Cymraeg",
     Lang("de", "DE") -> "Deutsch",
     Lang("el", "GR") -> "Ελληνικά",
     Lang("en", "US") -> "English (US)",

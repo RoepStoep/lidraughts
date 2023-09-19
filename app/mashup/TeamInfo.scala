@@ -57,7 +57,10 @@ final class TeamInfoApi(
     requestedByMe ← !mine ?? me.??(m => RequestRepo.exists(team.id, m.id))
     subscribed <- me.ifTrue(mine) ?? { api.isSubscribed(team, _) }
     forumPosts ← getForumPosts(team.id)
-    tours <- lidraughts.tournament.TournamentRepo.byTeam(team.id, 5, !team.isWfd)
+    tours <- TournamentRepo.byTeam(team.id, 5, withTeamBattle = !team.isWfd).flatMap { tours =>
+      if (tours.size < 5 || tours.exists(_.isFinished)) fuccess(tours)
+      else TournamentRepo.byTeamUpcoming(team.id, 5, withTeamBattle = !team.isWfd).dmap(_.reverse)
+    }
     _ <- tours.nonEmpty ?? {
       preloadTeams(tours.flatMap(_.teamBattle.??(_.teams)).toSet)
     }
@@ -74,7 +77,7 @@ final class TeamInfoApi(
 
   def tournaments(team: Team, nb: Int): Fu[List[AnyTour]] =
     for {
-      tours <- lidraughts.tournament.TournamentRepo.byTeam(team.id, nb, !team.isWfd)
+      tours <- TournamentRepo.byTeam(team.id, nb, withTeamBattle = !team.isWfd)
       swisses <- swissApi.visibleInTeam(team.id, nb)
     } yield {
       tours.map(anyTour) ::: swisses.map(anyTour)

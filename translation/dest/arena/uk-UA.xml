@@ -34,4 +34,28 @@
   </plurals>
   <string name="thisIsPrivate">Цей турнир приватний</string>
   <string name="shareUrl">Поділіться цим посиланням, щоб запросити гравців приєднатися: %s</string>
+  <string name="drawStreakStandard">Серія нічиїх: Якщо гравець має послідовні нічиї на арені, то одне очко зарахується лише за першу нічию, або нічию, яка триватиме більше ніж %s ходів. Серію нічиїх можна перервати лише перемогою, але не програшем чи нічиєю.</string>
+  <string name="drawStreakVariants">Мінімальна тривалість партії для нічиєї та отримання балів залежить від варіанту. Таблиця нижче містить поріг для кожного варіанту.</string>
+  <string name="variant">Варіант</string>
+  <string name="minimumGameLength">Мінімальна тривалість гри</string>
+  <string name="history">Історія Арени</string>
+  <plurals name="viewAllXTeams" comment="viewAllXTeams [one] [other]&#10;&#10;%s is the number of teams that can be viewed">
+    <item quantity="one">Переглянути команду</item>
+    <item quantity="few">Переглянути %s команди</item>
+    <item quantity="many">Переглянути %s команд</item>
+    <item quantity="other">Переглянути %s команди</item>
+  </plurals>
+  <string name="newTeamBattle">Нова Командна битва</string>
+  <string name="customStartDate">Власна дата початку</string>
+  <string name="customStartDateHelp">У вашому локальному часовому поясі. Це замінює налаштування \"Час до початку турніру\"</string>
+  <string name="allowBerserk">Дозволити Берсерк</string>
+  <string name="allowBerserkHelp">Дозволити гравцям зменшити наполовину свій час, щоб отримати додаткове очко</string>
+  <string name="allowChatHelp">Дозволити гравцям обговорення в чаті</string>
+  <string name="arenaStreaks">Серії Арени</string>
+  <string name="arenaStreaksHelp">Після двох перемог, кожна наступна перемога принесе 4 бали замість 2.</string>
+  <string name="noBerserkAllowed">Берсерк не дозволений</string>
+  <string name="noArenaStreaks">Немає серій Арени</string>
+  <string name="averagePerformance">Середня продуктивність</string>
+  <string name="averageScore">Середній результат</string>
+  <string name="myTournaments">Мої турніри</string>
 </resources>

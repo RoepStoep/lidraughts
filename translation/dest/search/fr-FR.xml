@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="search">Recherche</string>
+  <string name="advancedSearch">Recherche avancée</string>
+  <plurals name="searchInXGames">
+    <item quantity="one">Rechercher dans %s partie</item>
+    <item quantity="other">Rechercher dans %s parties</item>
+  </plurals>
+  <plurals name="xGamesFound">
+    <item quantity="one">Une partie trouvée</item>
+    <item quantity="other">%s parties trouvées</item>
+  </plurals>
+  <string name="searchPlayersExplanation">Le ou les noms des joueurs que vous souhaitez rechercher</string>
+  <string name="opponentName">Nom de l\'adversaire</string>
+  <string name="loser">Perdant</string>
+  <string name="from">De</string>
+  <string name="to">À</string>
+  <string name="humanOrComputer">Si l\'adversaire du joueur était un humain ou un ordinateur</string>
+  <string name="aiLevel">Niveau de l\'IA</string>
+  <string name="source">Source</string>
+  <string name="numberOfTurns">Nombre de tours</string>
+  <string name="numberOfTurnsExplanation">Le nombre de tours joués (les deux joueurs ont bougé)</string>
+  <string name="result">Résultat</string>
+  <string name="winnerColor">Couleur du vainqueur</string>
+  <string name="date">Date</string>
+  <string name="sortBy">Trier par</string>
+  <string name="analysis" comment="Short for computer analysis">Analyse</string>
+  <string name="onlyAnalysed">N\'inclure que les parties ayant fait l\'objet d\'une analyse informatique</string>
+  <string name="color">Couleur</string>
+  <string name="evaluation">Évaluation</string>
+  <string name="maxNumber">Nombre maximum</string>
+  <string name="maxNumberExplanation">Nombre maximum de parties à retourner</string>
+  <string name="include">Inclus</string>
+  <string name="descending">Décroissant</string>
+  <string name="ascending">Croissant</string>
+  <string name="ratingExplanation">Classement moyen des deux joueurs</string>
+</resources>

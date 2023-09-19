@@ -18,7 +18,6 @@ object Dasher extends LidraughtsController {
     trans.dark,
     trans.transparent,
     trans.backgroundImageUrl,
-    trans.boardGeometry,
     trans.boardTheme,
     trans.boardSize,
     trans.pieceSet,

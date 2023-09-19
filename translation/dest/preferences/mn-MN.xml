@@ -10,6 +10,7 @@
   <string name="outsideTheBoard">Өргийн гадар талд</string>
   <string name="moveListWhilePlaying">Хийгдсэн нүүдлүүдийн жагсаалтыг хажуу талд харуулах</string>
   <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Өрсөлдөгчийн чансааг нуух</string>
+  <string name="displayBoardResizeHandle">Хэмжээг өөрчлөх самбарыг харуул</string>
   <string name="onlyOnInitialPosition">Зөвхөн анхны байрлал дээр</string>
   <string name="tenthsOfSeconds">1/10 секунд</string>
   <string name="whenTimeRemainingLessThanTenSeconds">Хэрэв цаг 10 секундээс бага болвол</string>

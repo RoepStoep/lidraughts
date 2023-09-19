@@ -364,17 +364,9 @@
   <string name="takebackPropositionCanceled">Предложение вернуть ход отменено</string>
   <string name="yourOpponentProposesATakeback">Ваш соперник просит вас вернуть ход</string>
   <string name="bookmarkThisGame">Отметить эту игру</string>
-  <string name="search">Поиск</string>
-  <string name="advancedSearch">Расширенный поиск</string>
-  <string name="searchPlayersHelp">Имя(мена) игрока(ов), которого вы хотите найти</string>
-  <string name="searchRatingsHelp">Средний рейтинг обоих игроков</string>
-  <string name="searchOpponentHelp">Независимо от того, был ли оппонент игрока человеком или компьютером</string>
-  <string name="searchNumberOfTurnsHelp">Количество сыгранных ходов (от обоих игроков)</string>
-  <string name="searchAnalysisHelp">Включить игры только с компьютерным анализом</string>
   <string name="tournament">Турнир</string>
   <string name="tournaments">Турниры</string>
   <string name="xTournaments">Турниров: %s</string>
-  <string name="myTournaments">Мои турниры</string>
   <string name="createdTournaments">Создано</string>
   <string name="recentlyPlayed">Недавние</string>
   <string name="bestResults">Лучшие результаты</string>
@@ -427,10 +419,7 @@
   <string name="xCreatedTeamY">%1$s организовал клуб %2$s</string>
   <string name="xStartedStreaming">%s запустил стрим</string>
   <string name="averageElo">Средний рейтинг участников</string>
-  <string name="averagePerformance">Средняя результативность</string>
-  <string name="averageScore">Средний балл</string>
   <string name="teamPage">Страница клуба</string>
-  <string name="viewAllTeams">Посмотреть все клубы</string>
   <string name="pickYourTeam">Выберите команду</string>
   <string name="whichTeamWillYouRepresent">Какую команду вы будете представлять в этой битве?</string>
   <string name="youMustJoinOneOfTheseTeams">Вы должны присоединиться к одной из этих команд, чтобы участвовать!</string>
@@ -496,13 +485,6 @@
   <string name="lastSeenActive">Был онлайн %s</string>
   <string name="player">Игрок</string>
   <string name="list">Список</string>
-  <string name="sort">Сортировать</string>
-  <string name="sortBy">Автор</string>
-  <string name="from">От</string>
-  <string name="to">Кому</string>
-  <string name="ascending">Пр возрастанию</string>
-  <string name="descending">По убыванию</string>
-  <string name="source">Источник</string>
   <string name="graph">Диаграмма</string>
   <plurals name="lessThanNbMinutes">
     <item quantity="one">Менее %s минуты</item>
@@ -513,12 +495,7 @@
   <string name="required">Обязательное поле.</string>
   <string name="openTournaments">Открытые турниры</string>
   <string name="duration">Длительность</string>
-  <string name="date">Дата</string>
-  <string name="numberOfTurns">Количество ходов</string>
   <string name="winner">Победитель</string>
-  <string name="loser">Проигравший</string>
-  <string name="result">Результат</string>
-  <string name="winnerColor">Цвет победителя</string>
   <string name="standing">Турнирная таблица</string>
   <string name="createANewTournament">Создать турнир</string>
   <string name="tournamentCalendar">Турнирный календарь</string>
@@ -565,11 +542,10 @@
   <string name="savePosition">Сохранить позицию</string>
   <string name="loadPosition">Загрузить позицию</string>
   <string name="isPrivate">Закрытый</string>
-  <string name="noBerserkAllowed">Берсерк не разрешён</string>
   <string name="editTournament">Править турнир</string>
-  <string name="tournamentDescription">Описание турнира</string>
-  <string name="tournamentDescriptionHelp">Вы хотели бы сказать участникам что-нибудь особенное? Постарайтесь сделать это кратко. Доступны ссылки [text](https://url)</string>
-  <string name="cancelTheTournament">Отменить турнир</string>
+  <string name="tournDescription">Описание турнира</string>
+  <string name="tournDescriptionHelp">Вы хотели бы сказать участникам что-нибудь особенное? Постарайтесь сделать это кратко. Доступны ссылки [text](https://url)</string>
+  <string name="cancelTournament">Отменить турнир</string>
   <string name="reportXToModerators">Сообщить о %s модераторам</string>
   <string name="profileCompletion">Профиль заполнен на %s</string>
   <string name="xRating">Рейтинг %s</string>
@@ -779,7 +755,7 @@
   </plurals>
   <string name="tpTimeSpentPlaying">Проведённое за игрой время: %s</string>
   <string name="watchGames">Смотреть игры</string>
-  <string name="tpTimeSpentOnTV">Времени за просмотром TV: %s</string>
+  <string name="tpTimeSpentOnTV">Времени на TV: %s</string>
   <string name="watch">Просмотр</string>
   <string name="videoLibrary">Видеотека</string>
   <string name="streamersMenu">Стримеры</string>
@@ -830,7 +806,7 @@
   <string name="aboutSimul">Сеансы подразумевают сражение одного игрока с несколькими противниками одновременно.</string>
   <string name="aboutSimulImage">Из 169 игр Сейбрандс выиграл 115, сыграл вничью 43 и проиграл 11.</string>
   <string name="aboutSimulRealLife">Идея повторяет принятую в живых шашках концепцию, когда дающий сеанс одновременной игры перемещается от стола к столу, чтобы совершить один ход.</string>
-  <string name="aboutSimulRules">Когда начинается сеанс одновременной игры, каждый игрок начинает игру с сеансёром, который играет белыми. Сеанс закончится, когда все партии будут сыграны.</string>
+  <string name="aboutSimulRules">Когда начинается сеанс одновременной игры, каждый игрок начинает игру с сеансёром. Сеанс закончится, когда все партии будут сыграны.</string>
   <string name="aboutSimulSettings">Сеансы одновременной игры не предполагают партий на рейтинг. Переигровки, отмены ходов и добавки времени запрещены.</string>
   <string name="create">Создать</string>
   <string name="whenCreateSimul">Если вы создадите сеанс одновременной игры, вам придётся сыграть против нескольких игроков одновременно.</string>
@@ -902,7 +878,7 @@
   <string name="kidMode">Детский режим</string>
   <string name="kidModeIsEnabled">Детский режим включен.</string>
   <string name="kidModeExplanation">Это для безопасности. В детском режиме отключены все коммуникации на сайте. Включите его для ваших детей и учеников, чтобы защитить их от других пользователей интернета.</string>
-  <string name="inKidModeTheLidraughtsLogoGetsIconX">В детском режиме к логотипу lidraughts добавляется значок в виде %s, чтобы вы знали, что ваши дети находятся в безопасности.</string>
+  <string name="inKidModeTheLidraughtsLogoGetsIconX">В детском режиме к логотипу Lidraughts добавляется значок в виде %s, чтобы вы знали, что ваши дети находятся в безопасности.</string>
   <string name="enableKidMode">Включить детский режим</string>
   <string name="disableKidMode">Отключить детский режим</string>
   <string name="security">Безопасность</string>
@@ -945,7 +921,6 @@
   <string name="dark">Тёмный</string>
   <string name="transparent">Прозрачный</string>
   <string name="backgroundImageUrl">URL фонового изображения:</string>
-  <string name="boardGeometry">Вид и размер доски</string>
   <string name="boardTheme">Оформление доски</string>
   <string name="boardSize">Размер доски</string>
   <string name="pieceSet">Оформление фигур</string>

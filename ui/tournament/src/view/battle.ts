@@ -1,7 +1,7 @@
 import TournamentController from '../ctrl';
 import { bind, onInsert, playerName } from './util';
 import { h } from 'snabbdom'
-import { TeamBattle, RankedTeam, TournamentData, MaybeVNode } from '../interfaces';
+import { TeamBattle, RankedTeam, MaybeVNode } from '../interfaces';
 import { VNode } from 'snabbdom/vnode';
 
 export function joinWithTeamSelector(ctrl: TournamentController) {
@@ -52,21 +52,21 @@ export function teamStanding(ctrl: TournamentController, klass?: string): VNode 
     h('tbody', [
       ...standing.map(rt => teamTr(ctrl, battle, rt)),
       ...(bigBattle ? [
-        extraTeams(ctrl.data, ctrl.trans.noarg),
+        extraTeams(ctrl),
         myTeam(ctrl, battle)
       ] : [])
     ])
   ]) : null;
 }
 
-function extraTeams(tour: TournamentData, noarg: TransNoArg): VNode {
+function extraTeams(ctrl: TournamentController): VNode {
   return h('tr',
     h('td.more-teams', {
       attrs: { colspan: 4 }
     }, [
       h('a', {
-        attrs: { href: `/tournament/${tour.id}/teams` }
-      }, noarg('viewAllTeams'))
+        attrs: { href: `/tournament/${ctrl.data.id}/teams` }
+      }, ctrl.trans('viewAllXTeams', Object.keys(ctrl.data.teamBattle!.teams).length))
     ]
   ));
 }

@@ -31,7 +31,7 @@
   <string name="variantEnding">Variant ending</string>
   <string name="important">Important</string>
   <string name="yourQuestionMayHaveBeenAnswered">Your question may already have an answer %1$s</string>
-  <string name="inTheFAQ">in the F.A.Q.</string>
+  <string name="inTheFAQ">in the FAQ</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">To report a user for cheating or bad behavior, %1$s</string>
   <string name="useTheReportForm">use the report form</string>
   <string name="toRequestSupport">To request support, %1$s</string>
@@ -66,7 +66,7 @@
   <string name="analysis">Analysis board</string>
   <string name="depthX">Depth %s</string>
   <string name="usingServerAnalysis">Using server analysis</string>
-  <string name="loadingEngine">Loading engine ...</string>
+  <string name="loadingEngine">Loading engine...</string>
   <string name="cloudAnalysis">Cloud analysis</string>
   <string name="goDeeper">Go deeper</string>
   <string name="showThreat">Show threat</string>
@@ -326,9 +326,6 @@
   <string name="takebackPropositionCanceled">Takeback canceled</string>
   <string name="yourOpponentProposesATakeback">Your opponent proposes a takeback</string>
   <string name="bookmarkThisGame">Bookmark this game</string>
-  <string name="search">Search</string>
-  <string name="advancedSearch">Advanced search</string>
-  <string name="searchPlayersHelp">The name(s) of the player(s) you wish to search for</string>
   <string name="tournament">Tournament</string>
   <string name="tournaments">Tournaments</string>
   <string name="tournamentPoints">Tournament points</string>
@@ -360,7 +357,7 @@
   <string name="yourTopWeeklyPerfRatingIsTooHigh">Your top weekly %1$s rating (%2$s) is too high</string>
   <string name="yourPerfRatingIsTooLow">Your %1$s rating (%2$s) is too low</string>
   <string name="ratedMoreThanInPerf">Rated ≥ %1$s in %2$s</string>
-  <string name="ratedLessThanInPerf">Rated ≤ %1$s in %2$s</string>
+  <string name="ratedLessThanInPerf">Rated ≤ %1$s in %2$s for the last week</string>
   <string name="mustBeInTeam">Must be in team %s</string>
   <string name="youAreNotInTeam">You are not in the team %s</string>
   <string name="backToGame">Back to game</string>
@@ -425,18 +422,17 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="required">Required.</string>
   <string name="openTournaments">Open tournaments</string>
   <string name="duration">Duration</string>
-  <string name="numberOfTurns">Number of turns</string>
   <string name="winner">Winner</string>
   <string name="standing">Standing</string>
   <string name="createANewTournament">Create a new tournament</string>
   <string name="tournamentCalendar">Tournament calendar</string>
-  <string name="conditionOfEntry">Condition of entry:</string>
+  <string name="conditionOfEntry">Entry requirements:</string>
   <string name="advancedSettings">Advanced settings</string>
   <string name="safeTournamentName">Pick a very safe name for the tournament.</string>
   <string name="inappropriateNameWarning">Anything even slightly inappropriate could get your account closed.</string>
   <string name="emptyTournamentName">Leave empty to name the tournament after a random Grandmaster.</string>
   <string name="recommendNotTouching">We recommend not touching these.</string>
-  <string name="fewerPlayers">If you set conditions of entry, your tournament will have fewer players.</string>
+  <string name="fewerPlayers">If you set entry requirements, your tournament will have fewer players.</string>
   <string name="showAdvancedSettings">Show advanced settings</string>
   <string name="makePrivateTournament">Make the tournament private, and restrict access with a password</string>
   <string name="join">Join</string>
@@ -476,7 +472,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="gameCompletionRate">Game completion rate: %s</string>
   <string name="profile">Profile</string>
   <string name="editProfile">Edit profile</string>
-  <string name="firstName">Given name</string>
+  <string name="firstName">First name</string>
   <string name="lastName">Last name</string>
   <string name="biography">Biography</string>
   <string name="country">Country</string>
@@ -658,7 +654,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   </plurals>
   <string name="tpTimeSpentPlaying">Time spent playing: %s</string>
   <string name="watchGames">Watch games</string>
-  <string name="tpTimeSpentOnTV">Time on TV: %s</string>
+  <string name="tpTimeSpentOnTV">Time featured on TV: %s</string>
   <string name="watch">Watch</string>
   <string name="videoLibrary">Video library</string>
   <string name="streamersMenu">Streamers</string>
@@ -684,14 +680,14 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="aboutSimul">Simuls involve a single player facing several players at once.</string>
   <string name="aboutSimulImage">Out of 169 opponents, Sijbrands won 115 games, drew 43 and lost 11.</string>
   <string name="aboutSimulRealLife">The concept is taken from real world events. In real life, this involves the simul host moving from table to table to play a single move.</string>
-  <string name="aboutSimulRules">When the simul starts, every player starts a game with the host, who gets to play the white pieces. The simul ends when all games are complete.</string>
+  <string name="aboutSimulRules">When the simul starts, every player starts a game with the host. The simul ends when all games are complete.</string>
   <string name="aboutSimulSettings">Simuls are always casual. Rematches, takebacks and adding time are disabled.</string>
   <string name="create">Create</string>
   <string name="whenCreateSimul">When you create a Simul, you get to play several players at once.</string>
   <string name="simulVariantsHint">If you select several variants, each player gets to choose which one to play.</string>
   <string name="simulClockHint">Fischer Clock setup. The more players you take on, the more time you may need.</string>
-  <string name="simulAddExtraTime">You may add extra time to your clock to help cope with the simul.</string>
-  <string name="simulHostExtraTime">Host extra clock time</string>
+  <string name="simulAddExtraTime">You may add extra initial time to your clock to help cope with the simul.</string>
+  <string name="simulHostExtraTime">Host extra initial clock time</string>
   <string name="simulHostColor">Host color for each game</string>
   <string name="lidraughtsTournaments">Lidraughts tournaments</string>
   <string name="tournamentFAQ">Arena tournament FAQ</string>
@@ -722,7 +718,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="weHaveSentYouAnEmailClickTheLink">We\'ve sent you an email. Click the link in the email to activate your account.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">If you don\'t see the email, check other places it might be, like your junk, spam, social, or other folders.</string>
   <string name="weHaveSentYouAnEmailTo">We\'ve sent an email to %s. Click the link in the email to reset your password.</string>
-  <string name="byRegisteringYouAgreeToBeBoundByOur">By registering, you agree to be bound by our %s.</string>
+  <string name="byRegisteringYouAgreeToBeBoundByOur">By registering, you agree to the %s.</string>
   <string name="networkLagBetweenYouAndLidraughts">Network lag between you and Lidraughts</string>
   <string name="timeToProcessAMoveOnLidraughtsServer">Time to process a move on Lidraughts server</string>
   <string name="downloadAnnotated">Download annotated</string>
@@ -730,7 +726,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="downloadImported">Download imported</string>
   <string name="printFriendlyPDF">Print-friendly PDF</string>
   <string name="crosstable">Crosstable</string>
-  <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">You can also scroll over the board to move in the game.</string>
+  <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Scroll over the board to move in the game.</string>
   <string name="analysisShapesHowTo">Press shift+click or right-click to draw circles and arrows on the board.</string>
   <string name="letOtherPlayersMessageYou">Let other players message you</string>
   <string name="shareYourInsightsData">Share your draughts insights data</string>
@@ -740,7 +736,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="youHaveAlreadyRegisteredTheEmail">You have already registered the email: %s</string>
   <string name="kidMode">Kid mode</string>
   <string name="kidModeExplanation">This is about safety. In kid mode, all site communications are disabled. Enable this for your children and school students, to protect them from other internet users.</string>
-  <string name="inKidModeTheLidraughtsLogoGetsIconX">In kid mode, the lidraughts logo gets a %s icon, so you know your kids are safe.</string>
+  <string name="inKidModeTheLidraughtsLogoGetsIconX">In kid mode, the Lidraughts logo gets a %s icon, so you know your kids are safe.</string>
   <string name="enableKidMode">Enable Kid mode</string>
   <string name="disableKidMode">Disable Kid mode</string>
   <string name="security">Security</string>
@@ -781,7 +777,6 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="dark">Dark</string>
   <string name="transparent">Transparent</string>
   <string name="backgroundImageUrl">Background image URL:</string>
-  <string name="boardGeometry">Board size</string>
   <string name="boardTheme">Board theme</string>
   <string name="boardSize">Board size</string>
   <string name="pieceSet">Piece set</string>
@@ -789,7 +784,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="usernameAlreadyUsed">This username is already in use, please try another one.</string>
   <string name="usernamePrefixInvalid">The username must start with a letter.</string>
   <string name="usernameSuffixInvalid">The username must end with a letter or a number.</string>
-  <string name="usernameCharsInvalid">The username must only contain letters, numbers, underscores, and hyphens.</string>
+  <string name="usernameCharsInvalid">The username must only contain letters, numbers, underscores, and hyphens. Consecutive underscores and hyphens are not allowed.</string>
   <string name="usernameUnacceptable">This username is not acceptable.</string>
   <string name="directlySupportLidraughts">Directly support Lidraughts</string>
   <string name="playDraughtsInStyle">Play draughts in style</string>

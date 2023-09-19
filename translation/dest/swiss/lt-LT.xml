@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Šveicariškieji turnyrai</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s raundas</item>
+    <item quantity="few">%s raundai</item>
+    <item quantity="many">%s raundo</item>
+    <item quantity="other">%s raundų</item>
+  </plurals>
+  <string name="nextRound">Kitas raundas</string>
+  <string name="numberOfRounds">Raundų skaičius</string>
 </resources>

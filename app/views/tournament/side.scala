@@ -84,8 +84,8 @@ object side {
           else trans.drawOffersNotAllowed()
         )
       },
-      tour.noBerserk option div(cls := "text", dataIcon := "`")(trans.noBerserkAllowed()),
-      tour.noStreak option div(cls := "text", dataIcon := "Q")("No arena streaks"),
+      tour.noBerserk option div(cls := "text", dataIcon := "`")(trans.arena.noBerserkAllowed()),
+      tour.noStreak option div(cls := "text", dataIcon := "Q")(trans.arena.noArenaStreaks()),
       !tour.isScheduled option frag(trans.by(userIdLink(tour.createdBy.some, isWfd = tour.isWfd)), br),
       (!tour.isStarted || (tour.isScheduled && tour.isThematic)) option absClientDateTime(tour.startsAt),
       tour.isThematic option p(cls := "opening")(

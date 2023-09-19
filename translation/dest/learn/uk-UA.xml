@@ -11,8 +11,12 @@
   <string name="takeTheEnemyPieces">З\'їжте фігури противника</string>
   <string name="takeTheBlackPieces">З\'їжте чорні фігури!</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">З\'їжте всі чорні фігури! І не втратьте свої.</string>
+  <string name="protection">Захист</string>
+  <string name="keepYourPiecesSafe">Захищайте ваші фігури</string>
   <string name="combat">Битва</string>
   <string name="intermediate">Проміжний етап</string>
+  <string name="boardSetup">Позиція на дошці</string>
+  <string name="theGameIsADraw">Гра є нічийною</string>
   <string name="advanced">Просунутий етап</string>
   <string name="whatNext">Що далі?</string>
   <string name="register">Реєстрація</string>

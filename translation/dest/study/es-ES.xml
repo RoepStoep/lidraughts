@@ -66,6 +66,7 @@
   <string name="startAtX">Iniciar en %s</string>
   <string name="embedThisChapter">Inserta este capítulo en tu sitio web o blog</string>
   <string name="readMoreAboutEmbeddingAStudyChapter">Leer más sobre la incrustación de un capítulo de estudio</string>
+  <string name="onlyPublicStudiesCanBeEmbedded">¡Solo los estudios públicos pueden ser insertados!</string>
   <string name="open">Abierto</string>
   <string name="xBroughtToYouByY">%1$sauspiciado por%2$s</string>
   <string name="studyNotFound">Estudio no encontrado</string>

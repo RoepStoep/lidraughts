@@ -13,7 +13,7 @@ import scalaz.Validation.FlatMap._
 import lidraughts.common.Captcha
 import lidraughts.hub.actorApi.captcha._
 
-// only works with standard draughts (not chess960)
+// only works with standard draughts
 private final class Captcher extends Actor {
 
   def receive = {

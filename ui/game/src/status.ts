@@ -1,6 +1,6 @@
 import { GameData } from './interfaces';
 
-// https://github.com/ornicar/scalachess/blob/master/src/main/scala/Status.scala
+// https://github.com/RoepStoep/lidraughts/blob/master/modules/draughts/src/main/Status.scala
 
 export const ids = {
   created: 10,

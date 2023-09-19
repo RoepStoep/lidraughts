@@ -30,7 +30,7 @@ object Condition {
   case class WithVerdict(condition: Condition, verdict: Verdict)
 
   case object Titled extends Condition with FlatCond {
-    def name(lang: Lang) = "Only titled players"
+    def name(lang: Lang) = I18nKeys.onlyTitled.literalTxtTo(lang)
     def apply(user: User) =
       if (user.title.exists(_ != Title.LM) && user.noBot) Accepted
       else Refused(name _)

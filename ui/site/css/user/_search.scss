@@ -35,9 +35,14 @@
         select {
           width: 74%;
         }
-      }
-      .half.wide select {
-        width: 100%;
+        &.wide {
+          select {
+            width: 100%;
+          }
+          &:first-child select {
+            margin-left: 0px;
+          }
+        }
       }
       .date input {
         width: 74%;

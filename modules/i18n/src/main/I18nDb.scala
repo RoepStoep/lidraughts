@@ -20,6 +20,7 @@ object I18nDb {
   case object Preferences extends Ref
   case object Team extends Ref
   case object PerfStat extends Ref
+  case object Search extends Ref
   case object Lag extends Ref
   case object Swiss extends Ref
   case object Challenge extends Ref
@@ -39,6 +40,7 @@ object I18nDb {
   val preferences: Messages = lidraughts.i18n.db.preferences.Registry.load
   val team: Messages = lidraughts.i18n.db.team.Registry.load
   val perfStat: Messages = lidraughts.i18n.db.perfStat.Registry.load
+  val search: Messages = lidraughts.i18n.db.search.Registry.load
   val lag: Messages = lidraughts.i18n.db.lag.Registry.load
   val swiss: Messages = lidraughts.i18n.db.swiss.Registry.load
   val challenge: Messages = lidraughts.i18n.db.challenge.Registry.load
@@ -59,6 +61,7 @@ object I18nDb {
     case Preferences => preferences
     case Team => team
     case PerfStat => perfStat
+    case Search => search
     case Lag => lag
     case Swiss => swiss
     case Challenge => challenge

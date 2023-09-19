@@ -12,8 +12,8 @@ private[study] object CommentParser {
   private val arrowsRemoveRegex = """\[\%cal[\s\r\n]+((?:\w{5}[,\s]*)+)\]""".r
   private val clockRegex = """(?s)\[\%clock[\s\r\n]+([wW])([\d:\.]+)[\s\r\n]+([bB])([\d:\.]+)\]""".r.unanchored
   private val clockRemoveRegex = """\[\%clock[\s\r\n]+[wW][\d:\.]+[\s\r\n]+[bB][\d:\.]+\]""".r
-  private val pgnClockRegex = """(?s)\[\%clk[\s\r\n]+([\d:\.]+)\]""".r.unanchored
-  private val pgnClockRemoveRegex = """\[\%clk[\s\r\n]+[\d:\.]+\]""".r
+  private val pdnClockRegex = """(?s)\[\%clk[\s\r\n]+([\d:\.]+)\]""".r.unanchored
+  private val pdnClockRemoveRegex = """\[\%clk[\s\r\n]+[\d:\.]+\]""".r
   private val tcecClockRegex = """(?s)tl=([\d:\.]+)""".r.unanchored
   private val tcecClockRemoveRegex = """tl=[\d:\.]+""".r
 
@@ -55,7 +55,7 @@ private[study] object CommentParser {
       case Some(draughts.White) => readCentis(strB) -> clockRemoveRegex.replaceAllIn(comment, "").trim
       case _ => None -> comment
     }
-    case pgnClockRegex(str) => readCentis(str) -> pgnClockRemoveRegex.replaceAllIn(comment, "").trim
+    case pdnClockRegex(str) => readCentis(str) -> pdnClockRemoveRegex.replaceAllIn(comment, "").trim
     case tcecClockRegex(str) => readCentis(str) -> tcecClockRemoveRegex.replaceAllIn(comment, "").trim
     case _ => None -> comment
   }

@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="donate">Ахвяраваць</string>
+  <string name="lidraughtsPatron">Спонсар Lidraughts</string>
+  <string name="freeAccount">Бясплатны ўліковы запіс</string>
+  <string name="becomePatron">Стаць cпонсарам Lidraughts</string>
+  <string name="xBecamePatron">%s стаў(-ла) cпонсарам Lidraughts</string>
+  <string name="newPatrons">Новыя спонсары</string>
+  <string name="noAdsNoSubs">Ніякай рэкламы, ніякіх падпісак; толькі адкрыты зыходны код та запал.</string>
+  <string name="thankYou">Дзякуй за ваш унёсак!</string>
+  <string name="youHaveLifetime">У вас пажыццёвы ўліковы запіс спонсара. Гэта вельмі крута!</string>
+  <string name="patronUntil">Вы спонсар да %s.</string>
+  <string name="weRelyOnSupport">Мы разлічваем на дапамогу такіх людзей як вы, каб зрабіць усе гэта магчым. Калі вам падабаецца Lidraughts, калі ласка, падумайце пра магчымасць дапамагчы нам грашовым ахвяраваннем і стаць спонсарам!</string>
+  <string name="lifetime">Пажыццёва</string>
+  <string name="payLifetimeOnce">Ахвяруйце %s аднойчы. Станьце спонсарам Lidraughts пажыццёва!</string>
+  <string name="lifetimePatron">Пажыццёвы спонсар Lidraughts</string>
+  <string name="monthly">Штомесячна</string>
+  <string name="recurringBilling">Рэгулярныя плацяжы, аднаўляюць крылы спонсара штомесяц.</string>
+  <string name="onetime">Аднаразова</string>
+  <string name="singleDonation">Адначасовае ахвяраванне, якое дадае вам крылы Спонсара на адзін месяц.</string>
+  <string name="otherAmount">Іншая сума</string>
+  <string name="withCreditCard">Банкаўская картка</string>
+  <string name="weAreSmallTeam">Мы маленькая каманда, таму ваша дамога вельмі важлівая!</string>
+  <string name="celebratedPatrons">Выдатныя спонсары, якія робяць Lidraughts магчымым</string>
+  <string name="whereMoneyGoes">На што выкарыстоўваюцца грошы?</string>
+  <string name="changeMonthlySupport">Магу я змяніць/скасаваць месячную падпіску?</string>
+  <string name="contactSupport">звязацца са службай дапамогі Lidraughts</string>
+  <string name="otherMethods">Іншыя шляхі ахвяравання?</string>
+  <string name="patronFeatures">Можа нейкія ўнікальныя магчымасці прыдугледжаны для спонсараў?</string>
+  <string name="noPatronFeatures">Не, таму што Lidraughts поўнасцю бясплатны, назаўсёды і для кожнага. Гэта абяцанне.
+Аднак, спонсары атрымліваюць цудоўную іконку да профілю.</string>
+  <string name="featuresComparison">Паглядзець дакладнае параўнанне магчымасцяў</string>
+  <plurals name="patronForMonths">
+    <item quantity="one">Спонсар Lidraughts на працягу месяца</item>
+    <item quantity="few">Спонсар Lidraughts на працягу %s месяцаў</item>
+    <item quantity="many">Спонсар Lidraughts на працягу %s месяцаў</item>
+    <item quantity="other">Спонсар Lidraughts на працягу %s месяцаў</item>
+  </plurals>
+  <string name="youSupportWith">Вы ахвяруеце lidraughts.org %s кожны месяц.</string>
+  <string name="tyvm">Дзякуй вялікі за дапамогу! Вы неймаверны!</string>
+  <string name="currentStatus">Бягучы статус</string>
+  <string name="nextPayment">Наступны плацёж</string>
+  <string name="youWillBeChargedXOnY">%2$s вы заплаціце %1$s.</string>
+  <string name="makeAdditionalDonation">Зрабіць дадатковае ахвяраванне</string>
+  <string name="update">Абнавіць</string>
+  <string name="changeMonthlyAmount">Змяніць штомесячную суму (%s)</string>
+  <string name="cancelSupport">Скасаваць падтрымку</string>
+  <string name="xOrY">%1$s ці %2$s</string>
+  <string name="decideHowMuch">Колькі каштуе Lidraughts, на вашу думку:</string>
+  <string name="stopPayments">Адгукнуць картку і прыпыніць платяжы:</string>
+  <string name="noLongerSupport">Больш не падтрымліваць Lidraughts</string>
+  <string name="viewOthers">Паглядзець іншых спонсараў Lidraughts</string>
+  <string name="date">Дата</string>
+  <string name="amount">Сума</string>
+  <string name="transactionCompleted">Аперацыя завершана паспяхова, квітанцыя была адпраўлена вам на электроную пошту.</string>
+  <string name="permanentPatron">У вас цяпер пажыцёвы спонсарскі ўліковы запіс.</string>
+  <string name="checkOutProfile">Праверце сваю старонку!</string>
+  <string name="nowLifetime">Цяпер вы пажыцёвы спонсар Lidraughts!</string>
+  <string name="nowOneMonth">Вы цяпер спонсар Lidraughts на месяц!</string>
+  <string name="downgradeNextMonth">Праз месяц, грошы НЕ спішуцца зноў, і ваш уліковы запіс Lidraughts зробіцца звычайным.</string>
 </resources>

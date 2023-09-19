@@ -53,7 +53,7 @@ export function userHtml(ctrl: RoundController, player: Player, position: Positi
       player.engine ? h('span', {
         attrs: {
           'data-icon': 'j',
-          title: ctrl.trans.noarg('thisPlayerUsesChessComputerAssistance')
+          title: ctrl.trans.noarg('thisPlayerUsesDraughtsComputerAssistance')
         }
       }) : null
     ]);

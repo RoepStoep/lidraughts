@@ -74,7 +74,7 @@ object form {
             ),
             postForm(cls := "terminate", action := routes.Swiss.terminate(swiss.id.value))(
               submitButton(dataIcon := "j", cls := "text button button-red confirm")(
-                trans.cancelTheTournament()
+                trans.cancelTournament()
               )
             )
           )
@@ -132,8 +132,8 @@ final private class SwissFields(form: Form[_])(implicit ctx: Context) {
   def description =
     form3.group(
       form("description"),
-      trans.tournamentDescription(),
-      help = trans.tournamentDescriptionHelp().some
+      trans.tournDescription(),
+      help = trans.tournDescriptionHelp().some
     )(form3.textarea(_)(rows := 2))
   def startsAt =
     form3.group(

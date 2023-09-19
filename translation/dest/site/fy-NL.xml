@@ -43,7 +43,7 @@
   <string name="analysis">Analyzeboerd</string>
   <string name="depthX">Djipte %s</string>
   <string name="usingServerAnalysis">Serveranalyze yn gebrûk</string>
-  <string name="loadingEngine">\'Engine\' wurdt laden ...</string>
+  <string name="loadingEngine">\'Engine\' wurdt laden...</string>
   <string name="cloudAnalysis">\'Cloud\'-analyze</string>
   <string name="goDeeper">Djipper gean</string>
   <string name="showThreat">Toan driging</string>
@@ -184,7 +184,6 @@
   <string name="takebackPropositionCanceled">Weromset annulearre</string>
   <string name="yourOpponentProposesATakeback">Dyn tsjinstander stelt in weromset foar</string>
   <string name="bookmarkThisGame">Blêdwizerje dizze partij</string>
-  <string name="search">Sykje</string>
   <string name="tournament">Toernoai</string>
   <string name="tournaments">Toernoaien</string>
   <string name="tournamentPoints">Toernoai punten</string>
@@ -239,8 +238,6 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="lastSeenActive">%s Foar it lêst sjoen</string>
   <string name="player">Spiler</string>
   <string name="list">List</string>
-  <string name="from">Fan</string>
-  <string name="to">Oant</string>
   <string name="graph">Grafyk</string>
   <string name="required">Fereaske.</string>
   <string name="openTournaments">Iepen toernoaien</string>
@@ -428,7 +425,6 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="dark">Donker</string>
   <string name="transparent">Trochsichtich</string>
   <string name="backgroundImageUrl">URL fan de achtergrûnôfbylding:</string>
-  <string name="boardGeometry">Foarm fan it boerd</string>
   <string name="boardTheme">Tema fan it boerd</string>
   <string name="boardSize">Ofmjitting fan it boerd</string>
   <string name="pieceSet">Ynstelle fan it soarte stik</string>

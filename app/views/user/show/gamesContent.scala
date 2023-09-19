@@ -46,7 +46,7 @@ object gamesContent {
             views.html.game.widgets(pager.currentPageResults, user = u.some, ownerLink = ctx is u)
           )
         )
-        else div(cls := "search__status")(strong("No game found"), " • ", permalink)
+        else div(cls := "search__status")(strong(trans.noGameFound()), " • ", permalink)
       } else
         div(cls := List(
           "games infinitescroll" -> true,

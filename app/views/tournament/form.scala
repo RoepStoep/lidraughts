@@ -27,7 +27,7 @@ object form {
       main(cls := "page-small")(
         div(cls := "tour__form box box-pad")(
           h1(
-            if (isTeamBattle) "New Team Battle"
+            if (isTeamBattle) trans.arena.newTeamBattle()
             else trans.createANewTournament()
           ),
           postForm(cls := "form3", action := routes.Tournament.create)(
@@ -111,7 +111,7 @@ object form {
           ),
           postForm(cls := "terminate", action := routes.Tournament.terminate(tour.id))(
             submitButton(dataIcon := "j".some, cls := "text button button-red confirm")(
-              trans.cancelTheTournament()
+              trans.cancelTournament()
             )
           )
         )
@@ -139,34 +139,34 @@ object form {
         form3.group(teamField, trans.onlyMembersOfTeam(), half = true)(form3.input(_))
       },
       form3.split(
-        form3.group(form("conditions.nbRatedGame.nb"), frag("Minimum rated games"), half = true)(form3.select(_, Condition.DataForm.nbRatedGameChoices)),
+        form3.group(form("conditions.nbRatedGame.nb"), trans.minimumRatedGames(), half = true)(form3.select(_, Condition.DataForm.nbRatedGameChoices)),
         autoField(auto, form("conditions.nbRatedGame.perf")) { field =>
           form3.group(field, frag("In variant"), half = true)(form3.select(_, ("", "Any") :: Condition.DataForm.perfChoices))
         }
       ),
       form3.split(
-        form3.group(form("conditions.minRating.rating"), frag("Minimum rating"), half = true)(form3.select(_, Condition.DataForm.minRatingChoices)),
+        form3.group(form("conditions.minRating.rating"), trans.minimumRating(), half = true)(form3.select(_, Condition.DataForm.minRatingChoices)),
         autoField(auto, form("conditions.minRating.perf")) { field =>
           form3.group(field, frag("In variant"), half = true)(form3.select(_, Condition.DataForm.perfChoices))
         }
       ),
       form3.split(
-        form3.group(form("conditions.maxRating.rating"), frag("Maximum weekly rating"), half = true)(form3.select(_, Condition.DataForm.maxRatingChoices)),
+        form3.group(form("conditions.maxRating.rating"), trans.maximumWeeklyRating(), half = true)(form3.select(_, Condition.DataForm.maxRatingChoices)),
         autoField(auto, form("conditions.maxRating.perf")) { field =>
           form3.group(field, frag("In variant"), half = true)(form3.select(_, Condition.DataForm.perfChoices))
         }
       ),
       form3.split(
         (ctx.me.exists(_.hasTitle) || isGranted(_.ManageTournament)) ?? {
-          form3.checkbox(form("conditions.titled"), frag("Only titled players"), help = frag("Require an official title to join the tournament").some, half = true)
+          form3.checkbox(form("conditions.titled"), trans.onlyTitled(), help = trans.onlyTitledHelp().some, half = true)
         }
       ),
       form3.split(
-        form3.checkbox(form("berserkable"), frag("Allow berserk"), help = frag("Let players halve their clock time to gain an extra point").some, half = true),
-        form3.checkbox(form("streakable"), frag("Arena streaks"), help = frag("After 2 wins, consecutive wins grant 4 points instead of 2").some, half = true)
+        form3.checkbox(form("berserkable"), trans.arena.allowBerserk(), help = trans.arena.allowBerserkHelp().some, half = true),
+        form3.checkbox(form("streakable"), trans.arena.arenaStreaks(), help = trans.arena.arenaStreaksHelp().some, half = true)
       ),
       form3.split(
-        form3.checkbox(form("hasChat"), trans.chatRoom(), help = frag("Let players discuss in a chat room").some, half = true)
+        form3.checkbox(form("hasChat"), trans.chatRoom(), help = trans.arena.allowChatHelp().some, half = true)
       )
     )
   }
@@ -249,7 +249,7 @@ final private class TourFields(me: User, form: Form[_])(implicit ctx: Context) {
       )
     )
   def description =
-    form3.group(form("description"), trans.tournamentDescription(), help = trans.tournamentDescriptionHelp().some)(
+    form3.group(form("description"), trans.tournDescription(), help = trans.tournDescriptionHelp().some)(
       form3.textarea(_)(rows := 4)
     )
   def password =
@@ -265,8 +265,8 @@ final private class TourFields(me: User, form: Form[_])(implicit ctx: Context) {
   def startDate(withHelp: Boolean = true) =
     form3.group(
       form("startDate"),
-      frag("Custom start date"),
-      help = withHelp option frag("""This overrides the "Time before tournament starts" setting""")
+      frag(trans.arena.customStartDate()),
+      help = withHelp option trans.arena.customStartDateHelp()
     )(form3.flatpickr(_))
   def advancedSettings = frag(
     legend(trans.advancedSettings()),

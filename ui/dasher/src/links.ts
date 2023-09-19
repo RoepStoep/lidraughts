@@ -67,7 +67,7 @@ export default function(ctrl: DasherCtrl): VNode {
   const board = h(
     'a.sub',
     modeCfg(ctrl, 'board'),
-    noarg('boardGeometry'))
+    noarg('boardSize'))
 
   const theme = h(
     'a.sub',

@@ -2,6 +2,11 @@
 <resources>
   <string name="activity">Aktivitāte</string>
   <string name="hostedALiveStream">Rīkoja tiešsaistes straumi</string>
+  <plurals name="supportedNbMonths">
+    <item quantity="zero">%1$s mēnešus atbalstīja lidraughts.org kā %2$s</item>
+    <item quantity="one">%1$s mēnesi atbalstīja lidraughts.org kā %2$s</item>
+    <item quantity="other">%1$s mēnešus atbalstīja lidraughts.org kā %2$s</item>
+  </plurals>
   <plurals name="practicedNbPositions">
     <item quantity="zero">Mācījās %1$s pozīciju sadaļā %2$s</item>
     <item quantity="one">Mācījās %1$s pozīciju sadaļā %2$s</item>

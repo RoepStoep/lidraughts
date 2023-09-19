@@ -3,4 +3,10 @@
   <string name="swissTournaments">İsviçre Sistemi Turnuvaları</string>
   <string name="bye" comment="A player gets a &#34;bye&#34; when they don't play in a round of the tournament because there is an odd number of players.">Hoşça kal</string>
   <string name="byes" comment="Refers to the amount of &#34;byes&#34; in this tournament (the amount of players that didn't play a round because there was an odd number of players).">Hoşça kal</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s tur</item>
+    <item quantity="other">%s tur</item>
+  </plurals>
+  <string name="nextRound">Sıradaki tur</string>
+  <string name="numberOfRounds">Tur sayısı</string>
 </resources>

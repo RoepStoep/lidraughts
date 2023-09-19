@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">スイス式トーナメント</string>
+  <plurals name="nbRounds">
+    <item quantity="other">%s ラウンド</item>
+  </plurals>
+  <string name="nextRound">次のラウンド</string>
+  <string name="numberOfRounds">ラウンド数</string>
 </resources>

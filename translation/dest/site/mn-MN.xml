@@ -225,8 +225,6 @@
   <string name="takebackPropositionCanceled">Нүүдэл буцаах хүсэлтээ цуцаллаа</string>
   <string name="yourOpponentProposesATakeback">Таны өрсөлдөгч нүүдэл буцаах хүсэлт илгээлээ</string>
   <string name="bookmarkThisGame">Энэ өргийг хадгалаж авах</string>
-  <string name="search">Хайлт</string>
-  <string name="advancedSearch">Нарийвчилсан хайлт</string>
   <string name="tournament">Тэмцээн</string>
   <string name="tournaments">Тэмцээнүүд</string>
   <string name="tournamentPoints">Тэмцээний оноо</string>
@@ -537,7 +535,6 @@
   <string name="returnToSimulHomepage">Зэрэгцээ өргийн үндсэн хуудас руу буцах</string>
   <string name="aboutSimul">Зэрэгцээ өрөг нь нэг тоглогч олон тоглогчидтой зэрэг тоглох тоглолт юм.</string>
   <string name="aboutSimulRealLife">Бодит амьдрал дээрх зарчмаар тоглогдоно. Энэ зарчмын дагуу нэг тоглогч нэг ширээнээс нөгөө рүү ээлжлэн явч нүүдэл хийдэг.</string>
-  <string name="aboutSimulRules">Үндсэн тоглогч цагаан талаар нүүнэ. Зэрэгцээ  өрөг бүх тоглолтууд дууссанаар өндөрлөнө.</string>
   <string name="aboutSimulSettings">Зэрэгцээ өрөг нь чансаа өөрчлөгддөггүй өрөг бөгөөд дахин тоглох, нүүдэл буцаах, цаг нэмж өгөх боломжгүй онцлогтой.</string>
   <string name="create">Шинэ өрөг үүсгэх</string>
   <string name="whenCreateSimul">Тэ зэрэгцээ өрөг үүсгэвэл нэг зэрэг олон тоглогчидтой тоглох болно.</string>
@@ -616,7 +613,6 @@
   <string name="dark">Хар</string>
   <string name="transparent">Уусмал</string>
   <string name="backgroundImageUrl">Ар фонын зурагны холбоос:</string>
-  <string name="boardGeometry">Хөлгийн геометр</string>
   <string name="boardTheme">Хөлгийн загвар</string>
   <string name="boardSize">Хөлгийн хэмжээ</string>
   <string name="pieceSet">Дүрсний загвар</string>

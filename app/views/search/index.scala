@@ -13,11 +13,13 @@ import controllers.routes
 
 object index {
 
+  import trans.search._
+
   def apply(form: Form[_], paginator: Option[Paginator[lidraughts.game.Game]] = None, nbGames: Int)(implicit ctx: Context) = {
     val commons = bits of form
     import commons._
     views.html.base.layout(
-      title = trans.advancedSearch.txt(),
+      title = searchInXGames.txt(nbGames.localize, nbGames),
       moreJs = frag(
         jsTag("search.js"),
         infiniteScrollTag,
@@ -25,13 +27,13 @@ object index {
       ),
       moreCss = cssTag("search"),
       openGraph = lidraughts.app.ui.OpenGraph(
-        title = s"Search in ${nbGames.localize} draughts games",
+        title = searchInXGames.txt(nbGames.localize, nbGames),
         url = s"$netBaseUrl${routes.Search.index().url}",
-        description = s"Search in ${nbGames.localize} draughts games using advanced criteria"
+        description = searchInXGamesDescription.txt(nbGames.localize, nbGames)
       ).some
     ) {
         main(cls := "box page-small search")(
-          h1(trans.advancedSearch()),
+          h1(advancedSearch()),
           st.form(
             rel := "nofollow",
             cls := "box__pad search__form",
@@ -41,7 +43,7 @@ object index {
               globalError(form),
               table(
                 tr(
-                  th(label(trans.players(), " ", span(cls := "help", title := trans.searchPlayersHelp.txt())("(?)"))),
+                  th(label(trans.players(), " ", span(cls := "help", title := searchPlayersExplanation.txt())("(?)"))),
                   td(cls := "usernames")(List("a", "b").map { p =>
                     div(cls := "half")(form3.input(form("players")(p))(tpe := "text"))
                   })
@@ -67,10 +69,10 @@ object index {
                 tr(
                   th,
                   td(cls := "action")(
-                    submitButton(cls := "button")(trans.search()),
+                    submitButton(cls := "button")(trans.search.search()),
                     div(cls := "wait")(
                       spinner,
-                      "Searching in ", nbGames.localize, " games"
+                      searchInXGames(nbGames)
                     )
                   )
                 )
@@ -81,7 +83,8 @@ object index {
               val permalink = a(cls := "permalink", href := routes.Search.index(), rel := "nofollow")("Permalink")
               if (pager.nbResults > 0) frag(
                 div(cls := "search__status box__pad")(
-                  strong(pager.nbResults.localize, " games found"), " • ",
+                  strong(xGamesFound(pager.nbResults.localize, pager.nbResults)),
+                  " • ",
                   permalink
                 ),
                 div(cls := "search__rows")(
@@ -89,7 +92,7 @@ object index {
                   views.html.game.widgets(pager.currentPageResults)
                 )
               )
-              else div(cls := "search__status box__pad")(strong("No game found"), " • ", permalink)
+              else div(cls := "search__status box__pad")(strong(xGamesFound(0)), " • ", permalink)
             }
           )
         )

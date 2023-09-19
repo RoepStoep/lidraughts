@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="hostedALiveStream">Шууд дамжуулав</string>
   <plurals name="playedNbGames">
     <item quantity="one">%1$s %2$s тоглоом тоглуулсан</item>
     <item quantity="other">%1$s %2$s тоглоом тоглуулсан</item>

@@ -18,6 +18,12 @@
   <string name="aConfirmationIsRequiredToJoin">Па пацверджанні</string>
   <string name="joiningPolicy">Умовы далучэння</string>
   <string name="teamLeader">Лідар каманды</string>
+  <plurals name="teamLeaders">
+    <item quantity="one">Лідар каманды</item>
+    <item quantity="few">Лідары каманды</item>
+    <item quantity="many">Лідары каманды</item>
+    <item quantity="other">Лідары каманды</item>
+  </plurals>
   <string name="teamBestPlayers">Лепшыя гульцы каманды</string>
   <string name="teamRecentMembers">Нядаўна далучыліся</string>
   <string name="kickSomeone">Выгнаць кагосьці з каманды</string>
@@ -34,6 +40,13 @@
   <string name="teamBattleOverview">Бітва некалькіх каманд, кожны гулец набірае ачкі для сваёй каманды</string>
   <string name="teamTournament">Групны турнір</string>
   <string name="teamTournamentOverview">Арэнный турнір, ўступіць у які могуць толькі члены вашай групы</string>
+  <string name="swissTournamentOverview">Турнір па швейцарскай сістэме, да якога могуць далучыцца толькі чальці вашай каманды</string>
   <string name="messageAllMembers">Напісаць ўсім удзельнікам</string>
   <string name="messageAllMembersOverview">Напісаць асобнае паведамленне ўсім удзельнікам каманды</string>
+  <string name="messageAllMembersLongDescription">Даслаць асабістае паведамленне да ЎСІХ чальцоў каманды.
+Гэта можна выкарыстоўваць, каб паклікаць далучыцца да турніру або каманднай гульні.
+Гульцы, якія ня любяць такія паведамленні могуць пакінуць каманду.</string>
+  <string name="teamsIlead">Каманды, лідарам якіх я з\'яўляюся</string>
+  <string name="usersWhoCanManageThisTeam">Карыстальнікі, якія могуць кіраваць камандай</string>
+  <string name="leadersChat">Чат лідараў</string>
 </resources>

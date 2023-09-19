@@ -5,7 +5,7 @@ lidraughts.startInsightTour = function() {
       id: "insights",
       showPrevButton: true,
       steps: [{
-        title: "Welcome to chess insights!",
+        title: "Welcome to draughts insights!",
         content: "Know your strengths and weaknesses!<br>" +
           "Insights let you analyse your playing style, " +
           "using pertinent metrics and dimensions.<br><br>" +

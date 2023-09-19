@@ -53,7 +53,7 @@ object mine {
                 ctx.isAuth option div(
                   h2(cls := "ninja-title", trans.challenge.inviteLidraughtsUser()), br,
                   postForm(cls := "user-invite", action := routes.Challenge.toFriend(c.id))(
-                    input(name := "username", cls := "friend-autocomplete", placeholder := trans.search.txt()),
+                    input(name := "username", cls := "friend-autocomplete", placeholder := trans.search.search.txt()),
                     error.map { badTag(_) }
                   )
                 )

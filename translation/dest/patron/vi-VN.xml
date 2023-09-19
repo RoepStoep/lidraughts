@@ -54,7 +54,7 @@ Tuy nhiên, Patron được quyền khoe khoang với một huy hiệu mới.</s
   <string name="makeAdditionalDonation">Ủng hộ thêm ngay bây giờ</string>
   <string name="update">Cập Nhật</string>
   <string name="changeMonthlyAmount">Đổi số tiền hàng tháng (%s)</string>
-  <string name="cancelSupport">hủy sự ủng hộ của bạn</string>
+  <string name="cancelSupport">Hủy sự ủng hộ của bạn</string>
   <string name="xOrY">%1$s hoặc %2$s</string>
   <string name="decideHowMuch">Quyết định Lidraughts đáng giá như nào với bạn:</string>
   <string name="stopPayments">Rút thẻ tín dụng và dừng các thanh toán:</string>

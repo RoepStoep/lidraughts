@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Турніры па швейцарскай сыстэме</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s тур</item>
+    <item quantity="few">%s тураў</item>
+    <item quantity="many">%s тураў</item>
+    <item quantity="other">%s тураў</item>
+  </plurals>
+  <string name="nextRound">Наступны тур</string>
+  <string name="numberOfRounds">Колькасць тураў</string>
 </resources>

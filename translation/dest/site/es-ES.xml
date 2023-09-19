@@ -21,7 +21,7 @@
   <string name="variantEnding">Final de variante</string>
   <string name="important">Importante</string>
   <string name="yourQuestionMayHaveBeenAnswered">Puede que tu pregunta ya tenga respuesta %1$s</string>
-  <string name="inTheFAQ">en las preguntas frecuentes.</string>
+  <string name="inTheFAQ">en las preguntas frecuentes</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Para denunciar a un usuario por tramposo o por mal comportamiento, %1$s</string>
   <string name="useTheReportForm">usa el formulario de informe</string>
   <string name="toRequestSupport">Para solicitar soporte, %1$s</string>
@@ -257,8 +257,6 @@
   <string name="takebackPropositionCanceled">Propuesta de deshacer jugada cancelada</string>
   <string name="yourOpponentProposesATakeback">Tu oponente propone deshacer la jugada</string>
   <string name="bookmarkThisGame">Marcar este juego como favorito</string>
-  <string name="search">Buscar</string>
-  <string name="advancedSearch">Búsqueda avanzada</string>
   <string name="tournament">Torneo</string>
   <string name="tournaments">Torneos</string>
   <string name="tournamentPoints">Puntos de torneo</string>
@@ -566,7 +564,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   </plurals>
   <string name="tpTimeSpentPlaying">Tiempo total jugado: %s</string>
   <string name="watchGames">Ver partidas</string>
-  <string name="tpTimeSpentOnTV">Tiempo pasado en TV: %s</string>
+  <string name="tpTimeSpentOnTV">Tiempo transcurrido en TV: %s</string>
   <string name="watch">Observar</string>
   <string name="videoLibrary">Videoteca</string>
   <string name="streamersMenu">Presentadores</string>
@@ -588,7 +586,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="aboutSimul">En las simultáneas, un jugador se enfrenta a varios oponentes al mismo tiempo.</string>
   <string name="aboutSimulImage">De 169 oponentes, Sijbrands ganó 115 partidas, empató 43 y perdió 11.</string>
   <string name="aboutSimulRealLife">El concepto de simultáneas en Lidraughts se toma de la vida real, donde el anfitrión va de mesa en mesa para hacer sus movimientos.</string>
-  <string name="aboutSimulRules">Cuando la simultánea empieza, cada jugador comienza una partida con el anfitrión, que juega con blancas. La simultánea termina cuando terminan todas las partidas.</string>
+  <string name="aboutSimulRules">Cuando la simultánea empieza, cada jugador comienza una partida con el anfitrión. La simultánea termina cuando se acaban todas las partidas.</string>
   <string name="aboutSimulSettings">Las simultáneas son siempre partidas amistosas. Las opciones de petición de revancha, deshacer jugada y agregar tiempo están deshabilitadas.</string>
   <string name="create">Crear</string>
   <string name="whenCreateSimul">Cuando creas una simultánea, juegas contra varios jugadores a la vez.</string>
@@ -677,7 +675,6 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="dark">Oscuro</string>
   <string name="transparent">Transparente</string>
   <string name="backgroundImageUrl">URL de imagen de fondo:</string>
-  <string name="boardGeometry">Geometría del tablero</string>
   <string name="boardTheme">Tema del tablero</string>
   <string name="boardSize">Tamaño del tablero</string>
   <string name="pieceSet">Estilo de piezas</string>

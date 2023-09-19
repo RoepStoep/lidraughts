@@ -55,7 +55,7 @@ var d=lidraughts.StrongSocket.defaults;d.params.flag="tournament";d.events.reloa
             p(cls := "tour__links")(
               ctx.me map { me =>
                 frag(
-                  a(href := routes.UserTournament.path(me.username, "created"))(trans.myTournaments()),
+                  a(href := routes.UserTournament.path(me.username, "created"))(trans.arena.myTournaments()),
                   br
                 )
               },

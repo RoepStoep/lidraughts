@@ -44,10 +44,10 @@
   <string name="currentStatus">Поточний статус</string>
   <string name="nextPayment">Наступний платіж</string>
   <string name="youWillBeChargedXOnY">З %2$s буде знято %1$s.</string>
-  <string name="makeAdditionalDonation">Зробити додатковий внесок зараз</string>
+  <string name="makeAdditionalDonation">Зробити додатковий внесок</string>
   <string name="update">Оновити</string>
   <string name="changeMonthlyAmount">Змінити місячну суму (%s)</string>
-  <string name="cancelSupport">скасувати підтримку</string>
+  <string name="cancelSupport">Скасувати підтримку</string>
   <string name="xOrY">%1$s або %2$s</string>
   <string name="decideHowMuch">Виріште, наскільки цінним Lidraughts є для Вас:</string>
   <string name="stopPayments">Відкликати вашу кредитну картку і припинити платежі:</string>

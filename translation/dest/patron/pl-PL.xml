@@ -57,7 +57,7 @@ Patroni zyskują jedynie unikalną ikonę profilu (skrzydełka).</string>
   <string name="makeAdditionalDonation">Dokonaj dodatkowej darowizny teraz</string>
   <string name="update">Aktualizuj</string>
   <string name="changeMonthlyAmount">Zmień miesięczną kwotę (%s)</string>
-  <string name="cancelSupport">anuluj wsparcie</string>
+  <string name="cancelSupport">Anuluj wsparcie</string>
   <string name="xOrY">%1$s lub %2$s</string>
   <string name="decideHowMuch">Zdecyduj ile wart jest dla Ciebie Lidraughts:</string>
   <string name="stopPayments">Wypłać swoją kartę płatniczą i zatrzymaj płatności:</string>

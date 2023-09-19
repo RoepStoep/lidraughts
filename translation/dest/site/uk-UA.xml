@@ -22,7 +22,7 @@
   <string name="variantEnding">Гру завершено</string>
   <string name="important">Важливо</string>
   <string name="yourQuestionMayHaveBeenAnswered">Ваше запитання може мати відповідь %1$s</string>
-  <string name="inTheFAQ">в ЧаПах.</string>
+  <string name="inTheFAQ">в ЧаПах</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Щоб повідомити про нечесну гру чи погану поведінку, %1$s</string>
   <string name="useTheReportForm">використовуйте форму звіту</string>
   <string name="toRequestSupport">Для запиту підтримки %1$s</string>
@@ -288,8 +288,6 @@
   <string name="takebackPropositionCanceled">Пропозицію повернути хід скасовано</string>
   <string name="yourOpponentProposesATakeback">Ваш суперник хоче повернути хід</string>
   <string name="bookmarkThisGame">Додати гру в закладки</string>
-  <string name="search">Пошук</string>
-  <string name="advancedSearch">Розширений пошук</string>
   <string name="tournament">Турнір</string>
   <string name="tournaments">Турніри</string>
   <string name="tournamentPoints">Турнірні очки</string>
@@ -331,7 +329,7 @@
   <string name="yourTopWeeklyPerfRatingIsTooHigh">Ваш щотижневий рейтинг %1$s рейтинг (%2$s) дуже високий</string>
   <string name="yourPerfRatingIsTooLow">Ваш рейтинг %1$s (%2$s) дуже низький</string>
   <string name="ratedMoreThanInPerf">Рейтинг ≥ %1$s в %2$s</string>
-  <string name="ratedLessThanInPerf">Рейтинг ≤ %1$s в %2$s</string>
+  <string name="ratedLessThanInPerf">Рейтинг ≤ %1$s в %2$s за останній тиждень</string>
   <string name="mustBeInTeam">Потрібно бути в команді %s</string>
   <string name="youAreNotInTeam">Ви не в команді %s</string>
   <string name="backToGame">Повернутися до гри</string>
@@ -408,7 +406,7 @@
   <string name="inappropriateNameWarning">Все, що навіть трохи виявиться недоречним, може призвести до блокування.</string>
   <string name="emptyTournamentName">Залиште пустим, щоб назвати турнір на честь випадкового гросмейстера.</string>
   <string name="recommendNotTouching">Ми радимо не змінювати їх.</string>
-  <string name="fewerPlayers">Якщо Ви встановите умови вступу, у Вашому турнірі буде менше гравців.</string>
+  <string name="fewerPlayers">Якщо ви встановите умови вступу, у вашому турнірі буде менше гравців.</string>
   <string name="showAdvancedSettings">Показати додаткові налаштування</string>
   <string name="makePrivateTournament">Зробити турнір приватним та обмежити доступ паролем</string>
   <string name="join">Грати</string>
@@ -622,7 +620,7 @@
   </plurals>
   <string name="tpTimeSpentPlaying">Проведено часу у грі: %s</string>
   <string name="watchGames">Перегляд партій</string>
-  <string name="tpTimeSpentOnTV">Час на ТБ: %s</string>
+  <string name="tpTimeSpentOnTV">Час на TV: %s</string>
   <string name="watch">Перегляд</string>
   <string name="videoLibrary">Відеоархів</string>
   <string name="streamersMenu">Стрімери</string>
@@ -647,7 +645,7 @@
   <string name="whenCreateSimul">Коли ви створюєте сеанс, ви збираєтесь одночасно грати проти кількох суперників.</string>
   <string name="simulClockHint">Налаштування Фішера. Більша кількість учасників – більше часу для сеансера.</string>
   <string name="simulAddExtraTime">Ви можете додати собі час, щоб упоратися з сеансом.</string>
-  <string name="simulHostExtraTime">Додатковий час для сеансера</string>
+  <string name="simulHostExtraTime">Додатковий час організатора</string>
   <string name="everyone">Кожний</string>
   <string name="lidraughtsTournaments">Турніри Lidraughts</string>
   <string name="tournamentFAQ">FAQ сторінки турнірів</string>
@@ -674,7 +672,7 @@
   <string name="weHaveSentYouAnEmailClickTheLink">Ми надіслали вам листа. Перейдіть за посиланням у листі для активації облікового запису.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Якщо не знайшли листа, перевірте місця, де б він міг бути (наприклад, спам).</string>
   <string name="weHaveSentYouAnEmailTo">Ми надіслали повідомлення на %s. Для перевстановлення паролю перейдіть за посиланням у повідомленні.</string>
-  <string name="byRegisteringYouAgreeToBeBoundByOur">Ваша рєєстрація означає згоду з обмеженням нашими %s.</string>
+  <string name="byRegisteringYouAgreeToBeBoundByOur">Реєструючись, Ви даєте згоду дотримуватись наших %s.</string>
   <string name="networkLagBetweenYouAndLidraughts">Мережева затримка між вами та Lidraughts</string>
   <string name="timeToProcessAMoveOnLidraughtsServer">Час обробки ходу на сервері Lidraughts</string>
   <string name="downloadAnnotated">Завантажити з коментарями</string>
@@ -682,7 +680,7 @@
   <string name="downloadImported">Завантажити імпортоване</string>
   <string name="printFriendlyPDF">PDF-версія для друку</string>
   <string name="crosstable">Рахунок</string>
-  <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Також Ви можете використовувати коліщатко миші над дошкою для зміни ходів у грі.</string>
+  <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Прокручуйте коліщатко миші над шахівницею для перегляду ходів у грі.</string>
   <string name="analysisShapesHowTo">Натисніть shift+лкм або пкм, щоб намалювати кола та стрілки на дошці.</string>
   <string name="letOtherPlayersMessageYou">Дозволити іншим гравцям надсилати вам повідомлення</string>
   <string name="withNobody">Ні з ким</string>
@@ -691,7 +689,7 @@
   <string name="youHaveAlreadyRegisteredTheEmail">Ви вже маєте зареєстровану поштову адресу: %s</string>
   <string name="kidMode">Режим для дітей</string>
   <string name="kidModeExplanation">Мова йде про безпеку. У дитячому режимі всі комунікації на сайті вимкнено. Увімкніть цю функцію для ваших дітей і школярів, щоб захистити їх від інших користувачів Інтернету.</string>
-  <string name="inKidModeTheLidraughtsLogoGetsIconX">В дитячому режимі логотип lidraughts отримує значок у вигляді %s, щоб Ви знали, що діти у безпеці.</string>
+  <string name="inKidModeTheLidraughtsLogoGetsIconX">В дитячому режимі логотип Lidraughts отримує значок у вигляді %s, щоб Ви знали, що діти у безпеці.</string>
   <string name="enableKidMode">Увімкнути дитячий режим</string>
   <string name="disableKidMode">Вимкнути дитячий режим</string>
   <string name="security">Безпека</string>
@@ -728,7 +726,6 @@
   <string name="dark">Темна</string>
   <string name="transparent">Прозора</string>
   <string name="backgroundImageUrl">URL зображення в тлі:</string>
-  <string name="boardGeometry">Геометрія дошки</string>
   <string name="boardTheme">Оформлення дошки</string>
   <string name="boardSize">Розмір дошки</string>
   <string name="pieceSet">Набір фігур</string>
@@ -736,7 +733,7 @@
   <string name="usernameAlreadyUsed">Таке ім\'я користувача вже використовується, будь ласка, спробуйте інше.</string>
   <string name="usernamePrefixInvalid">Ім\'я користувача має починатися з літери.</string>
   <string name="usernameSuffixInvalid">Ім\'я користувача має закінчуватися буквою або цифрою.</string>
-  <string name="usernameCharsInvalid">Ім\'я користувача має містити тільки літери, цифри, символи підкреслення і тире.</string>
+  <string name="usernameCharsInvalid">Ім\'я користувача має містити лише літери, цифри, символи підкреслення і тире.</string>
   <string name="usernameUnacceptable">Неприйнятне ім\'я користувача.</string>
   <string name="directlySupportLidraughts">Підтримує Lidraughts</string>
   <string name="coaches">Тренери</string>

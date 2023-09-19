@@ -9,4 +9,8 @@
   <string name="lidraughtsServerLatency">Zpoždění Lidraughts serveru</string>
   <string name="lidraughtsServerLatencyExplanation">Čas, který trvá zpracovat tah na serveru. Je stejný pro všechny, a závisí pouze na vytížení serveru. Čím více hráčů, tím větší bude, ale Lidraughts vývojáři dělají vše, co je v jejich silách, aby tento čas zůstal nízký. Zřídka přesahuje 10 ms.</string>
   <string name="networkBetweenLidraughtsAndYou">Připojení mezi Lidraughtsem a vámi</string>
+  <string name="networkBetweenLidraughtsAndYouExplanation">Doba, kterou trvá odeslat tah z vašeho počítači na server Lidraughts, a cesta zpátky. Tato hodnota závisí na vaší vzdálenosti k Lidraughts serverům (Francie), a kvalitě vašeho internetového připojení. Vývojáři Lidraughts nemají schopnosti k tomu, aby zpravili Vaší WiFi, či aby zrychlili rychlost světla.</string>
+  <string name="youCanFindTheseValuesAtAnyTimeByClickingOnYourUsername">Obě tyto hodnoty můžete zjistit kdykoli kliknutím na své uživatelské jméno v horní liště.</string>
+  <string name="lagCompensation">Kompezace lagu (prodlevy připojení)</string>
+  <string name="lagCompensationExplanation">Lidraughts kompenzuje prodlevu (lag) vašeho připojení, a to jak zpoždění setrvalé, a i zpoždění občasné. Důsledkem toho není větší zpoždění Vaší sítě než Vašeho soupeře nevýhodou!</string>
 </resources>

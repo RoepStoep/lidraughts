@@ -349,7 +349,7 @@ object Team extends LidraughtsController {
 
   def pmAll(id: String) = Auth { implicit ctx => _ =>
     WithOwnedTeam(id) { team =>
-      lidraughts.tournament.TournamentRepo.byTeamUpcoming(team.id, 3) map { tours =>
+      lidraughts.tournament.TournamentRepo.byTeamUpcoming(team.id, 3, withTeamBattle = !team.isWfd) map { tours =>
         Ok(html.team.admin.pmAll(team, forms.pmAll, tours))
       }
     }
@@ -360,7 +360,7 @@ object Team extends LidraughtsController {
       implicit val req = ctx.body
       forms.pmAll.bindFromRequest.fold(
         err =>
-          lidraughts.tournament.TournamentRepo.byTeamUpcoming(team.id, 3) map { tours =>
+          lidraughts.tournament.TournamentRepo.byTeamUpcoming(team.id, 3, withTeamBattle = !team.isWfd) map { tours =>
             BadRequest(html.team.admin.pmAll(team, err, tours))
           },
         msg =>

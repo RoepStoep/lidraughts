@@ -40,6 +40,7 @@
   <string name="teamBattleOverview">Битва кількох команд, кожен гравець заробляє очки своїй команді</string>
   <string name="teamTournament">Командний турнір</string>
   <string name="teamTournamentOverview">Турнір у форматі Арени, до якого можуть приєднатися лише члени Вашої команди</string>
+  <string name="swissTournamentOverview">Турнір за швейцарською системою, до якого можуть приєднатися лише члени вашої команди</string>
   <string name="messageAllMembers">Повідомити усіх учасників</string>
   <string name="messageAllMembersOverview">Надіслати особисте повідомлення кожному членові команди</string>
   <string name="messageAllMembersLongDescription">Надіслати особисте повідомлення всім членам команди.
