@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="live">בשידור חי!</string>
+  <string name="offline">מנותק</string>
+  <string name="currentlyStreaming">משדרים כרגע: %s</string>
+  <string name="lastStream">משדר אחרון %s</string>
+  <string name="doYouHaveStream">יש לך ערוץ יוטיוב או טוויץ\'?</string>
+  <string name="hereWeGo">יוצאים לדרך!</string>
+  <string name="allStreamers">כל השדרנים</string>
+  <string name="editPage">ערוך עמוד שדרן</string>
+  <string name="yourPage">עמוד המשדר שלכם</string>
+  <string name="downloadKit">הורדת ערכת משדר</string>
+  <string name="xIsStreaming">%s משדר/ת</string>
+  <string name="rules">חוקי שידור</string>
+  <string name="perks">הטבות שידור עם מילת המפתח</string>
+  <string name="approved">המשדר שלכם אושר.</string>
+  <string name="pendingReview">המשדר שלכם עובר בדיקת מנהלים.</string>
+  <string name="pleaseFillIn">אנא מלאו את פרטי המשדר שלכם והעלו תמונה.</string>
+  <string name="requestReview">בקשו בדיקת מנהלים</string>
+  <string name="twitchUsername">שם המשתמש או כתובת הTwitch שלכם</string>
+  <string name="optionalOrEmpty">אופציונאלי. אם אין, השאירו את השדה ריק</string>
+  <plurals name="keepItShort">
+    <item quantity="one">עד תו %s</item>
+    <item quantity="two">עד %s תווים</item>
+    <item quantity="many">עד %s תווים</item>
+    <item quantity="other">עד %s תווים</item>
+  </plurals>
+  <string name="visibility">גלוי בעמוד השדרנים</string>
+  <string name="whenApproved">לאחר אישור מנהלים</string>
+  <string name="headline">כּוֹתֶרֶת</string>
+  <string name="tellUsAboutTheStream">ספרו לנו על שידורכם במשפט אחד</string>
+  <string name="longDescription">תיאור ארוך</string>
+  <string name="xStreamerPicture">תמונה של השדרן %s</string>
+  <string name="changePicture">שינוי/מחיקת התמונה שלך</string>
+  <string name="uploadPicture">העלאת תמונה</string>
+  <string name="maxSize">גודל מרבי: %s</string>
+</resources>

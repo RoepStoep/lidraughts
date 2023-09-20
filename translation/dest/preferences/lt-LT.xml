@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Nuostatos</string>
-  <string name="gameDisplay">Žaidimo vaizdas</string>
+  <string name="display">Rodymas</string>
   <string name="pieceAnimation">Figūrų animacija</string>
   <string name="materialDifference">Figūrų vertės skirtumas</string>
   <string name="boardCoordinates">Lentos koordinatės (1-50, a1-h8)</string>

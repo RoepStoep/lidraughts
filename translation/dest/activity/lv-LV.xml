@@ -37,11 +37,6 @@
     <item quantity="one">Izspēlēja %1$s gājienus</item>
     <item quantity="other">Izspēlēja %1$s gājienus</item>
   </plurals>
-  <plurals name="inNbCorrespondenceGames">
-    <item quantity="zero">%1$s korespondencšaha spēlēs</item>
-    <item quantity="one">%1$s korespondencšaha spēlē</item>
-    <item quantity="other">%1$s korespondencšaha spēlēs</item>
-  </plurals>
   <plurals name="completedNbGames">
     <item quantity="zero">Pabeidza %s partiju korespondencē</item>
     <item quantity="one">Pabeidza %s partiju korespondencē</item>

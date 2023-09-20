@@ -80,7 +80,6 @@
   <string name="deleteChapter">Elimina capitolo</string>
   <string name="deleteThisChapter">Vuoi davvero eliminare questo capitolo? Sarà perso per sempre!</string>
   <string name="clearAllCommentsInThisChapter">Cancellare tutti i commenti, le annotazioni e i disegni in questo capitolo?</string>
-  <string name="rightUnderTheBoard">Sotto la scacchiera</string>
   <string name="noPinnedComment">Nessun commento</string>
   <string name="normalAnalysis">Analisi normale</string>
   <string name="hideNextMoves">Nascondi le mosse successive</string>

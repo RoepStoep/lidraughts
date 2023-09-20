@@ -19,6 +19,7 @@
   <string name="createAGame">Створити гру</string>
   <string name="whiteIsVictorious">Перемога білих</string>
   <string name="blackIsVictorious">Перемога чорних</string>
+  <string name="promotion">Перетворення</string>
   <string name="variantEnding">Гру завершено</string>
   <string name="important">Важливо</string>
   <string name="yourQuestionMayHaveBeenAnswered">Ваше запитання може мати відповідь %1$s</string>
@@ -57,6 +58,7 @@
   <string name="analysis">Аналіз</string>
   <string name="depthX">Глибина %s</string>
   <string name="usingServerAnalysis">Використовуючи комп\'ютерний аналіз</string>
+  <string name="loadingEngine">Завантаження рушія...</string>
   <string name="cloudAnalysis">Хмарний аналіз</string>
   <string name="goDeeper">Ще глибше</string>
   <string name="showThreat">Показати загрозу</string>
@@ -124,6 +126,12 @@
     <item quantity="few">%s партії</item>
     <item quantity="many">%s партії</item>
     <item quantity="other">%s партії</item>
+  </plurals>
+  <plurals name="nbBookmarks">
+    <item quantity="one">%s закладка</item>
+    <item quantity="few">%s закладки</item>
+    <item quantity="many">%s закладок</item>
+    <item quantity="other">%s закладок</item>
   </plurals>
   <string name="viewInFullSize">Дивитися в повний розмір</string>
   <string name="logOut">Вийти</string>
@@ -205,9 +213,12 @@
   <string name="yourOpponentOffersADraw">Ваш суперник пропонує нічию</string>
   <string name="accept">Прийняти</string>
   <string name="decline">Відхилити</string>
+  <string name="startingIn" comment="Displayed above a timer">Початок через</string>
+  <string name="startingSoon">Скоро розпочнуться</string>
   <string name="playingRightNow">Грається прямо зараз</string>
   <string name="eventInProgress">Грається просто зараз</string>
   <string name="finished">Завершено</string>
+  <string name="finishesX">завершиться %s</string>
   <string name="abortGame">Скасувати гру</string>
   <string name="gameAborted">Гру скасовано</string>
   <string name="standard">Стандартний</string>
@@ -337,6 +348,7 @@
   <string name="xCreatedTeamY">%1$s створили команду %2$s</string>
   <string name="xStartedStreaming">%s почав трансляцію</string>
   <string name="averageElo">Середній рейтинґ</string>
+  <string name="teamPage">Сторінка команди</string>
   <string name="location">Місцезнаходження</string>
   <string name="filterGames">Фільтр ігор</string>
   <string name="reset">Скинути</string>
@@ -393,6 +405,12 @@
   <string name="player">Гравець</string>
   <string name="list">Список</string>
   <string name="graph">Графік</string>
+  <plurals name="lessThanNbMinutes">
+    <item quantity="one">Менше %s хвилини</item>
+    <item quantity="few">Менше %s хвилин</item>
+    <item quantity="many">Менше %s хвилин</item>
+    <item quantity="other">Менше %s хвилин</item>
+  </plurals>
   <string name="required">Обов\'язково.</string>
   <string name="openTournaments">Відкриті турніри</string>
   <string name="duration">Тривалість</string>
@@ -436,10 +454,14 @@
   <string name="popularOpenings">Популярні дебюти</string>
   <string name="startPosition">Початкова позиція</string>
   <string name="clearBoard">Очистити дошку</string>
+  <string name="edit">Змінити</string>
   <string name="save">Зберегти</string>
   <string name="savePosition">Зберегти позицію</string>
   <string name="loadPosition">Завантажiти позицiю</string>
   <string name="isPrivate">Приватний</string>
+  <string name="tournDescription">Опис турніру</string>
+  <string name="tournDescriptionHelp">Є щось особливе, що ви хочете сказати учасникам? Спробуйте написати це коротко. Для посилань доступна розмітка Markdown: [name](https://url)</string>
+  <string name="cancelTournament">Скасувати турнір</string>
   <string name="reportXToModerators">Повідомлення %s для модераторів</string>
   <string name="profileCompletion">Заповненість профілю: %s</string>
   <string name="xRating">%s рейтинг</string>
@@ -479,6 +501,13 @@
   <string name="pleaseVotePuzzle">Допоможіть Lidraughts зробитися кращими, натиснувши на одну зі стрілок:</string>
   <string name="thankYou">Дякуємо!</string>
   <string name="ratingX">Рівень: %s</string>
+  <string name="hidden">прихований</string>
+  <plurals name="playedXTimes">
+    <item quantity="one">Зіграно %s раз</item>
+    <item quantity="few">Зіграно %s рази</item>
+    <item quantity="many">Зіграно %s раз</item>
+    <item quantity="other">Зіграно %s разів</item>
+  </plurals>
   <string name="fromGameLink">Вилучено з гри %s</string>
   <string name="continueTraining">Продовжити тренування</string>
   <string name="retryThisPuzzle">Спробувати цю задачу ще раз</string>
@@ -537,6 +566,13 @@
   <string name="newPasswordsDontMatch">Нові паролі не однакові</string>
   <string name="clockInitialTime">Початковий час годинника</string>
   <string name="clockIncrement">Приріст часу</string>
+  <string name="onlyMembersOfTeam">Лише члени команди</string>
+  <string name="noRestriction">Без обмежень</string>
+  <string name="minimumRatedGames">Мінімум рейтингових ігор</string>
+  <string name="minimumRating">Мінімальний рейтинг</string>
+  <string name="maximumWeeklyRating">Максимальний тижневий рейтинг</string>
+  <string name="onlyTitled">Лише титуловані гравці</string>
+  <string name="onlyTitledHelp">Вимагає офіційний титул щоб приєднатись до турніру</string>
   <string name="privacy">Конфіденційність</string>
   <string name="letOtherPlayersFollowYou">Дозволити іншим спостерігати за вами</string>
   <string name="letOtherPlayersChallengeYou">Дозволити іншим кидати вам виклик</string>
@@ -606,8 +642,8 @@
   <string name="shareGameURL">Поділитись посиланням на гру</string>
   <string name="error.required">Це поле обов\'язкове</string>
   <string name="error.email">Ця адреса email помилкова</string>
-  <string name="error.email_acceptable">Ця адреса email неприйнятна</string>
-  <string name="error.email_unique">Цю адресу email уже задіяно</string>
+  <string name="error.email_acceptable">Ця адреса електронної пошти неприйнятна. Будь ласка, перевірте її та спробуйте знову.</string>
+  <string name="error.email_unique">Електронна адреса недійсна або вже використана</string>
   <string name="error.email_different">Це ваша поточна адреса пошти</string>
   <string name="ifRatingIsPlusMinusX">Якщо рейтинг ± %s</string>
   <string name="onlyFriends">Тільки друзі</string>
@@ -634,6 +670,8 @@
   <string name="termsOfService">Умови користування</string>
   <string name="sourceCode">Початковий програмний код</string>
   <string name="simultaneousExhibitions">Сеанси одночасної гри</string>
+  <string name="simulDescription">Опис сеансу</string>
+  <string name="simulDescriptionHelp">Чи хочете ви щось повідомити учасникам?</string>
   <string name="host">Сеансер</string>
   <string name="hostColorX">Колір організатора: %s</string>
   <string name="createdSimuls">Нові сеанси</string>
@@ -641,6 +679,10 @@
   <string name="noSimulFound">Сеанс не знайдено</string>
   <string name="noSimulExplanation">Цього сеансу одночасної гри не існує.</string>
   <string name="returnToSimulHomepage">Повернутися до сторінки \"Сеанси\"</string>
+  <string name="aboutSimul">Сеанс залучає одного гравця, що змагається з кількома гравцями одночасно.</string>
+  <string name="aboutSimulRealLife">Концепцію взято з сеансів у реальному світі, коли організатор ходить від дошки до дошки, роблячи один хід.</string>
+  <string name="aboutSimulRules">Коли сеанс розпочато, кожен гравець починає гру з організатором. Сеанс добігає кінця, коли завершуються всі партії.</string>
+  <string name="aboutSimulSettings">Сеанси завжди нерейтингові. Опції реваншу, повернення ходу і додавання часу вимкнені.</string>
   <string name="create">Створити</string>
   <string name="whenCreateSimul">Коли ви створюєте сеанс, ви збираєтесь одночасно грати проти кількох суперників.</string>
   <string name="simulClockHint">Налаштування Фішера. Більша кількість учасників – більше часу для сеансера.</string>
@@ -680,7 +722,6 @@
   <string name="downloadImported">Завантажити імпортоване</string>
   <string name="printFriendlyPDF">PDF-версія для друку</string>
   <string name="crosstable">Рахунок</string>
-  <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Прокручуйте коліщатко миші над шахівницею для перегляду ходів у грі.</string>
   <string name="analysisShapesHowTo">Натисніть shift+лкм або пкм, щоб намалювати кола та стрілки на дошці.</string>
   <string name="letOtherPlayersMessageYou">Дозволити іншим гравцям надсилати вам повідомлення</string>
   <string name="withNobody">Ні з ким</string>
@@ -739,14 +780,20 @@
   <string name="coaches">Тренери</string>
   <string name="invalidPdn">Неприпустимий PDN</string>
   <string name="invalidFen">Неприпустимий FEN</string>
-  <string name="error.minLength">Мінімальна довжина-%s</string>
-  <string name="error.maxLength">Максимальна довжина-%s</string>
-  <string name="error.min">Має бути більше або дорівнювати %s</string>
-  <string name="error.max">Має бути менше або дорівнювати %s</string>
-  <string name="error.unknown">Помилка</string>
+  <string name="error.minLength">Має бути принаймні %s символів</string>
+  <string name="error.maxLength">Повинно бути не більше %s символів</string>
+  <string name="error.min">Має бути принаймні %s</string>
+  <string name="error.max">Має бути щонайбільше %s</string>
+  <string name="error.unknown">Неприпустиме значення</string>
   <string name="custom">Користувацька гра</string>
   <string name="notifications">Сповіщення</string>
   <string name="perfRatingX">Рейтинг: %s</string>
+  <plurals name="nbSecondsToPlayTheFirstMove">
+    <item quantity="one">%s секунда на перший хід</item>
+    <item quantity="few">%s секунди на перший хід</item>
+    <item quantity="many">%s секунд на перший хід</item>
+    <item quantity="other">%s секунд на перший хід</item>
+  </plurals>
   <string name="practiceWithComputer">Тренування з комп\'ютером</string>
   <string name="anotherWasX">Також можна: %s</string>
   <string name="bestWasX">Найкращий хід: %s</string>
@@ -764,6 +811,7 @@
   <string name="learnFromThisMistake">Розібрати цю помилку</string>
   <string name="skipThisMove">Пропустити цей хід</string>
   <string name="next">Далі</string>
+  <string name="back">Назад</string>
   <string name="xWasPlayed">Було зіграно %s</string>
   <string name="findBetterMoveForWhite">Знайдіть за білих більш сильний хід</string>
   <string name="findBetterMoveForBlack">Знайдіть за чорних більш сильний хід</string>
@@ -780,12 +828,21 @@
   <string name="doItAgain">Ще раз</string>
   <string name="reviewWhiteMistakes">Розібрати помилки білих</string>
   <string name="reviewBlackMistakes">Розібрати помилки чорних</string>
+  <string name="whatWouldYouPlay">Що б ви грали в цій позиції?</string>
+  <string name="nextChapter">Наступний розділ</string>
+  <string name="playAgain">Грати знову</string>
   <string name="advantage">Перевага</string>
   <plurals name="nbSeconds">
     <item quantity="one">%s секунда</item>
     <item quantity="few">%s секунди</item>
     <item quantity="many">%s секунд</item>
     <item quantity="other">%s секунд</item>
+  </plurals>
+  <plurals name="nbMinutes">
+    <item quantity="one">%s хвилина</item>
+    <item quantity="few">%s хвилини</item>
+    <item quantity="many">%s хвилин</item>
+    <item quantity="other">%s хвилин</item>
   </plurals>
   <string name="opening">Дебют</string>
   <string name="middlegame">Міттельшпіль</string>

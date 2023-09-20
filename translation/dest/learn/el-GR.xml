@@ -35,9 +35,6 @@
   <string name="boardSetup">Στήσιμο σκακιέρας</string>
   <string name="howTheGameStarts">Πώς αρχίζει το παιχνίδι</string>
   <string name="boardSetupIntro">Οι δύο στρατοί αντιμετωπίζουν ο ένας τον άλλον, έτοιμοι για τη μάχη.</string>
-  <string name="thisIsTheInitialPosition">Αυτή είναι η αρχική θέση
-κάθε παρτίδας στο σκάκι!
-Κάντε οποιαδήποτε κίνηση για να συνεχείσουμε.</string>
   <string name="boardSetupComplete">Συγχαρητήρια! Ξέρετε πως να στήνετε την σκακιέρα ντάμας.</string>
   <string name="theGameIsADraw">Η παρτίδα είναι ισόπαλη</string>
   <string name="advanced">Προχωρημένο στάδιο</string>

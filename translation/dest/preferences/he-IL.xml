@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="preferences">העדפות</string>
+  <string name="display">תצוגה</string>
+  <string name="pieceAnimation">אנימציית הכלים</string>
+  <string name="materialDifference">הבדל בחומר</string>
+  <string name="pieceDestinations">יעדי הכלים: מהלכים וקדם-מהלכים מותרים</string>
+  <string name="boardCoordinates">קואורדינטות לוח (1-50, a1-h8)</string>
+  <string name="insideTheBoard">בתוך הלוח</string>
+  <string name="outsideTheBoard">מחוץ ללוח</string>
+  <string name="moveListWhilePlaying">רשימת מהלכים במהלך המשחק</string>
+  <string name="onSlowGames">במשחקים איטיים</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">מצב זן</string>
+  <string name="displayBoardResizeHandle">הצג סמן להגדלת הלוח</string>
+  <string name="onlyOnInitialPosition">רק בעמדה ההתחלתית</string>
+  <string name="tenthsOfSeconds">הצג עשיריות שניה</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">כאשר הזמן שנותר קטן מעשר שניות</string>
+  <string name="horizontalGreenProgressBars">מדי התקדמות ירוקים אופקיים</string>
+  <string name="soundWhenTimeGetsCritical">השמע צליל כאשר הזמן נהיה קריטי</string>
+  <string name="giveMoreTime">תן עוד זמן</string>
+  <string name="gameBehavior">התנהגות המשחק</string>
+  <string name="howDoYouMovePieces">איך מזיזים את הכלים?</string>
+  <string name="clickTwoSquares">לחץ על שני ריבועים</string>
+  <string name="dragPiece">הזז את הכלי</string>
+  <string name="bothClicksAndDrag">שניהם</string>
+  <string name="premovesPlayingDuringOpponentTurn">קדם-מהלכים: ביצוע מהלכים במהלך תורו של היריב</string>
+  <string name="takebacksWithOpponentApproval">החזרת המהלך האחרון: מותנה בהסכמת היריב</string>
+  <string name="inCasualGamesOnly">במשחקים ללא דירוג בלבד</string>
+  <string name="whenPremoving">כאשר מבצעים קדם-מהלך</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">הכרז על תיקו בחזרה משולשת באופן אוטומטי</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">כשהזמן הנותר קטן מ-30 שניות</string>
+  <string name="moveConfirmation">אישור המהלכים</string>
+  <string name="inCorrespondenceGames">במשחקים בהתכתבות</string>
+  <string name="correspondenceAndUnlimited">התכתבות וללא הגבלה</string>
+  <string name="confirmResignationAndDrawOffers">אשרו כניעה והצעות תיקו</string>
+  <string name="inputMovesWithTheKeyboard">הקלידו מהלכים באמצעות המקלדת</string>
+  <string name="yourPreferencesHaveBeenSaved">העדפותיך נשמרו.</string>
+</resources>

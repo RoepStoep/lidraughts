@@ -1347,7 +1347,7 @@ val `thisAccountIsClosed` = new Translated("thisAccountIsClosed", Settings)
 
 object preferences {
 val `preferences` = new Translated("preferences", Preferences)
-val `gameDisplay` = new Translated("gameDisplay", Preferences)
+val `display` = new Translated("display", Preferences)
 val `pieceAnimation` = new Translated("pieceAnimation", Preferences)
 val `materialDifference` = new Translated("materialDifference", Preferences)
 val `showKingMoves` = new Translated("showKingMoves", Preferences)

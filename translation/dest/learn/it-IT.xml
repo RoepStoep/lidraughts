@@ -26,10 +26,8 @@ nessun pezzo!</string>
   <string name="captureAndDefendPieces">Cattura e difendi i pezzi</string>
   <string name="combatIntro">Un buon guerriero comprende sia l\'attacco che la difesa!</string>
   <string name="intermediate">Livello intermedio</string>
-  <string name="boardSetup">La scacchiera</string>
   <string name="howTheGameStarts">Come inizia la partita</string>
   <string name="boardSetupIntro">I due eserciti l\'uno di fronte all\'altro, pronti per la battaglia.</string>
-  <string name="boardSetupComplete">Congratulazioni! Ora sai come preparare la scacchiera.</string>
   <string name="theGameIsADraw">La partita è patta</string>
   <string name="advanced">Livello avanzato</string>
   <string name="whatNext">E ora?</string>

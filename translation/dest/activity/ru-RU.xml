@@ -87,10 +87,10 @@
     <item quantity="other">Создал %s новых студий</item>
   </plurals>
   <plurals name="competedInNbTournaments">
-    <item quantity="one">Завершил %s турнир</item>
-    <item quantity="few">Завершил %s турнира</item>
-    <item quantity="many">Завершил %s турниров</item>
-    <item quantity="other">Завершил %s турниров</item>
+    <item quantity="one">Завершён %s турнир</item>
+    <item quantity="few">Завершены %s турнира</item>
+    <item quantity="many">Завершены %s турниров</item>
+    <item quantity="other">Завершены %s турниров</item>
   </plurals>
   <plurals name="rankedInTournament">
     <item quantity="one">Достиг #%1$s места (вошёл в %2$s%% лучших), сыграв %3$s игру в турнире %4$s</item>

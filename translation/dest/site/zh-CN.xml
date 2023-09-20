@@ -224,8 +224,8 @@
   <string name="yourOpponentOffersADraw">你的对手提出和棋</string>
   <string name="accept">接受</string>
   <string name="decline">拒绝</string>
-  <string name="startingIn">开始于</string>
-  <string name="startingSoon"> - 即将开始 - </string>
+  <string name="startingIn" comment="Displayed above a timer">开始于</string>
+  <string name="startingSoon">即将开始</string>
   <string name="playingRightNow">正在对局</string>
   <string name="eventInProgress">正在进行</string>
   <string name="finished">已结束</string>
@@ -457,7 +457,7 @@
   <string name="isPrivate">私人锦标赛</string>
   <string name="editTournament">编辑锦标赛</string>
   <string name="tournDescription">锦标赛描述</string>
-  <string name="tournDescriptionHelp">您有其它信息要告知参赛者？请尽量保持此信息简明扼要。可以使用标记语言链接：[text](https://url)</string>
+  <string name="tournDescriptionHelp">您有其它信息要告知参赛者？请尽量保持此信息简明扼要。可以使用标记语言链接：[name](https://url)</string>
   <string name="cancelTournament">取消锦标赛</string>
   <string name="reportXToModerators">举报%s</string>
   <string name="profileCompletion">资料完善: %s</string>
@@ -578,6 +578,11 @@
   <string name="clockIncrement">加秒</string>
   <string name="onlyMembersOfTeam">仅团队成员</string>
   <string name="noRestriction">没有限制</string>
+  <string name="minimumRatedGames">最少排位赛局数</string>
+  <string name="minimumRating">最低等级分</string>
+  <string name="maximumWeeklyRating">本周最高等级分</string>
+  <string name="onlyTitled">仅限有头衔玩家</string>
+  <string name="onlyTitledHelp">需要官方头衔才能加入比赛</string>
   <string name="privacy">隐私</string>
   <string name="letOtherPlayersFollowYou">允许其他棋手关注</string>
   <string name="letOtherPlayersChallengeYou">允许其他棋手挑战</string>
@@ -641,8 +646,8 @@
   <string name="shareGameURL">分享棋局链接</string>
   <string name="error.required">本项必填</string>
   <string name="error.email">该电子邮件地址无效。</string>
-  <string name="error.email_acceptable">该电子邮件地址不被接受。</string>
-  <string name="error.email_unique">该电子邮件地址已被使用。</string>
+  <string name="error.email_acceptable">该电子邮件地址是不可用。请重新检查后重试。</string>
+  <string name="error.email_unique">电子邮件地址无效或已被使用</string>
   <string name="error.email_different">这已经是你的电子邮件地址</string>
   <string name="ifRatingIsPlusMinusX">允许积分范围±%s</string>
   <string name="onlyFriends">只允许朋友</string>
@@ -832,7 +837,7 @@
   <string name="error.maxLength">最大长度：%s</string>
   <string name="error.min">大于或等于%s</string>
   <string name="error.max">小于或等于%s</string>
-  <string name="error.unknown">错误</string>
+  <string name="error.unknown">无效值</string>
   <string name="error.pattern">包含无效字符</string>
   <string name="error.eventName">包含无效字符。只可使用字母、数字和常见标点符号。</string>
   <string name="mustNotContainLidraughts">不能包含 \"lidraughts\"</string>

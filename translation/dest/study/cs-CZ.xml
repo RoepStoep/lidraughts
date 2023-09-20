@@ -83,7 +83,6 @@
   <string name="deleteChapter">Odstranit kapitolu</string>
   <string name="deleteThisChapter">Opravdu chcete odstranit tuto kapitolu? Kapitola bude navždy ztracena!</string>
   <string name="clearAllCommentsInThisChapter">Vymazat všechny komentáře a výtvory v této kapitole?</string>
-  <string name="rightUnderTheBoard">Přímo pod šachovnicí</string>
   <string name="noPinnedComment">Žádný</string>
   <string name="normalAnalysis">Normální rozbor</string>
   <string name="hideNextMoves">Skrýt následující tahy</string>

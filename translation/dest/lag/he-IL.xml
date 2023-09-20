@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="measurementInProgressThreeDot">מדידה מתבצעת...</string>
+  <string name="noAndYourNetworkIsGood">לא. והרשת שלך עובדת סבבה.</string>
+  <string name="noAndYourNetworkIsBad">לא. והרשת שלך לא עובדת כראוי.</string>
+  <string name="yesItWillBeFixedSoon">כן. זה יתוקן בקרוב!</string>
+  <string name="andNowTheLongAnswerLagComposedOfTwoValues">ועכשיו, התשובה הארוכה! לאג במשחק נגרם משני ערכים לא קשורים אחד לשני (ככל שהם נמוכים יותר כך יותר טוב):</string>
+  <string name="youCanFindTheseValuesAtAnyTimeByClickingOnYourUsername">אתם יכולים למצוא את הערכים האלה בכל זמן, על ידי לחיצה על שם המשתמש שלכם למעלה.</string>
+  <string name="lagCompensation">פיצוי על הלאג</string>
+</resources>

@@ -19,6 +19,7 @@
   <string name="createAGame">Kurti žaidimą</string>
   <string name="whiteIsVictorious">Baltieji laimėjo</string>
   <string name="blackIsVictorious">Juodieji laimėjo</string>
+  <string name="promotion">Paaukštinimas</string>
   <string name="variantEnding">Variantinė pabaiga</string>
   <string name="important">Dėmesio</string>
   <string name="yourQuestionMayHaveBeenAnswered">Jūsų klausimas jau gali būti atsakytas %1$s</string>
@@ -211,6 +212,8 @@
   <string name="yourOpponentOffersADraw">Jūsų varžovas siūlo lygiąsias</string>
   <string name="accept">Sutikti</string>
   <string name="decline">Atmesti</string>
+  <string name="startingIn" comment="Displayed above a timer">Prasideda po</string>
+  <string name="startingSoon">Greitai prasidės</string>
   <string name="playingRightNow">Vyksta šiuo metu</string>
   <string name="eventInProgress">Vyksta šiuo metu</string>
   <string name="finished">Baigėsi</string>
@@ -345,6 +348,7 @@
   <string name="xCreatedTeamY">%1$s sukūrė „%2$s“ komandą</string>
   <string name="xStartedStreaming">%s pradėjo transliaciją</string>
   <string name="averageElo">Reitingo vidurkis</string>
+  <string name="teamPage">Komandos puslapis</string>
   <string name="location">Vietovė</string>
   <string name="filterGames">Filtruoti partijas</string>
   <string name="reset">Atstatyti</string>
@@ -422,6 +426,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="recommendNotTouching">Rekomenduojame šitų neliesti.</string>
   <string name="fewerPlayers">Jeigu pridėsite dalyvavimo sąlygų, jūsų turnyre bus mažiau žaidėjų.</string>
   <string name="showAdvancedSettings">Rodyti papildomas nuostatas</string>
+  <string name="makePrivateTournament">Padaryti turnyrą privačiu, ir apriboti patekimą su slaptažodžiu</string>
   <string name="join">Prisijungti</string>
   <string name="withdraw">Pasitraukti</string>
   <string name="points">Taškai</string>
@@ -454,6 +459,9 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="savePosition">Išsaugoti poziciją</string>
   <string name="loadPosition">Įkelti poziciją</string>
   <string name="isPrivate">Privatus</string>
+  <string name="tournDescription">Turnyro aprašymas</string>
+  <string name="tournDescriptionHelp">Yra kažkas, ką turi žinoti dalyviai? Stenkitės perteikti trumpai. Galimos Markdown nuorodos: [pavadinimas](https://url)</string>
+  <string name="cancelTournament">Atšaukti turnyrą</string>
   <string name="reportXToModerators">Pranešti apie %s moderatoriams</string>
   <string name="profileCompletion">Profilio užbaigimas: %s</string>
   <string name="xRating">%s reitingas</string>
@@ -465,6 +473,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="lastName">Pavardė</string>
   <string name="biography">Aprašymas</string>
   <string name="country">Šalis</string>
+  <string name="socialMediaLinks">Socialinių tinklų nuorodos</string>
   <string name="inlineNotation">Įterptas žymėjimas</string>
   <string name="watchLidraughtsTV">Žiūrėti „lidraughts TV“</string>
   <string name="previouslyOnLidraughtsTV">Anksčiau per „lidraughts TV“</string>
@@ -557,6 +566,13 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="newPasswordsDontMatch">Nesutampa nauji slaptažodžiai</string>
   <string name="clockInitialTime">Laikrodžio pradinis laikas</string>
   <string name="clockIncrement">Laikrodžio prieaugis</string>
+  <string name="onlyMembersOfTeam">Tik komandos nariai</string>
+  <string name="noRestriction">Jokių apribojimų</string>
+  <string name="minimumRatedGames">Mažiausiai įvertintos partijos</string>
+  <string name="minimumRating">Minimalus reitingas</string>
+  <string name="maximumWeeklyRating">Maksimalus savaitinis reitingas</string>
+  <string name="onlyTitled">Tik tituluoti žaidėjai</string>
+  <string name="onlyTitledHelp">Jungiantis prie turnyro reikalauti oficialaus titulo</string>
   <string name="privacy">Privatumas</string>
   <string name="letOtherPlayersFollowYou">Leisti kitiems žaidėjams jus sekti</string>
   <string name="letOtherPlayersChallengeYou">Leisti kitiems žaidėjams pakviesti jus partijai</string>
@@ -582,6 +598,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="defeatVsYInZ">%1$s prieš %2$s žaidžiant %3$s</string>
   <string name="drawVsYInZ">%1$s su %2$s žaidžiant %3$s</string>
   <string name="timeline" comment="The timeline is a list of activities by users.">Veikla</string>
+  <string name="start">Pradėti</string>
   <string name="starting">Prasideda:</string>
   <string name="allInformationIsPublicAndOptional">Visa informacija yra vieša ir neprivaloma.</string>
   <string name="yourCityRegionOrDepartment">Jūsų miestas, regionas ar provincija.</string>
@@ -623,8 +640,8 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="shareGameURL">Dalintis partijos adresu</string>
   <string name="error.required">Šį laukelį būtina užpildyti</string>
   <string name="error.email">Neteisingas el.pašto adresas</string>
-  <string name="error.email_acceptable">Nepriimtinas el.pašto adresas</string>
-  <string name="error.email_unique">Šis el.pašto adresas yra užimtas</string>
+  <string name="error.email_acceptable">Nepriimtinas el. pašto adresas. Patikrinkite ir bandykite dar kartą.</string>
+  <string name="error.email_unique">El. pašto adresas neteisingas arba jau užimtas</string>
   <string name="error.email_different">Tai yra dabartinis jūsų el. pašto adresas</string>
   <string name="ifRatingIsPlusMinusX">Jei reitingas yra ± %s</string>
   <string name="onlyFriends">Tik draugai</string>
@@ -650,14 +667,16 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="contact">Susisiekite</string>
   <string name="termsOfService">Naudojimosi sąlygos</string>
   <string name="sourceCode">Pirminis kodas</string>
-  <string name="simultaneousExhibitions">Simulai</string>
+  <string name="simultaneousExhibitions">Simultanai</string>
+  <string name="simulDescription">Simultano aprašymas</string>
+  <string name="simulDescriptionHelp">Ar norite ką nors pranešti dalyviams?</string>
   <string name="host">Šeimininkas</string>
   <string name="hostColorX">Šeimininko spalva: %s</string>
-  <string name="createdSimuls">Naujai sukurti simulai</string>
-  <string name="hostANewSimul">Kurti nauji simulą</string>
-  <string name="noSimulFound">Simulas nerastas</string>
-  <string name="noSimulExplanation">Šis simulas neegzistuoja.</string>
-  <string name="returnToSimulHomepage">Grįžti į simulų pradžią</string>
+  <string name="createdSimuls">Naujai sukurti simultanai</string>
+  <string name="hostANewSimul">Kurti nauji simultaną</string>
+  <string name="noSimulFound">Simultanas nerastas</string>
+  <string name="noSimulExplanation">Šis simultanas neegzistuoja.</string>
+  <string name="returnToSimulHomepage">Grįžti į simultanų pradžią</string>
   <string name="aboutSimul">Simultanai yra vieno žaidėjo partijos prieš keletą kitų žaidėjų vienu metu.</string>
   <string name="aboutSimulRealLife">Idėja yra paimta iš tikro pasaulio įvykių. Tikrame gyvenime, simultano šeiminkas vaikščioja nuo stalo prie stalo atlikdamas po vieną ėjimą.</string>
   <string name="aboutSimulRules">Prasidėjus simultanui, kiekvienas žaidėjas pradeda partiją su šeimininku. Simultanas baigiasi kai užbaigiamos visos partijos.</string>
@@ -666,8 +685,9 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="whenCreateSimul">Sukūrę simultaną, turite galimybę žaisti su keletu žaidėjų vienu metu.</string>
   <string name="simulVariantsHint">Jei pasirinksite keletą variantų, kiekvienas žaidėjas galės nuspręsti kurį norės žaisti.</string>
   <string name="simulClockHint">Fišerio laikrodžio nustatymas. Prieš kuo daugiau žaidėjų rungsitės, tuo daugiau laiko jums gali prireikti.</string>
-  <string name="simulAddExtraTime">Galite pridėti papildomo laiko savo laikrodžiui, kad būtų lengviau žaisti simultane.</string>
+  <string name="simulAddExtraTime">Pridėti pradinio laiko prie jūsų laikrodžio už kiekvieną prie simultano prisijungiantį žaidėją.</string>
   <string name="simulHostExtraTime">Papildomas laikas šeimininkui</string>
+  <string name="everyone">Visiems</string>
   <string name="lidraughtsTournaments">„Lidraughts“ turnyrai</string>
   <string name="tournamentFAQ">Arenos turnyrų DUK</string>
   <string name="tournamentOfficial">Oficialūs</string>
@@ -768,11 +788,11 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="coaches">Treneriai</string>
   <string name="invalidPdn">Netinkamas PDN</string>
   <string name="invalidFen">Netinkamas FEN</string>
-  <string name="error.minLength">Mažiausias ilgis yra %s</string>
-  <string name="error.maxLength">Didžiausias ilgis yra %s</string>
+  <string name="error.minLength">Minimalus ilgis yra %s</string>
+  <string name="error.maxLength">Maksimalus ilgis yra %s</string>
   <string name="error.min">Turi būti didesnis arba lygus %s</string>
   <string name="error.max">Turi būti mažesnis arba lygus %s</string>
-  <string name="error.unknown">Klaida</string>
+  <string name="error.unknown">Netinkama reikšmė</string>
   <string name="custom">Kitoks</string>
   <string name="notifications">Pranešimai</string>
   <string name="perfRatingX">Reitingas: %s</string>
@@ -799,6 +819,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="learnFromThisMistake">Pasimokykite iš šios klaidos</string>
   <string name="skipThisMove">Praleisti šį ėjimą</string>
   <string name="next">Toliau</string>
+  <string name="back">Atgal</string>
   <string name="xWasPlayed">Buvo sužaistas %s</string>
   <string name="findBetterMoveForWhite">Suraskite geresnį ėjimą baltiesiems</string>
   <string name="findBetterMoveForBlack">Suraskite geresnį ėjimą juodiesiems</string>
@@ -815,12 +836,21 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="doItAgain">Atlikti dar kartą</string>
   <string name="reviewWhiteMistakes">Peržiūrėti baltųjų klaidas</string>
   <string name="reviewBlackMistakes">Peržiūrėti juodųjų klaidas</string>
+  <string name="whatWouldYouPlay">Ar norėtumėte žaisti nuo šios pozicijos?</string>
+  <string name="nextChapter">Kitas skyrius</string>
+  <string name="playAgain">Žaisti dar</string>
   <string name="advantage">Pranašumas</string>
   <plurals name="nbSeconds">
     <item quantity="one">%s sekundė</item>
     <item quantity="few">%s sekundės</item>
     <item quantity="many">%s sekundžių</item>
     <item quantity="other">%s sekundžių</item>
+  </plurals>
+  <plurals name="nbMinutes">
+    <item quantity="one">%s minutė</item>
+    <item quantity="few">%s minutės</item>
+    <item quantity="many">%s minutės</item>
+    <item quantity="other">%s minučių</item>
   </plurals>
   <string name="opening">Debiutas</string>
   <string name="middlegame">Mitelšpilis</string>

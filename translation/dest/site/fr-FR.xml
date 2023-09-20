@@ -236,8 +236,8 @@
   <string name="yourOpponentOffersADraw">Votre adversaire propose la nulle</string>
   <string name="accept">Accepter</string>
   <string name="decline">Refuser</string>
-  <string name="startingIn">Commence dans</string>
-  <string name="startingSoon"> - Démarrage imminent - </string>
+  <string name="startingIn" comment="Displayed above a timer">Commence dans</string>
+  <string name="startingSoon">Démarrage imminent</string>
   <string name="playingRightNow">Parties en cours</string>
   <string name="eventInProgress">En train de jouer</string>
   <string name="finished">Terminé</string>
@@ -486,7 +486,7 @@ consulter l\'analyse de l\'ordinateur, utiliser le tchat et partager le lien.</s
   <string name="isPrivate">Privé</string>
   <string name="editTournament">Modifier le tournoi</string>
   <string name="tournDescription">Description du tournoi</string>
-  <string name="tournDescriptionHelp">Avez-vous quelque chose de spécial à dire aux participants ? Essayez d\'être bref. Les liens Markdown sont disponibles : [text](https://url)[</string>
+  <string name="tournDescriptionHelp">Avez-vous quelque chose de spécial à dire aux participants ? Essayez d\'être bref. Les liens Markdown sont disponibles : [name](https://url)[</string>
   <string name="cancelTournament">Annuler le tournoi</string>
   <string name="reportXToModerators">Signaler %s aux modérateurs</string>
   <string name="profileCompletion">Profil rempli à %s</string>
@@ -563,6 +563,7 @@ Une URL par ligne</string>
   <string name="sequentialSwitch">Ordre déterminé</string>
   <string name="puzzles">Problèmes</string>
   <string name="variantPuzzles">%s problèmes</string>
+  <string name="variantPractice">%s S\'entraîner</string>
   <string name="latestUpdates">Dernières mises à jour</string>
   <string name="tournamentWinners">Vainqueurs du tournois</string>
   <string name="name">Nom</string>
@@ -609,6 +610,11 @@ Une URL par ligne</string>
   <string name="clockIncrement">Incrémentation de la pendule</string>
   <string name="onlyMembersOfTeam">Seulement les membres de l\'équipe</string>
   <string name="noRestriction">Aucune restriction</string>
+  <string name="minimumRatedGames">Nombre minimum de parties classées</string>
+  <string name="minimumRating">Classement minimal</string>
+  <string name="maximumWeeklyRating">Classement hebdomadaire maximal</string>
+  <string name="onlyTitled">Joueurs titrés seulement</string>
+  <string name="onlyTitledHelp">Titre officiel requis pour participer à un tournoi</string>
   <string name="privacy">Confidentialité</string>
   <string name="letOtherPlayersFollowYou">Autoriser les autres joueurs à vous suivre</string>
   <string name="letOtherPlayersChallengeYou">Autoriser les autres joueurs à vous défier</string>
@@ -669,12 +675,13 @@ Une URL par ligne</string>
   <string name="tools">Outils</string>
   <string name="increment">Incrément</string>
   <string name="sharePDN">Partager le PDN</string>
+  <string name="shareFEN">Partager le FEN</string>
   <string name="allowAnalytics">Autoriser l\'envoi de statistiques anonymes</string>
   <string name="shareGameURL">Partager l\'URL de la partie</string>
   <string name="error.required">Ce champ est requis</string>
   <string name="error.email">Ce courriel n\'est pas valide</string>
-  <string name="error.email_acceptable">Ce courriel n\'est pas acceptable</string>
-  <string name="error.email_unique">Ce courriel est déjà utilisé</string>
+  <string name="error.email_acceptable">Cette adresse courriel est refusée. Double-cliquez dessus et réessayez.</string>
+  <string name="error.email_unique">Adresse courriel invalide ou déjà utilisée</string>
   <string name="error.email_different">C’est déjà votre courriel</string>
   <string name="ifRatingIsPlusMinusX">Si son rang est ± %s</string>
   <string name="onlyFriends">Seulement les amis</string>
@@ -804,6 +811,7 @@ Une URL par ligne</string>
   <string name="withEverybody">Avec tout le monde</string>
   <string name="youHaveAlreadyRegisteredTheEmail">Ce courriel est déjà associé à un compte existant : %s</string>
   <string name="kidMode">Mode enfant</string>
+  <string name="kidModeIsEnabled">Mode enfant est activé.</string>
   <string name="kidModeExplanation">Cela concerne la sécurité. Dans le mode enfants, toutes les communications du site sont désactivées. Activez ce mode pour vos enfants et pour les étudiants, afin de les protéger des autres utilisateurs.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">Dans le mode enfants, l\'icône %s se rajoute au logo Lidraughts pour que vous sachiez que les enfants sont en sécurité.</string>
   <string name="enableKidMode">Activer le mode enfant</string>
@@ -863,11 +871,11 @@ Une URL par ligne</string>
   <string name="invalidFen">FEN non valide</string>
   <string name="invalidPosition">Position invalide</string>
   <string name="tooManyKings">Vous ne pouvez pas jouer contre Scan avec plus de 30 dames sur le damier.</string>
-  <string name="error.minLength">Vous devez écrire au moins %s caractères</string>
-  <string name="error.maxLength">Vous pouvez écrire un maximum de %s caractères</string>
-  <string name="error.min">Doit être supérieur ou égal à %s</string>
-  <string name="error.max">Doit être inférieur ou égal à %s</string>
-  <string name="error.unknown">Erreur</string>
+  <string name="error.minLength">La longueur minimale est %s</string>
+  <string name="error.maxLength">La longueur maximale est %s</string>
+  <string name="error.min">Doit être supérieur(e) ou égal(e) à %s</string>
+  <string name="error.max">Doit être inférieur(e) ou égal(e) à %s</string>
+  <string name="error.unknown">Valeur invalide</string>
   <string name="error.pattern">Contient des caractères invalides</string>
   <string name="error.eventName">Contient des caractères invalides. Seuls les lettres, les chiffres et les signes de ponctuation courants sont acceptés.</string>
   <string name="mustNotContainLidraughts">Ne doit pas contenir «lidraughts»</string>
@@ -973,4 +981,15 @@ Une URL par ligne</string>
   <string name="thankYouForReading">Merci d\'avoir pris le temps de lire !</string>
   <string name="lifetimeScore">Meilleur résultat</string>
   <string name="currentMatchScore">Score actuel de la partie</string>
+  <string name="welcomeToLidraughts">Bienvenue sur lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">Voici votre profil.</string>
+  <string name="wouldYouLikeToX">Voulez-vous %s?</string>
+  <string name="enabledKidModeSuggestion">Est-ce qu\'un enfant va utiliser ce compte? Vous voudriez peut-être activer %s.</string>
+  <string name="improveWithDraughtsTacticsPuzzles">S\'entraîner avec des problèmes tactiques de dames</string>
+  <string name="playTheAI">Jouer contre l\'intelligence artificielle</string>
+  <string name="playOpponentsWorldwide">Jouer contre des adversaires du monde entier</string>
+  <string name="followFriends">Suivez vos amis sur lidraughts</string>
+  <string name="playInTournaments">Participez à des tournois</string>
+  <string name="configureLidraughts">Configurez lidraughts selon votre goût</string>
+  <string name="exploreTheSiteAndHaveFun">Explorez le site et amusez-vous :)</string>
 </resources>

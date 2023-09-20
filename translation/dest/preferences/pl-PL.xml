@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Ustawienia</string>
-  <string name="gameDisplay">Widok partii</string>
+  <string name="display">Wyświetlanie</string>
   <string name="pieceAnimation">Animacja ruchu figur</string>
   <string name="materialDifference">Pokaż przewagę materialną</string>
   <string name="showKingMoves">Pokaż ile razy wykonano ruch damką (warcaby fryzyjskie)</string>

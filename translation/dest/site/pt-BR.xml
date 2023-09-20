@@ -236,8 +236,8 @@
   <string name="yourOpponentOffersADraw">Seu adversário propõe empate</string>
   <string name="accept">Aceitar</string>
   <string name="decline">Recusar</string>
-  <string name="startingIn">Começando</string>
-  <string name="startingSoon"> - Começando em breve - </string>
+  <string name="startingIn" comment="Displayed above a timer">Começando</string>
+  <string name="startingSoon">Começando em breve</string>
   <string name="playingRightNow">Jogando agora</string>
   <string name="eventInProgress">Jogando agora</string>
   <string name="finished">Terminado</string>
@@ -486,7 +486,7 @@ consultar uma análise de computador, utilizar o chat e compartilhar um link.</s
   <string name="isPrivate">Privado</string>
   <string name="editTournament">Editar o torneio</string>
   <string name="tournDescription">Descrição do torneio</string>
-  <string name="tournDescriptionHelp">Algo especial que você deseja dizer aos participantes? Tente ser breve. Os links em Markdown estão disponíveis: [text](https://url)</string>
+  <string name="tournDescriptionHelp">Algo especial que você deseja dizer aos participantes? Tente ser breve. Os links em Markdown estão disponíveis: [name](https://url)</string>
   <string name="cancelTournament">Cancelar o torneio</string>
   <string name="reportXToModerators">Reportar %s aos moderadores</string>
   <string name="profileCompletion">Conclusão do perfil: %s</string>
@@ -609,6 +609,11 @@ Uma URL por linha</string>
   <string name="clockIncrement">Incremento do relógio</string>
   <string name="onlyMembersOfTeam">Somente membros de equipe</string>
   <string name="noRestriction">Sem restrições</string>
+  <string name="minimumRatedGames">Mínimo de partidas ranqueadas</string>
+  <string name="minimumRating">Classificação mínima</string>
+  <string name="maximumWeeklyRating">Classificação máxima da semana</string>
+  <string name="onlyTitled">Apenas jogadores titulados</string>
+  <string name="onlyTitledHelp">Exigir um título oficial para entrar no torneio</string>
   <string name="privacy">Privacidade</string>
   <string name="letOtherPlayersFollowYou">Permitir que outros jogadores sigam você</string>
   <string name="letOtherPlayersChallengeYou">Permitir que outros jogadores desafiem você</string>
@@ -674,8 +679,8 @@ Uma URL por linha</string>
   <string name="shareGameURL">Compartilhar URL do Jogo</string>
   <string name="error.required">Este campo deve ser preenchido</string>
   <string name="error.email">Este endereço de email é inválido</string>
-  <string name="error.email_acceptable">Este endereço de email não é aceitável</string>
-  <string name="error.email_unique">Este endereço de email já existe</string>
+  <string name="error.email_acceptable">Este endereço de e-mail não é válido. Verifique e tente novamente.</string>
+  <string name="error.email_unique">Endereço de e-mail é inválido ou já está sendo utilizado</string>
   <string name="error.email_different">Este já é o seu endereço de e-mail</string>
   <string name="ifRatingIsPlusMinusX">Se a classificação for ± %s</string>
   <string name="onlyFriends">Apenas amigos</string>
@@ -868,7 +873,7 @@ Uma URL por linha</string>
   <string name="error.maxLength">O máximo de caracteres é %s</string>
   <string name="error.min">Deve ser maior ou igual a %s</string>
   <string name="error.max">Deve ser menor ou igual a %s</string>
-  <string name="error.unknown">Erro</string>
+  <string name="error.unknown">Valor inválido</string>
   <string name="error.pattern">Contém caracteres inválidos</string>
   <string name="error.eventName">Contém caracteres inválidos. Apenas letras, números e sinais de pontuação comuns são aceitos.</string>
   <string name="mustNotContainLidraughts">Não pode conter \"lidraughts\"</string>

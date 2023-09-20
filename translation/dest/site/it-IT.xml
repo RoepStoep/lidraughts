@@ -18,6 +18,7 @@
   <string name="createAGame">Crea una partita</string>
   <string name="whiteIsVictorious">Vince il Bianco</string>
   <string name="blackIsVictorious">Vince il Nero</string>
+  <string name="promotion">Promozione</string>
   <string name="variantEnding">Fine variante</string>
   <string name="important">Importante</string>
   <string name="yourQuestionMayHaveBeenAnswered">La tua domanda potrebbe già avere una risposta %1$s</string>
@@ -83,6 +84,7 @@
   <string name="openingExplorer">Esplora aperture</string>
   <string name="xOpeningExplorer">%s explorer delle aperture</string>
   <string name="allSet">Tutto pronto!</string>
+  <string name="importPdn">Importa PDN</string>
   <string name="delete">Elimina</string>
   <string name="deleteThisImportedGame">Vuoi eliminare questa partita importata?</string>
   <string name="replayMode">Modalità replay</string>
@@ -190,9 +192,12 @@
   <string name="yourOpponentOffersADraw">Il tuo avversario offre patta</string>
   <string name="accept">Accetta</string>
   <string name="decline">Rifiuta</string>
+  <string name="startingIn" comment="Displayed above a timer">Inizia tra</string>
+  <string name="startingSoon">Inizia a breve</string>
   <string name="playingRightNow">Partita in corso</string>
   <string name="eventInProgress">In corso in questo momento</string>
   <string name="finished">Terminati</string>
+  <string name="finishesX">finisce %s</string>
   <string name="abortGame">Interrompi la partita</string>
   <string name="gameAborted">Partita interrotta</string>
   <string name="unlimited">Illimitato</string>
@@ -289,17 +294,21 @@
   <string name="yourPerfRatingIsTooLow">Il tuo punteggio %1$s (%2$s) è troppo basso</string>
   <string name="ratedMoreThanInPerf">Punteggio ≥ %1$s in %2$s</string>
   <string name="ratedLessThanInPerf">Punteggio ≤ %1$s in %2$s</string>
+  <string name="mustBeInTeam">È necessario essere membri del gruppo %s</string>
+  <string name="youAreNotInTeam">Non sei nel team %s</string>
   <string name="backToGame">Torna alla partita</string>
   <string name="xJoinedTeamY">%1$s si è unito al gruppo %2$s</string>
   <string name="xCreatedTeamY">%1$s ha creato il gruppo %2$s</string>
   <string name="xStartedStreaming">%s ha avviato lo streaming</string>
   <string name="averageElo">Punteggio medio</string>
+  <string name="teamPage">Pagina della squadra</string>
   <string name="location">Luogo</string>
   <string name="filterGames">Filtra partite</string>
   <string name="reset">Azzera</string>
   <string name="apply">Applica</string>
   <string name="leaderboard">Classifica</string>
   <string name="pasteTheFenStringHere">Incolla qui la stringa FEN</string>
+  <string name="pasteThePdnStringHere">Incolla qui il testo PDN</string>
   <string name="fromPosition">Da una posizione</string>
   <string name="continueFromHere">Continua da qui</string>
   <string name="toStudy">Studia</string>
@@ -385,10 +394,14 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="membersOnly">Solo per iscritti</string>
   <string name="popularOpenings">Aperture popolari</string>
   <string name="startPosition">Posizione iniziale</string>
+  <string name="edit">Modifica</string>
   <string name="save">Salva</string>
   <string name="savePosition">Salva la posizione</string>
   <string name="loadPosition">Carica una posizione</string>
   <string name="isPrivate">Privato</string>
+  <string name="tournDescription">Descrizione del torneo</string>
+  <string name="tournDescriptionHelp">Qualcosa di speciale che vuoi dire ai partecipanti? Prova a mantenerla breve. I link di markdown sono disponibili: [name](https://url)</string>
+  <string name="cancelTournament">Annulla il torneo</string>
   <string name="reportXToModerators">Segnala %s ai moderatori</string>
   <string name="profileCompletion">Completamento del profilo: %s</string>
   <string name="xRating">%s punteggio</string>
@@ -428,6 +441,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="pleaseVotePuzzle">Aiuta Lidraughts a migliorare, utilizza la freccia su o giù per dare un giudizio:</string>
   <string name="thankYou">Grazie!</string>
   <string name="ratingX">Punteggio: %s</string>
+  <string name="hidden">nascosto</string>
   <plurals name="playedXTimes">
     <item quantity="one">Giocato %s volta</item>
     <item quantity="other">Giocato %s volte</item>
@@ -469,6 +483,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="troll">Provocazioni</string>
   <string name="other">Altro</string>
   <string name="reportDescriptionHelp">Incolla il link della partita/e e spiega cosa non va con questo giocatore. Non dire soltanto \"ha imbrogliato\", ma specifica come sei arrivato a questa conclusione. Il tuo report verrà processato più velocemente se scritto in lingua inglese.</string>
+  <string name="error.provideOneCheatedGameLink">Si prega di fornire almeno un collegamento link di una partita in cui il giocatore ha imbrogliato.</string>
   <string name="by">da %s</string>
   <string name="thisTopicIsNowClosed">Questa discussione è chiusa.</string>
   <string name="theming">Temi</string>
@@ -485,6 +500,13 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="newPasswordsDontMatch">Le nuove password non coincidono</string>
   <string name="clockInitialTime">Tempo iniziale</string>
   <string name="clockIncrement">Incremento orologio</string>
+  <string name="onlyMembersOfTeam">Solo i membri della squadra</string>
+  <string name="noRestriction">Nessuna restrizione</string>
+  <string name="minimumRatedGames">Giochi votati al minimo</string>
+  <string name="minimumRating">Valutazione minima</string>
+  <string name="maximumWeeklyRating">Valutazione settimanale massima</string>
+  <string name="onlyTitled">Solo giocatori intitolati</string>
+  <string name="onlyTitledHelp">Richiedi un titolo ufficiale per partecipare al torneo</string>
   <string name="letOtherPlayersFollowYou">Permetti ad altri giocatori di seguirti</string>
   <string name="letOtherPlayersChallengeYou">Permetti ad altri giocatori di sfidarti</string>
   <string name="letOtherPlayersInviteYouToStudy">Permetti ad altri giocatori di invitarti allo studio</string>
@@ -544,8 +566,8 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="shareGameURL">Condividi URL della partita</string>
   <string name="error.required">Questo campo è obbligatorio</string>
   <string name="error.email">Questa indirizzo email non è valido</string>
-  <string name="error.email_acceptable">Impossibile accettare questo indirizzo email</string>
-  <string name="error.email_unique">Questo indirizzo email è già utilizzato</string>
+  <string name="error.email_acceptable">Questo indirizzo email non è valido. Per favore ricontrollalo e riprova.</string>
+  <string name="error.email_unique">Indirizzo email non valido o già in uso</string>
   <string name="error.email_different">Questo è già il tuo indirizzo mail</string>
   <string name="ifRatingIsPlusMinusX">Se il punteggio è ± %s</string>
   <string name="onlyFriends">Solo amici</string>
@@ -559,12 +581,18 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="tpTimeSpentOnTV">Tempo in TV: %s</string>
   <string name="watch">Guarda</string>
   <string name="videoLibrary">Libreria video</string>
+  <string name="streamersMenu">Streamer</string>
+  <string name="mobileApp">App mobile</string>
   <string name="about">Info su</string>
+  <string name="aboutX">Informazioni su %s</string>
+  <string name="really">completamente</string>
   <string name="contribute">Contribuisci</string>
   <string name="contact">Contattaci</string>
   <string name="termsOfService">Termini di Servizio</string>
   <string name="sourceCode">Codice Sorgente</string>
   <string name="simultaneousExhibitions">Esibizioni simultanee</string>
+  <string name="simulDescription">Descrizione della simulazione</string>
+  <string name="simulDescriptionHelp">Vuoi dire qualcosa ai partecipanti?</string>
   <string name="host">Simultaneista</string>
   <string name="hostColorX">Colore del simultaneista: %s</string>
   <string name="createdSimuls">Simultanee recenti</string>
@@ -607,6 +635,9 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="yourPerfTypeRatingIsRating">Il tuo punteggio %1$s è %2$s.</string>
   <string name="youAreBetterThanPercentOfPerfTypePlayers">Giochi meglio del %1$s di giocatori %2$s.</string>
   <string name="youDoNotHaveAnEstablishedPerfTypeRating">Non disponi di un rating %s consolidato.</string>
+  <string name="yourRating">Il tuo punteggio</string>
+  <string name="cumulative">Percentile</string>
+  <string name="glicko2Rating">Punteggio Glicko-2</string>
   <string name="checkYourEmail">Controlla la tua e-mail</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Ti abbiamo inviato un\'email. Clicca sul link nella mail per attivare il tuo account.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Se non vedi l\'e-mail, controlla la cartella spam o altre cartelle.</string>
@@ -670,12 +701,13 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="usernameUnacceptable">Questo nome utente non è permesso.</string>
   <string name="directlySupportLidraughts">Supporta direttamente Lidraughts</string>
   <string name="coaches">Allenatori</string>
+  <string name="invalidPdn">PDN non valido</string>
   <string name="invalidFen">FEN non valido</string>
-  <string name="error.minLength">La lunghezza minima è %s</string>
-  <string name="error.maxLength">La lunghezza massima è %s</string>
-  <string name="error.min">Deve essere più grande o uguale a %s</string>
-  <string name="error.max">Deve essere minore o uguale a %s</string>
-  <string name="error.unknown">Errore</string>
+  <string name="error.minLength">Deve contenere almeno %s caratteri</string>
+  <string name="error.maxLength">Deve contenere al massimo %s caratteri</string>
+  <string name="error.min">Deve essere almeno %s</string>
+  <string name="error.max">Deve essere al massimo %s</string>
+  <string name="error.unknown">Valore non valido</string>
   <string name="custom">Altro/Personalizza</string>
   <string name="notifications">Notifiche</string>
   <string name="perfRatingX">Punteggio: %s</string>
@@ -700,6 +732,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="learnFromThisMistake">Impara da questo errore</string>
   <string name="skipThisMove">Salta questa mossa</string>
   <string name="next">Successivo</string>
+  <string name="back">Indietro</string>
   <string name="xWasPlayed">Ultima mossa %s</string>
   <string name="findBetterMoveForWhite">Trova una mossa migliore per il Bianco</string>
   <string name="findBetterMoveForBlack">Trova una mossa migliore per il Nero</string>
@@ -716,10 +749,17 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="doItAgain">Rifallo</string>
   <string name="reviewWhiteMistakes">Revisiona gli errori del Bianco</string>
   <string name="reviewBlackMistakes">Revisiona gli errori del Nero</string>
+  <string name="whatWouldYouPlay">Cosa giocheresti in questa posizione?</string>
+  <string name="nextChapter">Prossimo capitolo</string>
+  <string name="playAgain">Gioca di nuovo</string>
   <string name="advantage">Vantaggio</string>
   <plurals name="nbSeconds">
     <item quantity="one">%s secondo</item>
     <item quantity="other">%s secondi</item>
+  </plurals>
+  <plurals name="nbMinutes">
+    <item quantity="one">%s minuto</item>
+    <item quantity="other">%s minuti</item>
   </plurals>
   <string name="opening">Apertura</string>
   <string name="middlegame">Mediogioco</string>
@@ -733,4 +773,19 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
     <item quantity="one">e salva %s linea pre-mossa</item>
     <item quantity="other">e salva %s linee pre-mossa</item>
   </plurals>
+  <string name="sorry">Ci dispiace :(</string>
+  <string name="weHadToTimeYouOutForAWhile">Abbiamo dovuto bloccarti per un po\' di tempo.</string>
+  <string name="timeoutExpires">Sarai sbloccato %s.</string>
+  <string name="why">Perché?</string>
+  <string name="goodPractice">A tal fine, dobbiamo assicurarci che tutti i giocatori si comportino bene.</string>
+  <string name="potentialProblem">Quando notiamo un potenziale problema, mostriamo questo messaggio.</string>
+  <string name="howToAvoidThis">Come evitare il blocco?</string>
+  <string name="playEveryGame">Gioca ogni partita che inizi.</string>
+  <string name="tryToWin">Impegnati a vincere (o almeno a pareggiare) ogni partita che giochi.</string>
+  <string name="resignLostGames">Abbandona le partite perse (non far scorrere il tempo a vuoto).</string>
+  <string name="temporaryInconvenience">Ci scusiamo per l\'inconveniente temporaneo,</string>
+  <string name="wishYouGreatGames">e ti auguriamo partite memorabili su lidraughts.org.</string>
+  <string name="thankYouForReading">Grazie per l\'attenzione!</string>
+  <string name="lifetimeScore">Scontri diretti</string>
+  <string name="currentMatchScore">Punteggio della partita attuale</string>
 </resources>

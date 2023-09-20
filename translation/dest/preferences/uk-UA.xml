@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Налаштування</string>
+  <string name="display">Відображення</string>
   <string name="pieceAnimation">Анімація ходів</string>
   <string name="materialDifference">Співвідношення матеріалу</string>
   <string name="boardHighlights">Підсвітлення кольором (останнього ходу)</string>

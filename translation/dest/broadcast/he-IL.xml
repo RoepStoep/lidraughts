@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="broadcasts">הקרנות</string>
+  <string name="liveBroadcasts">צפייה ישירה בטורנירים</string>
+  <string name="newBroadcast">הקרנה ישירה חדשה</string>
+  <string name="ongoing">כרגע</string>
+  <string name="upcoming">בקרוב</string>
+  <string name="completed">שהושלמו</string>
+  <string name="sourceUrlOrGameIds">קישור למקור (URL) או מזהה המשחקים (IDs)</string>
+  <string name="sourceUrlHelp">הקישור ש־Lidraughts יבדוק כדי לקלוט עדכונים ב-PDN. הוא חייב להיות פומבי ונגיש דרך האינטרנט.</string>
+  <string name="roundNumber">מספר סבב</string>
+  <string name="startDate">תאריך ההתחלה באזור הזמן שלך</string>
+  <string name="startDateHelp">אופציונאלי, אם את/ה יודע/ת מתי האירוע צפוי להתחיל</string>
+  <string name="credits">תן/י קרדיט למקור</string>
+</resources>

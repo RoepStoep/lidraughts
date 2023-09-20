@@ -90,7 +90,7 @@
   <string name="averageRatingX">Average rating: %s</string>
   <string name="recentGames">Recent games</string>
   <string name="topGames">Top games</string>
-  <string name="masterDbExplanation">Real life games of %1$s+ master players rated from %2$s to %3$s</string>
+  <string name="masterDbExplanation">OTB games of %1$s+ master players rated from %2$s to %3$s</string>
   <plurals name="winInXHalfMoves">
     <item quantity="one">Win in %s half-move</item>
     <item quantity="other">Win in %s half-moves</item>
@@ -236,8 +236,8 @@
   <string name="yourOpponentOffersADraw">Your opponent offers a draw</string>
   <string name="accept">Accept</string>
   <string name="decline">Decline</string>
-  <string name="startingIn">Starting in</string>
-  <string name="startingSoon"> - Starting soon - </string>
+  <string name="startingIn" comment="Displayed above a timer">Starting in</string>
+  <string name="startingSoon">Starting soon</string>
   <string name="playingRightNow">Playing right now</string>
   <string name="eventInProgress">Playing right now</string>
   <string name="finished">Finished</string>
@@ -486,7 +486,7 @@ computer analysis, game chat and shareable URL.</string>
   <string name="isPrivate">Private</string>
   <string name="editTournament">Edit tournament</string>
   <string name="tournDescription">Tournament description</string>
-  <string name="tournDescriptionHelp">Anything special you want to tell the participants? Try to keep it short. Markdown links are available: [text](https://url)</string>
+  <string name="tournDescriptionHelp">Anything special you want to tell the participants? Try to keep it short. Markdown links are available: [name](https://url)</string>
   <string name="cancelTournament">Cancel the tournament</string>
   <string name="reportXToModerators">Report %s to moderators</string>
   <string name="profileCompletion">Profile completion: %s</string>
@@ -680,8 +680,8 @@ One URL per line</string>
   <string name="shareGameURL">Share game URL</string>
   <string name="error.required">This field is required</string>
   <string name="error.email">This email address is invalid</string>
-  <string name="error.email_acceptable">This email address is not acceptable</string>
-  <string name="error.email_unique">This email address is already taken</string>
+  <string name="error.email_acceptable">This email address is not acceptable. Please double-check it, and try again.</string>
+  <string name="error.email_unique">Email address invalid or already taken</string>
   <string name="error.email_different">This is already your email address</string>
   <string name="ifRatingIsPlusMinusX">If rating is ± %s</string>
   <string name="onlyFriends">Only friends</string>
@@ -871,11 +871,11 @@ One URL per line</string>
   <string name="invalidFen">Invalid FEN</string>
   <string name="invalidPosition">Invalid position</string>
   <string name="tooManyKings">You can't play against Scan with more than 30 kings on the board.</string>
-  <string name="error.minLength">Minimum length is %s</string>
-  <string name="error.maxLength">Maximum length is %s</string>
-  <string name="error.min">Must be greater or equal to %s</string>
-  <string name="error.max">Must be less or equal to %s</string>
-  <string name="error.unknown">Error</string>
+  <string name="error.minLength">Must be at least %s characters long</string>
+  <string name="error.maxLength">Must be at most %s characters long</string>
+  <string name="error.min">Must be at least %s</string>
+  <string name="error.max">Must be at most %s</string>
+  <string name="error.unknown">Invalid value</string>
   <string name="error.pattern">Contains invalid characters</string>
   <string name="error.eventName">Contains invalid characters. Only letters, numbers, and common punctuation marks are accepted.</string>
   <string name="mustNotContainLidraughts">Must not contain \"lidraughts\"</string>

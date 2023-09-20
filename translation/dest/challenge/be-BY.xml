@@ -18,7 +18,6 @@
   <string name="declineTimeControl">Не прымаю выклікі з гэтым кантролем часу.</string>
   <string name="declineRated">Калі ласка, прышлі рэйтынгавы выклік замест гэтага.</string>
   <string name="declineCasual">Калі ласка, замест дашліце таварыскі выклік.</string>
-  <string name="declineStandard">Не прымаю выклікі ў некласічныя шахматы на дадзены момант.</string>
   <string name="declineVariant">Я ня хочу граць гэты варыянт зараз.</string>
   <string name="declineNoBot">Я не прымаю выклікі ад ботаў.</string>
   <string name="declineOnlyBot">Я прымаю выклікі толькі ад ботаў.</string>

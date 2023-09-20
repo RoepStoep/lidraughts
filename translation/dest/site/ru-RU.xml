@@ -260,8 +260,8 @@
   <string name="yourOpponentOffersADraw">Ваш соперник предлагает вам ничью</string>
   <string name="accept">Принять</string>
   <string name="decline">Отклонить</string>
-  <string name="startingIn">Начинается через</string>
-  <string name="startingSoon"> - Скоро начинается - </string>
+  <string name="startingIn" comment="Displayed above a timer">Начинается через</string>
+  <string name="startingSoon">Скоро начинается</string>
   <string name="playingRightNow">Идёт игра</string>
   <string name="eventInProgress">Идёт прямо сейчас</string>
   <string name="finished">Завершено</string>
@@ -544,7 +544,7 @@
   <string name="isPrivate">Закрытый</string>
   <string name="editTournament">Править турнир</string>
   <string name="tournDescription">Описание турнира</string>
-  <string name="tournDescriptionHelp">Вы хотели бы сказать участникам что-нибудь особенное? Постарайтесь сделать это кратко. Доступны ссылки [text](https://url)</string>
+  <string name="tournDescriptionHelp">Вы хотели бы сказать участникам что-нибудь особенное? Постарайтесь сделать это кратко. Доступны ссылки [name](https://url)</string>
   <string name="cancelTournament">Отменить турнир</string>
   <string name="reportXToModerators">Сообщить о %s модераторам</string>
   <string name="profileCompletion">Профиль заполнен на %s</string>
@@ -672,6 +672,11 @@
   <string name="clockIncrement">Добавка времени</string>
   <string name="onlyMembersOfTeam">Только для участников</string>
   <string name="noRestriction">Нет ограничений</string>
+  <string name="minimumRatedGames">Минимум рейтинговых игр</string>
+  <string name="minimumRating">Минимальный рейтинг</string>
+  <string name="maximumWeeklyRating">Максимальный еженедельный рейтинг</string>
+  <string name="onlyTitled">Только титулованные игроки</string>
+  <string name="onlyTitledHelp">Требует официального звания для участия в турнире</string>
   <string name="privacy">Приватность</string>
   <string name="letOtherPlayersFollowYou">Разрешить другим игрокам подписываться на вас</string>
   <string name="letOtherPlayersChallengeYou">Разрешить другим игрокам вызывать вас на игру</string>
@@ -741,8 +746,8 @@
   <string name="shareGameURL">Поделиться ссылкой на игру</string>
   <string name="error.required">Это обязательное поле</string>
   <string name="error.email">Неверный адрес электронной почты</string>
-  <string name="error.email_acceptable">Неприемлемый адрес электронной почты</string>
-  <string name="error.email_unique">Этот адрес электронной почты уже занят</string>
+  <string name="error.email_acceptable">Этот адрес электронной почты недопустим. Проверьте его и повторите попытку.</string>
+  <string name="error.email_unique">Адрес электронной почты недействителен или уже занят</string>
   <string name="error.email_different">Это уже и так ваш адрес электронной почты</string>
   <string name="ifRatingIsPlusMinusX">Если их рейтинг ± %s</string>
   <string name="onlyFriends">Только друзьям</string>
@@ -942,7 +947,7 @@
   <string name="error.maxLength">Максимальная длина — %s</string>
   <string name="error.min">Значение должно быть больше либо равным %s</string>
   <string name="error.max">Значение должно быть меньше либо равным %s</string>
-  <string name="error.unknown">Ошибка</string>
+  <string name="error.unknown">Неверное значение</string>
   <string name="error.pattern">Содержит недопустимые символы</string>
   <string name="error.eventName">Содержит недопустимые символы. Принимаются только буквы, цифры и основные знаки препинания.</string>
   <string name="mustNotContainLidraughts">Не должно содержать \"lidraughts\"</string>

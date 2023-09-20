@@ -260,8 +260,8 @@
   <string name="yourOpponentOffersADraw">Przeciwnik proponuje remis</string>
   <string name="accept">Akceptuję</string>
   <string name="decline">Odrzuć</string>
-  <string name="startingIn">Zaczynamy za</string>
-  <string name="startingSoon"> - Zaczynamy wkrótce -</string>
+  <string name="startingIn" comment="Displayed above a timer">Zaczynamy za</string>
+  <string name="startingSoon">Zaczynamy wkrótce</string>
   <string name="playingRightNow">W toku</string>
   <string name="eventInProgress">W toku</string>
   <string name="finished">Zakończone</string>
@@ -544,7 +544,7 @@ poproszenia o analizę komputerową, omówienia jej z innymi oraz udostępnienia
   <string name="isPrivate">Prywatny</string>
   <string name="editTournament">Edytuj turniej</string>
   <string name="tournDescription">Opis turnieju</string>
-  <string name="tournDescriptionHelp">Czy chcesz powiedzieć coś szczególnego uczestnikom? Pisz krótko i na temat. Istnieje możliwość dodania odnośników: [text](https://url)</string>
+  <string name="tournDescriptionHelp">Czy chcesz powiedzieć coś szczególnego uczestnikom? Pisz krótko i na temat. Istnieje możliwość dodania odnośników: [name](https://url)</string>
   <string name="cancelTournament">Anuluj turniej</string>
   <string name="reportXToModerators">Zgłoś %s do moderatora</string>
   <string name="profileCompletion">Kompletność profilu: %s</string>
@@ -671,6 +671,11 @@ jeden adres URL na linię</string>
   <string name="clockIncrement">Przyrost czasu</string>
   <string name="onlyMembersOfTeam">Tylko członkowie zespołu</string>
   <string name="noRestriction">Bez ograniczeń</string>
+  <string name="minimumRatedGames">Minimalna liczba partii rankingowych</string>
+  <string name="minimumRating">Minimalny ranking</string>
+  <string name="maximumWeeklyRating">Maksymalny tygodniowy ranking</string>
+  <string name="onlyTitled">Tylko gracze z tytułem</string>
+  <string name="onlyTitledHelp">Wymagaj oficjalnego tytułu, aby dołączyć do turnieju</string>
   <string name="privacy">Prywatność</string>
   <string name="letOtherPlayersFollowYou">Zezwól na obserwowanie przez innych graczy</string>
   <string name="letOtherPlayersChallengeYou">Zezwól na zaproszenia od innych graczy</string>
@@ -740,8 +745,8 @@ jeden adres URL na linię</string>
   <string name="shareGameURL">Udostępnij link do partii</string>
   <string name="error.required">To pole jest wymagane</string>
   <string name="error.email">Podany adres email jest nieprawidłowy</string>
-  <string name="error.email_acceptable">Podany adres email nie został zaakceptowany</string>
-  <string name="error.email_unique">Podany adres email został już użyty</string>
+  <string name="error.email_acceptable">Ten adres e-mail jest niedopuszczalny. Sprawdź go i spróbuj ponownie.</string>
+  <string name="error.email_unique">Adres e-mail jest nieprawidłowy lub jest już w użyciu</string>
   <string name="error.email_different">To już jest Twój adres e-mail</string>
   <string name="ifRatingIsPlusMinusX">O rankingu ± %s</string>
   <string name="onlyFriends">Tylko znajomi</string>
@@ -936,11 +941,11 @@ jeden adres URL na linię</string>
   <string name="invalidFen">Nieprawidłowy plik FEN</string>
   <string name="invalidPosition">Nieprawidłowa pozycja</string>
   <string name="tooManyKings">Nie możesz grać przeciwko silnikowi Scan z więcej niż 30 damkami na warcabnicy.</string>
-  <string name="error.minLength">Minimalna długość to %s znaków</string>
-  <string name="error.maxLength">Maksymalna długość to %s znaków</string>
-  <string name="error.min">Musi być większe lub równe %s</string>
-  <string name="error.max">Musi być mniejsze lub równe %s</string>
-  <string name="error.unknown">Wystąpił błąd</string>
+  <string name="error.minLength">Minimalna długość to %s</string>
+  <string name="error.maxLength">Maksymalna długość to %s</string>
+  <string name="error.min">Musi być dłuższe lub równe %s</string>
+  <string name="error.max">Musi być krótsze lub równe %s</string>
+  <string name="error.unknown">Nieprawidłowa wartość</string>
   <string name="error.pattern">Zawiera niedozwolone znaki</string>
   <string name="error.eventName">Zawiera nieprawidłowe znaki. Akceptowane są tylko litery, cyfry i wspólne znaki interpunkcyjne.</string>
   <string name="mustNotContainLidraughts">Nie może zawierać \"lidraughts\"</string>

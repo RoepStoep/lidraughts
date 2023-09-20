@@ -59,8 +59,8 @@
     <item quantity="other">Criou %s novos estudos</item>
   </plurals>
   <plurals name="competedInNbTournaments">
-    <item quantity="one">Competiu em %s torneio</item>
-    <item quantity="other">Competiu em %s torneios</item>
+    <item quantity="one">Competiu em %s torneio arena</item>
+    <item quantity="other">Competiu em %s torneios arena</item>
   </plurals>
   <plurals name="rankedInTournament">
     <item quantity="one">Classificado #%1$s (top %2$s%%) com %3$s jogo em %4$s</item>

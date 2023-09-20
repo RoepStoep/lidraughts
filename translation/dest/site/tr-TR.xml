@@ -19,6 +19,7 @@
   <string name="createAGame">Yeni bir oyun kur</string>
   <string name="whiteIsVictorious">Zafer Beyazın</string>
   <string name="blackIsVictorious">Zafer Siyahın</string>
+  <string name="promotion">Terfi</string>
   <string name="variantEnding">Varyant bitti</string>
   <string name="important">Önemli</string>
   <string name="yourQuestionMayHaveBeenAnswered">Sorunuzun yanıtı %1$s cevaplanmış olabilir.</string>
@@ -80,7 +81,6 @@
   <string name="averageRatingX">Ortalama puan: %s</string>
   <string name="recentGames">Son oyunlar</string>
   <string name="topGames">En yüksek puanlı oyunlar</string>
-  <string name="masterDbExplanation">%2$s yılından %3$s yılına kadar %1$s+ FIDE puanına sahip oyuncular tarafından tahta üzerinde oynanmış 2 milyon oyun</string>
   <string name="noGameFound">Oyun bulunamadı</string>
   <string name="maybeIncludeMoreGamesFromThePreferencesMenu">Seçenekler menüsünden daha fazla oyun eklemeyi deneyebilirsiniz.</string>
   <string name="openingExplorer">Açılış kâşifi</string>
@@ -194,6 +194,8 @@
   <string name="yourOpponentOffersADraw">Rakibiniz beraberlik teklif ediyor</string>
   <string name="accept">Kabul et</string>
   <string name="decline">Reddet</string>
+  <string name="startingIn" comment="Displayed above a timer">Başlamasına</string>
+  <string name="startingSoon">Başlamak üzere</string>
   <string name="playingRightNow">Şu an oynanıyor</string>
   <string name="eventInProgress">Şu anda oynanıyor</string>
   <string name="finished">Bitti</string>
@@ -305,6 +307,7 @@
   <string name="xCreatedTeamY">%1$s, %2$s takımını kurdu</string>
   <string name="xStartedStreaming">%s canlı yayında</string>
   <string name="averageElo">Ortalama puan</string>
+  <string name="teamPage">Takım sayfası</string>
   <string name="location">Konum</string>
   <string name="filterGames">Oyunları kategorilendir</string>
   <string name="reset">Sıfırla</string>
@@ -405,6 +408,9 @@
   <string name="savePosition">Konumu kaydet</string>
   <string name="loadPosition">Konumu yükle</string>
   <string name="isPrivate">Özel</string>
+  <string name="tournDescription">Turnuva açıklaması</string>
+  <string name="tournDescriptionHelp">Katılımcılara söylemek istediğiniz özel bir şey var mı? Kısa tutmaya çalışın. İşaretleme bağlantılarını kullanabilirsiniz: [name](https://url)</string>
+  <string name="cancelTournament">Turnuvayı iptal et</string>
   <string name="reportXToModerators">%s \'i Moderatörlere bildir</string>
   <string name="profileCompletion">Profil tamamlanma oranı: %s</string>
   <string name="xRating">Derecelendirme: %s</string>
@@ -505,6 +511,13 @@
   <string name="newPasswordsDontMatch">Yeni parolalar eşleşmiyor</string>
   <string name="clockInitialTime">Maç başlangıç süresi</string>
   <string name="clockIncrement">Hamle başına süre artışı</string>
+  <string name="onlyMembersOfTeam">Sadece takım üyeleri</string>
+  <string name="noRestriction">Kısıtlama yok</string>
+  <string name="minimumRatedGames">En düşük puanlı oyunlar</string>
+  <string name="minimumRating">En düşük puan</string>
+  <string name="maximumWeeklyRating">Haftalık en yüksek puan</string>
+  <string name="onlyTitled">Sadece unvanlı oyuncular</string>
+  <string name="onlyTitledHelp">Sadece resmî bir unvana sahip oyuncular turnuvaya katılsın</string>
   <string name="privacy">Gizlilik</string>
   <string name="letOtherPlayersFollowYou">Diğer oyuncular seni takip etsin mi?</string>
   <string name="letOtherPlayersChallengeYou">Diğer oyuncular oyun teklif edebilsin</string>
@@ -568,8 +581,8 @@
   <string name="shareGameURL">Oyun linkini paylaş</string>
   <string name="error.required">Bu alan gerekli</string>
   <string name="error.email">Bu e-posta adresi geçersizdir</string>
-  <string name="error.email_acceptable">Bu e-posta adresi kabul edilemez</string>
-  <string name="error.email_unique">Bu e-posta adresi zaten alınmış</string>
+  <string name="error.email_acceptable">Bu e-posta adresi kabul edilemez. Lütfen tekrar kontrol edin ve tekrar deneyin.</string>
+  <string name="error.email_unique">E-posta adresi geçersiz veya önceden alınmış</string>
   <string name="error.email_different">Şu anda zaten bu e-posta adresini kullanıyorsun</string>
   <string name="ifRatingIsPlusMinusX">Eğer puanları ± %s ise</string>
   <string name="onlyFriends">Sadece arkadaşlar</string>
@@ -590,9 +603,12 @@
   <string name="aboutX">%s hakkında</string>
   <string name="really">ciddiyiz</string>
   <string name="contribute">Katkıda bulun</string>
+  <string name="contact">İletişim</string>
   <string name="termsOfService">Hizmet koşulları</string>
   <string name="sourceCode">Kaynak Kodu</string>
   <string name="simultaneousExhibitions">Eş zamanlı gösteriler</string>
+  <string name="simulDescription">Eş zamanlı gösterinin açıklaması</string>
+  <string name="simulDescriptionHelp">Katılımcılara söylemek istediğiniz bir şey var mı?</string>
   <string name="host">Ev Sahibi</string>
   <string name="hostColorX">Ev sahibi rengi: %s</string>
   <string name="createdSimuls">Yeni oluşturulan eş zamanlı gösteriler</string>
@@ -702,9 +718,9 @@
   <string name="invalidFen">Geçersiz FEN</string>
   <string name="error.minLength">Asgari uzunluk: %s</string>
   <string name="error.maxLength">Azami uzunluk: %s</string>
-  <string name="error.min">Şu sayıdan büyük veya şu sayıya eşit olması gerekir: %s</string>
-  <string name="error.max">Şu sayıdan küçük veya şu sayıya eşit olması gerekir: %s</string>
-  <string name="error.unknown">Hata</string>
+  <string name="error.min">%s değerinden büyük veya eşit olmalıdır</string>
+  <string name="error.max">%s değerinden küçük veya eşit olmalıdır</string>
+  <string name="error.unknown">Geçersiz değer</string>
   <string name="custom">Özel</string>
   <string name="notifications">Bildirimler</string>
   <string name="perfRatingX">Puan: %s</string>
@@ -729,6 +745,7 @@
   <string name="learnFromThisMistake">Bu hatadan ders çıkart</string>
   <string name="skipThisMove">Bu hamleyi geç</string>
   <string name="next">Sonraki</string>
+  <string name="back">Baştan başlat</string>
   <string name="xWasPlayed">%s oynandı</string>
   <string name="findBetterMoveForWhite">Beyaz için en iyi hamleyi bulun</string>
   <string name="findBetterMoveForBlack">Siyah için en iyi hamleyi bulun</string>
@@ -745,10 +762,17 @@
   <string name="doItAgain">Tekrarlayın</string>
   <string name="reviewWhiteMistakes">Beyazın hatalarını gözden geçirin</string>
   <string name="reviewBlackMistakes">Siyahın hatalarını gözden geçirin</string>
+  <string name="whatWouldYouPlay">Burada hangi hamleyi yapardınız?</string>
+  <string name="nextChapter">Sonraki bölüm</string>
+  <string name="playAgain">Tekrar oyna</string>
   <string name="advantage">Avantaj</string>
   <plurals name="nbSeconds">
     <item quantity="one">%s saniye</item>
     <item quantity="other">%s saniye</item>
+  </plurals>
+  <plurals name="nbMinutes">
+    <item quantity="one">%s dakika</item>
+    <item quantity="other">%s dakika</item>
   </plurals>
   <string name="opening">Açılış</string>
   <string name="middlegame">Oyunortası</string>

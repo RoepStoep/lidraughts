@@ -90,7 +90,7 @@
   <string name="averageRatingX">Durchschnittliche Wertungszahl: %s</string>
   <string name="recentGames">Letzte Partien</string>
   <string name="topGames">Spitzenpartien</string>
-  <string name="masterDbExplanation">Echte Partien von %1$s+ Meisterspielern mit Wertungen von %2$s bis %3$s</string>
+  <string name="masterDbExplanation">OTB-Partien von %1$s+ Meisterspielern mit Wertungen von %2$s bis %3$s</string>
   <plurals name="winInXHalfMoves">
     <item quantity="one">Sieg in %s Halbzug</item>
     <item quantity="other">Sieg in %s Halbzügen</item>
@@ -236,8 +236,8 @@
   <string name="yourOpponentOffersADraw">Dein Gegner bietet Remis an</string>
   <string name="accept">Annehmen</string>
   <string name="decline">Ablehnen</string>
-  <string name="startingIn">Beginnt in</string>
-  <string name="startingSoon"> - Beginnt bald - </string>
+  <string name="startingIn" comment="Displayed above a timer">Beginnt in</string>
+  <string name="startingSoon">Beginnt bald</string>
   <string name="playingRightNow">Partie läuft</string>
   <string name="eventInProgress">Laufende Partien</string>
   <string name="finished">Beendet</string>
@@ -482,7 +482,7 @@ eine Computeranalyse, einen Spielchat und eine teilbare URL.</string>
   <string name="isPrivate">Privat</string>
   <string name="editTournament">Turnier bearbeiten</string>
   <string name="tournDescription">Turnier Beschreibung</string>
-  <string name="tournDescriptionHelp">Möchtest du den Teilnehmen etwas bestimmtes mitteilen? Versuch dich kurz zu fassen. Markdown-Links können verwendet werden: [Text](https://url/)</string>
+  <string name="tournDescriptionHelp">Möchtest du den Teilnehmen etwas bestimmtes mitteilen? Versuch dich kurz zu fassen. Markdown-Links können verwendet werden: [name](https://url/)</string>
   <string name="cancelTournament">Turnier abbrechen</string>
   <string name="reportXToModerators">Melde %s den Moderatoren</string>
   <string name="profileCompletion">Profil vollständig zu %s</string>
@@ -605,6 +605,11 @@ Eine URL pro Zeile</string>
   <string name="clockIncrement">Zeit-Inkrement</string>
   <string name="onlyMembersOfTeam">Nur Teammitglieder</string>
   <string name="noRestriction">Keine Einschränkungen</string>
+  <string name="minimumRatedGames">Mindestanzahl gewerteter Partien</string>
+  <string name="minimumRating">Niedrigste Wertungszahl</string>
+  <string name="maximumWeeklyRating">Höchste Wertungszahl in dieser Woche</string>
+  <string name="onlyTitled">Nur Spieler mit Titel</string>
+  <string name="onlyTitledHelp">Benötigt einen offiziellen Titel, um dem Turnier beizutreten</string>
   <string name="privacy">Privatsphäre</string>
   <string name="letOtherPlayersFollowYou">Anderen erlauben, mir zu folgen</string>
   <string name="letOtherPlayersChallengeYou">Anderen erlauben, mich herauszufordern</string>
@@ -670,8 +675,8 @@ Eine URL pro Zeile</string>
   <string name="shareGameURL">Partie-URL teilen</string>
   <string name="error.required">Dieses Feld muss ausgefüllt werden</string>
   <string name="error.email">Diese E-Mail-Adresse ist ungültig</string>
-  <string name="error.email_acceptable">Diese E-Mail-Adresse wird nicht akzeptiert</string>
-  <string name="error.email_unique">Diese E-Mail-Adresse ist schon vergeben</string>
+  <string name="error.email_acceptable">Diese E-Mail-Adresse wird nicht akzeptiert. Bitte überprüfe sie und versuche es erneut.</string>
+  <string name="error.email_unique">E-Mail-Adresse ungültig oder bereits vergeben</string>
   <string name="error.email_different">Dies ist bereits deine E-Mail Adresse</string>
   <string name="ifRatingIsPlusMinusX">Nur, wenn die Wertungszahl ± %s ist</string>
   <string name="onlyFriends">Nur Freunde</string>
@@ -860,11 +865,11 @@ Eine URL pro Zeile</string>
   <string name="invalidFen">FEN ungültig</string>
   <string name="invalidPosition">Ungültige Position</string>
   <string name="tooManyKings">Du kannst nicht gegen Scan mit mehr als 30 Damen auf dem Brett spielen.</string>
-  <string name="error.minLength">Mindestens %s Zeichen</string>
-  <string name="error.maxLength">Höchstens %s Zeichen</string>
+  <string name="error.minLength">Mindestlänge beträgt %s Zeichen</string>
+  <string name="error.maxLength">Maximallänge beträgt %s Zeichen</string>
   <string name="error.min">Muss mindestens %s sein</string>
   <string name="error.max">Darf höchstens %s sein</string>
-  <string name="error.unknown">Fehler</string>
+  <string name="error.unknown">Ungültiger Wert</string>
   <string name="error.pattern">Enthält ungültige Zeichen</string>
   <string name="error.eventName">Enthält ungültige Zeichen. Nur Buchstaben, Zahlen und übliche Satzzeichen werden akzeptiert.</string>
   <string name="mustNotContainLidraughts">Darf kein \"lidraughts\" enthalten</string>

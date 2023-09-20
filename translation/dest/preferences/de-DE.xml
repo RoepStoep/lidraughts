@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Einstellungen</string>
-  <string name="gameDisplay">Spieldarstellung</string>
+  <string name="display">Anzeige</string>
   <string name="pieceAnimation">Figurenanimation</string>
   <string name="materialDifference">Materialunterschied</string>
   <string name="showKingMoves">Zeige, wie oft eine Dame bewegt wurde (Frisian-Variation)</string>

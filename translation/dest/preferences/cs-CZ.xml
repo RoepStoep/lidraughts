@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Předvolby</string>
-  <string name="gameDisplay">Zobrazení hry</string>
+  <string name="display">Zobrazení</string>
   <string name="pieceAnimation">Animace figur</string>
   <string name="materialDifference">Materiální rozdíl</string>
-  <string name="boardHighlights">Zvýraznění na šachovnici (poslední tah)</string>
   <string name="pieceDestinations">Možnosti figur (možné tahy a předtahy)</string>
   <string name="moveListWhilePlaying">Seznam tahů během hry</string>
   <string name="onSlowGames">Při pomalých hrách</string>

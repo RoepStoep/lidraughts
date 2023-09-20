@@ -50,6 +50,8 @@
   <string name="showThreat">Аюулыг үзүүл</string>
   <string name="inLocalBrowser">вэб хөтөч дээр</string>
   <string name="toggleLocalEvaluation">Шинжилгээг нээх/хаах</string>
+  <string name="makeMainLine">Үндсэн мөрийг гаргах</string>
+  <string name="deleteFromHere" comment="Delete everything beginning from this point. Used to delete all following moves and lines in analysis.">Энд дарж устага</string>
   <string name="move">Нүүдэл</string>
   <string name="variantLoss">Хожигдох хувилбар</string>
   <string name="variantWin">Хожих хувилбар</string>
@@ -138,6 +140,9 @@
   <string name="ratingStats">Чансааны жагсаалт</string>
   <string name="username">Хэрэглэгчийн нэр</string>
   <string name="usernameOrEmail">Хэрэглэгчийн нэр эсвэл электрон шуудангийн хаяг</string>
+  <string name="changeUsername">Хэрэглэгчийн нэрийг өөрчлөх</string>
+  <string name="changeUsernameNotSame">Зөвхөн үсэг нь зөвхөн өөрчлөгдөж болно. Жишээ нь \"johndoe\" нь \"JohnDoe\".</string>
+  <string name="changeUsernameDescription">Хэрэглэгчийн нэрээ өөрчил. Энэ нь зөвхөн нэг удаа хийгдэж болох ба зөвхөн хэрэглэгчийн нэр дээр үсгээ засах боломжтой.</string>
   <string name="password">Нууц үг</string>
   <string name="changePassword">Нэвтрэх үгээ өөрчлөх</string>
   <string name="changeEmail">Электрон шуудангийн хаягаа өөрчлөх</string>
@@ -168,8 +173,10 @@
   <string name="yourOpponentOffersADraw">Таны өрсөлдөгч тэнцэх санал гаргалаа</string>
   <string name="accept">Саналыг хүлээн авах</string>
   <string name="decline">Саналаас татгалзах</string>
+  <string name="startingSoon">Удахгүй эхлэх өргүүд</string>
   <string name="playingRightNow">Яг одоо тоглож байна</string>
   <string name="finished">Өндөрлөсөн тэмцээнүүд</string>
+  <string name="finishesX">%s дуусна</string>
   <string name="abortGame">Өргийг цуцлах</string>
   <string name="gameAborted">Өрөг цуцлагдлаа</string>
   <string name="standard">Стандарт</string>
@@ -177,6 +184,8 @@
   <string name="mode">Горим</string>
   <string name="casual">Чансаа өөрчлөгдөхгүй өрөг</string>
   <string name="rated">Чансаа өөрчлөгдөх өрөг</string>
+  <string name="casualTournament">Чансаа өөрчлөгдөхгүй өрөг</string>
+  <string name="ratedTournament">Чансаатай өрөг</string>
   <string name="thisGameIsRated">Энэ бол чансаа өөрчлөгдөх өрөг</string>
   <string name="rematch">Дахин тоглох</string>
   <string name="rematchOfferSent">Дахин тоглох хүсэлт илгээлээ</string>
@@ -209,6 +218,10 @@
   <plurals name="nbDraws">
     <item quantity="one">%s тэнцээ</item>
     <item quantity="other">%s тэнцээ</item>
+  </plurals>
+  <plurals name="nbPlaying">
+    <item quantity="one">%s өрөг тоглож байна</item>
+    <item quantity="other">%s тоглуулж байна</item>
   </plurals>
   <string name="exportGames">Тоглолтыг гадагш нүүлгэх</string>
   <string name="ratingRange">Чансааны хязгаарлалт</string>
@@ -249,6 +262,8 @@
   <string name="yourPerfRatingIsTooLow">Таны %1$s чансаа (%2$s) хэт бага байна</string>
   <string name="ratedMoreThanInPerf">%2$s чансаа ≥ %1$s</string>
   <string name="ratedLessThanInPerf">%2$s чансаа ≤ %1$s</string>
+  <string name="mustBeInTeam">Та %s багт байх ёстой</string>
+  <string name="youAreNotInTeam">Та %s багийн гишүүд биш байна</string>
   <string name="backToGame">Тоглолт руу буцах</string>
   <string name="xJoinedTeamY">%1$s багт %2$s нэгдлээ</string>
   <string name="xCreatedTeamY">%1$s багийг %2$s үүсгэлээ</string>
@@ -427,6 +442,7 @@
   <string name="troll">Тохуурхсан</string>
   <string name="other">Өөр шалтаан</string>
   <string name="reportDescriptionHelp">Та энэ гишүүнтэй тоглосон өргийнхөө холбоос хаягыг энд хуулж тавиад зүй бус үйлдлийнх нь талаар тайлбар бичнэ үү. Та хэрхэн энэ гишүүнийг булхайцсан үйлдэл хийсэн гэсэн дүгнэлтэд хүрсэн бэ? Хэрэв та гомдлоо англи хэлээр мэдүүлвэл бид илүү түргэн шуурхай арга хэмжээ авах болно.</string>
+  <string name="error.provideOneCheatedGameLink">Тоглоомын дор хаяж нэг холбоосыг оруулна уу.</string>
   <string name="by">Бичлэг бичигч: %s</string>
   <string name="thisTopicIsNowClosed">Энэ сэдэв хэлэлцэгдээд дууссан байна.</string>
   <string name="theming">Өргийн өнгө үзэмж, дүрс бүтэц</string>
@@ -464,6 +480,9 @@
   <string name="xCommentedY">%1$s дараахь сэдэвт сэтгэгдлээ бичлээ: %2$s</string>
   <string name="victory">Бодлогыг амжилттай бодлоо</string>
   <string name="defeat">Явагдал</string>
+  <string name="victoryVsYInZ">%3$s өрөгт %2$s-н эсрэг %1$s</string>
+  <string name="defeatVsYInZ">%3$s өрөгт %2$s-н эсрэг %1$s</string>
+  <string name="drawVsYInZ">%3$s өрөгт %2$s-н эсрэг %1$s</string>
   <string name="timeline" comment="The timeline is a list of activities by users.">Дагагч хүмүүсийн үйлдлүүд</string>
   <string name="start">Эхлэх</string>
   <string name="starting">Тэмцээн эхлэхэд хугацаа үлдлээ:</string>
@@ -521,6 +540,7 @@
   <string name="webmasters">Цахим хуудсыг хөгжүүлэгчид</string>
   <string name="about">Тухай</string>
   <string name="aboutX">Тухай %s</string>
+  <string name="really">бэлтгэнэ үү</string>
   <string name="contribute">Хувь нэмэрээ оруулах</string>
   <string name="contact">Холбоо тогтоох</string>
   <string name="termsOfService">Үйлчилгээний нөхцөл</string>
@@ -556,6 +576,9 @@
   <string name="tournamentMayHaveBeenCanceled">Тэмцээн эхлэхээс өмнө бүх тоглогчид тэмцээнийг орхисон бол энэхүү тэмцээн цуцлагдсан болно.</string>
   <string name="returnToTournamentsHomepage">Тэмцээний үндсэн нүүр хуудас руу буцах</string>
   <string name="youDoNotHaveAnEstablishedPerfTypeRating">%s төрөлд таньд тогтсон чансаа алга байна.</string>
+  <string name="yourRating">Чиний чансаа</string>
+  <string name="cumulative">Өссөн дүнгээр</string>
+  <string name="glicko2Rating">Глико-2 систем</string>
   <string name="checkYourEmail">Та цахим шуудангаа шалгана уу</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Бид тань руу зурвас илгээлээ. Зурвас доторх холбоос хаяг дээр дарснаар хэрэглэгчийн данс тань идэвхжинэ.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Хэрэв бидний зурвас үндсэн шуудангийн хайрцаг дотор тань олдохгүй байвал та бусад хайрцгуудаа ( junk, spam, social гэх мэт) шалгана уу.</string>
@@ -678,4 +701,8 @@
   <string name="opening">Гараа</string>
   <string name="middlegame">Тоглолтын дунд үе</string>
   <string name="endgame">Төгсгөл үе</string>
+  <string name="sorry">Уучлаарай</string>
+  <string name="why">Яагаад</string>
+  <string name="thankYouForReading">Уншсанд баярлалаа</string>
+  <string name="lifetimeScore">Амьдралын оноо</string>
 </resources>

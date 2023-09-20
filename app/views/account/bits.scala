@@ -9,7 +9,7 @@ import lidraughts.pref.PrefCateg
 object bits {
 
   def categName(categ: lidraughts.pref.PrefCateg)(implicit ctx: Context): String = categ match {
-    case PrefCateg.GameDisplay => trans.preferences.gameDisplay.txt()
+    case PrefCateg.GameDisplay => trans.preferences.display.txt()
     case PrefCateg.DraughtsClock => trans.preferences.draughtsClock.txt()
     case PrefCateg.GameBehavior => trans.preferences.gameBehavior.txt()
     case PrefCateg.Privacy => trans.privacy.txt()

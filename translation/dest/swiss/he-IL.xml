@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="swissTournaments">טורנירים שוויצריים</string>
+  <plurals name="nbRounds">
+    <item quantity="one">סבב %s</item>
+    <item quantity="two">%s סבבים</item>
+    <item quantity="many">%s סבבים</item>
+    <item quantity="other">%s סבבים</item>
+  </plurals>
+  <string name="nextRound">הסבב הבא</string>
+  <string name="numberOfRounds">מספר סבבים</string>
+</resources>

@@ -81,7 +81,6 @@
   <string name="averageRatingX">平均レーティング: %s</string>
   <string name="recentGames">最近のゲーム</string>
   <string name="topGames">トップのゲーム</string>
-  <string name="masterDbExplanation">%2$s 年から %3$s 年まで、FIDEレーティング %1$s 以上の 実戦 200 万局</string>
   <string name="noGameFound">ゲームが見つかりません</string>
   <string name="maybeIncludeMoreGamesFromThePreferencesMenu">設定メニューからさらに広い範囲を指定しますか？</string>
   <string name="openingExplorer">序盤探索</string>
@@ -186,6 +185,8 @@
   <string name="yourOpponentOffersADraw">相手が引き分けを申し込みました</string>
   <string name="accept">承諾</string>
   <string name="decline">拒否</string>
+  <string name="startingIn" comment="Displayed above a timer">開始まで</string>
+  <string name="startingSoon">間もなく開始</string>
   <string name="playingRightNow">対局中</string>
   <string name="eventInProgress">対局中</string>
   <string name="finished">終了したトーナメント</string>
@@ -286,6 +287,7 @@
   <string name="xCreatedTeamY">%1$s がチーム %2$s を作成しました</string>
   <string name="xStartedStreaming">%s が配信を開始</string>
   <string name="averageElo">平均レーティング</string>
+  <string name="teamPage">チームのページ</string>
   <string name="location">住所</string>
   <string name="filterGames">条件で絞り込む</string>
   <string name="reset">リセット</string>
@@ -378,10 +380,14 @@
   <string name="popularOpenings">人気のオープニング</string>
   <string name="startPosition">開始局面</string>
   <string name="clearBoard">盤面をクリアする</string>
+  <string name="edit">編集</string>
   <string name="save">保存</string>
   <string name="savePosition">盤面を保存</string>
   <string name="loadPosition">局面を読み込む</string>
   <string name="isPrivate">プライベート</string>
+  <string name="tournDescription">トーナメントの説明</string>
+  <string name="tournDescriptionHelp">参加者に特に説明しておきたいことはありますか？　短く書いてください。リンクも入れられます：[name](https://url)</string>
+  <string name="cancelTournament">トーナメントをキャンセル</string>
   <string name="reportXToModerators">モデレーターに%sを通報する。</string>
   <string name="profileCompletion">プロフィール記入率：%s</string>
   <string name="xRating">%s レーティング</string>
@@ -480,6 +486,13 @@
   <string name="newPasswordsDontMatch">新しいパスワードが一致しません</string>
   <string name="clockInitialTime">持時間</string>
   <string name="clockIncrement">追加時間</string>
+  <string name="onlyMembersOfTeam">チームメンバーのみ</string>
+  <string name="noRestriction">制限なし</string>
+  <string name="minimumRatedGames">必要対局数（レート戦）</string>
+  <string name="minimumRating">レーティング下限</string>
+  <string name="maximumWeeklyRating">レーティング上限（週内）</string>
+  <string name="onlyTitled">公式タイトル保持者のみ</string>
+  <string name="onlyTitledHelp">参加には公式タイトルを必須とする</string>
   <string name="privacy">プライバシー</string>
   <string name="letOtherPlayersFollowYou">他人からのフォローを可能にする</string>
   <string name="letOtherPlayersChallengeYou">他人からの挑戦を可能にする</string>
@@ -541,8 +554,8 @@
   <string name="shareGameURL">ゲームのURLを共有</string>
   <string name="error.required">この欄は入力必須です</string>
   <string name="error.email">このメールアドレスは無効です</string>
-  <string name="error.email_acceptable">このメールアドレスは認められません</string>
-  <string name="error.email_unique">このメールアドレスはすでに使用されています</string>
+  <string name="error.email_acceptable">このメールアドレスは使用できません。確認してもう一度どうぞ。</string>
+  <string name="error.email_unique">メールアドレスが無効かすでに使われています</string>
   <string name="error.email_different">すでにあなたのメールアドレスになっています</string>
   <string name="ifRatingIsPlusMinusX">レーティング差が±%s以内のとき</string>
   <string name="onlyFriends">友達のみ</string>
@@ -554,7 +567,6 @@
   <string name="watchGames">ゲームを見る</string>
   <string name="tpTimeSpentOnTV">TVに映った時間:%s</string>
   <string name="watch">見る</string>
-  <string name="videoLibrary">チェスの動画集</string>
   <string name="streamersMenu">配信者</string>
   <string name="mobileApp">モバイルアプリ</string>
   <string name="webmasters">ウェブ管理者</string>
@@ -566,6 +578,8 @@
   <string name="termsOfService">利用規約</string>
   <string name="sourceCode">ソースコード</string>
   <string name="simultaneousExhibitions">同時対局</string>
+  <string name="simulDescription">同時対局の説明</string>
+  <string name="simulDescriptionHelp">参加者に伝えたいことがあればどうぞ</string>
   <string name="host">ホスト</string>
   <string name="hostColorX">ホストの色: %s</string>
   <string name="createdSimuls">新たな同時対局</string>
@@ -675,11 +689,11 @@
   <string name="coaches">コーチ</string>
   <string name="invalidPdn">無効な PDN</string>
   <string name="invalidFen">無効な FEN</string>
-  <string name="error.minLength">最小の長さは %s 文字です</string>
-  <string name="error.maxLength">最大の長さは %s 文字です</string>
+  <string name="error.minLength">最小の長さは %s です</string>
+  <string name="error.maxLength">最大の長さは %s です</string>
   <string name="error.min">%s 以上にしてください</string>
   <string name="error.max">%s 以下にしてください</string>
-  <string name="error.unknown">エラー</string>
+  <string name="error.unknown">無効な値</string>
   <string name="custom">自由設定</string>
   <string name="notifications">通知</string>
   <string name="perfRatingX">レーティング: %s</string>
@@ -703,6 +717,7 @@
   <string name="learnFromThisMistake">この悪手に学ぶ</string>
   <string name="skipThisMove">この手を飛ばす</string>
   <string name="next">次</string>
+  <string name="back">戻る</string>
   <string name="xWasPlayed">指されたのは %s</string>
   <string name="findBetterMoveForWhite">白のもっといい手を見つけてください</string>
   <string name="findBetterMoveForBlack">黒のもっといい手を見つけてください</string>
@@ -719,9 +734,15 @@
   <string name="doItAgain">もう一度どうぞ</string>
   <string name="reviewWhiteMistakes">白の悪手をチェックする</string>
   <string name="reviewBlackMistakes">黒の悪手をチェックする</string>
+  <string name="whatWouldYouPlay">この局面、あなたならどう指す？</string>
+  <string name="nextChapter">次の章</string>
+  <string name="playAgain">もう一度プレイ</string>
   <string name="advantage">優位</string>
   <plurals name="nbSeconds">
     <item quantity="other">%s 秒</item>
+  </plurals>
+  <plurals name="nbMinutes">
+    <item quantity="other">%s 分</item>
   </plurals>
   <string name="opening">序盤</string>
   <string name="middlegame">中盤</string>

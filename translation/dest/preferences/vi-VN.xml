@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Cài đặt</string>
-  <string name="gameDisplay">Hiển thị ván cờ</string>
+  <string name="display">Hiển thị</string>
   <string name="pieceAnimation">Tính linh hoạt của quân cờ</string>
   <string name="materialDifference">Chênh lệch giá trị quân cờ</string>
   <string name="showKingMoves">Hiển thị số lần vua đã di chuyển (cờ đam Frisian)</string>

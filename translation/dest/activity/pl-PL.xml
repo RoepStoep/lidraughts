@@ -87,7 +87,7 @@
     <item quantity="other">Utworzono %s nowych studiów</item>
   </plurals>
   <plurals name="competedInNbTournaments">
-    <item quantity="one">Uczestnictwo w %s turnieju</item>
+    <item quantity="one">Uczestnictwo w turnieju</item>
     <item quantity="few">Uczestnictwo w %s turniejach</item>
     <item quantity="many">Uczestnictwo w %s turniejach</item>
     <item quantity="other">Uczestnictwo w %s turniejach</item>

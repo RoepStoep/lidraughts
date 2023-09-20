@@ -224,8 +224,8 @@
   <string name="yourOpponentOffersADraw">Đối phương xin hoà</string>
   <string name="accept">Đồng ý</string>
   <string name="decline">Từ chối</string>
-  <string name="startingIn">Bắt đầu trong</string>
-  <string name="startingSoon"> - Bắt đầu trong - </string>
+  <string name="startingIn" comment="Displayed above a timer">Bắt đầu trong</string>
+  <string name="startingSoon">Bắt đầu trong</string>
   <string name="playingRightNow">Ván đấu đang đánh</string>
   <string name="eventInProgress">Đang diễn ra</string>
   <string name="finished">Hoàn thành</string>
@@ -457,7 +457,7 @@ phân tích bằng máy tính, trò chuyện tong ván đấu và URL có thể 
   <string name="isPrivate">Riêng tư</string>
   <string name="editTournament">Sửa giải đấu</string>
   <string name="tournDescription">Mô tả giải đấu</string>
-  <string name="tournDescriptionHelp">Có điều gì đặc biệt bạn muốn nói với những người tham gia không? Cố gắng viết ngắn gọn. Các liên kết Markdown có sẵn: [text](https://url)</string>
+  <string name="tournDescriptionHelp">Có điều gì đặc biệt bạn muốn nói với những người tham gia không? Cố gắng viết ngắn gọn. Các liên kết Markdown có sẵn: [name](https://url)</string>
   <string name="cancelTournament">Hủy giải đấu</string>
   <string name="reportXToModerators">Báo cáo %s tới quản trị viên</string>
   <string name="profileCompletion">Hoàn thành hồ sơ: %s</string>
@@ -537,8 +537,8 @@ Một đường dẫn mỗi dòng</string>
   <string name="tournamentWinners">Các nhà vô địch giải đấu</string>
   <string name="name">Tên</string>
   <string name="description">Mô tả</string>
-  <string name="no">Không chọn</string>
-  <string name="yes">Chọn</string>
+  <string name="no">Không</string>
+  <string name="yes">Có</string>
   <string name="help">Hỗ trợ</string>
   <string name="createANewTopic">Tạo một chủ đề mới</string>
   <string name="topics">Các chủ đề</string>
@@ -579,6 +579,11 @@ Một đường dẫn mỗi dòng</string>
   <string name="clockIncrement">Thời gian được cho thêm</string>
   <string name="onlyMembersOfTeam">Chỉ dành cho thành viên trong đội</string>
   <string name="noRestriction">Không giới hạn</string>
+  <string name="minimumRatedGames">Số ván đã tính Elo tối thiểu</string>
+  <string name="minimumRating">Elo tối thiểu</string>
+  <string name="maximumWeeklyRating">Elo cao nhất trong tuần</string>
+  <string name="onlyTitled">Chỉ những kỳ thủ có tiêu đề</string>
+  <string name="onlyTitledHelp">Bắt buộc có một danh hiệu/tiêu đề chính thức để tham gia giải đấu</string>
   <string name="privacy">Bảo mật</string>
   <string name="letOtherPlayersFollowYou">Cho phép người khác theo dõi bạn</string>
   <string name="letOtherPlayersChallengeYou">Cho phép người khác thách đấu bạn</string>
@@ -642,8 +647,8 @@ Một đường dẫn mỗi dòng</string>
   <string name="shareGameURL">Chia sẻ link ván cờ</string>
   <string name="error.required">Mục bắt buộc</string>
   <string name="error.email">Địa chỉ email này không đúng</string>
-  <string name="error.email_acceptable">Địa chỉ email này không được chấp nhận. Vui lòng kiểm tra, và thử lại.</string>
-  <string name="error.email_unique">Địa chỉ email này không đúng hoặc đã được dùng</string>
+  <string name="error.email_acceptable">Địa chỉ email này không được chấp nhận. Vui lòng kiểm tra và thử lại.</string>
+  <string name="error.email_unique">Địa chỉ email này không hợp lệ hoặc đã được dùng</string>
   <string name="error.email_different">Đây đã là địa chỉ email hiện tại của bạn</string>
   <string name="ifRatingIsPlusMinusX">Nếu xếp hạng trong phạm vi ± %s</string>
   <string name="onlyFriends">Chỉ bạn bè</string>
@@ -826,8 +831,8 @@ Một đường dẫn mỗi dòng</string>
   <string name="tooManyKings">Bạn không thể đấu với Scan với hơn 30 quân vua trên bàn cờ.</string>
   <string name="error.minLength">Phải dài ít nhất %s ký tự</string>
   <string name="error.maxLength">Chỉ được dài tối đa %s ký tự</string>
-  <string name="error.min">Phải lớn hơn hoặc bằng %s</string>
-  <string name="error.max">Phải nhỏ hơn hoặc bằng %s</string>
+  <string name="error.min">Phải ≥ %s</string>
+  <string name="error.max">Phải ≤ %s</string>
   <string name="error.unknown">Giá trị không hợp lệ</string>
   <string name="error.pattern">Chứa các ký tự không hợp lệ</string>
   <string name="error.eventName">Chứa các ký tự không hợp lệ. Chỉ chấp nhận các chữ cái, số và dấu câu thông thường.</string>

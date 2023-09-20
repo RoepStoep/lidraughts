@@ -236,8 +236,8 @@
   <string name="yourOpponentOffersADraw">Ο αντίπαλος σας προτείνει ισοπαλία</string>
   <string name="accept">Αποδοχή</string>
   <string name="decline">Άρνηση</string>
-  <string name="startingIn">Εκκίνηση σε</string>
-  <string name="startingSoon"> - Αρχίζουμε σύντομα - </string>
+  <string name="startingIn" comment="Displayed above a timer">Εκκίνηση σε</string>
+  <string name="startingSoon">Αρχίζουμε σύντομα</string>
   <string name="playingRightNow">Παιχνίδια σε εξέλιξη τώρα</string>
   <string name="eventInProgress">Παιχνίδια σε εξέλιξη τώρα</string>
   <string name="finished">Ολοκληρωμένα</string>
@@ -486,7 +486,7 @@
   <string name="isPrivate">Ιδιωτικό</string>
   <string name="editTournament">Επεξεργασία πρωταθλήματος</string>
   <string name="tournDescription">Περιγραφή τουρνουά</string>
-  <string name="tournDescriptionHelp">Θέλετε να πείτε κάτι ιδιαίτερο στους παίκτες; Προσπαθήστε να κρατήσετε το μήνυμά σας σύντομο. Μπορείτε να χρησιμοποιείτε συνδέσμους σε Markdown: [text](https://url)</string>
+  <string name="tournDescriptionHelp">Θέλετε να πείτε κάτι ιδιαίτερο στους παίκτες; Προσπαθήστε να κρατήσετε το μήνυμά σας σύντομο. Μπορείτε να χρησιμοποιείτε συνδέσμους σε Markdown: [name](https://url)</string>
   <string name="cancelTournament">Ακύρωση τουρνουά</string>
   <string name="reportXToModerators">Αναφέρετε τον %s στο προσωπικό</string>
   <string name="profileCompletion">Ολοκλήρωση προφίλ: %s</string>
@@ -528,7 +528,7 @@
   <string name="findTheBestMoveForWhite">Βρείτε την καλύτερη κίνηση για τα λευκά.</string>
   <string name="findTheBestMoveForBlack">Βρείτε την καλύτερη κίνηση για τα μαύρα.</string>
   <string name="toTrackYourProgress">Για να παρακολουθήσετε τη πρόοδό σας:</string>
-  <string name="trainingSignupExplanation">Το lidraughts θα σας προσφέρει γρίφους που αντιστοιχούν με την ικανότητα σας, με αποτέλεσμα μια καλύτερη εμπειρία εξάσκησης στο σκάκι.</string>
+  <string name="trainingSignupExplanation">Το lidraughts θα σας προσφέρει γρίφους που αντιστοιχούν με την ικανότητα σας, με αποτέλεσμα μια καλύτερη εμπειρία εξάσκησης.</string>
   <string name="puzzleId">Γρίφος %s</string>
   <string name="puzzleOfTheDay">Γρίφος της ημέρας</string>
   <string name="clickToSolve">Κάνετε κλικ για να τον λύσετε</string>
@@ -609,6 +609,11 @@
   <string name="clockIncrement">Ρολόι προσαύξηση</string>
   <string name="onlyMembersOfTeam">Μόνο μέλη της ομάδας</string>
   <string name="noRestriction">Χωρίς περιορισμό</string>
+  <string name="minimumRatedGames">Ελάχιστος αριθμός βαθμολογημένων παιχνιδιών</string>
+  <string name="minimumRating">Ελάχιστη βαθμολογία</string>
+  <string name="maximumWeeklyRating">Μέγιστη εβδομαδιαία βαθμολογία</string>
+  <string name="onlyTitled">Μόνο τιτλούχοι παίκτες</string>
+  <string name="onlyTitledHelp">Να απαιτείται επίσημος τίτλος για τη συμμετοχή στο τουρνουά</string>
   <string name="privacy">Απόρρητο</string>
   <string name="letOtherPlayersFollowYou">Επιτρέψτε σε άλλους παίκτες να σας ακολουθούν</string>
   <string name="letOtherPlayersChallengeYou">Επιτρέψτε σε άλλους παίκτες να σας προκαλούν σε παιχνίδι</string>
@@ -674,8 +679,8 @@
   <string name="shareGameURL">Κοινοποιήστε URL παιχνιδιού</string>
   <string name="error.required">Αυτό το πεδίο είναι υποχρεωτικό</string>
   <string name="error.email">Αυτή η διεύθυνση ηλ. ταχυδρομείου δεν ισχύει</string>
-  <string name="error.email_acceptable">Αυτή η διεύθυνση ηλ. ταχυδρομείου δεν είναι αποδεκτή</string>
-  <string name="error.email_unique">Αυτή η διεύθυνση ηλ. ταχυδρομείου χρησιμοποιείται ήδη</string>
+  <string name="error.email_acceptable">Αυτή η διεύθυνση ηλ. ταχυδρομείου δεν είναι αποδεκτή. Ελέγξτε την και προσπαθήστε ξανά.</string>
+  <string name="error.email_unique">Η διεύθυνση ηλεκτρονικού ταχυδρομείου είναι άκυρη ή υπάρχει ήδη</string>
   <string name="error.email_different">Έχετε αυτήν την διεύθυνση ήδη</string>
   <string name="ifRatingIsPlusMinusX">Εάν η βαθμολογία είναι ± %s</string>
   <string name="onlyFriends">Μόνο φίλοι</string>
@@ -864,11 +869,11 @@
   <string name="invalidFen">Μη έγκυρο FEN</string>
   <string name="invalidPosition">Μη έγκυρη θέση</string>
   <string name="tooManyKings">Δεν μπορείτε να παίξετε εναντίον του Scan με περισσότερες από 30 βασίλισσες στη σκακιέρα.</string>
-  <string name="error.minLength">Ελάχιστο μήκος είναι %s</string>
-  <string name="error.maxLength">Μέγιστο μήκος είναι %s</string>
-  <string name="error.min">Πρέπει να είναι μεγαλύτερος ή ίσος με %s</string>
-  <string name="error.max">Πρέπει να είναι μικρότερος ή ίσος με %s</string>
-  <string name="error.unknown">Σφάλμα</string>
+  <string name="error.minLength">Πρέπει να περιέχει τουλάχιστον %s χαρακτήρες</string>
+  <string name="error.maxLength">Πρέπει να περιέχει το πολύ %s χαρακτήρες</string>
+  <string name="error.min">Πρέπει να είναι τουλάχιστον %s</string>
+  <string name="error.max">Πρέπει να είναι το πολύ %s</string>
+  <string name="error.unknown">Άκυρη τιμή</string>
   <string name="error.pattern">Περιέχει μη έγκυρους χαρακτήρες</string>
   <string name="error.eventName">Περιέχει μη έγκυρους χαρακτήρες. Μόνο γράμματα, αριθμοί και συχνά σημεία στίξης γίνονται αποδεκτά.</string>
   <string name="mustNotContainLidraughts">Δεν πρέπει να περιέχει το \"lidraughts\"</string>

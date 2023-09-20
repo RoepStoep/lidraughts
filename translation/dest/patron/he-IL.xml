@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="donate">תרמו</string>
+  <string name="freeAccount">חשבון חינמי</string>
+  <string name="newPatrons">תומכים חדשים</string>
+  <string name="noAdsNoSubs">ללא פרסומות, ללא מנוי – רק קוד־פתוח ואהבה למשחק.</string>
+  <string name="thankYou">תודה על תרומתך!</string>
+  <string name="youHaveLifetime">יש לך חשבון תומך/ת לכל החיים. זה מדהים!</string>
+  <string name="patronUntil">הפכת לתומך/ת עד %s.</string>
+  <string name="lifetime">לכל החיים</string>
+  <string name="monthly">חודשי</string>
+  <string name="recurringBilling">חיוב חודשי קבוע שיחדש את כנפי התומך/ת שלך מדי חודש.</string>
+  <string name="onetime">חד פעמי</string>
+  <string name="singleDonation">תרומה חד פעמית תעניק לך כנפי תורם לחודש אחד.</string>
+  <string name="otherAmount">אחר</string>
+  <string name="withCreditCard">כרטיס אשראי</string>
+  <string name="weAreSmallTeam">אנחנו צוות קטן, לכן התמיכה שלך תהיה משמעותית מאוד!</string>
+  <string name="whereMoneyGoes">לאן הכסף הולך?</string>
+  <string name="changeMonthlySupport">האם אני יכול/ה לשנות או לבטל את התמיכה החודשית שלי?</string>
+  <string name="otherMethods">האם יש אמצעים אחרים לתרום?</string>
+  <string name="patronFeatures">האם יש יתרונות ששמורים רק עבור תומכים?</string>
+  <string name="featuresComparison">צפו בהבדלים בין החשבונות</string>
+  <string name="youSupportWith">את/ה תומכ/ת ב־lidraughts.org עם תרומה של %s בחודש.</string>
+  <string name="tyvm">תודה רבה מאוד על העזרה שלך. את/ה תותח/ית!</string>
+  <string name="currentStatus">סטטוס נוכחי</string>
+  <string name="nextPayment">התשלום הבא</string>
+  <string name="youWillBeChargedXOnY">את/ה תחויב/י ב%1$s ב%2$s.</string>
+  <string name="makeAdditionalDonation">תרמו תרומה נוספת עכשיו</string>
+  <string name="update">עדכן</string>
+  <string name="changeMonthlyAmount">שנה את הסכום החודשי (%s)</string>
+  <string name="xOrY">%1$s או %2$s</string>
+  <string name="stopPayments">משכו את כרטיס האשראי שלכם ועצרו את התשלומים:</string>
+  <string name="date">תאריך</string>
+  <string name="amount">סכום</string>
+  <string name="transactionCompleted">העסקה שלך הושלמה, וקבלה על התרומה שלך נשלחה אליך בדוא\"ל.</string>
+  <string name="permanentPatron">עכשיו יש לך חשבון תומך/ת קבוע.</string>
+  <string name="checkOutProfile">הסתכלו על עמוד הפרופיל שלכם!</string>
+  <string name="downgradeNextMonth">בעוד חודש לא תחויב/י שוב, וחשבון Lidraughts שלך יחזור להיות חשבון רגיל.</string>
+</resources>

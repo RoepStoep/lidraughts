@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Voorkeuren</string>
-  <string name="gameDisplay">Speluiterlijk</string>
+  <string name="display">Weergave</string>
   <string name="pieceAnimation">Stukanimatie</string>
   <string name="materialDifference">Materiaalverschil</string>
   <string name="showKingMoves">Toon het aantal keer dat een dam is gezet (Fries dammen)</string>

@@ -2,7 +2,7 @@
 <resources>
   <string name="preferences">Preferences</string>
 
-  <string name="gameDisplay">Game display</string>
+  <string name="display">Display</string>
   <string name="pieceAnimation">Piece animation</string>
   <string name="materialDifference">Material difference</string>
   <string name="showKingMoves">Show the amount of times a king has moved (Frisian draughts)</string>

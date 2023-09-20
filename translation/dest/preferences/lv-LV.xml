@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="preferences">Uzstādījumi</string>
-  <string name="gameDisplay">Spēļu ekrāns</string>
+  <string name="display">Izskats</string>
   <string name="pieceAnimation">Kauliņu animācija</string>
   <string name="materialDifference">Materiāla starpība</string>
   <string name="showKingMoves">Uzrādīt, cik reižu gājusi dāma (frīzu dambretē)</string>

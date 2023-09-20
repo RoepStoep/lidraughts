@@ -90,7 +90,7 @@
   <string name="averageRatingX">Gemiddelde rating: %s</string>
   <string name="recentGames">Recente partijen</string>
   <string name="topGames">Toppartijen</string>
-  <string name="masterDbExplanation">Partijen van %1$s+ meesters met een rating tussen %2$s en %3$s</string>
+  <string name="masterDbExplanation">OTB-partijen van %1$s+ meesters met een rating tussen %2$s en %3$s</string>
   <plurals name="winInXHalfMoves">
     <item quantity="one">Win in %s halfzet</item>
     <item quantity="other">Win in %s halfzetten</item>
@@ -236,8 +236,8 @@
   <string name="yourOpponentOffersADraw">Je tegenstander biedt remise aan</string>
   <string name="accept">Accepteren</string>
   <string name="decline">Afwijzen</string>
-  <string name="startingIn">Begint over</string>
-  <string name="startingSoon"> - Binnenkort van start - </string>
+  <string name="startingIn" comment="Displayed above a timer">Begint over</string>
+  <string name="startingSoon">Binnenkort van start</string>
   <string name="playingRightNow">Nu aan het spelen</string>
   <string name="eventInProgress">Nu aan het spelen</string>
   <string name="finished">Afgelopen</string>
@@ -486,7 +486,7 @@ een computeranalyse, een chatbox bij de partij en een deelbare URL.</string>
   <string name="isPrivate">Privé</string>
   <string name="editTournament">Toernooi bewerken</string>
   <string name="tournDescription">Toernooi omschrijving</string>
-  <string name="tournDescriptionHelp">Iets bijzonders dat je aan de deelnemers kwijt wil? Probeer het kort te houden. Je kunt Markdown links gebruiken: [tekst](https://url)</string>
+  <string name="tournDescriptionHelp">Iets bijzonders dat je aan de deelnemers kwijt wil? Probeer het kort te houden. Je kunt Markdown links gebruiken: [naam](https://url)</string>
   <string name="cancelTournament">Toernooi afgelasten</string>
   <string name="reportXToModerators">Rapporteer %s aan de toezichthouders</string>
   <string name="profileCompletion">Voltooiing profiel: %s</string>
@@ -679,9 +679,9 @@ Een URL per regel</string>
   <string name="allowAnalytics">Sta anonieme statistieken toe</string>
   <string name="shareGameURL">Deel partij URL</string>
   <string name="error.required">Dit invullen is verplicht</string>
-  <string name="error.email">Dit emailadres is ongeldig</string>
-  <string name="error.email_acceptable">Dit emailadres wordt niet geaccepteerd</string>
-  <string name="error.email_unique">Dit emailadres is al in gebruik</string>
+  <string name="error.email">Dit e-mailadres is ongeldig</string>
+  <string name="error.email_acceptable">Dit e-mailadres wordt niet geaccepteerd. Controleer het en probeer opnieuw.</string>
+  <string name="error.email_unique">E-mailadres ongeldig of al in gebruik</string>
   <string name="error.email_different">Dit is je huidige e-mailadres</string>
   <string name="ifRatingIsPlusMinusX">Indien de rating ± %s is</string>
   <string name="onlyFriends">Alleen vrienden</string>
@@ -873,9 +873,9 @@ Een URL per regel</string>
   <string name="tooManyKings">Je kan niet tegen Scan spelen met meer dan 30 dammen op het bord.</string>
   <string name="error.minLength">Minimumlengte is %s tekens</string>
   <string name="error.maxLength">Maximumlengte is %s tekens</string>
-  <string name="error.min">Moet groter dan of gelijk aan %s zijn</string>
-  <string name="error.max">Moet kleiner dan of gelijk aan %s zijn</string>
-  <string name="error.unknown">Fout</string>
+  <string name="error.min">Moet groter dan of gelijk zijn aan %s</string>
+  <string name="error.max">Moet kleiner dan of gelijk zijn aan %s</string>
+  <string name="error.unknown">Ongeldige waarde</string>
   <string name="error.pattern">Bevat ongeldige tekens</string>
   <string name="error.eventName">Bevat ongeldige tekens. Alleen letters, cijfers, en gangbare leestekens zijn toegestaan.</string>
   <string name="mustNotContainLidraughts">Kan geen \"lidraughts\" bevatten</string>
