@@ -58,7 +58,7 @@ export interface Started {
 export interface CevalCtrl {
   goDeeper(): void;
   canGoDeeper(): boolean;
-  effectiveMaxDepth(): number;
+  effectiveMaxDepth(forceMaxDepth?: boolean): number;
   pnaclSupported: boolean;
   wasmSupported: boolean;
   allowed: Prop<boolean>;
@@ -69,7 +69,7 @@ export interface CevalCtrl {
   variant: Variant;
   setHovering: (fen: string, uci?: string) => void;
   multiPv: StoredProp<number>;
-  start: (path: string, steps: Step[], threatMode: boolean, deeper: boolean, depth?: number) => void;
+  start: (path: string, steps: Step[], threatMode: boolean, forceMaxDepth: boolean, deeper: boolean) => void;
   stop(): void;
   threads: StoredProp<number>;
   hashSize: StoredProp<number>;

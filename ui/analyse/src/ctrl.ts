@@ -904,13 +904,12 @@ export default class AnalyseCtrl {
     if (this.ceval.enabled()) {
       if (this.canUseCeval()) {
         // only analyze startingposition of multicaptures
-        const ghostEnd = (this.nodeList.length > 0 && this.node.displayPly && this.node.displayPly !== this.node.ply);
-        const path = ghostEnd ? this.path.slice(2) : this.path;
+        const ghostEnd = this.nodeList.length && this.node.displayPly && this.node.displayPly !== this.node.ply
+        const path = ghostEnd ? this.path.slice(2) : this.path
         const nodeList = ghostEnd ? this.nodeList.slice(1) : this.nodeList;
-        const maxDepth = !(this.practice && this.studyPractice) ? undefined :
-          (this.ceval.isDeeper() || this.ceval.infinite()) ? 99 : this.practiceDepth();
-        this.ceval.start(path, nodeList, this.threatMode(), false, maxDepth);
-        this.evalCache.fetch(path, parseInt(this.ceval.multiPv()));
+        const forceMaxDepth = !!(this.retro || this.practice || this.studyPractice)
+        this.ceval.start(path, nodeList, this.threatMode(), forceMaxDepth, false);
+        this.evalCache.fetch(path, forceMaxDepth ? 1 : parseInt(this.ceval.multiPv()));
       } else this.ceval.stop();
     }
   });
@@ -1105,18 +1104,28 @@ export default class AnalyseCtrl {
     this.explorer.toggle();
   }
 
-  private practiceDepth = () => this.data.game.variant.key === 'antidraughts' ? 10 : 22;
+  private practiceDepth = () => {
+    const v = this.data.game.variant.key
+    const baseDepth = v === 'antidraughts' ? 8 : 20
+    const pieceCount = util.pieceCount(this.node.fen)
+    if (pieceCount <= 5) {
+      if (v === 'antidraughts') return baseDepth + 2
+      else if (v === 'frisian' || v === 'frysk') return baseDepth + 8
+      return baseDepth + 5
+    } else if (pieceCount <= 10) {
+      if (v === 'antidraughts') return baseDepth + 1
+      else if (v === 'frisian' || v === 'frysk') return baseDepth + 5
+      return baseDepth + 3
+    }
+    return baseDepth
+  }
 
   togglePractice = () => {
     if (this.practice || !this.ceval.possible) this.practice = undefined;
     else {
       if (this.retro) this.toggleRetro();
       if (this.explorer.enabled()) this.toggleExplorer();
-      this.practice = makePractice(this, () => {
-        // push to 20 to store AI moves in the cloud
-        // lower to 18 after task completion (or failure)
-        return this.studyPractice && this.studyPractice.success() === null ? this.practiceDepth() : (this.practiceDepth() - 2);
-      });
+      this.practice = makePractice(this, this.practiceDepth);
     }
     this.setAutoShapes();
   };

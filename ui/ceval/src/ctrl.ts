@@ -108,24 +108,23 @@ export default function(opts: CevalOpts): CevalCtrl {
     }
   });
 
-  const effectiveMaxDepth = () => (isDeeper() || infinite()) ? 99 : (parseInt(maxDepth()) - (opts.variant.key === 'antidraughts' ? 10 : 0));
+  const effectiveMaxDepth = (forceMaxDepth = false) => (forceMaxDepth || isDeeper() || infinite()) ? 99 : parseInt(maxDepth());
 
   const sortPvsInPlace = (pvs: Tree.PvData[], color: Color) =>
     pvs.sort(function(a, b) {
       return povChances(color, b) - povChances(color, a);
     });
 
-  const start = (path: Tree.Path, steps: Step[], threatMode: boolean, deeper: boolean, depth?: number) => {
+  const start = (path: Tree.Path, steps: Step[], threatMode: boolean, forceMaxDepth: boolean, deeper: boolean) => {
 
     if (!enabled() || !opts.possible) return;
 
     isDeeper(deeper);
-    const maxD = depth ? depth : effectiveMaxDepth();
+    const maxDepth = effectiveMaxDepth(forceMaxDepth);
 
     const step = steps[steps.length - 1];
-
     const existing = threatMode ? step.threat : step.ceval;
-    if (existing && existing.depth >= maxD) return;
+    if (existing && existing.depth >= maxDepth) return;
 
     const work: Work = {
       initialFen: steps[0].fen,
@@ -133,8 +132,8 @@ export default function(opts: CevalOpts): CevalCtrl {
       currentFen: step.fen,
       path,
       ply: step.ply,
-      maxDepth: maxD,
-      multiPv: parseInt(multiPv()),
+      maxDepth,
+      multiPv: 1, // forceMaxDepth ? 1 : parseInt(multiPv()),
       threatMode,
       emit(ev: Tree.ClientEval) {
         if (enabled()) onEmit(ev, work);
@@ -170,7 +169,7 @@ export default function(opts: CevalOpts): CevalCtrl {
     const s = started || lastStarted;
     if (s) {
       stop();
-      start(s.path, s.steps, s.threatMode, true);
+      start(s.path, s.steps, s.threatMode, false, true);
     }
   };
 

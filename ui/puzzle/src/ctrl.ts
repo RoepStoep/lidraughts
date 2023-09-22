@@ -1,5 +1,5 @@
 import { build as treeBuild, ops as treeOps, path as treePath } from 'tree';
-import { ctrl as cevalCtrl, scan2uci } from 'ceval';
+import { ctrl as cevalCtrl, scan2uci, CevalCtrl } from 'ceval';
 import { readDests, readCaptureLength, decomposeUci, san2alg } from 'draughts';
 import { opposite } from 'draughtsground/util';
 import { countGhosts } from 'draughtsground/fen';
@@ -22,7 +22,8 @@ import { Vm, Controller } from './interfaces';
 export default function (opts, redraw: () => void): Controller {
 
   let vm: Vm = {} as Vm;
-  var data, tree, ceval, moveTest;
+  let ceval: CevalCtrl
+  var data, tree, moveTest;
   const ground = prop<CgApi | undefined>(undefined);
   const threatMode = prop(false);
 
@@ -365,8 +366,11 @@ export default function (opts, redraw: () => void): Controller {
   };
 
   const doStartCeval = throttle(800, function () {
-    const ghostEnd = (vm.nodeList.length > 0 && vm.node.displayPly && vm.node.displayPly !== vm.node.ply);
-    ceval.start(ghostEnd ? vm.path.slice(2) : vm.path, ghostEnd ? vm.nodeList.slice(1) : vm.nodeList, threatMode());
+    // only analyze startingposition of multicaptures
+    const ghostEnd = vm.nodeList.length && vm.node.displayPly && vm.node.displayPly !== vm.node.ply;
+    const path = ghostEnd ? vm.path.slice(2) : vm.path
+    const nodeList = ghostEnd ? vm.nodeList.slice(1) : vm.nodeList
+    ceval.start(path, nodeList, threatMode(), false, false);
   });
 
   function nextNodeBest() {

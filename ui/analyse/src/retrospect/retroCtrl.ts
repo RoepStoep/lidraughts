@@ -2,8 +2,9 @@ import { evalSwings } from '../nodeFinder';
 import { winningChances } from 'ceval';
 import { path as treePath } from 'tree';
 import { empty, prop } from 'common';
-//import { OpeningData } from '../explorer/interfaces';
+import { OpeningData } from '../explorer/interfaces';
 import AnalyseCtrl from '../ctrl';
+import { pieceCount } from '../util'
 
 export interface RetroCtrl {
   isSolving(): boolean
@@ -14,17 +15,16 @@ export interface RetroCtrl {
 
 type Feedback = 'find' | 'eval' | 'win' | 'fail' | 'view';
 
+const useOpeningExplorer = false
+
 export function make(root: AnalyseCtrl): RetroCtrl {
 
-  const game = root.data.game;
   const color = root.bottomColor();
   let candidateNodes: Tree.Node[] = [];
   const explorerCancelPlies: number[] = [];
   let solvedPlies: number[] = [];
   const current = prop<any>(null);
   const feedback = prop<Feedback>('find');
-  const maxDepth = game.variant.key === 'antidraughts' ? 10 : 20;
-  const minDepth = game.variant.key === 'antidraughts' ? 6 : 15;
 
   const redraw = root.redraw;
 
@@ -65,7 +65,8 @@ export function make(root: AnalyseCtrl): RetroCtrl {
       openingUcis: []
     });
     // fetch opening explorer moves
-    /*if (game.variant.key === 'standard' && game.division && (!game.division.middle || fault.node.ply < game.division.middle)) {
+    const game = root.data.game
+    if (useOpeningExplorer && game.variant.key === 'standard' && game.division && (!game.division.middle || fault.node.ply < game.division.middle)) {
       root.explorer.fetchMasterOpening(prev.node.fen).then((res: OpeningData) => {
         const cur = current();
         const ucis: Uci[] = [];
@@ -80,7 +81,7 @@ export function make(root: AnalyseCtrl): RetroCtrl {
           current(cur);
         }
       });
-    }*/
+    }
     root.userJump(prev.path);
     redraw();
   };
@@ -107,17 +108,22 @@ export function make(root: AnalyseCtrl): RetroCtrl {
   };
 
   function isCevalReady(node: Tree.Node): boolean {
+    const v = root.data.game.variant.key
+    const bonus = pieceCount(node.fen) > 10 ? 0 : (v === 'antidraughts' ? 1 : 2)
+    const maxDepth = bonus + (v === 'antidraughts' ? 10 : 20)
+    const minDepth = bonus + (v === 'antidraughts' ? 6 : 15)
     return node.ceval ? (
       node.ceval.depth >= Math.min(maxDepth, root.ceval.effectiveMaxDepth()) ||
-      (node.ceval.depth >= minDepth && node.ceval.millis > 7000)
-    ) : false;
-  };
+      (node.ceval.depth >= minDepth && !!node.ceval.millis && node.ceval.millis > 7000)
+    ) : false
+  }
 
   function checkCeval(): void {
     var node = root.node,
       cur = current();
     if (!cur || feedback() !== 'eval' || cur.fault.node.ply !== node.ply) return;
     if (isCevalReady(node)) {
+      root.ceval.stop()
       var diff = winningChances.povDiff(color, node.ceval!, cur.prev.node.eval);
       if (diff > -0.035) onWin();
       else onFail();
