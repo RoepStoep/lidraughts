@@ -668,8 +668,8 @@ Une URL par ligne</string>
   <string name="signedOut">Vous vous êtes déconnecté</string>
   <string name="loginSuccessful">Vous êtes connecté</string>
   <string name="opponent">Adversaire</string>
-  <string name="learnMenu">Apprendre</string>
-  <string name="studyMenu">Étudier</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Apprendre</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Étudier</string>
   <string name="practice">S\'entraîner</string>
   <string name="community">Communauté</string>
   <string name="tools">Outils</string>
@@ -695,7 +695,7 @@ Une URL par ligne</string>
   <string name="tpTimeSpentOnTV">Temps passé à la TV : %s</string>
   <string name="watch">Regarder</string>
   <string name="videoLibrary">Vidéothèque</string>
-  <string name="streamersMenu">Streamers</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamers</string>
   <string name="mobileApp">L\'application</string>
   <string name="webmasters">Webmestres</string>
   <string name="about">À propos de</string>

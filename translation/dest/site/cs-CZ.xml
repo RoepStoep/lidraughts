@@ -623,8 +623,8 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="signedOut">Byli jste odhlášeni.</string>
   <string name="loginSuccessful">Přihlášení úspěšné</string>
   <string name="opponent">Protihráč</string>
-  <string name="learnMenu">Učit se</string>
-  <string name="studyMenu">Studie</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Učit se</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Studie</string>
   <string name="practice">Procvičujte</string>
   <string name="community">Komunita</string>
   <string name="tools">Nástroje</string>
@@ -652,7 +652,7 @@ získáte počítačovou analýzu, chat ke hře a URL ke sdílení hry.</string>
   <string name="tpTimeSpentOnTV">Čas v TV: %s</string>
   <string name="watch">Sledujte</string>
   <string name="videoLibrary">Video knihovna</string>
-  <string name="streamersMenu">Streameři</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streameři</string>
   <string name="mobileApp">Mobilní aplikace</string>
   <string name="webmasters">Správci webu</string>
   <string name="about">O</string>

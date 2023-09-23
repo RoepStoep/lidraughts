@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="byPlaying">játszva!</string>
+  <string name="menu">Menü</string>
+  <string name="progressX">Haladás: %s</string>
+  <string name="resetMyProgress">Haladásom nullázása</string>
+  <string name="youWillLoseAllYourProgress">Az összes eddigi haladásod el fog veszni!</string>
+  <string name="play">játssz!</string>
+  <string name="fundamentals">Alapok</string>
+  <string name="capture">Ütés</string>
+  <string name="takeTheEnemyPieces">Üsd le az ellenfél figuráit</string>
+  <string name="takeTheBlackPieces">Üsd le sötét figuráit!</string>
+  <string name="takeTheBlackPiecesAndDontLoseYours">Üsd le a sötét figurákat!
+A sajátodat ne veszítsd el.</string>
+  <string name="protection">Védelem</string>
+  <string name="keepYourPiecesSafe">Védd meg a figuráidat</string>
+  <string name="protectionIntro">Keresd meg a megtámadott figuráidat és védd meg őket!</string>
+  <string name="protectionComplete">Gratulálunk! Ha nem veszíted el a bábudat, az olyan, mintha megnyerted volna!</string>
+  <string name="escape">Megtámadtak!
+Menekülj a fenyegetéstől!</string>
+  <string name="noEscape">Bár nem tudsz elmenekülni,
+de meg tudod védeni!</string>
+  <string name="dontLetThemTakeAnyUndefendedPiece">Ne engedd kiütni
+a védtelen figuráidat!</string>
+  <string name="combat">Harc</string>
+  <string name="captureAndDefendPieces">Figurák kiütése és védelme</string>
+  <string name="combatIntro">Egy jó harcos támadni és védekezni is tud!</string>
+  <string name="intermediate">Középfok</string>
+  <string name="boardSetup">A tábla felállítása</string>
+  <string name="howTheGameStarts">Hogyan kezdődik a játék</string>
+  <string name="boardSetupIntro">A két hadsereg harcra készen néz szembe egymással.</string>
+  <string name="theGameIsADraw">A döntetlen játszma</string>
+  <string name="advanced">Haladó</string>
+  <string name="whatNext">Mi következik?</string>
+  <string name="register">Regisztráció</string>
+  <string name="getAFreeLidraughtsAccount">Szerezz ingyenes Lidraughts fiókot</string>
+  <string name="practice">Gyakorolj</string>
+  <string name="exerciseYourTacticalSkills">Fejleszd a taktikai készséged</string>
+  <string name="videos">Videók</string>
+  <string name="playPeople">Játssz emberekkel</string>
+  <string name="opponentsFromAroundTheWorld">Ellenfelek a világ minden tájáról</string>
+  <string name="playMachine">Játssz a géppel</string>
+  <string name="testYourSkillsWithTheComputer">Tedd próbára magad a számítógéppel</string>
+  <string name="letsGo">Rajta!</string>
+  <string name="stageX">%s. szint</string>
+  <string name="awesome">Klassz!</string>
+  <string name="excellent">Kiváló!</string>
+  <string name="greatJob">Szép munka!</string>
+  <string name="perfect">Tökéletes!</string>
+  <string name="outstanding">Kiváló!</string>
+  <string name="wayToGo">Ez a beszéd!</string>
+  <string name="yesYesYes">Igen, igen, igen!</string>
+  <string name="youreGoodAtThis">Megy ez neked!</string>
+  <string name="nailedIt">Megcsináltad.</string>
+  <string name="rightOn">Csont nélkül!</string>
+  <string name="stageXComplete">%s. szint teljesítve</string>
+  <string name="next">Következő</string>
+  <string name="backToMenu">Vissza a menübe</string>
+  <string name="puzzleFailed">A megoldás sikertelen!</string>
+  <string name="retry">Újra</string>
+</resources>

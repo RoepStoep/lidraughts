@@ -628,8 +628,9 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="signedOut">Atsijungėte</string>
   <string name="loginSuccessful">Prisijungėte</string>
   <string name="opponent">Varžovas</string>
-  <string name="learnMenu">Išmok</string>
-  <string name="studyMenu">Studijos</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Išmok</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Studijos</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">D.U.K.</string>
   <string name="practice">Praktika</string>
   <string name="community">Bendruomenė</string>
   <string name="tools">Įrankiai</string>
@@ -657,7 +658,7 @@ kompiuterinę analizę, partijos pokalbį bei URL dalinimuisi.</string>
   <string name="tpTimeSpentOnTV">Laikas, praleistas stebint: %s</string>
   <string name="watch">Žiūrėk</string>
   <string name="videoLibrary">Video biblioteka</string>
-  <string name="streamersMenu">Transliuotojai</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Transliuotojai</string>
   <string name="mobileApp">Mobilioji programėlė</string>
   <string name="webmasters">Svetainių kūrėjams</string>
   <string name="about">Apie</string>

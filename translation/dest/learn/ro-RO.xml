@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="byPlaying">jucând!</string>
+  <string name="menu">Meniu</string>
+  <string name="progressX">Progres: %s</string>
+  <string name="resetMyProgress">Resetează progresul meu</string>
+  <string name="youWillLoseAllYourProgress">Vei pierde tot progresul!</string>
+  <string name="play">joacă!</string>
+  <string name="fundamentals">Principiile</string>
+  <string name="capture">Capturează</string>
+  <string name="takeTheEnemyPieces">Ia piesele inamice</string>
+  <string name="takeTheBlackPieces">Ia piesele negre!</string>
+  <string name="takeTheBlackPiecesAndDontLoseYours">Ia piesele negre! Și nu le pierde pe ale tale.</string>
+  <string name="protection">Protecție</string>
+  <string name="keepYourPiecesSafe">Protejează-ți piesele</string>
+  <string name="protectionIntro">Identifică piesele pe care oponentul tău le atacă și protejează-le!</string>
+  <string name="protectionComplete">Felicitări! O piesă pe care nu o pierzi este o piesă câștigată!</string>
+  <string name="escape">Ești atacat! Scăpa de amenințare!</string>
+  <string name="noEscape">Nu este nicio scăpare,
+dar poți proteja!</string>
+  <string name="dontLetThemTakeAnyUndefendedPiece">Nu-i lăsa să ia
+vreo piesă neprotejată!</string>
+  <string name="combat">Luptă</string>
+  <string name="captureAndDefendPieces">Capturează și protejează piese</string>
+  <string name="combatIntro">Un războinic bun știe și atac și apărare!</string>
+  <string name="intermediate">Intermediar</string>
+  <string name="boardSetup">Pregătirea tablei</string>
+  <string name="howTheGameStarts">Cum începe jocul</string>
+  <string name="theGameIsADraw">Acest meci este o remiză</string>
+  <string name="advanced">Avansat</string>
+  <string name="whatNext">Ce urmează?</string>
+  <string name="register">Înregistrează-te</string>
+  <string name="getAFreeLidraughtsAccount">Obține un cont de Lidraughts gratuit</string>
+  <string name="practice">Practică</string>
+  <string name="exerciseYourTacticalSkills">Exersează-ți abilitățile tactice</string>
+  <string name="videos">Videoclipuri</string>
+  <string name="playPeople">Joacă cu oameni</string>
+  <string name="opponentsFromAroundTheWorld">Oponenți din jurul lumii</string>
+  <string name="playMachine">Joacă cu calculatorul</string>
+  <string name="testYourSkillsWithTheComputer">Testează-ți abilitățile cu calculatorul</string>
+  <string name="letsGo">Să începem!</string>
+  <string name="stageX">Etapa %s</string>
+  <string name="awesome">Minunat!</string>
+  <string name="excellent">Excelent!</string>
+  <string name="greatJob">Bună treabă!</string>
+  <string name="outstanding">Remarcabil!</string>
+  <string name="wayToGo">Bravo!</string>
+  <string name="yesYesYes">Da, da, da!</string>
+  <string name="youreGoodAtThis">Ești bun la asta!</string>
+  <string name="nailedIt">Ai nimerit-o.</string>
+  <string name="rightOn">Perfect!</string>
+  <string name="stageXComplete">Etapa %s completă</string>
+  <string name="next">Urmează</string>
+  <string name="backToMenu">Înapoi la meniu</string>
+  <string name="puzzleFailed">Puzzle eșuat!</string>
+  <string name="retry">Reîncearcă</string>
+</resources>

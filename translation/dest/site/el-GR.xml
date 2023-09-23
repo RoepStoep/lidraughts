@@ -667,8 +667,8 @@
   <string name="signedOut">Έχετε αποσυνδεθεί επιτυχώς</string>
   <string name="loginSuccessful">Είσοδος επιτυχής</string>
   <string name="opponent">Αντίπαλος</string>
-  <string name="learnMenu">Εκμάθηση</string>
-  <string name="studyMenu">Μελέτη</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Εκμάθηση</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Μελέτη</string>
   <string name="practice">Εξάσκηση</string>
   <string name="community">Κοινότητα</string>
   <string name="tools">Εργαλεία</string>
@@ -694,7 +694,7 @@
   <string name="tpTimeSpentOnTV">Χρόνος στην Τηλεόραση: %s</string>
   <string name="watch">Παρακολουθήστε</string>
   <string name="videoLibrary">Βιβλιοθήκη τηλεοπτικού υλικού</string>
-  <string name="streamersMenu">Streamers</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamers</string>
   <string name="mobileApp">Εφαρμογή για Κινητά</string>
   <string name="webmasters">Διαχειριστές</string>
   <string name="about">Σχετικά με</string>

@@ -532,6 +532,7 @@
   <string name="sequentialSwitch">固定顺序</string>
   <string name="puzzles">训练题</string>
   <string name="variantPuzzles">%s训练题</string>
+  <string name="variantPractice">%s 练习</string>
   <string name="latestUpdates">最近更新</string>
   <string name="tournamentWinners">锦标赛赢家</string>
   <string name="name">名称</string>
@@ -634,8 +635,8 @@
   <string name="signedOut">您已登出</string>
   <string name="loginSuccessful">您已登录</string>
   <string name="opponent">对手</string>
-  <string name="learnMenu">学习</string>
-  <string name="studyMenu">专题课程</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">学习</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">专题课程</string>
   <string name="practice">练习</string>
   <string name="community">社区</string>
   <string name="tools">工具</string>
@@ -660,7 +661,7 @@
   <string name="tpTimeSpentOnTV">在 Lidraughts TV 出现的时长：%s</string>
   <string name="watch">观看</string>
   <string name="videoLibrary">视频库</string>
-  <string name="streamersMenu">主播</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">主播</string>
   <string name="mobileApp">手机应用</string>
   <string name="webmasters">网站管理员</string>
   <string name="about">关于</string>
@@ -775,6 +776,7 @@
   <string name="withEverybody">与每个人分享</string>
   <string name="youHaveAlreadyRegisteredTheEmail">您已经使用电子邮箱%s注册了Lidraughts帐户</string>
   <string name="kidMode">儿童模式</string>
+  <string name="kidModeIsEnabled">儿童模式已启用。</string>
   <string name="kidModeExplanation">安全第一。在儿童模式下， 站内信无法使用。为了保护你的孩子和学生免受站内其他用户的伤害，请启用儿童模式。</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">在儿童模式下，Lidraughts标志前有%s图标。出现该图标您就知道您的孩子是安全的。</string>
   <string name="enableKidMode">打开儿童模式</string>
@@ -938,4 +940,6 @@
   <string name="thankYouForReading">感谢您的理解！</string>
   <string name="lifetimeScore">永久得分</string>
   <string name="currentMatchScore">当前比赛得分</string>
+  <string name="welcomeToLidraughts">欢迎来到 lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">这是您的个人资料页面。</string>
 </resources>

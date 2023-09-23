@@ -569,8 +569,8 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="signedOut">Has cerrado la sesión</string>
   <string name="loginSuccessful">Conectado</string>
   <string name="opponent">Oponente</string>
-  <string name="learnMenu">Aprender</string>
-  <string name="studyMenu">Estudiar</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Aprender</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Estudiar</string>
   <string name="practice">Practicar</string>
   <string name="community">Comunidad</string>
   <string name="tools">Herramientas</string>
@@ -596,7 +596,7 @@ un análisis por ordenador, un chat de juego y una URL para compartir.</string>
   <string name="tpTimeSpentOnTV">Tiempo transcurrido en TV: %s</string>
   <string name="watch">Observar</string>
   <string name="videoLibrary">Videoteca</string>
-  <string name="streamersMenu">Presentadores</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Presentadores</string>
   <string name="mobileApp">Aplicación para móviles</string>
   <string name="webmasters">Webmaster</string>
   <string name="about">Acerca de</string>

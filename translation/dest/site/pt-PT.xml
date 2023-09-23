@@ -31,7 +31,7 @@
   <string name="variantEnding">Fim da variante</string>
   <string name="important">Importante</string>
   <string name="yourQuestionMayHaveBeenAnswered">A tua pergunta pode já ter uma resposta %1$s</string>
-  <string name="inTheFAQ">no FAQ (perguntas frequentes)</string>
+  <string name="inTheFAQ">no FAQ</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Para reportares um utilizador por fazer batota ou por mau comportamento, %1$s.</string>
   <string name="useTheReportForm">usa a ficha própria para o fazeres</string>
   <string name="toRequestSupport">Para solicitares suporte, %1$s.</string>
@@ -622,8 +622,8 @@ Um URL por linha</string>
   <string name="signedOut">Você fez logoff</string>
   <string name="loginSuccessful">Login efetuado</string>
   <string name="opponent">Oponente</string>
-  <string name="learnMenu">Aprende</string>
-  <string name="studyMenu">Estudos</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Aprende</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Estudos</string>
   <string name="practice">Praticar</string>
   <string name="community">Comunidade</string>
   <string name="tools">Ferramentas</string>

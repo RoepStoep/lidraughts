@@ -10,13 +10,13 @@ import controllers.routes
 object faq {
 
   def page(system: Option[lidraughts.tournament.System])(implicit ctx: Context) = views.html.base.layout(
-    title = "Tournament FAQ",
+    title = trans.tournamentFAQ.txt(),
     moreCss = cssTag("page")
   ) {
       main(cls := "page-small box box-pad page")(
         h1(
           a(href := routes.Tournament.home(), dataIcon := "I", cls := "text"),
-          system.??(_.toString), " Tournament FAQ"
+          trans.tournamentFAQ()
         ),
         div(cls := "body")(apply(system = system))
       )

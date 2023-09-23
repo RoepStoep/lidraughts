@@ -569,8 +569,8 @@
   <string name="signedOut">Zaten başarıyla çıkış yapmışsınız.</string>
   <string name="loginSuccessful">Giriş başarılı</string>
   <string name="opponent">Rakip</string>
-  <string name="learnMenu">Öğren</string>
-  <string name="studyMenu">Çalışmalar</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Öğren</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Çalışmalar</string>
   <string name="practice">Egzersizler</string>
   <string name="community">Topluluk</string>
   <string name="tools">Araçlar</string>
@@ -596,7 +596,7 @@
   <string name="tpTimeSpentOnTV">TV\'de izlenme süresi: %s</string>
   <string name="watch">İzle</string>
   <string name="videoLibrary">Video kütüphanesi</string>
-  <string name="streamersMenu">Canlı Yayınlar</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Canlı Yayınlar</string>
   <string name="mobileApp">Mobil Uygulama</string>
   <string name="webmasters">Site Yöneticileri</string>
   <string name="about">Hakkında</string>

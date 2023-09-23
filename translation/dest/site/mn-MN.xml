@@ -510,8 +510,8 @@
   <string name="signedOut">Та бүртгэлээсээ гарсан байна</string>
   <string name="loginSuccessful">Та бүртгэгдэн орлоо</string>
   <string name="opponent">Өрсөлдөгч</string>
-  <string name="learnMenu">Сургалт</string>
-  <string name="studyMenu">Суралцах</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Сургалт</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Суралцах</string>
   <string name="practice">Дадлага</string>
   <string name="community">Гишүүд</string>
   <string name="tools">Хэрэглүүр</string>
@@ -535,7 +535,7 @@
   <string name="tpTimeSpentOnTV">Сувагт зарцуулсан хугацаа: %s</string>
   <string name="watch">Үзэх</string>
   <string name="videoLibrary">Бичлэгийн сан</string>
-  <string name="streamersMenu">Стримчид</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Стримчид</string>
   <string name="mobileApp">Гар утасны програм</string>
   <string name="webmasters">Цахим хуудсыг хөгжүүлэгчид</string>
   <string name="about">Тухай</string>

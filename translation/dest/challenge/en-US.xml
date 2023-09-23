@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="challenges">Challenges</string>
+  <string name="noChallenges">No challenges</string>
+  <string name="challengeSomeone">Challenge someone</string>
+  <string name="openChallenge">Open challenge</string>
+  <string name="startsAtX">Start at %s</string>
   <string name="challengeToPlay">Challenge to a game</string>
   <string name="challengeDeclined">Challenge declined</string>
   <string name="challengeAccepted">Challenge accepted!</string>
   <string name="challengeCanceled">Challenge canceled</string>
+  <string name="challengeAcceptedAndWaiting">Challenge accepted! Waiting for your opponent...</string>
+  <string name="youWillBeRedirectedToTheGame">You will be redirected to the game when both players have accepted the challenge.</string>
   <string name="registerToSendChallenges">Please register to send challenges.</string>
   <string name="youCannotChallengeX">You cannot challenge %s.</string>
   <string name="xDoesNotAcceptChallenges">%s does not accept challenges.</string>

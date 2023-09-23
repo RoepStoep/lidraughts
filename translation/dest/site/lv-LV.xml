@@ -658,8 +658,8 @@ Vienā līnijā  - tikai vienu norādi.</string>
   <string name="signedOut">Tu esi atslēdzies</string>
   <string name="loginSuccessful">Pieslēgšanās veiksmīga</string>
   <string name="opponent">Pretinieks</string>
-  <string name="learnMenu">Apgūsti</string>
-  <string name="studyMenu">Studijas</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Apgūsti</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Studijas</string>
   <string name="practice">Trenēties</string>
   <string name="community">Kopiena</string>
   <string name="tools">Rīki</string>
@@ -686,7 +686,7 @@ Vienā līnijā  - tikai vienu norādi.</string>
   <string name="tpTimeSpentOnTV">TV laiks: %s</string>
   <string name="watch">Skaties</string>
   <string name="videoLibrary">Videoklipu bibliotēka</string>
-  <string name="streamersMenu">Straumētāji</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Straumētāji</string>
   <string name="mobileApp">Mobilā aplikācija</string>
   <string name="webmasters">Tīmekļa pārziņi</string>
   <string name="about">Par</string>

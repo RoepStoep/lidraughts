@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="coordinates">Coordonate</string>
+  <string name="coordinateTraining">Antrenament la coordonate</string>
+  <string name="averageScoreAsWhiteX">Media scorului cu albele: %s</string>
+  <string name="averageScoreAsBlackX">Media scorului cu negrele: %s</string>
+  <string name="startTraining">Începe antrenamentul</string>
+</resources>

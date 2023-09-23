@@ -668,8 +668,9 @@ One URL per line</string>
   <string name="signedOut">You have been signed out</string>
   <string name="loginSuccessful">You are now signed in</string>
   <string name="opponent">Opponent</string>
-  <string name="learnMenu">Learn</string>
-  <string name="studyMenu">Study</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Learn</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Study</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">FAQ</string>
   <string name="practice">Practice</string>
   <string name="community">Community</string>
   <string name="tools">Tools</string>
@@ -695,7 +696,7 @@ One URL per line</string>
   <string name="tpTimeSpentOnTV">Time featured on TV: %s</string>
   <string name="watch">Watch</string>
   <string name="videoLibrary">Video library</string>
-  <string name="streamersMenu">Streamers</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamers</string>
   <string name="mobileApp">Mobile App</string>
   <string name="webmasters">Webmasters</string>
   <string name="about">About</string>

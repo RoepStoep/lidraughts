@@ -542,8 +542,8 @@
   <string name="signedOut">サインアウトしました。</string>
   <string name="loginSuccessful">ログインしました</string>
   <string name="opponent">対戦相手</string>
-  <string name="learnMenu">学ぶ</string>
-  <string name="studyMenu">研究</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">学ぶ</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">研究</string>
   <string name="practice">練習問題</string>
   <string name="community">コミュニティ</string>
   <string name="tools">ツール</string>
@@ -567,7 +567,7 @@
   <string name="watchGames">ゲームを見る</string>
   <string name="tpTimeSpentOnTV">TVに映った時間:%s</string>
   <string name="watch">見る</string>
-  <string name="streamersMenu">配信者</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">配信者</string>
   <string name="mobileApp">モバイルアプリ</string>
   <string name="webmasters">ウェブ管理者</string>
   <string name="about">Lidraughts概要</string>

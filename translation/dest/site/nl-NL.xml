@@ -668,8 +668,8 @@ Een URL per regel</string>
   <string name="signedOut">Je bent uitgelogd</string>
   <string name="loginSuccessful">Inloggen succesvol</string>
   <string name="opponent">Tegenstander</string>
-  <string name="learnMenu">Leren</string>
-  <string name="studyMenu">Studie</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Leren</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Studie</string>
   <string name="practice">Oefenen</string>
   <string name="community">Gemeenschap</string>
   <string name="tools">Gereedschap</string>
@@ -695,7 +695,7 @@ Een URL per regel</string>
   <string name="tpTimeSpentOnTV">Tijd op TV: %s</string>
   <string name="watch">Kijken</string>
   <string name="videoLibrary">Videobibliotheek</string>
-  <string name="streamersMenu">Streamers</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamers</string>
   <string name="mobileApp">Mobiele app</string>
   <string name="webmasters">Webmasters</string>
   <string name="about">Over</string>

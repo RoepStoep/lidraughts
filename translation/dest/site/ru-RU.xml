@@ -734,8 +734,9 @@
   <string name="signedOut">Вы вышли</string>
   <string name="loginSuccessful">Вы вошли</string>
   <string name="opponent">Соперник</string>
-  <string name="learnMenu">Обучение</string>
-  <string name="studyMenu">Студия</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Обучение</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Студия</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">ЧаВо</string>
   <string name="practice">Практика</string>
   <string name="community">Сообщество</string>
   <string name="tools">Инструменты</string>
@@ -763,7 +764,7 @@
   <string name="tpTimeSpentOnTV">Времени на TV: %s</string>
   <string name="watch">Просмотр</string>
   <string name="videoLibrary">Видеотека</string>
-  <string name="streamersMenu">Стримеры</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Стримеры</string>
   <string name="mobileApp">Мобильное приложение</string>
   <string name="webmasters">Разработчикам</string>
   <string name="about">О сайте</string>

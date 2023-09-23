@@ -29,7 +29,7 @@ export default function(opts: CevalOpts): CevalCtrl {
   const threads = storedProp(storageKey('ceval.threads'), Math.ceil((navigator.hardwareConcurrency || 1) / 2));
   const hashSize = storedProp(storageKey('ceval.hash-size'), 128);
   const infinite = storedProp('ceval.infinite', false);
-  let curEval: Tree.ClientEval | null = null;
+  let curEval: Tree.ClientEval | undefined = undefined;
   const enableStorage = li.storage.makeBoolean(storageKey('client-eval-enabled'));
   const allowed = prop(opts.variant.key !== 'russian' && opts.variant.key !== 'brazilian');
   const enabled = prop(opts.possible && allowed() && enableStorage.get() && !document.hidden);
@@ -156,6 +156,7 @@ export default function(opts: CevalOpts): CevalCtrl {
       }
     }
 
+    curEval = undefined
     pool.start(work);
 
     started = {
@@ -189,6 +190,9 @@ export default function(opts: CevalOpts): CevalCtrl {
     });
   }
 
+  const curDepth = () => curEval ? curEval.depth : 0
+  const isComputing = () => !!started && pool.isComputing()
+
   return {
     pnaclSupported,
     wasmSupported,
@@ -216,13 +220,13 @@ export default function(opts: CevalOpts): CevalCtrl {
       if (document.visibilityState !== 'hidden')
         enableStorage.set(enabled());
     },
-    curDepth: () => curEval ? curEval.depth : 0,
+    curDepth,
     effectiveMaxDepth,
     variant: opts.variant,
     isDeeper,
     goDeeper,
-    canGoDeeper: () => !isDeeper() && !infinite() && !pool.isComputing(),
-    isComputing: () => !!started && pool.isComputing(),
+    canGoDeeper: () => curDepth() < 99 && !isDeeper() && !isComputing(),
+    isComputing,
     engineName: pool.engineName,
     destroy: pool.destroy,
     redraw: opts.redraw

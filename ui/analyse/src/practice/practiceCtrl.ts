@@ -76,7 +76,7 @@ export function make(root: AnalyseCtrl, playableDepth: () => number): PracticeCt
       ceval.depth >= Math.min(ceval.maxDepth || 99, playableDepth()) ||
       (ceval.depth >= depth && (ceval.cloud || Number(ceval.millis) > 5000))
     ) : false
-    if (doPlay && ceval) {
+    if (doPlay && ceval && ceval.depth < 50) {
       return !!(ceval.cloud || !ceval.millis || ceval.millis > 500)
     }
     return doPlay

@@ -328,6 +328,10 @@
   <string name="bookmarkThisGame">Bookmark this game</string>
   <string name="tournament">Tournament</string>
   <string name="tournaments">Tournaments</string>
+  <string name="xTournaments">%s tournaments</string>
+  <string name="createdTournaments">Created</string>
+  <string name="recentlyPlayed">Recently played</string>
+  <string name="bestResults">Best results</string>
   <string name="tournamentPoints">Tournament points</string>
   <plurals name="nbTournamentPoints">
     <item quantity="one">%s tournament point</item>
@@ -335,6 +339,7 @@
   </plurals>
   <string name="viewTournament">View tournament</string>
   <string name="backToTournament">Back to tournament</string>
+  <string name="backToSimul">Back to simul</string>
   <string name="thematic">Thematic</string>
   <plurals name="moreThanNbRatedGames">
     <item quantity="one">≥ %s rated game</item>
@@ -366,6 +371,8 @@
   <string name="xCreatedTeamY">%1$s created team %2$s</string>
   <string name="xStartedStreaming">%s started streaming</string>
   <string name="averageElo">Average rating</string>
+  <string name="teamPage">Team page</string>
+  <string name="pickYourTeam">Pick your team</string>
   <string name="location">Location</string>
   <string name="filterGames">Filter games</string>
   <string name="reset">Reset</string>
@@ -390,6 +397,10 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="colorPlaysCapture">%s to move; play the longest capture sequence</string>
   <string name="retry">Retry</string>
   <string name="reconnecting">Reconnecting</string>
+  <plurals name="nbFriendsOnline">
+    <item quantity="one">%s friend online</item>
+    <item quantity="other">%s friends online</item>
+  </plurals>
   <string name="noFriendsOnline">No friends online</string>
   <string name="findFriends">Find friends</string>
   <string name="favoriteOpponents">Favorite opponents</string>
@@ -462,9 +473,14 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="popularOpenings">Popular openings</string>
   <string name="startPosition">Starting position</string>
   <string name="clearBoard">Clear board</string>
+  <string name="edit">Edit</string>
+  <string name="save">Save</string>
   <string name="savePosition">Save position</string>
   <string name="loadPosition">Load position</string>
   <string name="isPrivate">Private</string>
+  <string name="editTournament">Edit tournament</string>
+  <string name="tournDescription">Tournament description</string>
+  <string name="cancelTournament">Cancel the tournament</string>
   <string name="reportXToModerators">Report %s to moderators</string>
   <string name="profileCompletion">Profile completion: %s</string>
   <string name="xRating">%s rating</string>
@@ -476,12 +492,17 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="lastName">Last name</string>
   <string name="biography">Biography</string>
   <string name="country">Country</string>
+  <string name="countryOrRegion">Country/Region</string>
   <string name="socialMediaLinks">Social media links</string>
   <string name="linkSuggestions">Such as Twitter, Facebook, GitHub, Lichess, ...
   One URL per line</string>
   <string name="inlineNotation">Inline notation</string>
   <string name="watchLidraughtsTV">Watch Lidraughts TV</string>
   <string name="previouslyOnLidraughtsTV">Previously on Lidraughts TV</string>
+  <string name="collection">Collection</string>
+  <string name="customGamesCollection">Custom games collection</string>
+  <string name="reloadBoards">Reload boards</string>
+  <string name="addGameByUrlOrId">Add a game by URL or game ID.</string>
   <string name="removeGame">Remove game</string>
   <string name="onlinePlayers">Online players</string>
   <string name="activeToday">Active today</string>
@@ -577,6 +598,10 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="clockIncrement">Clock increment</string>
   <string name="onlyMembersOfTeam">Only members of team</string>
   <string name="noRestriction">No restriction</string>
+  <string name="minimumRatedGames">Minimum rated games</string>
+  <string name="minimumRating">Minimum rating</string>
+  <string name="maximumWeeklyRating">Maximum weekly rating</string>
+  <string name="onlyTitled">Only titled players</string>
   <string name="privacy">Privacy</string>
   <string name="letOtherPlayersFollowYou">Let other players follow you</string>
   <string name="letOtherPlayersChallengeYou">Let other players challenge you</string>
@@ -630,8 +655,8 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="signedOut">You have been signed out</string>
   <string name="loginSuccessful">You are now signed in</string>
   <string name="opponent">Opponent</string>
-  <string name="learnMenu">Learn</string>
-  <string name="studyMenu">Study</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Learn</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Study</string>
   <string name="practice">Practice</string>
   <string name="community">Community</string>
   <string name="tools">Tools</string>
@@ -657,7 +682,7 @@ a computer analysis, a game chat and a shareable URL.</string>
   <string name="tpTimeSpentOnTV">Time featured on TV: %s</string>
   <string name="watch">Watch</string>
   <string name="videoLibrary">Video library</string>
-  <string name="streamersMenu">Streamers</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamers</string>
   <string name="mobileApp">Mobile App</string>
   <string name="webmasters">Webmasters</string>
   <string name="about">About</string>

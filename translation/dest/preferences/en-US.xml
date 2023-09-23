@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="preferences">Preferences</string>
   <string name="display">Display</string>
+  <string name="pieceAnimation">Piece animation</string>
+  <string name="materialDifference">Material difference</string>
+  <string name="showKingMoves">Show the amount of times a king has moved (Frisian draughts)</string>
+  <string name="boardHighlights">Board highlights (last move)</string>
+  <string name="pieceDestinations">Piece destinations (valid moves and premoves)</string>
+  <string name="boardCoordinates">Board coordinates (1-50, a1-h8)</string>
+  <string name="insideTheBoard">Inside the board</string>
+  <string name="outsideTheBoard">Outside the board</string>
+  <string name="coordinateSystem8x8">Coordinate system on 8x8 boards</string>
+  <string name="fieldnumbers8x8">Fieldnumbers (1-32)</string>
+  <string name="algebraic8x8">Algebraic (a-h, 1-8)</string>
+  <string name="moveListWhilePlaying">Move list while playing</string>
+  <string name="onSlowGames">On slow games</string>
+  <string name="notationGameResult">Notation game result (white win • draw • black win)</string>
+  <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">Zen mode</string>
+  <string name="displayBoardResizeHandle">Show board resize handle</string>
+  <string name="onlyOnInitialPosition">Only on initial position</string>
+  <string name="blindfoldDraughts">Blindfold draughts (invisible pieces)</string>
+  <string name="draughtsClock">Draughts clock</string>
+  <string name="tenthsOfSeconds">Tenths of seconds</string>
+  <string name="whenTimeRemainingLessThanTenSeconds">When time remaining &lt; 10 seconds</string>
+  <string name="horizontalGreenProgressBars">Horizontal green progress bars</string>
+  <string name="soundWhenTimeGetsCritical">Sound when time gets critical</string>
+  <string name="giveMoreTime">Give more time</string>
   <string name="gameBehavior">Game behavior</string>
+  <string name="howDoYouMovePieces">How do you move pieces?</string>
+  <string name="clickTwoSquares">Click two squares</string>
+  <string name="dragPiece">Drag a piece</string>
+  <string name="bothClicksAndDrag">Either</string>
+  <string name="howDoYouPlayMultiCaptures">How do you play multi-captures on analysis boards?</string>
+  <string name="stepByStep">Step by step</string>
+  <string name="allAtOnce">All at once</string>
+  <string name="premovesPlayingDuringOpponentTurn">Premoves (playing during opponent turn)</string>
+  <string name="takebacksWithOpponentApproval">Takebacks (with opponent approval)</string>
+  <string name="inCasualGamesOnly">In casual games only</string>
+  <string name="whenPremoving">When premoving</string>
+  <string name="claimDrawOnThreefoldRepetitionAutomatically">Claim draw on threefold repetition automatically</string>
+  <string name="whenTimeRemainingLessThanThirtySeconds">When time remaining &lt; 30 seconds</string>
+  <string name="moveConfirmation">Move confirmation</string>
+  <string name="inCorrespondenceGames">Correspondence games</string>
+  <string name="correspondenceAndUnlimited">Correspondence and unlimited</string>
+  <string name="confirmResignationAndDrawOffers">Confirm resignation and draw offers</string>
+  <string name="inputMovesWithTheKeyboard">Input moves with the keyboard</string>
+  <string name="yourPreferencesHaveBeenSaved">Your preferences have been saved.</string>
 </resources>

@@ -119,11 +119,14 @@ export function make(root: AnalyseCtrl): RetroCtrl {
   }
 
   function checkCeval(): void {
-    var node = root.node,
+    const node = root.node,
       cur = current();
-    if (!cur || feedback() !== 'eval' || cur.fault.node.ply !== node.ply) return;
-    if (isCevalReady(node)) {
+    const isReady = isCevalReady(node)
+    if (isReady && !root.ceval.isDeeper()) {
       root.ceval.stop()
+    }
+    if (!cur || feedback() !== 'eval' || cur.fault.node.ply !== node.ply) return;
+    if (isReady) {
       var diff = winningChances.povDiff(color, node.ceval!, cur.prev.node.eval);
       if (diff > -0.035) onWin();
       else onFail();

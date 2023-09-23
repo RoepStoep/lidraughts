@@ -635,8 +635,9 @@ Một đường dẫn mỗi dòng</string>
   <string name="signedOut">Bạn đã đăng xuất</string>
   <string name="loginSuccessful">Bây giờ bạn đã đăng nhập thành công</string>
   <string name="opponent">Đối thủ</string>
-  <string name="learnMenu">Học</string>
-  <string name="studyMenu">Nghiên cứu</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Học</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Nghiên cứu</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Các câu hỏi thường gặp</string>
   <string name="practice">Luyện tập</string>
   <string name="community">Cộng đồng</string>
   <string name="tools">Công cụ</string>
@@ -661,7 +662,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="tpTimeSpentOnTV">Thời gian được lên Lidraughts TV: %s</string>
   <string name="watch">Xem</string>
   <string name="videoLibrary">Thư viện video</string>
-  <string name="streamersMenu">Các Streamer</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Các Streamer</string>
   <string name="mobileApp">Ứng dụng Điện thoại</string>
   <string name="webmasters">Các nhà phát triển web</string>
   <string name="about">Giới thiệu</string>

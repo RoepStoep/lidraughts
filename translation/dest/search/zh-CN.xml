@@ -2,6 +2,15 @@
 <resources>
   <string name="search">搜索</string>
   <string name="advancedSearch">高级搜索</string>
+  <plurals name="searchInXGames">
+    <item quantity="other">在%s个对局中搜索</item>
+  </plurals>
+  <plurals name="searchInXGamesDescription">
+    <item quantity="other">在%s个对局中使用高级标准搜索</item>
+  </plurals>
+  <plurals name="xGamesFound">
+    <item quantity="other">找到%s盘对局</item>
+  </plurals>
   <string name="searchPlayersExplanation">您想搜索的棋手姓名</string>
   <string name="opponentName">对手</string>
   <string name="loser">失败者</string>
@@ -11,6 +20,7 @@
   <string name="aiLevel">AI 级别</string>
   <string name="source">来源</string>
   <string name="numberOfTurns">行棋步数</string>
+  <string name="numberOfTurnsExplanation">行棋着数(一个回合算一着棋)</string>
   <string name="result">结果</string>
   <string name="winnerColor">获胜方</string>
   <string name="date">日期</string>

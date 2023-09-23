@@ -663,8 +663,8 @@ Eine URL pro Zeile</string>
   <string name="signedOut">Erfolgreich ausgeloggt</string>
   <string name="loginSuccessful">Du bist jetzt eingeloggt</string>
   <string name="opponent">Gegner</string>
-  <string name="learnMenu">Lernen</string>
-  <string name="studyMenu">Studien</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Lernen</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Studien</string>
   <string name="practice">Trainieren</string>
   <string name="community">Gemeinschaft</string>
   <string name="tools">Werkzeuge</string>
@@ -690,7 +690,7 @@ Eine URL pro Zeile</string>
   <string name="tpTimeSpentOnTV">Gesamtzeit TV: %s</string>
   <string name="watch">Zuschauen</string>
   <string name="videoLibrary">Video-Bibliothek</string>
-  <string name="streamersMenu">Streamer</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamer</string>
   <string name="mobileApp">Mobile-App</string>
   <string name="webmasters">Webmaster</string>
   <string name="about">Über</string>

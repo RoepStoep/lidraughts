@@ -630,8 +630,9 @@
   <string name="signedOut">Ви вийшли.</string>
   <string name="loginSuccessful">Вхід у систему успішно здійснений</string>
   <string name="opponent">Суперник</string>
-  <string name="learnMenu">Навчатися</string>
-  <string name="studyMenu">Дослідження</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Навчатися</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Дослідження</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">ЧаПах</string>
   <string name="practice">Практика</string>
   <string name="community">Спільнота</string>
   <string name="tools">Інструменти</string>
@@ -659,7 +660,7 @@
   <string name="tpTimeSpentOnTV">Час на TV: %s</string>
   <string name="watch">Перегляд</string>
   <string name="videoLibrary">Відеоархів</string>
-  <string name="streamersMenu">Стрімери</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Стрімери</string>
   <string name="mobileApp">Мобільний додаток</string>
   <string name="webmasters">Розробникам</string>
   <string name="about">Про сайт</string>

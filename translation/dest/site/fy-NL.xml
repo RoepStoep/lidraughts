@@ -450,8 +450,8 @@ kompjûteranalyze, partijpetear en dielbere URL te krijen.</string>
   <string name="signedOut">Do bist ôfmeld</string>
   <string name="loginSuccessful">Do bist oanmeld</string>
   <string name="opponent">Tsjinstanner</string>
-  <string name="learnMenu">Leare</string>
-  <string name="studyMenu">Stúdzje</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Leare</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Stúdzje</string>
   <string name="practice">Oefenje</string>
   <string name="increment">Tafoeging per set</string>
   <string name="sharePDN">Diel PDN</string>

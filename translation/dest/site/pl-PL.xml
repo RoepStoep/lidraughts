@@ -733,8 +733,8 @@ jeden adres URL na linię</string>
   <string name="signedOut">Wylogowałeś się</string>
   <string name="loginSuccessful">Jesteś zalogowany</string>
   <string name="opponent">Przeciwnik</string>
-  <string name="learnMenu">Nauka</string>
-  <string name="studyMenu">Opracowania</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Nauka</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Opracowania</string>
   <string name="practice">Ćwiczenia</string>
   <string name="community">Społeczność</string>
   <string name="tools">Narzędzia</string>
@@ -762,7 +762,7 @@ jeden adres URL na linię</string>
   <string name="tpTimeSpentOnTV">Czas w TV: %s</string>
   <string name="watch">Oglądaj</string>
   <string name="videoLibrary">Wideoteka</string>
-  <string name="streamersMenu">Streamerzy</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamerzy</string>
   <string name="mobileApp">Aplikacja mobilna</string>
   <string name="webmasters">Webmasterzy</string>
   <string name="about">Informacje o</string>

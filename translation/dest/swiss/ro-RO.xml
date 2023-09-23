@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="swissTournaments">Turnee Swiss</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s rundă</item>
+    <item quantity="few">%s runde</item>
+    <item quantity="other">%s de runde</item>
+  </plurals>
+  <string name="nextRound">Runda următoare</string>
+  <string name="numberOfRounds">Număr de runde</string>
+</resources>

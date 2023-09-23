@@ -412,8 +412,8 @@
   <string name="youPlayTheBlackPieces">Chi yw du</string>
   <string name="itsYourTurn">Dy dro di!</string>
   <string name="opponent">Gwrthwynebydd</string>
-  <string name="learnMenu">Dysgu</string>
-  <string name="studyMenu">Astudiaeth</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Dysgu</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Astudiaeth</string>
   <string name="practice">Ymarfer</string>
   <string name="community">Cymdeithas</string>
   <string name="tools">Offer</string>
@@ -431,7 +431,7 @@
   <string name="tpTimeSpentOnTV">Edrychodd ar TV: %s</string>
   <string name="watch">Gwylio</string>
   <string name="videoLibrary">Llyfrgell fideo</string>
-  <string name="streamersMenu">Ffrydwyr</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Ffrydwyr</string>
   <string name="mobileApp">Rhaglen symudol</string>
   <string name="webmasters">Gwefeistrau</string>
   <string name="about">Amdan</string>

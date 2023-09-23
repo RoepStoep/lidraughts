@@ -625,8 +625,8 @@
   <string name="signedOut">Ты выйшаў з свайго акаўту</string>
   <string name="loginSuccessful">Ты ўвайшоў у свой акаўнт</string>
   <string name="opponent">Апанэнт</string>
-  <string name="learnMenu">Вучыцца</string>
-  <string name="studyMenu">Студыя</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Вучыцца</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Студыя</string>
   <string name="practice">Практыка</string>
   <string name="community">Супольнасць</string>
   <string name="tools">Інструменты</string>
@@ -654,7 +654,7 @@
   <string name="tpTimeSpentOnTV">Час у TV: %s</string>
   <string name="watch">Прагляд</string>
   <string name="videoLibrary">Відэатэка</string>
-  <string name="streamersMenu">Стрымеры</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Стрымеры</string>
   <string name="mobileApp">Мабільная праграма</string>
   <string name="webmasters">Для распрацоўнікаў</string>
   <string name="about">Пра сайт</string>

@@ -572,8 +572,8 @@
   <string name="youPlayTheBlackPieces">את/ה משחק/ת כשחור</string>
   <string name="itsYourTurn">תורך!</string>
   <string name="opponent">יריב</string>
-  <string name="learnMenu">למד/י</string>
-  <string name="studyMenu">לוחות למידה</string>
+  <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">למד/י</string>
+  <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">לוחות למידה</string>
   <string name="practice">תרגול</string>
   <string name="community">קהילה</string>
   <string name="tools">כלים</string>
@@ -599,7 +599,7 @@
   <string name="tpTimeSpentOnTV">זמן בטלוויזיה: %s</string>
   <string name="watch">צפו</string>
   <string name="videoLibrary">ספריית וידאו</string>
-  <string name="streamersMenu">משדרים</string>
+  <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">משדרים</string>
   <string name="mobileApp">אפליקציה לטלפון</string>
   <string name="webmasters">עבור מתכנתים</string>
   <string name="about">על אודות</string>

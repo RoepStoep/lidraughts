@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="broadcasts">Versenyközvetítések</string>
+  <string name="liveBroadcasts">Közvetítések élő versenyekről</string>
+  <string name="newBroadcast">Új élő versenyközvetítés</string>
+  <string name="ongoing">Folyamatban</string>
+  <string name="upcoming">Közelgő</string>
+  <string name="completed">Befejeződött</string>
+  <string name="fullDescription">Esemény teljes leírása</string>
+  <string name="fullDescriptionHelp">Opcionális a közvetítés még bővebb leírása. %1$s használható. A hossz nem lehet több, mint %2$s karakter.</string>
+  <string name="sourceUrlOrGameIds">Forrás URL vagy játszmaazonosítók</string>
+  <string name="sourceUrlHelp">URL amit a Lidraughts időnként PDN frissítésekért ellenőriz. Ennek nyilvános internetcímnek kell lennie.</string>
+  <string name="gameIdsHelp">Illetve megadhatsz legfeljebb 64 Lidraughts játszmaazonosítót, szóközökkel elválasztva.</string>
+  <string name="roundNumber">Forduló száma</string>
+  <string name="startDate">Kezdés időpontja a saját időzónádban</string>
+  <string name="startDateHelp">Opcionális, ha tudod mikor kezdődik az esemény</string>
+  <string name="credits">Forrásmegjelölés</string>
+</resources>

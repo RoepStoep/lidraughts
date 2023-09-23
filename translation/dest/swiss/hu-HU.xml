@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="swissTournaments">Svájci rendszerű versenyek</string>
+  <plurals name="nbRounds">
+    <item quantity="one">%s forduló</item>
+    <item quantity="other">%s forduló</item>
+  </plurals>
+  <string name="nextRound">Következő forduló</string>
+  <string name="numberOfRounds">Fordulók száma</string>
+</resources>
