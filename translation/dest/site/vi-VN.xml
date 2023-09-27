@@ -116,7 +116,7 @@
   <string name="cpus">CPU</string>
   <string name="memory">Bộ nhớ</string>
   <string name="infiniteAnalysis">Phân tích vô hạn</string>
-  <string name="removesTheDepthLimit">Bỏ giới hạn độ sâu, và làm máy tính của bạn ấm hơn</string>
+  <string name="removesTheDepthLimit">Bỏ giới hạn độ sâu và giữ máy tính của bạn mượt hơn</string>
   <string name="blunder">Sai lầm nghiêm trọng</string>
   <string name="blunders">Sai lầm nghiêm trọng</string>
   <string name="mistake">Lỗi</string>
@@ -159,7 +159,7 @@
   <string name="youNeedAnAccountToDoThat">Bạn cần một tài khoản để thực hiện điều này</string>
   <string name="signUp">Đăng kí</string>
   <string name="signupEmailHint">Chúng tôi chỉ sử dụng nó cho việc khôi phục mật khẩu.</string>
-  <string name="computersAreNotAllowedToPlay">Máy tính và chơi với sự trợ giúp của máy tính không được chấp nhận. Đừng nhờ sự trợ giúp của máy chơi cờ đam, các dữ liệu, hoặc từ những người chơi khác khi chơi.</string>
+  <string name="computersAreNotAllowedToPlay">Máy tính và chơi với sự trợ giúp của máy tính không được chấp nhận. Đừng nhờ sự trợ giúp của máy chơi cờ đam, các dữ liệu hoặc từ những người chơi khác khi chơi.</string>
   <string name="gameByUsername">Ván cờ theo tên người dùng</string>
   <string name="gameByUrlOrId">Ván cờ theo URL hoặc ID</string>
   <string name="games">Các ván đấu</string>
@@ -363,14 +363,14 @@
   <string name="toStudy">Nghiên cứu</string>
   <string name="pdnImportBy">PDN nhập bởi %s</string>
   <string name="importGame">Nhập ván cờ</string>
-  <string name="importGameExplanation">Dán PDN trò chơi để có bản phát lại có thể xem được,
-phân tích bằng máy tính, trò chuyện tong ván đấu và URL có thể chia sẻ.</string>
+  <string name="importGameExplanation">Dán PDN của ván đấu để xem lại trên trình duyệt,
+phân tích bằng máy tính, trò chuyện trong ván đấu và có một URL có thể chia sẻ được.</string>
   <string name="orUploadAPdnFile">Hoặc tải tệp PDN lên</string>
   <plurals name="nbImportedGames">
     <item quantity="other">%s ván cờ đã nhập</item>
   </plurals>
   <string name="thisIsADraughtsCaptcha">Đây là mã CAPTCHA cờ đam.</string>
-  <string name="clickOnTheBoardToMakeYourMove">Nhấn vào bàn cờ để di chuyển, và chứng minh bạn là con người.</string>
+  <string name="clickOnTheBoardToMakeYourMove">Nhấn vào bàn cờ để di chuyển và chứng minh bạn là con người.</string>
   <string name="captcha.fail">Hãy giải mã captcha cờ đam.</string>
   <string name="notTheBestCapture">Đó không phải là nước ăn quân tốt nhất</string>
   <string name="colorPlaysCapture">%s để di chuyển; chơi chuỗi ăn quân dài nhất</string>
@@ -500,8 +500,8 @@ Một đường dẫn mỗi dòng</string>
   <string name="findTheBestMoveForBlack">Tìm nước tối ưu cho Đen.</string>
   <string name="toTrackYourProgress">Theo dõi tiến trình của bạn:</string>
   <string name="trainingSignupExplanation">Lidraughts sẽ cung cấp những câu đố phù hợp với kỹ năng của bạn, tạo nên hiệu quả đào tạo tốt hơn.</string>
-  <string name="puzzleId">Câu đố %s</string>
-  <string name="puzzleOfTheDay">Thế cờ của ngày</string>
+  <string name="puzzleId">Câu đố số %s</string>
+  <string name="puzzleOfTheDay">Câu đố của ngày</string>
   <string name="clickToSolve">Nhấn để giải</string>
   <string name="goodMove">Nước đi tốt</string>
   <string name="butYouCanDoBetter">Nhưng bạn không thể làm hơn được.</string>
@@ -695,6 +695,8 @@ Một đường dẫn mỗi dòng</string>
   <string name="winningPercentage">Tỷ lệ chiến thắng</string>
   <string name="targetPercentage">Phần trăm mục tiêu</string>
   <string name="toReachTarget">Để đạt được mục tiêu:</string>
+  <string name="targetWinningPercentage">Tỷ lệ chiến thắng mục tiêu: %s</string>
+  <string name="currentWinningPercentage">Tỷ lệ chiến thắng hiện tại: %s</string>
   <string name="succeeded">đã thành công!</string>
   <string name="failed">thất bại</string>
   <string name="simulTimeOut">Hết thời gian chờ sự kiện đồng loạt</string>
@@ -710,7 +712,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="aboutSimulSettings">Cờ đồng loạt luôn không tính elo. Việc tái đấu, đi lại và thêm thời gian sẽ bị vô hiệu hoá.</string>
   <string name="create">Tạo</string>
   <string name="whenCreateSimul">Khi bạn tạo một sự kiện đồng loạt, bạn sẽ chơi với nhiều người cùng một lúc.</string>
-  <string name="simulVariantsHint">Nếu bạn chọn nhiều thể loại, mỗi người tham gia sẽ được lựa chọn chơi thể loại nào.</string>
+  <string name="simulVariantsHint">Nếu bạn chọn nhiều biến thể, mỗi người chơi sẽ được lựa chọn chơi biến thể nào.</string>
   <string name="simulClockHint">Thiết lập Đồng hồ Fischer. Bạn càng chơi với nhiều người thì càng có thể cần nhiều thời gian.</string>
   <string name="simulAddExtraTime">Bạn có thể thêm thời gian cho đồng hồ của bạn để đấu cờ đồng loạt dễ hơn.</string>
   <string name="simulHostExtraTime">Thời gian thêm cho người chủ trì</string>
@@ -751,9 +753,42 @@ Một đường dẫn mỗi dòng</string>
   <string name="cumulative">Tích luỹ</string>
   <string name="glicko2Rating">Xếp hạng Glicko-2</string>
   <string name="checkYourEmail">Kiểm tra Email của bạn</string>
+  <string name="almostThereX">Gần đến rồi, %s!</string>
+  <string name="nowCheckYourEmailX">Bây giờ hãy kiểm tra email của bạn (%s) để xác nhận đăng ký.</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Chúng tôi đã gửi cho bạn một email. Nhấn vào link trong Email để kích hoạt tài khoản của bạn.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Nếu bạn không thấy ở trong email, kiểm tra lại ở các nơi khác có thể có, như thư rác, thư spam, mạng xã hội hay các thư mục khác.</string>
   <string name="weHaveSentYouAnEmailTo">Chúng tôi đã gửi một email đến %s. Nhấp vào liên kết trong email để đặt lại mật khẩu của bạn.</string>
+  <string name="notReceivingIt" comment="As in: not receiving the email?">Không nhận được nó?</string>
+  <string name="makeSureYourEmailAddressIsCorrect">Đảm bảo địa chỉ email của bạn là chính xác:</string>
+  <string name="waitUpToFiveMinutes">Hãy đợi khoảng 5 phút.</string>
+  <string name="itCanTakeAWhileToArrive">Tùy thuộc vào nhà cung cấp email của bạn, có thể mất một lúc để nhận được email.</string>
+  <string name="hotmailIsNotoriouslyBad">Hotmail nổi tiếng là tệ, email xác nhận của bạn có thể không bao giờ đến địa chỉ này.</string>
+  <string name="considerUsingADifferentOne">Hãy cân nhắc việc sử dụng một cái khác.</string>
+  <string name="stillNotGettingIt" comment="As in: still not receiving the email?">Vẫn chưa nhận được?</string>
+  <string name="didYoumakeSureYourEmailAddressIsCorrect">Bạn có chắc chắn rằng địa chỉ email của bạn là chính xác?</string>
+  <string name="didYouWaitFiveMinutes">Bạn đã đợi 5 phút?</string>
+  <string name="changeIt">Thay đổi nó</string>
+  <string name="thisIsAlreadyYourCurrentEmail">Đây đã là email hiện tại của bạn.</string>
+  <string name="ifSoX">Nếu vậy, %s.</string>
+  <string name="proceedToThisPage">tiếp tục đến trang này để giải quyết vấn đề</string>
+  <string name="clickHereForHelp">Nhấn vào đây để được giúp đỡ</string>
+  <string name="emailConfirmHelp">Hỗ trợ việc xác nhận qua email</string>
+  <string name="emailConfirmNotReceived">Không nhận được email xác nhận sau khi đăng ký?</string>
+  <string name="whatSignupUsername">Tên người dùng mà bạn đã đăng ký là gì?</string>
+  <string name="usernameNotFound">Chúng tôi không tìm thấy bất kì người dùng nào có tên: %s.</string>
+  <string name="usernameCanBeUsedForNewAccount">Bạn có thể dùng tên này để tạo một tài khoản mới</string>
+  <string name="emailSent">Chúng tôi đã gửi cho %s một email.</string>
+  <string name="emailCanTakeSomeTime">Có thể sẽ mất một lúc để nhận được.</string>
+  <string name="refreshInboxAfterFiveMinutes">Đợi 5 phút sau đó làm mới hộp thư đến trong email.</string>
+  <string name="checkSpamFolder">Ngoài ra hãy kiểm tra hộp thư rác, nó có thể ở trong đó. Nếu có, hãy đánh dấu nó không phải là rác.</string>
+  <string name="emailForSignupHelp">Nếu vẫn không nhận được, hãy gửi cho chúng tôi email này:</string>
+  <string name="copyTextToEmail">Sao chép và dán đoạn văn bản phía trên và gửi nó tới %s</string>
+  <string name="waitForSignupHelp">Chúng tôi sẽ sớm liên lạc lại với bạn để giúp bạn hoàn tất việc đăng ký.</string>
+  <string name="accountConfirmed">Đã xác nhận người dùng %s thành công.</string>
+  <string name="accountCanLogin">Bạn đã có thể đăng nhập ngay bây giờ tại %s.</string>
+  <string name="accountConfirmationEmailNotNeeded">Bạn không cần xác nhận email.</string>
+  <string name="accountClosed">Tài khoản %s đã đóng.</string>
+  <string name="accountRegisteredWithoutEmail">Tài khoản %s đã đăng ký mà không cần có email.</string>
   <string name="byRegisteringYouAgreeToBeBoundByOur">Bằng cách đăng ký, bạn đồng ý tuân thủ %s của chúng tôi.</string>
   <string name="networkLagBetweenYouAndLidraughts">Độ trễ giữa bạn và Lidraughts</string>
   <string name="timeToProcessAMoveOnLidraughtsServer">Thời gian để tiến hành một nước đi trên máy chủ Lidraughts</string>

@@ -80,6 +80,7 @@ Faça qualquer movimento para continuar.</string>
   <string name="puzzleFailed">Exercício falhado!</string>
   <string name="retry">De novo</string>
   <string name="clickToRetry">Clique para tentar novamente</string>
+  <string name="playALegalCapture">Joga uma captura legal</string>
   <string name="winTheGame">Vença a partida</string>
   <plurals name="winTheGameInX">
     <item quantity="one">Vença a partida em %s lances</item>

@@ -82,7 +82,7 @@ object bits {
         )
       }
 
-  def checkYourEmailBanner(userEmail: lidraughts.security.EmailConfirm.UserEmail) = frag(
+  def checkYourEmailBanner(userEmail: lidraughts.security.EmailConfirm.UserEmail)(implicit ctx: Context) = frag(
     styleTag("""
 body { margin-top: 45px; }
 #email-confirm {
@@ -109,8 +109,10 @@ body { margin-top: 45px; }
 }
 """),
     div(id := "email-confirm")(
-      s"Almost there, ${userEmail.username}! Now check your email (${userEmail.email.conceal}) for signup confirmation.",
-      a(href := routes.Auth.checkYourEmail)("Click here for help")
+      trans.almostThereX(userEmail.username),
+      " ",
+      trans.nowCheckYourEmailX(userEmail.email.conceal),
+      a(href := routes.Auth.checkYourEmail)(trans.clickHereForHelp())
     )
   )
 

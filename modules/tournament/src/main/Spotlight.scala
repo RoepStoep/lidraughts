@@ -18,10 +18,10 @@ object Spotlight {
   import Schedule.Freq._
 
   def select(tours: List[Tournament], user: Option[User], max: Int): List[Tournament] =
-    user.fold(sort(tours) take max) { select(tours, _, max) }
+    user.fold(sort(tours) |> { takeMax(_, max) }) { select(tours, _, max) }
 
   def select(tours: List[Tournament], user: User, max: Int): List[Tournament] =
-    sort(tours.filter { select(_, user) }) take max
+    sort(tours.filter { select(_, user) }) |> { takeMax(_, max) }
 
   private def sort(tours: List[Tournament]) = tours.sortBy { t =>
     -(t.schedule.fold(if (t.isPromoted) userPromotedImportance else 0)(_.freq.importance))
@@ -57,4 +57,11 @@ object Spotlight {
       tour.conditions.nbRatedGame.fold(true) { c => c(user).accepted } &&
       tour.conditions.minRating.fold(true) { c => c(user).accepted } &&
       tour.conditions.maxRating.fold(true)(_ maybe user)
+
+  private def takeMax(tours: List[Tournament], max: Int) = tours.foldLeft(List[Tournament]()) {
+    case (acc, tour) if acc.size < max =>
+      if (tour.isPromoted && acc.exists(t => t.isPromoted && t.variant == tour.variant)) acc
+      else acc :+ tour
+    case (acc, _) => acc
+  }
 }
