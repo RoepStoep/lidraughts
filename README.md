@@ -1,24 +1,33 @@
-[lidraughts.org](https://lidraughts.org)
+# [lidraughts.org](https://lidraughts.org)
 ==================================
 
-Lidraughts is a rewrite of [lichess/lila](https://github.com/ornicar/lila/) for draughts, supporting both 10x10 and 8x8 boards. It includes the 10x10 variants [Frisian draughts](https://lidraughts.org/variant/frisian), [Antidraughts](https://lidraughts.org/variant/antidraughts), [Frysk!](https://lidraughts.org/variant/frysk) and [Breakthrough](https://lidraughts.org/variant/breakthrough). The 8x8 variants are [Russian](https://lidraughts.org/variant/russian) and [Brazilian](https://lidraughts.org/variant/brazilian) draughts.
+Lidraughts is the ultimate platform for draughts enthusiasts, offering an immersive gaming experience for both 10x10 and 8x8 boards. Explore exciting variants such as [Frisian draughts](https://lidraughts.org/variant/frisian), [Antidraughts](https://lidraughts.org/variant/antidraughts), [Frysk!](https://lidraughts.org/variant/frysk), [Breakthrough](https://lidraughts.org/variant/breakthrough), [Russian](https://lidraughts.org/variant/russian), and [Brazilian](https://lidraughts.org/variant/brazilian) draughts.
 
-It features [live games](https://lidraughts.org/?any#hook),
-[computer opponents](https://lidraughts.org/setup/ai),
-[tournaments](https://lidraughts.org/tournament),
-[simuls](https://lidraughts.org/simul),
-[tactics](https://lidraughts.org/training),
-[board editor](https://lidraughts.org/editor),
-[analysis](https://lidraughts.org/analysis) (with engine),
-[studies / shared analysis](https://lidraughts.org/study),
-[coordinates training](https://lidraughts.org/training/coordinate),
-[forums](https://lidraughts.org/forum) and
-[teams](https://lidraughts.org/team).
+## Key Features
 
-Computer opposition and analysis is made possible by Fabien Letouzey's great engine [Scan 3.1](https://github.com/rhalbersma/scan) for all 10x10 draughts variants.
+- [Live games](https://lidraughts.org/?any#hook)
+- [Computer opponents](https://lidraughts.org/setup/ai)
+- [Tournaments](https://lidraughts.org/tournament)
+- [Simuls](https://lidraughts.org/simul)
+- [Tactics](https://lidraughts.org/training)
+- [Board editor](https://lidraughts.org/editor)
+- [Analysis](https://lidraughts.org/analysis) (with engine)
+- [Studies / shared analysis](https://lidraughts.org/study)
+- [Coordinates training](https://lidraughts.org/training/coordinate)
+- [Forums](https://lidraughts.org/forum)
+- [Teams](https://lidraughts.org/team)
 
-The UI is currently available in 27 languages, translated from English (GB and US) with a varying degree of completeness: Belarusian, Chinese Simplified, Chinese Traditional, Czech, Dutch, German, Greek, French, Hebrew, Hungarian, Italian, Japanese, Latvian, Lithuanian, Mongolian, Polish, Romanian, Russian, Portuguese Brazilian, Portuguese European, Spanish, Taiwanese, Turkish, Ukrainian, Vietnamese and Welsh; and out of respect for Frisian draughts of course also in Frisian!
+Computer opposition and analysis are powered by Fabien Letouzey's exceptional engine [Scan 3.1](https://github.com/rhalbersma/scan), supporting all 10x10 draughts variants.
 
-Please help us translate Lidraughts [with Crowdin](https://crowdin.com/project/lidraughts). If your language isn't in the list, send us an email and we can add it.
+The UI is available in 27 languages, translated from English (GB and US), including Belarusian, Chinese Simplified, Chinese Traditional, Dutch, German, French, Russian, Portuguese Brazilian, Spanish, Turkish, and more. Contribute to translations through [Crowdin](https://crowdin.com/project/lidraughts).
 
-The source includes a draughts implementation of [scalachess](https://github.com/ornicar/scalachess/) in modules/draughts. The UI component [chessground](https://github.com/ornicar/chessground) is implemented for draughts as ui/draughtsground.
+## Responsive Design
+
+Lidraughts.org boasts a responsive design, ensuring an unparalleled user experience across various devices, from desktops to smartphones.
+
+## Installation
+
+Clone the Lidraughts repository:
+
+```bash
+git clone https://github.com/RoepStoep/lidraughts.git
