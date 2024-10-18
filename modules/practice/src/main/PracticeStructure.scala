@@ -98,17 +98,18 @@ object PracticeStructure {
 
   private def isBetaSection(sec: PracticeConfigSection) = sec.id.toLowerCase.startsWith("beta-")
 
-  def make(conf: PracticeConfig, chapters: Map[Study.Id, Vector[Chapter.IdName]], langOpt: Option[String]) = {
+  def make(conf: PracticeConfig, chapters: Map[Study.Id, Vector[Chapter.IdName]], langOpt: Option[String], beta: Boolean = false) = {
     val sections = langOpt.fold(conf.sections)(_ => conf.sections.filter(_.lang.isEmpty))
     val lang = langOpt.filterNot(defaultLang ==)
+    val sectionsBeta = if (beta) sections else sections.filterNot(isBetaSection)
     PracticeStructure(
-      sections = sections.filterNot(isBetaSection).map { defaultSec =>
+      sections = sectionsBeta.map { defaultSec =>
         val sec = lang.flatMap(conf.translatedSection(defaultSec.id, _)) | defaultSec
         PracticeSection(
           id = sec.id,
           lang = sec.lang | defaultLang,
           variant = sec.getVariant,
-          name = sec.name,
+          name = if (isBetaSection(sec)) s"${sec.name} [BETA]" else sec.name,
           studies = sec.studies.map { stu =>
             val id = Study.Id(stu.id)
             PracticeStudy(

@@ -5,6 +5,7 @@ import scala.concurrent.duration._
 import draughts.variant.Variant
 import lidraughts.common.Lang
 import lidraughts.db.dsl._
+import lidraughts.security.Granter
 import lidraughts.study.{ Chapter, Study }
 import lidraughts.user.User
 
@@ -19,12 +20,12 @@ final class PracticeApi(
   import BSONHandlers._
 
   def get(user: Option[User], variant: Option[Variant], lang: Lang): Fu[UserPractice] = for {
-    struct <- structure.getLang(lang.code.some).map(s => variant.fold(s)(s.withVariant))
+    struct <- structure.getLang(lang.code.some, user).map(s => variant.fold(s)(s.withVariant))
     prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated(_, lang.code))
   } yield UserPractice(struct, prog)
 
   def getStudyWithFirstOngoingChapter(user: Option[User], lang: Lang, tryStudyId: Study.Id): Fu[Option[UserStudy]] = for {
-    structAll <- structure.getAll
+    structAll <- structure.getAll(user)
     prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated(_, lang.code))
     langCode = lang.code.some
     studyId = structAll.translatedStudy(tryStudyId, langCode).fold(tryStudyId)(_.id)
@@ -33,11 +34,11 @@ final class PracticeApi(
     studyOption <- chapter.fold(studyApi byIdWithFirstChapter studyId) { chapter =>
       studyApi.byIdWithChapter(studyId, chapter.id)
     }
-    structLang <- structure.getLang(langCode) // TODO: filter same variant
+    structLang <- structure.getLang(langCode, user) // TODO: filter same variant
   } yield makeUserStudy(studyOption, UserPractice(structLang, prog), chapters)
 
   def getStudyWithChapter(user: Option[User], lang: Lang, tryStudyId: Study.Id, tryChapterId: Chapter.Id): Fu[Option[UserStudy]] = for {
-    structAll <- structure.getAll
+    structAll <- structure.getAll(user)
     prog <- user.fold(fuccess(PracticeProgress.anon))(progress.getTranslated(_, lang.code))
     langCode = lang.code.some
     studyId = structAll.translatedStudy(tryStudyId, langCode).fold(tryStudyId)(_.id)
@@ -45,7 +46,7 @@ final class PracticeApi(
     baseChapterId <- structure.getChaptersFromLangs.map(_.getOrElse(tryChapterId, tryChapterId))
     chapterId <- structure.getChaptersToLang(langCode).map(_.fold(baseChapterId)(_.getOrElse(baseChapterId, baseChapterId)))
     studyOption <- studyApi.byIdWithChapter(studyId, chapterId)
-    structLang <- structure.getLang(langCode) // TODO: filter same variant
+    structLang <- structure.getLang(langCode, user) // TODO: filter same variant
   } yield makeUserStudy(studyOption, UserPractice(structLang, prog), chapters)
 
   private def makeUserStudy(studyOption: Option[Study.WithChapter], up: UserPractice, chapters: List[Chapter.Metadata]) = for {
@@ -88,8 +89,20 @@ final class PracticeApi(
       expireAfter = _.ExpireAfterAccess(3.hours)
     )
 
-    def getAll = cacheAll.get
-    def getLang(lang: Option[String]) = cacheLang.get(lang.getOrElse(PracticeStructure.defaultLang))
+    def getAll(betaUser: Option[User]) =
+      if (betaUser ?? Granter(_.Beta)) for {
+        conf <- config.get
+        chapters <- studyApi.chapterIdNames(conf.studyIds)
+      } yield PracticeStructure.make(conf, chapters, none, beta = true)
+      else cacheAll.get
+    def getLang(lang: Option[String], betaUser: Option[User]) = {
+      val langOrDefault = lang.getOrElse(PracticeStructure.defaultLang)
+      if (betaUser ?? Granter(_.Beta)) for {
+        conf <- config.get
+        chapters <- studyApi.chapterIdNames(conf.studyIds)
+      } yield PracticeStructure.make(conf, chapters, langOrDefault.some, beta = true)
+      else cacheLang.get(langOrDefault)
+    }
 
     private val chaptersFromLangs = asyncCache.single[Map[Chapter.Id, Chapter.Id]](
       "practice.structure.chapters.fromLangs",
@@ -119,7 +132,7 @@ final class PracticeApi(
       chaptersToLang.invalidateAll
     }
 
-    def onSave(study: Study) = getAll foreach { structure =>
+    def onSave(study: Study) = getAll(none) foreach { structure =>
       if (structure.hasStudy(study.id)) clear
     }
   }
@@ -162,7 +175,7 @@ final class PracticeApi(
       variant match {
         case Some(v) => for {
           prog <- getRaw(user)
-          struct <- structure.getAll
+          struct <- structure.getAll(user.some)
           studies = struct.sections.filter(s => s.variant == v && s.lang == PracticeStructure.defaultLang).flatMap(_.studies)
         } yield save(prog.clearChapters(studies.flatMap(_.chapterIds)))
         case _ => coll.remove($id(user.id)).void

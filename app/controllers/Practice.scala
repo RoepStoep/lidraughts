@@ -24,7 +24,7 @@ object Practice extends LidraughtsController {
     renderIndex(ctx.pref.practiceVariant, none)
   }
 
-  private def indexVariant(key: String) = Open { implicit ctx =>
+  def indexVariant(key: String) = Open { implicit ctx =>
     Variant(key) match {
       case Some(variant) if practiceVariants.contains(variant) =>
         if (ctx.pref.practiceVariant != variant)
@@ -63,7 +63,7 @@ object Practice extends LidraughtsController {
     redirectTo(sectionId, studySlug.some)(_.studies.find(_.slug == studySlug))
 
   private def redirectTo(sectionId: String, withSlug: Option[String])(select: PracticeSection => Option[PracticeStudy]) = Open { implicit ctx =>
-    env.api.structure.getAll.flatMap { struct =>
+    env.api.structure.getAll(ctx.me).flatMap { struct =>
       struct.sections.find(sec => sec.id == sectionId && withSlug.fold(true)(sec.hasSlug)).fold(notFound) { section =>
         select(section) ?? { study =>
           Redirect(routes.Practice.show(section.id, study.slug, study.id.value)).fuccess
@@ -123,7 +123,7 @@ object Practice extends LidraughtsController {
 
   def config = Secure(_.PracticeConfig) { implicit ctx => me =>
     for {
-      struct <- env.api.structure.getAll
+      struct <- env.api.structure.getAll(me.some)
       form <- env.api.config.form
     } yield Ok(html.practice.config(struct, form))
   }
@@ -132,7 +132,7 @@ object Practice extends LidraughtsController {
     implicit val req = ctx.body
     env.api.config.form.flatMap { form =>
       FormFuResult(form) { err =>
-        env.api.structure.getAll map { html.practice.config(_, err) }
+        env.api.structure.getAll(me.some) map { html.practice.config(_, err) }
       } { text =>
         ~env.api.config.set(text).right.toOption >>-
           env.api.structure.clear >>

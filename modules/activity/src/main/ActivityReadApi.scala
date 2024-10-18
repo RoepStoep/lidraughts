@@ -28,7 +28,7 @@ final class ActivityReadApi(
       .gather[Activity, Vector](nb)
     activities = allActivities.filterNot(_.isEmpty)
     practiceStructure <- activities.exists(_.practice.isDefined) ?? {
-      practiceApi.structure.getAll map some
+      practiceApi.structure.getAll(none) map some
     }
     views <- activities.map { one(u, practiceStructure, lang.map(_.code)) _ }.sequenceFu
   } yield addSignup(u.createdAt, views)
