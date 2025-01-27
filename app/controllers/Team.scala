@@ -284,8 +284,12 @@ object Team extends LidraughtsController {
   }
 
   def requestForm(id: String) = Auth { implicit ctx => me =>
-    OptionFuOk(api.requestable(id, me)) { team =>
-      fuccess(html.team.request.requestForm(team, forms.request))
+    api.requestable(id, me) flatMap {
+      _.fold(Redirect(routes.Team.show(id)).fuccess) { team =>
+        fuccess(html.team.request.requestForm(team, forms.request)) map {
+          Ok(_)
+        }
+      }
     }
   }
 
