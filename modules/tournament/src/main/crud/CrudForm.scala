@@ -38,7 +38,9 @@ object CrudForm {
     "hasChat" -> boolean,
     "teamBattle" -> boolean,
     "drawLimit" -> text(minLength = 0, maxLength = 2)
-      .verifying("Enter a value between 0 and 99, or leave empty", mvs => mvs.length == 0 || parseIntOption(mvs).??(m => m >= 0 && m <= 99))
+      .verifying("Enter a value between 0 and 99, or leave empty", mvs => mvs.length == 0 || parseIntOption(mvs).??(m => m >= 0 && m <= 99)),
+    "excludeUserIds" -> optional(nonEmptyText),
+    "excludeReason" -> optional(nonEmptyText)
   )(CrudForm.Data.apply)(CrudForm.Data.unapply)
     .verifying("Invalid clock", _.validClock)
     .verifying("Increase tournament duration, or decrease game clock", _.validTiming)) fill empty
@@ -63,7 +65,9 @@ object CrudForm {
       streakable: Boolean,
       hasChat: Boolean,
       teamBattle: Boolean,
-      drawLimit: String
+      drawLimit: String,
+      excludeUserIds: Option[String],
+      excludeReason: Option[String]
   ) {
 
     def realVariant = Variant orDefault variant
@@ -121,6 +125,8 @@ object CrudForm {
     streakable = true,
     hasChat = true,
     teamBattle = false,
-    drawLimit = ""
+    drawLimit = "",
+    excludeUserIds = None,
+    excludeReason = None
   )
 }

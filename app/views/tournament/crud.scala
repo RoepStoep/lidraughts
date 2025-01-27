@@ -101,6 +101,8 @@ object crud {
     h2("Conditions of entry"),
     tournament.form.condition(form, crud = true, Nil),
     form3.group(form("password"), raw("Password (optional)"))(form3.input(_)),
+    form3.group(form("excludeUserIds"), raw("Exclude users (optional, lidraughts usernames separated by a comma)"))(form3.input(_)),
+    form3.group(form("excludeReason"), raw("Exclude reason (optional, message for excluded users)"))(form3.input(_)),
     form3.action(form3.submit(trans.apply()))
   )
 

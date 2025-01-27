@@ -232,5 +232,8 @@ object Tournament {
     case object Verdicts extends JoinResult("Tournament restrictions".some)
     case object MissingTeam extends JoinResult("Missing team".some)
     case object Nope extends JoinResult("Couldn't join for some reason?".some)
+    case class Excluded(reason: Option[String]) extends JoinResult(
+      reason.getOrElse("Your account has been excluded from participation").some
+    )
   }
 }

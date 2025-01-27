@@ -10,8 +10,16 @@ case class Spotlight(
     homepageHours: Option[Int] = None, // feature on homepage hours before start
     iconFont: Option[String] = None,
     iconImg: Option[String] = None,
-    drawLimit: Option[Int] = None
-)
+    drawLimit: Option[Int] = None,
+    excludeUserIds: Option[String] = None,
+    excludeReason: Option[String] = None
+) {
+
+  def excludeUser(user: User): Boolean =
+    excludeUserIds.fold(false) { userIds =>
+      userIds.split(",").map(_.trim).contains(user.id)
+    }
+}
 
 object Spotlight {
 

@@ -37,7 +37,9 @@ final class CrudApi(cached: Cached) {
     streakable = !tour.noStreak,
     hasChat = tour.hasChat,
     teamBattle = tour.isTeamBattle,
-    drawLimit = ~tour.spotlight.flatMap(_.drawLimit).map(_.toString)
+    drawLimit = ~tour.spotlight.flatMap(_.drawLimit).map(_.toString),
+    excludeUserIds = tour.spotlight.flatMap(_.excludeUserIds),
+    excludeReason = tour.spotlight.flatMap(_.excludeReason)
   )
 
   def update(old: Tournament, data: CrudForm.Data, teams: List[LightTeam]) =
@@ -104,7 +106,9 @@ final class CrudApi(cached: Cached) {
         homepageHours = homepageHours.some.filterNot(0 ==),
         iconFont = none,
         iconImg = image.some.filter(_.nonEmpty),
-        drawLimit = parseIntOption(drawLimit)
+        drawLimit = parseIntOption(drawLimit),
+        excludeUserIds = excludeUserIds,
+        excludeReason = excludeReason
       ).some,
       position = startingPosition,
       openingTable = openingTable,

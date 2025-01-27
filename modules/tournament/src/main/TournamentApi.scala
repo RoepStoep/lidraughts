@@ -309,6 +309,8 @@ final class TournamentApi(
           getVerdicts(tour, me.some, getUserTeamIds) flatMap { verdicts =>
             if (!verdicts.accepted) fuccess(JoinResult.Verdicts)
             else if (!pause.canJoin(me.id, tour)) fuccess(JoinResult.Paused)
+            else if (~tour.spotlight.map(_.excludeUser(me)))
+              fuccess(JoinResult.Excluded(tour.spotlight.flatMap(_.excludeReason)))
             else {
               def proceedWithTeam(team: Option[String]): Fu[JoinResult] =
                 PlayerRepo.join(tour.id, me, tour.perfLens, team) >>
