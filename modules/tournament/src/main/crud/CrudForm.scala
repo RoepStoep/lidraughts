@@ -30,7 +30,7 @@ object CrudForm {
     "date" -> utcDate,
     "image" -> stringIn(imageChoices),
     "headline" -> text(minLength = 5, maxLength = 30),
-    "description" -> text(minLength = 10, maxLength = 800),
+    "description" -> text(minLength = 10, maxLength = 1200),
     "conditions" -> Condition.DataForm.all,
     "password" -> optional(nonEmptyText),
     "berserkable" -> boolean,

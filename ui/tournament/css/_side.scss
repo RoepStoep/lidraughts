@@ -57,6 +57,9 @@
     @extend %break-word;
     max-height: 20vh;
     overflow-y: auto;
+    &.long {
+      max-height: 30vh;
+    }
   }
 }
 .chat__members {
