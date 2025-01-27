@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="playInATournament">Jouez dans un tournoi</string>
-  <string name="playWithAFriend">Jouer avec un(e) ami(e)</string>
+  <string name="playWithAFriend">Jouer avec un ami</string>
   <string name="playWithTheMachine">Jouer contre l\'ordinateur</string>
   <string name="toInviteSomeoneToPlayGiveThisUrl">Pour inviter quelqu\'un à jouer, donnez-lui ce lien URL</string>
   <string name="gameOver">Partie terminée</string>
@@ -670,6 +670,7 @@ Une URL par ligne</string>
   <string name="opponent">Adversaire</string>
   <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Apprendre</string>
   <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Étudier</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">FAQ</string>
   <string name="practice">S\'entraîner</string>
   <string name="community">Communauté</string>
   <string name="tools">Outils</string>
@@ -791,9 +792,25 @@ Une URL par ligne</string>
   <string name="cumulative">Cumulatif</string>
   <string name="glicko2Rating">Classement Glicko-2</string>
   <string name="checkYourEmail">Vérifiez vos courriels</string>
+  <string name="almostThereX">Nous y sommes presque, %s !</string>
+  <string name="nowCheckYourEmailX">Vérifiez dans vos emails (%s) pour confirmer votre inscription.</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Nous vous avons envoyé un courriel. Visitez le lien qui s\'y trouve pour activer votre compte.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Si vous ne trouvez pas le courriel dans votre boîte de réception, vérifiez dans vos courriels indésirables ou dans vos autres dossiers.</string>
   <string name="weHaveSentYouAnEmailTo">Nous avons envoyé un email à %s. Cliquez le lien qui s\'y trouve pour réinitialiser votre mot de passe.</string>
+  <string name="notReceivingIt" comment="As in: not receiving the email?">Renvoyer l\'e-mail?</string>
+  <string name="makeSureYourEmailAddressIsCorrect">Assurez-vous que votre adresse e-mail est correcte :</string>
+  <string name="waitUpToFiveMinutes">Vous devez attendre 5 minutes.</string>
+  <string name="itCanTakeAWhileToArrive">Selon votre fournisseur d\'email, cela peut prendre plus de temps.</string>
+  <string name="hotmailIsNotoriouslyBad">Hotmail est notoirement mauvais, votre e-mail de confirmation peut ne jamais arriver.</string>
+  <string name="considerUsingADifferentOne">Envisagez d\'utiliser un autre e-mail.</string>
+  <string name="stillNotGettingIt" comment="As in: still not receiving the email?">Toujours pas reçu d\'email ?</string>
+  <string name="didYoumakeSureYourEmailAddressIsCorrect">Avez-vous vérifié que votre e-mail est correct ?</string>
+  <string name="didYouWaitFiveMinutes">Avez-vous attendu 5 minutes ?</string>
+  <string name="changeIt">Changez-le</string>
+  <string name="thisIsAlreadyYourCurrentEmail">Ceci est déjà votre e-mail actuel.</string>
+  <string name="ifSoX">Si oui, %s.</string>
+  <string name="proceedToThisPage">allez à cette page pour résoudre le problème</string>
+  <string name="clickHereForHelp">Cliquez ici obtenir de l\'aide</string>
   <string name="emailConfirmHelp">Aide sur la confirmation par courriel</string>
   <string name="emailConfirmNotReceived">Vous n\'avez pas reçu votre courriel de confirmation après votre inscription?</string>
   <string name="whatSignupUsername">Avec quel nom d\'utilisateur vous êtes-vous inscrit?</string>
@@ -1001,12 +1018,15 @@ Une URL par ligne</string>
   <string name="welcomeToLidraughts">Bienvenue sur lidraughts.org!</string>
   <string name="thisIsYourProfilePage">Voici votre profil.</string>
   <string name="wouldYouLikeToX">Voulez-vous %s?</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">améliorez-le</string>
   <string name="enabledKidModeSuggestion">Est-ce qu\'un enfant va utiliser ce compte? Vous voudriez peut-être activer %s.</string>
+  <string name="whatNowSuggestions">Et maintenant ? Voici quelques suggestions :</string>
   <string name="improveWithDraughtsTacticsPuzzles">S\'entraîner avec des problèmes tactiques de dames</string>
   <string name="playTheAI">Jouer contre l\'intelligence artificielle</string>
   <string name="playOpponentsWorldwide">Jouer contre des adversaires du monde entier</string>
   <string name="followFriends">Suivez vos amis sur lidraughts</string>
   <string name="playInTournaments">Participez à des tournois</string>
+  <string name="learnFromStudies">Apprenez grâce aux études</string>
   <string name="configureLidraughts">Configurez lidraughts selon votre goût</string>
   <string name="exploreTheSiteAndHaveFun">Explorez le site et amusez-vous :)</string>
 </resources>

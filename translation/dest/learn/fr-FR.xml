@@ -77,10 +77,20 @@ Faites un déplacement pour continuer.</string>
   <string name="puzzleFailed">Problème raté !</string>
   <string name="retry">Réessayez</string>
   <string name="clickToRetry">Cliquez pour réessayer</string>
+  <string name="playALegalCapture">Jouez une capture légale</string>
+  <plurals name="playAllLegalCapturesXRemaining">
+    <item quantity="one">Jouez toutes les captures légales. Encore une capture à jouer !</item>
+    <item quantity="other">Jouez toutes les captures légales. Encore %s captures à jouer !</item>
+  </plurals>
   <string name="winTheGame">Gagnez la partie</string>
   <plurals name="winTheGameInX">
     <item quantity="one">Gagnez la partie en %s coup</item>
     <item quantity="other">Gagnez la partie en %s coups</item>
+  </plurals>
+  <string name="promoteAKing">Promouvez en roi</string>
+  <plurals name="promoteAKingInX">
+    <item quantity="one">Promouvez en roi en %s coup</item>
+    <item quantity="other">Promouvez en roi en %s coups</item>
   </plurals>
   <plurals name="holdTheDrawForX">
     <item quantity="one">Maintenir la nulle pour %s coup de plus</item>

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="isLidraughtsLagging">האם זמני התגובה של Lightdraughts נמוכים?</string>
   <string name="measurementInProgressThreeDot">מדידה מתבצעת...</string>
   <string name="noAndYourNetworkIsGood">לא. והרשת שלך עובדת סבבה.</string>
   <string name="noAndYourNetworkIsBad">לא. והרשת שלך לא עובדת כראוי.</string>
   <string name="yesItWillBeFixedSoon">כן. זה יתוקן בקרוב!</string>
   <string name="andNowTheLongAnswerLagComposedOfTwoValues">ועכשיו, התשובה הארוכה! לאג במשחק נגרם משני ערכים לא קשורים אחד לשני (ככל שהם נמוכים יותר כך יותר טוב):</string>
+  <string name="lidraughtsServerLatency">זמן התגובה של שרת Lightdraughts</string>
+  <string name="lidraughtsServerLatencyExplanation">הזמן שלוקח לעבד מהלך בשרת זהה עבור וכולם ותלוי בעומס השרת בלבד. כמה שיותר שחקנים, כך זמן התגובה ארוך יותר. המפתחים של Lightraughts עושים את מירב המאמצים לשמור על זמני תגובה טובים. רק לעיתים נדירות זמן התגובה יחרוג מ-10 מילי-שניות.</string>
+  <string name="networkBetweenLidraughtsAndYou">הרשת בינכם לבין Lightdraughts</string>
+  <string name="networkBetweenLidraughtsAndYouExplanation">הזמן שלוקח לשלוח מהלך מהמחשב שלכם לשרת Lightdraugts ולקבל תשובה חזרה. זה מושפע מהמרחק שלכם מהשרת (צרפת), ומאיכות חיבור האינטרנט שלכם. המפתחים של Lidraughts לא יכולים לתקן לכם את הרשת האלחותית או לגרום לאור לנוע במהירות גבוהה יותר.</string>
   <string name="youCanFindTheseValuesAtAnyTimeByClickingOnYourUsername">אתם יכולים למצוא את הערכים האלה בכל זמן, על ידי לחיצה על שם המשתמש שלכם למעלה.</string>
   <string name="lagCompensation">פיצוי על הלאג</string>
+  <string name="lagCompensationExplanation">Lidraughts מפצה על עיכובי רשת, כולל עיכובים קבועים וקפיצות בעיכובים. קיימות הגבלות ואמצעי עזר מבוססי בקרת זמן עיכוב המפוצה עד רגע זה, כך שהתוצאה אמורה להרגיש סבירה לשני השחקים. לכן, אם יש לך עיכובי רשת גבוהים יותר מאשר ליריב - אין הדבר מהווה מגבלה עבורך!</string>
 </resources>

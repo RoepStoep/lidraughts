@@ -6,6 +6,10 @@
     <item quantity="one">Rechercher dans %s partie</item>
     <item quantity="other">Rechercher dans %s parties</item>
   </plurals>
+  <plurals name="searchInXGamesDescription">
+    <item quantity="one">Rechercher dans la partie %s en utilisant des critères avancés</item>
+    <item quantity="other">Rechercher dans les parties %s en utilisant des critères avancés</item>
+  </plurals>
   <plurals name="xGamesFound">
     <item quantity="one">Une partie trouvée</item>
     <item quantity="other">%s parties trouvées</item>

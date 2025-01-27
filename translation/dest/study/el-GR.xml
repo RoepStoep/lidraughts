@@ -81,6 +81,7 @@
   <string name="deleteChapter">Διαγραφή κεφαλαίου</string>
   <string name="deleteThisChapter">Διαγραφή κεφαλαίου; Μη αναιρέσιμη ενέργεια!</string>
   <string name="clearAllCommentsInThisChapter">Καθαρισμός όλων των σχολίων, συμβόλων και σχεδίων στο τρέχον κεφάλαιο;</string>
+  <string name="rightUnderTheBoard">Κάτω από την σκακιέρα</string>
   <string name="noPinnedComment">Καμία</string>
   <string name="normalAnalysis">Απλή ανάλυση</string>
   <string name="hideNextMoves">Απόκρυψη επόμενων κινήσεων</string>

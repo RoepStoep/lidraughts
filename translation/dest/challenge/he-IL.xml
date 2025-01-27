@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="challenges">אתגרים</string>
   <string name="challengeToPlay">הזמינו למשחק</string>
   <string name="challengeDeclined">ההזמנה למשחק נדחתה</string>
   <string name="challengeAccepted">ההזמנה למשחק התקבלה!</string>
   <string name="challengeCanceled">ההזמנה למשחק התבטלה</string>
+  <string name="youWillBeRedirectedToTheGame">המשחק יעלה כששני השחקים קיבלו את האתגר.</string>
   <string name="registerToSendChallenges">אנא הירשמו כדי לשלוח הזמנות למשחקים.</string>
   <string name="youCannotChallengeX">לא ניתן להזמין את %s למשחק.</string>
   <string name="xDoesNotAcceptChallenges">%s לא מקבל/ת הזמנות למשחקים.</string>
@@ -17,6 +19,7 @@
   <string name="declineTimeControl">אני לא מאשר/ת אתגרים בקטגוריית הזמן הזו.</string>
   <string name="declineRated">בבקשה שלח/י לי הזמנה למשחק מדורג במקום.</string>
   <string name="declineCasual">בבקשה שלח לי הזמנה למשחק לא מדורג במקום.</string>
+  <string name="declineVariant">אני לא מעוניינ/ת לשחק וריאציה זו כרגע.</string>
   <string name="declineNoBot">אני לא מאשר/ת הזמנות מבוטים.</string>
   <string name="declineOnlyBot">מאשר/ת הזמנות למשחק רק מבוטים.</string>
   <string name="inviteLidraughtsUser">ניתן גם לשלוח הזמנה למשתמש/ת Lidraughts:</string>

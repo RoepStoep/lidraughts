@@ -27,7 +27,7 @@
   <string name="createAGame">Khởi tạo ván cờ</string>
   <string name="whiteIsVictorious">Bên Trắng thắng</string>
   <string name="blackIsVictorious">Bên Đen thắng</string>
-  <string name="promotion">Khuyến mãi</string>
+  <string name="promotion">Phong cấp</string>
   <string name="variantEnding">Hết cờ theo luật</string>
   <string name="important">Quan trọng</string>
   <string name="yourQuestionMayHaveBeenAnswered">Vấn đề của bạn có thể được giải đáp %1$s</string>
@@ -63,7 +63,7 @@
   <string name="requestAComputerAnalysis">Yêu cầu máy tính phân tích</string>
   <string name="computerAnalysis">Máy tính phân tích</string>
   <string name="computerAnalysisAvailable">Máy tính phân tích có sẵn</string>
-  <string name="analysis">Bảng phân tích</string>
+  <string name="analysis">Bàn cờ phân tích</string>
   <string name="depthX">Độ sâu %s</string>
   <string name="usingServerAnalysis">Phân tích bằng máy chủ</string>
   <string name="loadingEngine">Đang tải động cơ máy tính...</string>
@@ -90,7 +90,7 @@
   <string name="averageRatingX">Xếp loại bình quân: %s</string>
   <string name="recentGames">Các ván cờ gần đây</string>
   <string name="topGames">Các ván đấu hàng đầu</string>
-  <string name="masterDbExplanation">Trò chơi thực của %1$s+ người chơi tiêu đề được xếp hạng từ %2$s đến %3$s</string>
+  <string name="masterDbExplanation">Trò chơi thực của %1$s+ người chơi có danh hiệu được xếp hạng từ %2$s đến %3$s</string>
   <plurals name="winInXHalfMoves">
     <item quantity="other">Thắng trong %s nước đi</item>
   </plurals>
@@ -225,14 +225,14 @@
   <string name="accept">Đồng ý</string>
   <string name="decline">Từ chối</string>
   <string name="startingIn" comment="Displayed above a timer">Bắt đầu trong</string>
-  <string name="startingSoon">Bắt đầu trong</string>
+  <string name="startingSoon">Sắp diễn ra</string>
   <string name="playingRightNow">Ván đấu đang đánh</string>
   <string name="eventInProgress">Đang diễn ra</string>
   <string name="finished">Hoàn thành</string>
   <string name="finishesX">kết thúc trong %s</string>
   <string name="abortGame">Hủy ván cờ</string>
   <string name="gameAborted">Ván cờ đã bị hủy</string>
-  <string name="standard">Bình thường</string>
+  <string name="standard">Tiêu chuẩn</string>
   <string name="variantTitleStandard">Quy tắc tiêu chuẩn của cờ đam quốc tế (FMJD).</string>
   <string name="variantTitleFrisian">Các quân cờ cũng có thể ăn theo chiều ngang và chiều dọc.</string>
   <string name="variantTitleFrysk">Cờ đam Frisian bắt đầu với 5 quân mỗi bên.</string>
@@ -243,12 +243,12 @@
   <string name="customStartingPosition">Thế cờ bắt đầu tùy chỉnh</string>
   <string name="unlimited">Không giới hạn</string>
   <string name="mode">Chế độ</string>
-  <string name="casual">Không tính Elo</string>
-  <string name="rated">Tính Elo</string>
+  <string name="casual">Không xếp hạng</string>
+  <string name="rated">Có xếp hạng</string>
   <string name="gamesWillImpactThePlayersRating">Ván cờ sẽ ảnh hưởng đến elo của người chơi</string>
-  <string name="casualTournament">Không tính elo</string>
-  <string name="ratedTournament">Tính Elo</string>
-  <string name="thisGameIsRated">Ván đấu này có tính Elo</string>
+  <string name="casualTournament">Không xếp hạng</string>
+  <string name="ratedTournament">Có xếp hạng</string>
+  <string name="thisGameIsRated">Ván cờ này có xếp hạng</string>
   <string name="rematch">Đấu lại</string>
   <string name="rematchOfferSent">Yêu cầu đấu lại đã được gửi</string>
   <string name="rematchOfferSentWhite">Trắng đề nghị đấu lại</string>
@@ -273,7 +273,7 @@
   <string name="freeOnlineDraughts">Chơi Cờ Đam Trực Tuyến Miễn Phí</string>
   <string name="spectators">Người xem:</string>
   <plurals name="nbRated">
-    <item quantity="other">%s tính elo</item>
+    <item quantity="other">%s ván xếp hạng</item>
   </plurals>
   <plurals name="nbWins">
     <item quantity="other">%s thắng</item>
@@ -308,7 +308,7 @@
   <string name="yourOpponentProposesATakeback">Đối thủ của bạn đề nghị lùi một nước</string>
   <string name="bookmarkThisGame">Đánh dấu ván này</string>
   <string name="tournament">Giải đấu</string>
-  <string name="tournaments">Giải đấu</string>
+  <string name="tournaments">Các giải đấu</string>
   <string name="xTournaments">%s giải đấu</string>
   <string name="createdTournaments">Đã tạo</string>
   <string name="recentlyPlayed">Đã chơi gần đây</string>
@@ -490,7 +490,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="onlinePlayers">Các kỳ thủ đang trực tuyến</string>
   <string name="activeToday">Hoạt động hôm nay</string>
   <string name="activePlayers">Các kỳ thủ tích cực</string>
-  <string name="bewareTheGameIsRatedButHasNoClock">Lưu ý, ván cờ tính Elo nhưng không tính thời gian!</string>
+  <string name="bewareTheGameIsRatedButHasNoClock">Lưu ý, ván cờ có xếp hạng nhưng không tính thời gian!</string>
   <string name="standardFmjdRegulationsWithDrawingRules">Các ván cờ tiêu chuẩn trên lidraughts tuân theo các quy tắc của cờ đam quốc tế do FMJD đặt ra. Điều này bao gồm các quy tắc hòa tự động áp dụng khi chỉ còn một vài quân trên bàn cờ.</string>
   <string name="exploreDraughtsVariants">Các biến thể của cờ đam sử dụng các biến thể của các quy tắc này hoặc có thể giới thiệu toàn bộ cơ chế trò chơi mới. Hãy suy nghĩ sáng tạo và khám phá các biến thể mà lidraughts mang lại!</string>
   <string name="rulesAndVariants">Luật chơi &amp; Các biến thể</string>
@@ -579,7 +579,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="clockIncrement">Thời gian được cho thêm</string>
   <string name="onlyMembersOfTeam">Chỉ dành cho thành viên trong đội</string>
   <string name="noRestriction">Không giới hạn</string>
-  <string name="minimumRatedGames">Số ván đã tính Elo tối thiểu</string>
+  <string name="minimumRatedGames">Số ván đã xếp hạng tối thiểu</string>
   <string name="minimumRating">Elo tối thiểu</string>
   <string name="maximumWeeklyRating">Elo cao nhất trong tuần</string>
   <string name="onlyTitled">Chỉ những kỳ thủ có tiêu đề</string>
@@ -711,7 +711,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="aboutSimulImage">Trong số 169 đối thủ, Sijbrands thắng 115 ván, hòa 43 và thua 11.</string>
   <string name="aboutSimulRealLife">Ý tưởng được lấy từ các sự kiện có thật. Trong đời thực, một người chủ trì cờ đồng loạt sẽ di chuyển từ bàn này qua bàn khác và đánh một nước mỗi bàn.</string>
   <string name="aboutSimulRules">Khi cờ đồng loạt bắt đầu, mỗi người chơi bắt đầu một ván cờ với người chủ trì. Cờ đồng loạt kết thúc khi tất cả các ván cờ hoàn tất.</string>
-  <string name="aboutSimulSettings">Cờ đồng loạt luôn không tính elo. Việc tái đấu, đi lại và thêm thời gian sẽ bị vô hiệu hoá.</string>
+  <string name="aboutSimulSettings">Cờ đồng loạt luôn không xếp hạng. Việc tái đấu, đi lại hay cho thêm thời gian đều bị vô hiệu.</string>
   <string name="create">Tạo</string>
   <string name="whenCreateSimul">Khi bạn tạo một sự kiện đồng loạt, bạn sẽ chơi với nhiều người cùng một lúc.</string>
   <string name="simulVariantsHint">Nếu bạn chọn nhiều biến thể, mỗi người chơi sẽ được lựa chọn chơi biến thể nào.</string>
@@ -800,7 +800,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="downloadRaw">Tải bản thô</string>
   <string name="downloadImported">Tải tệp đã được nhập</string>
   <string name="printFriendlyPDF">Bản PDF thân thiện với in ấn</string>
-  <string name="crosstable">Bảng tổng điểm</string>
+  <string name="crosstable">Bảng tổng điểm đối đầu</string>
   <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Bạn cũng có thể cuộn chuột trên bàn cờ để xem các nước đi của ván.</string>
   <string name="analysisShapesHowTo">Nhấn Shift+click hoặc nhấp chuột phải để vẽ vòng tròn, mũi tên trên bàn cờ.</string>
   <string name="letOtherPlayersMessageYou">Cho phép người chơi khác gửi tin nhắn cho bạn</string>
@@ -821,7 +821,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="alternativelyYouCanX">Ngoài ra, bạn có thể %s.</string>
   <string name="revokeAllSessions">xóa toàn bộ phiên đăng nhập</string>
   <string name="speedUpYourAnalysis">Tăng tốc độ phân tích của bạn!</string>
-  <string name="enableFullCaptureAtXPreferences">Chơi ăn nhiều quân trong 1 nước trên bảng phân tích. Chế độ ăn quân có thể được định cấu hình theo tùy chọn %s.</string>
+  <string name="enableFullCaptureAtXPreferences">Chơi ăn nhiều quân trong 1 nước trên bàn cờ phân tích. Chế độ ăn quân có thể được định cấu hình theo tùy chọn %s.</string>
   <string name="playDraughtsEverywhere">Chơi cờ đam miễn phí ở mọi nơi</string>
   <string name="asFreeAsLidraughts">Miễn phí như cờ đam</string>
   <string name="builtForTheLoveOfDraughtsNotMoney">Xây dựng trên nền tảng tình yêu dành cho cờ đam, không phải vì tiền bạc</string>
@@ -925,7 +925,7 @@ Một đường dẫn mỗi dòng</string>
   <string name="reflectOnCorrectMove">Bạn có thể phản ánh về nước đi chính xác của người chơi, với một nhận xét; hoặc bỏ trống để nhảy ngay sang nước đi tiếp theo.</string>
   <string name="addVariationsWrongMoves">Thêm các biến nước đi để giải thích tại sao các nước đi cụ thể khác lại sai.</string>
   <string name="explainWhyThisMoveIsWrong">Giải thích lý do tại sao nước cờ này là sai trong một bình luận.</string>
-  <string name="orPromoteItToMainline">Hoặc khuyến khích nó như là dòng chính nếu đó là nước đi đúng đắn.</string>
+  <string name="orPromoteItToMainline">Hoặc phong cấp nó như là dòng chính nếu đó là nước đi đúng đắn.</string>
   <string name="anyOtherWrongMove">Khi thực hiện bất kỳ nước đi sai nào khác:</string>
   <string name="explainWhyOtherMovesWrong">Giải thích tại sao tất cả các nước đi khác đều sai</string>
   <string name="optionalHint">Gợi ý tùy chọn, theo yêu cầu cho người chơi:</string>

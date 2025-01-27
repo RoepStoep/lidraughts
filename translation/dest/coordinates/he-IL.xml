@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="coordinates">מיספור משבצות</string>
+  <string name="coordinateTraining">אימון מיספור משבצות</string>
   <string name="averageScoreAsWhiteX">הציון הממוצע כלבן: %s</string>
   <string name="averageScoreAsBlackX">הציון הממוצע כשחור: %s</string>
+  <string name="knowingTheDraughtsBoard">הכרת מיספור המשבצות בלוח הדמקה היא יכולת חשובה מאד:</string>
+  <string name="mostDraughtsCourses">רוב הקורסים והתרגילים משתמשים בסימון מספר המשבצת באופן נרחב.</string>
+  <string name="talkToYourDraughtsFriends">זה מקל על השיח עם החברים לדמקה, היות ואתם מבינים את ״שפת לוח הדמקה״.</string>
+  <string name="youCanAnalyseAGameMoreEffectively">אתם יכולים לנתח את המשחק באופן יעיל יותר אם אתם לא צריכים לחפש איפה מספרי המשבצות כתובים.</string>
+  <string name="aSquareNameAppears">מספר המשבצת יופיע על הלוח ועליכם ללחוץ על המשבצת המתאימה. יש לכם 30 שניות למפות כמה שיותר משבצות!</string>
   <string name="startTraining">התחילו להתאמן</string>
 </resources>
