@@ -9,7 +9,7 @@ import play.api.libs.json._
 
 import draughts.format.pdn.Glyph
 import lidraughts.chat.Chat
-import lidraughts.common.ApiVersion
+import lidraughts.common.{ ApiVersion, IpAddress }
 import lidraughts.common.PimpedJson._
 import lidraughts.hub.actorApi.map._
 import lidraughts.socket.actorApi.{ Connected => _, _ }
@@ -72,7 +72,8 @@ final class SocketHandler(
     studyId: Study.Id,
     uid: Uid,
     member: StudySocket.Member,
-    user: Option[User]
+    user: Option[User],
+    ip: IpAddress
   ): Handler.Controller = ({
     case ("talk", o) => o str "d" foreach { text =>
       member.userId foreach { api.talk(_, studyId, text) }
@@ -244,7 +245,7 @@ final class SocketHandler(
       chapterId <- o.get[Chapter.Id]("d")
     } api.analysisRequest(studyId, chapterId, byUserId)
 
-  }: Handler.Controller) orElse evalCacheHandler(uid, member, user) orElse lidraughts.chat.Socket.in(
+  }: Handler.Controller) orElse evalCacheHandler(uid, member, user, ip) orElse lidraughts.chat.Socket.in(
     chatId = Chat.Id(studyId.value),
     member = member,
     chat = chat,
@@ -284,11 +285,12 @@ final class SocketHandler(
     studyId: Study.Id,
     uid: Uid,
     user: Option[User],
+    ip: IpAddress,
     version: Option[SocketVersion],
     apiVersion: ApiVersion
   ): Fu[JsSocketHandler] = {
     val socket = getSocket(studyId)
-    join(studyId, uid, user, socket, member => makeController(socket, studyId, uid, member, user = user), version, apiVersion)
+    join(studyId, uid, user, socket, member => makeController(socket, studyId, uid, member, user, ip), version, apiVersion)
   }
 
   def join(

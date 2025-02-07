@@ -1,10 +1,10 @@
 package lidraughts.evalCache
 
-import draughts.format.{ Forsyth, FEN }
-import draughts.variant.Variant
 import org.joda.time.DateTime
 import scalaz.NonEmptyList
 
+import draughts.format.{ Forsyth, FEN }
+import draughts.variant.Variant
 import lidraughts.tree.Eval.Score
 import lidraughts.user.User
 

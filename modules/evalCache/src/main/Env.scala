@@ -7,7 +7,8 @@ final class Env(
     settingStore: lidraughts.memo.SettingStore.Builder,
     db: lidraughts.db.Env,
     system: akka.actor.ActorSystem,
-    asyncCache: lidraughts.memo.AsyncCache.Builder
+    asyncCache: lidraughts.memo.AsyncCache.Builder,
+    anaCacheApi: lidraughts.anaCache.AnaCacheApi
 ) {
 
   private val CollectionEvalCache = config getString "collection.eval_cache"
@@ -25,6 +26,7 @@ final class Env(
 
   lazy val socketHandler = new EvalCacheSocketHandler(
     api = api,
+    anaCacheApi = anaCacheApi,
     truster = truster,
     upgrade = upgrade
   )
@@ -50,6 +52,7 @@ object Env {
     settingStore = lidraughts.memo.Env.current.settingStore,
     db = lidraughts.db.Env.current,
     system = lidraughts.common.PlayApp.system,
-    asyncCache = lidraughts.memo.Env.current.asyncCache
+    asyncCache = lidraughts.memo.Env.current.asyncCache,
+    anaCacheApi = lidraughts.anaCache.Env.current.api
   )
 }

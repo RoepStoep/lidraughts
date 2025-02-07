@@ -60,14 +60,27 @@ function toCeval(e) {
   return res;
 }
 
+function toAnaPutData(variant, node) {
+  const data: any = {
+    fen: node.fen,
+  };
+  if (variant !== 'standard') data.variant = variant;
+  return data;
+}
+
 export function make(opts): EvalCache {
   const fetchedByFen = {};
+  let lastAnaFen = ''
   const upgradable = prop(false);
   return {
     onCeval: throttle(500, function() {
       const node = opts.getNode(), ev = node.ceval;
       if (ev && !ev.cloud && node.fen in fetchedByFen && qualityCheck(ev) && opts.canPut(node)) {
         opts.send('evalPut', toPutData(opts.variant, ev));
+      }
+      if (node.fen != lastAnaFen) {
+        lastAnaFen = node.fen
+        opts.send('anaPut', toAnaPutData(opts.variant, node));
       }
     }),
     fetch(path: Tree.Path, multiPv: number): void {

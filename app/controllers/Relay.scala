@@ -102,6 +102,7 @@ object Relay extends LidraughtsController {
             relayId = relay.id,
             uid = lidraughts.socket.Socket.Uid(uid),
             user = ctx.me,
+            ctx.ip,
             getSocketVersion,
             apiVersion
           ) map some

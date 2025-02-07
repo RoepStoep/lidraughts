@@ -244,5 +244,6 @@ object Env {
   def oAuth = lidraughts.oauth.Env.current
   def bot = lidraughts.bot.Env.current
   def evalCache = lidraughts.evalCache.Env.current
+  def anaCache = lidraughts.anaCache.Env.current
   def swiss = lidraughts.swiss.Env.current
 }

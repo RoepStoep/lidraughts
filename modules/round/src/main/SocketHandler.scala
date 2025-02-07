@@ -61,7 +61,7 @@ private[round] final class SocketHandler(
       case ("talk", o) => o str "d" foreach { messenger.watcher(gameId, member, _) }
       case ("outoftime", _) => send(QuietFlag) // mobile app BC
       case ("flag", o) => clientFlag(o, none) foreach send
-    }: Handler.Controller) orElse evalCacheHandler(uid, member, me) orElse lidraughts.chat.Socket.in(
+    }: Handler.Controller) orElse evalCacheHandler(uid, member, me, ip) orElse lidraughts.chat.Socket.in(
       chatId = Chat.Id(s"$gameId/w"),
       member = member,
       chat = messenger.chat,

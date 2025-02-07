@@ -53,7 +53,7 @@ lazy val modules = Seq(
   history, shutup, push, explorer,
   playban, insight, perfStat, slack, quote, challenge,
   study, studySearch, draughtsnet, learn, plan,
-  event, practice, evalCache, irwin,
+  event, practice, evalCache, anaCache, irwin,
   activity, relay, streamer, bot, swiss
 )
 
@@ -267,7 +267,11 @@ lazy val streamer = module("streamer", Seq(common, hub, db, user, notifyModule))
   libraryDependencies ++= provided(play.api, scalatags, reactivemongo.driver)
 )
 
-lazy val evalCache = module("evalCache", Seq(common, db, user, security, socket, tree)).settings(
+lazy val anaCache = module("anaCache", Seq(common, db, user, security)).settings(
+  libraryDependencies ++= provided(play.api, reactivemongo.driver)
+)
+
+lazy val evalCache = module("evalCache", Seq(common, db, user, anaCache, security, socket, tree)).settings(
   libraryDependencies ++= provided(play.api, reactivemongo.driver)
 )
 

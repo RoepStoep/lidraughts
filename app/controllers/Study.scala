@@ -226,6 +226,7 @@ object Study extends LidraughtsController {
             studyId = id,
             uid = lidraughts.socket.Socket.Uid(uid),
             user = ctx.me,
+            ctx.ip,
             getSocketVersion,
             apiVersion
           ) map some
