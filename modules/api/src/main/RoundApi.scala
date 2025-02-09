@@ -22,6 +22,7 @@ private[api] final class RoundApi(
     bookmarkApi: lidraughts.bookmark.BookmarkApi,
     swissApi: lidraughts.swiss.SwissApi,
     tourApi: lidraughts.tournament.TournamentApi,
+    anaCacheApi: lidraughts.anaCache.AnaCacheApi,
     getSimul: Simul.ID => Fu[Option[Simul]],
     getTeamName: lidraughts.team.Team.ID => Option[String],
     getLightUser: lidraughts.common.LightUser.GetterSync
@@ -84,23 +85,26 @@ private[api] final class RoundApi(
   )(implicit ctx: Context): Fu[JsObject] =
     initialFenO.fold(GameRepo initialFen pov.game)(fuccess).flatMap { initialFen =>
       tourApi.gameView.analysis(pov.game) flatMap { tour =>
+        val isHunter = ctx.me ?? Granter(_.Hunter)
         jsonView.watcherJson(pov, ctx.pref, apiVersion, ctx.me, tv,
           initialFen = initialFen,
           withFlags = withFlags.copy(blurs = ctx.me ?? Granter(_.ViewBlurs)),
           isWfd = pov.game.isWfd || ~tour.map(_.tour.isWfd)) zip
           (pov.game.simulId ?? getSimul) zip
           swissApi.gameView(pov) zip
+          isHunter.??(anaCacheApi.getGameEntries(pov.game, initialFen)) zip
           ctx.userId.ifTrue(ctx.isMobileApi).?? { noteApi.get(pov.gameId, _) } zip
           (owner.??(forecastApi loadForDisplay pov)) zip
           bookmarkApi.exists(pov.game, ctx.me) map {
-            case json ~ simulOption ~ swissOption ~ note ~ fco ~ bookmarked => (
+            case json ~ simulOption ~ swissOption ~ anaCache ~ note ~ fco ~ bookmarked => (
               withTournament(pov, tour) _ compose
               withSimul(pov, simulOption, false) _ compose
               withSwiss(swissOption) _ compose
               withNote(note) _ compose
               withBookmark(bookmarked) _ compose
               withTree(pov, analysis, initialFen, withFlags, pov.game.metadata.pdnImport.isDefined) _ compose
-              withAnalysis(pov.game, analysis, ctx.me ?? Granter(_.Hunter)) _ compose
+              withAnalysis(pov.game, analysis, isHunter) _ compose
+              withAnaCache(pov.game, anaCache) _ compose
               withForecast(pov, owner, fco) _
             )(json)
           }
@@ -190,6 +194,34 @@ private[api] final class RoundApi(
 
   private def withAnalysis(g: Game, o: Option[Analysis], modStats: Boolean = false)(json: JsObject) =
     json.add("analysis", o.map { a => analysisJson.bothPlayers(g, a, modStats) })
+
+  private def withAnaCache(g: Game, entriesWithPly: List[(Int, List[lidraughts.anaCache.AnaCacheEntry])])(json: JsObject) =
+    if (entriesWithPly.isEmpty) json else {
+      val fullCentis = ~g.moveTimesConcat(false)
+      val lastMoveTime = if (g.situation.ghosts == 0) g.movedAt else g.movedAt.plusMillis(-10 * ~fullCentis.lastOption.map(_.centis))
+      val centis = (if (g.situation.ghosts == 0) fullCentis else fullCentis.dropRight(1)) map { _.centis }
+      json + (
+        "anaCache" -> JsArray {
+          entriesWithPly.map {
+            case (ply, entries) =>
+              val moveTime = lastMoveTime.plusMillis(
+                -10 * centis.takeRight(centis.length - ply).sum
+              )
+              Json.obj(
+                "ply" -> ply,
+                "time" -> moveTime,
+                "centis" -> ~centis.lift(ply),
+                "entries" -> entries.map { entry =>
+                  Json.obj(
+                    "time" -> entry.createdAt,
+                    "ip" -> entry.ip.value
+                  ).add("userId", entry.userId)
+                }
+              )
+          }
+        }
+      )
+    }
 
   private def withTournament(pov: Pov, viewO: Option[TourView])(json: JsObject) =
     json.add("tournament" -> viewO.map { v =>

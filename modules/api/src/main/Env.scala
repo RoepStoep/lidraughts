@@ -21,6 +21,7 @@ final class Env(
     tournamentApi: lidraughts.tournament.TournamentApi,
     crosstableApi: lidraughts.game.CrosstableApi,
     prefApi: lidraughts.pref.PrefApi,
+    anaCacheApi: lidraughts.anaCache.AnaCacheApi,
     playBanApi: lidraughts.playban.PlaybanApi,
     gamePdnDump: lidraughts.game.PdnDump,
     gameCache: lidraughts.game.Cached,
@@ -126,6 +127,7 @@ final class Env(
     bookmarkApi = bookmarkApi,
     swissApi = swissEnv.api,
     tourApi = tournamentApi,
+    anaCacheApi = anaCacheApi,
     getSimul = getSimul,
     getTeamName = getTeamName,
     getLightUser = userEnv.lightUserSync
@@ -185,6 +187,7 @@ object Env {
     crosstableApi = lidraughts.game.Env.current.crosstableApi,
     playBanApi = lidraughts.playban.Env.current.api,
     prefApi = lidraughts.pref.Env.current.api,
+    anaCacheApi = lidraughts.anaCache.Env.current.api,
     gamePdnDump = lidraughts.game.Env.current.pdnDump,
     gameCache = lidraughts.game.Env.current.cached,
     system = lidraughts.common.PlayApp.system,

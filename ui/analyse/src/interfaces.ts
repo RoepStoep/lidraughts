@@ -32,6 +32,7 @@ export interface AnalyseData {
   takebackable: boolean;
   moretimeable: boolean;
   analysis?: Analysis;
+  anaCache?: any[];
   userAnalysis: boolean;
   puzzleEditor: boolean;
   toPuzzleEditor?: boolean;

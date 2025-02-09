@@ -267,7 +267,7 @@ lazy val streamer = module("streamer", Seq(common, hub, db, user, notifyModule))
   libraryDependencies ++= provided(play.api, scalatags, reactivemongo.driver)
 )
 
-lazy val anaCache = module("anaCache", Seq(common, db, user, security)).settings(
+lazy val anaCache = module("anaCache", Seq(common, db, game, user, security)).settings(
   libraryDependencies ++= provided(play.api, reactivemongo.driver)
 )
 

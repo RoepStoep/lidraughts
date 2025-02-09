@@ -163,6 +163,30 @@ case class Game(
       } yield w
     }
 
+  def moveTimesConcat(dropGhosts: Boolean = false): Option[Vector[Centis]] =
+    moveTimes.map { centis =>
+      val movesWithCentis = (centis zip pdnMoves).foldLeft(Vector.empty[(Centis, String)]) {
+        case (acc, (curTime, curMove)) =>
+          if (acc.isEmpty) acc :+ (curTime, curMove)
+          else {
+            val curX = curMove.indexOf('x')
+            if (curX == -1) acc :+ (curTime, curMove)
+            else {
+              val lastTime = acc.last._1
+              val lastMove = acc.last._2
+              val lastX = lastMove.lastIndexOf('x')
+              if (lastX != -1 && lastMove.takeRight(lastMove.length - lastX - 1) == curMove.take(curX)) {
+                acc.dropRight(1) :+ (
+                  lastTime + curTime,
+                  lastMove + curMove.takeRight(curMove.length - curX)
+                )
+              } else acc :+ (curTime, curMove)
+            }
+          }
+      }
+      (if (dropGhosts && situation.ghosts != 0) movesWithCentis.dropRight(1) else movesWithCentis) map { _._1 }
+    }
+
   private def weaveMoveTimes(moveTimes1st: List[Centis], moveTimes2nd: List[Centis], moveFirst: Boolean, fullCapture: Boolean = false): Option[Vector[Centis]] = {
     @tailrec
     def weave(mvt1: List[Centis], mvt2: List[Centis], mv1: Boolean, mvs: Vector[String], res: Vector[Centis]): Option[Vector[Centis]] =

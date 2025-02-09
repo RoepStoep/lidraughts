@@ -112,6 +112,10 @@ export default class AnalyseCtrl {
     this.treeView = treeViewCtrl(opts.embed ? 'inline' : 'column');
     this.flipped = this.data.puzzleEditor;
 
+    if (this.data.anaCache) {
+      window.lidraughts.loadCssPath('analyse.ana-cache')
+    }
+
     if (this.data.forecast) this.forecast = makeForecast(this.data.forecast, this.data, redraw);
 
     if (li.AnalyseNVUI) this.nvui = li.AnalyseNVUI(redraw) as NvuiPlugin;
@@ -281,6 +285,18 @@ export default class AnalyseCtrl {
     const nbm = this.data.analysis[this.showBestMoves].nbm || [];
     const node = this.tree.nodeAtPath(path);
     return nbm.includes((node.displayPly || node.ply) - 1);
+  }
+
+  anaCacheNode(path: Tree.Path) {
+    if (this.showBestMoves || !this.data.anaCache || !this.tree.pathIsMainline(path)) return false;
+    const node = this.tree.nodeAtPath(path),
+      nodePly = (node.displayPly || node.ply) - 1,
+      anaCache = this.data.anaCache;
+    for (let i = 0; i < anaCache.length; i++) {
+      if (anaCache[i].ply === nodePly) {
+        return anaCache[i]
+      }
+    }
   }
 
   toggleBestMoves(c: Color) {

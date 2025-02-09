@@ -354,7 +354,6 @@ declare namespace PowerTip {
     placement?: Placement;
     smartPlacement?: boolean;
     popupId?: string;
-    poupClass?: string;
     offset?: number;
     fadeInTime?: number;
     fadeOutTime?: number;

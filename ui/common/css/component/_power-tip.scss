@@ -1,5 +1,6 @@
 #powerTip,
-#miniGame {
+#miniGame,
+#anaCache {
   @extend %box-radius-force, %popup-shadow;
   width: 20rem;
   min-height: 3em;
@@ -24,6 +25,21 @@
       border-bottom: 1px solid #c0c0c0;
       text-align: center;
       text-transform: uppercase;
+    }
+    .content {
+      display: block;
+      padding: 15px 15px;
+    }
+  }
+}
+#anaCache {
+  width: 10rem;
+  .info {
+    .title {
+      display: block;
+      padding: 10px 15px;
+      border-bottom: 1px solid #c0c0c0;
+      text-align: center;
     }
     .content {
       display: block;

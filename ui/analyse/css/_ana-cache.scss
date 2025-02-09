@@ -1,0 +1,12 @@
+.ana-cache-box {
+  @extend %flex-column;
+  flex: 1.0 1 0px;
+  background: $c-bg-zebra;
+  .info {
+    padding: 4px 7px 2px 7px;
+    @extend %flex-column;
+  }
+  .entry {
+    margin-top: 4px
+  }
+}

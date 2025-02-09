@@ -17,6 +17,7 @@ import { view as keyboardView } from './keyboard';
 import explorerView from './explorer/explorerView';
 import retroView from './retrospect/retroView';
 import practiceView from './practice/practiceView';
+import anaCacheView from './anaCache'
 import * as gbEdit from './study/gamebook/gamebookEdit';
 import * as gbPlay from './study/gamebook/gamebookPlayView';
 import { StudyCtrl } from './study/interfaces';
@@ -357,7 +358,7 @@ export default function(ctrl: AnalyseCtrl): VNode {
           showCevalPvs ? cevalView.renderPvs(ctrl) : null,
           renderAnalyse(ctrl, concealOf),
           gamebookEditView || forkView(ctrl, concealOf),
-          retroView(ctrl) || practiceView(ctrl) || explorerView(ctrl)
+          retroView(ctrl) || practiceView(ctrl) || explorerView(ctrl) || anaCacheView(ctrl)
         ]))
     ])),
     (gamebookPlayView || intro) ? null : controls(ctrl),

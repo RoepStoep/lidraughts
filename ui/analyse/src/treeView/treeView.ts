@@ -82,7 +82,7 @@ export function nodeClasses(ctx: Ctx, path: Tree.Path): NodeClasses {
     active: path === ctx.ctrl.path,
     first: ctx.ctrl.data.puzzleEditor && path.length == 2,
     alts: alternatives,
-    notbest: ctx.ctrl.markNotBestMove(path),
+    notbest: ctx.ctrl.markNotBestMove(path) || !!ctx.ctrl.anaCacheNode(path),
     'context-menu': path === ctx.ctrl.contextMenuPath,
     current: path === ctx.currentPath,
     nongame: !ctx.currentPath && !!ctx.ctrl.gamePath && treePath.contains(path, ctx.ctrl.gamePath) && path !== ctx.ctrl.gamePath
