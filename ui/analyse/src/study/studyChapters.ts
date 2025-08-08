@@ -73,6 +73,7 @@ export function resultOf(tags: TagArray[], isWhite: boolean, draughtsResult: boo
     case '1-1':
     case '1/2-1/2':
     case '½-½':
+    case '0.5-0.5':
       return (draughtsResult ? '1' : '½');
     default:
       return;
