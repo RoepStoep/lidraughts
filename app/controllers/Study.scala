@@ -405,6 +405,20 @@ object Study extends LidraughtsController {
     }
   }
 
+  def currentChapter(id: String) = Open { implicit ctx =>
+    OnlyHumans {
+      env.api.byIdWithChapter(id) flatMap {
+        _.fold(notFound) {
+          case WithChapter(study, chapter) => CanViewResult(study) {
+            Ok(
+              env.jsonView.currentChapter(chapter)
+            ).fuccess
+          }
+        }
+      }
+    }
+  }
+
   def multiBoard(id: String, page: Int) = Open { implicit ctx =>
     OptionFuResult(env.api byId id) { study =>
       CanViewResult(study) {

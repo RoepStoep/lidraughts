@@ -59,6 +59,13 @@ final class JsonView(
     "orientation" -> c.setup.orientation
   ).add("description", c.description) |> addChapterMode(c)
 
+  def currentChapter(c: Chapter) = Json.obj(
+    "studyId" -> c.studyId,
+    "chapterId" -> c.id,
+    "name" -> c.name,
+    "tags" -> c.tags
+  )
+
   def pagerData(s: Study.WithChaptersAndLiked) = Json.obj(
     "id" -> s.study.id.value,
     "name" -> s.study.name.value,
