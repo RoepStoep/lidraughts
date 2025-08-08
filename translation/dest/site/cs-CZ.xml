@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="playInATournament">Hrát turnaj</string>
   <string name="playWithAFriend">Vyzvat kamaráda</string>
   <string name="playWithTheMachine">Hrát proti počítači</string>
   <string name="toInviteSomeoneToPlayGiveThisUrl">Pro přizvání kamaráda k partii mu pošlete tento odkaz</string>
   <string name="gameOver">Konec hry</string>
   <string name="waitingForOpponent">Čekání na soupeře</string>
+  <string name="waitingForPlayer">Čeká se na hráče</string>
   <string name="waiting">Čekání</string>
   <string name="yourTurn">Jste na tahu</string>
   <string name="aiNameLevelAiLevel">%1$s - úroveň %2$s</string>
@@ -16,9 +18,16 @@
   <string name="white">Bílý</string>
   <string name="black">Černý</string>
   <string name="randomColor">Náhodná barva</string>
+  <string name="microMatch">Mikro-zápas</string>
+  <string name="microMatchChallenge">Tato výzva je mikrozápas!</string>
+  <string name="microMatchExplanation">Ihned po tomto zápase se odehraje odveta s obrácenými barvami.</string>
+  <string name="microMatchRematchStarted">Začala druhá hra mikrozápasu</string>
+  <string name="microMatchRematchAwaiting">Čeká se na druhou hru mikrohry</string>
+  <string name="microMatchGameX">Mikrozápasová hra %s</string>
   <string name="createAGame">Vytvořit hru</string>
   <string name="whiteIsVictorious">Vyhrál bílý</string>
   <string name="blackIsVictorious">Vyhrál černý</string>
+  <string name="promotion">Akce</string>
   <string name="variantEnding">Jiné ukončení</string>
   <string name="important">Důležité</string>
   <string name="yourQuestionMayHaveBeenAnswered">Vaše otázka již možná má odpověď %1$s</string>
@@ -111,6 +120,8 @@
   <string name="threefoldRepetition">Trojí opakování pozice</string>
   <string name="claimADraw">Reklamovat remízu</string>
   <string name="offerDraw">Nabídnout remízu</string>
+  <string name="drawOffersAfterX">Nabídky remíz jsou povoleny pouze po tahu %s</string>
+  <string name="drawOffersNotAllowed">Nabídka remízy není povolena</string>
   <string name="draw">Remíza</string>
   <plurals name="nbPlayers">
     <item quantity="one">%s hráč online</item>

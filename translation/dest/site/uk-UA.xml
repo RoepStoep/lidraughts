@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="playInATournament">Грайте в турнірі</string>
   <string name="playWithAFriend">Грати з другом</string>
   <string name="playWithTheMachine">Грати з комп’ютером</string>
-  <string name="toInviteSomeoneToPlayGiveThisUrl">Щоб запросити когось до гри, дайте це посилання</string>
-  <string name="gameOver">Гру завершено</string>
+  <string name="toInviteSomeoneToPlayGiveThisUrl">Щоб запросити когось до гри, надайте це посилання</string>
+  <string name="gameOver">Партію завершено</string>
   <string name="waitingForOpponent">Очікування на суперника</string>
+  <string name="waitingForPlayer">Очікуємо гравця</string>
   <string name="waiting">Очікуйте</string>
   <string name="yourTurn">Ваш хід</string>
   <string name="aiNameLevelAiLevel">%1$s рівень %2$s</string>
@@ -16,22 +18,28 @@
   <string name="white">Білі</string>
   <string name="black">Чорні</string>
   <string name="randomColor">Випадковий колір</string>
+  <string name="microMatch">Мікроматч</string>
+  <string name="microMatchChallenge">Цей виклик є мікроматчем!</string>
+  <string name="microMatchExplanation">Повторний матч зі зміною кольорів відбудеться відразу після цієї гри.</string>
+  <string name="microMatchRematchStarted">Розпочато другу гру мікроматчу</string>
+  <string name="microMatchRematchAwaiting">Очікуємо другої гри мікроматчу</string>
+  <string name="microMatchGameX">Гра мікроматчу %s</string>
   <string name="createAGame">Створити гру</string>
   <string name="whiteIsVictorious">Перемога білих</string>
   <string name="blackIsVictorious">Перемога чорних</string>
   <string name="promotion">Перетворення</string>
-  <string name="variantEnding">Гру завершено</string>
+  <string name="variantEnding">Кінець варіанту</string>
   <string name="important">Важливо</string>
   <string name="yourQuestionMayHaveBeenAnswered">Ваше запитання може мати відповідь %1$s</string>
   <string name="inTheFAQ">в ЧаПах</string>
   <string name="toReportSomeoneForCheatingOrBadBehavior">Щоб повідомити про нечесну гру чи погану поведінку, %1$s</string>
   <string name="useTheReportForm">використовуйте форму звіту</string>
-  <string name="toRequestSupport">Для запиту підтримки %1$s</string>
-  <string name="tryTheContactPage">спробуйте сторінку контактів</string>
+  <string name="toRequestSupport">Щоб зв\'язатися з підтримкою %1$s</string>
+  <string name="tryTheContactPage">спробуйте сторінку зворотного зв\'язку</string>
   <string name="thisTopicIsArchived">Ця тема була заархівована і додати відповідь більше не можна.</string>
   <string name="joinTheTeamXToPost">Приєднайтесь до %1$s, щоб писати у цьому форумі</string>
   <string name="teamNamedX">%1$s команда</string>
-  <string name="youCannotPostYetPlaySomeGames">Ви не можете писати нові повідомлення у форумах. Зіграйте кілька ігор!</string>
+  <string name="youCannotPostYetPlaySomeGames">Ви поки що не можете писати повідомлення у форумах. Зіграйте кілька партій!</string>
   <string name="subscribe">Підписатись</string>
   <string name="unsubscribe">Відписатись</string>
   <string name="newOpponent">Новий суперник</string>
@@ -82,6 +90,19 @@
   <string name="averageRatingX">Середня оцінка: %s</string>
   <string name="recentGames">Останні ігри</string>
   <string name="topGames">Кращі ігри</string>
+  <string name="masterDbExplanation">Партії наживо %1$s+ професіональних гравців рейтингом від %2$s до %3$s</string>
+  <plurals name="winInXHalfMoves">
+    <item quantity="one">Перемога в %s напівхід</item>
+    <item quantity="few">Перемога в %s напівходи</item>
+    <item quantity="many">Перемога в %s напівходів</item>
+    <item quantity="other">Перемога в %s напівходів</item>
+  </plurals>
+  <plurals name="drawInXHalfMoves">
+    <item quantity="one">Нічия в %s напівхід</item>
+    <item quantity="few">Нічия в %s напівходи</item>
+    <item quantity="many">Нічия в %s напівходів</item>
+    <item quantity="other">Нічия в %s напівходів</item>
+  </plurals>
   <string name="noGameFound">Ігор не знайдено</string>
   <string name="maybeIncludeMoreGamesFromThePreferencesMenu">Може, варто включити більше ігор з вкладки переваг?</string>
   <string name="openingExplorer">Перегляд дебютів</string>
@@ -113,6 +134,8 @@
   <string name="threefoldRepetition">Потрійне повторення</string>
   <string name="claimADraw">Оголосити нічию</string>
   <string name="offerDraw">Запропонувати нічию</string>
+  <string name="drawOffersAfterX">Запропонувати нічию можна тільки після ходу %s</string>
+  <string name="drawOffersNotAllowed">Запропонувати нічию заборонено</string>
   <string name="draw">Нічия</string>
   <plurals name="nbPlayers">
     <item quantity="one">%s гравець</item>
@@ -120,12 +143,28 @@
     <item quantity="many">%s гравців</item>
     <item quantity="other">%s гравців</item>
   </plurals>
+  <plurals name="nbOpponents">
+    <item quantity="one">%s суперник</item>
+    <item quantity="few">%s суперники</item>
+    <item quantity="many">%s суперників</item>
+    <item quantity="other">%s суперників</item>
+  </plurals>
+  <string name="ongoingGames">Поточні партії</string>
   <string name="currentGames">Поточні партії</string>
+  <string name="gamesInTimeout">Партій за часом</string>
+  <string name="yourTurnInX">Ваш хід через %s</string>
+  <string name="gameNumberX">Партія %s</string>
   <plurals name="nbGames">
     <item quantity="one">%s партія</item>
     <item quantity="few">%s партії</item>
     <item quantity="many">%s партії</item>
     <item quantity="other">%s партії</item>
+  </plurals>
+  <plurals name="nbGamesOngoing">
+    <item quantity="one">%s партія продовжується</item>
+    <item quantity="few">%s партії продовжуються</item>
+    <item quantity="many">%s партій продовжуються</item>
+    <item quantity="other">%s партій продовжуються</item>
   </plurals>
   <plurals name="nbBookmarks">
     <item quantity="one">%s закладка</item>
@@ -136,10 +175,12 @@
   <string name="viewInFullSize">Дивитися в повний розмір</string>
   <string name="logOut">Вийти</string>
   <string name="signIn">Увійти</string>
+  <string name="youMustSignInToJoinIt">Ви повинні %s, аби приєднатися</string>
   <string name="newToLidraughts">Уперше на Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Для цього вам потрібен обліковий запис</string>
   <string name="signUp">Зареєструватися</string>
   <string name="signupEmailHint">Ми використаємо її лише для скидання пароля.</string>
+  <string name="computersAreNotAllowedToPlay">Комп\'ютерам та гравцям, що користуються підтримкою комп\'ютера,  заборонено грати. Будь ласка, не користуйтесь допомогою шашкових движків, баз даних чи інших гравців під час партії. Також зверніть увагу, що створення кількох акаунтів категорично не рекомендується та надлишкове створення акаунтів призведе до блокування.</string>
   <string name="games">Партії</string>
   <string name="forum">Форум</string>
   <string name="xPostedInForumY">%1$s відповів в темі %2$s</string>
