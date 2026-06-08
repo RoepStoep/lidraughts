@@ -862,9 +862,16 @@
   <string name="cumulative">Всего</string>
   <string name="glicko2Rating">Рейтинг Glicko-2</string>
   <string name="checkYourEmail">Проверьте свой почтовый ящик</string>
+  <string name="almostThereX">Почти готово, %s!</string>
+  <string name="nowCheckYourEmailX">Проверьте вашу почту для подтверждения регистрации</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Мы отправили вам письмо. Для активации учётной записи нажмите на ссылку в письме.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Если письма нет, проверьте папку для спама и другие места, куда оно могло попасть.</string>
   <string name="weHaveSentYouAnEmailTo">Мы отправили письмо по адресу %s. Нажмите на ссылку в нём для сброса пароля.</string>
+  <string name="notReceivingIt" comment="As in: not receiving the email?">Не доставлено?</string>
+  <string name="makeSureYourEmailAddressIsCorrect">Убедитесь в корректности вашей почты:</string>
+  <string name="waitUpToFiveMinutes">Ожидайте 5 минут.</string>
+  <string name="considerUsingADifferentOne">Попробуйте использовать другой вариант.</string>
+  <string name="clickHereForHelp">Нажмите здесь для помощи</string>
   <string name="emailConfirmHelp">Помощь с подтверждением электронной почты</string>
   <string name="emailConfirmNotReceived">Не получили подтверждение по электронной почте после регистрации?</string>
   <string name="whatSignupUsername">Какое имя пользователя вы использовали для регистрации?</string>

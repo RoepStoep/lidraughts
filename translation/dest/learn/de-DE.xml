@@ -75,10 +75,20 @@
   <string name="puzzleFailed">Aufgabe misslungen!</string>
   <string name="retry">Erneut versuchen</string>
   <string name="clickToRetry">Klick um es erneut zu versuchen</string>
+  <string name="playALegalCapture">Führen Sie einen regelkonformen Schlagzug aus</string>
+  <plurals name="playAllLegalCapturesXRemaining">
+    <item quantity="one">Schlagen Sie alle Steine. Noch einer!</item>
+    <item quantity="other">Schlagen Sie alle Steine. Noch %s!</item>
+  </plurals>
   <string name="winTheGame">Gewinne das Spiel</string>
   <plurals name="winTheGameInX">
     <item quantity="one">Gewinn das Speil in %s Zug</item>
     <item quantity="other">Gewinn das Speil in %s Zügen</item>
+  </plurals>
+  <string name="promoteAKing">Zur Dame umwandeln</string>
+  <plurals name="promoteAKingInX">
+    <item quantity="one">In %s Zug zur Dame umwandeln</item>
+    <item quantity="other">In %s Zügen zur Dame umwandeln</item>
   </plurals>
   <plurals name="holdTheDrawForX">
     <item quantity="one">Halte das Unentschieden für %s Zug mehr</item>

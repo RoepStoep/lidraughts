@@ -13,6 +13,7 @@
   <string name="zenMode" comment="zenMode&#10;&#10;This is not the religious meaning. Turning this option on takes away make elements of the user interface.&#10;&#10;Can also translate as 'Focus mode' as one example.">מצב זן</string>
   <string name="displayBoardResizeHandle">הצג סמן להגדלת הלוח</string>
   <string name="onlyOnInitialPosition">רק בעמדה ההתחלתית</string>
+  <string name="draughtsClock">שעון דמקה</string>
   <string name="tenthsOfSeconds">הצג עשיריות שניה</string>
   <string name="whenTimeRemainingLessThanTenSeconds">כאשר הזמן שנותר קטן מעשר שניות</string>
   <string name="horizontalGreenProgressBars">מדי התקדמות ירוקים אופקיים</string>

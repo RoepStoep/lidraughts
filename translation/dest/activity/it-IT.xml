@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="activity">Attività</string>
-  <string name="hostedALiveStream">Ha ospitato uno stream live</string>
+  <string name="hostedALiveStream">Ha ospitato una diretta</string>
   <plurals name="supportedNbMonths">
     <item quantity="one">Supporta lidraughts.org da %1$s mese in qualità di %2$s</item>
     <item quantity="other">Supporta lidraughts.org da %1$s mesi in qualità di %2$s</item>
@@ -13,6 +13,10 @@
   <plurals name="solvedNbPuzzles">
     <item quantity="one">%s tattica giocata</item>
     <item quantity="other">%s tattiche giocate</item>
+  </plurals>
+  <plurals name="solvedNbVariantPuzzles">
+    <item quantity="one">Risolto %1$s esercizio di %2$s</item>
+    <item quantity="other">Risolti %1$s esercizi di %2$s</item>
   </plurals>
   <plurals name="playedNbGames">
     <item quantity="one">%1$s partita in %2$s</item>

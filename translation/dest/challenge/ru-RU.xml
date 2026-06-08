@@ -24,6 +24,7 @@
   <string name="declineTimeControl">Я не принимаю вызовы с таким контролем времени.</string>
   <string name="declineRated">Вызовите меня на рейтинговую игру, пожалуйста.</string>
   <string name="declineCasual">Вызовите меня на товарищескую игру, пожалуйста.</string>
+  <string name="declineVariant">Я сейчас не готов играть в этот вид шашек.</string>
   <string name="declineNoBot">Я не принимаю вызовы от ботов.</string>
   <string name="declineOnlyBot">Я принимаю вызовы только от ботов.</string>
   <string name="inviteLidraughtsUser">Или пригласите пользователя Lidraughts:</string>

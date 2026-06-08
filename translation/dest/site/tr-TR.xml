@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="playInATournament">Bir turnuvada oynayın</string>
   <string name="playWithAFriend">Bir arkadaşınla oyna</string>
   <string name="playWithTheMachine">Bilgisayara karşı oyna</string>
   <string name="toInviteSomeoneToPlayGiveThisUrl">Oyuna davet etmek için, bu linki gönderin</string>
   <string name="gameOver">Oyun bitti</string>
   <string name="waitingForOpponent">Rakip bekleniyor</string>
+  <string name="waitingForPlayer">Oyuncu bekleniyor</string>
   <string name="waiting">Bekleniyor</string>
   <string name="yourTurn">Sıra sizde</string>
   <string name="aiNameLevelAiLevel">%1$s seviye %2$s</string>
@@ -16,6 +18,12 @@
   <string name="white">Beyaz</string>
   <string name="black">Siyah</string>
   <string name="randomColor">Rastgele renk</string>
+  <string name="microMatch">Mikro-karşılaşma</string>
+  <string name="microMatchChallenge">Bu maç bir mikro-karşılaşma!</string>
+  <string name="microMatchExplanation">Bu maçın hemen ardından, renklerin değiştirildiği bir rövanş maçı oynanacak.</string>
+  <string name="microMatchRematchStarted">Mikro-karşılaşmanın ikinci oyunu başladı</string>
+  <string name="microMatchRematchAwaiting">Mikro-karşılaşmanın ikinci oyunu bekleniyor</string>
+  <string name="microMatchGameX">Mikro-karşılaşma oyunu %s</string>
   <string name="createAGame">Yeni bir oyun kur</string>
   <string name="whiteIsVictorious">Zafer Beyazın</string>
   <string name="blackIsVictorious">Zafer Siyahın</string>
@@ -58,6 +66,7 @@
   <string name="analysis">Analiz tahtası</string>
   <string name="depthX">Derinlik %s</string>
   <string name="usingServerAnalysis">Sunucu analizi yapılıyor</string>
+  <string name="loadingEngine">Motor yükleniyor...</string>
   <string name="cloudAnalysis">Bulut analizi</string>
   <string name="goDeeper">Daha derine in</string>
   <string name="showThreat">Tehdidi göster</string>
@@ -81,6 +90,15 @@
   <string name="averageRatingX">Ortalama puan: %s</string>
   <string name="recentGames">Son oyunlar</string>
   <string name="topGames">En yüksek puanlı oyunlar</string>
+  <string name="masterDbExplanation">%2$s ile %3$s aralığında rating puanı olan usta oyuncular tarafından oynanan %1$s+ OTB oyunu</string>
+  <plurals name="winInXHalfMoves">
+    <item quantity="one">%s yarı-hamlede kazan</item>
+    <item quantity="other">%s yarı-hamlede kazan</item>
+  </plurals>
+  <plurals name="drawInXHalfMoves">
+    <item quantity="one">%s yarı-hamlede berabere</item>
+    <item quantity="other">%s yarı-hamlede berabere</item>
+  </plurals>
   <string name="noGameFound">Oyun bulunamadı</string>
   <string name="maybeIncludeMoreGamesFromThePreferencesMenu">Seçenekler menüsünden daha fazla oyun eklemeyi deneyebilirsiniz.</string>
   <string name="openingExplorer">Açılış kâşifi</string>
@@ -112,15 +130,29 @@
   <string name="threefoldRepetition">Üç kez hamle tekrarı</string>
   <string name="claimADraw">Beraberlik talep et</string>
   <string name="offerDraw">Beraberlik teklif et</string>
+  <string name="drawOffersAfterX">Beraberlik tekliflerine yalnızca %s. hamleden sonra izin verilir</string>
+  <string name="drawOffersNotAllowed">Beraberlik tekliflerine izin verilmez</string>
   <string name="draw">Berabere</string>
   <plurals name="nbPlayers">
     <item quantity="one">%s çevrimiçi oyuncu</item>
     <item quantity="other">%s çevrimiçi oyuncu</item>
   </plurals>
+  <plurals name="nbOpponents">
+    <item quantity="one">%s rakip</item>
+    <item quantity="other">%s rakip</item>
+  </plurals>
+  <string name="ongoingGames">Devam eden oyunlar</string>
   <string name="currentGames">Şu anda oynanan oyunlar</string>
+  <string name="gamesInTimeout">Mola verilen oyunlar</string>
+  <string name="yourTurnInX">%s içinde sizin sıranız</string>
+  <string name="gameNumberX">Oyun %s</string>
   <plurals name="nbGames">
     <item quantity="one">%s oynanan oyun</item>
     <item quantity="other">%s oynanan oyun</item>
+  </plurals>
+  <plurals name="nbGamesOngoing">
+    <item quantity="one">%s oyun devam ediyor</item>
+    <item quantity="other">%s oyun devam ediyor</item>
   </plurals>
   <plurals name="nbBookmarks">
     <item quantity="one">%s işaretlenmiş oyun</item>
@@ -129,10 +161,16 @@
   <string name="viewInFullSize">Tam ekran göster</string>
   <string name="logOut">Çıkış</string>
   <string name="signIn">Giriş</string>
+  <string name="youMustSignInToJoinIt">Katılmak için %smanız gerekiyor</string>
+  <string name="newToLidraughts">Lidraughts\'da yeni misiniz?</string>
   <string name="youNeedAnAccountToDoThat">Bunu yapmanız için bir hesaba ihtiyacınız var</string>
   <string name="signUp">Kayıt Ol</string>
   <string name="signupEmailHint">Bunu yalnızca şifre sıfırlaması için kullanacağız.</string>
+  <string name="computersAreNotAllowedToPlay">Bilgisayarlar ve bilgisayar destekli oyuncuların oynamasına izin yoktur. Lütfen maçlarda dama motorlarından, veri tabanlarından ya da başka oyunculardan destek almayınız. Ayrıca, birden fazla hesap açmanız kesinlikle önerilmez. Çok fazla hesap açmak, hesapların kapatılmasına neden olacaktır.</string>
+  <string name="gameByUsername">Kullanıcı adına göre oyun</string>
+  <string name="gameByUrlOrId">URL veya ID\'ye göre oyun</string>
   <string name="games">Oyunlar</string>
+  <string name="userTv">Kullanıcıyı izle</string>
   <string name="forum">Forum</string>
   <string name="xPostedInForumY">%1$s, %2$s konusu altına bir mesaj yazdı</string>
   <string name="latestForumPosts">En son forum gönderileri</string>
@@ -159,6 +197,7 @@
   <string name="username">Kullanıcı adı</string>
   <string name="usernameOrEmail">Kullanıcı adı veya e-posta</string>
   <string name="changeUsername">Kullanıcı adını değiştir</string>
+  <string name="changeUsernameAlreadyChanged">Kullanıcı adınızı zaten değiştirdiniz!</string>
   <string name="changeUsernameNotSame">Sadece kullanıcı adınızdaki büyük/küçük harfleri değiştirebilirsiniz. Örneğin \"johndoe\" den \"JohnDoe\" gibi.</string>
   <string name="changeUsernameDescription">Kullanıcı adınızı değiştirin. Bu işlemi sadece 1 (bir) kez gerçekleştirebilirsiniz ve sadece mevcut kullanıcı adınızdaki harfleri (\"johndoe\", \"JohnDoe\") değiştirebilirsiniz.</string>
   <string name="password">Şifre</string>
@@ -183,6 +222,9 @@
     <item quantity="other">Sizinle oynadığı oyun sayısı: %s</item>
   </plurals>
   <string name="cancel">İptal et</string>
+  <string name="timeOut">Zaman aşımı</string>
+  <string name="arbiterDraw">Eş zamanlı hakemlik tarafından berabere olarak sonuçlandırıldı</string>
+  <string name="arbiterResign">Eş zamanlı hakemlik tarafından kazanç olarak sonuçlandırıldı</string>
   <string name="drawOfferSent">Beraberlik teklifi gönderildi</string>
   <string name="drawOfferDeclined">Beraberlik teklifi reddedildi</string>
   <string name="drawOfferAccepted">Beraberlik teklifi kabul edildi</string>
@@ -203,10 +245,19 @@
   <string name="abortGame">Oyunu iptal et</string>
   <string name="gameAborted">Oyun iptal edildi</string>
   <string name="standard">Standart</string>
+  <string name="variantTitleStandard">Uluslararası damanın standart kuralları (FMJD).</string>
+  <string name="variantTitleFrisian">Taşlar, dikey veya yatay olarak da taş alabilir.</string>
+  <string name="variantTitleFrysk">Friz daması ama her oyuncu 5 taşla başlar.</string>
+  <string name="variantTitleAntidraughts">Kazanmak için tüm taşlarınızı kaybedin (veya hamlesiz kalın).</string>
+  <string name="variantTitleBreakthrough">İlk şah yapan oyuncu kazanır.</string>
+  <string name="variantTitleRussian">Taş alma seçimi, çoklu taş alma sırasında promosyon.</string>
+  <string name="variantTitleBrazilian">Uluslararası dama ile aynı kurallar, ama 8x8 tahtada oynanır.</string>
+  <string name="customStartingPosition">Özel başlangıç konumu</string>
   <string name="unlimited">Sınırsız</string>
   <string name="mode">Mod</string>
   <string name="casual">Puansız</string>
   <string name="rated">Puanlı</string>
+  <string name="gamesWillImpactThePlayersRating">Oyunlar, oyuncuların rating puanını etkileyecektir</string>
   <string name="casualTournament">Puansız</string>
   <string name="ratedTournament">Puanlı</string>
   <string name="thisGameIsRated">Bu oyun puanlıdır</string>
@@ -231,6 +282,7 @@
   <string name="recipient">Alıcı</string>
   <string name="send">Gönder</string>
   <string name="incrementInSeconds">Hamle başına eklenen saniye</string>
+  <string name="freeOnlineDraughts">Ücretsiz Çevrimiçi Dama</string>
   <string name="spectators">İzleyiciler</string>
   <plurals name="nbRated">
     <item quantity="one">%s puanlı</item>
@@ -248,16 +300,22 @@
     <item quantity="one">%s kez berabere kaldı</item>
     <item quantity="other">%s kez berabere kaldı</item>
   </plurals>
+  <plurals name="nbVictories">
+    <item quantity="one">%s zafer</item>
+    <item quantity="other">%s zafer</item>
+  </plurals>
   <plurals name="nbPlaying">
     <item quantity="one">%s şimdi oynanıyor</item>
     <item quantity="other">%s şimdi oynanıyor</item>
   </plurals>
   <string name="exportGames">Oyunları indir</string>
+  <string name="exportSimulGames">Eş zamanlı oyunları aktar</string>
   <string name="ratingRange">Puan aralığı</string>
   <plurals name="giveNbSeconds">
     <item quantity="one">%s saniye ver</item>
     <item quantity="other">%s saniye ver</item>
   </plurals>
+  <string name="thisPlayerUsesDraughtsComputerAssistance">Bu kullanıcı, dama bilgisayarı desteği kullanıyor</string>
   <string name="thisPlayerArtificiallyIncreasesTheirRating">Bu oyuncu puanını sahte bir şekilde artırıyor/azaltıyor</string>
   <string name="openingExplorerAndTablebase">Açılış kâşifi &amp; oyunsonu analizi</string>
   <string name="takeback">Hamleni geri al</string>
@@ -270,6 +328,10 @@
   <string name="bookmarkThisGame">Bu oyunu işaretle</string>
   <string name="tournament">Turnuva</string>
   <string name="tournaments">Turnuvalar</string>
+  <string name="xTournaments">%s turnuva</string>
+  <string name="createdTournaments">Oluşturulan</string>
+  <string name="recentlyPlayed">Son oynanan</string>
+  <string name="bestResults">En iyi sonuçlar</string>
   <string name="tournamentPoints">Turnuvada alınan puanlar</string>
   <plurals name="nbTournamentPoints">
     <item quantity="one">%s Turnuva Puanı</item>
@@ -277,6 +339,7 @@
   </plurals>
   <string name="viewTournament">Turnuvaya göz at</string>
   <string name="backToTournament">Turnuvaya geri dön</string>
+  <string name="backToSimul">Eş zamanlı oyuna dön</string>
   <string name="thematic">Tematik</string>
   <plurals name="moreThanNbRatedGames">
     <item quantity="one">≥ %s puanlı maç</item>
@@ -303,11 +366,15 @@
   <string name="mustBeInTeam">%s adlı takımda olmalısınız.</string>
   <string name="youAreNotInTeam">%s takımının üyesi değilsiniz.</string>
   <string name="backToGame">Oyuna dön</string>
+  <string name="siteDescription">Ücretsiz çevrimiçi dama sunucusu. Temiz bir arayüzde dama oynayın. Kayıt yok, reklam yok, eklenti gerekmiyor. Turnuvalarda, arkadaşlarınızla veya rastgele rakiplerle dama oynayın.</string>
   <string name="xJoinedTeamY">%1$s, %2$s takımına katıldı</string>
   <string name="xCreatedTeamY">%1$s, %2$s takımını kurdu</string>
   <string name="xStartedStreaming">%s canlı yayında</string>
   <string name="averageElo">Ortalama puan</string>
   <string name="teamPage">Takım sayfası</string>
+  <string name="pickYourTeam">Takımınızı seçin</string>
+  <string name="whichTeamWillYouRepresent">Bu mücadelede hangi takımı temsil edeceksiniz?</string>
+  <string name="youMustJoinOneOfTheseTeams">Katılmak için bu takımlardan birine katılmanız gerekir!</string>
   <string name="location">Konum</string>
   <string name="filterGames">Oyunları kategorilendir</string>
   <string name="reset">Sıfırla</string>
@@ -318,13 +385,19 @@
   <string name="fromPosition">Özel pozisyondan</string>
   <string name="continueFromHere">Bu pozisyondan devam et</string>
   <string name="toStudy">Çalışma oluştur</string>
+  <string name="pdnImportBy">PDN, %s tarafından aktarıldı</string>
   <string name="importGame">Oyun yükle</string>
   <string name="importGameExplanation">Göz atılabilir bir oyun tekrarı, bilgisayar analizi, oyun sohbeti ve paylaşılabilir bir URL edinmek için bir oyun PDN\'si yapıştırın.</string>
+  <string name="orUploadAPdnFile">Veya bir PDN dosyası yükle</string>
   <plurals name="nbImportedGames">
     <item quantity="one">%s yüklenen oyun</item>
     <item quantity="other">%s yüklenen oyun</item>
   </plurals>
+  <string name="thisIsADraughtsCaptcha">Bu bir dama CAPTCHA\'sıdır.</string>
   <string name="clickOnTheBoardToMakeYourMove">İnsan olduğunuzu kanıtlamak için tahtaya tıklayın ve hamlenizi yapın.</string>
+  <string name="captcha.fail">Lütfen dama captcha\'sını çözün.</string>
+  <string name="notTheBestCapture">En iyi taş alma değil</string>
+  <string name="colorPlaysCapture">Hamle %s oyuncuda, en uzun taş alma gidişatını oynayın</string>
   <string name="retry">Tekrar dene</string>
   <string name="reconnecting">Yeniden bağlanılıyor</string>
   <plurals name="nbFriendsOnline">
@@ -370,8 +443,10 @@
   <string name="conditionOfEntry">Katılma şartı:</string>
   <string name="advancedSettings">Gelişmiş ayarlar</string>
   <string name="safeTournamentName">Turnuva için oldukça güvenli bir isim seçin.</string>
+  <string name="safeSimulName">Eş zamanlı oyun için oldukça güvenli bir isim seçin.</string>
   <string name="inappropriateNameWarning">Herhangi bir uygunsuz isim, hesabınızın yasaklanmasına yol açabilir.</string>
   <string name="emptyTournamentName">Kutuyu boş bırakarak turnuvaya rastgele bir Büyükusta\'nın ismini verebilirsiniz.</string>
+  <string name="emptySimulName">Eş zamanlı oyuna rastgele bir kimyasal elementin adını vermek için alanı boş bırakın.</string>
   <string name="recommendNotTouching">Bu ayarlara dokunmamanızı öneririz.</string>
   <string name="fewerPlayers">Turnuvaya katılım şartı koyarsanız, daha az oyuncu katılacaktır.</string>
   <string name="showAdvancedSettings">Gelişmiş ayarları göster</string>
@@ -408,6 +483,7 @@
   <string name="savePosition">Konumu kaydet</string>
   <string name="loadPosition">Konumu yükle</string>
   <string name="isPrivate">Özel</string>
+  <string name="editTournament">Turnuvayı düzenle</string>
   <string name="tournDescription">Turnuva açıklaması</string>
   <string name="tournDescriptionHelp">Katılımcılara söylemek istediğiniz özel bir şey var mı? Kısa tutmaya çalışın. İşaretleme bağlantılarını kullanabilirsiniz: [name](https://url)</string>
   <string name="cancelTournament">Turnuvayı iptal et</string>
@@ -422,14 +498,30 @@
   <string name="lastName">Soyad</string>
   <string name="biography">Biyografi</string>
   <string name="country">Ülke</string>
+  <string name="countryOrRegion">Ülke / Bölge</string>
   <string name="socialMediaLinks">Sosyal medya bağlantıları</string>
+  <string name="linkSuggestions">Twitter, Facebook, GitHub, Lichess, ...
+Her satıra bir URL yazın</string>
   <string name="inlineNotation">Notasyonu aynı satırda göster</string>
   <string name="watchLidraughtsTV">Lidraughts TV\'ye göz at</string>
   <string name="previouslyOnLidraughtsTV">Lidraughts TV\'de bunlar da vardı;</string>
+  <string name="collection">Koleksiyon</string>
+  <string name="customGamesCollection">Özel oyunlar koleksiyonu</string>
+  <string name="editCollection">Koleksiyonu düzenle</string>
+  <string name="copyCollectionUrl">Koleksiyon bağlantısını kopyala</string>
+  <string name="reloadBoards">Tahtaları yeniden yükle</string>
+  <string name="reloadBoardsExplanation">Tamamlanmış tüm oyun tahtalarını, aynı oyuncunun devam eden oyunuyla (varsa) yeniden yükleyin.</string>
+  <string name="reloadWithCurrentGameOfX">%s\'in mevcut oyunuyla yeniden yükle</string>
+  <string name="addOngoingOrRecentGame">Birinin oynadığı son oyunu ekleyin (mevcut oyunu veya en son bitirdiği oyunu).</string>
+  <string name="addGameByUrlOrId">URL veya oyun ID\'siyle oyun ekleyin.</string>
+  <string name="removeGame">Oyunu kaldır</string>
   <string name="onlinePlayers">Çevrimiçi oyuncular</string>
   <string name="activeToday">Bugün aktif</string>
   <string name="activePlayers">Aktif oyuncular</string>
   <string name="bewareTheGameIsRatedButHasNoClock">Dikkat, oyun puanlı ama suresizdir.</string>
+  <string name="standardFmjdRegulationsWithDrawingRules">Lidraughts\'daki standart dama oyunları, FMJD tarafından belirlenen uluslararası dama kurallarına uyar. Bu, tahtada yalnızca birkaç taş kaldığında uygulanan otomatik beraberlik kurallarını da içerir.</string>
+  <string name="exploreDraughtsVariants">Damanın farklı varyantları bu kuralların bazı kısımlarını kullanır veya tamamen yeni oyun mekanikleri getirebilir. Alışılmışın dışında düşünün ve dama oyununun sunduğu varyantları keşfedin!</string>
+  <string name="rulesAndVariants">Kurallar &amp; Varyantlar</string>
   <string name="training">Bulmacalar</string>
   <string name="yourPuzzleRatingX">Bulmaca puanın: %s</string>
   <string name="findTheBestMoveForWhite">Beyaz için en iyi hamleyi bulun.</string>
@@ -465,8 +557,12 @@
     <item quantity="other">Şu anda %s oyun oynanıyor</item>
   </plurals>
   <string name="automaticallyProceedToNextGameAfterMoving">Hamle yaptıktan sonra otomatik olarak diğer oyuna geç</string>
+  <string name="switchGamesInSameOrder">Oyunları sabit sırayla oynayın</string>
   <string name="autoSwitch">Otomatik Seç</string>
+  <string name="sequentialSwitch">Sabit sıra</string>
   <string name="puzzles">Bulmacalar</string>
+  <string name="variantPuzzles">%s bulmaca</string>
+  <string name="variantPractice">%s pratik</string>
   <string name="latestUpdates">Son gelişmeler</string>
   <string name="tournamentWinners">Turnuvanın Kazananları</string>
   <string name="name">İsim</string>
@@ -543,10 +639,12 @@
   <string name="defeatVsYInZ">%2$s adlı oyuncuya karşı %3$s maçında %1$s</string>
   <string name="drawVsYInZ">%2$s adlı oyuncuya karşı %3$s maçında %1$s</string>
   <string name="timeline" comment="The timeline is a list of activities by users.">Zaman tüneli</string>
+  <string name="seeAllTournaments">Tüm turnuvaları gör</string>
   <string name="start">Başlat</string>
   <string name="starting">Başlangıç:</string>
   <string name="allInformationIsPublicAndOptional">Tüm bilgiler herkese açık ve seçime bağlıdır.</string>
   <string name="yourCityRegionOrDepartment">Şehrin, ilçen ya da bölgen.</string>
+  <string name="biographyDescription">Kendinizden bahsedin, ilgi alanlarınız, damada neyi seviyorsunuz, favori açılışlarınız, hayranı olduğunuz oyuncular, ...</string>
   <plurals name="maximumNbCharacters">
     <item quantity="one">En fazla: %s karakter.</item>
     <item quantity="other">En fazla: %s karakter.</item>
@@ -571,6 +669,7 @@
   <string name="opponent">Rakip</string>
   <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Öğren</string>
   <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Çalışmalar</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">SSS</string>
   <string name="practice">Egzersizler</string>
   <string name="community">Topluluk</string>
   <string name="tools">Araçlar</string>
@@ -601,24 +700,50 @@
   <string name="webmasters">Site Yöneticileri</string>
   <string name="about">Hakkında</string>
   <string name="aboutX">%s hakkında</string>
+  <string name="xIsAFreeYLibreOpenSourceDraughtsServer">%1$s, ücretsiz (%2$s), özgür, reklamsız, açık kaynaklı bir dama sunucusudur.</string>
   <string name="really">ciddiyiz</string>
   <string name="contribute">Katkıda bulun</string>
   <string name="contact">İletişim</string>
   <string name="termsOfService">Hizmet koşulları</string>
   <string name="sourceCode">Kaynak Kodu</string>
+  <string name="simulShortName">Eş zamanlı oyun</string>
   <string name="simultaneousExhibitions">Eş zamanlı gösteriler</string>
   <string name="simulDescription">Eş zamanlı gösterinin açıklaması</string>
   <string name="simulDescriptionHelp">Katılımcılara söylemek istediğiniz bir şey var mı?</string>
+  <string name="yourPendingSimuls">Bekleyen eş zamanlı oyunlarınız</string>
   <string name="host">Ev Sahibi</string>
   <string name="hostColorX">Ev sahibi rengi: %s</string>
+  <string name="arbiter">Hakem</string>
   <string name="createdSimuls">Yeni oluşturulan eş zamanlı gösteriler</string>
   <string name="hostANewSimul">Eş zamanlı gösteri düzenle</string>
+  <string name="followSimulHostTv">Eş zamanlı sunucu perspektifini takip edin</string>
+  <string name="shareSimulUrl">İnsanların eş zamanlı oyuna girebilmesi için bu sayfanın URL bağlantısını paylaşın!</string>
+  <string name="candidatePlayers"> aday oyuncular</string>
+  <string name="allowedPlayers">Katılım aşağıdaki kişilerle sınırlıdır </string>
+  <string name="acceptedPlayers"> kabul edilen oyuncular</string>
+  <string name="acceptSomePlayers">Şimdi bazı oyuncuları kabul edebilir, ardından eş zamanlı oyunu başlatabilirsiniz</string>
+  <string name="acceptRandomCandidate">Rastgele adayı kabul et</string>
+  <string name="youHaveBeenSelected">Seçildiniz! Sakin olun, Eş zamanlı oyun başlamak üzere.</string>
+  <string name="xComplete">%s tamamlandı!</string>
+  <string name="ongoing">%s devam ediyor</string>
+  <string name="winningPercentage">Kazanma yüzdesi</string>
+  <string name="targetPercentage">Hedef yüzde</string>
+  <string name="toReachTarget">Hedefe ulaşmak için:</string>
+  <string name="relativeScoreRequired">Gerekli göreceli puan: %s</string>
+  <string name="targetWinningPercentage">Hedef kazanma yüzdesi: %s</string>
+  <string name="currentWinningPercentage">Şuanki kazanma yüzdesi: %s</string>
+  <string name="succeeded">başarılı!</string>
+  <string name="failed">başarısız</string>
+  <string name="simulTimeOut">Eş zamanlı oyun zaman aşımı</string>
+  <string name="simulTimeOutExplanation">Seçilen zaman aşımı süresi geçene kadar bu oyun eş zamanlı oyunda görünmeyecektir.</string>
   <string name="noSimulFound">Eş zamanlı gösteri bulunamadı</string>
+  <string name="deleteThisSimul">Eş zamanlı oyunu sil?</string>
   <string name="noSimulExplanation">Eş zamanlı gösteri yok.</string>
   <string name="returnToSimulHomepage">Eş zamanlı gösteri sayfasına geri dön</string>
   <string name="aboutSimul">Eş zamanlı gösterilerde, bir oyuncu aynı anda birçok oyuncuya karşı mücadele verir.</string>
   <string name="aboutSimulImage">Sijbrands 169 rakibe karşı, 115 oyun kazandı, 43 beraberlik ve 11 yenilgi aldı.</string>
   <string name="aboutSimulRealLife">Bu kavram gerçek etkinliklerden alınmıştır. Gerçek hayatta, eş zamanlı gösterinin ev sahibi masadan masaya dolaşarak birer hamle yapar.</string>
+  <string name="aboutSimulRules">Eş zamanlı gösteriye katılan her oyuncu, beyaz taşlarla oynayan ev sahibi ilk hamleyi yaptıktan sonra maça başlar. Bütün oyunlar bittiğinde eş zamanlı gösteri sona erer.</string>
   <string name="aboutSimulSettings">Eş zamanlı gösteriler daima puansızdır. Yeniden maç teklifi göndermek, hamleyi geri almak ve ek süre talep etmek devre dışıdır.</string>
   <string name="create">Oluştur</string>
   <string name="whenCreateSimul">Eş zamanlı gösterilerde, birkaç oyuncuyla aynı anda oynarsınız.</string>
@@ -626,21 +751,39 @@
   <string name="simulClockHint">Fischer Saati formatı. Ne kadar fazla oyuncu ile yüzleşirseniz, o kadar fazla zamana ihtiyaç duyabilirsiniz.</string>
   <string name="simulAddExtraTime">Eş zamanlı gösteride süreyi idare edebilmek için kendi saatinize fazladan zaman ekleyebilirsiniz.</string>
   <string name="simulHostExtraTime">Ev sahibinin fazladan süresi</string>
+  <string name="simulHostColor">Her oyun için sunucu rengi</string>
+  <string name="simulChatRestrictionsHint">Sohbet kısıtlamaları yalnızca eş zamanlı oyun devam ederken geçerlidir.</string>
+  <string name="simulTargetPercentageHint">İsteğe bağlı olarak, sunucu takımın elde etmesi gereken hedef kazanma yüzdesini belirleyebilirsiniz; bu yüzde (galibiyetler + 0,5 * beraberlikler) / (oyun sayısı) olarak hesaplanır. 50 ile 100 arasında bir yüzde girin veya hedef belirlememek için boş bırakın.</string>
+  <string name="simulParticipationLimited">Katılım, önceden seçilen %s oyuncuyla sınırlıdır.</string>
+  <string name="chatAvailableFor">Sohbet için mevcuttur</string>
+  <string name="chatAvailableForX">Oyun sırasında sohbet kısıtlamaları: %s</string>
   <string name="everyone">Herkes</string>
+  <string name="spectatorsOnly">Sadece seyirciler</string>
+  <string name="participantsOnly">Sadece katılımcılar</string>
+  <string name="atLeastOneVariant">En az bir varyant seçin!</string>
+  <string name="invalidTargetPercentage">50 ila 100 arasında bir değer girin, veya boş bırakın</string>
   <string name="lidraughtsTournaments">Lidraughts turnuvaları</string>
   <string name="tournamentFAQ">Arena turnuvaları SSS</string>
   <string name="tournamentOfficial">Resmî</string>
   <string name="timeBeforeTournamentStarts">Turnuvanın başlama süresi</string>
+  <string name="averageCentipieceLoss">Ortalama santitaş kaybı</string>
   <string name="keyboardShortcuts">Klavye kısayolları</string>
   <string name="keyMoveBackwardOrForward">önceki/sonraki hamle</string>
   <string name="keyGoToStartOrEnd">başa/sona git</string>
   <string name="keyShowOrHideComments">yorumları gizle/göster</string>
   <string name="keyEnterOrExitVariation">varyasyona gir/çık</string>
   <string name="newTournament">Yeni turnuva</string>
+  <string name="tournamentHomeTitle">Çeşitli zaman kontrolleri ve varyantları içeren dama turnuvaları</string>
+  <string name="tournamentHomeDescription">Hızlı tempolu dama turnuvalarına katılın! Resmi olarak planlanmış bir turnuvaya katılın veya kendi turnuvanızı oluşturun. Kurşun, Yıldırım, Klasik, Friz, Antidama ve daha birçok seçenekle sınırsız dama eğlencesi sizi bekliyor</string>
   <string name="tournamentNotFound">Turnuva bulunamadı.</string>
   <string name="tournamentDoesNotExist">Böyle bir turnuva yok.</string>
   <string name="tournamentMayHaveBeenCanceled">Eğer bütün oyuncular turnuva başlamadan ayrıldıysa, iptal edilmiş olabilir.</string>
   <string name="returnToTournamentsHomepage">Turnuva sayfasına geri dön.</string>
+  <string name="monthlyPerfTypeRatingDistribution">Aylık %s rating dağılımı</string>
+  <plurals name="nbPerfTypePlayersThisMonth">
+    <item quantity="one">Bu ay %1$s %2$s oyuncu.</item>
+    <item quantity="other">Bu ay %1$s %2$s oyuncu.</item>
+  </plurals>
   <string name="yourPerfTypeRatingIsRating">%1$s puanınız %2$s.</string>
   <string name="youAreBetterThanPercentOfPerfTypePlayers">%2$s kategorisindeki oyuncuların %1$s kadarından daha iyisiniz.</string>
   <string name="youDoNotHaveAnEstablishedPerfTypeRating">Sabit bir %s puanınız yok.</string>
@@ -648,9 +791,25 @@
   <string name="cumulative">Kümülatif</string>
   <string name="glicko2Rating">Glicko-2 puanı</string>
   <string name="checkYourEmail">E-postanızı kontrol edin</string>
+  <string name="almostThereX">Nerdeyse geldik, %s!</string>
+  <string name="nowCheckYourEmailX">Şimdi kayıt onayınız için email adresinizi (%s) kontrol edin.</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Size e-posta yolladık. Hesabınızı aktifleştirmek için e-postanızdaki linke tıklayın.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Eğer e-postayı görmüyorsanız, spam, sosyal veya diğer klasörlere göz atmayı deneyin.</string>
   <string name="weHaveSentYouAnEmailTo">%s adresine e-posta yolladık. Şifrenizi tekrar ayarlamak için e-postadaki linke tıklayın.</string>
+  <string name="notReceivingIt" comment="As in: not receiving the email?">Almadınız mı?</string>
+  <string name="makeSureYourEmailAddressIsCorrect">Email adresinizin doğru olduğundan emin olun:</string>
+  <string name="waitUpToFiveMinutes">5 dakikaya kadar bekleyin.</string>
+  <string name="itCanTakeAWhileToArrive">Email sağlayıcınıza bağlı olarak, ulaşması biraz zaman alabilir.</string>
+  <string name="hotmailIsNotoriouslyBad">Hotmail kötü bir hizmettir, onay email\'iniz bu adrese asla ulaşmayabilir.</string>
+  <string name="considerUsingADifferentOne">Farklı bir tanesini kullanmayı düşünün.</string>
+  <string name="stillNotGettingIt" comment="As in: still not receiving the email?">Hala almadınız mı?</string>
+  <string name="didYoumakeSureYourEmailAddressIsCorrect">Email adresinizin doğru olduğundan emin misiniz?</string>
+  <string name="didYouWaitFiveMinutes">5 dakika beklediniz mi?</string>
+  <string name="changeIt">Değiştir</string>
+  <string name="thisIsAlreadyYourCurrentEmail">Bu zaten şuanki emailiniz.</string>
+  <string name="ifSoX">Eğer öyleyse, %s.</string>
+  <string name="proceedToThisPage">sorunu çözmek için bu sayfaya gidin</string>
+  <string name="clickHereForHelp">Yardım için tıklayın</string>
   <string name="emailConfirmHelp">E-posta onayı için yardım</string>
   <string name="emailConfirmNotReceived">Kayıt olduktan sonra doğrulama e-postası almadınız mı?</string>
   <string name="whatSignupUsername">Kayıt olmak için hangi kullanıcı adını kullandınız?</string>
@@ -679,25 +838,33 @@
   <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">Ayrıca fare tekerini kullanarak da hamle yapabilirsiniz.</string>
   <string name="analysisShapesHowTo">Tahta üzerinde çember ya da ok çizmek için lütfen shift+click ya da right+click kullanın.</string>
   <string name="letOtherPlayersMessageYou">Diğer oyuncular size mesaj yollayabilsinler mi?</string>
+  <string name="shareYourInsightsData">Dama istatistik verilerinizi paylaşın</string>
   <string name="withNobody">Hiçkimse ile</string>
   <string name="withFriends">Yalnızca arkadaşlarımla</string>
   <string name="withEverybody">Herkes ile</string>
   <string name="youHaveAlreadyRegisteredTheEmail">Zaten kaydedilmiş e-posta adresiniz var: %s</string>
   <string name="kidMode">Çocuk modu</string>
+  <string name="kidModeIsEnabled">Çocuk modu etkin.</string>
   <string name="kidModeExplanation">Bu mod çocuğunuzun güvenliği ile ilgilidir. Tüm site bağlantıları devre dışı bırakılır. Eğer çocuklarınızı veya okul öğrencilerinizi diğer internet kullanıcılarına karşı korumak istiyorsanız, bu modu etkinleştirin.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">Çocuk modunda, Lidraughts logosu yerine %s belirir, bilin ki çocuğunuz güvendedir.</string>
   <string name="enableKidMode">Çocuk modunu aktifleştir</string>
   <string name="disableKidMode">Çocuk modunu devre dışı bırak</string>
   <string name="security">Güvenlik</string>
+  <string name="entirely">Baştan sona</string>
   <string name="thisIsAListOfDevicesThatHaveLoggedIntoYourAccount">Bu, hesabınıza giriş yaptığınız cihazların listesidir. Tanımadığınız veya bilmediğiniz tüm oturumları kapatın.</string>
   <string name="alternativelyYouCanX">Ayrıca %s de yapabilirsiniz.</string>
   <string name="revokeAllSessions">tüm oturumları kaldır</string>
+  <string name="speedUpYourAnalysis">Analizlerinizi hızlandırın!</string>
+  <string name="enableFullCaptureAtXPreferences">Analiz tahtasında aynı anda çoklu-taş alımlarını oynayın. Taş alma modu %s tercihlerinde yapılandırılabilir.</string>
+  <string name="playDraughtsEverywhere">Heryerde dama oynayın</string>
   <string name="asFreeAsLidraughts">lidraughts kadar özgür</string>
+  <string name="builtForTheLoveOfDraughtsNotMoney">Dama sevgisi için yapıldı, para için değil</string>
   <string name="everybodyGetsAllFeaturesForFree">Bütün özellikler ücretsizdir</string>
   <string name="zeroAdvertisement">Sıfır reklam</string>
   <string name="fullFeatured">Tüm özellikler</string>
   <string name="phoneAndTablet">Telefon ve tablet</string>
   <string name="bulletBlitzClassical">Kurşun, yıldırım, klasik</string>
+  <string name="correspondenceDraughts">Yazışmalı dama</string>
   <string name="onlineAndOfflinePlay">Çevrimiçi ve çevrimdışı oyna</string>
   <string name="viewTheSolution">Çözümü göster</string>
   <string name="followAndChallengeFriends">Takip edin ve arkadaşlarınıza meydan okuyun</string>
@@ -730,14 +897,22 @@
   <string name="usernameCharsInvalid">Kullanıcı adı yalnızca harf, sayı, alt çizgi ve çizgi içerebilir.</string>
   <string name="usernameUnacceptable">Bu kullanıcı adı uygun değil.</string>
   <string name="directlySupportLidraughts">Lidraughts\'i destekleyin</string>
+  <string name="playDraughtsInStyle">Tarzda dama oynayın</string>
+  <string name="draughtsBasics">Damanın temelleri</string>
   <string name="coaches">Eğitmenler</string>
   <string name="invalidPdn">Geçersiz PDN</string>
   <string name="invalidFen">Geçersiz FEN</string>
+  <string name="invalidPosition">Geçersiz pozisyon</string>
+  <string name="tooManyKings">Tahtada 30\'dan fazla şah ile Scan\'a karşı oynayamazsınız.</string>
   <string name="error.minLength">Asgari uzunluk: %s</string>
   <string name="error.maxLength">Azami uzunluk: %s</string>
   <string name="error.min">%s değerinden büyük veya eşit olmalıdır</string>
   <string name="error.max">%s değerinden küçük veya eşit olmalıdır</string>
   <string name="error.unknown">Geçersiz değer</string>
+  <string name="error.pattern">Geçersiz karakterler içeriyor</string>
+  <string name="error.eventName">Geçersiz karakterler içeriyor. Sadece harfler, rakamlar ve yaygın noktalama işaretleri kabul edilir.</string>
+  <string name="mustNotContainLidraughts">\"lidraughts\" içermemeli</string>
+  <string name="mustNotContainATitleThatIsNotVerified">Hesabınız için doğrulanmamış bir başlık içermemelidir</string>
   <string name="custom">Özel</string>
   <string name="notifications">Bildirimler</string>
   <string name="perfRatingX">Puan: %s</string>
@@ -779,9 +954,24 @@
   <string name="doItAgain">Tekrarlayın</string>
   <string name="reviewWhiteMistakes">Beyazın hatalarını gözden geçirin</string>
   <string name="reviewBlackMistakes">Siyahın hatalarını gözden geçirin</string>
+  <string name="helpPlayerInitialMove">Oyuncunun ilk hamlesini bulmasına bir yorumla yardımcı olun.</string>
+  <string name="introduceLesson">Bu derse bir yorumla giriş yapın.</string>
+  <string name="putOpponentsFirstMove">Rakibin ilk hamlesini tahtaya yerleştirin.</string>
+  <string name="explainOpponentMove">Rakibin hamlesini açıklayın ve yorum yaparak oyuncunun bir sonraki hamleyi bulmasına yardımcı olun.</string>
+  <string name="reflectOnCorrectMove">Oyuncunun doğru hamlesini bir yorumla değerlendirebilirsiniz; veya bir sonraki hamleye hemen geçmek için boş bırakabilirsiniz.</string>
+  <string name="addVariationsWrongMoves">Diğer bazı hamlelerin neden yanlış olduğunu açıklamak için varyasyon hamleleri ekleyin.</string>
+  <string name="explainWhyThisMoveIsWrong">Bu hamlenin neden yanlış olduğunu bir yorumda açıklayın.</string>
+  <string name="orPromoteItToMainline">Ya da doğru bir hamle ise ana yola yükseltin.</string>
+  <string name="anyOtherWrongMove">Başka herhangi bir yanlış hamle yapıldığında:</string>
+  <string name="explainWhyOtherMovesWrong">Diğer tüm hamlelerin neden yanlış olduğunu açıklayın</string>
+  <string name="optionalHint">Oyuncu için isteğe bağlı, anlık ipucu:</string>
+  <string name="giveThePlayerAHint">Oyuncuya doğru hamleyi bulabilmesi için bir ipucu verin</string>
   <string name="whatWouldYouPlay">Burada hangi hamleyi yapardınız?</string>
+  <string name="lessonCompleted">Tebrikler! Bu dersi tamamlandınız.</string>
   <string name="nextChapter">Sonraki bölüm</string>
   <string name="playAgain">Tekrar oyna</string>
+  <string name="analyse">Analiz et</string>
+  <string name="preview">Önizleme</string>
   <string name="advantage">Avantaj</string>
   <plurals name="nbSeconds">
     <item quantity="one">%s saniye</item>
@@ -791,9 +981,14 @@
     <item quantity="one">%s dakika</item>
     <item quantity="other">%s dakika</item>
   </plurals>
+  <plurals name="nbTurns">
+    <item quantity="one">%s sıra</item>
+    <item quantity="other">%s sıra</item>
+  </plurals>
   <string name="opening">Açılış</string>
   <string name="middlegame">Oyunortası</string>
   <string name="endgame">Oyunsonu</string>
+  <string name="randomOpeningFromX">%s\'den rastgele açılış</string>
   <string name="conditionalPremoves">Şartlı ön hamle</string>
   <string name="addCurrentVariation">Mevcut varyantı ekle</string>
   <string name="playVariationToCreateConditionalPremoves">Koşullu ön hamleler yapmak için bir varyasyon oynayın</string>
@@ -807,6 +1002,7 @@
   <string name="weHadToTimeYouOutForAWhile">Sizi bir süreliğine oyunlardan men etmek zorunda kaldık.</string>
   <string name="timeoutExpires">Men süresi %s dolacak.</string>
   <string name="why">Neden?</string>
+  <string name="pleasantDraughtsExperience">Herkese keyifli bir dama deneyimi sunmayı hedefliyoruz.</string>
   <string name="goodPractice">Bu nedenle, bütün oyuncuların doğru davranışlar sergilemesine özen gösteriyoruz.</string>
   <string name="potentialProblem">Potansiyel bir sorun tespit edildiğinde bu mesajı görüntülüyoruz.</string>
   <string name="howToAvoidThis">Tekrar olmaması için ne yapmalıyım?</string>
@@ -818,4 +1014,18 @@
   <string name="thankYouForReading">Okuduğunuz için teşekkür ederiz!</string>
   <string name="lifetimeScore">Toplam skor</string>
   <string name="currentMatchScore">Mevcut maç skoru</string>
+  <string name="welcomeToLidraughts">Lidraughts.org\'a hoş geldiniz!</string>
+  <string name="thisIsYourProfilePage">Bu, sizin profil sayfanız.</string>
+  <string name="wouldYouLikeToX">%s yapmak ister misiniz?</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">geliştir</string>
+  <string name="enabledKidModeSuggestion">Bu hesabı bir çocuk mu kullanacak? %s\'i aktifleştirmek isteyebilirsiniz.</string>
+  <string name="whatNowSuggestions">Sırada ne var? Birkaç öneriyi burada bulabilirsiniz:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Dama taktik bulmacaları ile gelişin</string>
+  <string name="playTheAI">Yapay zeka ile oyna</string>
+  <string name="playOpponentsWorldwide">Dünyanın dört bir yanından rakiplerle oyna</string>
+  <string name="followFriends">Lidraughts\'da arkadaşlarınızı takip edin</string>
+  <string name="playInTournaments">Turnuvalarda oyna</string>
+  <string name="learnFromStudies">Çalışmalardan öğren</string>
+  <string name="configureLidraughts">Lidraughts\'u beğenilerinize göre yapılandırın</string>
+  <string name="exploreTheSiteAndHaveFun">Siteyi keşfedin ve eğlenmenize bakın :)</string>
 </resources>

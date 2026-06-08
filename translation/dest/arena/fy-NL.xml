@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="arenaTournaments">Arena-toernoai</string>
+  <string name="isItRated">Mei wurdearring?</string>
+  <string name="howAreScoresCalculated">Hoe wurdt de skoare berekkene?</string>
+  <string name="howIsTheWinnerDecided">Hoe wurdt de winner bepaald?</string>
+  <string name="howDoesItEnd">Hoe einiget it?</string>
+  <string name="otherRules">Oare wichtige regels</string>
+  <string name="thisIsPrivate">Dit is in privee-toernoai</string>
   <string name="variant">Fariant</string>
+  <string name="minimumGameLength">Minimale spultoer</string>
+  <string name="history">Arena-skiednis</string>
+  <string name="averagePerformance">Trochsneed prestaasje</string>
+  <string name="averageScore">Trochsneed skoare</string>
+  <string name="myTournaments">Myn toernoaien</string>
 </resources>

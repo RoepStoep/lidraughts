@@ -7,7 +7,7 @@
   <string name="yesItWillBeFixedSoon">כן. זה יתוקן בקרוב!</string>
   <string name="andNowTheLongAnswerLagComposedOfTwoValues">ועכשיו, התשובה הארוכה! לאג במשחק נגרם משני ערכים לא קשורים אחד לשני (ככל שהם נמוכים יותר כך יותר טוב):</string>
   <string name="lidraughtsServerLatency">זמן התגובה של שרת Lightdraughts</string>
-  <string name="lidraughtsServerLatencyExplanation">הזמן שלוקח לעבד מהלך בשרת זהה עבור וכולם ותלוי בעומס השרת בלבד. כמה שיותר שחקנים, כך זמן התגובה ארוך יותר. המפתחים של Lightraughts עושים את מירב המאמצים לשמור על זמני תגובה טובים. רק לעיתים נדירות זמן התגובה יחרוג מ-10 מילי-שניות.</string>
+  <string name="lidraughtsServerLatencyExplanation">הזמן שלוקח לעבד מהלך בשרת זהה עבור וכולם ותלוי בעומס השרת בלבד. כמה שיותר שחקנים, כך זמן התגובה ארוך יותר. המפתחים של Lightraughts עושים את מרבית המאמצים לשמור על זמני תגובה טובים. רק לעיתים נדירות זמן התגובה יחרוג מ-10 מילישניות.</string>
   <string name="networkBetweenLidraughtsAndYou">הרשת בינכם לבין Lightdraughts</string>
   <string name="networkBetweenLidraughtsAndYouExplanation">הזמן שלוקח לשלוח מהלך מהמחשב שלכם לשרת Lightdraugts ולקבל תשובה חזרה. זה מושפע מהמרחק שלכם מהשרת (צרפת), ומאיכות חיבור האינטרנט שלכם. המפתחים של Lidraughts לא יכולים לתקן לכם את הרשת האלחותית או לגרום לאור לנוע במהירות גבוהה יותר.</string>
   <string name="youCanFindTheseValuesAtAnyTimeByClickingOnYourUsername">אתם יכולים למצוא את הערכים האלה בכל זמן, על ידי לחיצה על שם המשתמש שלכם למעלה.</string>

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="challenges">Sfide</string>
+  <string name="noChallenges">Nessuna sfida</string>
+  <string name="challengeSomeone">Sfida qualcuno</string>
+  <string name="openChallenge">Sfida aperta</string>
+  <string name="startsAtX">Inizia a %s</string>
   <string name="challengeToPlay">Sfida a una partita</string>
   <string name="challengeDeclined">Sfida rifiutata</string>
   <string name="challengeAccepted">Sfida accettata!</string>
   <string name="challengeCanceled">Sfida annullata</string>
+  <string name="challengeAcceptedAndWaiting">Sfida accettata! In attesa dell\'avversario...</string>
+  <string name="youWillBeRedirectedToTheGame">Sarai reindirizzato alla partita quando entrambi i giocatori avranno accettato la sfida.</string>
   <string name="registerToSendChallenges">Registrati per sfidare altri giocatori.</string>
   <string name="youCannotChallengeX">Non puoi sfidare %s.</string>
   <string name="xDoesNotAcceptChallenges">%s non accetta sfide.</string>

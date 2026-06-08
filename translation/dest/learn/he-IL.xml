@@ -26,14 +26,14 @@
   <string name="boardSetup">סידור הכלים</string>
   <string name="howTheGameStarts">העמדה ההתחלתית</string>
   <string name="boardSetupIntro">שני הצבאות מוכנים לקרב, זה מול זה.</string>
-  <string name="boardSetupComplete">יפה, את/ה יודע/ת להכין את הלוח למשחק!</string>
+  <string name="boardSetupComplete">ברכות! יש לך הידע בסידור לוח הדמקה.</string>
   <string name="theGameIsADraw">המשחק מסתיים בתיקו</string>
   <string name="advanced">מתקדם</string>
   <string name="whatNext">ומה עכשיו?</string>
   <string name="register">הרשמה</string>
-  <string name="getAFreeLidraughtsAccount">צרו חשבון Lidraughts בחינם</string>
+  <string name="getAFreeLidraughtsAccount">יוצרים חשבון Lidraughts בחינם</string>
   <string name="practice">אימון</string>
-  <string name="learnCommonDraughtsPositions">למדו עמדות נפוצות</string>
+  <string name="learnCommonDraughtsPositions">למידה על עמדות נפוצות בדמקה</string>
   <string name="exerciseYourTacticalSkills">הפכו לאשפים טקטיים</string>
   <string name="videos">סרטונים</string>
   <string name="playPeople">שחקו עם אנשים</string>

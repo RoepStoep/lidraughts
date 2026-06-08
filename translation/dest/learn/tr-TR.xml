@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="learnDraughts">Dama öğrenin</string>
   <string name="byPlaying">oynayarak!</string>
   <string name="menu">Menü</string>
   <string name="progressX">İlerleme: %s</string>
   <string name="resetMyProgress">İlerlememi sıfırla</string>
   <string name="youWillLoseAllYourProgress">Tüm ilerlemen silinecek!</string>
   <string name="play">oyna!</string>
+  <string name="draughtsPieces">Dama taşları</string>
+  <string name="theMen">Taş</string>
   <string name="theKing">Şah</string>
   <string name="fundamentals">Temel Prensipler</string>
   <string name="capture">Taş yeme</string>
   <string name="takeTheEnemyPieces">Düşman taşlarını ele geçir</string>
   <string name="takeTheBlackPieces">Siyah taşları ye!</string>
   <string name="takeTheBlackPiecesAndDontLoseYours">Siyah taşları ye ve kendi taşlarını kaybetme!</string>
+  <string name="captureComplete">Tebrikler! Artık dama taşlarıyla nasıl taş alınacağını biliyorsunuz!</string>
   <string name="protection">Savunma</string>
   <string name="keepYourPiecesSafe">Taşlarını koru</string>
   <string name="protectionIntro">Rakibin saldırdığı taşları bul ve onları koru!</string>
@@ -22,18 +26,32 @@
   <string name="combat">Çarpışma</string>
   <string name="captureAndDefendPieces">Taşlarını koru ve rakip taşları ele geçir</string>
   <string name="combatIntro">Güçlü bir savaşçı hem saldırıyı hem de savunmayı iyi bilir!</string>
+  <string name="combatComplete">Tebrikler! Artık dama taşlarıyla nasıl savaşılacağını biliyorsunuz!</string>
   <string name="intermediate">Orta düzey</string>
   <string name="boardSetup">Tahta düzeni</string>
   <string name="howTheGameStarts">Oyun nasıl başlar</string>
   <string name="boardSetupIntro">İki ordu karşı karşıya dizilmiş, savaşa hazır.</string>
+  <string name="thisIsTheInitialPosition">Her dama oyunu
+bu düzende başlar!
+Devam etmek için bir hamle yap.</string>
+  <string name="boardSetupComplete">Tebrikler! Artık dama tahtasının nasıl kurulacağını biliyorsunuz.</string>
   <string name="theGameIsADraw">Beraberlik</string>
   <string name="advanced">İleri düzey</string>
   <string name="whatNext">Sırada ne var?</string>
+  <string name="youKnowHowToPlayDraughts">Artık damayı iyice öğrendin, tebrikler! Daha güçlü bir oyuncu olmaya ne dersin?</string>
   <string name="register">Kayıt Ol</string>
   <string name="getAFreeLidraughtsAccount">Lidraughts\'e ücretsiz üye ol</string>
   <string name="practice">Alıştırmalar</string>
+  <string name="makesYourDraughtsPerfect">damanı daha iyi yapar</string>
+  <string name="learnCommonDraughtsPositions">Yaygın dama pozisyonlarını öğrenin</string>
+  <string name="signUpToSaveYourProgress">İlerlemenizi kaydetmek için kaydolun</string>
+  <string name="goToNextExercise">Bir sonraki egzersize geç</string>
+  <string name="loadNextExerciseImmediately">Hemen sonraki egzersizi yükle</string>
+  <string name="practiceList">Pratik listesi</string>
+  <string name="backToPracticeMenu">Pratik listesine dön</string>
   <string name="exerciseYourTacticalSkills">Taktiksel becerilerini geliştir</string>
   <string name="videos">Videolar</string>
+  <string name="watchInstructiveDraughtsVideos">Eğitici dama videoları izleyin</string>
   <string name="playPeople">Rakip bul</string>
   <string name="opponentsFromAroundTheWorld">Dünyanın dört bir yanından oyuncular</string>
   <string name="playMachine">Bilgisayarla oyna</string>
@@ -50,10 +68,43 @@
   <string name="youreGoodAtThis">Sen bu işte iyisin!</string>
   <string name="nailedIt">Başardın!</string>
   <string name="rightOn">İşte böyle!</string>
+  <string name="success">Başarılı!</string>
   <string name="stageXComplete">%s. aşama tamamlandı</string>
   <string name="yourScore">Puanın</string>
   <string name="next">Sıradaki</string>
   <string name="backToMenu">Menüye geri dön</string>
   <string name="puzzleFailed">Bulmaca çözülemedi!</string>
   <string name="retry">Tekrar dene</string>
+  <string name="clickToRetry">Tekrar denemek için tıklayın</string>
+  <string name="playALegalCapture">Mümkün bir taş alma hamlesi yapın</string>
+  <plurals name="playAllLegalCapturesXRemaining">
+    <item quantity="one">Bütün mümkün taş alma hamlelerini yapın. Bir tane daha kaldı!</item>
+    <item quantity="other">Bütün mümkün taş alma hamlelerini yapın. %s tane daha kaldı!</item>
+  </plurals>
+  <string name="winTheGame">Oyunu kazan</string>
+  <plurals name="winTheGameInX">
+    <item quantity="one">%s hamlede oyunu kazan</item>
+    <item quantity="other">%s hamlede oyunu kazan</item>
+  </plurals>
+  <string name="promoteAKing">Şaha terfi et</string>
+  <plurals name="promoteAKingInX">
+    <item quantity="one">%s hamlede şaha terfi et</item>
+    <item quantity="other">%s hamlede şaha terfi et</item>
+  </plurals>
+  <plurals name="holdTheDrawForX">
+    <item quantity="one">Beraberliği %s hamle daha tutun</item>
+    <item quantity="other">Beraberliği %s hamle daha tutun</item>
+  </plurals>
+  <plurals name="equalizeInX">
+    <item quantity="one">%s hamlede eşitleyin</item>
+    <item quantity="other">%s hamlede eşitleyin</item>
+  </plurals>
+  <plurals name="defendForX">
+    <item quantity="one">%s hamle boyunca savunmaya geçin</item>
+    <item quantity="other">%s hamle boyunca savunmaya geçin</item>
+  </plurals>
+  <plurals name="getAWinningPositionInX">
+    <item quantity="one">%s hamlede kazanan pozisyona ulaş</item>
+    <item quantity="other">%s hamlede kazanan pozisyona ulaş</item>
+  </plurals>
 </resources>

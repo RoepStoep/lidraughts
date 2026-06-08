@@ -416,6 +416,10 @@ eine Computeranalyse, einen Spielchat und eine teilbare URL.</string>
   <string name="unblock">Nicht mehr blockieren</string>
   <string name="followsYou">Folgt dir</string>
   <string name="xStartedFollowingY">%1$s folgt jetzt %2$s</string>
+  <plurals name="nbFollowers">
+    <item quantity="one">%s Follower</item>
+    <item quantity="other">%s Followers</item>
+  </plurals>
   <plurals name="nbFollowing">
     <item quantity="one">%s folgend</item>
     <item quantity="other">%s folgend</item>
@@ -789,9 +793,24 @@ Eine URL pro Zeile</string>
   <string name="glicko2Rating">Glicko-2 Wertung</string>
   <string name="checkYourEmail">Prüfe deine E-Mails</string>
   <string name="almostThereX">Fast geschafft, %s!</string>
+  <string name="nowCheckYourEmailX">Schauen Sie nun unter Ihren E-Mails (%s) nach einer Anmeldebestätigung.</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Wir haben dir eine E-Mail gesendet. Klicke den Link in der Email, um deinen Account zu aktivieren.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Wenn du die E-Mail nicht findest, prüfe in deinem E-Mail-Konto, ob sie in einem anderen Ordner wie z.B. dem Spamordner oder dem Papierkorb ist.</string>
   <string name="weHaveSentYouAnEmailTo">Wir haben dir eine Email an %s gesendet. Klicke auf den Link in der E-Mail, um dein Passwort zurück zu setzen.</string>
+  <string name="notReceivingIt" comment="As in: not receiving the email?">Haben Sie die E-Mail nicht erhalten?</string>
+  <string name="makeSureYourEmailAddressIsCorrect">Stellen Sie sicher, dass Ihre E-Mail-Adresse korrekt ist:</string>
+  <string name="waitUpToFiveMinutes">Warten Sie bis zu 5 Minuten.</string>
+  <string name="itCanTakeAWhileToArrive">Abhängig von Ihrem E-Mail-Provider kann es eine Weile dauern, bis das E-Mail ankommt.</string>
+  <string name="hotmailIsNotoriouslyBad">Hotmail ist bekanntermaßen schlecht, Ihre Bestätigungs-E-Mail wird möglicherweise nie eintreffen.</string>
+  <string name="considerUsingADifferentOne">Überlegen Sie sich, eine andere zu verwenden.</string>
+  <string name="stillNotGettingIt" comment="As in: still not receiving the email?">Immer noch nicht erhalten?</string>
+  <string name="didYoumakeSureYourEmailAddressIsCorrect">Haben Sie sichergestellt, dass Ihre E-Mail-Adresse korrekt ist?</string>
+  <string name="didYouWaitFiveMinutes">Haben Sie 5 Minuten gewartet?</string>
+  <string name="changeIt">Ändern Sie sie</string>
+  <string name="thisIsAlreadyYourCurrentEmail">Dies ist bereits Ihre aktuelle E-Mail-Adresse.</string>
+  <string name="ifSoX">Wenn ja, %s.</string>
+  <string name="proceedToThisPage">Besuchen Sie diese Seite, um das Problem zu lösen</string>
+  <string name="clickHereForHelp">Klicken Sie für Hilfe hier</string>
   <string name="emailConfirmHelp">Hilfe bei der E-Mail-Bestätigung</string>
   <string name="emailConfirmNotReceived">Hast du die Bestätigungs-E-Mail nach der Anmeldung nicht erhalten?</string>
   <string name="whatSignupUsername">Mit welchem Benutzernamen hast du dich registriert?</string>
@@ -826,6 +845,7 @@ Eine URL pro Zeile</string>
   <string name="withEverybody">Mit jedem</string>
   <string name="youHaveAlreadyRegisteredTheEmail">Du hast die folgende Emailadresse schon registriert: %s</string>
   <string name="kidMode">Kindermodus</string>
+  <string name="kidModeIsEnabled">Der Kindermodus ist aktiviert.</string>
   <string name="kidModeExplanation">Dies ist eine Sicherheitseinstellung. Im Kindermodus sind alle Kommunikationsmöglichkeiten deaktiviert. Aktiviere diese Option, um Kinder und Schüler vor anderen Internetbenutzern zu schützen.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">Im Kindermodus erhält das Lidraughts-Logo ein %s-Icon, an dem erkennen kannst, dass deine Kinder geschützt sind.</string>
   <string name="enableKidMode">Kindermodus aktivieren</string>
@@ -995,4 +1015,18 @@ Eine URL pro Zeile</string>
   <string name="thankYouForReading">Vielen Dank für’s Lesen!</string>
   <string name="lifetimeScore">Lebenszeit-Wertung</string>
   <string name="currentMatchScore">Aktueller Spielstand</string>
+  <string name="welcomeToLidraughts">Herzlich willkommen bei lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">Das ist Ihre Benutzerseite.</string>
+  <string name="wouldYouLikeToX">Möchten Sie %s?</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">verbessere es</string>
+  <string name="enabledKidModeSuggestion">Wird ein Kind dieses Konto verwenden? Vielleicht möchten Sie %s aktivieren.</string>
+  <string name="whatNowSuggestions">Was nun? Hier sind ein paar Vorschläge:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Werden Sie durch Taktiktraining besser</string>
+  <string name="playTheAI">Gegen Computer/KI spielen</string>
+  <string name="playOpponentsWorldwide">Gegen Gegner aus aller Welt spielen</string>
+  <string name="followFriends">Ihre Freunde auf Lidraughts</string>
+  <string name="playInTournaments">In einem Turnier spielen</string>
+  <string name="learnFromStudies">Mit Studien lernen</string>
+  <string name="configureLidraughts">Konfigurieren Sie Lidraughts nach Ihren Wünschen</string>
+  <string name="exploreTheSiteAndHaveFun">Erkunden Sie die Seite und haben Sie Spaß!</string>
 </resources>

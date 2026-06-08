@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="playInATournament">Gioca un torneo</string>
   <string name="playWithAFriend">Gioca contro un amico</string>
   <string name="playWithTheMachine">Gioca contro il computer</string>
   <string name="toInviteSomeoneToPlayGiveThisUrl">Per invitare qualcuno a giocare, dagli questo URL</string>
   <string name="gameOver">Partita terminata</string>
   <string name="waitingForOpponent">In attesa dell\'avversario</string>
+  <string name="waitingForPlayer">In attesa di un avversario</string>
   <string name="waiting">In attesa</string>
   <string name="yourTurn">Tocca a te</string>
   <string name="aiNameLevelAiLevel">%1$s livello %2$s</string>
   <string name="level">Livello</string>
   <string name="toggleTheChat" comment="Setting to enable/disable the chat">Attiva/disattiva la chat</string>
   <string name="toggleSound" comment="Setting to enable/disable sound">Attiva/disattiva audio</string>
+  <string name="chat">Chat</string>
   <string name="resign">Abbandona</string>
   <string name="white">Bianco</string>
   <string name="black">Nero</string>
   <string name="randomColor">Colore casuale</string>
+  <string name="microMatch">Micropartita</string>
+  <string name="microMatchChallenge">Questa sfida è una micropartita!</string>
+  <string name="microMatchExplanation">Una rivincita a colori invertiti sarà giocata immediatamente dopo questa partita.</string>
+  <string name="microMatchRematchStarted">Iniziata la seconda partita del micromatch</string>
+  <string name="microMatchRematchAwaiting">In attesa della seconda partita del micromatch</string>
+  <string name="microMatchGameX">Partita numero %s del micromatch</string>
   <string name="createAGame">Crea una partita</string>
   <string name="whiteIsVictorious">Vince il Bianco</string>
   <string name="blackIsVictorious">Vince il Nero</string>
@@ -54,6 +63,7 @@
   <string name="requestAComputerAnalysis">Chiedi un\'analisi del computer</string>
   <string name="computerAnalysis">Analisi del computer</string>
   <string name="computerAnalysisAvailable">Analisi del computer disponibile</string>
+  <string name="analysis">Analisi</string>
   <string name="depthX">Profondità %s</string>
   <string name="usingServerAnalysis">Analisi del computer in uso</string>
   <string name="loadingEngine">Sto caricando il motore...</string>
@@ -75,10 +85,20 @@
   <string name="losing">Mosse perdenti</string>
   <string name="drawn">Patta</string>
   <string name="unknown">Posizioni sconosciute</string>
+  <string name="database">Database</string>
   <string name="whiteDrawBlack">Bianco / Patta / Nero</string>
   <string name="averageRatingX">Punteggio medio: %s</string>
   <string name="recentGames">Partite recenti</string>
   <string name="topGames">Migliori partite</string>
+  <string name="masterDbExplanation">Partite dal vivo di%1$s+ maestri con punteggio da %2$s a %3$s</string>
+  <plurals name="winInXHalfMoves">
+    <item quantity="one">Vittoria in %s semimossa</item>
+    <item quantity="other">Vittoria in %s semimosse</item>
+  </plurals>
+  <plurals name="drawInXHalfMoves">
+    <item quantity="one">Pareggio in %s semimossa</item>
+    <item quantity="other">Pareggio in %s semimosse</item>
+  </plurals>
   <string name="noGameFound">Nessun partita trovata</string>
   <string name="maybeIncludeMoreGamesFromThePreferencesMenu">Prova ad includere più partite dal menu Preferenze.</string>
   <string name="openingExplorer">Esplora aperture</string>
@@ -106,18 +126,33 @@
   <string name="inaccuracy">Imprecisione</string>
   <string name="inaccuracies">Imprecisioni</string>
   <string name="moveTimes">Tempo per mossa</string>
+  <string name="flipBoard">Girare la scacchiera</string>
   <string name="threefoldRepetition">Triplice ripetizione</string>
   <string name="claimADraw">Reclama patta</string>
   <string name="offerDraw">Offri patta</string>
+  <string name="drawOffersAfterX">Offerte di patta sono ammesse solo dopo mossa %s</string>
+  <string name="drawOffersNotAllowed">Non sono ammesse offerte di patta</string>
   <string name="draw">Patta</string>
   <plurals name="nbPlayers">
     <item quantity="one">%s giocatore collegato</item>
     <item quantity="other">%s giocatori collegati</item>
   </plurals>
+  <plurals name="nbOpponents">
+    <item quantity="one">%s avversario</item>
+    <item quantity="other">%s avversari</item>
+  </plurals>
+  <string name="ongoingGames">Partite in corso</string>
   <string name="currentGames">Partite in corso</string>
+  <string name="gamesInTimeout">Partite in timeout</string>
+  <string name="yourTurnInX">Il tuo turno inizia tra %s</string>
+  <string name="gameNumberX">Partita %s</string>
   <plurals name="nbGames">
     <item quantity="one">%s partita</item>
     <item quantity="other">%s partite</item>
+  </plurals>
+  <plurals name="nbGamesOngoing">
+    <item quantity="one">%s partita in corso</item>
+    <item quantity="other">%s partite in corso</item>
   </plurals>
   <plurals name="nbBookmarks">
     <item quantity="one">%s preferito</item>
@@ -126,12 +161,17 @@
   <string name="viewInFullSize">Visualizza a schermo intero</string>
   <string name="logOut">Esci</string>
   <string name="signIn">Entra</string>
+  <string name="youMustSignInToJoinIt">Devi %s per unirti/accedere</string>
   <string name="newToLidraughts">Nuovo su Lidraughts?</string>
   <string name="youNeedAnAccountToDoThat">Devi avere un account per farlo</string>
   <string name="signUp">Registrati</string>
   <string name="signupEmailHint">Lo useremo solamente per reimpostare la tua password.</string>
   <string name="computersAreNotAllowedToPlay">Non è permesso giocare a computer e a giocatori che si fanno aiutare dai computer. Mentre giochi, non farti aiutare da programmi, da database o da altre persone. Inoltre si sconsiglia vivamente di creare account multipli e un uso eccessivo di account porterà alla cancellazione dal sito.</string>
+  <string name="gameByUsername">Partita in base al nome utente</string>
+  <string name="gameByUrlOrId">Partita in base a URL o ID</string>
   <string name="games">Partite</string>
+  <string name="userTv">TV utenti</string>
+  <string name="forum">Forum</string>
   <string name="xPostedInForumY">%1$s ha postato nel forum %2$s</string>
   <string name="latestForumPosts">Ultimi interventi nel forum</string>
   <string name="players">Giocatori</string>
@@ -157,11 +197,13 @@
   <string name="username">Nome utente</string>
   <string name="usernameOrEmail">Nome utente o email</string>
   <string name="changeUsername">Cambia nome utente</string>
+  <string name="changeUsernameAlreadyChanged">Hai già cambiato il tuo nome utente!</string>
   <string name="changeUsernameNotSame">Può cambiare solamente il maiuscolo/minuscolo delle lettere. Per esempio da \"johndoe\" a \"JohnDoe\".</string>
   <string name="changeUsernameDescription">Cambia il tuo nome utente. Questa operazione può essere effettuata una sola volta e consente di modificare solamente il maiuscolo/minuscolo del tuo nome utente.</string>
   <string name="password">Password</string>
   <string name="changePassword">Cambia password</string>
   <string name="changeEmail">Cambia email</string>
+  <string name="email">E-mail</string>
   <string name="passwordReset">Reimpostare la password</string>
   <string name="forgotPassword">Password dimenticata?</string>
   <string name="rank">Posizione</string>
@@ -181,6 +223,8 @@
   </plurals>
   <string name="cancel">Annulla</string>
   <string name="timeOut">Tempo scaduto</string>
+  <string name="arbiterDraw">Pareggio stabilito dall\'arbitro della simultanea</string>
+  <string name="arbiterResign">Vittoria stabilita dall\'arbitro della simultanea</string>
   <string name="drawOfferSent">Offerta di patta inviata</string>
   <string name="drawOfferDeclined">Offerta di patta rifiutata</string>
   <string name="drawOfferAccepted">Offerta di patta accettata</string>
@@ -200,15 +244,27 @@
   <string name="finishesX">finisce %s</string>
   <string name="abortGame">Interrompi la partita</string>
   <string name="gameAborted">Partita interrotta</string>
+  <string name="standard">Standard</string>
+  <string name="variantTitleStandard">Regole standard di dama internazionale (FMJD).</string>
+  <string name="variantTitleFrisian">I pezzi possono catturare anche orizzontalmente e verticalmente.</string>
+  <string name="variantTitleFrysk">Dama frisiana con 5 pezzi per giocatore.</string>
+  <string name="variantTitleAntidraughts">Perdi tutti i tuoi pezzi (o esaurisci le mosse) per vincere la partita.</string>
+  <string name="variantTitleBreakthrough">Il primo giocatore che promuove a dama vince.</string>
+  <string name="variantTitleRussian">Scelta della cattura, promozione durante una cattura multipla.</string>
+  <string name="variantTitleBrazilian">Regole di dama internazionale, giocata su una scacchiera 8x8.</string>
+  <string name="customStartingPosition">Posizione di partenza personalizzata</string>
   <string name="unlimited">Illimitato</string>
   <string name="mode">Modalità</string>
   <string name="casual">Amichevole</string>
   <string name="rated">Classificata</string>
+  <string name="gamesWillImpactThePlayersRating">Le partite sono valide per il punteggio del giocatore</string>
   <string name="casualTournament">Amichevole</string>
   <string name="ratedTournament">Classificata</string>
   <string name="thisGameIsRated">Questa partita è classificata</string>
   <string name="rematch">Rivincita</string>
   <string name="rematchOfferSent">Offerta di rivincita inviata</string>
+  <string name="rematchOfferSentWhite">Il bianco propone una rivincita</string>
+  <string name="rematchOfferSentBlack">Il nero propone una rivincita</string>
   <string name="rematchOfferAccepted">Rivincita accettata</string>
   <string name="rematchOfferCanceled">Offerta di rivincita annullata</string>
   <string name="rematchOfferDeclined">Offerta di rivincita rifiutata</string>
@@ -216,6 +272,7 @@
   <string name="viewRematch">Osserva la rivincita</string>
   <string name="play">Gioca</string>
   <string name="inbox">Messaggi</string>
+  <string name="chatRoom">Chat</string>
   <string name="loginToChat">Entra per partecipare alla chat</string>
   <string name="youHaveBeenTimedOut">Sei stato temporaneamente bloccato.</string>
   <string name="spectatorRoom">Chat spettatori</string>
@@ -225,6 +282,7 @@
   <string name="recipient">Destinatario</string>
   <string name="send">Invia</string>
   <string name="incrementInSeconds">Incremento in secondi</string>
+  <string name="freeOnlineDraughts">Dama Online Gratuita</string>
   <string name="spectators">Spettatori:</string>
   <plurals name="nbRated">
     <item quantity="one">%s classificata</item>
@@ -242,16 +300,22 @@
     <item quantity="one">%s pareggio</item>
     <item quantity="other">%s pareggi</item>
   </plurals>
+  <plurals name="nbVictories">
+    <item quantity="one">%s vittoria</item>
+    <item quantity="other">%s vittorie</item>
+  </plurals>
   <plurals name="nbPlaying">
     <item quantity="one">%s in corso</item>
     <item quantity="other">%s in corso</item>
   </plurals>
   <string name="exportGames">Esporta le partite</string>
+  <string name="exportSimulGames">Esportare partite della simultanea</string>
   <string name="ratingRange">Punteggio avversario</string>
   <plurals name="giveNbSeconds">
     <item quantity="one">Concedi %s secondo</item>
     <item quantity="other">Concedi %s secondi</item>
   </plurals>
+  <string name="thisPlayerUsesDraughtsComputerAssistance">Questo giocatore impiega un computer di dama </string>
   <string name="thisPlayerArtificiallyIncreasesTheirRating">Questo giocatore modifica il proprio punteggio irregolarmente</string>
   <string name="openingExplorerAndTablebase">Explorer delle aperture &amp; tablebase</string>
   <string name="takeback">Ritira la mossa</string>
@@ -264,6 +328,10 @@
   <string name="bookmarkThisGame">Aggiungi questa partita ai preferiti</string>
   <string name="tournament">Torneo</string>
   <string name="tournaments">Tornei</string>
+  <string name="xTournaments">%s tornei</string>
+  <string name="createdTournaments">Creato</string>
+  <string name="recentlyPlayed">Giocato di recente</string>
+  <string name="bestResults">Migliori risultati</string>
   <string name="tournamentPoints">Punti di torneo</string>
   <plurals name="nbTournamentPoints">
     <item quantity="one">%s punto di torneo</item>
@@ -271,6 +339,7 @@
   </plurals>
   <string name="viewTournament">Visualizza torneo</string>
   <string name="backToTournament">Ritorna al torneo</string>
+  <string name="backToSimul">Tornare alla simultanea</string>
   <string name="thematic">A tema</string>
   <plurals name="moreThanNbRatedGames">
     <item quantity="one">≥ %s partita classificata</item>
@@ -297,11 +366,15 @@
   <string name="mustBeInTeam">È necessario essere membri del gruppo %s</string>
   <string name="youAreNotInTeam">Non sei nel team %s</string>
   <string name="backToGame">Torna alla partita</string>
+  <string name="siteDescription">Server di dama online gratuito. Gioca a dama con un\'interfaccia pulita. Nessuna registrazione, nessuna pubblicità, nessun plugin richiesto. Gioca a dama nei tornei, con gli amici o con avversari casuali.</string>
   <string name="xJoinedTeamY">%1$s si è unito al gruppo %2$s</string>
   <string name="xCreatedTeamY">%1$s ha creato il gruppo %2$s</string>
   <string name="xStartedStreaming">%s ha avviato lo streaming</string>
   <string name="averageElo">Punteggio medio</string>
   <string name="teamPage">Pagina della squadra</string>
+  <string name="pickYourTeam">Scegli la tua squadra</string>
+  <string name="whichTeamWillYouRepresent">Quale squadra rappresenterai in questa battaglia?</string>
+  <string name="youMustJoinOneOfTheseTeams">Devi unirti ad una di queste squadre per partecipare!</string>
   <string name="location">Luogo</string>
   <string name="filterGames">Filtra partite</string>
   <string name="reset">Azzera</string>
@@ -312,14 +385,20 @@
   <string name="fromPosition">Da una posizione</string>
   <string name="continueFromHere">Continua da qui</string>
   <string name="toStudy">Studia</string>
+  <string name="pdnImportBy">Importazione PDN di %s</string>
   <string name="importGame">Importa partita</string>
   <string name="importGameExplanation">Quando incolli una partita tramite PDN potrai ripercorrerla,
 analizzarla con il computer, commentarla in chat, e condividerla tramire indirizzo URL.</string>
+  <string name="orUploadAPdnFile">O carica un file PDN</string>
   <plurals name="nbImportedGames">
     <item quantity="one">%s partita importata</item>
     <item quantity="other">%s partite importate</item>
   </plurals>
+  <string name="thisIsADraughtsCaptcha">Questo è un CAPTCHA di dama.</string>
+  <string name="clickOnTheBoardToMakeYourMove">Clicca sulla scacchiera e fai la tua mossa per dimostrare che sei un umano.</string>
   <string name="captcha.fail">Per favore risolvi il puzzle.</string>
+  <string name="notTheBestCapture">Non la cattura migliore</string>
+  <string name="colorPlaysCapture">%s a muovere; esegui la sequenza di cattura più lunga</string>
   <string name="retry">Riprova</string>
   <string name="reconnecting">Riconnessione</string>
   <plurals name="nbFriendsOnline">
@@ -365,8 +444,10 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="conditionOfEntry">Condizioni di accesso:</string>
   <string name="advancedSettings">Impostazioni Avanzate</string>
   <string name="safeTournamentName">Scegli un nome appropriato per il torneo.</string>
+  <string name="safeSimulName">Scegli un nome appropriato per il torneo.</string>
   <string name="inappropriateNameWarning">Qualsiasi cosa anche solo lievemente inappropriata potrebbe comportare l\'eliminazione del tuo account.</string>
   <string name="emptyTournamentName">Lascia vuoto il nome del torneo per chiamarlo con il nome di un giocatore famoso casuale.</string>
+  <string name="emptySimulName">Lasciare vuoto per nominare la simultanea come un elemento chimico a caso.</string>
   <string name="recommendNotTouching">Si consiglia di non toccare queste impostazioni.</string>
   <string name="fewerPlayers">Se imponi condizioni d\'accesso il torneo avrà un minor numero di giocatori.</string>
   <string name="showAdvancedSettings">Mostra impostazioni avanzate</string>
@@ -384,6 +465,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="youArePlaying">Stai giocando!</string>
   <string name="winRate">Percentuale di vittorie</string>
   <string name="berserkRate">Percentuale Berserk</string>
+  <string name="performance">Performance</string>
   <string name="tournamentComplete">Torneo terminato</string>
   <string name="movesPlayed">Mosse giocate</string>
   <string name="whiteWins">Il Bianco vince</string>
@@ -392,13 +474,17 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="nextXTournament">Prossimo torneo %s:</string>
   <string name="averageOpponent" comment="Is followed by the average opponent rating (in e.g. a tournament).">Punteggio medio degli avversari</string>
   <string name="membersOnly">Solo per iscritti</string>
+  <string name="boardEditor">Editor scacchiera</string>
+  <string name="setTheBoard">Imposta la scacchiera</string>
   <string name="popularOpenings">Aperture popolari</string>
   <string name="startPosition">Posizione iniziale</string>
+  <string name="clearBoard">Svuota la scacchiera</string>
   <string name="edit">Modifica</string>
   <string name="save">Salva</string>
   <string name="savePosition">Salva la posizione</string>
   <string name="loadPosition">Carica una posizione</string>
   <string name="isPrivate">Privato</string>
+  <string name="editTournament">Modificare il torneo</string>
   <string name="tournDescription">Descrizione del torneo</string>
   <string name="tournDescriptionHelp">Qualcosa di speciale che vuoi dire ai partecipanti? Prova a mantenerla breve. I link di markdown sono disponibili: [name](https://url)</string>
   <string name="cancelTournament">Annulla il torneo</string>
@@ -413,14 +499,30 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="lastName">Cognome</string>
   <string name="biography">Biografia</string>
   <string name="country">Paese</string>
+  <string name="countryOrRegion">Paese / Regione</string>
   <string name="socialMediaLinks">Collegamenti ai social media</string>
+  <string name="linkSuggestions">Come Twitter, Facebook, GitHub, Lichess, ...
+Un URL per riga</string>
   <string name="inlineNotation">Notazione in linea</string>
   <string name="watchLidraughtsTV">Guarda la TV di Lidraughts</string>
   <string name="previouslyOnLidraughtsTV">Già visti sulla TV di Lidraughts</string>
+  <string name="collection">Collezione</string>
+  <string name="customGamesCollection">Collezione personale di partite</string>
+  <string name="editCollection">Modificare collezione</string>
+  <string name="copyCollectionUrl">Copia url della collezione</string>
+  <string name="reloadBoards">Ricaricare le scacchiere</string>
+  <string name="reloadBoardsExplanation">Ricarica tutte le scacchiere terminate con la partita attualmente in corso dello stesso giocatore (se ce ne è una).</string>
+  <string name="reloadWithCurrentGameOfX">Ricarica con la partita in corso di %s</string>
+  <string name="addOngoingOrRecentGame">Aggiungi l\'ultima partita che qualcuno ha giocato (la sua partita in corso o altrimenti quella più recente).</string>
+  <string name="addGameByUrlOrId">Aggiungi una partita in base a URL o ID della partita.</string>
+  <string name="removeGame">Rimuovere partita</string>
   <string name="onlinePlayers">Giocatori online</string>
   <string name="activeToday">Attivi oggi</string>
   <string name="activePlayers">Giocatori attivi</string>
   <string name="bewareTheGameIsRatedButHasNoClock">Attenzione, la partita è classificata ma senza limite di tempo!</string>
+  <string name="standardFmjdRegulationsWithDrawingRules">Le partite standard su lidraughts vengono giocate secondo le regole di dama internazionale come stabilite dalla FMJD, comprese le regole di patta che vengono applicate quando solo pochi pezzi sono rimasti sulla scacchiera.</string>
+  <string name="exploreDraughtsVariants">Le altre varianti di dama utilizzano versioni modificate di queste regole e in alcuni casi introducono meccaniche di gioco completamente diverse. Pensa al di fuori degli schemi ed esplora le varianti che lidraughts offre!</string>
+  <string name="rulesAndVariants">Regole &amp; Varianti</string>
   <string name="training">Allenamento</string>
   <string name="yourPuzzleRatingX">Il tuo punteggio in allenamento: %s</string>
   <string name="findTheBestMoveForWhite">Trova la mossa migliore per il Bianco.</string>
@@ -456,12 +558,17 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
     <item quantity="other">%s partite in gioco</item>
   </plurals>
   <string name="automaticallyProceedToNextGameAfterMoving">Passa automaticamente alla partita successiva dopo aver mosso</string>
+  <string name="switchGamesInSameOrder">Visualizzare le partite in un ordine fisso</string>
   <string name="autoSwitch">Cambia automaticamente</string>
+  <string name="sequentialSwitch">Ordine fisso</string>
   <string name="puzzles">Puzzle</string>
+  <string name="variantPuzzles">%s esercizi</string>
+  <string name="variantPractice">%s allenamento</string>
   <string name="latestUpdates">Ultimi aggiornamenti</string>
   <string name="tournamentWinners">Vincitori del torneo</string>
   <string name="name">Nome</string>
   <string name="description">Descrizione</string>
+  <string name="no">No</string>
   <string name="yes">Sì</string>
   <string name="help">Aiuto</string>
   <string name="createANewTopic">Crea una nuova discussione</string>
@@ -487,6 +594,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="by">da %s</string>
   <string name="thisTopicIsNowClosed">Questa discussione è chiusa.</string>
   <string name="theming">Temi</string>
+  <string name="blog">Blog</string>
   <string name="questionsAndAnswers">Domande &amp; risposte</string>
   <string name="notes">Note</string>
   <string name="typePrivateNotesHere">Scrivi qui le tue note private</string>
@@ -507,6 +615,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="maximumWeeklyRating">Valutazione settimanale massima</string>
   <string name="onlyTitled">Solo giocatori intitolati</string>
   <string name="onlyTitledHelp">Richiedi un titolo ufficiale per partecipare al torneo</string>
+  <string name="privacy">Privacy</string>
   <string name="letOtherPlayersFollowYou">Permetti ad altri giocatori di seguirti</string>
   <string name="letOtherPlayersChallengeYou">Permetti ad altri giocatori di sfidarti</string>
   <string name="letOtherPlayersInviteYouToStudy">Permetti ad altri giocatori di invitarti allo studio</string>
@@ -527,12 +636,16 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="xCommentedY">%1$s ha commentato %2$s</string>
   <string name="victory">Vittoria</string>
   <string name="defeat">Sconfitta</string>
+  <string name="victoryVsYInZ">%1$s vs %2$s fra %3$s</string>
+  <string name="defeatVsYInZ">%1$s vs %2$s fra %3$s</string>
+  <string name="drawVsYInZ">%1$s vs %2$s fra %3$s</string>
   <string name="timeline" comment="The timeline is a list of activities by users.">Resoconto attività</string>
   <string name="seeAllTournaments">Vedi tutti i tornei</string>
   <string name="start">Inizia</string>
   <string name="starting">Inizio:</string>
   <string name="allInformationIsPublicAndOptional">Tutte le informazioni sono pubbliche e facoltative.</string>
   <string name="yourCityRegionOrDepartment">La tua città, regione o provincia.</string>
+  <string name="biographyDescription">Parla di te, dei tuoi interessi, di cosa ti piace nella dama, delle tue aperture preferite, partite, dei giocatori preferiti, ...</string>
   <plurals name="maximumNbCharacters">
     <item quantity="one">Massimo: %s carattere.</item>
     <item quantity="other">Massimo: %s caratteri.</item>
@@ -543,6 +656,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   </plurals>
   <string name="listBlockedPlayers">Lista dei giocatori bloccati da te</string>
   <string name="human">Umano</string>
+  <string name="computer">Computer</string>
   <string name="side">Lato</string>
   <string name="clock">Orologio</string>
   <string name="youPlayTheWhitePieces">Sei il Bianco</string>
@@ -556,6 +670,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="opponent">Avversario</string>
   <string name="learnMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Impara</string>
   <string name="studyMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Studi</string>
+  <string name="faqMenu" comment="This appears in the top menu, so try to keep it as short as possible.">FAQ</string>
   <string name="practice">Allenamento</string>
   <string name="community">Community</string>
   <string name="tools">Strumenti</string>
@@ -583,21 +698,47 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="videoLibrary">Libreria video</string>
   <string name="streamersMenu" comment="This appears in the top menu, so try to keep it as short as possible.">Streamer</string>
   <string name="mobileApp">App mobile</string>
+  <string name="webmasters">Webmasters</string>
   <string name="about">Info su</string>
   <string name="aboutX">Informazioni su %s</string>
+  <string name="xIsAFreeYLibreOpenSourceDraughtsServer">%1$s è un server gratuito (%2$s), libre, senza pubblicità, open-source di dama.</string>
   <string name="really">completamente</string>
   <string name="contribute">Contribuisci</string>
   <string name="contact">Contattaci</string>
   <string name="termsOfService">Termini di Servizio</string>
   <string name="sourceCode">Codice Sorgente</string>
+  <string name="simulShortName">Simultanea</string>
   <string name="simultaneousExhibitions">Esibizioni simultanee</string>
   <string name="simulDescription">Descrizione della simulazione</string>
   <string name="simulDescriptionHelp">Vuoi dire qualcosa ai partecipanti?</string>
+  <string name="yourPendingSimuls">Le tue simultanee in attesa</string>
   <string name="host">Simultaneista</string>
   <string name="hostColorX">Colore del simultaneista: %s</string>
+  <string name="arbiter">Arbitro</string>
   <string name="createdSimuls">Simultanee recenti</string>
   <string name="hostANewSimul">Crea una nuova simultanea</string>
+  <string name="followSimulHostTv">Prospettiva dell\'organizzatore della simultanea</string>
+  <string name="shareSimulUrl">Condividi l\'URL di questa pagina per permettere ad altre persone di partecipare alla simultanea!</string>
+  <string name="candidatePlayers"> giocatori candidati</string>
+  <string name="allowedPlayers">La partecipazione è limitata ai seguenti </string>
+  <string name="acceptedPlayers"> giocatori accettati</string>
+  <string name="acceptSomePlayers">Accetta alcuni giocatori per poi iniziare la simultanea</string>
+  <string name="acceptRandomCandidate">Accettare candidato a caso</string>
+  <string name="youHaveBeenSelected">Sei stato selezionato! Resta pronto, la simultanea sta per iniziare.</string>
+  <string name="xComplete">%s terminata!</string>
+  <string name="ongoing">%s in corso</string>
+  <string name="winningPercentage">Percentuale di vittoria</string>
+  <string name="targetPercentage">Obiettivo</string>
+  <string name="toReachTarget">Per raggiungere l\'obiettivo:</string>
+  <string name="relativeScoreRequired">Punteggio relativo richiesto: %s</string>
+  <string name="targetWinningPercentage">Obiettivo: %s</string>
+  <string name="currentWinningPercentage">Percentuale di vittoria attuale: %s</string>
+  <string name="succeeded">successo!</string>
+  <string name="failed">non riuscito</string>
+  <string name="simulTimeOut">Timeout della simultanea</string>
+  <string name="simulTimeOutExplanation">Questa partita non verrà visualizzata nella simultanea fino al termine del timeout.</string>
   <string name="noSimulFound">Simultanea non trovata</string>
+  <string name="deleteThisSimul">Eliminare questa simultanea?</string>
   <string name="noSimulExplanation">Questa esibizione simultanea non esiste.</string>
   <string name="returnToSimulHomepage">Ritorna alla pagina delle simultanee</string>
   <string name="aboutSimul">Nelle simultanee un giocatore sfida diversi avversari contemporaneamente.</string>
@@ -611,11 +752,22 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="simulClockHint">Modello Fischer Clock. Più giocatori sfidi, più tempo ti potrebbe servire.</string>
   <string name="simulAddExtraTime">Puoi aggiungere più tempo al tuo orologio per far fronte alla simultanea.</string>
   <string name="simulHostExtraTime">Tempo aggiuntivo del simultaneista</string>
+  <string name="simulHostColor">Colore del giocatore di simultanea</string>
+  <string name="simulChatRestrictionsHint">Le restrizioni della chat sono in vigore solo mentre la simultanea è in corso.</string>
+  <string name="simulTargetPercentageHint">Facoltativamente, è possibile impostare una percentuale di vittoria obiettivo che il giocatore di simultanea dovrebbe raggiungere, calcolata come (vittorie + 0.5 * patte) / (numero di partite). Inserisci una percentuale tra 50 e 100, o lascia vuoto per non fissare un obiettivo.</string>
+  <string name="simulParticipationLimited">La partecipazione è limitata ad %s giocatori selezionati.</string>
+  <string name="chatAvailableFor">La chat è disponibile per</string>
+  <string name="chatAvailableForX">Restrizioni della chat a partite in corso: %s</string>
   <string name="everyone">Tutti</string>
+  <string name="spectatorsOnly">Solo spettatori</string>
+  <string name="participantsOnly">Solo partecipanti</string>
+  <string name="atLeastOneVariant">Seleziona almeno una variante!</string>
+  <string name="invalidTargetPercentage">Inserire un valore fra 50 e 100 o lasciare vuoto</string>
   <string name="lidraughtsTournaments">Tornei Lidraughts</string>
   <string name="tournamentFAQ">FAQ tornei Arena</string>
   <string name="tournamentOfficial">Ufficiale</string>
   <string name="timeBeforeTournamentStarts">Tempo prima dell\'inizio del torneo</string>
+  <string name="averageCentipieceLoss">Centesimi di pezzo persi in media</string>
   <string name="keyboardShortcuts">Scorciatoie da tastiera</string>
   <string name="keyMoveBackwardOrForward">muovi indietro/avanti</string>
   <string name="keyGoToStartOrEnd">vai all\'inizio/fine</string>
@@ -623,6 +775,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="keyEnterOrExitVariation">entra/esci dalla variante</string>
   <string name="newTournament">Nuovo torneo</string>
   <string name="tournamentHomeTitle">Torneo con diversi controlli del tempo e varianti</string>
+  <string name="tournamentHomeDescription">Gioca a tornei di dama ad alta cadenza! Partecipa ad un torneo ufficiale in programma, o crea il tuo. Bullet, Blitz, Classico, Frisiano, Antidraughts e altre opzioni sono disponibili per il divertimento infinito di giocare a dama.</string>
   <string name="tournamentNotFound">Torneo non trovato</string>
   <string name="tournamentDoesNotExist">Questo torneo non esiste.</string>
   <string name="tournamentMayHaveBeenCanceled">Può essere stato annullato, se tutti i giocatori l\'hanno abbandonato prima che il torneo iniziasse.</string>
@@ -639,9 +792,25 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="cumulative">Percentile</string>
   <string name="glicko2Rating">Punteggio Glicko-2</string>
   <string name="checkYourEmail">Controlla la tua e-mail</string>
+  <string name="almostThereX">Quasi lì, %s!</string>
+  <string name="nowCheckYourEmailX">Ora controlla la tua email (%s) per la conferma dell\'iscrizione.</string>
   <string name="weHaveSentYouAnEmailClickTheLink">Ti abbiamo inviato un\'email. Clicca sul link nella mail per attivare il tuo account.</string>
   <string name="ifYouDoNotSeeTheEmailCheckOtherPlaces">Se non vedi l\'e-mail, controlla la cartella spam o altre cartelle.</string>
   <string name="weHaveSentYouAnEmailTo">Abbiamo inviato un\'email all\'indirizzo %s. Clicca sul link nell\'email per reimpostare la password.</string>
+  <string name="notReceivingIt" comment="As in: not receiving the email?">Non ricevuta?</string>
+  <string name="makeSureYourEmailAddressIsCorrect">Assicurati che il tuo indirizzo email sia corretto:</string>
+  <string name="waitUpToFiveMinutes">Attendi fino a 5 minuti.</string>
+  <string name="itCanTakeAWhileToArrive">A seconda del tuo provider di posta elettronica ci può volere un po\' di tempo.</string>
+  <string name="hotmailIsNotoriouslyBad">Hotmail è notoriamente problematico, la tua email di conferma non potrebbe mai arrivare.</string>
+  <string name="considerUsingADifferentOne">Considera usare un indirizzo diverso.</string>
+  <string name="stillNotGettingIt" comment="As in: still not receiving the email?">Non ancora ricevuta?</string>
+  <string name="didYoumakeSureYourEmailAddressIsCorrect">Ti sei assicurato che l\'indirizzo e-mail sia corretto?</string>
+  <string name="didYouWaitFiveMinutes">Hai aspettato 5 minuti?</string>
+  <string name="changeIt">Cambialo</string>
+  <string name="thisIsAlreadyYourCurrentEmail">Questa è la tua email corrente.</string>
+  <string name="ifSoX">Se così, %s.</string>
+  <string name="proceedToThisPage">procedere a questa pagina per risolvere il problema</string>
+  <string name="clickHereForHelp">Clicca qui per aiuto</string>
   <string name="emailConfirmHelp">Aiuto per la conferma dell\'email</string>
   <string name="emailConfirmNotReceived">Non hai ricevuto la tua email di conferma dopo la registrazione?</string>
   <string name="whatSignupUsername">Quale nome utente hai usato per registrarti?</string>
@@ -666,7 +835,9 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="downloadRaw">Scarica PDN senza annotazioni</string>
   <string name="downloadImported">Download importato</string>
   <string name="printFriendlyPDF">Stampa in PDF</string>
+  <string name="crosstable">Tabella</string>
   <string name="youCanAlsoScrollOverTheBoardToMoveInTheGame">È inoltre possibile scorrere sopra il bordo per entrare nel gioco.</string>
+  <string name="analysisShapesHowTo">Premere shift e cliccare oppure cliccare con tasto destro del mouse per disegnare cerchi e frecce sulla scacchiera.</string>
   <string name="letOtherPlayersMessageYou">Lascia che gli altri giocatori ti inviino messaggi</string>
   <string name="shareYourInsightsData">Condividi i tuoi dati Insights</string>
   <string name="withNobody">Con nessuno</string>
@@ -674,20 +845,27 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="withEverybody">Con tutti</string>
   <string name="youHaveAlreadyRegisteredTheEmail">Hai già registrato l\'email: %s</string>
   <string name="kidMode">Modalità bambino</string>
+  <string name="kidModeIsEnabled">La modalità per bambini è attiva.</string>
   <string name="kidModeExplanation">Questa modalità riguarda la sicurezza: in modalità bambino tutte le comunicazioni sono disabilitate. Si consiglia di attivare questa modalità per bambini e studenti, in modo da proteggerli dagli altri utenti.</string>
   <string name="inKidModeTheLidraughtsLogoGetsIconX">In \"modalità bambino\", al logo di lidraughts viene aggiunto %s, in questo modo sai che il bambino è sicuro.</string>
   <string name="enableKidMode">Attiva \"modalità bambino\"</string>
   <string name="disableKidMode">Disattiva \"modalità bambino\"</string>
   <string name="security">Sicurezza</string>
+  <string name="entirely">Interamente</string>
   <string name="thisIsAListOfDevicesThatHaveLoggedIntoYourAccount">Questa è la lista di dispositivi collegata al tuo account. Rimuovi ogni istanza che non riconosci.</string>
   <string name="alternativelyYouCanX">In alternativa è possibile %s.</string>
   <string name="revokeAllSessions">rimuovi tutte le sessioni</string>
+  <string name="speedUpYourAnalysis">Accelera la tua analisi!</string>
+  <string name="enableFullCaptureAtXPreferences">Esegui sequenze di cattura in un colpo sulle scacchiere di analisi. La modalità di cattura può essere configurata sotto %s nelle preferenze.</string>
+  <string name="playDraughtsEverywhere">Gioca a dama ovunque</string>
   <string name="asFreeAsLidraughts">Libero come Lidraughts</string>
+  <string name="builtForTheLoveOfDraughtsNotMoney">Sviluppato per l\'amore per la dama, non soldi</string>
   <string name="everybodyGetsAllFeaturesForFree">Tutti hanno le stesse funzionalità gratis</string>
   <string name="zeroAdvertisement">Nessuna pubblicità</string>
   <string name="fullFeatured">Piena funzionalità</string>
   <string name="phoneAndTablet">Cellulare e tablet</string>
   <string name="bulletBlitzClassical">Bullet, blitz, classico</string>
+  <string name="correspondenceDraughts">Dama per corrispondenza</string>
   <string name="onlineAndOfflinePlay">Gioca online e offline</string>
   <string name="viewTheSolution">Guarda la soluzione</string>
   <string name="followAndChallengeFriends">Segui e sfida gli amici</string>
@@ -701,6 +879,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="xLikesY">A %1$s piace %2$s</string>
   <string name="xCreatesStudyY">%1$s crea uno studio %2$s</string>
   <string name="quickPairing">Accoppiamento rapido</string>
+  <string name="lobby">Lobby</string>
   <string name="anonymous">Anonimo</string>
   <string name="yourScore">Il tuo punteggio: %s</string>
   <string name="language">Lingua</string>
@@ -709,6 +888,8 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="dark">Scuro</string>
   <string name="transparent">Trasparente</string>
   <string name="backgroundImageUrl">URL dell\'immagine di sfondo:</string>
+  <string name="boardTheme">Tema della scacchiera</string>
+  <string name="boardSize">Dimensione della scacchiera</string>
   <string name="pieceSet">Set pezzi</string>
   <string name="embedInYourWebsite">Incorpora nel tuo sito Web</string>
   <string name="usernameAlreadyUsed">Questo nome è già in uso. Prego sceglierne un altro.</string>
@@ -717,14 +898,22 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="usernameCharsInvalid">Il nome utente deve contenere solo lettere, numeri, underscore e trattini.</string>
   <string name="usernameUnacceptable">Questo nome utente non è permesso.</string>
   <string name="directlySupportLidraughts">Supporta direttamente Lidraughts</string>
+  <string name="playDraughtsInStyle">Gioca a dama con stile</string>
+  <string name="draughtsBasics">Le basi della dama</string>
   <string name="coaches">Allenatori</string>
   <string name="invalidPdn">PDN non valido</string>
   <string name="invalidFen">FEN non valido</string>
+  <string name="invalidPosition">Posizione invalida</string>
+  <string name="tooManyKings">Non puoi giocare contro Scan con più di 30 dame sulla scacchiera.</string>
   <string name="error.minLength">Deve contenere almeno %s caratteri</string>
   <string name="error.maxLength">Deve contenere al massimo %s caratteri</string>
   <string name="error.min">Deve essere almeno %s</string>
   <string name="error.max">Deve essere al massimo %s</string>
   <string name="error.unknown">Valore non valido</string>
+  <string name="error.pattern">Contiene caratteri non validi</string>
+  <string name="error.eventName">Contiene caratteri non validi. Sono ammesse solo lettere, numeri e segni di punteggiatura comuni.</string>
+  <string name="mustNotContainLidraughts">Non può contenere \"lidraughts\"</string>
+  <string name="mustNotContainATitleThatIsNotVerified">Non può contenere un titolo che non è verificato per il tuo account</string>
   <string name="custom">Altro/Personalizza</string>
   <string name="notifications">Notifiche</string>
   <string name="perfRatingX">Punteggio: %s</string>
@@ -766,9 +955,24 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="doItAgain">Rifallo</string>
   <string name="reviewWhiteMistakes">Revisiona gli errori del Bianco</string>
   <string name="reviewBlackMistakes">Revisiona gli errori del Nero</string>
+  <string name="helpPlayerInitialMove">Aiuta il giocatore a trovare la mossa iniziale, con un commento.</string>
+  <string name="introduceLesson">Introdurre questa lezione con un commento.</string>
+  <string name="putOpponentsFirstMove">Eseguire la prima mossa dell\'avversario sulla scacchiera.</string>
+  <string name="explainOpponentMove">Spiega la mossa dell\'avversario e aiuta il giocatore a trovare la mossa successiva, con un commento.</string>
+  <string name="reflectOnCorrectMove">Puoi riflettere sulla mossa corretta del giocatore con un commento; o lasciare vuoto per saltare immediatamente alla mossa successiva.</string>
+  <string name="addVariationsWrongMoves">Aggiungi qualche mossa in qualche variante per spiegare perché certe altre mosse sono errate.</string>
+  <string name="explainWhyThisMoveIsWrong">Spiega perché questa mossa è sbagliata con un commento.</string>
+  <string name="orPromoteItToMainline">O segnala come mossa principale se è la mossa giusta.</string>
+  <string name="anyOtherWrongMove">Quando viene giocata qualsiasi altra mossa sbagliata:</string>
+  <string name="explainWhyOtherMovesWrong">Spiega perché tutte le altre mosse sono sbagliate</string>
+  <string name="optionalHint">Suggerimento opzionale su richiesta per il giocatore:</string>
+  <string name="giveThePlayerAHint">Dai un suggerimento al giocatore in modo che possa trovare la mossa giusta</string>
   <string name="whatWouldYouPlay">Cosa giocheresti in questa posizione?</string>
+  <string name="lessonCompleted">Congratulazioni! Hai completato questa lezione.</string>
   <string name="nextChapter">Prossimo capitolo</string>
   <string name="playAgain">Gioca di nuovo</string>
+  <string name="analyse">Analizza</string>
+  <string name="preview">Anteprima</string>
   <string name="advantage">Vantaggio</string>
   <plurals name="nbSeconds">
     <item quantity="one">%s secondo</item>
@@ -778,9 +982,14 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
     <item quantity="one">%s minuto</item>
     <item quantity="other">%s minuti</item>
   </plurals>
+  <plurals name="nbTurns">
+    <item quantity="one">%s turno</item>
+    <item quantity="other">%s turni</item>
+  </plurals>
   <string name="opening">Apertura</string>
   <string name="middlegame">Mediogioco</string>
   <string name="endgame">Finale</string>
+  <string name="randomOpeningFromX">Apertura casuale da %s</string>
   <string name="conditionalPremoves">Premosse condizionali</string>
   <string name="addCurrentVariation">Aggiungi variazione corrente</string>
   <string name="playVariationToCreateConditionalPremoves">Gioca una variazione per creare premosse condizionali</string>
@@ -794,6 +1003,7 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="weHadToTimeYouOutForAWhile">Abbiamo dovuto bloccarti per un po\' di tempo.</string>
   <string name="timeoutExpires">Sarai sbloccato %s.</string>
   <string name="why">Perché?</string>
+  <string name="pleasantDraughtsExperience">Ci proponiamo di fornire un\' esperienza di dama piacevole per tutti.</string>
   <string name="goodPractice">A tal fine, dobbiamo assicurarci che tutti i giocatori si comportino bene.</string>
   <string name="potentialProblem">Quando notiamo un potenziale problema, mostriamo questo messaggio.</string>
   <string name="howToAvoidThis">Come evitare il blocco?</string>
@@ -805,4 +1015,18 @@ analizzarla con il computer, commentarla in chat, e condividerla tramire indiriz
   <string name="thankYouForReading">Grazie per l\'attenzione!</string>
   <string name="lifetimeScore">Scontri diretti</string>
   <string name="currentMatchScore">Punteggio della partita attuale</string>
+  <string name="welcomeToLidraughts">Benvenuto su lidraughts.org!</string>
+  <string name="thisIsYourProfilePage">Questa è la tua pagina profilo.</string>
+  <string name="wouldYouLikeToX">Vuoi %s?</string>
+  <string name="improveIt" comment="Is included in wouldYouLikeToX as a link. Both together make the question: &#34;Would you like to improve it?&#34;">miglioralo</string>
+  <string name="enabledKidModeSuggestion">Questo account sarà usato da un bambino? In tal caso potresti voler attivare %s.</string>
+  <string name="whatNowSuggestions">E adesso? Ecco alcuni suggerimenti:</string>
+  <string name="improveWithDraughtsTacticsPuzzles">Migliora con esercizi di tattica</string>
+  <string name="playTheAI">Gioca contro computer (intelligenza artificiale)</string>
+  <string name="playOpponentsWorldwide">Gioca contro avversari da tutto il mondo</string>
+  <string name="followFriends">Segui i tuoi amici su lidraughts</string>
+  <string name="playInTournaments">Gioca un torneo</string>
+  <string name="learnFromStudies">Impara dagli studi</string>
+  <string name="configureLidraughts">Configura lidraughts a tuo piacimento</string>
+  <string name="exploreTheSiteAndHaveFun">Esplora il sito e divertiti :)</string>
 </resources>

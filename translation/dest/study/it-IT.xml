@@ -51,6 +51,7 @@
   <string name="allSyncMembersRemainOnTheSamePosition">Tutti i membri in SYNC rimangono sulla stessa posizione</string>
   <string name="shareChanges">Condividi le modifiche con gli spettatori e salvale sul server</string>
   <string name="playing">In corso</string>
+  <string name="onlyOngoingGames">Solo partite in corso</string>
   <string name="first">Primo</string>
   <string name="previous">Precedente</string>
   <string name="next">Successivo</string>
@@ -80,6 +81,7 @@
   <string name="deleteChapter">Elimina capitolo</string>
   <string name="deleteThisChapter">Vuoi davvero eliminare questo capitolo? Sarà perso per sempre!</string>
   <string name="clearAllCommentsInThisChapter">Cancellare tutti i commenti, le annotazioni e i disegni in questo capitolo?</string>
+  <string name="rightUnderTheBoard">Sotto alla scacchiera</string>
   <string name="noPinnedComment">Nessun commento</string>
   <string name="normalAnalysis">Analisi normale</string>
   <string name="hideNextMoves">Nascondi le mosse successive</string>
@@ -93,6 +95,10 @@
   <string name="loadAPositionFromFen">Carica una posizione da FEN</string>
   <string name="loadAGameFromPdn">Carica una partita da PDN</string>
   <string name="automatic">Automatica</string>
+  <plurals name="pasteYourPdnTextHereUpToNbGames">
+    <item quantity="one">Incolla qui il tuo PDN, fino a %s partita, separate da una riga vuota</item>
+    <item quantity="other">Incolla qui il tuo PDN, fino a %s partite, separate da una riga vuota</item>
+  </plurals>
   <string name="urlOfTheGame">URL della partita</string>
   <string name="loadAGameFromXOrY">Carica una partita da %1$s o %2$s</string>
   <string name="createChapter">Crea capitolo</string>

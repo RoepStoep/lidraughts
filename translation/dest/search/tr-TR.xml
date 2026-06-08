@@ -2,6 +2,19 @@
 <resources>
   <string name="search">Ara</string>
   <string name="advancedSearch">Gelişmiş Arama</string>
+  <plurals name="searchInXGames">
+    <item quantity="one">%s dama oyununda ara</item>
+    <item quantity="other">%s dama oyununda ara</item>
+  </plurals>
+  <plurals name="searchInXGamesDescription">
+    <item quantity="one">Gelişmiş kriterler kullanarak %s dama oyununda ara</item>
+    <item quantity="other">Gelişmiş kriterler kullanarak %s dama oyununda ara</item>
+  </plurals>
+  <plurals name="xGamesFound">
+    <item quantity="one">Bir oyun bulundu</item>
+    <item quantity="other">%s oyun bulundu</item>
+  </plurals>
+  <string name="searchPlayersExplanation">Oyuncuyu ismine göre, isteğe bağlı olarak rakip ismini de ekleyerek arayın</string>
   <string name="opponentName">Rakibin ismi</string>
   <string name="loser">Kaybeden</string>
   <string name="from">Bu değerden</string>
@@ -10,6 +23,7 @@
   <string name="aiLevel">Yapay Zeka seviyesi</string>
   <string name="source">Kaynak</string>
   <string name="numberOfTurns">Hamle sayısı</string>
+  <string name="numberOfTurnsExplanation">Oynanan tam tur sayısı (her iki oyuncunun da hamle yaptığı)</string>
   <string name="result">Sonuç</string>
   <string name="winnerColor">Kazanının rengi</string>
   <string name="date">Tarih</string>

@@ -14,6 +14,10 @@
     <item quantity="one">%s bulmaca çözdü</item>
     <item quantity="other">%s bulmaca çözdü</item>
   </plurals>
+  <plurals name="solvedNbVariantPuzzles">
+    <item quantity="one">%1$s %2$s taktik bulmacası çözüldü</item>
+    <item quantity="other">%1$s %2$s taktik bulmacası çözüldü</item>
+  </plurals>
   <plurals name="playedNbGames">
     <item quantity="one">%1$s kez %2$s oynadı</item>
     <item quantity="other">%1$s kez %2$s oynadı</item>

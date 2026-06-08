@@ -6,10 +6,15 @@
     <item quantity="one">Cerca in %s partita</item>
     <item quantity="other">Cerca in %s partite</item>
   </plurals>
+  <plurals name="searchInXGamesDescription">
+    <item quantity="one">Cerca in %s partita di dama utilizzando criteri avanzati</item>
+    <item quantity="other">Cerca in %s partite di dama utilizzando criteri avanzati</item>
+  </plurals>
   <plurals name="xGamesFound">
     <item quantity="one">Una partita trovata</item>
     <item quantity="other">%s partite trovate</item>
   </plurals>
+  <string name="searchPlayersExplanation">Cerca un giocatore per nome, opzionalmente con il nome dell\'avversario</string>
   <string name="opponentName">Nome dell\'avversario</string>
   <string name="loser">Perdente</string>
   <string name="from">Da</string>
@@ -18,6 +23,7 @@
   <string name="aiLevel">Livello I.A.</string>
   <string name="source">Fonti</string>
   <string name="numberOfTurns">Numero di turni</string>
+  <string name="numberOfTurnsExplanation">Il numero di turni interi (una mossa per giocatore) giocati</string>
   <string name="result">Risultato</string>
   <string name="winnerColor">Colore del vincitore</string>
   <string name="date">Data</string>

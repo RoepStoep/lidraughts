@@ -4,6 +4,10 @@
   <string name="coordinateTraining">Allenamento sulle coordinate</string>
   <string name="averageScoreAsWhiteX">Punteggio medio come bianco: %s</string>
   <string name="averageScoreAsBlackX">Punteggio medio come nero: %s</string>
+  <string name="knowingTheDraughtsBoard">Conoscere le coordinate della scacchiera è un\'abilità molto importante:</string>
+  <string name="mostDraughtsCourses">La maggior parte dei corsi ed esercizi di dama utilizzano ampiamente la notazione numerica per le case.</string>
+  <string name="talkToYourDraughtsFriends">Conoscere le coordinate rende più facile parlare con altri giocatori di dama, dal momento che entrambi capiscono la \"terminologia della scacchiera\".</string>
   <string name="youCanAnalyseAGameMoreEffectively">Puoi analizzare le partite con più efficacia se non hai bisogno di cercare di volta in volta le coordinate di ogni casa.</string>
+  <string name="aSquareNameAppears">Il nome di ogni casa apparirà sullo schermo e dovrai cliccare sulla casa sulla scacchiera. Hai 30 secondi per riconoscere il maggior numero di case possibile!</string>
   <string name="startTraining">Inizia l\'allenamento</string>
 </resources>

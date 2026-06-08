@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="swissTournaments">Tornei a sistema svizzero</string>
+  <string name="bye" comment="A player gets a &#34;bye&#34; when they don't play in a round of the tournament because there is an odd number of players.">Ciao</string>
+  <string name="byes" comment="Refers to the amount of &#34;byes&#34; in this tournament (the amount of players that didn't play a round because there was an odd number of players).">Ciao</string>
+  <string name="absent">Assente</string>
+  <string name="absences">Assenze</string>
+  <string name="late">In ritardo</string>
+  <string name="tieBreak">Spareggio</string>
   <plurals name="nbRounds">
     <item quantity="one">%s turni</item>
     <item quantity="other">%s turni</item>
   </plurals>
   <string name="nextRound">Prossimo turno</string>
   <string name="numberOfRounds">Numero di turni</string>
+  <string name="scheduleTheNextRound">Pianifica il prossimo turno</string>
 </resources>

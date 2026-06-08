@@ -35,5 +35,5 @@
   <string name="transactionCompleted">העסקה שלך הושלמה, וקבלה על התרומה שלך נשלחה אליך בדוא\"ל.</string>
   <string name="permanentPatron">עכשיו יש לך חשבון תומך/ת קבוע.</string>
   <string name="checkOutProfile">הסתכלו על עמוד הפרופיל שלכם!</string>
-  <string name="downgradeNextMonth">בעוד חודש לא תחויב/י שוב, וחשבון Lidraughts שלך יחזור להיות חשבון רגיל.</string>
+  <string name="downgradeNextMonth">בעוד חודש, לא נחייב אותך שוב, וחשבון Lidraughts שלך יחזור להיות חשבון רגיל.</string>
 </resources>
