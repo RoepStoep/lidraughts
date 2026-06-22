@@ -54,7 +54,7 @@ export function player(p, asLink: boolean, withRating: boolean, defender: boolea
   }, '' + -p.ratingDiff);
   const rating = ' ' + p.rating + (p.provisional ? '?' : ''),
     fullName = playerName(p);
-  const userId = p.id || p.name
+  const userId = p.id || p.name;
 
   return h('a.ulpt.user-link' + (fullName.length > 15 ? '.long' : ''), {
     attrs: asLink ? { href: '/@/' + userId } : { 'data-href': '/@/' + userId },

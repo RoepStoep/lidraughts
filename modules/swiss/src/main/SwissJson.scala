@@ -5,14 +5,14 @@ import org.joda.time.format.ISODateTimeFormat
 import play.api.i18n.Lang
 import play.api.libs.json._
 
-import lidraughts.common.{ GreatPlayer, LightUser }
+import lidraughts.common.{ GreatPlayer, LightUser, LightWfdUser }
 import lidraughts.db.dsl._
 import lidraughts.game.Game
 import lidraughts.game.JsonView.boardSizeWriter
 import lidraughts.pref.Pref
 import lidraughts.quote.Quote.quoteWriter
 import lidraughts.socket.Socket.SocketVersion
-import lidraughts.user.{ User, UserRepo }
+import lidraughts.user.{ LightUserApi, LightWfdUserApi, User, UserRepo }
 
 final class SwissJson(
     swissColl: Coll,
@@ -22,7 +22,8 @@ final class SwissJson(
     rankingApi: SwissRankingApi,
     boardApi: SwissBoardApi,
     statsApi: SwissStatsApi,
-    lightUserApi: lidraughts.user.LightUserApi
+    lightUserApi: LightUserApi,
+    lightWfdUserApi: LightWfdUserApi
 ) {
 
   import SwissJson._
@@ -73,6 +74,7 @@ final class SwissJson(
       .add("greatPlayer" -> GreatPlayer.wikiUrl(swiss.name).map { url =>
         Json.obj("name" -> swiss.name, "url" -> url)
       })
+      .add("isWfd" -> swiss.isWfd)
 
   def fetchMyInfo(swiss: Swiss, me: User): Fu[Option[MyInfo]] =
     playerColl.byId[SwissPlayer](SwissPlayer.makeId(swiss.id, me.id).value) flatMap {
@@ -133,13 +135,27 @@ final class SwissJson(
                 top3.map { player =>
                   playerJsonBase(
                     player,
-                    lightUserApi.sync(player.userId) | LightUser.fallback(player.userId),
-                    performance = true
+                    swissUserJson(swiss, player),
+                    performance = true,
+                    isWfd = ~swiss.isWfd
                   ).add("engine", engines(player.userId))
                 }
               ).some
             }
           }
+      }
+    }
+
+  private def swissUserJson(swiss: Swiss, player: SwissPlayer) =
+    {
+      ~swiss.isWfd ?? {
+        lightWfdUserApi.sync(player.userId).map {
+          LightWfdUser.lightWfdUserWrites.writes
+        }
+      } getOrElse {
+        LightUser.lightUserWrites.writes(
+          lightUserApi.sync(player.userId).getOrElse(LightUser.fallback(player.userId))
+        )
       }
     }
 }
@@ -176,7 +192,7 @@ object SwissJson {
       })
 
   private[swiss] def playerJson(swiss: Swiss, view: SwissPlayer.View): JsObject =
-    playerJsonBase(view, false) ++ Json
+    playerJsonBase(view, performance = false, isWfd = ~swiss.isWfd) ++ Json
       .obj(
         "sheetMin" -> swiss.allRounds
           .map(view.pairings.get)
@@ -188,7 +204,7 @@ object SwissJson {
       )
 
   def playerJsonExt(swiss: Swiss, view: SwissPlayer.ViewExt): JsObject =
-    playerJsonBase(view, true) ++ Json.obj(
+    playerJsonBase(view, performance = true, isWfd = ~swiss.isWfd) ++ Json.obj(
       "sheet" -> swiss.allRounds
         .zip(view.sheet.outcomes)
         .reverse
@@ -197,28 +213,43 @@ object SwissJson {
             view.pairings.get(round).fold[JsValue](JsString(outcomeJson(outcome))) { p =>
               pairingJson(view.player, p.pairing) ++
                 Json.obj(
-                  "user" -> p.player.user,
+                  "user" -> lightUserJson(p.player.user),
                   "rating" -> p.player.player.rating
                 )
             }
         }
     )
 
+  private def lightUserJson(u: Either[LightUser, LightWfdUser]) = u match {
+    case Right(u) => LightWfdUser.lightWfdUserWrites.writes(u)
+    case Left(u) => LightUser.lightUserWrites.writes(u)
+  }
+
   private def playerJsonBase(
     view: SwissPlayer.Viewish,
-    performance: Boolean
+    performance: Boolean,
+    isWfd: Boolean
   ): JsObject =
-    playerJsonBase(view.player, view.user, performance) ++
+    playerJsonBase(view.player, view.user, performance, isWfd) ++
       Json.obj("rank" -> view.rank)
 
   private def playerJsonBase(
     p: SwissPlayer,
-    user: LightUser,
-    performance: Boolean
+    user: Either[LightUser, LightWfdUser],
+    performance: Boolean,
+    isWfd: Boolean
+  ): JsObject =
+    playerJsonBase(p, lightUserJson(user), performance, isWfd)
+
+  private def playerJsonBase(
+    p: SwissPlayer,
+    userJson: JsObject,
+    performance: Boolean,
+    isWfd: Boolean
   ): JsObject =
     Json
       .obj(
-        "user" -> user,
+        "user" -> userJson,
         "rating" -> p.rating,
         "points" -> p.points,
         "tieBreak" -> p.tieBreak
@@ -292,7 +323,7 @@ object SwissJson {
     Json.obj(
       "rank" -> player.rank,
       "rating" -> player.rating,
-      "user" -> player.user
+      "user" -> lightUserJson(player.user)
     )
 
   implicit val variantWriter: OWrites[draughts.variant.Variant] = OWrites { v =>

@@ -102,6 +102,7 @@ final private class SwissDirector(
       )
       .withId(pairing.gameId)
       .withSwissId(swiss.id.value)
+      .withWfd(~swiss.isWfd)
       .start
 
   private def makePlayer(color: Color, player: SwissPlayer) =

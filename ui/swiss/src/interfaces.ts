@@ -52,6 +52,7 @@ export interface SwissData {
   isRecentlyFinished?: boolean;
   stats?: Stats;
   password?: boolean;
+  isWfd?: boolean;
 }
 
 export interface VariantData {

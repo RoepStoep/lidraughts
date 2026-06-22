@@ -1,6 +1,6 @@
 package lidraughts.swiss
 
-import lidraughts.common.LightUser
+import lidraughts.common.{ LightUser, LightWfdUser }
 import lidraughts.rating.Perf
 import lidraughts.user.{ Perfs, User }
 
@@ -57,19 +57,19 @@ object SwissPlayer {
     override def toString = s"$rank. ${player.userId}[${player.rating}]"
   }
 
-  case class WithUser(player: SwissPlayer, user: LightUser)
+  case class WithUser(player: SwissPlayer, user: Either[LightUser, LightWfdUser])
 
   sealed private[swiss] trait Viewish {
     val player: SwissPlayer
     val rank: Int
-    val user: LightUser
+    val user: Either[LightUser, LightWfdUser]
     val sheet: SwissSheet
   }
 
   private[swiss] case class View(
       player: SwissPlayer,
       rank: Int,
-      user: LightUser,
+      user: Either[LightUser, LightWfdUser],
       pairings: Map[SwissRound.Number, SwissPairing],
       sheet: SwissSheet
   ) extends Viewish
@@ -77,7 +77,7 @@ object SwissPlayer {
   private[swiss] case class ViewExt(
       player: SwissPlayer,
       rank: Int,
-      user: LightUser,
+      user: Either[LightUser, LightWfdUser],
       pairings: Map[SwissRound.Number, SwissPairing.View],
       sheet: SwissSheet
   ) extends Viewish

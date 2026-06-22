@@ -4,7 +4,7 @@ import akka.actor._
 import com.typesafe.config.Config
 import scala.concurrent.duration._
 
-import lidraughts.common.{ AtMost, Every, ResilientScheduler }
+import lidraughts.common.{ AtMost, Every, LightUser, LightWfdUser, ResilientScheduler }
 import lidraughts.game.Game
 import lidraughts.socket.History
 import lidraughts.socket.Socket.{ GetVersion, SocketVersion }
@@ -18,7 +18,7 @@ final class Env(
     mongoCache: lidraughts.memo.MongoCache.Builder,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
     chatApi: lidraughts.chat.ChatApi,
-    lightUserApi: lidraughts.user.LightUserApi,
+    userEnv: lidraughts.user.Env,
     onStart: String => Unit,
     historyApi: lidraughts.history.HistoryApi,
     proxyGame: Game.ID => Fu[Option[Game]],
@@ -77,7 +77,8 @@ final class Env(
 
   private val boardApi = new SwissBoardApi(
     rankingApi = rankingApi,
-    lightUserApi = lightUserApi,
+    lightUserApi = userEnv.lightUserApi,
+    lightWfdUserApi = userEnv.lightWfdUserApi,
     proxyGame = proxyGame
   )
 
@@ -104,7 +105,7 @@ final class Env(
     boardApi = boardApi,
     verify = verify,
     chatApi = chatApi,
-    lightUserApi = lightUserApi,
+    getLightUsers = getLightUsers,
     proxyGames = proxyGames,
     bus = system.lidraughtsBus
   )(system)
@@ -115,7 +116,10 @@ final class Env(
       system = system,
       swissId = swissId,
       history = new History(ttl = HistoryMessageTtl),
-      lightUser = lightUserApi.async,
+      lightUser = userEnv.lightUser,
+      lightWfdUser = userEnv.lightWfdUser,
+      toWfdName = userEnv.wfdUsername,
+      isWfdSwiss = cache.isWfd,
       uidTtl = UidTimeout,
       keepMeAlive = () => socketMap touch swissId
     ),
@@ -136,12 +140,16 @@ final class Env(
     flood = flood
   )
 
+  private[swiss] def getLightUsers(userIds: List[String], isWfd: Boolean): Fu[List[Either[Option[LightUser], Option[LightWfdUser]]]] =
+    if (isWfd) userEnv.lightWfdUserApi.asyncMany(userIds).map(u => u.map(Right(_)))
+    else userEnv.lightUserApi.asyncMany(userIds).map(u => u.map(Left(_)))
+
   lazy val standingApi = new SwissStandingApi(
     swissColl = swissColl,
     playerColl = playerColl,
     pairingColl = pairingColl,
     asyncCache = asyncCache,
-    lightUserApi = lightUserApi
+    getLightUsers = getLightUsers
   )
 
   lazy val json = new SwissJson(
@@ -152,7 +160,8 @@ final class Env(
     rankingApi = rankingApi,
     boardApi = boardApi,
     statsApi = statsApi,
-    lightUserApi = lightUserApi
+    lightUserApi = userEnv.lightUserApi,
+    lightWfdUserApi = userEnv.lightWfdUserApi
   )
 
   lazy val forms = new SwissForm(
@@ -212,7 +221,7 @@ object Env {
     mongoCache = lidraughts.memo.Env.current.mongoCache,
     asyncCache = lidraughts.memo.Env.current.asyncCache,
     chatApi = lidraughts.chat.Env.current.api,
-    lightUserApi = lidraughts.user.Env.current.lightUserApi,
+    userEnv = lidraughts.user.Env.current,
     onStart = lidraughts.round.Env.current.onStart,
     historyApi = lidraughts.history.Env.current.api,
     proxyGame = lidraughts.round.Env.current.proxy.game _,

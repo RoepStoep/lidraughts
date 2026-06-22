@@ -25,7 +25,8 @@ case class Swiss(
     settings: Swiss.Settings,
     nextRoundAt: Option[DateTime],
     finishedAt: Option[DateTime],
-    winnerId: Option[User.ID] = None
+    winnerId: Option[User.ID] = None,
+    isWfd: Option[Boolean] = None
 ) {
   def id = _id
 

@@ -22,6 +22,17 @@ final private class SwissCache(
     logger = logger
   )
 
+  val wfdCache = new Syncache[Swiss.Id, Boolean](
+    name = "swiss.wfd",
+    compute = id => swissColl.primitiveOne[Boolean]($id(id), "isWfd").dmap(v => ~v),
+    default = _ => false,
+    strategy = Syncache.WaitAfterUptime(10 millis),
+    expireAfter = Syncache.ExpireAfterAccess(1 hour),
+    logger = logger
+  )
+
+  def isWfd(id: Swiss.Id) = wfdCache sync id
+
   private[swiss] object featuredInTeam {
     private val compute = (teamId: TeamId) => {
       val max = 5

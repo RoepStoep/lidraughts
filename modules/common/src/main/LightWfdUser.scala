@@ -1,5 +1,7 @@
 package lidraughts.common
 
+import play.api.libs.json.{ Json, OWrites }
+
 case class LightWfdUser(
     name: String,
     username: String,
@@ -16,6 +18,21 @@ case class LightWfdUser(
 }
 
 object LightWfdUser {
+
+  implicit val lightWfdUserWrites = OWrites[LightWfdUser] { u =>
+    Json.obj(
+      "id" -> u.id,
+      "name" -> u.name
+    ).add("title" -> u.title)
+      .add("patron" -> u.isPatron)
+  }
+
+  def fallback(userId: String) = LightWfdUser(
+    name = userId,
+    username = userId,
+    title = None,
+    isPatron = false
+  )
 
   type Getter = String => Fu[Option[LightWfdUser]]
   type GetterSync = String => Option[LightWfdUser]

@@ -92,7 +92,7 @@ object Swiss extends LidraughtsController {
             err => BadRequest(html.swiss.form.create(err, teamId)).fuccess,
             data =>
               Tournament.rateLimitCreation(me, false, ctx.req) {
-                env.api.create(data, me, teamId) map { swiss =>
+                env.api.create(data, me, teamId, Env.team.cached.isWfd(teamId)) map { swiss =>
                   Redirect(routes.Swiss.show(swiss.id.value))
                 }
               }
@@ -114,7 +114,7 @@ object Swiss extends LidraughtsController {
                 data =>
                   Tournament.rateLimitCreation(me, false, req) {
                     JsonOk {
-                      env.api.create(data, me, teamId) map env.json.api
+                      env.api.create(data, me, teamId, Env.team.cached.isWfd(teamId)) map env.json.api
                     }
                   }
               )

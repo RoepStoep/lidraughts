@@ -18,6 +18,9 @@ private[swiss] final class SwissSocket(
     swissId: String,
     protected val history: History[Messadata],
     lightUser: lidraughts.common.LightUser.Getter,
+    lightWfdUser: lidraughts.common.LightWfdUser.Getter,
+    toWfdName: String => Option[String],
+    isWfdSwiss: Swiss.Id => Boolean,
     uidTtl: Duration,
     keepMeAlive: () => Unit
 ) extends SocketTrouper[Member](system, uidTtl) with Historical[Member, Messadata] {
@@ -52,7 +55,7 @@ private[swiss] final class SwissSocket(
 
     case NotifyCrowd =>
       delayedCrowdNotification = false
-      showSpectators(lightUser)(members.values) foreach {
+      showSpectators(lightUser, isWfdSwiss(Swiss.Id(swissId)) option lightWfdUser)(members.values) foreach {
         notifyAll("crowd", _)
       }
 
@@ -61,7 +64,8 @@ private[swiss] final class SwissSocket(
       notifyAll("reload")
 
   }: Trouper.Receive) orElse lidraughts.chat.Socket.out(
-    send = (t, d, trollish) => notifyVersion(t, d, Messadata(trollish))
+    send = (t, d, trollish) => notifyVersion(t, d, Messadata(trollish)),
+    pimpUser = Some(() => isWfdSwiss(Swiss.Id(swissId)) option toWfdName)
   )
 
   override protected def broom: Unit = {

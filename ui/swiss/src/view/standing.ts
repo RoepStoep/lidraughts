@@ -32,9 +32,10 @@ function playerTr(ctrl: SwissCtrl, player: Player) {
               p == 'bye' ? h(p, title(noarg('bye')), winChar) : (
               p == 'late' ? h(p, title(noarg('late')), drawChar) :
           h('a.glpt.' + (p.o ? 'ongoing' : (p.w === true ? 'win' : (p.w === false ? 'loss' : 'draw'))), {
+            key: p.g,
             attrs: {
-              key: p.g,
-              href: `/${p.g}`
+              href: `/${p.g}`,
+              wfd: !!ctrl.data.isWfd
             },
             hook: onInsert(window.lidraughts.powertip.manualGame)
           }, p.o ? '*' : (p.w === true ? winChar : (p.w === false ? '0' : drawChar)))))

@@ -42,8 +42,9 @@ export const userName = (u: LightUser) => {
 }
 
 export function player(p: BasePlayer, asLink: boolean, withRating: boolean) {
+  const userId = p.user.id || p.user.name;
   return h('a.ulpt.user-link' + (((p.user.title || '') + p.user.name).length > 15 ? '.long' : ''), {
-    attrs: asLink ? { href: '/@/' + p.user.name } : { 'data-href': '/@/' + p.user.name },
+    attrs: asLink ? { href: '/@/' + userId } : { 'data-href': '/@/' + userId },
     hook: {
       destroy: vnode => $.powerTip.destroy(vnode.elm as HTMLElement)
     }

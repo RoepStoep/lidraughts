@@ -10,11 +10,10 @@ import scala.concurrent.duration._
 
 import actorApi._
 import lidraughts.chat.{ Chat, ChatApi }
-import lidraughts.common.{ Bus, GreatPlayer, LightUser }
+import lidraughts.common.{ Bus, GreatPlayer, LightUser, LightWfdUser }
 import lidraughts.db.dsl._
 import lidraughts.game.{ Game, Pov }
 import lidraughts.hub.lightTeam.TeamId
-import lidraughts.hub.{ Duct, DuctMap }
 import lidraughts.round.actorApi.round.QuietFlag
 import lidraughts.user.{ User, UserRepo }
 
@@ -31,7 +30,7 @@ final class SwissApi(
     boardApi: SwissBoardApi,
     verify: SwissCondition.Verify,
     chatApi: ChatApi,
-    lightUserApi: lidraughts.user.LightUserApi,
+    getLightUsers: LightUsersGetter,
     proxyGames: List[Game.ID] => Fu[List[(Game.ID, Option[Game])]],
     bus: Bus
 )(implicit system: ActorSystem) {
@@ -51,7 +50,7 @@ final class SwissApi(
   def createdById(id: Swiss.Id) = byId(id).dmap(_.filter(_.isCreated))
   def startedById(id: Swiss.Id) = byId(id).dmap(_.filter(_.isStarted))
 
-  def create(data: SwissForm.SwissData, me: User, teamId: TeamId): Fu[Swiss] = {
+  def create(data: SwissForm.SwissData, me: User, teamId: TeamId, isWfd: Boolean): Fu[Swiss] = {
     val swiss = Swiss(
       _id = Swiss.makeId,
       name = data.name | GreatPlayer.randomName,
@@ -75,7 +74,8 @@ final class SwissApi(
         roundInterval = data.realRoundInterval,
         password = data.password,
         conditions = data.conditions.all
-      )
+      ),
+      isWfd = isWfd option true
     )
     swissColl.insert(addFeaturable(swiss)) >>-
       cache.featuredInTeam.invalidate(swiss.teamId) inject swiss
@@ -186,7 +186,7 @@ final class SwissApi(
                 .sort($sort asc f.round)
                 .list[SwissPairing]()
             } flatMap {
-              pairingViews(_, player)
+              pairingViews(_, player, ~swiss.isWfd)
             } flatMap { pairings =>
               SwissPlayer.fields { f =>
                 playerColl.countSel($doc(f.swissId -> swiss.id, f.score $gt player.score)).dmap(1.+)
@@ -198,7 +198,7 @@ final class SwissApi(
                   .ViewExt(
                     player,
                     rank,
-                    user.light,
+                    if (~swiss.isWfd) Right(user.lightWfd) else Left(user.light),
                     pairingMap,
                     SwissSheet.one(swiss, pairingMap.view.map { case (r, p) => (r, p.pairing) }.toMap, player)
                   )
@@ -210,15 +210,15 @@ final class SwissApi(
       }
     }
 
-  def pairingViews(pairings: Seq[SwissPairing], player: SwissPlayer): Fu[Seq[SwissPairing.View]] =
+  def pairingViews(pairings: Seq[SwissPairing], player: SwissPlayer, isWfd: Boolean): Fu[Seq[SwissPairing.View]] =
     pairings.headOption ?? { first =>
       playerColl
         .find($inIds(pairings.map(_ opponentOf player.userId).map { SwissPlayer.makeId(first.swissId, _) }))
         .list[SwissPlayer]()
         .flatMap { opponents =>
-          lightUserApi asyncMany opponents.map(_.userId) map { users =>
+          getLightUsers(opponents.map(_.userId), isWfd) map { users =>
             opponents.zip(users) map {
-              case (o, u) => SwissPlayer.WithUser(o, u | LightUser.fallback(o.userId))
+              case (o, u) => SwissPlayer.WithUser(o, lightUserWithFallback(u, o.userId))
             }
           } map { opponents =>
             pairings flatMap { pairing =>
@@ -229,6 +229,11 @@ final class SwissApi(
           }
         }
     }
+
+  private def lightUserWithFallback(user: Either[Option[LightUser], Option[LightWfdUser]], userId: String) = user match {
+    case Right(u) => Right(u | LightWfdUser.fallback(userId))
+    case Left(u) => Left(u | LightUser.fallback(userId))
+  }
 
   def searchPlayers(id: Swiss.Id, term: String, nb: Int): Fu[List[User.ID]] =
     User.couldBeUsername(term) ?? SwissPlayer.fields { f =>

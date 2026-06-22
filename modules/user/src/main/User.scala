@@ -2,7 +2,7 @@ package lidraughts.user
 
 import scala.concurrent.duration._
 
-import lidraughts.common.{ LightUser, EmailAddress, NormalizedEmailAddress }
+import lidraughts.common.{ LightUser, LightWfdUser, EmailAddress, NormalizedEmailAddress }
 
 import lidraughts.rating.PerfType
 import org.joda.time.DateTime
@@ -43,7 +43,18 @@ case class User(
   override def toString =
     s"User $username(${perfs.bestRating}) games:${count.game}${troll ?? " troll"}${engine ?? " engine"}"
 
-  def light = LightUser(id = id, name = username, title = title.map(_.value), isPatron = isPatron)
+  def light = LightUser(
+    id = id,
+    name = username,
+    title = title.map(_.value),
+    isPatron = isPatron
+  )
+  def lightWfd = LightWfdUser(
+    name = profileWfd.flatMap(_.nonEmptyRealName).getOrElse(username),
+    username = username,
+    title = title.map(_.value),
+    isPatron = isPatron
+  )
 
   def realNameOrUsername = profileOrDefault.nonEmptyRealName | username
 

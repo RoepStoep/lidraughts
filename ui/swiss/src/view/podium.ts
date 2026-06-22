@@ -21,7 +21,7 @@ function podiumPosition(p: PodiumPlayer, pos: string, trans: Trans, draughtsResu
   }, [
     h('div.trophy'),
     h('a.text.ulpt.user-link', {
-      attrs: { href: '/@/' + p.user.name }
+      attrs: { href: '/@/' + (p.user.id || p.user.name) }
     }, userName(p.user)),
     podiumStats(p, trans, draughtsResult)
   ]) : undefined;

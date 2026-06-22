@@ -4,7 +4,7 @@ import com.github.blemale.scaffeine.Scaffeine
 import play.api.libs.json._
 import scala.concurrent.duration._
 
-import lidraughts.common.LightUser
+import lidraughts.common.{ LightUser, LightWfdUser }
 import lidraughts.db.dsl._
 
 /*
@@ -18,7 +18,7 @@ final class SwissStandingApi(
     playerColl: Coll,
     pairingColl: Coll,
     asyncCache: lidraughts.memo.AsyncCache.Builder,
-    lightUserApi: lidraughts.user.LightUserApi
+    getLightUsers: LightUsersGetter
 ) {
 
   import BsonHandlers._
@@ -34,7 +34,7 @@ final class SwissStandingApi(
     }
 
   def update(res: SwissScoring.Result): Funit =
-    lightUserApi.asyncMany(res.leaderboard.map(_._1.userId)) map {
+    getLightUsers(res.leaderboard.map(_._1.userId), ~res.swiss.isWfd) map {
       _.zip(res.leaderboard).zipWithIndex
         .grouped(10)
         .toList
@@ -53,7 +53,7 @@ final class SwissStandingApi(
                         SwissPlayer.View(
                           player = player,
                           rank = r + 1,
-                          user = user | LightUser.fallback(player.userId),
+                          user = lightUserWithFallback(user, player.userId),
                           ~res.pairings.get(player.userId),
                           sheet
                         )
@@ -67,6 +67,11 @@ final class SwissStandingApi(
       // make sure there's no extra page in the cache in case of players leaving the tournament
       pageCache.invalidate(res.swiss.id -> (lastPage + 1))
     }
+
+  private def lightUserWithFallback(user: Either[Option[LightUser], Option[LightWfdUser]], userId: String) = user match {
+    case Right(u) => Right(u | LightWfdUser.fallback(userId))
+    case Left(u) => Left(u | LightUser.fallback(userId))
+  }
 
   private val first = asyncCache.multi[Swiss.Id, JsObject](
     name = "swiss.page.first",
@@ -88,7 +93,7 @@ final class SwissStandingApi(
           .map(SwissPairing.toMap)
       }
       sheets = SwissSheet.many(swiss, rankedPlayers.map(_.player), pairings)
-      users <- lightUserApi asyncMany rankedPlayers.map(_.player.userId)
+      users <- getLightUsers(rankedPlayers.map(_.player.userId), ~swiss.isWfd)
     } yield Json.obj(
       "page" -> page,
       "players" -> rankedPlayers
@@ -101,7 +106,7 @@ final class SwissStandingApi(
               SwissPlayer.View(
                 player,
                 rank,
-                user | LightUser.fallback(player.userId),
+                lightUserWithFallback(user, player.userId),
                 ~pairings.get(player.userId),
                 sheet
               )

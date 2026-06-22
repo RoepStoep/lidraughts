@@ -13,7 +13,7 @@ import lidraughts.pref.Pref
 import lidraughts.quote.Quote.quoteWriter
 import lidraughts.rating.PerfType
 import lidraughts.socket.Socket.SocketVersion
-import lidraughts.user.{ LightUserApi, User, LightWfdUserApi }
+import lidraughts.user.{ LightUserApi, LightWfdUserApi, User }
 
 final class JsonView(
     lightUserApi: LightUserApi,
@@ -326,7 +326,7 @@ final class JsonView(
     "rank" -> i.rank,
     "withdraw" -> i.withdraw,
     "gameId" -> i.gameId,
-    "username" -> u.map(_.titleUsername)
+    "username" -> u.map(_.username)
   ).add("pauseDelay", delay.map(_.seconds))
 
   private def gameUserJson(tour: Tournament, userId: Option[String], rating: Option[Int]): JsObject = {
