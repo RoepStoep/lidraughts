@@ -109,7 +109,8 @@ object Swiss {
       conditions: SwissCondition.All,
       roundInterval: FiniteDuration,
       forbiddenPairings: String,
-      homepageHours: Int
+      homepageHours: Int,
+      drawLimit: Option[Int]
   ) {
     lazy val intervalSeconds = roundInterval.toSeconds.toInt
     def manualRounds = intervalSeconds == Swiss.RoundInterval.manual

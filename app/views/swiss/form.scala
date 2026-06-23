@@ -34,8 +34,11 @@ object form {
                 fields.roundInterval,
                 fields.startsAt
               ),
+              isGranted(_.ManageTournament) option form3.split(
+                fields.homepageHours,
+                fields.drawLimit
+              ),
               fields.password,
-              isGranted(_.ManageTournament) option fields.homepageHours,
               condition(form, fields, swiss = none),
               form3.split(fields.forbiddenPairings),
               form3.globalError(form),
@@ -70,8 +73,11 @@ object form {
                 fields.roundInterval,
                 swiss.isCreated option fields.startsAt
               ),
+              isGranted(_.ManageTournament) option form3.split(
+                fields.homepageHours,
+                fields.drawLimit
+              ),
               fields.password,
-              isGranted(_.ManageTournament) option fields.homepageHours,
               condition(form, fields, swiss = none),
               form3.split(fields.forbiddenPairings),
               form3.globalError(form),
@@ -202,10 +208,19 @@ final private class SwissFields(form: Form[_], swiss: Option[Swiss])(implicit ct
       half = true
     )(form3.textarea(_)(rows := 4))
 
+  def drawLimit =
+    form3.group(
+      form("drawLimit"),
+      raw("No draw offers before move"),
+      help = raw("Optional, 0 disables draw offers").some,
+      half = true
+    )(form3.input(_, typ = "number")(min := 0, max := 99))
+
   def homepageHours =
     form3.group(
       form("homepageHours"),
       raw(s"Hours on homepage (0 to ${SwissForm.maxHomepageHours})"),
-      help = raw("Ask first!").some
+      help = raw("Ask first!").some,
+      half = true
     )(form3.input(_, typ = "number"))
 }

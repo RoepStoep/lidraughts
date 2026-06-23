@@ -98,7 +98,8 @@ final private class SwissDirector(
         blackPlayer = makePlayer(Black, players get pairing.black err s"Missing pairing black $pairing"),
         mode = draughts.Mode(swiss.settings.rated),
         source = lidraughts.game.Source.Swiss,
-        pdnImport = None
+        pdnImport = None,
+        drawLimit = swiss.settings.drawLimit
       )
       .withId(pairing.gameId)
       .withSwissId(swiss.id.value)

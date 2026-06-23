@@ -44,7 +44,14 @@ object side {
               a(href := routes.Swiss.edit(s.id.value), title := trans.ratedTournament.txt())(iconTag("%"))
             )
           ),
-          bits.showInterval(s)
+          bits.showInterval(s),
+          s.settings.drawLimit.map { lim =>
+            frag(
+              br,
+              if (lim > 0) trans.drawOffersAfterX(lim)
+              else trans.drawOffersNotAllowed()
+            )
+          }
         )
       ),
       s.settings.description map { d =>

@@ -37,7 +37,8 @@ final class SwissForm(isProd: Boolean) {
             str => str.lines.size <= Swiss.maxForbiddenPairings
           )
         ),
-        "homepageHours" -> optional(number(min = 0, max = maxHomepageHours))
+        "homepageHours" -> optional(number(min = 0, max = maxHomepageHours)),
+        "drawLimit" -> optional(number(min = 0, max = 99))
       )(SwissData.apply)(SwissData.unapply)
     )
 
@@ -57,7 +58,8 @@ final class SwissForm(isProd: Boolean) {
       password = None,
       conditions = SwissCondition.DataForm.AllSetup.default,
       forbiddenPairings = none,
-      homepageHours = none
+      homepageHours = none,
+      drawLimit = none
     )
 
   def edit(s: Swiss) =
@@ -74,7 +76,8 @@ final class SwissForm(isProd: Boolean) {
       password = s.settings.password,
       conditions = SwissCondition.DataForm.AllSetup(s.settings.conditions),
       forbiddenPairings = s.settings.forbiddenPairings.some.filter(_.nonEmpty),
-      homepageHours = (s.settings.homepageHours > 0).option(s.settings.homepageHours)
+      homepageHours = (s.settings.homepageHours > 0).option(s.settings.homepageHours),
+      drawLimit = s.settings.drawLimit
     )
 
   def nextRound =
@@ -146,7 +149,8 @@ object SwissForm {
       password: Option[String],
       conditions: SwissCondition.DataForm.AllSetup,
       forbiddenPairings: Option[String],
-      homepageHours: Option[Int]
+      homepageHours: Option[Int],
+      drawLimit: Option[Int]
   ) {
     def realVariant = variant flatMap Variant.apply getOrElse Variant.default
     def realStartsAt = startsAt | DateTime.now.plusMinutes(10)

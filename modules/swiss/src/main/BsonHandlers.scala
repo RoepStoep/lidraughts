@@ -113,7 +113,8 @@ object BsonHandlers {
       password = r.strO("p"),
       conditions = r.getO[SwissCondition.All]("o") getOrElse SwissCondition.All.empty,
       forbiddenPairings = r.getD[String]("fp"),
-      homepageHours = r.intO("h") | 0
+      homepageHours = r.intO("h") | 0,
+      drawLimit = r.intO("l")
     )
     def writes(w: BSON.Writer, s: Swiss.Settings) = $doc(
       "n" -> s.nbRounds,
@@ -124,7 +125,8 @@ object BsonHandlers {
       "p" -> s.password,
       "o" -> s.conditions.ifNonEmpty,
       "fp" -> s.forbiddenPairings.some.filter(_.nonEmpty),
-      "h" -> s.homepageHours.some.filter(_ > 0)
+      "h" -> s.homepageHours.some.filter(_ > 0),
+      "l" -> s.drawLimit
     )
   }
 

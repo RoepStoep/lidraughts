@@ -76,7 +76,8 @@ final class SwissApi(
         password = data.password,
         conditions = data.conditions.all,
         forbiddenPairings = ~data.forbiddenPairings,
-        homepageHours = if (isAdmin) ~data.homepageHours else 0
+        homepageHours = if (isAdmin) ~data.homepageHours else 0,
+        drawLimit = if (isAdmin) data.drawLimit else None
       ),
       isWfd = isWfd option true
     )
@@ -109,7 +110,8 @@ final class SwissApi(
               password = data.password,
               conditions = data.conditions.all,
               forbiddenPairings = ~data.forbiddenPairings,
-              homepageHours = if (isAdmin) ~data.homepageHours else swiss.homepageHours
+              homepageHours = if (isAdmin) ~data.homepageHours else swiss.homepageHours,
+              drawLimit = if (isAdmin) data.drawLimit else swiss.settings.drawLimit
             )
           ) |> { s =>
               if (s.isStarted && s.nbOngoing == 0 && (s.nextRoundAt.isEmpty || old.settings.manualRounds) && !s.settings.manualRounds)
