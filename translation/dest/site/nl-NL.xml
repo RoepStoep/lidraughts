@@ -1029,4 +1029,9 @@ Een URL per regel</string>
   <string name="learnFromStudies">Leer van studies</string>
   <string name="configureLidraughts">Configureer lidraughts naar eigen wens</string>
   <string name="exploreTheSiteAndHaveFun">Verken de website en heb het naar je zin :)</string>
+  <string name="inYourLocalTimezone">In je eigen lokale tijdzone</string>
+  <string name="tournChat">Toernooichat</string>
+  <string name="noChat">Geen chat</string>
+  <string name="onlyTeamLeaders">Alleen teamleiders</string>
+  <string name="onlyTeamMembers">Alleen teamleden</string>
 </resources>

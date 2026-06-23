@@ -13,5 +13,28 @@
   </plurals>
   <string name="nextRound">Volgende ronde</string>
   <string name="numberOfRounds">Aantal rondes</string>
+  <string name="numberOfRoundsHelp">Een oneven aantal rondes zorgt voor een optimale kleurenbalans.</string>
   <string name="scheduleTheNextRound">Plan de volgende ronde</string>
+  <plurals name="viewAllXRounds">
+    <item quantity="one">Bekijk de ronde</item>
+    <item quantity="other">Bekijk alle %s rondes</item>
+  </plurals>
+  <plurals name="oneRoundEveryXDays">
+    <item quantity="one">Eén ronde per dag</item>
+    <item quantity="other">Eén ronde elke %s dagen</item>
+  </plurals>
+  <string name="roundsAreStartedManually">Rondes worden handmatig gestart</string>
+  <plurals name="xSecondsBetweenRounds">
+    <item quantity="one">%s seconde tussen rondes</item>
+    <item quantity="other">%s seconden tussen rondes</item>
+  </plurals>
+  <plurals name="xMinutesBetweenRounds">
+    <item quantity="one">%s minuut tussen rondes</item>
+    <item quantity="other">%s minuten tussen rondes</item>
+  </plurals>
+  <string name="tournStartDate">Begindatum toernooi</string>
+  <string name="roundInterval">Interval tussen rondes</string>
+  <string name="forbiddenPairings">Verboden paringen</string>
+  <string name="forbiddenPairingsHelp">Gebruikersnamen van spelers waarvan je niet wilt dat ze tegen elkaar moeten spelen (bijvoorbeeld broers en zussen). Vul twee gebruikersnamen per regel in, gescheiden door een spatie.</string>
+  <string name="newSwiss">Nieuw Zwitsers toernooi</string>
 </resources>
