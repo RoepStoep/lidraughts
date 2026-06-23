@@ -34,7 +34,7 @@ object bits {
   </head>
   <body>
     <redoc spec-url="https://raw.githubusercontent.com/roepstoep/lidraughts-api/master/doc/specs/lidraughts-api.yaml"></redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@2.5.3/bundles/redoc.standalone.js"></script>
   </body>
 </html>""")
 }
