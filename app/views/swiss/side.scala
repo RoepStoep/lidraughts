@@ -74,7 +74,7 @@ object side {
           )
         )
       else br,
-      small(trans.by(userIdLink(s.createdBy.some))),
+      small(trans.by(userIdLink(s.createdBy.some, isWfd = ~s.isWfd))),
       br,
       absClientDateTime(s.startsAt)
     ),
