@@ -149,7 +149,9 @@ export default class SwissCtrl {
   private isIn = () => !!this.data.me && !this.data.me.absent;
 
   private redrawNbRounds = () =>
-    $('.swiss__meta__round').text(`${this.data.round}/${this.data.nbRounds}`);
+    $('.swiss__meta__round').text(
+      this.trans.vdomPlural('nbRounds', this.data.nbRounds, `${this.data.round}/${this.data.nbRounds}`).join(' ')
+    );
 
   private readData = (data: SwissData) => ({
     ...data,
