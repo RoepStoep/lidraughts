@@ -162,7 +162,7 @@ object Swiss extends LidraughtsController {
         .bindFromRequest
         .fold(
           err => BadRequest(html.swiss.form.edit(swiss, err)).fuccess,
-          data => env.api.update(swiss, data) inject Redirect(routes.Swiss.show(id))
+          data => env.api.update(swiss, me, data) inject Redirect(routes.Swiss.show(id))
         )
     }
   }

@@ -51,6 +51,7 @@ final class SwissApi(
   def startedById(id: Swiss.Id) = byId(id).dmap(_.filter(_.isStarted))
 
   def create(data: SwissForm.SwissData, me: User, teamId: TeamId, isWfd: Boolean): Fu[Swiss] = {
+    val isAdmin = lidraughts.security.Granter(_.ManageTournament)(me)
     val swiss = Swiss(
       _id = Swiss.makeId,
       name = data.name | GreatPlayer.randomName,
@@ -75,7 +76,7 @@ final class SwissApi(
         password = data.password,
         conditions = data.conditions.all,
         forbiddenPairings = ~data.forbiddenPairings,
-        homepageHours = ~data.homepageHours
+        homepageHours = if (isAdmin) ~data.homepageHours else 0
       ),
       isWfd = isWfd option true
     )
@@ -83,8 +84,9 @@ final class SwissApi(
       cache.featuredInTeam.invalidate(swiss.teamId) inject swiss
   }
 
-  def update(swiss: Swiss, data: SwissForm.SwissData): Funit =
+  def update(swiss: Swiss, me: User, data: SwissForm.SwissData): Funit =
     Sequencing(swiss.id)(byId) { old =>
+      val isAdmin = lidraughts.security.Granter(_.ManageTournament)(me)
       swissColl
         .update(
           $id(old.id),
@@ -107,7 +109,7 @@ final class SwissApi(
               password = data.password,
               conditions = data.conditions.all,
               forbiddenPairings = ~data.forbiddenPairings,
-              homepageHours = ~data.homepageHours
+              homepageHours = if (isAdmin) ~data.homepageHours else swiss.homepageHours
             )
           ) |> { s =>
               if (s.isStarted && s.nbOngoing == 0 && (s.nextRoundAt.isEmpty || old.settings.manualRounds) && !s.settings.manualRounds)
