@@ -76,6 +76,8 @@ case class Swiss(
     !settings.manualRounds &&
       settings.dailyInterval.isEmpty &&
       clock.estimateTotalSeconds * 2 * settings.nbRounds > 3600 * 8
+
+  def homepageHours = settings.homepageHours
 }
 
 object Swiss {
@@ -106,7 +108,8 @@ object Swiss {
       password: Option[String] = None,
       conditions: SwissCondition.All,
       roundInterval: FiniteDuration,
-      forbiddenPairings: String
+      forbiddenPairings: String,
+      homepageHours: Int
   ) {
     lazy val intervalSeconds = roundInterval.toSeconds.toInt
     def manualRounds = intervalSeconds == Swiss.RoundInterval.manual

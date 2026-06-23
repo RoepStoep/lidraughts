@@ -80,6 +80,19 @@ object bits {
         else trans.swiss.xMinutesBetweenRounds.pluralSame(s.settings.intervalSeconds / 60)
     }
 
+  def homepageSpotlight(s: Swiss)(implicit ctx: Context) =
+    a(href := routes.Swiss.show(s.id.value), cls := "tour-spotlight little id_@s.id")(
+      iconTag(iconChar(s))(cls := "img icon"),
+      span(cls := "content")(
+        span(cls := "name")(s.name, " Swiss"),
+        span(cls := "more")(
+          trans.nbPlayers.plural(s.nbPlayers, s.nbPlayers.localize),
+          " • ",
+          if (s.isStarted) trans.eventInProgress() else momentFromNow(s.startsAt)
+        )
+      )
+    )
+
   def jsI18n(implicit ctx: Context) = i18nJsObject(i18nKeys)
 
   private val i18nKeys = List(

@@ -35,6 +35,7 @@ object form {
                 fields.startsAt
               ),
               fields.password,
+              isGranted(_.ManageTournament) option fields.homepageHours,
               condition(form, fields, swiss = none),
               form3.split(fields.forbiddenPairings),
               form3.globalError(form),
@@ -70,6 +71,7 @@ object form {
                 swiss.isCreated option fields.startsAt
               ),
               fields.password,
+              isGranted(_.ManageTournament) option fields.homepageHours,
               condition(form, fields, swiss = none),
               form3.split(fields.forbiddenPairings),
               form3.globalError(form),
@@ -90,6 +92,14 @@ object form {
   private def condition(form: Form[_], fields: SwissFields, swiss: Option[Swiss])(implicit ctx: Context) =
     frag(
       form3.split(
+        form3.group(form("conditions.minRating.rating"), trans.minimumRating(), half = true)(
+          form3.select(_, SwissCondition.DataForm.minRatingChoices)
+        ),
+        form3.group(form("conditions.maxRating.rating"), trans.maximumWeeklyRating(), half = true)(
+          form3.select(_, SwissCondition.DataForm.maxRatingChoices)
+        )
+      ),
+      form3.split(
         form3.group(form("conditions.nbRatedGame.nb"), trans.minimumRatedGames(), half = true)(
           form3.select(_, SwissCondition.DataForm.nbRatedGameChoices)
         ),
@@ -101,14 +111,6 @@ object form {
             half = true
           )
         }
-      ),
-      form3.split(
-        form3.group(form("conditions.minRating.rating"), trans.minimumRating(), half = true)(
-          form3.select(_, SwissCondition.DataForm.minRatingChoices)
-        ),
-        form3.group(form("conditions.maxRating.rating"), trans.maximumWeeklyRating(), half = true)(
-          form3.select(_, SwissCondition.DataForm.maxRatingChoices)
-        )
       )
     )
 }
@@ -199,4 +201,11 @@ final private class SwissFields(form: Form[_], swiss: Option[Swiss])(implicit ct
       help = trans.swiss.forbiddenPairingsHelp().some,
       half = true
     )(form3.textarea(_)(rows := 4))
+
+  def homepageHours =
+    form3.group(
+      form("homepageHours"),
+      raw(s"Hours on homepage (0 to ${SwissForm.maxHomepageHours})"),
+      help = raw("Ask first!").some
+    )(form3.input(_, typ = "number"))
 }

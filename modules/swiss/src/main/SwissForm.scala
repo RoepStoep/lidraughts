@@ -36,7 +36,8 @@ final class SwissForm(isProd: Boolean) {
             s"Maximum forbidden pairings: ${Swiss.maxForbiddenPairings}",
             str => str.lines.size <= Swiss.maxForbiddenPairings
           )
-        )
+        ),
+        "homepageHours" -> optional(number(min = 0, max = maxHomepageHours))
       )(SwissData.apply)(SwissData.unapply)
     )
 
@@ -55,7 +56,8 @@ final class SwissForm(isProd: Boolean) {
       roundInterval = Swiss.RoundInterval.auto.some,
       password = None,
       conditions = SwissCondition.DataForm.AllSetup.default,
-      forbiddenPairings = none
+      forbiddenPairings = none,
+      homepageHours = none
     )
 
   def edit(s: Swiss) =
@@ -71,7 +73,8 @@ final class SwissForm(isProd: Boolean) {
       roundInterval = s.settings.roundInterval.toSeconds.toInt.some,
       password = s.settings.password,
       conditions = SwissCondition.DataForm.AllSetup(s.settings.conditions),
-      forbiddenPairings = s.settings.forbiddenPairings.some.filter(_.nonEmpty)
+      forbiddenPairings = s.settings.forbiddenPairings.some.filter(_.nonEmpty),
+      homepageHours = (s.settings.homepageHours > 0).option(s.settings.homepageHours)
     )
 
   def nextRound =
@@ -83,6 +86,8 @@ final class SwissForm(isProd: Boolean) {
 }
 
 object SwissForm {
+
+  val maxHomepageHours = 72
 
   val clockLimits: Seq[Int] = Seq(0, 15, 30, 45, 60, 90) ++ {
     (120 to 420 by 60) ++ (600 to 1800 by 300) ++ (2400 to 10800 by 600)
@@ -140,7 +145,8 @@ object SwissForm {
       roundInterval: Option[Int],
       password: Option[String],
       conditions: SwissCondition.DataForm.AllSetup,
-      forbiddenPairings: Option[String]
+      forbiddenPairings: Option[String],
+      homepageHours: Option[Int]
   ) {
     def realVariant = variant flatMap Variant.apply getOrElse Variant.default
     def realStartsAt = startsAt | DateTime.now.plusMinutes(10)

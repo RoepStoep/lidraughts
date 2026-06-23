@@ -36,6 +36,7 @@ object Lobby extends LidraughtsController {
     Env.current.preloader(
       posts = Env.forum.recent(ctx.me, Env.team.cached.teamIdsList).nevermind,
       tours = Env.tournament.cached.promotable.get.nevermind,
+      swisses = Env.swiss.getPromotable.nevermind,
       events = Env.event.api.promoteTo(ctx.req).nevermind,
       relays = Env.relay.allFeaturable.get.nevermind,
       simulsUnique = Env.simul.allUniqueFeaturable.get.nevermind,

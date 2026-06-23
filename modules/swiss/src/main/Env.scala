@@ -179,6 +179,8 @@ final class Env(
     swissCache = cache
   )
 
+  def getPromotable = cache.promotable.get
+
   lazy val getName = new GetSwissName(cache.name.sync)
 
   private[swiss] lazy val swissColl = db(CollectionSwiss)

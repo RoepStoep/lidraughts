@@ -18,6 +18,7 @@ object home {
     userTimeline: Vector[lidraughts.timeline.Entry],
     forumRecent: List[lidraughts.forum.MiniForumPost],
     tours: List[lidraughts.tournament.Tournament],
+    swisses: List[lidraughts.swiss.Swiss],
     events: List[lidraughts.event.Event],
     relays: List[lidraughts.relay.Relay],
     simuls: List[lidraughts.simul.Simul],
@@ -106,7 +107,10 @@ object home {
               lidraughts.tournament.Spotlight.select(tours, ctx.me, (3 - events.size - relays.size) atLeast 1) map {
                 views.html.tournament.homepageSpotlight(_)
               },
-              simuls.filter(lidraughts.simul.Env.current.featurable).take(2) map views.html.simul.bits.homepageSpotlight
+              swisses.take(1) map views.html.swiss.bits.homepageSpotlight,
+              simuls.filter(lidraughts.simul.Env.current.featurable).take(
+                if (swisses.isEmpty) 2 else 1
+              ) map views.html.simul.bits.homepageSpotlight
             )
           ),
           ctx.me map { u =>

@@ -1,5 +1,6 @@
 package lidraughts.swiss
 
+import org.joda.time.DateTime
 import scala.concurrent.duration._
 
 import lidraughts.db.dsl._
@@ -21,6 +22,29 @@ final private class SwissCache(
     expireAfter = Syncache.ExpireAfterAccess(20 minutes),
     logger = logger
   )
+
+  val promotable = asyncCache.single(
+    name = "swiss.promotable",
+    fetchPromotable,
+    expireAfter = _.ExpireAfterWrite(10 seconds)
+  )
+
+  private def fetchPromotable: Fu[List[Swiss]] = {
+    val now = DateTime.now
+    swissColl
+      .find($doc(
+        "startsAt" $lte now.plusHours(SwissForm.maxHomepageHours),
+        "finishedAt" $exists false
+      ))
+      .sort($doc("startsAt" -> 1))
+      .list[Swiss]()
+      .map {
+        _.filter(s =>
+          s.homepageHours > 0 && (
+            s.startsAt minusHours s.homepageHours isBefore now
+          ))
+      }
+  }
 
   val wfdCache = new Syncache[Swiss.Id, Boolean](
     name = "swiss.wfd",
