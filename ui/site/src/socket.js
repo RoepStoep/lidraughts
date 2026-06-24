@@ -268,7 +268,10 @@ lidraughts.StrongSocket = function(url, version, settings) {
   };
 
   connect();
-  window.addEventListener('unload', destroy);
+  window.addEventListener('pagehide', destroy);
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) connect();
+  });
 
   return {
     connect: connect,
