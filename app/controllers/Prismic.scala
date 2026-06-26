@@ -33,8 +33,8 @@ object Prismic {
   )
 
   private def fetchVariantLanguages(variant: Variant) = prismicApi flatMap { api =>
-    api.forms("variant")
-      .query(s"""[[:d = at(my.variant.key, "${variant.key}")]]""")
+    api.forms("everything")
+      .query(s"""[[:d = at(document.type, "variant")][:d = at(my.variant.key, "${variant.key}")]]""")
       .set("lang", "*")
       .ref(api.master.ref)
       .submit() map {
@@ -69,13 +69,18 @@ object Prismic {
       }
   }
 
-  def getBookmark(name: String) = prismicApi flatMap { api =>
-    api.bookmarks.get(name) ?? getDocument map2 { (doc: io.prismic.Document) =>
-      doc -> makeLinkResolver(api)
-    }
+  // Bookmarks were removed from the Prismic API; UIDs on the "doc" custom type replace them.
+  // https://community.prismic.io/t/faq-deprecation-of-bookmarks-and-collections-in-prismic-api/18154
+  def getBookmark(uid: String) = prismicApi flatMap { api =>
+    api.forms("everything")
+      .query(s"""[[:d = at(document.type, "doc")][:d = at(my.doc.uid, "$uid")]]""")
+      .ref(api.master.ref)
+      .submit() map {
+        _.results.headOption map (_ -> makeLinkResolver(api))
+      }
   } recover {
     case e: Exception =>
-      logger.error(s"bookmark:$name", e)
+      logger.error(s"doc:$uid", e)
       lidraughts.mon.http.prismic.timeout()
       none
   }

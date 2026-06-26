@@ -13,25 +13,31 @@ final class BlogApi(
     collection: String
 ) {
 
+  // Collection forms were removed from the Prismic API; filter by custom type on "everything" instead.
+  // https://community.prismic.io/t/faq-deprecation-of-bookmarks-and-collections-in-prismic-api/18154
+  private def form(api: Api) =
+    api.forms("everything").query(s"""[[:d = at(document.type, "$collection")]]""")
+
   def recent(api: Api, ref: Option[String], page: Int, maxPerPage: MaxPerPage): Fu[Option[Paginator[Document]]] =
-    api.forms(collection).ref(ref | api.master.ref)
+    form(api).ref(ref | api.master.ref)
       .orderings(s"[my.$collection.date desc]")
       .pageSize(maxPerPage.value).page(page).submit().fold(_ => none, some _) map2 { (res: Response) =>
         PrismicPaginator(res, page, maxPerPage)
       }
+
   def recent(prismic: BlogApi.Context, page: Int, maxPerPage: MaxPerPage): Fu[Option[Paginator[Document]]] =
     recent(prismic.api, prismic.ref.some, page, maxPerPage)
 
   def one(api: Api, ref: Option[String], id: String): Fu[Option[Document]] =
-    api.forms(collection)
+    api.forms("everything")
       .query(s"""[[:d = at(document.id, "$id")]]""")
       .ref(ref | api.master.ref).submit() map (_.results.headOption)
 
   def one(prismic: BlogApi.Context, id: String): Fu[Option[Document]] = one(prismic.api, prismic.ref.some, id)
 
   def byYear(prismic: BlogApi.Context, year: Int): Fu[List[MiniPost]] = {
-    prismic.api.forms(collection).ref(prismic.ref)
-      .query(s"[[date.year(my.$collection.date, $year)]]")
+    prismic.api.forms("everything").ref(prismic.ref)
+      .query(s"""[[:d = at(document.type, "$collection")][date.year(my.$collection.date, $year)]]""")
       .orderings(s"[my.$collection.date desc]")
       .pageSize(100) // prismic max
       .submit().fold(_ => Nil, _.results flatMap MiniPost.fromDocument(collection, "wide"))
