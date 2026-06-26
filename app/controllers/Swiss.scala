@@ -46,11 +46,13 @@ object Swiss extends LidraughtsController {
               .findMine(lidraughts.chat.Chat.Id(swiss.id.value), ctx.me)
               .dmap(some)
             _ <- chat ?? { c =>
-              Env.user.lightUserApi.preloadMany(c.chat.userIds)
+              Env.user.lightUserApi.preloadMany(c.chat.userIds) >>- {
+                ~swiss.isWfd ?? Env.user.lightWfdUserApi.preloadMany(c.chat.userIds)
+              }
             }
             streamers <- streamerCache get swiss.id
             isLocalMod <- canChat ?? canModChat(swiss)
-          } yield Ok(html.swiss.show(swiss, verdicts, json, chat, streamers, isLocalMod))
+          } yield Ok(html.swiss.show(swiss, verdicts, json, chat, streamers, isLocalMod, ~swiss.isWfd option Env.user.wfdUsername))
         },
         api = _ =>
           swissOption.fold(notFoundJson("No such swiss tournament")) { swiss =>

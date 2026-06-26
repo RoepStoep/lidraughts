@@ -18,7 +18,8 @@ object show {
     data: play.api.libs.json.JsObject,
     chatOption: Option[lidraughts.chat.UserChat.Mine],
     streamers: List[lidraughts.user.User.ID],
-    isLocalMod: Boolean
+    isLocalMod: Boolean,
+    pimpChat: Option[String => Option[String]]
   )(implicit ctx: Context): Frag = {
     val isDirector = ctx.userId.has(s.createdBy)
     val hasScheduleInput = isDirector && s.settings.manualRounds && s.isNotFinished
@@ -36,7 +37,7 @@ object show {
                 "userId" -> ctx.userId,
                 "chat" -> chatOption.map { c =>
                   chat.json(
-                    c.chat,
+                    c.chat.pimp(pimpChat),
                     name = trans.chatRoom.txt(),
                     timeout = c.timeout,
                     public = true,
