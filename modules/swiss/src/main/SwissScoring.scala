@@ -35,19 +35,21 @@ final private class SwissScoring(
           playerMap = SwissPlayer.toMap(withPoints)
           players = withPoints.map { p =>
             val playerPairings = (~pairingMap.get(p.userId)).values
-            val (tieBreak, perfSum) = playerPairings.foldLeft(0f -> 0f) {
-              case ((tieBreak, perfSum), pairing) =>
+            val (tieBreakSB, tieBreakSolkoff, perfSum) = playerPairings.foldLeft((0f, 0f, 0f)) {
+              case ((sb, solkoff, perfSum), pairing) =>
                 val opponent = playerMap.get(pairing opponentOf p.userId)
                 val opponentPoints = opponent.??(_.points.value)
                 val result = pairing.resultFor(p.userId)
-                val newTieBreak = tieBreak + result.fold(opponentPoints / 2) { _ ?? opponentPoints }
+                val newSB = sb + result.fold(opponentPoints / 2) { _ ?? opponentPoints }
+                val newSolkoff = solkoff + opponentPoints
                 val newPerf = perfSum + opponent.??(_.rating) + result.?? { win =>
                   if (win) 500 else -500
                 }
-                newTieBreak -> newPerf
+                (newSB, newSolkoff, newPerf)
             }
             p.copy(
-              tieBreak = Swiss.TieBreak(tieBreak),
+              tieBreakSB = Swiss.TieBreak(tieBreakSB),
+              tieBreakSolkoff = Swiss.TieBreak(tieBreakSolkoff),
               performance = playerPairings.nonEmpty option Swiss.Performance(perfSum / playerPairings.size)
             )
               .recomputeScore
@@ -65,7 +67,8 @@ final private class SwissScoring(
                       $id(player.id),
                       $set(
                         f.points -> player.points,
-                        f.tieBreak -> player.tieBreak,
+                        f.tieBreakSB -> player.tieBreakSB,
+                        f.tieBreakSolkoff -> player.tieBreakSolkoff,
                         f.performance -> player.performance,
                         f.score -> player.score
                       )

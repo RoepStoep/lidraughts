@@ -252,7 +252,7 @@ object SwissJson {
         "user" -> userJson,
         "rating" -> p.rating,
         "points" -> p.points,
-        "tieBreak" -> p.tieBreak
+        "tieBreak" -> p.tieBreakSB
       )
       .add("performance" -> (performance ?? p.performance))
       .add("provisional" -> p.provisional)

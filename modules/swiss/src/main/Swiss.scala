@@ -122,8 +122,8 @@ object Swiss {
     val manual = 99999999
   }
 
-  def makeScore(points: Points, tieBreak: TieBreak, perf: Performance) = Score(
-    (points.value * 10000000 + tieBreak.value * 10000 + perf.value).toInt
+  def makeScore(points: Points, tieBreakSB: TieBreak, perf: Performance) = Score(
+    (points.value * 10000000 + tieBreakSB.value * 10000 + perf.value).toInt
   )
 
   def makeId = Id(scala.util.Random.alphanumeric take 8 mkString)

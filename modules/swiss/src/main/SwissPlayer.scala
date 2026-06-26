@@ -11,7 +11,8 @@ case class SwissPlayer(
     rating: Int,
     provisional: Boolean,
     points: Swiss.Points,
-    tieBreak: Swiss.TieBreak,
+    tieBreakSB: Swiss.TieBreak,
+    tieBreakSolkoff: Swiss.TieBreak,
     performance: Option[Swiss.Performance],
     score: Swiss.Score,
     absent: Boolean,
@@ -23,7 +24,7 @@ case class SwissPlayer(
   def present = !absent
 
   def recomputeScore = copy(
-    score = Swiss.makeScore(points, tieBreak, performance | Swiss.Performance(rating.toFloat))
+    score = Swiss.makeScore(points, tieBreakSB, performance | Swiss.Performance(rating.toFloat))
   )
 }
 
@@ -45,7 +46,8 @@ object SwissPlayer {
       rating = perfLens(user.perfs).intRating,
       provisional = perfLens(user.perfs).provisional,
       points = Swiss.Points(0),
-      tieBreak = Swiss.TieBreak(0),
+      tieBreakSB = Swiss.TieBreak(0),
+      tieBreakSolkoff = Swiss.TieBreak(0),
       performance = none,
       score = Swiss.Score(0),
       absent = false,
@@ -94,7 +96,8 @@ object SwissPlayer {
     val rating = "r"
     val provisional = "pr"
     val points = "p"
-    val tieBreak = "t"
+    val tieBreakSB = "t"
+    val tieBreakSolkoff = "ts"
     val performance = "e"
     val score = "c"
     val absent = "a"
