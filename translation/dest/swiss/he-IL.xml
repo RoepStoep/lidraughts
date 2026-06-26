@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="swiss">שוויצרי</string>
   <string name="swissTournaments">טורנירים שוויצריים</string>
   <plurals name="nbRounds">
     <item quantity="one">סבב %s</item>

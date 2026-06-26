@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="swiss">スイス式</string>
   <string name="swissTournaments">スイス式トーナメント</string>
   <plurals name="nbRounds">
     <item quantity="other">%s ラウンド</item>

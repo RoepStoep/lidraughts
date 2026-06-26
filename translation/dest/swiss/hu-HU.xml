@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="swiss">Svájci verseny</string>
   <string name="swissTournaments">Svájci rendszerű versenyek</string>
   <plurals name="nbRounds">
     <item quantity="one">%s forduló</item>
@@ -7,4 +8,17 @@
   </plurals>
   <string name="nextRound">Következő forduló</string>
   <string name="numberOfRounds">Fordulók száma</string>
+  <string name="numberOfRoundsHelp">Páratlan számú fordulók kiegyensúlyozottabb színpárosítást tesznek lehetővé.</string>
+  <string name="roundsAreStartedManually">Manuálisan indított fordulók</string>
+  <plurals name="xSecondsBetweenRounds">
+    <item quantity="one">%s másodperc a fordulók között</item>
+    <item quantity="other">%s másodperc a fordulók között</item>
+  </plurals>
+  <plurals name="xMinutesBetweenRounds">
+    <item quantity="one">%s perc a fordulók között</item>
+    <item quantity="other">%s perc a fordulók között</item>
+  </plurals>
+  <string name="tournStartDate">Verseny kezdési ideje</string>
+  <string name="roundInterval">Fordulók közötti szünet</string>
+  <string name="forbiddenPairings">Tiltott párosítások</string>
 </resources>

@@ -8,4 +8,16 @@
   </plurals>
   <string name="nextRound">Runda următoare</string>
   <string name="numberOfRounds">Număr de runde</string>
+  <string name="roundsAreStartedManually">Rundele sunt pornite manual</string>
+  <plurals name="xSecondsBetweenRounds">
+    <item quantity="one">%s secundă între runde</item>
+    <item quantity="few">%s secunde între runde</item>
+    <item quantity="other">%s de secunde între runde</item>
+  </plurals>
+  <plurals name="xMinutesBetweenRounds">
+    <item quantity="one">%s minut între runde</item>
+    <item quantity="few">%s minute între runde</item>
+    <item quantity="other">%s de minute între runde</item>
+  </plurals>
+  <string name="tournStartDate">Data de începere a turneului</string>
 </resources>

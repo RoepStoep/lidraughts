@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="swiss">Suizo</string>
   <string name="swissTournaments">Torneos suizos</string>
   <plurals name="nbRounds">
     <item quantity="one">%s ronda</item>
@@ -7,4 +8,21 @@
   </plurals>
   <string name="nextRound">Siguiente ronda</string>
   <string name="numberOfRounds">Número de rondas</string>
+  <string name="numberOfRoundsHelp">Un número impar de rondas permite un equilibrio de colores óptimo.</string>
+  <plurals name="oneRoundEveryXDays">
+    <item quantity="one">Una ronda al día</item>
+    <item quantity="other">Una ronda cada %s días</item>
+  </plurals>
+  <string name="roundsAreStartedManually">Las rondas se inician manualmente</string>
+  <plurals name="xSecondsBetweenRounds">
+    <item quantity="one">%s segundo entre rondas</item>
+    <item quantity="other">%s segundos entre rondas</item>
+  </plurals>
+  <plurals name="xMinutesBetweenRounds">
+    <item quantity="one">%s minuto entre rondas</item>
+    <item quantity="other">%s minutos entre rondas</item>
+  </plurals>
+  <string name="tournStartDate">Fecha de inicio del torneo</string>
+  <string name="roundInterval">Intervalo entre rondas</string>
+  <string name="forbiddenPairings">Emparejamientos prohibidos</string>
 </resources>

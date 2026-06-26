@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="swiss">Suíço</string>
   <string name="swissTournaments">Torneios em sistema suíço</string>
   <string name="absent">Ausente</string>
   <string name="absences">Ausências</string>

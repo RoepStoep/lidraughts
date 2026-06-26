@@ -1558,6 +1558,7 @@ val `lagCompensationExplanation` = new Translated("lagCompensationExplanation", 
 }
 
 object swiss {
+val `swiss` = new Translated("swiss", Swiss)
 val `swissTournaments` = new Translated("swissTournaments", Swiss)
 val `bye` = new Translated("bye", Swiss)
 val `byes` = new Translated("byes", Swiss)
