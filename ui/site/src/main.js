@@ -460,8 +460,10 @@
         return false;
       });
 
-      $('a.delete, input.delete').click(() => confirm('Delete?'));
-      $('input.confirm, button.confirm').click(function() {
+      $('#main-wrap').on('click', 'a.delete, input.delete', function() {
+        return confirm('Delete?');
+      });
+      $('#main-wrap').on('click', 'input.confirm, button.confirm', function() {
         return confirm($(this).attr('title') || 'Confirm this action?');
       });
 
