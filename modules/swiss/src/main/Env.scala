@@ -76,7 +76,7 @@ final class Env(
   )
 
   private val boardApi = new SwissBoardApi(
-    rankingApi = rankingApi,
+    scoring = scoring,
     lightUserApi = userEnv.lightUserApi,
     lightWfdUserApi = userEnv.lightWfdUserApi,
     proxyGame = proxyGame
