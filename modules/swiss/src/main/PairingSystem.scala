@@ -10,7 +10,7 @@ final private class PairingSystem(
 
   def apply(swiss: Swiss): Fu[List[SwissPairing.ByeOrPending]] =
     trf.fetchPlayerIds(swiss) flatMap { playerIds =>
-      trf(swiss, playerIds, sorted = false).map {
+      trf(swiss, playerIds, sorted = false, forPairings = true).map {
         invoke(swiss, _) |> reader(playerIds.map(_.swap))
       }
     }
@@ -19,8 +19,8 @@ final private class PairingSystem(
     withTempFile(swiss, input) { file =>
       import scala.sys.process._
       val flavour =
-        if (swiss.nbPlayers < 250) "dutch"
-        else if (swiss.nbPlayers < 700) "burstein"
+        if (swiss.nbPlayers < 400) "dutch"
+        else if (swiss.nbPlayers < 750) "burstein"
         else "fast"
       val command = s"$executable --$flavour $file -p"
       val stdout = new collection.mutable.ListBuffer[String]

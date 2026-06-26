@@ -14,21 +14,21 @@ final class SwissTrf(
 
   private type Bits = List[(Int, String)]
 
-  def apply(swiss: Swiss, sorted: Boolean): Fu[List[String]] =
-    fetchPlayerIds(swiss) flatMap { apply(swiss, _, sorted) }
+  def apply(swiss: Swiss, sorted: Boolean, forPairings: Boolean): Fu[List[String]] =
+    fetchPlayerIds(swiss) flatMap { apply(swiss, _, sorted, forPairings) }
 
-  def apply(swiss: Swiss, playerIds: PlayerIds, sorted: Boolean): Fu[List[String]] =
+  def apply(swiss: Swiss, playerIds: PlayerIds, sorted: Boolean, forPairings: Boolean): Fu[List[String]] =
     SwissPlayer.fields { f =>
       sheetApi
         .source(swiss, sort = sorted.??($doc(f.rating -> -1)))
         .map { lines =>
-          tournamentLines(swiss) ::: forbiddenPairings(swiss, playerIds) ::: lines
+          tournamentLines(swiss, forPairings) ::: forbiddenPairings(swiss, playerIds) ::: lines
             .map((playerLine(swiss, playerIds) _).tupled)
             .map(formatLine)
         }
     }
 
-  private def tournamentLines(swiss: Swiss) =
+  private def tournamentLines(swiss: Swiss, forPairings: Boolean) =
     List(
       s"012 ${swiss.name}",
       s"022 ${baseUrl}/swiss/${swiss.id}",
@@ -40,7 +40,9 @@ final class SwissTrf(
       s"102 ${baseUrl}/swiss",
       s"XXR ${swiss.settings.nbRounds}",
       s"XXC ${draughts.Color(swiss.id.value(0).toInt % 2 == 0).name}1"
-    )
+    ) ::: (
+        if (forPairings) List(s"XXF 1") else Nil
+      )
 
   private def playerLine(
     swiss: Swiss,
