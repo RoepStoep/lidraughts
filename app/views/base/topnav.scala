@@ -21,8 +21,8 @@ object topnav {
         if (ctx.noBot) a(href := "/?any#hook")(trans.createAGame())
         else a(href := "/?any#friend")(trans.playWithAFriend()),
         ctx.noBot option frag(
-          a(href := routes.Tournament.home())(if (isGranted(_.Beta)) trans.arena.arenaTournaments() else trans.tournaments()),
-          isGranted(_.Beta) option a(href := routes.Swiss.home())(trans.swiss.swissTournaments.txt() + " [BETA]"),
+          a(href := routes.Tournament.home())(trans.arena.arenaTournaments()),
+          a(href := routes.Swiss.home())(trans.swiss.swissTournaments()),
           a(href := routes.Simul.home)(trans.simultaneousExhibitions())
         )
       )
@@ -33,7 +33,7 @@ object topnav {
         ctx.noBot option frag(
           //a(href := routes.Learn.index)(trans.draughtsBasics()),
           a(href := routes.Puzzle.home)(trans.training()),
-          a(href := routes.Practice.index)(trans.practice.txt()),
+          a(href := routes.Practice.index)(trans.practice()),
           a(href := routes.Coordinate.home)(trans.coordinates.coordinates())
         ),
         a(href := routes.Study.allDefault(1))(trans.studyMenu()),

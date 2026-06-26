@@ -16,13 +16,12 @@ object Swiss extends LidraughtsController {
 
   private def swissNotFound(implicit ctx: Context) = NotFound(html.swiss.bits.notFound())
 
-  def home =
-    Secure(_.Beta) { implicit ctx => _ =>
-      ctx.userId.??(Env.team.cached.teamIdsList) flatMap
-        env.feature.get map html.swiss.home.apply map { Ok(_) }
-    }
+  def home = Open { implicit ctx =>
+    ctx.userId.??(Env.team.cached.teamIdsList) flatMap
+      env.feature.get map html.swiss.home.apply map { Ok(_) }
+  }
 
-  def show(id: String) = Secure(_.Beta) { implicit ctx => _ =>
+  def show(id: String) = Open { implicit ctx =>
     env.api.byId(SwissId(id)) flatMap { swissOption =>
       val page = getInt("page").filter(0.<)
       negotiate(
@@ -80,11 +79,14 @@ object Swiss extends LidraughtsController {
   private def isCtxInTheTeam(teamId: lidraughts.team.Team.ID)(implicit ctx: Context) =
     ctx.userId.??(u => Env.team.cached.teamIds(u).dmap(_ contains teamId))
 
-  def form(teamId: String) = Secure(_.Beta) { implicit ctx => me =>
-    Ok(html.swiss.form.create(env.forms.create, teamId)).fuccess
+  def form(teamId: String) = Auth { implicit ctx => me =>
+    lidraughts.team.TeamRepo.isCreator(teamId, me.id) flatMap {
+      case false => notFound
+      case _ => Ok(html.swiss.form.create(env.forms.create, teamId)).fuccess
+    }
   }
 
-  def create(teamId: String) = SecureBody(_.Beta) { implicit ctx => me =>
+  def create(teamId: String) = AuthBody { implicit ctx => me =>
     lidraughts.team.TeamRepo.isCreator(teamId, me.id) flatMap {
       case false => notFound
       case _ =>
@@ -104,7 +106,7 @@ object Swiss extends LidraughtsController {
 
   def apiCreate(teamId: String) =
     ScopedBody() { implicit req => me =>
-      if (me.isBot || me.lame || !isGranted(_.Beta, me)) notFoundJson("This account cannot create tournaments")
+      if (me.isBot || me.lame) notFoundJson("This account cannot create tournaments")
       else
         lidraughts.team.TeamRepo.isCreator(teamId, me.id) flatMap {
           case false => notFoundJson("You're not a leader of that team")
@@ -123,7 +125,7 @@ object Swiss extends LidraughtsController {
         }
     }
 
-  def join(id: String) = SecureBody(BodyParsers.parse.json)(lidraughts.security.Permission.Beta) { implicit ctx => me =>
+  def join(id: String) = AuthBody(BodyParsers.parse.json) { implicit ctx => implicit me =>
     NoLameOrBot {
       val password = ctx.body.body.\("password").asOpt[String]
       Env.team.cached.teamIds(me.id) flatMap { teamIds =>
@@ -151,7 +153,7 @@ object Swiss extends LidraughtsController {
       }
     }
 
-  def edit(id: String) = Secure(_.Beta) { implicit ctx => me =>
+  def edit(id: String) = Auth { implicit ctx => me =>
     WithEditableSwiss(id, me) { swiss =>
       Ok(html.swiss.form.edit(swiss, env.forms.edit(swiss))).fuccess
     }

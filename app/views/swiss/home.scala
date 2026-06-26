@@ -15,7 +15,7 @@ object home {
       moreCss = cssTag("swiss.home")
     ) {
         main(cls := "page-small box box-pad page swiss-home")(
-          h1(trans.swiss.swissTournaments.txt() + " [BETA]"),
+          h1(trans.swiss.swissTournaments()),
           renderList("Now playing")(featured.started),
           renderList("Starting soon")(featured.created),
           div(cls := "swiss-home__infos")(

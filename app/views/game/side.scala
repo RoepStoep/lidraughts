@@ -110,7 +110,7 @@ object side {
         )
       } orElse game.tournamentId.map { tourId =>
         st.section(cls := "game__tournament-link")(tournamentLink(tourId))
-      } orElse isGranted(_.Beta) ?? game.swissId.map { swissId =>
+      } orElse game.swissId.map { swissId =>
         st.section(cls := "game__tournament-link")(
           views.html.swiss.bits.link(lidraughts.swiss.Swiss.Id(swissId))
         )

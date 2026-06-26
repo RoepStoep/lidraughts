@@ -38,7 +38,7 @@ object side {
           p(
             span(cls := "swiss__meta__round")(trans.swiss.nbRounds.plural(s.actualNbRounds, s"${s.round}/${s.actualNbRounds}")),
             separator,
-            a(href := routes.Swiss.home)("Swiss [BETA]"),
+            a(href := routes.Swiss.home)(trans.swiss.swiss()),
             (isGranted(_.ManageTournament) || (ctx.userId.has(s.createdBy) && s.isCreated)) option frag(
               " ",
               a(href := routes.Swiss.edit(s.id.value), title := trans.ratedTournament.txt())(iconTag("%"))
