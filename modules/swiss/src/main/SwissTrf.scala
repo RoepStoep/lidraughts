@@ -1,13 +1,10 @@
 package lidraughts.swiss
 
-import reactivemongo.bson._
-
 import lidraughts.db.dsl._
-import lidraughts.user.User
 
 // https://www.fide.com/FIDE/handbook/C04Annex2_TRF16.pdf
 final class SwissTrf(
-    playerColl: Coll,
+    rankingApi: SwissRankingApi,
     sheetApi: SwissSheetApi,
     baseUrl: String
 ) {
@@ -20,7 +17,7 @@ final class SwissTrf(
   def apply(swiss: Swiss, playerIds: PlayerIds, sorted: Boolean, forPairings: Boolean): Fu[List[String]] =
     SwissPlayer.fields { f =>
       sheetApi
-        .source(swiss, sort = sorted.??($doc(f.rating -> -1)))
+        .source(swiss, sort = sorted.??($doc(f.score -> -1)))
         .map { lines =>
           tournamentLines(swiss, forPairings) ::: forbiddenPairings(swiss, playerIds) ::: lines
             .map((playerLine(swiss, playerIds) _).tupled)
@@ -93,28 +90,7 @@ final class SwissTrf(
   private val dateFormatter = org.joda.time.format.DateTimeFormat forStyle "M-"
 
   def fetchPlayerIds(swiss: Swiss): Fu[PlayerIds] =
-    SwissPlayer
-      .fields { p =>
-        import BsonHandlers._
-        import reactivemongo.api.collections.bson.BSONBatchCommands.AggregationFramework._
-        playerColl
-          .aggregateOne(
-            Match($doc(p.swissId -> swiss.id)),
-            List(
-              Sort(Descending(p.rating)),
-              Group(BSONNull)("us" -> PushField(p.userId))
-            )
-          )
-          .map {
-            ~_.flatMap(_.getAs[List[User.ID]]("us"))
-          }
-          .map {
-            _.view.zipWithIndex.map {
-              case (userId, index) =>
-                (userId, index + 1)
-            }.toMap
-          }
-      }
+    rankingApi(swiss)
 
   private def forbiddenPairings(swiss: Swiss, playerIds: PlayerIds): List[String] =
     if (swiss.settings.forbiddenPairings.isEmpty) List.empty[String]
