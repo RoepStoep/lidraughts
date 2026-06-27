@@ -6,9 +6,13 @@ import { userName, formatTieBreaks, title } from './util';
 
 function podiumStats(p: PodiumPlayer, trans: Trans, draughtsResult: boolean): VNode {
   const noarg = trans.noarg;
+  const tieBreakTitle = title(trans('tieBreakX', 'Solkoff'));
   return h('table.stats', [
     h('tr', [h('th', noarg('points')), h('td', '' + (draughtsResult ? p.points * 2 : p.points))]),
-    h('tr', [h('th', title(trans('tieBreakX', 'Solkoff')), noarg('tieBreak')), h('td', formatTieBreaks(draughtsResult, p.tieBreakSolkoff, undefined))]),
+    h('tr', [
+      h('th', tieBreakTitle, noarg('tieBreak')),
+      h('td', tieBreakTitle, formatTieBreaks(draughtsResult, p.tieBreakSolkoff, undefined))
+    ]),
     p.performance ? h('tr', [h('th', noarg('performance')), h('td', '' + p.performance)]) : null
   ]);
 }
