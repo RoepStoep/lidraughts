@@ -13,6 +13,7 @@ object Iso {
 
   type StringIso[B] = Iso[String, B]
   type IntIso[B] = Iso[Int, B]
+  type LongIso[B] = Iso[Long, B]
   type BooleanIso[B] = Iso[Boolean, B]
   type DoubleIso[B] = Iso[Double, B]
   type FloatIso[B] = Iso[Float, B]
@@ -24,6 +25,7 @@ object Iso {
 
   def string[B](from: String => B, to: B => String): StringIso[B] = apply(from, to)
   def int[B](from: Int => B, to: B => Int): IntIso[B] = apply(from, to)
+  def long[B](from: Long => B, to: B => Long): LongIso[B] = apply(from, to)
   def double[B](from: Double => B, to: B => Double): DoubleIso[B] = apply(from, to)
   def float[B](from: Float => B, to: B => Float): FloatIso[B] = apply(from, to)
 

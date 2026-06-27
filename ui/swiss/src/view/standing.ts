@@ -1,7 +1,7 @@
 import { h } from 'snabbdom'
 import { VNode,  } from 'snabbdom/vnode';
 import SwissCtrl from '../ctrl';
-import { player as renderPlayer, bind, onInsert } from './util';
+import { player as renderPlayer, bind, formatTieBreaks, onInsert, title } from './util';
 import { MaybeVNodes, Player, Pager } from '../interfaces';
 
 
@@ -44,11 +44,10 @@ function playerTr(ctrl: SwissCtrl, player: Player) {
         )
       )),
     h('td.points', title(noarg('points')), '' + (ctrl.draughtsResult ? player.points * 2 : player.points)),
-    h('td.tieBreak', title(noarg('tieBreak')), '' + player.tieBreak)
+    h('td.tieBreak', title(ctrl.trans('tieBreakX', 'Solkoff')), formatTieBreaks(ctrl.draughtsResult, player.tieBreakSolkoff, undefined)),
+    h('td.tieBreak', title(ctrl.trans('tieBreakX', 'Sonneborn-Berger')), formatTieBreaks(ctrl.draughtsResult, undefined, player.tieBreakSB))
   ]);
 }
-
-const title = (str: string) => ({ attrs: { title: str } });
 
 let lastBody: MaybeVNodes | undefined;
 

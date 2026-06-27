@@ -106,8 +106,10 @@
   }
   .tieBreak {
     @extend %roboto;
-    text-align: right;
-    padding-right: $block-gap;
+    padding-right: 0;
+    &:last-child {
+      padding-right: $block-gap;
+    }
   }
   &.long {
     .user-link .rating {

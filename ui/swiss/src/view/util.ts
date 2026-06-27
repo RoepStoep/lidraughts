@@ -54,6 +54,21 @@ export function player(p: BasePlayer, asLink: boolean, withRating: boolean) {
   ]);
 }
 
+export function formatTieBreaks(draughtsResult: boolean, solk?: number, sb?: number): string {
+  if (draughtsResult) {
+    if (solk !== undefined) solk *= 2;
+    if (sb !== undefined) sb *= 4;
+  }
+  const solkFmt = solk !== undefined ? window.lidraughts.numberFormat(solk) : undefined;
+  const sbFmt = sb !== undefined ? window.lidraughts.numberFormat(sb) : undefined;
+  if (solkFmt && sbFmt) return `${solkFmt} / ${sbFmt}`;
+  if (solkFmt) return solkFmt;
+  if (sbFmt) return sbFmt;
+  return '';
+}
+
+export const title = (str: string) => ({ attrs: { title: str } });
+
 export const ratio2percent = (r: number) => Math.round(100 * r) + '%';
 
 export function numberRow(name: string, value: any, typ?: string) {

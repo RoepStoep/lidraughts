@@ -28,6 +28,9 @@ trait Handlers {
   def intIsoHandler[A](implicit iso: IntIso[A]): BSONHandler[BSONInteger, A] = isoHandler[A, Int, BSONInteger](iso)
   def intAnyValHandler[A](to: A => Int, from: Int => A): BSONHandler[BSONInteger, A] = intIsoHandler(Iso(from, to))
 
+  def longIsoHandler[A](implicit iso: LongIso[A]): BSONHandler[BSONLong, A] = isoHandler[A, Long, BSONLong](iso)
+  def longAnyValHandler[A](to: A => Long, from: Long => A): BSONHandler[BSONLong, A] = longIsoHandler(Iso(from, to))
+
   def booleanIsoHandler[A](implicit iso: BooleanIso[A]): BSONHandler[BSONBoolean, A] = isoHandler[A, Boolean, BSONBoolean](iso)
   def booleanAnyValHandler[A](to: A => Boolean, from: Boolean => A): BSONHandler[BSONBoolean, A] = booleanIsoHandler(Iso(from, to))
 

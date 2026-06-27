@@ -94,7 +94,7 @@ object Swiss {
   }
   case class TieBreak(value: Double) extends AnyVal
   case class Performance(value: Double) extends AnyVal
-  case class Score(value: Int) extends AnyVal
+  case class Score(value: Long) extends AnyVal
 
   case class IdName(_id: Id, name: String) {
     def id = _id
@@ -122,9 +122,61 @@ object Swiss {
     val manual = 99999999
   }
 
-  def makeScore(points: Points, tieBreakSB: TieBreak, perf: Performance) = Score(
-    (points.value * 10000000 + tieBreakSB.value * 10000 + perf.value).toInt
-  )
+  /**
+   * Computes an aggregate score to allow single-column database sorting:
+   *  Points -> Solkoff -> Sonneborn-Berger -> Performance.
+   *
+   * To prevent lower-priority tie-breakers from mathematically bleeding into
+   * higher-priority tiers, we allocate a specific numerical block (multiplier)
+   * for each tier. The multiplier for a tier must be strictly greater than the
+   * absolute maximum possible value of the tier directly below it.
+   *
+   * Assumes a maximum of 100 rounds.
+   */
+  def makeScore(
+    points: Points,
+    tieBreakSolkoff: TieBreak,
+    tieBreakSB: TieBreak,
+    perf: Performance
+  ): Score = {
+
+    // Clamp negative values to zero to prevent tier-borrowing
+    val p = math.max(0, points.value)
+    val solk = math.max(0, tieBreakSolkoff.value)
+    val sb = math.max(0, tieBreakSB.value)
+
+    // Cap performance to prevent bleeding into the SB tier
+    val r = math.max(0, math.min(4999d, perf.value))
+
+    // TIER 4: Performance
+    // Max contribution: ~5 * 10^3 due to cap above
+
+    // TIER 3: Sonneborn-Berger
+    // To clear the performance max, the smallest SB step (0.25) must equal 5 * 10^3
+    // Multiplier: 2 * 10^4
+    // Max mathematical SB in 100 rounds is ~10^4
+    // Max SB contribution: (10^4) * (2 * 10^4) = 2 * 10^8
+    val mSB = 20000L // 2 * 10^4
+
+    // TIER 2: Solkoff
+    // To clear the SB max, the smallest Solkoff step (0.5) must equal 2.5 * 10^8
+    // Multiplier: 5 * 10^8
+    // Max mathematical Solkoff in 100 rounds is ~10^4
+    // Max Solkoff contribution: (10^4) * (5 * 10^8) = 5 * 10^12
+    val mSolk = 500000000L // 5 * 10^8
+
+    // TIER 1: Points
+    // To clear the Solkoff max, the smallest Points step (0.5) must equal 6 * 10^12
+    val mPoints = 12000000000000L // 1.2 * 10^13
+
+    // With max 100 round the total score is ~1.2 * 10^15, which fits Long.MaxValue
+    Score(
+      (p * mPoints).toLong +
+        (solk * mSolk).toLong +
+        (sb * mSB).toLong +
+        r.toLong
+    )
+  }
 
   def makeId = Id(scala.util.Random.alphanumeric take 8 mkString)
 }

@@ -24,7 +24,7 @@ case class SwissPlayer(
   def present = !absent
 
   def recomputeScore = copy(
-    score = Swiss.makeScore(points, tieBreakSB, performance | Swiss.Performance(rating.toFloat))
+    score = Swiss.makeScore(points, tieBreakSolkoff, tieBreakSB, performance | Swiss.Performance(rating.toFloat))
   )
 }
 

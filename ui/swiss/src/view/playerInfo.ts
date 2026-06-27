@@ -1,6 +1,6 @@
 import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
-import { spinner, bind, userName, dataIcon, player as renderPlayer, numberRow  } from './util';
+import { spinner, bind, userName, dataIcon, player as renderPlayer, numberRow, formatTieBreaks  } from './util';
 import { Pairing } from '../interfaces';
 import { isOutcome } from '../util';
 import SwissCtrl from '../ctrl';
@@ -38,7 +38,8 @@ export default function(ctrl: SwissCtrl): VNode | undefined {
       ]),
       h('table', [
           numberRow(noarg('points'), ctrl.draughtsResult ? data.points * 2 : data.points, 'raw'),
-          numberRow(noarg('tieBreak'), data.tieBreak, 'raw'),
+          numberRow(ctrl.trans('tieBreakX', 'Solkoff'), formatTieBreaks(ctrl.draughtsResult, data.tieBreakSolkoff, undefined), 'raw'),
+          numberRow(ctrl.trans('tieBreakX', 'SB'), formatTieBreaks(ctrl.draughtsResult, undefined, data.tieBreakSB), 'raw'),
           ...(games ? [
             data.performance ? numberRow(
               noarg('performance'),

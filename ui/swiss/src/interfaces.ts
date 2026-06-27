@@ -97,7 +97,8 @@ export interface BasePlayer {
   provisional?: boolean;
   withdraw?: boolean;
   points: number;
-  tieBreak: number;
+  tieBreakSolkoff: number;
+  tieBreakSB: number;
   performance?: number;
   absent: boolean;
 }

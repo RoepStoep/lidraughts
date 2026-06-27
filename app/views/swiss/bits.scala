@@ -122,6 +122,7 @@ object bits {
     trans.swiss.absences,
     trans.swiss.late,
     trans.swiss.tieBreak,
+    trans.swiss.tieBreakX,
     trans.swiss.nbRounds,
     trans.swiss.nextRound,
     trans.swiss.scheduleTheNextRound,

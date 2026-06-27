@@ -2,13 +2,13 @@ import { h } from 'snabbdom'
 import { VNode } from 'snabbdom/vnode';
 import SwissCtrl from '../ctrl';
 import { PodiumPlayer } from '../interfaces';
-import { userName } from './util';
+import { userName, formatTieBreaks, title } from './util';
 
 function podiumStats(p: PodiumPlayer, trans: Trans, draughtsResult: boolean): VNode {
   const noarg = trans.noarg;
   return h('table.stats', [
     h('tr', [h('th', noarg('points')), h('td', '' + (draughtsResult ? p.points * 2 : p.points))]),
-    h('tr', [h('th', noarg('tieBreak')), h('td', '' + p.tieBreak)]),
+    h('tr', [h('th', title(trans('tieBreakX', 'Solkoff')), noarg('tieBreak')), h('td', formatTieBreaks(draughtsResult, p.tieBreakSolkoff, undefined))]),
     p.performance ? h('tr', [h('th', noarg('performance')), h('td', '' + p.performance)]) : null
   ]);
 }

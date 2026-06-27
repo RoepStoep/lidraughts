@@ -30,7 +30,7 @@ object BsonHandlers {
   implicit val swissPointsHandler = intAnyValHandler[Swiss.Points](_.double, Swiss.Points.apply)
   implicit val swissTieBreakHandler = doubleAnyValHandler[Swiss.TieBreak](_.value, Swiss.TieBreak.apply)
   implicit val swissPerformanceHandler = doubleAnyValHandler[Swiss.Performance](_.value, Swiss.Performance.apply)
-  implicit val swissScoreHandler = intAnyValHandler[Swiss.Score](_.value, Swiss.Score.apply)
+  implicit val swissScoreHandler = longAnyValHandler[Swiss.Score](_.value, Swiss.Score.apply)
   implicit val roundNumberHandler = intAnyValHandler[SwissRound.Number](_.value, SwissRound.Number.apply)
   implicit val swissIdHandler = stringAnyValHandler[Swiss.Id](_.value, Swiss.Id.apply)
   implicit val playerIdHandler = stringAnyValHandler[SwissPlayer.Id](_.value, SwissPlayer.Id.apply)
@@ -45,7 +45,7 @@ object BsonHandlers {
       provisional = r boolD provisional,
       points = r.get[Swiss.Points](points),
       tieBreakSB = r.get[Swiss.TieBreak](tieBreakSB),
-      tieBreakSolkoff = r.getO[Swiss.TieBreak](tieBreakSolkoff) | Swiss.TieBreak(0),
+      tieBreakSolkoff = r.get[Swiss.TieBreak](tieBreakSolkoff),
       performance = r.getO[Swiss.Performance](performance),
       score = r.get[Swiss.Score](score),
       absent = r.boolD(absent),
