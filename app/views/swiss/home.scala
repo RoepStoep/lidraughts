@@ -164,13 +164,19 @@ object home {
       i("?"),
       p(
         strong("How are tie breaks calculated?"),
-        "With the ",
+        "The first tie break is the ",
+        a(
+          href := "https://en.wikipedia.org/wiki/Tie-breaking_in_Swiss-system_tournaments#Solkoff"
+        )("Solkoff score"),
+        ": ",
+        "the sum of the scores of all opponents the player has faced.",
+        br,
+        "The second tie break is the ",
         a(
           href := "https://en.wikipedia.org/wiki/Tie-breaking_in_Swiss-system_tournaments#Sonneborn%E2%80%93Berger_score"
         )("Sonneborn–Berger score"),
-        ".",
-        br,
-        "Add the scores of every opponent the player beats and half of the score of every opponent the player draws."
+        ": ",
+        "the sum of 2 times the scores of the players against who the game was won, plus the sum of the scores of the players against who the game was drawn."
       )
     ),
     div(cls := "faq")(
@@ -181,10 +187,10 @@ object home {
         a(
           href := "https://en.wikipedia.org/wiki/Swiss-system_tournament#Dutch_system"
         )("Dutch system"),
-        ", implemented by ",
-        a(href := "https://github.com/BieremaBoyzProgramming/bbpPairings")("bbPairings"),
-        " in accordance with the ",
-        a(href := "https://www.fide.com/fide/handbook.html?id=170&view=article")("FIDE handbook"),
+        " as implemented by ",
+        a(href := "https://github.com/BieremaBoyzProgramming/bbpPairings")("bbpPairings"),
+        ", modified in accordance with Annex 5 of the ",
+        a(href := "https://www.fmjd.org/downloads/FMJD_Annexes_2024_8-sig.pdf")("FMJD handbook"),
         "."
       )
     ),
