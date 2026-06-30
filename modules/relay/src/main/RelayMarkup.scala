@@ -17,16 +17,26 @@ private final class RelayMarkup {
   private val options = new MutableDataSet()
   options.set(Parser.EXTENSIONS, java.util.Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()))
   options.set(HtmlRenderer.SOFT_BREAK, "<br />\n")
+  options.set(HtmlRenderer.ESCAPE_HTML, java.lang.Boolean.TRUE)
   options.set(TablesExtension.CLASS_NAME, "slist")
   private val parser = Parser.builder(options).build()
   private val renderer = HtmlRenderer.builder(options).build()
+
+  // Prevent StackOverflow DoS from deeply nested blockquotes.
+  // See: lichess/lila@de775d2b9c
+  private val tooManyQuotes = ">{15,}".r
+  private def preventQuoteDoS(text: Text): Text =
+    text.linesIterator.map { line =>
+      if (tooManyQuotes.findFirstIn(line).isDefined) line.replace(">", "")
+      else line
+    }.mkString("\n")
 
   private val cache: Cache[Text, Html] = Scaffeine()
     .expireAfterWrite(5 minutes)
     .build[Text, Html]
 
   private def compute(text: Text): Html =
-    renderer.render(parser.parse(text))
+    renderer.render(parser.parse(preventQuoteDoS(text)))
 
   def apply(text: Text): Html = cache.get(text, compute)
 }
