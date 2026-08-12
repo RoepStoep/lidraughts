@@ -2,17 +2,40 @@ package controllers
 
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import ornicar.scalalib.Zero
 import play.api.mvc._
 import scala.concurrent.duration._
 
 import lidraughts.api.GameApiV2
 import lidraughts.app._
-import lidraughts.common.{ MaxPerSecond, HTTPRequest }
+import lidraughts.common.{ MaxPerSecond, HTTPRequest, IpAddress }
 import lidraughts.game.{ GameRepo, Game => GameModel }
+import lidraughts.memo.RateLimit
 import lidraughts.pref.Pref.{ default => defaultPref }
 import views._
 
 object Game extends LidraughtsController {
+
+  private val ExportOnePdnPerIP = new RateLimit[IpAddress](
+    credits = 30,
+    duration = 1 minute,
+    name = "export game PDN per IP",
+    key = "export.game_pdn.ip"
+  )
+
+  private val ExportOnePdnGlobal = new RateLimit[String](
+    credits = 150,
+    duration = 1 minute,
+    name = "export game PDN global anon",
+    key = "export.game_pdn.global"
+  )
+
+  private implicit val tooManyRequests: Zero[Fu[Result]] =
+    Zero.instance[Fu[Result]] {
+      fuccess(TooManyRequest(
+        "Too many game exports; try again later. For bulk downloads use /games/export/:username or the API."
+      ))
+    }
 
   def delete(gameId: String) = Auth { implicit ctx => me =>
     OptionFuResult(GameRepo game gameId) { game =>
@@ -29,20 +52,29 @@ object Game extends LidraughtsController {
   }
 
   def exportOne(id: String) = Open { implicit ctx =>
-    OptionFuResult(Env.round.proxy.gameIfPresent(id) orElse GameRepo.game(id)) { game =>
-      val config = GameApiV2.OneConfig(
-        format = if (HTTPRequest acceptsJson ctx.req) GameApiV2.Format.JSON else GameApiV2.Format.PDN,
-        imported = getBool("imported"),
-        flags = requestPdnFlags(ctx.req, ctx.pref.draughtsResult, extended = true, ctx.pref.canAlgebraic)
-      )
-      lidraughts.mon.export.pdn.game()
-      Env.api.gameApiV2.exportOne(game, config) flatMap { content =>
-        Env.api.gameApiV2.filename(game, config.format) map { filename =>
-          Ok(content).withHeaders(
-            CONTENT_TYPE -> gameContentType(config),
-            CONTENT_DISPOSITION -> s"attachment; filename=$filename"
-          )
+    val ip = HTTPRequest lastRemoteAddress ctx.req
+    def doExport =
+      OptionFuResult(Env.round.proxy.gameIfPresent(id) orElse GameRepo.game(id)) { game =>
+        val config = GameApiV2.OneConfig(
+          format = if (HTTPRequest acceptsJson ctx.req) GameApiV2.Format.JSON else GameApiV2.Format.PDN,
+          imported = getBool("imported"),
+          flags = requestPdnFlags(ctx.req, ctx.pref.draughtsResult, extended = true, ctx.pref.canAlgebraic)
+        )
+        lidraughts.mon.export.pdn.game()
+        Env.api.gameApiV2.exportOne(game, config) flatMap { content =>
+          Env.api.gameApiV2.filename(game, config.format) map { filename =>
+            Ok(content).withHeaders(
+              CONTENT_TYPE -> gameContentType(config),
+              CONTENT_DISPOSITION -> s"attachment; filename=$filename"
+            )
+          }
         }
+      }
+
+    ExportOnePdnPerIP(ip, cost = 1, msg = s"@${ctx.userId | "anon"} $id") {
+      if (ctx.isAuth) doExport
+      else ExportOnePdnGlobal("-", cost = 1, msg = s"${ip.value} $id") {
+        doExport
       }
     }
   }
