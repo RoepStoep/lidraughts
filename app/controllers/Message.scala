@@ -107,7 +107,7 @@ object Message extends LidraughtsController {
             err => renderForm(me, none, _ => err) map { BadRequest(_) },
             data => {
               val cost =
-                if (isGranted(_.ModMessage)) 0
+                if (isGranted(_.ModMessage) || isGranted(_.UnlimitedMessages)) 0
                 else if (!me.createdSinceDays(3)) 2
                 else 1
               ThreadLimitPerUser(me.id, cost = cost) {

@@ -34,6 +34,7 @@ object Permission {
   case object PracticeConfig extends Permission("ROLE_PRACTICE_CONFIG")
   case object Beta extends Permission("ROLE_BETA")
   case object MessageAnyone extends Permission("ROLE_MESSAGE_ANYONE")
+  case object UnlimitedMessages extends Permission("ROLE_UNLIMITED_MESSAGES")
   case object UserSearch extends Permission("ROLE_USER_SEARCH")
   case object ManageTeam extends Permission("ROLE_MANAGE_TEAM")
   case object ManageTournament extends Permission("ROLE_MANAGE_TOURNAMENT")
@@ -84,7 +85,7 @@ object Permission {
   lazy val allButSuperAdmin: List[Permission] = List(
     Admin, Hunter, Shadowban, ChatTimeout, ChangePermission, ViewBlurs, StaffForum, ModerateForum,
     UserSpy, MarkEngine, MarkBooster, IpBan, PrintBan, PracticeConfig,
-    Beta, MessageAnyone, UserSearch, ManageTeam, ManageTournament, ManageEvent, ManageSimul,
+    Beta, MessageAnyone, UnlimitedMessages, UserSearch, ManageTeam, ManageTournament, ManageEvent, ManageSimul,
     PublicMod, Developer, Coach, ModNote, RemoveRanking, ReportBan, Impersonate,
     Relay, Cli, Settings, Streamers, CreatePuzzles, DisableTwoFactor, Verified, Prismic
   )
