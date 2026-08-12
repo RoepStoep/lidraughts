@@ -25,6 +25,7 @@
   <string name="teamRecentMembers">Naujausi nariai</string>
   <string name="kickSomeone">Išmesti ką nors iš komandos</string>
   <string name="whoToKick">Ką norite išmesti iš komandos?</string>
+  <string name="appointOwner">Paskirti kitą komandos savininką</string>
   <plurals name="xJoinRequests">
     <item quantity="one">%s stojimo prašymas</item>
     <item quantity="few">%s stojimo prašymai</item>

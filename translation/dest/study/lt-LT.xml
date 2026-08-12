@@ -69,6 +69,7 @@
   <string name="currentChapterUrl">Dabartinio skyriaus URL</string>
   <string name="startAtInitialPosition">Pradėti pradinėje pozicijoje</string>
   <string name="startAtX">Pradėti nuo %s</string>
+  <string name="readMoreAboutEmbeddingAStudyChapter">Skaitykite daugiau apie studijų skyriaus įterpimą</string>
   <string name="onlyPublicStudiesCanBeEmbedded">Gali būti įterptos tik viešos studijos!</string>
   <string name="open">Atverti</string>
   <string name="xBroughtToYouByY">%1$s iš %2$s</string>
